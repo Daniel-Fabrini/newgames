@@ -4,9 +4,9 @@ from rig import *
 from globe import globe_material
 subprocess.check_call(['python3', '-I', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'flagstrip.py')], env=dict(os.environ))
 new_scene('#2f8cff', '#04163f', samples=int(os.environ.get('SAMPLES', 128)))
-Z = 2.0
-sphere(1.5, globe_material(ocean='#1250c8'), loc=(0, 0, Z))
-strip = image_material(os.path.join(TMP, 'flagstrip.png'), rough=0.3, coat=0.5)
+Z = 1.25
+sphere(1.55, globe_material(ocean='#1250c8', thresh=0.47), loc=(0, 0, Z))
+strip = image_material(os.path.join(TMP, 'flagstrip.png'), rough=0.5, coat=0.15)
 from mathutils import Euler
 def band(R, h, rot, off):
     bpy.ops.mesh.primitive_cylinder_add(radius=R, depth=h, vertices=128, end_fill_type='NOTHING')
@@ -20,7 +20,7 @@ def band(R, h, rot, off):
     o.location = Vector((0, 0, Z)) + ax * off
     o.rotation_euler = e
     return o
-band(1.42, 0.62, (-14, -26, 0), 0.62)
-band(1.42, 0.62, (-14, -26, 0), -0.68)
+band(1.46, 0.66, (-12, -18, 0), 0.62)
+band(1.46, 0.66, (-12, -18, 0), -0.68)
 shadow_catcher(0.0)
 render('flags')
