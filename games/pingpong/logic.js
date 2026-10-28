@@ -155,7 +155,7 @@ export class Match {
     const qz = 1 - Math.abs(s.p[2] - IDEAL_Z) / 0.42;
     const qy = 1 - Math.abs(s.p[1] - ideal) / 0.5;
     const q = clamp((qz * 0.6 + qy * 0.4), 0, 1);
-    if (q < 0.12) return { ok: false, q, reason: 'timing', early: s.p[2] > IDEAL_Z };
+    if (q < 0.12) return { ok: false, q, reason: 'timing', early: s.p[2] < IDEAL_Z };
     this.restore(s);
     const shotInfo = this.applyShot(0, shot, q, this.cfg.eq.control, this.cfg.eq.spin);
     // fast-forward the physics from the contact moment to now, keeping history
