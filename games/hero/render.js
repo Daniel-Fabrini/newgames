@@ -740,8 +740,6 @@ export function drawFigure(g, v, ent, look, opt = {}) {
   const dpr = v.dpr;
   const pose = ent.pose || 'idle';
   const t = ent.poseT || 0;
-  const m = ent.moving || 0;
-  const ph = ent.anim || 0;
 
   // shadow (ground space)
   g.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -756,6 +754,25 @@ export function drawFigure(g, v, ent, look, opt = {}) {
   const ry = ux;
   g.setTransform(dpr * rx * k, dpr * ry * k, -dpr * ux * kh, -dpr * uy * kh, dpr * fx, dpr * fy);
 
+  drawBody(g, ent, look, lift);
+
+  g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  if (opt.out) {
+    opt.out.x = fx;
+    opt.out.y = fy;
+    opt.out.hx = fx + ux * 2.05 * kh;
+    opt.out.hy = fy + uy * 2.05 * kh;
+    opt.out.k = k;
+  }
+}
+
+// Draws the body in local meters (X right, Y down, origin at the feet).
+// The caller sets the transform.
+export function drawBody(g, ent, look, lift = 0) {
+  const pose = ent.pose || 'idle';
+  const t = ent.poseT || 0;
+  const m = ent.moving || 0;
+  const ph = ent.anim || 0;
   let rot = 0;
   let oy = -lift;
   let ox = 0;
@@ -973,14 +990,18 @@ export function drawFigure(g, v, ent, look, opt = {}) {
   g.arc(0, hy, 0.135, 0, Math.PI * 2);
   g.stroke();
 
-  g.setTransform(dpr, 0, 0, dpr, 0, 0);
-  if (opt.out) {
-    opt.out.x = fx;
-    opt.out.y = fy;
-    opt.out.hx = fx + ux * 2.05 * kh;
-    opt.out.hy = fy + uy * 2.05 * kh;
-    opt.out.k = k;
-  }
+}
+
+// Portrait / full-body render for menus.
+export function drawAvatar(g, dpr, cx, cy, scale, look, ent = {}) {
+  g.save();
+  g.setTransform(dpr * scale, 0, 0, dpr * scale, dpr * cx, dpr * cy);
+  g.fillStyle = 'rgba(0,0,0,0.35)';
+  g.beginPath();
+  g.ellipse(0.06, 0.02, 0.45, 0.12, 0, 0, Math.PI * 2);
+  g.fill();
+  drawBody(g, { pose: 'idle', anim: 0, moving: 0, ...ent }, look, 0);
+  g.restore();
 }
 
 function drawHair(g, look, front, hy) {

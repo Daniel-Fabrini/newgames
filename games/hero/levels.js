@@ -245,7 +245,21 @@ export function careerLevel(i) {
   if (i < HAND_COUNT) return handLevel(i);
   const d = Math.min(1.8, 1 + (i - HAND_COUNT) / 70);
   const L = genLevel(1000 + i * 31, d);
-  return { ...L, idx: i, min: 60 + ((i * 7) % 35), score: scoreFor(i), venue: i % 2 ? 'A' : 'H' };
+  return { ...L, ...careerMoment(i), idx: i };
+}
+
+// Cheap match context (minute, score, venue) without generating the level.
+export function careerMoment(i) {
+  if (i < HAND_COUNT) {
+    const H = HAND[i];
+    return { min: H.min, score: H.score, venue: H.venue };
+  }
+  const k = i % 10;
+  return { min: k === 9 ? 88 + (i % 5) : 60 + ((i * 7) % 33), score: k === 9 ? [1, 1] : scoreFor(i), venue: k === 9 ? 'N' : i % 2 ? 'A' : 'H' };
+}
+
+export function isGenerated(i) {
+  return i < HAND_COUNT || genCache.has(1000 + i * 31 + ':' + Math.min(1.8, 1 + (i - HAND_COUNT) / 70).toFixed(3) + ':');
 }
 
 function scoreFor(i) {

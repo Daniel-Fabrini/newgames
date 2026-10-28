@@ -62,9 +62,10 @@ export function createModel(store, hooks = {}) {
   const canPay = (c) => S.coins >= (c.coins || 0) && Object.entries(c).every(([k, v]) => k === 'coins' || (S.inv[k] || 0) >= v);
   const pay = (c) => {
     S.coins -= c.coins || 0;
-    for (const [k, v] of Object.entries(c)) if (k !== 'coins') S.inv[k] -= v;
+    for (const [k, v] of Object.entries(c)) if (k !== 'coins') { S.inv[k] -= v; drop(k); }
   };
   const give = (m) => { for (const [k, v] of Object.entries(m)) S.inv[k] = (S.inv[k] || 0) + v; };
+  const drop = (id) => { if (!S.inv[id]) delete S.inv[id]; };
 
   function energyTick(t = now()) {
     const max = maxEnergy(level());
@@ -280,7 +281,7 @@ export function createModel(store, hooks = {}) {
     if (level() < r.lvl) return fail('lvl');
     if (b.q.length >= P.slots) return fail('slots');
     if (!has(r.in)) return fail('stock');
-    for (const [k, v] of Object.entries(r.in)) S.inv[k] -= v;
+    for (const [k, v] of Object.entries(r.in)) { S.inv[k] -= v; drop(k); }
     const t = now();
     const start = b.q.length ? b.q[b.q.length - 1].end : t;
     b.q.push({ r: ri, end: start + r.t });
@@ -339,6 +340,7 @@ export function createModel(store, hooks = {}) {
     const food = P.food.find((f) => (S.inv[f] || 0) >= b.count);
     if (!food) return fail('food');
     S.inv[food] -= b.count;
+    drop(food);
     b.cyc++;
     if (!b.busy) b.busy = now() + P.cycle;
     bump('feed', 1);
@@ -363,6 +365,7 @@ export function createModel(store, hooks = {}) {
   function sell(id, n) {
     if ((S.inv[id] || 0) < n) return fail('stock');
     S.inv[id] -= n;
+    drop(id);
     S.coins += ITEMS[id].v * n;
     save();
     return ok({ coins: ITEMS[id].v * n });
@@ -374,6 +377,7 @@ export function createModel(store, hooks = {}) {
     if ((S.inv[id] || 0) < 1) return fail('stock');
     energyTick();
     S.inv[id]--;
+    drop(id);
     S.energy = Math.min(maxEnergy(level()), S.energy + e);
     save();
     return ok({ en: e });
@@ -394,7 +398,7 @@ export function createModel(store, hooks = {}) {
     const o = list.find((q) => q.id === oid);
     if (!o) return fail('gone');
     if (!has(o.need)) return fail('stock');
-    for (const [k, v] of Object.entries(o.need)) S.inv[k] -= v;
+    for (const [k, v] of Object.entries(o.need)) { S.inv[k] -= v; drop(k); }
     S.coins += o.reward.coins;
     S.gems += o.reward.gems;
     if (S.train?.id === oid) S.train = null;

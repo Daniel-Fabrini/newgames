@@ -244,6 +244,7 @@ function tile(g, i = 0) {
     },
     h('span', { class: 'tile-art', html: gameArt(g.id) }),
     h('span', { class: 'tile-text' }, h('span', { class: 'tile-name' }, pick(g.name)), h('span', { class: 'tile-sub' }, pick(g.sub))),
+    g.progress < 100 ? h('span', { class: 'tile-prog', title: `${g.progress}%` }, h('i', { style: { width: `${g.progress}%` } }), h('b', null, `${g.progress}%`)) : null,
   );
 }
 

@@ -582,6 +582,15 @@ export function playShow(app, { league = false } = {}) {
         showResults(app, { reason, prize, correct: G.correct, league, last, ...rewards });
       }
 
+      // Desktop keyboard: A–D or 1–4 pick an answer.
+      scope.on(document, 'keydown', (e) => {
+        if (app.sheets.count || e.ctrlKey || e.metaKey || e.altKey) return;
+        const k = 'abcd'.indexOf(e.key.toLowerCase());
+        const n = '1234'.indexOf(e.key);
+        const i = k >= 0 ? k : n;
+        if (i >= 0) choose(i);
+      });
+
       intro();
     },
     {

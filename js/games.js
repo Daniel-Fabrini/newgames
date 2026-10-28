@@ -7,12 +7,14 @@
 //   modes   lobby mode buttons → mount(root, ctx) with ctx.mode = id
 //   trophies  icons for the lobby achievements row (unlocked by plays / game level)
 //   lobby   false → the game opens directly, without the lobby page
+//   progress  % of the game built (0–100); below 100 the hub shows a progress bar
 //   music   false → background music is silenced while the game is open
 
 export const GAMES = [
   {
     id: 'soccer',
     cat: 'sport',
+    progress: 100,
     name: { pt: 'Super Craques', en: 'Super Strikers', es: 'Súper Cracks' },
     sub: { pt: 'Futebol de Mesa', en: 'Table Soccer', es: 'Fútbol de Mesa' },
     about: {
@@ -31,6 +33,7 @@ export const GAMES = [
   {
     id: 'squad',
     cat: 'strategy',
+    progress: 100,
     name: { pt: 'Zona de Guerra', en: 'War Zone', es: 'Zona de Guerra' },
     sub: { pt: 'Estratégia e Batalha', en: 'Strategy & Battle', es: 'Estrategia y Batalla' },
     about: {
@@ -49,6 +52,7 @@ export const GAMES = [
   {
     id: 'mapquiz',
     cat: 'knowledge',
+    progress: 100,
     name: { pt: 'Adivinhe o País', en: 'Guess the Country', es: 'Adivina el País' },
     sub: { pt: 'Mapa-Múndi', en: 'World Map', es: 'Mapamundi' },
     about: {
@@ -67,6 +71,7 @@ export const GAMES = [
   {
     id: 'flags',
     cat: 'knowledge',
+    progress: 100,
     name: { pt: 'Bandeiras', en: 'Flags', es: 'Banderas' },
     sub: { pt: 'Bandeiras do Mundo', en: 'World Flags', es: 'Banderas del Mundo' },
     about: {
@@ -85,6 +90,7 @@ export const GAMES = [
   {
     id: 'polyglot',
     cat: 'knowledge',
+    progress: 100,
     lobby: false,
     music: false, // lessons speak and listen
     name: { pt: 'Poliglota', en: 'Polyglot', es: 'Políglota' },
@@ -101,6 +107,7 @@ export const GAMES = [
   {
     id: 'busjam',
     cat: 'puzzle',
+    progress: 100,
     name: { pt: 'Bus Jam', en: 'Bus Jam', es: 'Bus Jam' },
     sub: { pt: 'Organização', en: 'Sorting Puzzle', es: 'Organización' },
     about: {
@@ -118,6 +125,7 @@ export const GAMES = [
   {
     id: 'waldo',
     cat: 'puzzle',
+    progress: 100,
     name: { pt: 'Cadê o Ruivinho?', en: 'Where is Red?', es: '¿Dónde está Rojito?' },
     sub: { pt: 'Ache o Personagem', en: 'Find the Character', es: 'Encuentra al Personaje' },
     about: {
@@ -136,6 +144,7 @@ export const GAMES = [
   {
     id: 'findit',
     cat: 'puzzle',
+    progress: 40,
     name: { pt: 'Caça-Objetos', en: 'Seek & Find', es: 'Busca y Encuentra' },
     sub: { pt: 'Objetos Escondidos', en: 'Hidden Objects', es: 'Objetos Ocultos' },
     about: {
@@ -154,6 +163,7 @@ export const GAMES = [
   {
     id: 'wordsearch',
     cat: 'puzzle',
+    progress: 100,
     name: { pt: 'Caça-Palavras', en: 'Word Search', es: 'Sopa de Letras' },
     sub: { pt: 'Temas Variados', en: 'Many Themes', es: 'Temas Variados' },
     about: {
@@ -172,6 +182,7 @@ export const GAMES = [
   {
     id: 'hero',
     cat: 'sport',
+    progress: 30,
     name: { pt: 'Herói da Bola', en: 'Ball Hero', es: 'Héroe del Balón' },
     sub: { pt: 'Carreira no Futebol', en: 'Soccer Career', es: 'Carrera de Fútbol' },
     about: {
@@ -190,6 +201,7 @@ export const GAMES = [
   {
     id: 'million',
     cat: 'knowledge',
+    progress: 60,
     name: { pt: 'Rumo ao Milhão', en: 'Road to a Million', es: 'Rumbo al Millón' },
     sub: { pt: 'Quiz de Perguntas', en: 'Trivia Quiz', es: 'Quiz de Preguntas' },
     about: {
@@ -208,6 +220,7 @@ export const GAMES = [
   {
     id: 'towers',
     cat: 'strategy',
+    progress: 5,
     name: { pt: 'Batalha de Torres', en: 'Tower Battles', es: 'Batalla de Torres' },
     sub: { pt: 'Defesa de Torres', en: 'Tower Defense', es: 'Defensa de Torres' },
     about: {
@@ -226,6 +239,7 @@ export const GAMES = [
   {
     id: 'naval',
     cat: 'strategy',
+    progress: 100,
     name: { pt: 'Batalha Naval', en: 'Sea Battle', es: 'Batalla Naval' },
     sub: { pt: 'Guerra no Mar', en: 'Naval Warfare', es: 'Guerra en el Mar' },
     about: {
@@ -244,6 +258,7 @@ export const GAMES = [
   {
     id: 'farm',
     cat: 'strategy',
+    progress: 5,
     name: { pt: 'Fazenda Aventura', en: 'Farm Adventure', es: 'Granja Aventura' },
     sub: { pt: 'Fazenda e Expedições', en: 'Farm & Expeditions', es: 'Granja y Expediciones' },
     about: {
@@ -262,6 +277,7 @@ export const GAMES = [
   {
     id: 'pingpong',
     cat: 'sport',
+    progress: 5,
     name: { pt: 'Tênis de Mesa', en: 'Table Tennis', es: 'Tenis de Mesa' },
     sub: { pt: 'Ping-Pong 3D', en: '3D Ping Pong', es: 'Ping-Pong 3D' },
     about: {

@@ -233,7 +233,6 @@ export function mountRun(host, env) {
   });
   stage.invalidate();
   window.__farmDbg && (window.__farmDbg.stage = stage); // DBG
-  centerOnExplorer();
   updateChip();
 
   return {

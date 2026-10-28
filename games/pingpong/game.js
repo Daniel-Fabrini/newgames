@@ -1,9 +1,8 @@
 // Match and drill controller: owns the stage, the loop, swipe input, announcer,
 // sounds and the match / drill rules that sit on top of the simulation.
-import { Match, TABLE_Y, HALF_W, HALF_L, IDEAL_Z, clamp } from './logic.js';
+import { Match, TABLE_Y } from './logic.js';
 import { createRenderer, ARENAS, withAlpha } from './render.js';
 import { analyzeSwipe } from './swipe.js';
-import { ITEMS } from './data.js';
 
 const TARGET_R = 0.2;
 const RALLY_GOAL = 20;
@@ -38,7 +37,6 @@ export function createGame(env) {
   let firstBounce = null;
   let gameEnd = false;
 
-  const eq = env.eq();
   const look = {
     player: { shirt: '#1b4d9e', shirt2: '#f4c542', skin: '#e9b98c', shorts: '#f4f4f6', shoe: '#222', rubber: '#d6252b', wood: '#c48a3e', hair: '#2b1c10' },
     ai: { shirt: '#f4c542', shirt2: '#c4282c', skin: '#c98e5f', shorts: '#16161c', shoe: '#eee', rubber: '#16161c', wood: '#8a5a2b', hair: '#0c0c0c' },
@@ -336,6 +334,7 @@ export function createGame(env) {
     if (!an) return;
     const tc = match.time - (performance.now() / 1000 - an.contactT) * match.slowmo;
     const res = match.swipe(an.shot, tc);
+    if (globalThis.__ppDebug) globalThis.__ppDebug.lastSwipe = { res: res ? { ok: res.ok, q: res.q, reason: res.reason, early: res.early, smash: res.smash, kind: res.kind } : null, shot: an.shot, speed: Math.round(an.speed), dur: Math.round(an.dur * 1000) };
     if (!res) return;
     if (res.ok) {
       swing.player = 1;
@@ -472,7 +471,8 @@ export function createGame(env) {
     const arena = ARENAS[m.arena || 0];
     renderer = createRenderer(canvas, arena);
     resizeFx();
-    match = new Match({ ...cfg, eq });
+    match = new Match({ ...cfg, eq: env.eq() });
+    if (globalThis.__ppDebug) globalThis.__ppDebug.match = match; // test seam
     serverAtStart = match.server;
     if (m.type === 'training') {
       trainState = { kind: m.drill, attempts: 0, hits: 0, streak: 0, best: 0, score: 0, left: TARGET_TIME, tgt: null };
@@ -531,4 +531,3 @@ export function createGame(env) {
   };
 }
 
-export { ITEMS, HALF_W, HALF_L, IDEAL_Z, clamp, ARENAS };

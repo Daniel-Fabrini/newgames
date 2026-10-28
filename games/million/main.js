@@ -64,6 +64,7 @@ export async function mount(root, ctx) {
   // ---------- views ----------
   let cur = null;
   function show(build, { cls = '', title = null, back = null } = {}) {
+    if (unmounted) return null;
     sheets.closeAll();
     if (cur) {
       cur.scope.dispose();
@@ -376,7 +377,7 @@ export async function mount(root, ctx) {
       },
       {
         cls: 'screen g-million-scroll',
-        title: t('shopTitle'),
+        title: t('shopShort'),
         back: () => {
           home();
           return true;
@@ -466,8 +467,18 @@ export async function mount(root, ctx) {
   else if (entry === 'practice') practicePicker(app, { root: true });
   else home();
 
+  // Desktop keyboard: Escape closes the top sheet (like the back button).
+  const onKey = (e) => {
+    if (e.key === 'Escape' && sheets.count) {
+      sheets.back();
+      e.preventDefault();
+    }
+  };
+  document.addEventListener('keydown', onKey);
+
   return () => {
     unmounted = true;
+    document.removeEventListener('keydown', onKey);
     if (cur) cur.scope.dispose();
     sheets.closeAll();
     pending.forEach(clearTimeout);

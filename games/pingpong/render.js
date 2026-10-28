@@ -15,8 +15,8 @@ export const ARENAS = [
   { id: 9, key: 'arenaName9', table: '#5b4a1c', tableEdge: '#3a2f10', floor: '#120c04', wall: '#1d1606', light: '#ffd768', crowd: ['#f7d774', '#c9971c', '#ffffff', '#8e5a1a', '#fff1b8'], glow: '#ffd768' },
 ];
 
-const CAM_POS = [0, 1.95, 4.3];
-const CAM_TGT = [0, 0.82, 0.1];
+const CAM_POS = [0, 2.05, 5.0];
+const CAM_TGT = [0, 0.78, -0.2];
 const BALL_SKINS = {
   std: { fill: '#fdfdfb', glow: null, trail: null },
   fire: { fill: '#ffe2a6', glow: '#ff7a1a', trail: [255, 140, 40] },
@@ -87,7 +87,7 @@ export function createRenderer(canvas, arena0) {
     dpr = Math.min(2, window.devicePixelRatio || 1);
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
-    f = Math.min(W * 1.45, H * 0.95);
+    f = Math.min(W * 1.75, H * 1.0);
     cx = W / 2;
     cy = H * 0.5;
     buildBasis();
@@ -142,6 +142,11 @@ export function createRenderer(canvas, arena0) {
     }
     ctx.restore();
 
+    const wg = ctx.createRadialGradient(W / 2, H * 0.3, 10, W / 2, H * 0.3, W * 0.9);
+    wg.addColorStop(0, withAlpha(arena.light, 0.3));
+    wg.addColorStop(1, withAlpha(arena.light, 0));
+    ctx.fillStyle = wg;
+    ctx.fillRect(0, 0, W, H);
     // back wall (z = -6.2) and crowd stand rows
     const wallQ = [proj(-6, 0, -6.4), proj(6, 0, -6.4), proj(6, 4.5, -6.4), proj(-6, 4.5, -6.4)];
     if (wallQ.every(Boolean)) {
@@ -325,7 +330,7 @@ export function createRenderer(canvas, arena0) {
   // ---------- players ----------
   // side 0 = player (near), 1 = opponent (far). fx.swing = 0..1 (swing progress)
   function drawPlayer(side, paddleX, paddleY, paddleZ, swing, look) {
-    const zb = side === 0 ? 2.75 : -2.75;
+    const zb = side === 0 ? 2.6 : -2.6;
     const shirt = side === 0 ? look.shirt : look.shirt2;
     const skin = look.skin;
     const hip = [paddleX * 0.25, 0.92, zb];
@@ -351,7 +356,7 @@ export function createRenderer(canvas, arena0) {
     // legs (shorts) and shoes
     ctx.lineCap = 'round';
     ctx.strokeStyle = look.shorts;
-    ctx.lineWidth = Math.max(3, 0.2 * s);
+    ctx.lineWidth = Math.max(3, 0.1 * s);
     ctx.beginPath();
     ctx.moveTo(pts.hip[0] - 0.12 * s, pts.hip[1]);
     ctx.lineTo(pts.lf[0], pts.lf[1]);
@@ -359,7 +364,7 @@ export function createRenderer(canvas, arena0) {
     ctx.lineTo(pts.rf[0], pts.rf[1]);
     ctx.stroke();
     ctx.strokeStyle = look.shoe;
-    ctx.lineWidth = Math.max(3, 0.12 * s);
+    ctx.lineWidth = Math.max(2, 0.06 * s);
     ctx.beginPath();
     ctx.moveTo(pts.lf[0], pts.lf[1] - 0.05 * s);
     ctx.lineTo(pts.lf[0] + 0.03 * s, pts.lf[1]);
@@ -368,7 +373,7 @@ export function createRenderer(canvas, arena0) {
     ctx.stroke();
     // torso
     ctx.strokeStyle = shirt;
-    ctx.lineWidth = Math.max(5, 0.34 * s);
+    ctx.lineWidth = Math.max(4, 0.17 * s);
     ctx.beginPath();
     ctx.moveTo(pts.hip[0], pts.hip[1]);
     ctx.lineTo(pts.sh[0], pts.sh[1]);
@@ -376,13 +381,13 @@ export function createRenderer(canvas, arena0) {
     // arm (sleeve, then skin forearm)
     if (pts.el && pts.hand) {
       ctx.strokeStyle = shirt;
-      ctx.lineWidth = Math.max(3, 0.12 * s);
+      ctx.lineWidth = Math.max(2, 0.07 * s);
       ctx.beginPath();
       ctx.moveTo(pts.sh[0], pts.sh[1]);
       ctx.lineTo(pts.el[0], pts.el[1]);
       ctx.stroke();
       ctx.strokeStyle = skin;
-      ctx.lineWidth = Math.max(2.5, 0.1 * s);
+      ctx.lineWidth = Math.max(2, 0.06 * s);
       ctx.beginPath();
       ctx.moveTo(pts.el[0], pts.el[1]);
       ctx.lineTo(pts.hand[0], pts.hand[1]);
@@ -407,11 +412,11 @@ export function createRenderer(canvas, arena0) {
     // head
     ctx.fillStyle = skin;
     ctx.beginPath();
-    ctx.arc(pts.head[0], pts.head[1], Math.max(4, 0.12 * s), 0, Math.PI * 2);
+    ctx.arc(pts.head[0], pts.head[1], Math.max(4, 0.1 * s), 0, Math.PI * 2);
     ctx.fill();
     ctx.fillStyle = look.hair;
     ctx.beginPath();
-    ctx.arc(pts.head[0], pts.head[1] - 0.03 * s, Math.max(4, 0.12 * s), Math.PI * 1.05, Math.PI * 1.95);
+    ctx.arc(pts.head[0], pts.head[1] - 0.03 * s, Math.max(4, 0.1 * s), Math.PI * 1.05, Math.PI * 1.95);
     ctx.fill();
     ctx.lineCap = 'butt';
   }

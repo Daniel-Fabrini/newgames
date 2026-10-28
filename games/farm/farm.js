@@ -385,13 +385,16 @@ export function mount(host, env) {
       const cr = M.T(x, y).cr;
       if (!cr) return h('p', { class: 'g-farm-text' }, '—');
       const C = CROPS[cr.id];
-      const f = M.cropFrac(cr);
-      const left = C.grow * (1 - f);
-      const gems = Math.max(1, Math.ceil(left / 60e3));
+      const left0 = C.grow * (1 - M.cropFrac(cr));
+      const gems = Math.max(1, Math.ceil(left0 / 60e3));
+      const left = () => {
+        const c = M.T(x, y).cr;
+        return c ? C.grow * (1 - M.cropFrac(c)) : 0;
+      };
       return h('div', { class: 'g-farm-col' },
         h('div', { class: 'g-farm-big-ico' }, ITEMS[cr.id].e),
-        h('p', { class: 'g-farm-text' }, t('growing', { t: fmtTime(left) })),
-        h('div', { class: 'g-farm-progress' }, h('i', { style: { width: (f * 100).toFixed(1) + '%' } })),
+        env.live(h('p', { class: 'g-farm-text' }), () => t('growing', { t: fmtTime(left()) })),
+        h('div', { class: 'g-farm-progress' }, env.live(h('i'), () => ((1 - left() / C.grow) * 100).toFixed(1) + '%', 'width')),
         h('button', { class: 'btn accent block', disabled: M.S.gems < gems, onclick: () => {
           const r = M.speedCrop(x, y);
           if (!r.ok) return toast(errText(r.err));

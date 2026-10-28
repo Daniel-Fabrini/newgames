@@ -112,11 +112,13 @@ export async function mount(root, ctx) {
 
   // ------------------------------------------------------------ sheets
   let sheetEl = null, sheetRefresh = null;
+  let env_live = null;
   function closeSheet() {
     if (!sheetEl) return false;
     const el = sheetEl;
     sheetEl = null;
     sheetRefresh = null;
+    liveList = [];
     el.classList.remove('show');
     setTimeout(() => el.remove(), 200);
     return true;
@@ -137,15 +139,39 @@ export async function mount(root, ctx) {
     return close;
   }
 
-  // A sheet whose content is rebuilt by build(rerender) now and every second while it is open.
+  // Live text inside sheets (timers, gem prices) is registered with env.live and refreshed each second.
+  let liveReg = null, liveList = [];
+  const sigOf = (node) => node.textContent.replace(/\d+/g, '#') + '|' + node.querySelectorAll('button').length + '|' + node.querySelectorAll('button:disabled').length;
+  // A sheet built by build(rerender). Actions call rerender (always rebuilds); the 1s refresh rebuilds only
+  // when its structure changes, so buttons are not replaced under the player's finger.
   function dynSheet(title, build) {
     const body = h('div', { class: 'g-farm-dyn' });
-    const re = () => body.replaceChildren(build(re));
-    re();
+    let sig = null;
+    const render = (force) => {
+      const pending = [];
+      const saved = liveReg;
+      liveReg = pending;
+      const node = build(re);
+      liveReg = saved;
+      const s = sigOf(node);
+      if (force || s !== sig) {
+        sig = s;
+        body.replaceChildren(node);
+        liveList = pending;
+      }
+    };
+    const re = () => render(true);
+    render(true);
     const close = sheet(title, body);
-    sheetRefresh = re;
+    sheetRefresh = () => render(false);
     return close;
   }
+  env_live = (el, fn, prop) => {
+    const apply = () => (prop ? (el.style[prop] = fn()) : (el.textContent = fn()));
+    if (liveReg) liveReg.push([el, fn, prop]);
+    apply();
+    return el;
+  };
 
   function openHelp() {
     sheet(t('help'), h('p', { class: 'g-farm-text' }, t('helpBody')), { });
@@ -166,7 +192,7 @@ export async function mount(root, ctx) {
   // ------------------------------------------------------------ views
   const env = {
     ctx, t, M, lang: ctx.lang, h, ui: ctx.ui, sfx: ctx.sfx,
-    toast, errText, floatText, flyTo, burst, sheet, dynSheet, closeSheet, setBar,
+    toast, errText, floatText, flyTo, burst, sheet, dynSheet, closeSheet, setBar, live: (el, fn, prop) => env_live(el, fn, prop),
     hud: hudUpdate,
     go: (name, arg) => go(name, arg),
     isDead: () => dead,
@@ -211,7 +237,10 @@ export async function mount(root, ctx) {
       if (ev.k === 'ship') toast(t('shipTitle'));
     }
     hudUpdate();
-    if (sheetEl) sheetRefresh?.();
+    if (sheetEl) {
+      sheetRefresh?.();
+      for (const [el, fn, prop] of liveList) if (el.isConnected) (prop ? (el.style[prop] = fn()) : (el.textContent = fn()));
+    }
     if (performance.now() - lastSave > 5000) { M.save(); lastSave = performance.now(); }
     view?.tick?.();
   }, 1000);

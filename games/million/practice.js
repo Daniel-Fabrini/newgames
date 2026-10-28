@@ -111,6 +111,7 @@ export function practicePlay(app, { theme, diff, root }) {
         { class: 'g-million-phud' },
         h('div', { class: 'g-million-pstat fire' }, h('span', { html: ico('fire') }), streakEl),
         h('div', { class: 'g-million-pstat' }, h('span', { html: ico('check') }), scoreEl),
+        h('span', { class: 'g-million-ptheme' }, `${THEME_ICON[theme] || ''} ${t(`set_${theme}`)}`),
         dEl,
       );
       const qImg = h('img', { class: 'g-million-qimg', alt: '', hidden: true, draggable: 'false' });
@@ -240,13 +241,21 @@ export function practicePlay(app, { theme, diff, root }) {
         finishFn && finishFn();
       }
 
+      scope.on(document, 'keydown', (e) => {
+        if (app.sheets.count || e.ctrlKey || e.metaKey || e.altKey) return;
+        const k = 'abcd'.indexOf(e.key.toLowerCase());
+        const n = '1234'.indexOf(e.key);
+        if (k >= 0 || n >= 0) answer(k >= 0 ? k : n);
+        else if (e.key === 'Enter' && !nextBtn.hidden) next();
+      });
+
       render();
       stage.say(t('practiceHello'), 'happy');
       next();
     },
     {
       cls: 'g-million-play practice',
-      title: t(`set_${theme}`),
+      title: t('practiceTitle'),
       back: () => {
         if (app.sheets.count) return true;
         finishFn && finishFn();

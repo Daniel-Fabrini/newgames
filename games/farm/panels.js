@@ -117,17 +117,23 @@ export function openProd(env, bid) {
       const r = P.recipes[job.r];
       const left = job.end - now;
       const gems = Math.max(1, Math.ceil(left / 60e3));
+      const remain = () => {
+        const x = M.S.B.find((q) => q.id === bid);
+        const j = x && x.q[i];
+        return j ? j.end - M.now() : 0;
+      };
       queue.append(h('div', { class: 'g-farm-row static' },
         h('span', { class: 'g-farm-row-ico' }, recipeText(r.out)),
-        h('span', { class: 'g-farm-row-body' }, h('b', {}, left > 0 ? t('prodLeft', { t: fmtTime(left) }) : t('err_full')),
+        h('span', { class: 'g-farm-row-body' },
+          env.live(h('b'), () => (remain() > 0 ? t('prodLeft', { t: fmtTime(remain()) }) : t('err_full'))),
           h('small', {}, recipeText(r.in) + ' → ' + recipeText(r.out))),
-        i === 0 && left > 0 ? h('button', { class: 'btn small accent', disabled: M.S.gems < gems, onclick: () => {
+        i === 0 && left > 0 ? env.live(h('button', { class: 'btn small accent', disabled: M.S.gems < gems, onclick: () => {
           const res = M.speedJob(bid, i);
           if (!res.ok) return toast(errText(res.err));
           sfx.play('success');
           hud();
           re();
-        } }, t('speedBtn', { g: gems })) : null));
+        } }), () => t('speedBtn', { g: Math.max(1, Math.ceil(Math.max(0, remain()) / 60e3)) })) : null));
     });
     wrap.append(queue);
     wrap.append(h('h3', { class: 'g-farm-sub' }, t('prodStart')));
@@ -161,10 +167,13 @@ export function openPen(env, bid) {
   dynSheet(t('pen_' + b0.t), (re) => {
     const b = M.S.B.find((q) => q.id === bid);
     const now = M.now();
-    const status = b.st > 0 ? t('penReady') : b.busy ? t('penBusy', { t: fmtTime(b.busy - now) }) : t('penIdle');
+    const status = () => {
+      const x = M.S.B.find((q) => q.id === bid);
+      return x.st > 0 ? t('penReady') : x.busy ? t('penBusy', { t: fmtTime(x.busy - M.now()) }) : t('penIdle');
+    };
     const wrap = h('div', { class: 'g-farm-col' });
     wrap.append(h('div', { class: 'g-farm-big-ico' }, P.e));
-    wrap.append(h('p', { class: 'g-farm-text' }, status));
+    wrap.append(env.live(h('p', { class: 'g-farm-text' }), status));
     wrap.append(h('p', { class: 'g-farm-text small' }, t('penAnimals', { n: b.count, m: MAX_PENS_ANIMALS }), ' · ',
       t('penQueue', { n: b.cyc }), ' · ', t('penStored', { n: b.st })));
     wrap.append(h('p', { class: 'g-farm-text small' }, t('penFoodList', { f: P.food.map((f) => ITEMS[f].e).join(' ') })));
@@ -190,13 +199,16 @@ export function openPen(env, bid) {
     if (b.busy) {
       const left = Math.max(0, b.busy - now);
       const gems = Math.max(1, Math.ceil(left / 60e3));
-      acts.append(h('button', { class: 'btn accent block', disabled: M.S.gems < gems, onclick: () => {
+      acts.append(env.live(h('button', { class: 'btn accent block', disabled: M.S.gems < gems, onclick: () => {
         const r = M.speedPen(bid);
         if (!r.ok) return toast(errText(r.err));
         sfx.play('success');
         hud();
         re();
-      } }, t('speedBtn', { g: gems })));
+      } }), () => {
+        const x = M.S.B.find((q) => q.id === bid);
+        return t('speedBtn', { g: Math.max(1, Math.ceil(Math.max(0, (x.busy || 0) - M.now()) / 60e3)) });
+      }));
     }
     acts.append(h('button', { class: 'btn block', disabled: b.count >= MAX_PENS_ANIMALS || M.S.coins < P.add, onclick: () => {
       const r = M.buyAnimal(bid);

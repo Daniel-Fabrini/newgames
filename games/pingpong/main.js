@@ -5,7 +5,7 @@ import { screens } from './screens.js';
 import { createGame } from './game.js';
 import { ARENAS } from './render.js';
 import { STYLES } from './logic.js';
-import { defaultProfile, eqFrom, skinFrom, find, tourInfo, tourOpponent, ITEMS } from './data.js';
+import { defaultProfile, eqFrom, skinFrom, find, tourInfo, tourOpponent } from './data.js';
 
 const OPP_KEYS = ['opponentName0', 'opponentName1', 'opponentName2', 'opponentName3', 'opponentName4', 'opponentName5', 'opponentName6', 'opponentName7', 'opponentName8', 'opponentName9'];
 const DRILLS = {
@@ -257,9 +257,6 @@ export async function mount(root, ctx) {
   });
 
   render();
-  if (entry) {
-    // lobby mode: jump straight into the screen for it (no extra back step)
-  }
 
   return () => {
     alive = false;
@@ -268,4 +265,3 @@ export async function mount(root, ctx) {
   };
 }
 
-export { ITEMS };

@@ -112,6 +112,7 @@ export async function mount(root, ctx) {
   let disposed = false;
   let board = new BoardRenderer(boardCanvas);
   const mini = new BoardRenderer(oppCanvas, { mini: true });
+  mini.resize(62, 88);
   const shopCards = {};
   let panelMode = null;     // 'shop' | 'tower'
   const sendBtns = [];
@@ -716,7 +717,6 @@ export async function mount(root, ctx) {
       const events = match.drainEvents();
       if (events.length) handleEvents(events);
       board.resize(boardWrap.clientWidth || 360, boardWrap.clientHeight || 400);
-      mini.resize(oppCanvas.clientWidth || 62, oppCanvas.clientHeight || 90);
       board.tick(dt);
       mini.tick(dt);
       board.setTrack(match.track);
@@ -761,7 +761,11 @@ export async function mount(root, ctx) {
     pointerDown = null;
     if (match.over) return;
     if (placing) {
-      if (p.x >= 0 && p.y >= 0 && p.x < WORLD_W && p.y < WORLD_H) tryBuild(Math.floor(p.x / CELL), Math.floor(p.y / CELL));
+      if (p.x >= 0 && p.y >= 0 && p.x < WORLD_W && p.y < WORLD_H) {
+        const col = Math.floor(p.x / CELL), row = Math.floor(p.y / CELL);
+        if (match.sides[0].grid[row * COLS + col] === 2) { placing = null; selectTowerAt(p.x, p.y); }
+        else tryBuild(col, row);
+      }
       return;
     }
     if (!moved) selectTowerAt(p.x, p.y);

@@ -322,6 +322,7 @@
   font-size: 14px;
   line-height: 1.25;
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55), 0 0 0 2px #c9971c, 0 0 18px rgba(243, 194, 74, 0.35);
+  max-width: 460px;
   opacity: 0;
   transform-origin: 0 50%;
 }
@@ -2377,7 +2378,19 @@
 .g-million-pstat.fire > span {
   color: #ff9f43;
 }
+.g-million-ptheme {
+  flex: 1;
+  min-width: 0;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--text-2);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .g-million-dpill {
+  flex: none;
   margin-left: auto;
   padding: 6px 12px;
   border-radius: 999px;

@@ -102,6 +102,9 @@ export function createSheets(layer) {
     layer.append(overlay);
     stack.push(entry);
     requestAnimationFrame(() => requestAnimationFrame(() => overlay.classList.add('show')));
+    // Keyboard: Enter/Space activate the focused primary action.
+    const primary = box.querySelector('.g-million-sheet-actions .btn.primary');
+    if (primary) setTimeout(() => !closed && primary.focus({ preventScroll: true }), 60);
     return { el: box, close, done };
   }
   return {

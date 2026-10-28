@@ -2,7 +2,7 @@
 // opponents and trophies. All club names are invented.
 
 import { COUNTRIES } from '../../js/data/countries.js';
-import { careerLevel, HAND } from './levels.js';
+import { careerMoment, HAND } from './levels.js';
 
 export const SEASON_LEN = 10;
 
@@ -102,7 +102,6 @@ export function levelMeta(i, heroCountry) {
   const k = i % SEASON_LEN;
   const club = clubForSeason(s);
   const intl = intlInfo(i);
-  const L = careerLevel(i);
   const final = k === SEASON_LEN - 1;
   return {
     i,
@@ -114,7 +113,7 @@ export function levelMeta(i, heroCountry) {
     trophy: final ? seasonTrophy(s) : intl && intl.final ? intl.trophy : null,
     opp: opponentFor(i, heroCountry),
     story: storyFor(i),
-    level: L,
+    ...careerMoment(i),
   };
 }
 
