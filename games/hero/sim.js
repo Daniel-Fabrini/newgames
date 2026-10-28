@@ -646,6 +646,10 @@ function stepKeeper(w, F, dt) {
     k.kx += (dx / d) * m;
     k.kz += (dz / d) * m;
   }
+  // step toward a ball crossing in front of him
+  const py = clamp(b.y + vy * tc, 0.3, 4.5);
+  const my = py - k.y;
+  if (Math.abs(my) > 0.05) k.y += Math.sign(my) * Math.min(Math.abs(my), spd * 0.55 * dt);
   k.kx = clamp(k.kx, -GW - 0.3, GW + 0.3);
   const off = k.kx - k.x0;
   if (Math.abs(off) > 0.55 || k.kz < 0.55 || k.kz > 1.75) {
