@@ -733,13 +733,15 @@ export function drawFigure(g, v, ent, look, opt = {}) {
   if (!v.p(ent.x, ent.y, 0, P0)) return;
   const fx = P0.x;
   const fy = P0.y;
-  const k = P0.k * FIG;
+  // stylized: never smaller than ~16 px per meter so far players stay readable
+  const boost = Math.max(1, 16 / (P0.k * FIG));
+  const k = P0.k * FIG * boost;
   if (!v.p(ent.x, ent.y, 1.8, P1)) return;
   let ux = P1.x - fx;
   let uy = P1.y - fy;
   const ul = Math.hypot(ux, uy) || 1;
   // billboard: never squash figures much under steep cameras
-  const kh = Math.max((ul / 1.8) * FIG, k * 0.86);
+  const kh = Math.max((ul / 1.8) * FIG * boost, k * 0.86);
   ux /= ul;
   uy /= ul;
   const dpr = v.dpr;

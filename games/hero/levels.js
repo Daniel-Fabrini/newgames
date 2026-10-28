@@ -313,7 +313,7 @@ export function drillLevel(kind, ball, seed) {
   const side = R() < 0.5 ? -1 : 1;
   const hx = rnd(R, -4, 4);
   const hy = rnd(R, 6.5, 11);
-  const def = ball > 3 ? [{ x: hx + rnd(R, -3, 3), y: hy + rnd(R, -3.5, -2.2) }] : [];
+  const def = ball > 3 ? [{ x: hx + (R() < 0.5 ? -1 : 1) * rnd(R, 2.4, 3.2), y: hy + rnd(R, 0.6, 2) }] : [];
   return {
     type: 'open',
     drill: kind,

@@ -207,7 +207,7 @@ export function createMatch(host, cfg) {
     // try a few camera pitches: steeper angles spread the action vertically,
     // flatter ones look more like TV; pick the best compromise
     let best = null;
-    for (const th of [0.55, 0.65, 0.75, 0.85]) {
+    for (const th of [0.55, 0.65, 0.75, 0.85, 0.97, 1.08]) {
       view.setPitch(th);
       const r = fit(pts, m);
       r.th = th;
