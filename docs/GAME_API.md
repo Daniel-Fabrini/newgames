@@ -2,7 +2,8 @@
 
 NewGames is a static web app (no build step, plain ES modules) that runs on phones
 in the browser and can be installed as a PWA. The hub (`js/main.js`) lists the
-games registered in `js/games.js`; each game lives in `games/<id>/`.
+games registered in `js/games.js`; each game lives in `games/<id>/` and opens at
+`index.html#<id>`.
 
 ## File layout of a game
 

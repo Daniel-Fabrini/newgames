@@ -1,6 +1,8 @@
 // App shell: hub screen, hash router, game lifecycle, settings.
-//   #/            hub
-//   #/play/<id>   a game (games/<id>/main.js)
+//   #             hub
+//   #<id>         a game (games/<id>/main.js); #/play/<id> is accepted too
+// Plain #name hashes keep links working when the app is embedded (artifact viewers
+// only pass simple hashes through).
 
 import { GAMES } from './games.js';
 import { LANGS, getLang, setLang, makeT, pick, onLangChange } from './core/i18n.js';
@@ -42,12 +44,14 @@ function setTopbar({ left = null, title = '', right = null }) {
 
 // ---------- routing ----------
 function parseRoute() {
-  const m = location.hash.match(/^#\/play\/([\w-]+)/);
-  return m ? { view: 'play', id: m[1] } : { view: 'hub' };
+  const m = location.hash.match(/^#(?:\/play\/)?([\w-]+)/);
+  return m && GAMES.some((g) => g.id === m[1]) ? { view: 'play', id: m[1] } : { view: 'hub' };
 }
 
+const gameHash = (id) => `#${id}`;
+
 function navigate(hash) {
-  if (location.hash === hash) route();
+  if ((location.hash || '#') === hash) route();
   else location.hash = hash;
 }
 
@@ -63,7 +67,7 @@ window.addEventListener('hashchange', () => {
       console.error(e);
     }
     if (handled) {
-      history.pushState(null, '', `#/play/${current.id}`);
+      history.pushState(null, '', gameHash(current.id));
       return;
     }
   }
@@ -73,12 +77,12 @@ window.addEventListener('hashchange', () => {
 
 function exitToHub() {
   skipBackCheck = true;
-  navigate('#/');
+  navigate('#');
 }
 
 function route() {
   const r = parseRoute();
-  if (r.view === 'play' && GAMES.some((g) => g.id === r.id)) openGame(r.id);
+  if (r.view === 'play') openGame(r.id);
   else showHub();
 }
 
@@ -148,7 +152,7 @@ function showHub() {
           style: { background: g.bg },
           onclick: () => {
             sfx.play('select');
-            navigate(`#/play/${g.id}`);
+            navigate(gameHash(g.id));
           },
         },
         h('span', { class: 'gc-icon', 'aria-hidden': 'true' }, g.icon),
