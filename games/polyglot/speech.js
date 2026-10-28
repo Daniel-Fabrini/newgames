@@ -15,7 +15,7 @@ function logEv(msg) {
   }
 }
 
-export const SPEECH_VERSION = 'speech-v6';
+export const SPEECH_VERSION = 'speech-v7';
 
 export function createSpeech(onProblem) {
   try {
@@ -41,14 +41,17 @@ export function createSpeech(onProblem) {
     if (nativeTTS) return nativeTTS;
     const c = typeof window !== 'undefined' ? window.Capacitor : null;
     const isNat = !!(c && c.isNativePlatform && c.isNativePlatform());
-    if (!isNat || !c.registerPlugin) {
+    // Capacitor lists every native plugin under Capacitor.Plugins; registerPlugin is
+    // only a fallback (it may not exist on the global in the Android app).
+    const plug = isNat ? (c.Plugins && c.Plugins.TextToSpeech) || (c.registerPlugin ? c.registerPlugin('TextToSpeech') : null) : null;
+    if (!plug) {
       if (!nativeNoted) {
         nativeNoted = true;
-        logEv(`sem voz nativa (Capacitor=${!!c} nativo=${isNat})`);
+        logEv(`sem voz nativa (Capacitor=${!!c} nativo=${isNat} Plugins=${!!(c && c.Plugins)} registerPlugin=${!!(c && c.registerPlugin)})`);
       }
       return null;
     }
-    nativeTTS = (c.Plugins && c.Plugins.TextToSpeech) || c.registerPlugin('TextToSpeech');
+    nativeTTS = plug;
     logEv('voz nativa pronta');
     const norm = (l) => String(l).replace(/_/g, '-').toLowerCase();
     Promise.resolve(nativeTTS.getSupportedLanguages())
