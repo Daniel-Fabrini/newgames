@@ -743,8 +743,7 @@
   animation: g-flags-q-in 0.3s ease-out backwards;
 }
 .g-flags-q-mc {
-  justify-content: center;
-  padding-bottom: 6%;
+  padding-top: 6px;
 }
 .g-flags-skipout .g-flags-q {
   animation: g-flags-q-out 0.18s ease-in forwards;
@@ -767,7 +766,7 @@
 .g-flags-stage {
   flex: 1 1 auto;
   min-height: 110px;
-  max-height: 290px;
+  max-height: 252px;
   container-type: size;
   display: grid;
   place-items: center;

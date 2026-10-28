@@ -374,7 +374,8 @@ export class MapView {
   }
 
   // camera that shows rect [x0,y0,x1,y1] inside the free area (minus insets)
-  cameraFor(rect, { pad = 16, maxS = Infinity, minSize = 0 } = {}) {
+  // fill (0..1): 0 = show the whole rect, 1 = cover the free area with it
+  cameraFor(rect, { pad = 16, maxS = Infinity, minSize = 0, fill = 0 } = {}) {
     let [x0, y0, x1, y1] = rect;
     if (x1 - x0 < minSize) {
       const m = (x0 + x1) / 2;
@@ -389,7 +390,9 @@ export class MapView {
     const { top, bottom, left, right } = this.insets;
     const aw = Math.max(40, this.vw - left - right - pad * 2);
     const ah = Math.max(40, this.vh - top - bottom - pad * 2);
-    const s = clamp(Math.min(aw / (x1 - x0), ah / (y1 - y0), maxS), this.sMin, this.sMax);
+    const sContain = Math.min(aw / (x1 - x0), ah / (y1 - y0));
+    const sCover = Math.max(aw / (x1 - x0), ah / (y1 - y0));
+    const s = clamp(Math.min(sContain * Math.pow(sCover / sContain, fill), maxS), this.sMin, this.sMax);
     const cx = (x0 + x1) / 2 - (left - right) / 2 / s;
     const cy = (y0 + y1) / 2 - (top - bottom) / 2 / s;
     return this.clampCam({ cx, cy, s });
@@ -411,7 +414,7 @@ export class MapView {
   }
 
   fitView(key, opts = {}) {
-    this.fitRect(VIEWS[key] || VIEWS.world, opts);
+    this.fitRect(VIEWS[key] || VIEWS.world, { fill: key === 'world' ? 0 : 0.42, ...opts });
   }
 
   focus(code, opts = {}) {
@@ -675,42 +678,38 @@ export class MapView {
     const [wx0, wy] = this.toWorld(sx, sy);
     const s = this.cam.s;
     const rM = this.markerRadius();
-    let best = null;
-    let bestD = Infinity;
-    // 1) markers of tiny countries (exact-ish)
-    for (const g of Object.values(this.geo.shapes)) {
+    const shapes = Object.values(this.geo.shapes);
+    // nearest visible marker (tiny countries)
+    let mCode = null;
+    let mD = Infinity;
+    for (const g of shapes) {
       if (!this.isActive(g.code) || !this.markerVisible(g)) continue;
       const [mx, my] = this.toScreen(g.p[0], g.p[1]);
-      const d = Math.hypot(mx - sx, my - sy);
-      if (d < rM + 9 && d < bestD) {
-        best = g.code;
-        bestD = d;
+      const d = Math.hypot(mx - sx, my - sy) - rM;
+      if (d < mD) {
+        mD = d;
+        mCode = g.code;
       }
     }
-    if (best) return best;
-    const wxs = [mod(wx0, MAP_W), mod(wx0, MAP_W) - MAP_W, mod(wx0, MAP_W) + MAP_W];
+    // 1) right on a marker
+    if (mCode && mD <= 4) return mCode;
+    const xw = mod(wx0, MAP_W);
+    const wxs = [xw, xw - MAP_W, xw + MAP_W];
     // 2) inside a polygon
-    for (const g of Object.values(this.geo.shapes)) {
+    for (const g of shapes) {
       if (!g.hasGeo || !this.isActive(g.code)) continue;
       for (const wx of wxs) {
         if (wx < g.b[0] || wx > g.b[2] || wy < g.b[1] || wy > g.b[3]) continue;
         if (insideRings(g, wx, wy)) return g.code;
       }
     }
-    // 3) forgiving: nearest coast/border or marker within a finger's width
+    // 3) forgiving: nearest marker or coast/border within a finger's width
     const slopPx = 22;
     const slop = slopPx / s;
-    for (const g of Object.values(this.geo.shapes)) {
-      if (!this.isActive(g.code)) continue;
-      if (this.markerVisible(g)) {
-        const [mx, my] = this.toScreen(g.p[0], g.p[1]);
-        const d = Math.hypot(mx - sx, my - sy) - rM;
-        if (d < slopPx + 4 && d < bestD) {
-          best = g.code;
-          bestD = d;
-        }
-      }
-      if (!g.hasGeo) continue;
+    let best = mCode && mD < slopPx ? mCode : null;
+    let bestD = best ? mD : Infinity;
+    for (const g of shapes) {
+      if (!g.hasGeo || !this.isActive(g.code)) continue;
       for (const wx of wxs) {
         if (wx < g.b[0] - slop || wx > g.b[2] + slop || wy < g.b[1] - slop || wy > g.b[3] + slop) continue;
         const d = distToRings(g, wx, wy, slop) * s;

@@ -169,7 +169,7 @@ export function playSession(app, view, scope, cfg) {
       labelKey ? h('div', { class: 'g-flags-qlabel' }, t(labelKey)) : null,
       h('div', { class: 'g-flags-stage' }, h('div', { class: 'g-flags-cardin' }, flagCard(q.c), comboEl)),
       q.kind === 'caps' ? h('div', { class: 'g-flags-caption' }, q.c.name[lang]) : null,
-    ];
+    ].filter(Boolean);
   }
 
   const api = {

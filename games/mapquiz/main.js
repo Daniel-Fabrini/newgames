@@ -1125,7 +1125,7 @@ export async function mount(root, ctx) {
       updateHud();
       const g = geometry().shapes[qs[st.i].code];
       const size = Math.max(g.b[2] - g.b[0], g.b[3] - g.b[1]);
-      const r = Math.max(size * 0.9, 1100);
+      const r = Math.max(size * 0.85, 850);
       const ang = Math.random() * Math.PI * 2;
       const off = r * 0.45 * Math.random();
       const cx = g.p[0] + Math.cos(ang) * off;
