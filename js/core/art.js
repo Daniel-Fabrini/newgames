@@ -93,8 +93,15 @@ const COVERS = new Set(['soccer', 'squad', 'mapquiz', 'flags', 'polyglot', 'busj
 export const hasCover = (id) => COVERS.has(id);
 export const coverUrl = (id) => new URL(`../../assets/covers/${id}.webp`, import.meta.url).href;
 
+// Temporary drawn art for games that do not have a 3D cover yet.
+const EMOJI_ART = { blocks: ['🧱', '#2b6fe0', '#0d2a6b'], water: ['🧪', '#7c3aed', '#2b0d6b'], snake: ['🐍', '#16a34a', '#06361c'], numbers: ['🔢', '#f59e0b', '#6b3a05'], solitaire: ['🃏', '#0f766e', '#04302c'], checkers: ['⚫', '#b91c1c', '#3a0707'], domino: ['🁣', '#0ea5e9', '#06334d'], sudoku: ['🔟', '#6366f1', '#1e1b6b'], g2048: ['🎲', '#f97316', '#5a2105'], crossword: ['✏️', '#e11d48', '#4a0719'] };
+const emojiArt = (id) => {
+  const [e, a, b] = EMOJI_ART[id] || ['🎮', '#444', '#111'];
+  return `<div class="art" style="background:radial-gradient(circle at 50% 38%,${a},${b})"><span class="art-emoji c" style="--s:52">${e}</span></div>`;
+};
+
 export function gameArt(id) {
-  const legacy = (ART[id] || ART.soccer)();
+  const legacy = (ART[id] || (() => emojiArt(id)))();
   if (!COVERS.has(id)) return legacy;
   return `${legacy}<img class="cover" src="${coverUrl(id)}" alt="" decoding="async" draggable="false" onerror="this.remove()">`;
 }

@@ -57,3 +57,36 @@ def fit(scale=1.0, dz=0.0, dx=0.0):
 
 def podium(color, r=3.3, h=0.5, z=0.0, rough=0.3):
     return cylinder(r, h, glossy(color, rough, 0.5, name='podium'), loc=(0, 0, z - h / 2), bevel=0.12, seg=96)
+
+
+def soccer_ball(R=1.0, loc=(0, 0, 0), rot=(0, 0, 0)):
+    """White glossy ball with 12 black pentagon patches (icosahedron vertex directions)."""
+    import math as m
+    from mathutils import Vector
+    phi = (1 + 5 ** 0.5) / 2
+    dirs = []
+    for a in (-1, 1):
+        for b in (-phi, phi):
+            dirs += [Vector((0, a, b)), Vector((a, b, 0)), Vector((b, 0, a))]
+    white = glossy('#ffffff', 0.18, 0.9, name='ball_white')
+    black = glossy('#15151c', 0.2, 0.9, name='ball_black')
+    parts = [sphere(R, white)]
+    for d in dirs:
+        d = d.normalized()
+        p = cylinder(0.28 * R, 0.1 * R, black, loc=tuple(d * (R * 0.965)), bevel=0.03 * R, seg=5)
+        p.rotation_euler = d.to_track_quat('Z', 'Y').to_euler()
+        parts.append(p)
+    return parent(parts, loc=loc, rot=rot)
+
+
+def flame(color, strength=2.0, name=None):
+    m = bpy.data.materials.new(name or f'fl_{color}')
+    m.use_nodes = True
+    nt = m.node_tree
+    nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial')
+    e = nt.nodes.new('ShaderNodeEmission')
+    e.inputs['Color'].default_value = (*srgb(color), 1)
+    e.inputs['Strength'].default_value = strength
+    nt.links.new(e.outputs[0], out.inputs['Surface'])
+    return m
