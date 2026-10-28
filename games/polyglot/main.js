@@ -6,7 +6,7 @@
 import STRINGS from './strings.js';
 import { UNITS, SECTIONS, loadUnit } from './content/index.js';
 import { LANGS6, FLAG, primary, alts, canon, bare, buildLexicon, tokenize } from './corpus.js';
-import { createState, MAX_HEARTS, GOALS } from './progress.js';
+import { createState, GOALS } from './progress.js';
 import { createSpeech } from './speech.js';
 import { createGenerator, UNIT_NODES, NODES_PER_UNIT, chunkWordIndexes, nodeChunk } from './lessons.js';
 import { runLesson, runStory, showStreak } from './runner.js';
@@ -729,6 +729,5 @@ export async function mount(root, ctx) {
     window.removeEventListener('keydown', onKey);
     offVoices();
     speech.dispose();
-    void MAX_HEARTS;
   };
 }

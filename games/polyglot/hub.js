@@ -1,6 +1,6 @@
 // Practice, League, Quests and Profile tabs + bottom sheets (hearts, streak, shop, guidebook).
 
-import { UNITS, SECTIONS } from './content/index.js';
+import { UNITS } from './content/index.js';
 import { FLAG, primary, display } from './corpus.js';
 import { NODES_PER_UNIT } from './lessons.js';
 import { mascotSVG, ICON } from './art.js';
@@ -640,7 +640,6 @@ export function renderProfile(app, sc) {
       t('resetCourse'),
     ),
   );
-  void SECTIONS;
 }
 
 function achSheet(app, a) {

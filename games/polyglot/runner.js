@@ -5,7 +5,7 @@ import { primary, display } from './corpus.js';
 import { renderExercise, speakerButton, sentenceView } from './exercises.js';
 import { wordsInExercise } from './lessons.js';
 import { mascotSVG, ICON } from './art.js';
-import { levelInfo, dayKey, addDays, MAX_HEARTS, REFILL_COST } from './progress.js';
+import { levelInfo, dayKey, addDays, REFILL_COST } from './progress.js';
 
 const PRAISE = ['praise1', 'praise2', 'praise3', 'praise4', 'praise5', 'praise6'];
 
@@ -719,5 +719,4 @@ export function runStory(app, unit, story, { onComplete }) {
   scope.onCleanup(() => speech.stop());
   progress();
   scope.later(() => advance(), 450);
-  void MAX_HEARTS;
 }
