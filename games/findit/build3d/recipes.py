@@ -234,11 +234,11 @@ def compose(L, S, cfg):
     fl = cfg.get('floor')
     if fl:
         C.build_occluder()
-        lv = L.flat_level(0.0, *fl['region'], tag='floor')
-        C.fill([lv], fl['pool'], fl['count'], jitter=fl.get('jitter', 0.8))
+        lvs = [L.flat_level(0.0, *fl['region'], tag='floor')]
+        C.fill(lvs, fl['pool'], fl['count'], jitter=fl.get('jitter', 0.8))
         if fl.get('small'):
             C.build_occluder()
-            C.fill([lv], fl['small'], fl.get('small_count', 20), jitter=1.2)
+            C.fill(lvs, fl['small'], fl.get('small_count', 20), jitter=1.2)
     art = cfg.get('wall_art')
     if art:
         C.decorate_wall(art['pool'], W, art.get('x0', R['x0'] + 0.3), art.get('x1', R['x1'] - 0.3), art['z0'], art['z1'], art['count'])
