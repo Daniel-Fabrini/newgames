@@ -132,7 +132,13 @@ def main(argv):
     img = Image.open(os.path.join(src, 'beauty.png')).convert('RGB')
     assert img.size == (W, H), (img.size, W, H)
     img = grade(img)
-    img.save(os.path.join(dst, sid + '.webp'), 'WEBP', quality=q, method=6)
+    # keep the photo under ~500 KB: step the quality down for very detailed scenes
+    out_img = os.path.join(dst, sid + '.webp')
+    while True:
+        img.save(out_img, 'WEBP', quality=q, method=6)
+        if os.path.getsize(out_img) <= 500 * 1024 or q <= 66:
+            break
+        q -= 4
     sw = 480
     img.resize((sw, round(H * sw / W)), Image.LANCZOS).save(os.path.join(dst, sid + '_s.webp'), 'WEBP', quality=72, method=6)
 

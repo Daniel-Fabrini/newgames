@@ -186,7 +186,7 @@ GROUPS = {
     'tire_pump': ('bomba de ar', 'tire pump', 'bombín', ['tire_pump']),
     'can': ('lata enferrujada', 'rusty can', 'lata oxidada', ['can_rusted']),
     'bucket': ('balde de madeira', 'wooden bucket', 'cubo de madera', ['wooden_bucket_01', 'wooden_bucket_02']),
-    'barrel': ('barril', 'barrel', 'barril', ['Barrel_01', 'Barrel_02', 'barrel_03', 'wine_barrel_01']),
+    'barrel': ('barril', 'barrel', 'barril', ['Barrel_01', 'Barrel_02', 'barrel_03', 'wine_barrel_01', 'wooden_barrels_01/barrel0']),
     'crate': ('caixote', 'wooden crate', 'cajón de madera', ['wooden_crate_01', 'wooden_crate_02']),
     'military_crate': ('caixa militar', 'military crate', 'caja militar', ['wooden_military_crate', 'old_military_crate']),
     'plastic_crate': ('engradado', 'plastic crate', 'caja de plástico', ['plastic_crate_01', 'plastic_crate_02', 'plastic_crate_03']),
