@@ -639,6 +639,17 @@ export class BaseView {
     g.fillStyle = bg;
     g.fillRect(0, 0, MW, MH);
     const r = rng(1234);
+    // outer forest beyond the base (fills the view when panning)
+    const outer = [];
+    for (let x = -9; x < N + 9; x++) {
+      for (let y = -9; y < N + 9; y++) {
+        if (x >= 0 && y >= 0 && x < N && y < N) continue;
+        const p = I(x + 0.5, y + 0.5);
+        if (p[0] < -TW || p[0] > MW + TW || p[1] < -TH * 2 || p[1] > MH + TH * 2) continue;
+        fillP(g, [I(x, y), I(x + 1, y), I(x + 1, y + 1), I(x, y + 1)], r() < 0.5 ? '#5f9a34' : '#5a9431', null);
+        if (r() < 0.55) outer.push([x, y]);
+      }
+    }
     // grass tiles
     for (let x = 0; x < N; x++) {
       for (let y = 0; y < N; y++) {
@@ -647,9 +658,6 @@ export class BaseView {
         fillP(g, [I(x, y), I(x + 1, y), I(x + 1, y + 1), I(x, y + 1)], col, 'rgba(60,100,30,.12)', 0.6);
       }
     }
-    // map edge (cliff)
-    fillP(g, [I(0, N), I(N, N), I(N, N, -18), I(0, N, -18)], '#6a4a2a', null);
-    fillP(g, [I(N, 0), I(N, N), I(N, N, -18), I(N, 0, -18)], '#7a5a34', null);
     // plaza under HQ
     const hq = BUILDINGS[0];
     fillP(g, [I(hq.gx - 0.5, hq.gy - 0.5), I(hq.gx + hq.w + 0.5, hq.gy - 0.5), I(hq.gx + hq.w + 0.5, hq.gy + hq.h + 0.5), I(hq.gx - 0.5, hq.gy + hq.h + 0.5)], '#b9a98a', 'rgba(90,70,40,.4)');
@@ -742,6 +750,7 @@ export class BaseView {
         },
       });
     }
+    for (const [x, y] of outer) objs.push({ d: x + y + 1, draw: () => tree(g, x + 0.5 + (r() - 0.5) * 0.4, y + 0.5 + (r() - 0.5) * 0.4, 0.9 + r() * 0.4, ['#3f8a34', '#4a9a3a', '#357a2c', '#2f7028'][Math.floor(r() * 4)]) });
     objs.sort((a, b) => a.d - b.d);
     for (const o of objs) o.draw();
     this.layer = c;

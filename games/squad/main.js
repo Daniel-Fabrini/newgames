@@ -347,6 +347,7 @@ export async function mount(root, ctx) {
     base.sheetHost.append(scrim, el);
     sheet = { kind, el, body, scrim, opt };
     for (const tb of TABS) base.tabs.btns[tb.id].classList.toggle('active', tb.id === kind);
+    base.tabs.btns[kind].classList.remove('pulse');
     requestAnimationFrame(() => {
       el.classList.add('open');
       scrim.classList.add('open');
@@ -460,7 +461,7 @@ export async function mount(root, ctx) {
       }
       let act;
       if (lvl >= max) {
-        act = h('div', { class: 'g-squad-need' }, icon('lock'), t('needHq', { n: id === 'goldmine' || id === 'factory' ? lvl : lvl + 1 }));
+        act = h('div', { class: 'g-squad-need' }, icon('lock'), t('needHq', { n: lvl - 1 }));
       } else {
         const btn = goldBtn(t('upgrade'), () => {
           if (!canAfford(cost)) return refuse(card);
@@ -959,7 +960,7 @@ export async function mount(root, ctx) {
   async function showWelcome() {
     if (!alive) return;
     const rows = [
-      ['tabMap', 'help1'],
+      ['soldier', 'help1'],
       ['target', 'help2'],
       ['chest', 'help3'],
       ['skull', 'help4'],

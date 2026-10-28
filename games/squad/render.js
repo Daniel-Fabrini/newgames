@@ -68,8 +68,8 @@ export class Renderer {
     this.cv.width = Math.round(w * dpr);
     this.cv.height = Math.round(h * dpr);
     if (this.opts.preview) {
-      this.s0 = (w * 0.62) / (ROAD * 2);
-      this.sY = h * 1.08;
+      this.s0 = (w * 0.5) / (ROAD * 2);
+      this.sY = h * 0.98;
     } else {
       this.s0 = Math.min((w * 0.8) / (ROAD * 2), h / 560);
       this.sY = h * 0.77;
@@ -679,8 +679,9 @@ export class Renderer {
     {
       const yEnd = this.proj(0, sq.z + VIEW * 0.72).y;
       const g = ctx.createLinearGradient(0, 0, 0, Math.max(40, yEnd));
-      g.addColorStop(0, css(pal.fog, 0.96));
-      g.addColorStop(0.55, css(pal.fog, 0.45));
+      const fk = this.opts.preview ? 0.55 : 1;
+      g.addColorStop(0, css(pal.fog, 0.96 * fk));
+      g.addColorStop(0.55, css(pal.fog, 0.45 * fk));
       g.addColorStop(1, css(pal.fog, 0));
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, W, Math.max(40, yEnd));

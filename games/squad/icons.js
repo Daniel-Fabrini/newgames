@@ -83,6 +83,8 @@ export const ICONS = {
     <path d="M28 52c1 4 2 7 4 9 2-2 3-5 4-9z" fill="#ffb347"/><path d="M30 52c.5 3 1 5 2 6 1-1 1.5-3 2-6z" fill="#fff1b0"/></svg>`,
 };
 
+ICONS.gems = ICONS.gem;
+
 export function icon(name, cls = '') {
   const span = document.createElement('span');
   span.className = `g-squad-ico ${cls}`;

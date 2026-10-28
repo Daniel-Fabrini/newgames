@@ -188,8 +188,8 @@ export function playLevel(app, spec) {
       s.el.classList.add('done');
       if (!s.el.querySelector('.g-hidden-check')) s.el.append(h('span', { class: 'g-hidden-check', html: ICON.check }));
       if (queue.length) {
+        const next = queue.shift();
         later(() => {
-          const next = queue.shift();
           const tile = makeTile(next);
           s.el.replaceWith(tile);
           s.el = tile;

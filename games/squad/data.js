@@ -37,7 +37,7 @@ export function bldCost(id, lvl) {
   return { gold: nice(b.g * f), mat: nice(b.m * f) };
 }
 export function bldMaxLevel(save, id) {
-  return id === 'hq' ? Infinity : save.bld.hq + (id === 'goldmine' || id === 'factory' ? 1 : 0);
+  return id === 'hq' ? Infinity : save.bld.hq + 2;
 }
 
 // Production per hour / storage.
@@ -94,7 +94,7 @@ export function defaultSave(now = Date.now()) {
   return {
     v: SAVE_VERSION,
     gold: 300,
-    mat: 150,
+    mat: 200,
     gems: 10,
     level: 1,
     stars: {},
