@@ -2,6 +2,10 @@
 // (found outlines, effects) and handles pan / pinch-zoom / wheel / double-tap
 // with inertia. Renders on demand (no idle rAF loop).
 
+const now = () => performance.now();
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
 export class SceneView {
   constructor(host, opts = {}) {
     this.host = host;

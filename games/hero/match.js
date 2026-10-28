@@ -36,7 +36,7 @@ export function createMatch(host, cfg) {
   let hintPulse = 0;
   let paused = false;
   let inputOn = cfg.input !== false;
-  const cam = { tx: 0, ty: 20, dist: 50, th: 0.6, ready: false };
+  const cam = { cx: 0, cy: 40, cz: 10, yaw: 0, pitch: 0.3, ready: false };
   const looks = { att: [], def: [] };
 
   // ------------------------------------------------------------------ setup
@@ -54,6 +54,7 @@ export function createMatch(host, cfg) {
         hairColor: base.hairColor,
         boots: a.hero ? cfg.heroLook.boots : '#15151a',
         num: a.hero ? cfg.heroNum : nums[i],
+        name: a.hero ? cfg.heroName : null,
         front: false,
       };
     });
@@ -80,10 +81,7 @@ export function createMatch(host, cfg) {
     introT = 0;
     buildLooks();
     const d = desired(true);
-    cam.tx = d.tx;
-    cam.ty = d.ty + 14;
-    cam.dist = d.dist * 1.45;
-    cam.th = d.th;
+    Object.assign(cam, { cx: d.cx, cy: d.cy + 8, cz: d.cz + 5, yaw: d.yaw, pitch: d.pitch });
     cam.ready = true;
     if (cfg.onState) cfg.onState('intro');
     sfx.play('whistle');
@@ -102,152 +100,130 @@ export function createMatch(host, cfg) {
   }
 
   // ------------------------------------------------------------------ camera
+  // Low chase camera behind the focus point (ball / carrier) looking toward
+  // a target (goal or receiver). It backs off only as far as needed for the
+  // important points to fit on screen.
   const PP = { x: 0, y: 0, d: 0, k: 0 };
-  function fits(pts, m) {
-    for (const p of pts) {
-      if (!view.p(p.x, p.y, p.z, PP)) return false;
-      if (PP.x < m.l || PP.x > W - m.r || PP.y < m.t || PP.y > H - m.b) return false;
+  function rigFor(A, T, pts, m, opt = {}) {
+    // yaw: centre the bearings of everything that matters (seen from A)
+    let bmin = Infinity;
+    let bmax = -Infinity;
+    let D = 8;
+    const consider = [...pts, { x: T.x, y: T.y, z: 0 }];
+    for (const p of consider) {
+      const dx = p.x - A.x;
+      const dy = p.y - A.y;
+      const d = Math.hypot(dx, dy);
+      if (d < 3) continue;
+      const br = Math.atan2(dx, -dy);
+      bmin = Math.min(bmin, br);
+      bmax = Math.max(bmax, br);
+      D = Math.max(D, d);
     }
-    return true;
-  }
-  function fit(pts, m, minD = 24, maxD = 130) {
-    let x0 = Infinity;
-    let x1 = -Infinity;
-    let y0 = Infinity;
-    let y1 = -Infinity;
-    for (const p of pts) {
-      x0 = Math.min(x0, p.x);
-      x1 = Math.max(x1, p.x);
-      y0 = Math.min(y0, p.y);
-      y1 = Math.max(y1, p.y);
-    }
-    let tx = (x0 + x1) / 2;
-    let ty = (y0 + y1) / 2;
-    let dist = 40;
-    for (let it = 0; it < 4; it++) {
-      let lo = minD;
-      let hi = maxD;
-      view.setCam(tx, ty, hi);
-      if (fits(pts, m)) {
-        for (let k = 0; k < 14; k++) {
-          const mid = (lo + hi) / 2;
-          view.setCam(tx, ty, mid);
-          if (fits(pts, m)) hi = mid;
-          else lo = mid;
+    D = Math.min(D, 45);
+    let yaw = bmin < Infinity ? (bmin + bmax) / 2 : 0;
+    yaw = Math.max(-0.9, Math.min(0.9, yaw * (opt.yawK ?? 1)));
+    const fxv = Math.sin(yaw);
+    const fyv = -Math.cos(yaw);
+    const focusY = H * (opt.focus ?? 0.8);
+    let best = null;
+    let s = opt.s0 || 1;
+    for (let it = 0; it < 22; it++, s *= 1.09) {
+      // camera distance grows, and the camera climbs as it backs off
+      const dist = (6 + 0.12 * D) * s;
+      const elev = Math.min(0.95, 0.4 + 0.045 * it + (opt.s0 > 1 ? 0.1 : 0));
+      const back = dist * Math.cos(elev);
+      const hgt = dist * Math.sin(elev);
+      const cx = A.x - fxv * back;
+      const cy = A.y - fyv * back;
+      let pitch = Math.atan2(hgt, back + D * 0.5);
+      for (let k = 0; k < 4; k++) {
+        view.setRig(cx, cy, hgt, yaw, pitch);
+        if (!view.p(A.x, A.y, 0, PP)) {
+          pitch += 0.15;
+          continue;
+        }
+        pitch += Math.atan((PP.y - focusY) / view.F);
+        pitch = Math.max(0.04, Math.min(1.25, pitch));
+      }
+      view.setRig(cx, cy, hgt, yaw, pitch);
+      // keep the stands to the top of the screen: the goal line must sit high
+      let fit = true;
+      for (const p of pts) {
+        if (!view.p(p.x, p.y, p.z, PP) || PP.x < m.l || PP.x > W - m.r || PP.y < m.t || PP.y > H - m.b) {
+          fit = false;
+          break;
         }
       }
-      dist = hi;
-      view.setCam(tx, ty, dist);
-      let bx0 = Infinity;
-      let bx1 = -Infinity;
-      let by0 = Infinity;
-      let by1 = -Infinity;
-      for (const p of pts) {
-        if (!view.p(p.x, p.y, p.z, PP)) continue;
-        bx0 = Math.min(bx0, PP.x);
-        bx1 = Math.max(bx1, PP.x);
-        by0 = Math.min(by0, PP.y);
-        by1 = Math.max(by1, PP.y);
-      }
-      if (!view.p(tx, ty, 0, PP)) break;
-      const k = PP.k;
-      const spT = by0 - m.t;
-      const spB = H - m.b - by1;
-      const spL = bx0 - m.l;
-      const spR = W - m.r - bx1;
-      // keep the action low on screen; spare room goes to the stadium above
-      ty += ((spT - spB) / 2 / (k * view.st)) * 0.85 - (Math.max(0, spB) * 0.5) / (k * view.st);
-      tx += ((spL - spR) / 2 / k) * 0.85;
+      best = { cx, cy, cz: hgt, yaw, pitch };
+      if (fit) break;
     }
-    return { tx, ty, dist };
+    return best || { cx: A.x, cy: A.y + 20, cz: 8, yaw: 0, pitch: 0.3 };
   }
 
   function desired(intro) {
     const w = world;
     const pts = [];
     const add = (x, y, z = 0) => pts.push({ x, y, z });
-    add(-GW - 1.5, -1, GH + 1.2);
-    add(GW + 1.5, -1, GH + 1.2);
-    add(0, -2.4, 0);
     const b = w.ball;
-    const m = { l: 14, r: 14, t: H * 0.15 + 8, b: H * 0.08 + 8 };
+    const m = { l: 12, r: 12, t: H * 0.16 + 6, b: H * 0.04 + 6 };
+    add(-GW - 0.6, 0, GH + 0.6);
+    add(GW + 0.6, 0, GH + 0.6);
     if (intro || w.phase === 'aim' || w.phase === 'settle') {
       const A = w.att[w.carrier];
-      add(A.x, A.y + 2.2);
-      add(A.x - 1.2, A.y + 1);
-      add(A.x + 1.2, A.y + 1);
+      add(A.x, A.y + 0.8);
+      add(A.x, A.y, 2.1);
       for (const a of w.att) {
-        add(a.x, a.y + 1.4);
-        add(a.x, a.y, 2.7);
+        if (a === A) continue;
+        add(a.x, a.y + 0.6);
+        add(a.x, a.y, 2.3);
         if (a.run) add(a.run.x, a.run.y);
       }
-      for (const d of w.def) add(d.x, d.y, 2.7);
-      if (level.type === 'corner') m.l = m.r = 6;
-    } else if (w.phase === 'flight') {
+      const r = rigFor({ x: A.x, y: A.y }, { x: 0, y: 0 }, pts, m, { s0: intro ? 1.5 : 1, goalMax: 0.42 });
+      return r;
+    }
+    if (w.phase === 'flight') {
       const F = w.flight;
-      add(b.x, b.y + 2, 0);
-      add(b.x, b.y, b.z + 1);
-      if (F.type === 'shot') {
-        m.t = H * 0.2;
-      } else {
-        const p2 = F.curve.p2;
-        add(p2.x, p2.y + 2);
-        add(p2.x, p2.y, 2.8);
-      }
-    } else {
-      add(b.x, b.y + 2, 0);
-      add(b.x, b.y, b.z + 0.5);
-      if (w.result && w.result.goal) {
-        const A = w.att[w.result.scorer];
-        add(A.x, A.y + 2);
-        add(A.x, A.y, 3);
-        m.t = H * 0.22;
-      }
+      add(b.x, b.y + 0.5, 0);
+      add(b.x, b.y, b.z + 0.6);
+      if (F.type === 'shot') return rigFor({ x: b.x, y: b.y }, { x: 0, y: 0 }, pts, m, { focus: 0.72 });
+      const p2 = F.curve.p2;
+      add(p2.x, p2.y + 0.6);
+      add(p2.x, p2.y, 2.4);
+      return rigFor({ x: b.x, y: b.y }, p2, pts, m, { focus: 0.72 });
     }
-    // try a few camera pitches: steeper angles spread the action vertically,
-    // flatter ones look more like TV; pick the best compromise
-    let best = null;
-    for (const th of [0.55, 0.65, 0.75, 0.85, 0.97, 1.08]) {
-      view.setPitch(th);
-      const r = fit(pts, m);
-      r.th = th;
-      view.setCam(r.tx, r.ty, r.dist);
-      let y0 = Infinity;
-      let y1 = -Infinity;
-      for (const p of pts) {
-        if (!view.p(p.x, p.y, p.z, PP)) continue;
-        y0 = Math.min(y0, PP.y);
-        y1 = Math.max(y1, PP.y);
-      }
-      const fill = (y1 - y0) / (H - m.t - m.b);
-      r.score = r.dist * (1 + 0.3 * (th - 0.55)) * (1 + 0.6 * Math.max(0, 0.85 - fill));
-      if (!best || r.score < best.score) best = r;
+    // after the play
+    const sc = w.result && w.result.goal ? w.att[w.result.scorer] : null;
+    add(b.x, b.y, b.z + 0.3);
+    if (sc) {
+      add(sc.x, sc.y + 0.5);
+      add(sc.x, sc.y, 2.4);
     }
-    view.setPitch(cam.th);
-    return best;
+    const A = sc ? { x: (sc.x + b.x) / 2, y: (sc.y + Math.max(0, b.y)) / 2 + 6 } : { x: b.x, y: Math.max(2, b.y) + 6 };
+    return rigFor(A, { x: 0, y: -1 }, pts, m, { focus: 0.85 });
   }
 
   function updateCamera(dt) {
     if (stroke) return; // keep the frame still while drawing
     const d = desired(false);
     const shot = world.flight && world.flight.type === 'shot';
-    const rate = world.phase === 'aim' ? 3.2 : shot ? 4.5 : 2.6;
-    const a = 1 - Math.exp(-dt * (introT < 1.2 ? 1.8 : rate));
-    cam.tx += (d.tx - cam.tx) * a;
-    cam.ty += (d.ty - cam.ty) * a;
-    cam.dist += (d.dist - cam.dist) * a;
-    cam.th += (d.th - cam.th) * a;
+    const rate = world.phase === 'aim' ? 3.2 : shot ? 5 : 3;
+    const a = 1 - Math.exp(-dt * (introT < 1.3 ? 1.9 : rate));
+    cam.cx += (d.cx - cam.cx) * a;
+    cam.cy += (d.cy - cam.cy) * a;
+    cam.cz += (d.cz - cam.cz) * a;
+    cam.yaw += (d.yaw - cam.yaw) * a;
+    cam.pitch += (d.pitch - cam.pitch) * a;
   }
 
   function applyCamera() {
-    view.setPitch(cam.th);
     let sx = 0;
     let sy = 0;
     if (fx.shake > 0) {
-      sx = Math.sin(clock * 61) * fx.shake * 0.25;
-      sy = Math.cos(clock * 47) * fx.shake * 0.25;
+      sx = Math.sin(clock * 61) * fx.shake * 0.12;
+      sy = Math.cos(clock * 47) * fx.shake * 0.12;
     }
-    view.setCam(cam.tx + sx, cam.ty + sy, cam.dist);
+    view.setRig(cam.cx + sx, cam.cy, cam.cz + sy, cam.yaw, cam.pitch);
   }
 
   // ------------------------------------------------------------------ input
@@ -663,24 +639,19 @@ export function createMatch(host, cfg) {
 
     // ground marks
     if (aim || w.phase === 'settle') {
-      for (const d of w.def) {
-        if (d.wall) continue;
-        R.groundEllipse(g, view, d.x, d.y, w.P.defReach + 0.35, 'rgba(255,60,80,0.10)', 'rgba(255,90,100,0.28)', 1.2);
-      }
-      for (const a of w.att) if (a.run) R.groundArrow(g, view, a.x, a.y, a.run.x, a.run.y, 'rgba(255,255,255,0.75)', clock);
+      for (const a of w.att) if (a.run) R.groundArrow(g, view, a.x, a.y, a.run.x, a.run.y, 'rgba(255,255,255,0.95)', clock);
     }
     const hero = w.att.find((a) => a.hero);
-    if (hero && !(w.result && w.result.goal)) R.groundEllipse(g, view, hero.x, hero.y, 0.95, 'rgba(243,194,74,0.18)', 'rgba(255,215,104,0.85)', 2);
     if (aim) {
       const A = w.att[w.carrier];
       const pul = (Math.sin(clock * 5) + 1) / 2;
-      R.groundEllipse(g, view, A.x, A.y - 0.2, 1.3 + pul * 0.35 + hintPulse * 0.8, null, `rgba(255,255,255,${0.35 + pul * 0.45})`, 2.5);
+      R.groundEllipse(g, view, A.x, A.y - 0.2, 0.9 + pul * 0.25 + hintPulse * 0.6, 'rgba(255,255,255,0.10)', `rgba(255,255,255,${0.55 + pul * 0.4})`, 2.5);
     }
     if (w.flight && w.flight.type !== 'shot' && w.flight.receiver >= 0) {
       const p2 = w.flight.curve.p2;
       const open = S.firstTimeOpen(w);
       const pul = (Math.sin(clock * 9) + 1) / 2;
-      R.groundEllipse(g, view, p2.x, p2.y, open ? 1.2 + pul * 0.5 : 0.9, open ? 'rgba(255,215,104,0.22)' : null, open ? 'rgba(255,225,130,0.95)' : 'rgba(255,255,255,0.5)', open ? 3 : 1.5);
+      R.groundEllipse(g, view, p2.x, p2.y, open ? 1.0 + pul * 0.4 : 0.8, open ? 'rgba(255,215,60,0.25)' : null, open ? '#ffe14a' : 'rgba(255,255,255,0.7)', open ? 3 : 2);
     }
 
     // goal (net behind, ball in the net, roof, frame)
@@ -697,10 +668,10 @@ export function createMatch(host, cfg) {
 
     // players + ball, far to near
     const items = [];
-    for (const a of w.att) items.push({ d: view.depth(a.y, 0), k: 'a', e: a });
-    for (const d of w.def) items.push({ d: view.depth(d.y, 0), k: 'd', e: d });
-    if (w.gk) items.push({ d: view.depth(w.gk.y, 0), k: 'g', e: w.gk });
-    if (!ballIn) items.push({ d: view.depth(w.ball.y - 0.15, 0), k: 'b' });
+    for (const a of w.att) items.push({ d: view.depth(a.x, a.y, 0), k: 'a', e: a });
+    for (const d of w.def) items.push({ d: view.depth(d.x, d.y, 0), k: 'd', e: d });
+    if (w.gk) items.push({ d: view.depth(w.gk.x, w.gk.y, 0), k: 'g', e: w.gk });
+    if (!ballIn) items.push({ d: view.depth(w.ball.x, w.ball.y - 0.15, 0), k: 'b' });
     items.sort((p, q) => q.d - p.d);
     const heroOut = {};
     if (!ballIn) R.drawBallShadow(g, view, w.ball);
@@ -715,7 +686,7 @@ export function createMatch(host, cfg) {
         R.drawFigure(g, view, { ...k, x: k.pose === 'dive' ? k.x : k.x, kz: k.kz }, looks.gk);
       } else {
         drawTrail();
-        R.drawBall(g, view, w.ball);
+        R.drawBall(g, view, w.ball, ballVel());
       }
     }
 
@@ -731,45 +702,49 @@ export function createMatch(host, cfg) {
 
     R.drawLighting(g, view);
 
-    // planned trajectory preview (fades as the ball travels)
-    if (fx.plan && fx.planT < 1.6) {
-      const a = Math.max(0, 1 - fx.planT / 1.6);
-      const pts = [];
-      for (const q of fx.plan.pts) if (view.p(q.x, q.y, q.z, SP)) pts.push({ x: SP.x, y: SP.y });
-      g.setLineDash([2, 9]);
-      g.lineCap = 'round';
-      g.strokeStyle = `rgba(255,226,120,${0.85 * a})`;
-      g.lineWidth = 4;
-      g.beginPath();
-      pts.forEach((q, i) => (i ? g.lineTo(q.x, q.y) : g.moveTo(q.x, q.y)));
-      g.stroke();
-      g.setLineDash([]);
+    // planned trajectory preview: dotted white line (fades as the ball travels)
+    if (fx.plan && fx.planT < 1.8) {
+      const a = Math.max(0, 1 - fx.planT / 1.8);
+      R.groundDots(g, view, fx.plan.pts, `rgba(255,255,255,${0.95 * a})`, 0.6);
+    }
+
+    // stars over open teammates (pass targets) while aiming
+    if (aim && !stroke) {
+      for (const a of w.att) {
+        if (a.i === w.carrier) continue;
+        if (view.p(a.x, a.y, 2.55, SP)) R.drawStar(g, SP.x, SP.y + Math.sin(clock * 3 + a.i) * 3, Math.max(7, Math.min(16, SP.k * 0.32)), clock + a.i);
+      }
     }
 
     // hero label
-    if (hero && heroOut.hx !== undefined && (aim || w.phase === 'settle') && cfg.heroName) {
+    if (hero && heroOut.hx !== undefined && (aim || w.phase === 'settle') && cfg.heroName && w.att[w.carrier] !== hero) {
       const bob = Math.sin(clock * 3) * 2;
       const x = heroOut.hx;
       const y = heroOut.hy - 8 + bob;
-      g.font = '900 12px Nunito, system-ui, sans-serif';
+      g.font = 'italic 900 12px Nunito, system-ui, sans-serif';
       const tw = g.measureText(cfg.heroName).width;
-      const pw = tw + 16;
-      const gr2 = g.createLinearGradient(0, y - 20, 0, y);
-      gr2.addColorStop(0, '#fff0a8');
-      gr2.addColorStop(1, '#d9a21f');
-      g.fillStyle = gr2;
-      roundRect(x - pw / 2, y - 21, pw, 18, 9);
+      const pw = tw + 18;
+      g.fillStyle = '#d8262c';
+      g.beginPath();
+      g.moveTo(x - pw / 2 + 4, y - 21);
+      g.lineTo(x + pw / 2 + 4, y - 21);
+      g.lineTo(x + pw / 2 - 4, y - 3);
+      g.lineTo(x - pw / 2 - 4, y - 3);
+      g.closePath();
       g.fill();
-      g.fillStyle = '#1a1102';
+      g.strokeStyle = '#fff';
+      g.lineWidth = 1.5;
+      g.stroke();
+      g.fillStyle = '#fff';
       g.textAlign = 'center';
       g.textBaseline = 'middle';
       g.fillText(cfg.heroName, x, y - 11.5);
       g.beginPath();
-      g.moveTo(x - 5, y - 3);
-      g.lineTo(x + 5, y - 3);
-      g.lineTo(x, y + 3);
+      g.moveTo(x - 5, y - 2);
+      g.lineTo(x + 5, y - 2);
+      g.lineTo(x, y + 4);
       g.closePath();
-      g.fillStyle = '#d9a21f';
+      g.fillStyle = '#fff';
       g.fill();
     }
 
@@ -854,6 +829,17 @@ export function createMatch(host, cfg) {
       g.fillRect(0, 0, W, 10 + 18 * a);
       g.fillRect(0, H - 10 - 18 * a, W, 10 + 18 * a);
     }
+  }
+
+  let lastBall = null;
+  function ballVel() {
+    const b = world.ball;
+    const o = { x: 0, y: 0, d: 0, k: 0 };
+    const cur = view.p(b.x, b.y, b.z, o) ? o : null;
+    let v = null;
+    if (cur && lastBall && world.flight && world.flight.type === 'shot') v = { x: cur.x - lastBall.x, y: cur.y - lastBall.y };
+    lastBall = cur;
+    return v;
   }
 
   function roundRect(x, y, w, h, r) {

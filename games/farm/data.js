@@ -3,6 +3,12 @@
 export const GRID = 16;                                  // farm is GRID x GRID tiles
 export const START = { x0: 4, y0: 4, x1: 11, y1: 11 };   // initially unlocked square (inclusive)
 export const MAX_PENS_ANIMALS = 6;
+
+// Cobblestone paths of the starting farm (decorative, not buildable).
+export function isPath(x, y) {
+  return (y === 6 && x >= 4 && x <= 11) || (x === 6 && y >= 7 && y <= 11);
+}
+export const RENOVATE = { coins: 300, wood: 15, stone: 10, lvl: 2 };
 export const REGEN_MS = 60e3;                            // +1 energy per minute
 export const ENERGY_CAP = 180;
 
@@ -28,13 +34,13 @@ export const ITEMS = {
   pie:        { e: '🥧', v: 65, lvl: 8, en: 35 },
   wood:       { e: '🪵', v: 3,  lvl: 1 },
   stone:      { e: '🪨', v: 3,  lvl: 1 },
-  ore:        { e: '🔩', v: 9,  lvl: 4 },
-  herb:       { e: '🌿', v: 12, lvl: 1 },
-  mushroom:   { e: '🍄', v: 14, lvl: 1 },
-  honey:      { e: '🍯', v: 40, lvl: 1 },
-  crystal:    { e: '🔮', v: 50, lvl: 8 },
-  coconut:    { e: '🥥', v: 20, lvl: 16 },
-  shell:      { e: '🐚', v: 24, lvl: 16 },
+  ore:        { e: '🔩', v: 9,  lvl: 6 },
+  herb:       { e: '🌿', v: 12, lvl: 3 },
+  mushroom:   { e: '🍄', v: 14, lvl: 3 },
+  honey:      { e: '🍯', v: 40, lvl: 3 },
+  crystal:    { e: '🔮', v: 50, lvl: 10 },
+  coconut:    { e: '🥥', v: 20, lvl: 1 },
+  shell:      { e: '🐚', v: 24, lvl: 1 },
 };
 
 // Crops are planted on fields. grow = ms until ready.
@@ -108,14 +114,15 @@ export const OBST = {
 };
 
 // Expedition covers: hard = energy needed to clear.
-export const COVERS = { bush: 1, vine: 1, debris: 2, rock: 2, rubble: 2, palm: 2, ice: 3, boulder: 3 };
+export const COVERS = { bush: 1, vine: 1, debris: 2, crate: 2, rock: 2, rubble: 2, palm: 2, ice: 3, boulder: 3 };
 
+// ground: palette in art.GROUND; edge: what surrounds the map (sea, forest, rocks, snow forest, jungle).
 export const REGIONS = [
-  { id: 'forest', lvl: 1,  covers: ['bush', 'bush', 'debris', 'vine'],   items: [['wood', 3], ['herb', 2], ['mushroom', 2], ['honey', 1]], goal: 'cabin' },
-  { id: 'canyon', lvl: 4,  covers: ['rock', 'rubble', 'debris'],         items: [['stone', 3], ['ore', 2]],                              goal: 'totem' },
-  { id: 'mine',   lvl: 8,  covers: ['ice', 'boulder', 'rock'],           items: [['ore', 3], ['crystal', 2], ['stone', 1]],              goal: 'gate' },
-  { id: 'ruins',  lvl: 12, covers: ['rubble', 'vine', 'debris'],         items: [['crystal', 2], ['ore', 2], ['stone', 2]],              goal: 'obelisk' },
-  { id: 'island', lvl: 16, covers: ['palm', 'bush', 'rock'],             items: [['coconut', 3], ['shell', 2], ['honey', 1]],            goal: 'flag' },
+  { id: 'island', lvl: 1,  covers: ['palm', 'crate', 'debris', 'rock', 'bush'], items: [['coconut', 3], ['shell', 2], ['wood', 2]], ground: 'sand', edge: 'sea' },
+  { id: 'forest', lvl: 3,  covers: ['bush', 'bush', 'debris', 'vine'],        items: [['wood', 3], ['herb', 2], ['mushroom', 2], ['honey', 1]], ground: 'forest', edge: 'forest' },
+  { id: 'canyon', lvl: 6,  covers: ['rock', 'rubble', 'debris', 'crate'],     items: [['stone', 3], ['ore', 2]], ground: 'canyon', edge: 'rocks' },
+  { id: 'mine',   lvl: 10, covers: ['ice', 'boulder', 'rock'],                items: [['ore', 3], ['crystal', 2], ['stone', 1]], ground: 'snow', edge: 'snow' },
+  { id: 'ruins',  lvl: 14, covers: ['rubble', 'vine', 'debris'],              items: [['crystal', 2], ['ore', 2], ['stone', 2]], ground: 'ruins', edge: 'forest' },
 ];
 
 export const CHARS = {

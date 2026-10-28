@@ -1,39 +1,10 @@
-// Chapter map: an endless list of themed chapter cards (painted thumbnail of
-// the scene + level tiles), with a big "Continue" button at the top.
+// Chapter map: an endless list of chapter cards (a preview of the scene's
+// photo + level tiles), with a big "Continue" button at the top.
 
-import { rng } from '../../../js/core/ui.js';
-import { paintIndoor } from './paint/indoor.js';
-import { paintOutdoorBack, paintOutdoorFront } from './paint/outdoor.js';
-import { emojiList } from './catalog.js';
 import { ICON, coinIcon } from './ui.js';
+import { sceneUrl } from './scene.js';
 
 export const PER_CHAPTER = 5;
-const thumbs = new Map();
-
-function renderThumb(look, theme) {
-  const key = look + ':' + theme.id;
-  if (thumbs.has(key)) return thumbs.get(key);
-  const c = document.createElement('canvas');
-  if (look === 'indoor') {
-    const W = 1000, H = 1420, k = 0.4;
-    c.width = Math.round(W * k);
-    c.height = Math.round(H * k);
-    const g = c.getContext('2d');
-    g.scale(k, k);
-    paintIndoor(g, W, H, rng(7 + theme.id.length * 131), theme.paint);
-  } else {
-    const H = 1100, W = 2400, k = 0.2;
-    c.width = Math.round(W * k);
-    c.height = Math.round(H * k);
-    const g = c.getContext('2d');
-    g.scale(k, k);
-    const margin = { x: 0, y: 0 };
-    const back = paintOutdoorBack(g, W, H, rng(11 + theme.id.length * 97), theme.paint, margin);
-    paintOutdoorFront(g, W, H, rng(5 + theme.id.length * 53), theme.paint, back);
-  }
-  thumbs.set(key, c);
-  return c;
-}
 
 export function showMap(app, modeId) {
   const { t, h, ctx, cfg } = app;
@@ -41,9 +12,8 @@ export function showMap(app, modeId) {
   const tr = app.track(modeId);
   const cur = tr.n;
   const curCh = Math.floor(cur / PER_CHAPTER);
-  const T = cfg.themes.length;
   let destroyed = false;
-  const themeOf = (c) => cfg.themes[(c + (mode.offset || 0)) % T];
+  const themeOf = (c) => app.sceneOf(modeId, c);
 
   const totalStars = Object.values(tr.stars).reduce((a, b) => a + b, 0);
   const head = h(
@@ -66,56 +36,16 @@ export function showMap(app, modeId) {
   const scroller = h('div', { class: 'g-findit-map screen g-findit-enter' }, head, cont, h('div', { class: 'g-findit-section' }, t('chapters')), list, h('p', { class: 'g-findit-endless' }, t('endless')));
   app.mount(scroller);
 
-  const pending = [];
-  let pumping = false;
-  const pump = () => {
-    if (pumping) return;
-    pumping = true;
-    const step = () => {
-      if (destroyed || !pending.length) {
-        pumping = false;
-        return;
-      }
-      const { holder, theme } = pending.shift();
-      try {
-        const src = renderThumb(cfg.look, theme);
-        const c = document.createElement('canvas');
-        c.width = src.width;
-        c.height = src.height;
-        c.getContext('2d').drawImage(src, 0, 0);
-        c.className = 'g-findit-ch-canvas';
-        holder.prepend(c);
-        holder.classList.add('ready');
-      } catch (e) {
-        console.error(e);
-      }
-      setTimeout(step, 16);
-    };
-    setTimeout(step, 30);
-  };
-  const io = new IntersectionObserver(
-    (entries) => {
-      for (const en of entries) {
-        if (!en.isIntersecting) continue;
-        io.unobserve(en.target);
-        pending.push({ holder: en.target, theme: en.target.__theme });
-        pump();
-      }
-    },
-    { root: scroller, rootMargin: '200px' },
-  );
-
   let currentCard = null;
   for (let c = 0; c <= curCh + 1; c++) {
     const theme = themeOf(c);
     const locked = c > curCh;
     let chStars = 0;
     for (let i = 0; i < PER_CHAPTER; i++) chStars += tr.stars[c * PER_CHAPTER + i] || 0;
-    const deco = emojiList(theme.items).slice(0, 3);
     const art = h(
       'div',
-      { class: 'g-findit-ch-art', style: { background: `linear-gradient(135deg, ${theme.card[0]}, ${theme.card[1]})` } },
-      h('div', { class: 'g-findit-ch-deco' }, deco.map((e, i) => h('span', { style: { '--i': i } }, e))),
+      { class: 'g-findit-ch-art ready' },
+      h('img', { class: 'g-findit-ch-canvas', src: sceneUrl(`${theme.id}_s.webp`), alt: '', loading: 'lazy', decoding: 'async' }),
       h(
         'div',
         { class: 'g-findit-ch-label' },
@@ -124,7 +54,6 @@ export function showMap(app, modeId) {
       ),
       h('div', { class: 'g-findit-ch-stars' }, h('span', { html: ICON.star }), `${chStars}/${PER_CHAPTER * 3}`),
     );
-    art.__theme = theme;
     const levels = h('div', { class: 'g-findit-ch-levels' });
     for (let i = 0; i < PER_CHAPTER; i++) {
       const n = c * PER_CHAPTER + i;
@@ -154,7 +83,6 @@ export function showMap(app, modeId) {
       locked ? h('div', { class: 'g-findit-ch-locked' }, h('span', { html: ICON.lock }), t('locked')) : levels,
     );
     list.append(card);
-    io.observe(art);
     if (c === curCh) currentCard = card;
   }
   requestAnimationFrame(() => {
@@ -165,7 +93,6 @@ export function showMap(app, modeId) {
     back: () => false,
     destroy() {
       destroyed = true;
-      io.disconnect();
       scroller.remove();
     },
   };

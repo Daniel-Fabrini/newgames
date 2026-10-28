@@ -50,7 +50,7 @@ export function screens(api) {
             class: `pp-arena ${open ? '' : 'locked'}`,
             disabled: !open,
             onclick: () => api.startTour(k),
-            style: { backgroundImage: `linear-gradient(180deg, transparent 20%, rgba(0,0,0,.85)), linear-gradient(135deg, ${ARENAS[k].table}, ${ARENAS[k].wall} 60%, ${ARENAS[k].light}66)` },
+            style: { backgroundImage: `linear-gradient(180deg, transparent 25%, rgba(0,0,0,.85)), linear-gradient(160deg, ${ARENAS[k].boards.bg[0]} 0 22%, ${ARENAS[k].boards.bg[2]} 22% 30%, ${ARENAS[k].table} 30% 62%, ${ARENAS[k].floor.a} 62%)` },
           },
           h('span', { class: 'pp-ar-n' }, t('arena', { n: k + 1 })),
           h('span', { class: 'pp-ar-t' }, t(ARENAS[k].key)),

@@ -244,7 +244,7 @@ export function createGame(env) {
     else if (k === 'rally') s = t('bestRally', { n: trainState.best });
     else s = t('score', { n: trainState.score }) + ' · ' + t('timeLeft', { n: Math.ceil(Math.max(0, trainState.left)) });
     hudTop.innerHTML = '';
-    hudTop.append(ctx.ui.h('div', { class: 'pp-tt' }, t(meta.label)), ctx.ui.h('div', { class: 'pp-ts' }, s));
+    hudTop.append(ctx.ui.h('div', { class: 'pp-trainbox' }, ctx.ui.h('div', { class: 'pp-tt' }, t(meta.label)), ctx.ui.h('div', { class: 'pp-ts' }, s)));
   }
 
   function finishDrill() {
@@ -421,7 +421,7 @@ export function createGame(env) {
       for (let i = Math.max(0, h.length - 16); i < h.length; i += 2) trail.push(h[i].p);
     }
     renderer.draw(
-      { match, look, ballSkin: skinOf(), swing, trail, excite },
+      { match, look, ballSkin: skinOf(), swing, trail, excite, finger: stroke && stroke.pts.length ? stroke.pts[stroke.pts.length - 1] : null },
       dt,
     );
     drawFx(now);
@@ -449,18 +449,19 @@ export function createGame(env) {
       return;
     }
     hudTop.innerHTML = '';
-    const side = (name, pts, srvOn, setN, cls) =>
-      ctx.ui.h(
-        'div',
-        { class: `pp-side ${cls}` },
-        ctx.ui.h('div', { class: 'pp-nm' }, srvOn ? ctx.ui.h('i', { class: 'pp-srv' }) : null, name),
-        ctx.ui.h('div', { class: 'pp-pts' }, String(pts)),
-        ctx.ui.h('div', { class: 'pp-sets' }, String(setN)),
-      );
+    const h = ctx.ui.h;
+    const oppName = meta.opp || t('ai');
+    const player = (name, srvOn, cls) =>
+      h('div', { class: `pp-pl ${cls}` }, h('i', { class: 'pp-av' }, name.trim().charAt(0).toUpperCase()), h('span', null, name), srvOn ? h('b', { class: 'pp-srv' }) : null);
+    const dots = (n) => h('span', { class: 'pp-dots' }, Array.from({ length: Math.ceil((match.cfg.bestOf || 3) / 2) }, (_, i) => h('i', { class: i < n ? 'on' : '' })));
     hudTop.append(
-      side(t('you'), a, srv === 0, sets[0], 'me'),
-      ctx.ui.h('div', { class: 'pp-mid' }, ctx.ui.h('div', { class: 'pp-game' }, t('game', { n: match.setNo })), ctx.ui.h('div', { class: 'pp-ver' }, meta.sub || '')),
-      side(meta.opp || t('ai'), b, srv === 1, sets[1], 'ai'),
+      h('div', { class: 'pp-hl' }, player(t('you'), srv === 0, 'me'), player(oppName, srv === 1, 'ai')),
+      h(
+        'div',
+        { class: 'pp-hr' },
+        h('div', { class: 'pp-badges' }, h('b', { class: 'pp-badge me' }, String(a)), h('b', { class: 'pp-badge ai' }, String(b))),
+        h('div', { class: 'pp-setrow' }, dots(sets[0]), h('small', null, t('game', { n: match.setNo })), dots(sets[1])),
+      ),
     );
   }
 
@@ -478,7 +479,7 @@ export function createGame(env) {
     swing = { player: 0, ai: 0 };
     mkStage();
     const arena = ARENAS[m.arena || 0];
-    renderer = createRenderer(canvas, arena);
+    renderer = createRenderer(canvas, arena, t(arena.key));
     resizeFx();
     match = new Match({ ...cfg, eq: env.eq() });
     if (globalThis.__ppDebug) globalThis.__ppDebug.match = match; // test seam

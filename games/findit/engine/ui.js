@@ -1,4 +1,4 @@
-// Small UI pieces for the hidden-object games: gold-framed sheets (pause,
+// Small UI pieces for the hidden-object game: gold-framed sheets (pause,
 // results, intros), inline SVG icons, coin and star widgets.
 
 import { h } from '../../../js/core/ui.js';
@@ -19,6 +19,7 @@ export const ICON = {
   grid: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="2" fill="currentColor"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2" fill="currentColor"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2" fill="currentColor"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2" fill="currentColor"/></svg>',
   hand: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 3.5a1.5 1.5 0 0 1 3 0V11h.5V5a1.5 1.5 0 0 1 3 0v6h.5V7a1.5 1.5 0 0 1 3 0v7.5c0 4-2.7 7-6.6 7-2.7 0-4.2-1.2-5.6-3.3l-2.6-4a1.5 1.5 0 0 1 2.4-1.8L9 14V3.5z"/></svg>',
   pinch: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14 4.5 19.5M14 10l5.5-5.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M4 14.5v5.5h5.5M20 9.5V4h-5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/></svg>',
+  list: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6.5" r="1.8" fill="currentColor"/><circle cx="5" cy="12" r="1.8" fill="currentColor"/><circle cx="5" cy="17.5" r="1.8" fill="currentColor"/><rect x="9" y="5.2" width="12" height="2.6" rx="1.3" fill="currentColor"/><rect x="9" y="10.7" width="12" height="2.6" rx="1.3" fill="currentColor"/><rect x="9" y="16.2" width="9" height="2.6" rx="1.3" fill="currentColor"/></svg>',
   map: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 6.2 8.5 4l7 2.5L21 4.3v13.5L15.5 20l-7-2.5L3 19.7V6.2Zm6.5-.2v11.6l5 1.8V7.8l-5-1.8Z"/></svg>',
 };
 

@@ -122,7 +122,8 @@ export async function mount(root, ctx) {
   }
 
   function startQuick(o) {
-    const arena = Math.floor(Math.random() * 10);
+    const dbg = globalThis.__ppDebug && globalThis.__ppDebug.arena; // test seam
+    const arena = Number.isInteger(dbg) ? dbg : Math.floor(Math.random() * 10);
     const style = STYLES[Math.floor(Math.random() * STYLES.length)];
     current = 'quick';
     launch(

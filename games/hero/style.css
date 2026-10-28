@@ -1801,3 +1801,654 @@
     padding-right: max(16px, calc(50% - 300px));
   }
 }
+
+/* =====================================================================
+   Broadcast / reference look: red-white-blue game UI on top of the pitch
+   ===================================================================== */
+.g-hero {
+  --hr: #e3222c;
+  --hr-d: #a5121a;
+  --hb: #1d5fe0;
+  --hb-d: #0f3a9c;
+  --hy: linear-gradient(180deg, #ffe680 0%, #ffc61a 55%, #f0a000 100%);
+}
+.g-hero-score {
+  height: 40px;
+  padding: 0;
+  gap: 0;
+  border-radius: 6px;
+  border: 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, #24304f, #121a30);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  transform: skewX(-8deg);
+}
+.g-hero-score > * {
+  transform: skewX(8deg);
+}
+.g-hero-score .g-hero-tag {
+  padding: 0 9px;
+  height: 40px;
+  font-style: italic;
+  font-size: 14px;
+}
+.g-hero-score .g-hero-tag:first-child {
+  background: linear-gradient(180deg, #2f6df0, var(--hb-d));
+  transform: none;
+  padding-left: 12px;
+}
+.g-hero-score .g-hero-tag:first-child > * {
+  transform: skewX(8deg);
+}
+.g-hero-sb-score {
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 0;
+  padding: 0 10px;
+  font-size: 18px;
+  font-weight: 1000;
+  background: #fff;
+  color: #111a30;
+}
+.g-hero-sb-min {
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 0;
+  padding: 0 10px;
+  background: linear-gradient(180deg, #ff3b45, var(--hr-d));
+  color: #fff;
+  font-style: italic;
+  font-size: 15px;
+}
+.g-hero-score.train .g-hero-sb-score {
+  background: #fff;
+  color: #111a30;
+}
+.g-hero-round {
+  border: 2px solid #fff;
+  background: linear-gradient(180deg, #2f6df0, var(--hb-d));
+  color: #fff;
+}
+.g-hero-objs {
+  justify-content: flex-start;
+  top: 58px;
+  left: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+.g-hero-obj {
+  border-radius: 4px;
+  padding: 4px 10px 4px 6px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 0;
+  color: #1a2340;
+  font-size: 12.5px;
+  font-weight: 900;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  transform: skewX(-8deg);
+}
+.g-hero-obj > * {
+  transform: skewX(8deg);
+}
+.g-hero-obj i {
+  color: #b9bfcc;
+}
+.g-hero-obj.ok {
+  background: var(--hy);
+  color: #3a2500;
+  box-shadow: 0 0 14px rgba(255, 200, 30, 0.6);
+}
+.g-hero-obj.ok i {
+  color: #fff;
+}
+.g-hero-hint {
+  border-radius: 6px;
+  background: var(--hr);
+  border: 2px solid #fff;
+  color: #fff;
+  font-style: italic;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+.g-hero-banner {
+  border-radius: 6px;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transform-origin: center;
+}
+.g-hero-banner.bad {
+  background: linear-gradient(180deg, #ff3b45, var(--hr-d));
+  border: 3px solid #fff;
+}
+.g-hero-banner.good {
+  background: var(--hy);
+  border: 3px solid #fff;
+  color: #3a2500;
+}
+.g-hero-goal b {
+  font-size: clamp(84px, 30vw, 140px);
+  letter-spacing: 1px;
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 48%, #d9e6ff 52%, #b8cdfa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 3px #0f3a9c;
+  filter: drop-shadow(0 5px 0 #0a2466) drop-shadow(0 0 22px rgba(70, 140, 255, 0.6));
+}
+.g-hero-goal span {
+  border-radius: 4px;
+  background: var(--hr);
+  border: 2px solid #fff;
+  color: #fff;
+  font-style: italic;
+  transform: skewX(-8deg);
+}
+.g-hero-goal::before {
+  content: '';
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 34%;
+  height: 46%;
+  background: linear-gradient(180deg, var(--hr), var(--hr-d));
+  transform: skewY(-4deg);
+  z-index: -1;
+  box-shadow: 0 0 0 4px #fff, 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* white game panels with a red ribbon header (result / fail / story / clubs) */
+.g-hero-overlay.result .g-hero-panel,
+.g-hero-overlay.story .g-hero-panel,
+.g-hero-overlay.reveal .g-hero-panel,
+.g-hero-overlay.intro .g-hero-panel,
+.g-hero-overlay.clubs .g-hero-panel {
+  background: repeating-linear-gradient(-20deg, rgba(20, 40, 90, 0.035) 0 18px, transparent 18px 36px), linear-gradient(180deg, #ffffff, #eef1f7);
+  border: 0;
+  border-radius: 10px;
+  color: #141c33;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5), 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+.g-hero-overlay.result .g-hero-ptitle.gold,
+.g-hero-overlay.reveal .g-hero-ptitle.gold,
+.g-hero-overlay.story .g-hero-ptitle,
+.g-hero-overlay.clubs .g-hero-ptitle {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: #141c33;
+  filter: none;
+  text-transform: uppercase;
+  font-style: italic;
+  letter-spacing: 0.3px;
+}
+.g-hero-ribbon {
+  position: absolute;
+  left: -8px;
+  top: -16px;
+  display: flex;
+  transform: skewX(-10deg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.g-hero-ribbon b,
+.g-hero-ribbon span {
+  padding: 5px 12px;
+  font-size: 16px;
+  font-weight: 1000;
+  font-style: italic;
+  color: #fff;
+}
+.g-hero-ribbon b {
+  background: var(--hr);
+  border: 2px solid #fff;
+  border-right: 0;
+  border-radius: 6px 0 0 6px;
+}
+.g-hero-ribbon span {
+  background: var(--hb);
+  border: 2px solid #fff;
+  border-radius: 0 6px 6px 0;
+}
+.g-hero-overlay .g-hero-medal {
+  background: linear-gradient(180deg, #2f6df0, var(--hb-d));
+  border: 3px solid #fff;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+.g-hero-overlay.result .g-hero-objlist li,
+.g-hero-overlay.intro .g-hero-objlist li {
+  background: #fff;
+  border: 1px solid #d7dce8;
+  color: #1a2340;
+  border-radius: 6px;
+}
+.g-hero-overlay.result .g-hero-objlist li.ok {
+  background: #fff6d6;
+  border-color: #ffc61a;
+}
+.g-hero-overlay.result .g-hero-objlist li.ok i,
+.g-hero-overlay.intro .g-hero-objlist li i {
+  color: #f0a000;
+}
+.g-hero-overlay.intro .g-hero-objlist li.main {
+  background: #fff6d6;
+  border-color: #ffc61a;
+}
+.g-hero-overlay .g-hero-bigstars i {
+  color: #d5d9e3;
+}
+.g-hero-overlay .g-hero-bigstars i.on {
+  color: #ffc61a;
+  filter: drop-shadow(0 3px 0 #c98a00) drop-shadow(0 0 10px rgba(255, 200, 30, 0.6));
+}
+.g-hero-overlay .g-hero-rw {
+  background: #141c33;
+  border: 0;
+  color: #fff;
+  border-radius: 8px;
+}
+.g-hero-overlay.result .btn.primary,
+.g-hero-overlay.story .btn.primary,
+.g-hero-overlay.reveal .btn.primary,
+.g-hero-overlay.intro .btn.primary {
+  background: var(--hy);
+  color: #2a1a00;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  font-style: italic;
+  text-transform: uppercase;
+  box-shadow: 0 5px 0 #b06e00, 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+.g-hero-overlay.result .btn:not(.primary),
+.g-hero-overlay.reveal .btn:not(.primary) {
+  background: linear-gradient(180deg, #2f6df0, var(--hb-d));
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 0 #0a2466;
+}
+.g-hero-overlay.result .btn.ghost {
+  background: transparent;
+  color: var(--hb-d);
+  border: 0;
+  box-shadow: none;
+}
+.g-hero-overlay .g-hero-fail-title {
+  color: var(--hr);
+  text-shadow: none;
+  font-style: italic;
+  text-transform: uppercase;
+}
+.g-hero-overlay .g-hero-tip,
+.g-hero-overlay .g-hero-story-text {
+  color: #3a4566;
+}
+.g-hero-overlay .g-hero-story-kicker,
+.g-hero-overlay .g-hero-intro-label,
+.g-hero-overlay .g-hero-intro-kicker {
+  color: var(--hr);
+}
+.g-hero-overlay .g-hero-intro-top {
+  color: #3a4566;
+}
+.g-hero-overlay .g-hero-intro-min {
+  background: var(--hr);
+  color: #fff;
+  border-radius: 4px;
+  font-style: italic;
+}
+.g-hero-overlay .g-hero-intro-vs {
+  color: #8a93ad;
+}
+.g-hero-overlay .g-hero-intro-vs .g-hero-tag {
+  color: #141c33;
+}
+.g-hero-overlay.intro {
+  background: linear-gradient(180deg, rgba(4, 8, 20, 0) 35%, rgba(4, 8, 20, 0.6) 75%);
+}
+.g-hero-overlay .g-hero-bigscore b {
+  color: #141c33;
+}
+.g-hero-overlay .g-hero-bigscore small {
+  color: var(--hr);
+}
+.g-hero-overlay.reveal .g-hero-rays {
+  background: repeating-conic-gradient(from 0deg, rgba(255, 198, 26, 0.22) 0 10deg, transparent 10deg 20deg);
+}
+
+/* club choice cards ("which club will you sign for?") */
+.g-hero-clubcards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 14px 0 4px;
+}
+.g-hero-clubcard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 84px;
+  padding: 8px 14px 8px 10px;
+  border-radius: 12px;
+  border: 2px solid #fff;
+  background: var(--hy);
+  box-shadow: 0 5px 0 #b06e00, 0 10px 22px rgba(0, 0, 0, 0.25);
+  color: #1d1300;
+  cursor: pointer;
+  text-align: right;
+}
+.g-hero-clubcard:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #b06e00;
+}
+.g-hero-clubcard canvas {
+  flex: none;
+}
+.g-hero-clubcard .g-hero-cc-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.g-hero-clubcard b {
+  font-size: 19px;
+  font-weight: 1000;
+  font-style: italic;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+.g-hero-clubcard small {
+  font-size: 12px;
+  font-weight: 900;
+  opacity: 0.75;
+}
+
+/* ---------------- locker room (hero big in the centre, buttons on the left) */
+.g-hero-locker2 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 58%, rgba(0, 0, 0, 0.15) 58.2%, rgba(0, 0, 0, 0) 60%),
+    repeating-linear-gradient(90deg, #b88a5a 0 2px, #c99a68 2px 25%) 0 0 / 100% 58% no-repeat,
+    linear-gradient(180deg, #e8e4dc 0%, #d9d3c8 100%);
+}
+.g-hero-locker2::before {
+  /* lockers + bench */
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 58%;
+  background:
+    linear-gradient(180deg, #f1ede6 0 14%, transparent 14%),
+    repeating-linear-gradient(90deg, rgba(60, 35, 10, 0.45) 0 3px, transparent 3px 33.3%),
+    linear-gradient(180deg, transparent 0 78%, #6b6f7a 78% 82%, #4b4f5a 82% 86%, transparent 86%),
+    linear-gradient(180deg, #c9965f, #a9773f);
+}
+.g-hero-locker2::after {
+  /* tiled floor in perspective */
+  content: '';
+  position: absolute;
+  left: -40%;
+  right: -40%;
+  bottom: -10%;
+  height: 52%;
+  background:
+    repeating-linear-gradient(90deg, rgba(120, 125, 135, 0.35) 0 2px, transparent 2px 70px),
+    repeating-linear-gradient(0deg, rgba(120, 125, 135, 0.35) 0 2px, transparent 2px 60px),
+    linear-gradient(180deg, #d8dbe0, #b8bcc4);
+  transform: perspective(300px) rotateX(55deg);
+  transform-origin: 50% 0;
+}
+.g-hero-neon {
+  position: absolute;
+  z-index: 1;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-30%) rotate(-4deg);
+  font-size: 34px;
+  font-weight: 1000;
+  font-style: italic;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px #6ad0ff, 0 0 14px #3aa0ff, 0 0 26px #3aa0ff;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.g-hero-neon span {
+  text-shadow: 0 0 6px #ff7ab0, 0 0 14px #ff3a7a, 0 0 26px #ff3a7a;
+}
+.g-hero-shirtrack {
+  position: absolute;
+  z-index: 1;
+  top: 22%;
+  right: 4%;
+  pointer-events: none;
+  opacity: 0.95;
+}
+.g-hero-herostage {
+  position: absolute;
+  z-index: 2;
+  left: 34%;
+  right: -4%;
+  top: 8%;
+  bottom: 14%;
+  display: grid;
+  place-items: end center;
+}
+.g-hero-herostage canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+.g-hero-lockbtns {
+  position: absolute;
+  z-index: 3;
+  left: 10px;
+  top: 10px;
+  bottom: 86px;
+  width: 132px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding-bottom: 6px;
+}
+.g-hero-lockbtn {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px 8px;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  background: linear-gradient(180deg, #3b7cf5, #1747b8);
+  color: #fff;
+  box-shadow: 0 4px 0 #0c2d7a, 0 8px 16px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+.g-hero-lockbtn.on {
+  background: linear-gradient(180deg, #ff4a52, #b8141c);
+  box-shadow: 0 4px 0 #6d0a10, 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+.g-hero-lockbtn b {
+  font-size: 11.5px;
+  font-weight: 1000;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  text-align: center;
+  line-height: 1.1;
+}
+.g-hero-lockbtn .lb-ico {
+  height: 40px;
+  display: grid;
+  place-items: center;
+}
+.g-hero-lockbtn .lb-ico .g-hero-ico {
+  width: 38px;
+  height: 38px;
+}
+.g-hero-lockbtn .lb-num {
+  font-size: 22px;
+  font-weight: 1000;
+  color: #1747b8;
+  background: #fff;
+  width: 40px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  clip-path: polygon(22% 0, 78% 0, 100% 22%, 88% 36%, 84% 100%, 16% 100%, 12% 36%, 0 22%);
+}
+.g-hero-lockbtn .lb-bar {
+  position: relative;
+  width: 100%;
+  height: 14px;
+  border-radius: 4px;
+  background: #0b2a6e;
+  overflow: hidden;
+}
+.g-hero-lockbtn .lb-bar i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: linear-gradient(180deg, #7dfc5a, #2fb31c);
+}
+.g-hero-lockbtn .lb-bar span {
+  position: relative;
+  display: block;
+  font-size: 10px;
+  font-weight: 1000;
+  line-height: 14px;
+  text-align: center;
+}
+.g-hero-nameplate {
+  position: absolute;
+  z-index: 3;
+  left: 10px;
+  right: 10px;
+  bottom: calc(10px + var(--safe-bottom));
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 62px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 2px solid #fff;
+  background: linear-gradient(180deg, #3b7cf5, #1747b8);
+  box-shadow: 0 5px 0 #0c2d7a, 0 10px 22px rgba(0, 0, 0, 0.35);
+  color: #fff;
+}
+.g-hero-nameplate .g-hero-flag {
+  width: 40px;
+  height: 28px;
+  cursor: pointer;
+}
+.g-hero-nameplate input {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  border: 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 22px;
+  font-weight: 1000;
+  font-style: italic;
+  text-transform: uppercase;
+  text-align: center;
+  outline: none;
+}
+.g-hero-nameplate input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+.g-hero-sheet {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 62%;
+  overflow-y: auto;
+  padding: 16px 12px calc(16px + var(--safe-bottom));
+  border-radius: 18px 18px 0 0;
+  background: linear-gradient(180deg, #ffffff, #e9edf5);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.45);
+  transform: translateY(100%);
+  transition: transform 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  color: #141c33;
+}
+.g-hero-sheet.show {
+  transform: none;
+}
+.g-hero-sheet h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 1000;
+  font-style: italic;
+  text-transform: uppercase;
+  text-align: center;
+  color: #141c33;
+}
+.g-hero-sheet .g-hero-item {
+  background: #fff;
+  border: 2px solid #d7dce8;
+  color: #141c33;
+  border-radius: 10px;
+}
+.g-hero-sheet .g-hero-item.on {
+  border-color: var(--hr);
+  box-shadow: 0 0 0 2px rgba(227, 34, 44, 0.25);
+}
+.g-hero-sheet .g-hero-sw {
+  background: radial-gradient(circle at 50% 35%, #eef1f7, #c9cfdc 80%);
+}
+.g-hero-sheet .g-hero-item-price .cost {
+  color: #8a5a00;
+}
+.g-hero-sheet .g-hero-item-price .eq {
+  color: var(--hr);
+}
+.g-hero-sheet .g-hero-nations .list-item {
+  background: #fff;
+  color: #141c33;
+  border-color: #d7dce8;
+}
+.g-hero-sheet .g-hero-input {
+  background: #fff;
+  color: #141c33;
+  border-color: #c9cfdc;
+}
+.g-hero-sheet-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  background: rgba(0, 0, 0, 0.3);
+}
+.g-hero-numgrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+.g-hero-numgrid button {
+  height: 46px;
+  border-radius: 8px;
+  border: 2px solid #d7dce8;
+  background: #fff;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 1000;
+  color: #141c33;
+  cursor: pointer;
+}
+.g-hero-numgrid button.on {
+  background: var(--hr);
+  border-color: #fff;
+  color: #fff;
+  box-shadow: 0 0 0 2px var(--hr);
+}

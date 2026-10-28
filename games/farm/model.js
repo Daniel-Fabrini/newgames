@@ -1,6 +1,6 @@
 // Game state and rules. Everything time-based stores absolute timestamps, so the farm
 // keeps growing while the app is closed. Actions return { ok: true } or { ok: false, err }.
-import { GRID, START, ITEMS, CROPS, PENS, PROD, DECOR, OBST, REGIONS, GIVERS, CUSTOMERS, QUEST, QUEST_ORDER,
+import { isPath, RENOVATE, GRID, START, ITEMS, CROPS, PENS, PROD, DECOR, OBST, REGIONS, GIVERS, CUSTOMERS, QUEST, QUEST_ORDER,
   REGEN_MS, MAX_PENS_ANIMALS, levelInfo, maxEnergy, idx, inBox, unlockCost, fieldCost, kindOf, sizeOf, lvlOf,
   costOf } from './data.js';
 import { makeMap } from './expgen.js';
@@ -22,23 +22,29 @@ export function createModel(store, hooks = {}) {
       tiles.push({ u: inBox(x, y) && x >= START.x0 && x <= START.x1 && y >= START.y0 && y <= START.y1 ? 1 : 0, f: 0, ob: null, cr: null });
     }
     for (const [x, y] of [[7, 8], [8, 8], [7, 9], [8, 9]]) tiles[idx(x, y)].f = 1;
+    // the first wheat is already ripe, so the farm opens golden and ready to harvest
+    for (const [x, y] of [[7, 8], [8, 8], [7, 9], [8, 9]]) tiles[idx(x, y)].cr = { id: 'wheat', at: t - CROPS.wheat.grow - 1000 };
+    const B = [
+      { id: 'house', t: 'house', kind: 'fixed', x: 4, y: 4, w: 2, h: 2 },
+      { id: 'barn', t: 'barn', kind: 'barn', x: 10, y: 4, w: 2, h: 2 },
+      { id: 'oldhouse', t: 'oldhouse', kind: 'ruin', x: 4, y: 9, w: 2, h: 2 },
+      { id: 'coop', t: 'chicken', kind: 'pen', x: 7, y: 4, w: 2, h: 2, cyc: 0, busy: 0, count: 2, st: 2 },
+      { id: 'p-hay', t: 'hay', kind: 'prop', x: 9, y: 4, w: 1, h: 1 },
+      { id: 'p-crates', t: 'crates', kind: 'prop', x: 9, y: 5, w: 1, h: 1 },
+      { id: 'p-barrels', t: 'barrels', kind: 'prop', x: 6, y: 4, w: 1, h: 1 },
+    ];
+    const used = (x, y) => B.some((b) => x >= b.x && x < b.x + b.w && y >= b.y && y < b.y + b.h);
     const r = rng(91);
     const kinds = ['bush', 'bush', 'bush', 'stump', 'stump', 'rock'];
     for (let y = START.y0; y <= START.y1; y++) for (let x = START.x0; x <= START.x1; x++) {
-      const inHouse = x >= 4 && x <= 5 && y >= 4 && y <= 5;
-      const inBarn = x >= 10 && x <= 11 && y >= 4 && y <= 5;
       const near = (x >= 6 && x <= 9 && y >= 6 && y <= 10);   // keep the field block clear
-      const t = tiles[idx(x, y)];
-      if (t.f || inHouse || inBarn || near) continue;
-      if (r() < 0.22) t.ob = kinds[Math.floor(r() * kinds.length)];
+      const tl = tiles[idx(x, y)];
+      if (tl.f || used(x, y) || near || isPath(x, y)) continue;
+      if (r() < 0.22) tl.ob = kinds[Math.floor(r() * kinds.length)];
     }
     return {
-      v: 1, coins: 120, gems: 5, energy: 100, eAt: t, xp: 0, whUp: 0,
-      inv: { wood: 6 }, tiles, nid: 1,
-      B: [
-        { id: 'house', t: 'house', kind: 'fixed', x: 4, y: 4, w: 2, h: 2 },
-        { id: 'barn', t: 'barn', kind: 'barn', x: 10, y: 4, w: 2, h: 2 },
-      ],
+      v: 2, coins: 120, gems: 5, energy: 100, eAt: t, xp: 0, whUp: 0,
+      inv: { wood: 6 }, tiles, nid: 1, renov: false, B,
       stats: {}, qSeq: 0, quests: [], orders: [], train: null, ship: null,
       nextTrain: t + 4 * MIN, nextShip: t + 12 * MIN, exp: {}, run: null,
     };
@@ -46,7 +52,7 @@ export function createModel(store, hooks = {}) {
 
   let S = (() => {
     const v = store.get('save', null);
-    return v && v.v === 1 ? v : fresh(now());
+    return v && v.v === 2 ? v : fresh(now());
   })();
 
   const T = (x, y) => S.tiles[idx(x, y)];
@@ -209,7 +215,7 @@ export function createModel(store, hooks = {}) {
 
   function plow(x, y) {
     const t = T(x, y);
-    if (!t || !t.u || t.f || t.ob || buildingAt(x, y)) return fail('busy');
+    if (!t || !t.u || t.f || t.ob || buildingAt(x, y) || isPath(x, y)) return fail('busy');
     const fields = S.tiles.filter((q) => q.f).length;
     const c = fieldCost(fields);
     if (S.coins < c) return fail('coins');
@@ -254,7 +260,7 @@ export function createModel(store, hooks = {}) {
     for (let yy = y; yy < y + size; yy++) for (let xx = x; xx < x + size; xx++) {
       if (!inBox(xx, yy)) return 'bounds';
       const t = T(xx, yy);
-      if (!t.u || t.f || t.ob || buildingAt(xx, yy)) return 'busy';
+      if (!t.u || t.f || t.ob || buildingAt(xx, yy) || isPath(xx, yy)) return 'busy';
     }
     if (!canPay(costOf(id))) return 'coins';
     return null;
@@ -273,6 +279,19 @@ export function createModel(store, hooks = {}) {
     gainXP(10, true);
     save();
     return ok({ b });
+  }
+
+  function renovate() {
+    if (S.renov) return fail('busy');
+    if (level() < RENOVATE.lvl) return fail('lvl');
+    const c = { coins: RENOVATE.coins, wood: RENOVATE.wood, stone: RENOVATE.stone };
+    if (!canPay(c)) return fail(S.coins < c.coins ? 'coins' : 'stock');
+    pay(c);
+    S.renov = true;
+    bump('build', 1);
+    gainXP(30, true);
+    save();
+    return ok();
   }
 
   function startJob(bid, ri) {
@@ -527,7 +546,7 @@ export function createModel(store, hooks = {}) {
     get S() { return S; },
     now, tick, energy: () => { energyTick(); return S.energy; }, energyTick, maxEnergy: () => maxEnergy(level()),
     level, total, cap, space, has, levelInfo: () => levelInfo(S.xp), cropFrac, T, buildingAt,
-    plant, harvest, plow, clearObst, unlockTile, canPlace, place, startJob, speedJob, speedCrop, speedPen,
+    renovate, plant, harvest, plow, clearObst, unlockTile, canPlace, place, startJob, speedJob, speedCrop, speedPen,
     buyAnimal, feedPen, collectPen, sell, eat, upgradeWh, deliver, claimQuest, ensureQuests,
     startRun, runOpen, finishRun, visibleRun, save, pool,
     reset() { S = fresh(now()); save(); },

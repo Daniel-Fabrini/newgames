@@ -1,12 +1,10 @@
-// One level being played: scene panel (canvas), round pause button, cream
-// tray with the targets, hints, timer, feedback effects and the result panel.
+// One level being played: the rendered photo of the scene (pan / zoom), the
+// cream tray with the objects to find (icons + names, or a word list), hints,
+// timer, feedback effects and the pause sheet.
 
 import { rng } from '../../../js/core/ui.js';
 import { SceneView } from './view.js';
-import { generateLevel } from './gen.js';
-import { paintIndoor } from './paint/indoor.js';
-import { paintOutdoorBack, paintOutdoorFront } from './paint/outdoor.js';
-import { emojiName } from './catalog.js';
+import { loadScene, pickGoals, insideAny, distTo, tracePath } from './scene.js';
 import { sheet, coinIcon, ICON } from './ui.js';
 
 const TAU = Math.PI * 2;
@@ -22,51 +20,19 @@ const fmtTime = (ms) => {
 const PENALTY = 5;
 const HINT_PRICE = 25;
 
-// ---------------------------------------------------------------- scene building
-function buildCanvases(spec) {
-  const { W, H, theme, seed } = spec;
-  const budget = 6.2e6;
-  const bs = Math.min(2, Math.sqrt(budget / (W * H)));
-  const front = document.createElement('canvas');
-  front.width = Math.round(W * bs);
-  front.height = Math.round(H * bs);
-  const g = front.getContext('2d');
-  g.scale(bs, bs);
-  const prnd = rng(seed ^ 0x51ed);
-  if (spec.look === 'indoor') {
-    const res = paintIndoor(g, W, H, prnd, theme.paint);
-    return { front, zones: res.zones, horizon: res.horizon };
-  }
-  const margin = { x: Math.round(W * 0.12), y: 140 };
-  const horizon = Math.round(H * (theme.paint.horizon || 0.28));
-  const bh = horizon + 220 + margin.y;
-  const bw = W + margin.x * 2;
-  const bsb = bs * 0.62;
-  const back = document.createElement('canvas');
-  back.width = Math.round(bw * bsb);
-  back.height = Math.round(bh * bsb);
-  const gb = back.getContext('2d');
-  gb.scale(bsb, bsb);
-  gb.translate(margin.x, margin.y);
-  const brnd = rng(seed ^ 0xbac4);
-  const bk = paintOutdoorBack(gb, W, H, brnd, theme.paint, margin);
-  const fr = paintOutdoorFront(g, W, H, prnd, theme.paint, bk);
-  return { front, back, backRect: { x: -margin.x, y: -margin.y, w: bw, h: bh }, zones: fr.zones, horizon };
-}
-
-// ---------------------------------------------------------------- the screen
 export function playLevel(app, spec) {
   const { ctx, t, h } = app;
   const { sfx } = ctx;
   const kind = spec.kind;
-  const timed = !spec.zen;
+  const timed = true;
   let destroyed = false;
   let view = null;
-  let level = null;
+  let scene = null;
   let goals = [];
   let finished = false;
   let paused = false;
   let openSheet = null;
+  const marks = []; // found objects outlined on the photo: { it, t0 }
   const timers = new Set();
   const later = (fn, ms) => {
     const id = setTimeout(() => {
@@ -101,53 +67,77 @@ export function playLevel(app, spec) {
   const banner = h('div', { class: 'g-findit-banner' });
   const coach = h('div', { class: 'g-findit-coach' }, t('pinch'));
   const sceneEl = h('div', { class: 'g-findit-scene' }, canvasHost, banner, coach, pauseBtn, loader);
-  const trayTitle = h('span', { class: 'g-findit-tray-title' }, kind === 'match' ? t('matchTitle') : kind === 'findall' ? t('findAllTitle') : t('findTitle'));
+  const trayTitle = h('span', { class: 'g-findit-tray-title' }, kind === 'match' ? t('matchTitle') : t('findTitle'));
   const trayInfo = h('span', { class: 'g-findit-tray-info' });
+  let listMode = app.ctx.store.get('trayMode', 'icons') === 'words' ? 'words' : 'icons';
+  const modeBtn = h('button', { class: 'g-findit-traymode', 'aria-label': t('trayToggle'), onclick: () => toggleMode() });
   const tiles = h('div', { class: 'g-findit-tiles' });
-  const tray = h('div', { class: 'g-findit-tray' }, h('div', { class: 'g-findit-tray-head' }, trayTitle, trayInfo), tiles);
+  const tray = h('div', { class: 'g-findit-tray' }, h('div', { class: 'g-findit-tray-head' }, trayTitle, h('span', { class: 'g-findit-tray-right' }, trayInfo, modeBtn)), tiles);
   const flyLayer = h('div', { class: 'g-findit-fly-layer' });
   const el = h('div', { class: 'g-findit-play g-findit-enter' }, sceneEl, tray, flyLayer);
   app.mount(el);
 
-  // ---- tray model
-  let slots = []; // { el, key } for classic-like modes
-  let queue = []; // goal keys waiting for a slot
-  let matchSlot = null, pips = [];
-  let selected = null, selectFx = null;
+  // ---- tray
+  let slots = []; // { el, key }
+  let queue = [];
+
+  function setModeIcon() {
+    modeBtn.innerHTML = listMode === 'icons' ? ICON.list : ICON.grid;
+    modeBtn.title = t(listMode === 'icons' ? 'showWords' : 'showIcons');
+  }
+
+  function toggleMode() {
+    sfx.play('tap');
+    closePopover();
+    listMode = listMode === 'icons' ? 'words' : 'icons';
+    app.ctx.store.set('trayMode', listMode);
+    buildTray();
+  }
 
   function tileFor(key) {
-    if (kind === 'match') return pips[key] ? pips[key].el : matchSlot;
     const s = slots.find((x) => x.key === key);
     return s ? s.el : null;
   }
 
   function makeTile(key) {
     const gl = goals[key];
-    const b = h('button', { class: 'g-findit-tile g-findit-tile-in', 'aria-label': emojiName(gl.ch, ctx.lang) }, h('span', { class: 'g-findit-tile-e' }, gl.ch));
+    if (listMode === 'words') {
+      const w = h('button', { class: 'g-findit-word', 'aria-label': gl.name }, gl.name);
+      if (gl.need > 1) w.append(h('small', null, ` ×${gl.need - gl.shown}`));
+      if (gl.shown >= gl.need) w.classList.add('done');
+      w.addEventListener('click', () => tilePopover(w, key));
+      return w;
+    }
+    const img = h('img', { class: 'g-findit-tile-img', src: gl.thumb, alt: '', draggable: 'false' });
+    const b = h('button', { class: 'g-findit-tile g-findit-tile-in', 'aria-label': gl.name }, img, h('span', { class: 'g-findit-tile-name' }, gl.name));
     if (gl.need > 1) b.append(h('span', { class: 'g-findit-badge' }, String(gl.need - gl.shown)));
+    if (gl.shown >= gl.need) {
+      b.classList.add('done');
+      b.append(h('span', { class: 'g-findit-check', html: ICON.check }));
+    }
     b.addEventListener('click', () => tilePopover(b, key));
     return b;
   }
 
   function buildTray() {
     tiles.innerHTML = '';
+    tiles.className = `g-findit-tiles ${listMode === 'words' ? 'words' : ''}`;
+    setModeIcon();
     slots = [];
-    if (kind === 'match') {
-      matchSlot = h('button', { class: 'g-findit-tile g-findit-hand', 'aria-label': t('hint') }, h('span', { class: 'g-findit-tile-e' }, '?'));
-      matchSlot.addEventListener('click', () => tilePopover(matchSlot, selected ? selected.key : -1));
-      const pipBox = h('div', { class: 'g-findit-pips' });
-      pips = goals.map(() => {
-        const p = h('span', { class: 'g-findit-pip' });
-        pipBox.append(p);
-        return { el: p };
-      });
-      tiles.append(matchSlot, pipBox);
+    queue = [];
+    const order = goals.map((g, i) => i);
+    if (listMode === 'words') {
+      for (const key of order) {
+        const tile = makeTile(key);
+        slots.push({ el: tile, key });
+        tiles.append(tile);
+      }
     } else {
       const w = tiles.clientWidth || 340;
-      const max = kind === 'findall' ? goals.length : clamp(Math.floor((w + 8) / 62), 3, 6);
-      const order = goals.map((g, i) => i);
-      const first = order.slice(0, max);
-      queue = order.slice(max);
+      const max = clamp(Math.floor((w + 8) / 70), 3, 6);
+      const open = order.filter((k) => goals[k].shown < goals[k].need);
+      const first = open.slice(0, max);
+      queue = open.slice(max);
       for (const key of first) {
         const tile = makeTile(key);
         slots.push({ el: tile, key });
@@ -158,7 +148,7 @@ export function playLevel(app, spec) {
   }
 
   function updateInfo() {
-    const done = goals.reduce((a, g) => a + (kind === 'match' ? (g.shown >= 2 ? 1 : 0) : g.shown), 0);
+    const done = goals.reduce((a, g) => a + (kind === 'match' ? (g.shown >= g.need ? 1 : 0) : g.shown), 0);
     const total = goals.reduce((a, g) => a + (kind === 'match' ? 1 : g.need), 0);
     const parts = [t('found', { a: done, b: total })];
     if (timed) parts.push('⏱ ' + fmtTime(elapsed()));
@@ -167,19 +157,15 @@ export function playLevel(app, spec) {
 
   function tickTile(key) {
     const gl = goals[key];
-    if (kind === 'match') {
-      const p = pips[key];
-      if (p) {
-        p.el.textContent = gl.ch;
-        p.el.classList.add('on');
-      }
-      matchSlot.classList.remove('active');
-      matchSlot.querySelector('.g-findit-tile-e').textContent = '?';
-      updateInfo();
-      return;
-    }
     const s = slots.find((x) => x.key === key);
     if (!s) return updateInfo();
+    if (listMode === 'words') {
+      const fresh = makeTile(key);
+      s.el.replaceWith(fresh);
+      s.el = fresh;
+      fresh.classList.add('g-findit-bump');
+      return updateInfo();
+    }
     const badge = s.el.querySelector('.g-findit-badge');
     if (badge) badge.textContent = String(Math.max(0, gl.need - gl.shown));
     s.el.classList.remove('g-findit-bump');
@@ -191,6 +177,7 @@ export function playLevel(app, spec) {
       if (queue.length) {
         const next = queue.shift();
         later(() => {
+          if (listMode !== 'icons') return;
           const tile = makeTile(next);
           s.el.replaceWith(tile);
           s.el = tile;
@@ -215,17 +202,18 @@ export function playLevel(app, spec) {
     closePopover();
     if (wasOpen) return;
     const gl = goals[key];
-    if (key !== -1 && (!gl || gl.found >= gl.need)) return;
-    const hintLabel = spec.zen ? t('hintFree') : app.state.hints > 0 ? `${t('hint')} · ${app.state.hints}` : `${t('hint')} · ${HINT_PRICE}`;
+    if (!gl || gl.found >= gl.need) return;
+    const hintLabel = app.state.hints > 0 ? `${t('hint')} · ${app.state.hints}` : `${t('hint')} · ${HINT_PRICE}`;
     pop = h(
       'div',
       { class: 'g-findit-popover', 'data-key': String(key) },
-      gl ? h('div', { class: 'g-findit-pop-name' }, emojiName(gl.ch, ctx.lang)) : null,
+      h('img', { class: 'g-findit-pop-img', src: gl.thumb, alt: '' }),
+      h('div', { class: 'g-findit-pop-name' }, gl.name),
       h('button', { class: 'g-findit-pop-hint', onclick: (e) => {
         e.stopPropagation();
         closePopover();
-        useHint(key === -1 ? undefined : key);
-      } }, h('span', { html: ICON.lens }), hintLabel, !spec.zen && app.state.hints <= 0 ? coinIcon() : null),
+        useHint(key);
+      } }, h('span', { html: ICON.lens }), hintLabel, app.state.hints <= 0 ? coinIcon() : null),
     );
     el.append(pop);
     const r = tile.getBoundingClientRect(), pr = el.getBoundingClientRect();
@@ -235,29 +223,50 @@ export function playLevel(app, spec) {
     pop.style.setProperty('--arrow', r.left - pr.left + r.width / 2 - parseFloat(pop.style.left) + 'px');
   }
 
-  // ---- effects
-  function ringFx(p, color = '#7CF0B8') {
-    const N = 12;
+  // ---- drawing on top of the photo (world coordinates)
+  function drawOver(g, z, tx, ty, tnow) {
+    if (!marks.length) return;
+    const dpr = view.dpr;
+    for (const m of marks) {
+      const k = clamp((tnow - m.t0) / 900, 0, 1);
+      g.save();
+      tracePath(g, m.it);
+      g.lineJoin = 'round';
+      if (k < 1) {
+        // the "found!" flash: gold fill fading, thick glowing outline
+        g.fillStyle = `rgba(255, 222, 120, ${0.42 * (1 - k)})`;
+        g.fill();
+        g.shadowColor = 'rgba(255, 200, 60, 0.95)';
+        g.shadowBlur = (10 + 18 * (1 - k)) * dpr;
+        g.strokeStyle = '#ffe08a';
+        g.lineWidth = (2.5 + 3 * (1 - k)) / z;
+        g.stroke();
+      }
+      // persistent marker: thin gold outline with a soft glow
+      g.shadowColor = 'rgba(0, 0, 0, 0.6)';
+      g.shadowBlur = 3 * dpr;
+      g.strokeStyle = 'rgba(247, 215, 116, 0.95)';
+      g.lineWidth = 2 / z;
+      g.stroke();
+      g.restore();
+    }
+  }
+  const animating = (tnow) => marks.some((m) => tnow - m.t0 < 950);
+
+  // ---- effects (screen space)
+  function sparkleFx(it) {
+    const N = 14;
     const parts = Array.from({ length: N }, (_, i) => ({ a: (i / N) * TAU + Math.random() * 0.3, v: 0.6 + Math.random() * 0.6, c: i % 3 ? '#ffe28a' : '#ffffff' }));
     view.addEffect({
       dur: 900,
       draw(g, k, v) {
-        const s = v.worldToScreen(p.x, p.y);
-        const r = Math.max(20, p.s * v.z * 0.62);
-        const a = k < 0.7 ? 1 : 1 - (k - 0.7) / 0.3;
-        g.globalAlpha = a;
-        g.lineWidth = 4;
-        g.strokeStyle = color;
-        g.shadowColor = 'rgba(0,0,0,0.5)';
-        g.shadowBlur = 6;
-        g.beginPath();
-        g.arc(s.x, s.y, r * (1 + 0.1 * easeOut(k)), -Math.PI / 2, -Math.PI / 2 + TAU * easeOut(Math.min(1, k * 2.2)));
-        g.stroke();
-        g.shadowBlur = 0;
+        const s = v.worldToScreen(it.c.x, it.c.y);
+        const r = Math.max(18, it.s * v.z * 0.5);
+        g.globalAlpha = k < 0.7 ? 1 : 1 - (k - 0.7) / 0.3;
         for (const q of parts) {
-          const d = r * (0.8 + easeOut(k) * 1.4 * q.v);
+          const d = r * (0.7 + easeOut(k) * 1.3 * q.v);
           const x = s.x + Math.cos(q.a) * d, y = s.y + Math.sin(q.a) * d;
-          const sz = 6 * (1 - k) + 1;
+          const sz = 6 * (1 - k) + 1.5;
           g.fillStyle = q.c;
           g.beginPath();
           g.moveTo(x, y - sz);
@@ -275,14 +284,13 @@ export function playLevel(app, spec) {
     });
   }
 
-  function missFx(wx, wy, soft, penalty) {
+  function missFx(wx, wy, penalty) {
     view.addEffect({
       dur: 800,
       draw(g, k, v) {
         const s = v.worldToScreen(wx, wy);
         const sc = k < 0.2 ? easeOut(k / 0.2) : 1;
-        const a = k < 0.6 ? 1 : 1 - (k - 0.6) / 0.4;
-        g.globalAlpha = a;
+        g.globalAlpha = k < 0.6 ? 1 : 1 - (k - 0.6) / 0.4;
         g.translate(s.x, s.y);
         g.scale(sc, sc);
         g.lineCap = 'round';
@@ -295,7 +303,7 @@ export function playLevel(app, spec) {
         g.moveTo(d, -d);
         g.lineTo(-d, d);
         g.stroke();
-        g.strokeStyle = soft ? '#8a8a96' : '#ff3b5c';
+        g.strokeStyle = '#ff3b5c';
         g.lineWidth = 5;
         g.stroke();
         if (penalty) {
@@ -304,60 +312,60 @@ export function playLevel(app, spec) {
           g.textAlign = 'center';
           g.lineWidth = 4;
           g.strokeStyle = 'rgba(0,0,0,0.6)';
-          g.strokeText(t('penalty', { s: PENALTY }), s.x, s.y - 22 - k * 26);
+          const ty = s.y - 22 - k * 26;
+          g.strokeText(t('penalty', { s: PENALTY }), s.x, ty);
           g.fillStyle = '#ff6b81';
-          g.fillText(t('penalty', { s: PENALTY }), s.x, s.y - 22 - k * 26);
+          g.fillText(t('penalty', { s: PENALTY }), s.x, ty);
         }
       },
     });
   }
 
-  function selectionFx(p) {
-    return view.addEffect({
-      dur: Infinity,
-      draw(g, ms, v) {
-        const s = v.worldToScreen(p.x, p.y);
-        const r = Math.max(22, p.s * v.z * 0.7) * (1 + 0.08 * Math.sin(ms / 160));
-        g.lineWidth = 4;
-        g.strokeStyle = '#ffd34d';
-        g.shadowColor = 'rgba(255,200,60,0.9)';
-        g.shadowBlur = 12;
-        g.beginPath();
-        g.arc(s.x, s.y, r, 0, TAU);
-        g.stroke();
-      },
-    });
+  function ring(g, v, it, ms, scale = 1) {
+    const s = v.worldToScreen(it.c.x, it.c.y);
+    const r = Math.max(24, it.s * v.z * 0.62 * scale) * (1 + 0.08 * Math.sin(ms / 140));
+    g.lineWidth = 4;
+    g.strokeStyle = '#ffd34d';
+    g.shadowColor = 'rgba(255,200,60,0.9)';
+    g.shadowBlur = 14;
+    g.beginPath();
+    g.arc(s.x, s.y, r, 0, TAU);
+    g.stroke();
+    return { s, r };
   }
 
-  function lensFx(p) {
+  function lensFx(it) {
     const start = { x: view.w * 0.85, y: view.h * 1.05 };
     view.addEffect({
-      dur: 3000,
+      dur: 3200,
       draw(g, k, v, ms) {
-        const s = v.worldToScreen(p.x, p.y);
+        const s = v.worldToScreen(it.c.x, it.c.y);
         const a = easeOut(clamp(k / 0.16, 0, 1));
         const fade = k > 0.86 ? 1 - (k - 0.86) / 0.14 : 1;
-        const R = clamp(Math.min(v.w, v.h) * 0.2, 54, 86);
+        const R = clamp(Math.min(v.w, v.h) * 0.22, 58, 92);
         const lx = lerp(start.x, s.x, a), ly = lerp(start.y, s.y, a);
         g.globalAlpha = fade;
-        // magnified content
-        const mz = Math.min(v.z * 2.1, v.maxZ * 1.6);
+        const mz = Math.min(v.z * 2, v.maxZ * 1.4);
         const c = v.screenToWorld(lx, ly);
         g.save();
         g.beginPath();
         g.arc(lx, ly, R, 0, TAU);
         g.clip();
-        v.drawWorld(g, mz, lx - c.x * mz, ly - c.y * mz, performance.now(), v.w, v.h);
+        v.drawWorld(g, mz, lx - c.x * mz, ly - c.y * mz, performance.now());
         g.setTransform(v.dpr, 0, 0, v.dpr, 0, 0);
-        const pr = Math.max(16, p.s * mz * 0.62) * (1 + 0.07 * Math.sin(ms / 140));
-        const ts = { x: lx + (s.x - lx) * (mz / v.z), y: ly + (s.y - ly) * (mz / v.z) };
-        g.lineWidth = 4;
+        // outline the object inside the lens
+        g.save();
+        g.setTransform(v.dpr * mz, 0, 0, v.dpr * mz, v.dpr * (lx - c.x * mz), v.dpr * (ly - c.y * mz));
+        tracePath(g, it);
+        g.lineJoin = 'round';
+        g.lineWidth = (3 + Math.sin(ms / 140)) / mz;
         g.strokeStyle = 'rgba(255,214,90,0.95)';
-        g.beginPath();
-        g.arc(ts.x, ts.y, pr, 0, TAU);
+        g.shadowColor = 'rgba(255,200,60,0.9)';
+        g.shadowBlur = 10 * v.dpr;
         g.stroke();
+        g.restore();
         const gl = g.createLinearGradient(lx - R, ly - R, lx + R, ly + R);
-        gl.addColorStop(0, 'rgba(255,255,255,0.28)');
+        gl.addColorStop(0, 'rgba(255,255,255,0.26)');
         gl.addColorStop(0.45, 'rgba(255,255,255,0)');
         g.fillStyle = gl;
         g.fillRect(lx - R, ly - R, R * 2, R * 2);
@@ -372,12 +380,12 @@ export function playLevel(app, spec) {
         hg.addColorStop(1, '#4a2a12');
         g.fillStyle = hg;
         g.beginPath();
-        g.roundRect ? g.roundRect(R + 6, -9, R * 0.95, 18, 9) : g.rect(R + 6, -9, R * 0.95, 18);
+        if (g.roundRect) g.roundRect(R + 6, -9, R * 0.95, 18, 9);
+        else g.rect(R + 6, -9, R * 0.95, 18);
         g.fill();
         g.fillStyle = '#d9a63a';
         g.fillRect(R + 2, -11, 12, 22);
         g.restore();
-        // golden rim
         const rg = g.createLinearGradient(lx - R, ly - R, lx + R, ly + R);
         rg.addColorStop(0, '#f7d774');
         rg.addColorStop(0.5, '#c9971c');
@@ -389,72 +397,58 @@ export function playLevel(app, spec) {
         g.beginPath();
         g.arc(lx, ly, R + 3, 0, TAU);
         g.stroke();
-        g.shadowBlur = 0;
-        g.lineWidth = 1.5;
-        g.strokeStyle = 'rgba(80,50,0,0.8)';
-        g.beginPath();
-        g.arc(lx, ly, R - 1, 0, TAU);
-        g.stroke();
       },
     });
   }
 
-  function spotFx(p) {
+  function spotFx(it) {
     view.addEffect({
-      dur: 2800,
+      dur: 3000,
       draw(g, k, v, ms) {
-        const s = v.worldToScreen(p.x, p.y);
+        const s = v.worldToScreen(it.c.x, it.c.y);
         const a = k < 0.12 ? k / 0.12 : k > 0.82 ? 1 - (k - 0.82) / 0.18 : 1;
-        const r = Math.max(34, p.s * v.z * 0.95);
+        const r = Math.max(40, it.s * v.z * 0.85);
         g.globalAlpha = a;
-        g.fillStyle = 'rgba(5,5,12,0.6)';
+        g.fillStyle = 'rgba(5,5,12,0.62)';
         g.beginPath();
         g.rect(0, 0, v.w, v.h);
         g.arc(s.x, s.y, r * (1.6 - 0.6 * easeOut(Math.min(1, k * 3))), 0, TAU, true);
         g.fill();
-        const pr = r * (1 + 0.1 * Math.sin(ms / 130));
-        g.lineWidth = 4;
-        g.strokeStyle = '#ffd34d';
-        g.shadowColor = 'rgba(255,200,60,0.9)';
-        g.shadowBlur = 14;
-        g.beginPath();
-        g.arc(s.x, s.y, pr, 0, TAU);
-        g.stroke();
+        const { r: pr } = ring(g, v, it, ms, 1.25);
         for (let i = 0; i < 4; i++) {
           const an = ms / 600 + (i * TAU) / 4;
-          const x = s.x + Math.cos(an) * (pr + 14), y = s.y + Math.sin(an) * (pr + 14);
           g.fillStyle = '#fff3c0';
           g.beginPath();
-          g.arc(x, y, 3.5, 0, TAU);
+          g.arc(s.x + Math.cos(an) * (pr + 14), s.y + Math.sin(an) * (pr + 14), 3.5, 0, TAU);
           g.fill();
         }
       },
     });
   }
 
-  // ---- fly to tray
-  function fly(p, key, done) {
+  // ---- fly the icon to the tray
+  function fly(it, key, done) {
     const cr = view.canvas.getBoundingClientRect();
     const er = el.getBoundingClientRect();
-    const s = view.worldToScreen(p.x, p.y);
+    const s = view.worldToScreen(it.c.x, it.c.y);
     const target = tileFor(key) || trayTitle;
     const tr = target.getBoundingClientRect();
     const x0 = cr.left - er.left + s.x, y0 = cr.top - er.top + s.y;
-    const x1 = tr.left - er.left + tr.width / 2, y1 = tr.top - er.top + tr.height / 2;
-    const size = clamp(p.s * view.z, 30, 84);
-    const f = h('span', { class: 'g-findit-fly' }, p.ch);
-    f.style.fontSize = size + 'px';
+    const x1 = tr.left - er.left + tr.width / 2, y1 = tr.top - er.top + tr.height / 2 - (listMode === 'icons' ? 8 : 0);
+    const size = clamp(it.s * view.z, 44, 96);
+    const f = h('img', { class: 'g-findit-fly', src: goals[key].thumb, alt: '' });
+    f.style.width = f.style.height = size + 'px';
     flyLayer.append(f);
     const mx = (x0 + x1) / 2 + (x0 < x1 ? -40 : 40), my = Math.min(y0, y1) - 70;
-    const end = 36 / size;
+    const end = 40 / size;
     const anim = f.animate(
       [
-        { transform: `translate(${x0}px, ${y0}px) translate(-50%, -50%) scale(1)`, offset: 0 },
-        { transform: `translate(${x0}px, ${y0 - 18}px) translate(-50%, -50%) scale(1.35)`, offset: 0.18 },
-        { transform: `translate(${mx}px, ${my}px) translate(-50%, -50%) scale(1.05) rotate(-12deg)`, offset: 0.55 },
+        { transform: `translate(${x0}px, ${y0}px) translate(-50%, -50%) scale(0.6)`, opacity: 0.4, offset: 0 },
+        { transform: `translate(${x0}px, ${y0 - 18}px) translate(-50%, -50%) scale(1.25)`, opacity: 1, offset: 0.2 },
+        { transform: `translate(${mx}px, ${my}px) translate(-50%, -50%) scale(1.05) rotate(-10deg)`, offset: 0.55 },
         { transform: `translate(${x1}px, ${y1}px) translate(-50%, -50%) scale(${end})`, offset: 1 },
       ],
-      { duration: 720, easing: 'cubic-bezier(.45,.05,.4,1)', fill: 'forwards' },
+      { duration: 760, easing: 'cubic-bezier(.45,.05,.4,1)', fill: 'forwards' },
     );
     anim.onfinish = () => {
       f.remove();
@@ -462,132 +456,71 @@ export function playLevel(app, spec) {
     };
   }
 
-  // ---- input handling
-  function candidates() {
-    if (!level) return [];
-    return level.props.filter((p) => p.alive && (p.role === 'target' || p.role === 'pair'));
-  }
+  // ---- input
+  // A tap counts when it lands on (or close to) a visible part of an object
+  // still to be found. Small objects get a more generous radius, but a tap
+  // that is clearly on another object is a miss.
   function hitTest(wx, wy) {
-    let best = null, bestK = Infinity;
-    const tol = 22 / view.z;
-    for (const p of candidates()) {
-      const r = Math.max(p.s * 0.56, tol);
-      const d = Math.hypot(wx - p.x, wy - p.y);
-      if (d <= r && d / r < bestK) {
-        best = p;
-        bestK = d / r;
+    const z = view.z;
+    let best = null, bestD = Infinity;
+    for (const gl of goals) {
+      if (gl.found >= gl.need) continue;
+      for (const it of gl.items) {
+        if (it.found) continue;
+        const d = distTo(it, wx, wy);
+        if (d === 0) return { it, gl };
+        const tol = (it.s * z < 34 ? 22 : 13) / z;
+        if (d < tol && d < bestD) {
+          bestD = d;
+          best = { it, gl };
+        }
       }
+    }
+    if (!best) return null;
+    for (const other of scene.data.items) {
+      if (other.k !== best.gl.k && other.n > 400 && insideAny(other, wx, wy)) return null;
     }
     return best;
   }
 
   function onTap(wx, wy) {
     closePopover();
-    if (finished || paused) return true;
-    const p = hitTest(wx, wy);
-    if (!p) return false;
-    if (kind === 'match') matchTap(p);
-    else found(p);
+    if (finished || paused || !scene) return true;
+    const hit = hitTest(wx, wy);
+    if (!hit) return false;
+    found(hit.it, goals.indexOf(hit.gl));
     return true;
   }
 
-  function found(p) {
+  function found(it, key) {
     progressed();
-    const gl = goals[p.key];
+    const gl = goals[key];
     gl.found++;
-    p.role = 'found';
-    p.pop = performance.now();
-    p.dieAfterPop = true;
+    it.found = true;
+    marks.push({ it, t0: performance.now() });
     sfx.play('pop');
     sfx.vibrate(22);
-    ringFx(p);
+    sparkleFx(it);
+    view.request();
+    if (gl.need > 1 && gl.found < gl.need && !app.seen('twin')) {
+      app.markSeen('twin');
+      ctx.ui.toast(t('findTwin'));
+    }
     later(() => {
-      fly(p, p.key, () => {
+      fly(it, key, () => {
         gl.shown++;
         sfx.tone({ freq: 880, to: 1320, dur: 0.12, type: 'triangle', vol: 0.3 });
-        tickTile(p.key);
+        tickTile(key);
         checkDone();
       });
-    }, 200);
-  }
-
-  function matchTap(p) {
-    if (!selected) {
-      selected = p;
-      selectFx = selectionFx(p);
-      matchSlot.querySelector('.g-findit-tile-e').textContent = p.ch;
-      matchSlot.classList.add('active');
-      sfx.play('select');
-      sfx.vibrate(12);
-      if (!app.seen('twin')) {
-        app.markSeen('twin');
-        ctx.ui.toast(t('findTwin'));
-      }
-      return;
-    }
-    if (selected === p) {
-      clearSelection();
-      sfx.play('tap');
-      return;
-    }
-    if (selected.key === p.key) {
-      progressed();
-      const a = selected, b = p;
-      clearSelection(true);
-      const gl = goals[a.key];
-      gl.found = 2;
-      for (const q of [a, b]) {
-        q.role = 'found';
-        q.pop = performance.now();
-        q.dieAfterPop = true;
-        ringFx(q);
-      }
-      sfx.play('success');
-      sfx.vibrate([18, 40, 18]);
-      later(() => {
-        let n = 0;
-        for (const q of [a, b])
-          fly(q, a.key, () => {
-            if (++n === 2) {
-              gl.shown = 2;
-              tickTile(a.key);
-              checkDone();
-            }
-          });
-      }, 200);
-      return;
-    }
-    // mismatch
-    clearSelection();
-    penalize(p.x, p.y, true);
-    ctx.ui.toast(t('mismatch'));
-  }
-
-  function clearSelection(keepSlot) {
-    if (selectFx) selectFx.done = true;
-    selectFx = null;
-    selected = null;
-    if (!keepSlot && matchSlot) {
-      matchSlot.classList.remove('active');
-      matchSlot.querySelector('.g-findit-tile-e').textContent = '?';
-    }
-    view.request();
+    }, 220);
   }
 
   function onMiss(wx, wy) {
     if (finished || paused) return;
-    penalize(wx, wy, false);
-  }
-
-  function penalize(wx, wy) {
     stats.misses++;
-    if (spec.zen) {
-      missFx(wx, wy, true, false);
-      sfx.play('tap');
-      return;
-    }
     clock.penalty += PENALTY;
-    missFx(wx, wy, false, true);
+    missFx(wx, wy, true);
     sfx.play('error');
     sfx.vibrate([30, 40, 30]);
     sceneEl.classList.remove('g-findit-shake');
@@ -610,31 +543,29 @@ export function playLevel(app, spec) {
   }
 
   // ---- hints
-  let zenHintReady = 0;
   function hintTarget(key) {
-    const alive = candidates();
-    if (!alive.length) return null;
-    if (kind === 'match') {
-      if (selected) return alive.find((q) => q !== selected && q.key === selected.key) || null;
-      return alive[Math.floor(Math.random() * alive.length)];
-    }
-    let list = key !== undefined ? alive.filter((q) => q.key === key) : alive.filter((q) => slots.some((s) => s.key === q.key));
-    if (!list.length) list = alive;
+    const open = goals.map((g, i) => i).filter((i) => goals[i].found < goals[i].need);
+    if (!open.length) return null;
+    let keys = key !== undefined && open.includes(key) ? [key] : open.filter((i) => slots.some((s) => s.key === i));
+    if (!keys.length) keys = open;
     const c = view.center();
-    list.sort((a, b) => Math.hypot(a.x - c.x, a.y - c.y) - Math.hypot(b.x - c.x, b.y - c.y));
-    return list[0];
+    let best = null, bestD = Infinity;
+    for (const k of keys) {
+      for (const it of goals[k].items) {
+        if (it.found || it.n < 120) continue;
+        const d = Math.hypot(it.c.x - c.x, it.c.y - c.y) - it.n * 0.002;
+        if (d < bestD) {
+          bestD = d;
+          best = it;
+        }
+      }
+    }
+    return best;
   }
 
   async function useHint(key) {
     if (finished || !view) return;
-    if (spec.zen) {
-      const left = Math.ceil((zenHintReady - performance.now()) / 1000);
-      if (left > 0) {
-        ctx.ui.toast(t('hintWait', { s: left }));
-        return;
-      }
-      zenHintReady = performance.now() + 8000;
-    } else if (app.state.hints <= 0) {
+    if (app.state.hints <= 0) {
       if (app.state.coins < HINT_PRICE) {
         sfx.play('error');
         ctx.ui.toast(t('noCoins'));
@@ -645,16 +576,17 @@ export function playLevel(app, spec) {
       app.addCoins(-HINT_PRICE);
       sfx.play('coin');
     } else app.setHints(app.state.hints - 1);
-    const p = hintTarget(key);
-    if (!p) return;
+    const it = hintTarget(key);
+    if (!it) return;
     stats.hints++;
     sfx.play('whoosh');
-    const z = clamp(Math.max(view.z, view.minZ * 1.9), view.minZ, view.maxZ * 0.8);
-    view.flyTo(p.x, p.y, z, 560, () => {
+    const want = clamp(Math.min(view.w, view.h) * 0.22 / Math.max(20, it.s), view.minZ * 1.4, view.maxZ * 0.75);
+    const z = clamp(Math.max(view.z, want), view.minZ, view.maxZ);
+    view.flyTo(it.c.x, it.c.y, z, 600, () => {
       if (destroyed) return;
       sfx.play('select');
-      if (app.cfg.hint === 'lens') lensFx(p);
-      else spotFx(p);
+      if (spec.scene.kind === 'outdoor') spotFx(it);
+      else lensFx(it);
     });
   }
 
@@ -685,20 +617,20 @@ export function playLevel(app, spec) {
   }
   function resumeClock() {
     paused = false;
-    if (level && !finished && !document.hidden) clockStart();
+    if (scene && !finished && !document.hidden) clockStart();
   }
   function openPause() {
-    if (finished || openSheet || !level) return;
+    if (finished || openSheet || !scene) return;
     sfx.play('tap');
     closePopover();
     pauseClock();
     const body = h(
       'div',
       { class: 'g-findit-pause-stats' },
-      timed ? h('div', null, h('span', { html: ICON.clock }), fmtTime(elapsed())) : null,
+      h('div', null, h('span', { html: ICON.clock }), fmtTime(elapsed())),
       h('div', null, h('span', { html: ICON.target }), trayInfo.textContent.split('·')[0].trim()),
     );
-    const hintLabel = spec.zen ? t('hintFree') : app.state.hints > 0 ? `${t('hint')} · ${app.state.hints}` : `${t('hint')} · ${HINT_PRICE}`;
+    const hintLabel = app.state.hints > 0 ? `${t('hint')} · ${app.state.hints}` : `${t('hint')} · ${HINT_PRICE}`;
     const actions = [
       { label: t('resume'), primary: true, onclick: () => {} },
       { label: [h('span', { class: 'g-findit-btn-ico', html: ICON.lens }), hintLabel], onclick: () => later(() => useHint(), 260) },
@@ -709,7 +641,7 @@ export function playLevel(app, spec) {
       kind: 'pause',
       icon: ICON.pause,
       title: t('paused'),
-      subtitle: spec.title,
+      subtitle: `${spec.title} · ${spec.subtitle}`,
       body,
       actions,
       onClose: () => {
@@ -722,32 +654,30 @@ export function playLevel(app, spec) {
   // ---- completion
   function checkDone() {
     if (finished) return;
-    const done = goals.every((g) => g.shown >= g.need);
-    if (!done) return;
+    if (!goals.every((g) => g.shown >= g.need)) return;
     finished = true;
     clockStop();
     const ms = elapsed();
-    later(() => app.complete(spec, { ms, misses: stats.misses, hints: stats.hints }), 450);
+    later(() => app.complete(spec, { ms, misses: stats.misses, hints: stats.hints, found: goals.map((g) => g.k) }), 650);
   }
 
-  // ---- visibility / lifecycle
+  // ---- lifecycle
   const onVis = () => {
     if (document.hidden) clockStop();
-    else if (!paused && level && !finished) clockStart();
+    else if (!paused && scene && !finished) clockStart();
   };
   document.addEventListener('visibilitychange', onVis);
-  // idle nudge: point at the tray (hints live there) after a long search
   let lastProgress = performance.now();
   let nudged = false;
   const infoTimer = setInterval(() => {
-    if (destroyed || !level) return;
+    if (destroyed || !scene) return;
     updateInfo();
     if (!nudged && !finished && !paused && !openSheet && performance.now() - lastProgress > 45000) {
       nudged = true;
       coach.textContent = t('idleHint');
       coach.classList.remove('hide');
       coach.classList.add('show');
-      const first = tiles.querySelector('.g-findit-tile:not(.done)');
+      const first = tiles.querySelector('.g-findit-tile:not(.done), .g-findit-word:not(.done)');
       if (first) first.classList.add('g-findit-nudge');
       later(() => coach.classList.add('hide'), 6000);
     }
@@ -758,14 +688,51 @@ export function playLevel(app, spec) {
     for (const n of tiles.querySelectorAll('.g-findit-nudge')) n.classList.remove('g-findit-nudge');
   };
 
+  function debugHook() {
+    if (!window.__FINDIT_TEST__) return;
+    const toClient = (x, y) => {
+      const r = view.canvas.getBoundingClientRect();
+      const s = view.worldToScreen(x, y);
+      return { x: r.left + s.x, y: r.top + s.y };
+    };
+    window.__finditDebug = {
+      spec: { modeId: spec.modeId, n: spec.n, scene: spec.scene.id, kind, d: spec.d, count: spec.count },
+      goals: () => goals.map((g) => ({ k: g.k, name: g.name, need: g.need, found: g.found, shown: g.shown, thumb: g.thumb })),
+      // one point per still-missing object (inside its outline), in world and client coords
+      targets: () =>
+        goals.flatMap((g) =>
+          g.found >= g.need ? [] : g.items.filter((it) => !it.found).sort((a, b) => b.n - a.n).slice(0, g.need - g.found).map((it) => ({ k: g.k, x: it.c.x, y: it.c.y, s: it.s, n: it.n, client: toClient(it.c.x, it.c.y) })),
+        ),
+      misses: () => {
+        // a point on the photo that is not on any target name
+        const keys = new Set(goals.map((g) => g.k));
+        const it = scene.data.items.find((o) => !keys.has(o.k) && o.n > 3000);
+        return it ? { x: it.c.x, y: it.c.y, client: toClient(it.c.x, it.c.y) } : null;
+      },
+      view: () => ({ z: view.z, minZ: view.minZ, maxZ: view.maxZ, w: view.w, h: view.h, W: scene.data.w, H: scene.data.h }),
+      toClient,
+      centerOn: (x, y, z) => {
+        view.anim = null;
+        view.inertia = null;
+        view.z = clamp(z || view.z, view.minZ, view.maxZ);
+        view.centerOn(x, y);
+        view.request();
+      },
+      hint: (k) => useHint(k),
+      elapsed,
+      state: () => ({ ...app.state }),
+    };
+  }
+
   // ---- build the level
   (async () => {
     await nextFrame();
     if (destroyed) return;
-    const cv = buildCanvases(spec);
-    level = generateLevel({ seed: spec.seed, theme: spec.theme, kind, zones: cv.zones, W: spec.W, H: spec.H, p: spec.p });
-    goals = level.goals.map((g) => ({ ...g, shown: 0 }));
+    scene = await loadScene(spec.scene);
     if (destroyed) return;
+    const rnd = rng(spec.seed);
+    goals = pickGoals(scene.data, { count: spec.count, need: kind === 'match' ? 2 : 1, d: spec.d, rnd, avoid: new Set(spec.avoid || []), lang: ctx.lang });
+    for (const it of scene.data.items) it.found = false;
     view = new SceneView(canvasHost, {
       onTap,
       onMiss,
@@ -774,24 +741,11 @@ export function playLevel(app, spec) {
       },
       onPan: () => closePopover(),
     });
-    view.setScene({
-      W: spec.W,
-      H: spec.H,
-      front: cv.front,
-      back: cv.back,
-      backRect: cv.backRect,
-      parallax: 0.78,
-      props: level.props,
-      variant: spec.theme.variant || 'shadow',
-      edge: spec.theme.edge || '#0a0a0c',
-      fit: spec.look === 'indoor' ? 'cover' : 'height',
-      startX: spec.W * 0.5,
-    });
-    app.debug({ spec, level, view, goals, useHint, elapsed });
+    view.setScene({ W: scene.data.w, H: scene.data.h, img: scene.img, edge: '#0a0a0c', drawOver, animating, startX: scene.data.w * (spec.startX ?? 0.5) });
+    debugHook();
     buildTray();
-    // intro: settle from a slight zoom
     const c = view.center();
-    view.z = view.minZ * 1.18;
+    view.z = view.minZ * 1.15;
     view.centerOn(c.x, c.y);
     view.flyTo(c.x, c.y, view.minZ, 900);
     loader.classList.add('hide');
@@ -820,8 +774,9 @@ export function playLevel(app, spec) {
       clockStart();
     }
   })().catch((e) => {
+    if (destroyed) return;
     console.error(e);
-    loader.textContent = String(e && e.message);
+    loader.textContent = t('loadError');
   });
 
   return {
@@ -835,7 +790,6 @@ export function playLevel(app, spec) {
           openSheet.close();
           return true;
         }
-        // Back while paused leaves the level.
         if (spec.map) {
           app.showMap(spec.modeId);
           return true;
@@ -863,6 +817,7 @@ export function playLevel(app, spec) {
       if (openSheet) openSheet.close(true);
       if (view) view.destroy();
       el.remove();
+      if (window.__finditDebug) delete window.__finditDebug;
     },
   };
 }

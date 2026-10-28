@@ -7,6 +7,7 @@ import * as farmView from './farm.js';
 import * as runView from './run.js';
 import * as ordersView from './orders.js';
 import { fmtTime } from './format.js';
+import { portrait } from './portraits.js';
 
 export async function mount(root, ctx) {
   const t = ctx.makeT(STRINGS);
@@ -17,6 +18,7 @@ export async function mount(root, ctx) {
   M.tick();
   M.save();
   let dead = false;
+  window.__farmDbg = { M }; // DBG
 
   // ------------------------------------------------------------ layout
   const app = h('div', { class: 'g-farm-app' });
@@ -39,7 +41,10 @@ export async function mount(root, ctx) {
   ui.energyPill = h('div', { class: 'g-farm-pill g-farm-energy', title: t('energy') },
     h('span', { class: 'g-farm-coin' }, '⚡'), h('div', { class: 'g-farm-bar-mini' }, ui.energyBar), ui.energy);
   ui.lvlBox = h('div', { class: 'g-farm-lvlbox', title: t('xp', { a: 0, b: 0 }) }, ui.level, h('div', { class: 'g-farm-bar-mini xp' }, ui.xpBar));
-  hud.append(h('div', { class: 'g-farm-hudrow' }, ui.coinPill, ui.gemPill, ui.lvlBox), h('div', { class: 'g-farm-hudrow' }, ui.energyPill));
+  ui.lvlNum = h('b', { class: 'g-farm-avlvl' }, '1');
+  const avatar = h('div', { class: 'g-farm-avatar' }, h('span', { class: 'g-farm-avimg', html: portrait('lia') }), ui.lvlNum);
+  hud.append(h('div', { class: 'g-farm-hudmain' }, avatar,
+    h('div', { class: 'g-farm-hudcol' }, h('div', { class: 'g-farm-hudrow' }, ui.coinPill, ui.gemPill, ui.lvlBox), h('div', { class: 'g-farm-hudrow' }, ui.energyPill))));
 
   const help = h('button', { class: 'icon-btn g-farm-help', title: t('help'), 'aria-label': t('help'), onclick: () => openHelp() }, '?');
   ctx.setHeaderRight(help);
@@ -55,6 +60,7 @@ export async function mount(root, ctx) {
     ui.energy.textContent = `${en}/${max}`;
     ui.energyBar.style.width = Math.min(100, (en / max) * 100) + '%';
     ui.level.textContent = t('lvl', { n: info.level });
+    ui.lvlNum.textContent = info.level;
     ui.xpBar.style.width = Math.min(100, (info.into / info.need) * 100) + '%';
     ui.lvlBox.title = t('xp', { a: info.into, b: info.need });
     if (lastLevel !== null && info.level > lastLevel) {

@@ -27,6 +27,7 @@ const CHAR = {
 };
 
 const pt = {
+  renovTitle: 'Casa abandonada', renovBody: 'Um incêndio destruiu a casa antiga. Reforme-a para trazer a família de volta à fazenda.', renovBtn: 'Reformar · {c} 🪙 · {w} 🪵 · {s} 🪨', renovDone: 'Casa reformada!', cottageInfo: 'Uma casa linda, cheia de rosas.',
   close: 'Fechar', cancel: 'Cancelar', ok: 'OK', help: 'Como jogar', plowTitle: 'Arar campo', unlockTitle: 'Expandir terreno',
   helpBody: 'Toque nos campos para plantar e colher. Animais produzem quando alimentados. Os prédios transformam produtos. Encomendas e missões trazem moedas e XP. Expedições gastam energia para limpar caminhos até a saída.',
   lvl: 'Nível {n}', xp: 'XP {a}/{b}', energy: 'Energia', coins: 'Moedas', gems: 'Gemas',
@@ -89,6 +90,7 @@ const pt = {
 };
 
 const en = {
+  renovTitle: 'Abandoned house', renovBody: 'A fire ruined the old house. Renovate it to bring the family back to the farm.', renovBtn: 'Renovate · {c} 🪙 · {w} 🪵 · {s} 🪨', renovDone: 'House renovated!', cottageInfo: 'A lovely cottage covered in roses.',
   close: 'Close', cancel: 'Cancel', ok: 'OK', help: 'How to play', plowTitle: 'Plow field', unlockTitle: 'Expand land',
   helpBody: 'Tap fields to plant and harvest. Animals produce when fed. Buildings turn goods into products. Orders and quests pay coins and XP. Expeditions spend energy to clear the way to the exit.',
   lvl: 'Level {n}', xp: 'XP {a}/{b}', energy: 'Energy', coins: 'Coins', gems: 'Gems',
@@ -151,6 +153,7 @@ const en = {
 };
 
 const es = {
+  renovTitle: 'Casa abandonada', renovBody: 'Un incendio destruyó la casa vieja. Renuévala para traer a la familia de vuelta a la granja.', renovBtn: 'Renovar · {c} 🪙 · {w} 🪵 · {s} 🪨', renovDone: '¡Casa renovada!', cottageInfo: 'Una casa preciosa, llena de rosas.',
   close: 'Cerrar', cancel: 'Cancelar', ok: 'OK', help: 'Cómo jugar', plowTitle: 'Arar campo', unlockTitle: 'Ampliar terreno',
   helpBody: 'Toca los campos para plantar y cosechar. Los animales producen si los alimentas. Los edificios transforman productos. Pedidos y misiones dan monedas y XP. Las expediciones gastan energía para abrir el camino a la salida.',
   lvl: 'Nivel {n}', xp: 'XP {a}/{b}', energy: 'Energía', coins: 'Monedas', gems: 'Gemas',
