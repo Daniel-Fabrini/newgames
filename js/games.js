@@ -1,7 +1,7 @@
 // Registry of every game shown in the hub. Each game lives in games/<id>/main.js
 // and exports `mount(root, ctx)` — see docs/GAME_API.md.
 //
-//   cat     hub category chip: sport | strategy | knowledge | puzzle
+//   cat     hub category chip: sport | strategy | knowledge | puzzle | classic
 //   sub     subtitle under the name (tile + lobby)
 //   about   lobby description
 //   modes   lobby mode buttons → mount(root, ctx) with ctx.mode = id
@@ -293,6 +293,176 @@ export const GAMES = [
     trophies: ['🏆', '🏓', '🔥', '⭐', '🎯'],
     load: () => import('../games/pingpong/main.js'),
   },
+  // ---- PlayVerse games (games/pv/): run in an iframe, see games/pv/host.js ----
+  {
+    id: 'blocks',
+    cat: 'puzzle',
+    progress: 100,
+    name: { pt: 'Block Puzzle', en: 'Block Puzzle', es: 'Block Puzzle' },
+    sub: { pt: 'Encaixe de Blocos', en: 'Block Fit', es: 'Encaje de Bloques' },
+    about: {
+      pt: 'Encaixe as peças no tabuleiro 9×9 e limpe linhas, colunas e quadrados para fazer combos. Quanto mais você limpa, mais pontos ganha. Até onde você chega?',
+      en: 'Fit the pieces onto the 9×9 board and clear rows, columns and squares to chain combos. The more you clear, the more you score. How far can you go?',
+      es: 'Encaja las piezas en el tablero de 9×9 y limpia filas, columnas y cuadrados para encadenar combos. Cuanto más limpias, más puntos ganas. ¿Hasta dónde llegas?',
+    },
+    modes: [],
+    trophies: ['🏆', '🧩', '💥', '⭐', '🎯'],
+    load: () => import('../games/pv/blocks.js'),
+  },
+  {
+    id: 'water',
+    cat: 'puzzle',
+    progress: 100,
+    name: { pt: 'Water Sort', en: 'Water Sort', es: 'Water Sort' },
+    sub: { pt: 'Quebra-cabeça de Cores', en: 'Color Sorting', es: 'Clasifica los Colores' },
+    about: {
+      pt: 'Despeje os líquidos de uma garrafa para outra até que cada uma tenha uma só cor. Níveis infinitos, dicas e estrelas para colecionar.',
+      en: 'Pour the liquids from bottle to bottle until each one holds a single color. Endless levels, hints and stars to collect.',
+      es: 'Vierte los líquidos de una botella a otra hasta que cada una tenga un solo color. Niveles infinitos, pistas y estrellas para coleccionar.',
+    },
+    modes: [],
+    trophies: ['🏆', '🧪', '💧', '⭐', '🎯'],
+    load: () => import('../games/pv/water.js'),
+  },
+  {
+    id: 'snake',
+    cat: 'classic',
+    progress: 100,
+    name: { pt: 'Snake', en: 'Snake', es: 'Snake' },
+    sub: { pt: 'Cobrinha Clássica', en: 'Classic Snake', es: 'Serpiente Clásica' },
+    about: {
+      pt: 'Coma, cresça e não bata em nada. Escolha o modo clássico ou infinito e a velocidade, e bata seu recorde.',
+      en: 'Eat, grow and do not hit anything. Pick classic or endless mode and your speed, then beat your record.',
+      es: 'Come, crece y no choques con nada. Elige el modo clásico o infinito y la velocidad, y supera tu récord.',
+    },
+    modes: [
+      { id: 'classic', icon: 'play', label: { pt: 'Clássico', en: 'Classic', es: 'Clásico' } },
+      { id: 'endless', icon: 'infinity', label: { pt: 'Infinito', en: 'Endless', es: 'Infinito' } },
+    ],
+    trophies: ['🏆', '🐍', '🍎', '⭐', '🎯'],
+    load: () => import('../games/pv/snake.js'),
+  },
+  {
+    id: 'numbers',
+    cat: 'puzzle',
+    progress: 100,
+    name: { pt: 'Number Match', en: 'Number Match', es: 'Number Match' },
+    sub: { pt: 'Pares e Somas', en: 'Pairs & Sums', es: 'Pares y Sumas' },
+    about: {
+      pt: 'Junte pares de números iguais ou que somem 10, na linha, na coluna ou na diagonal. Limpe a grade no modo clássico ou encare os desafios.',
+      en: 'Match pairs of equal numbers or numbers that add up to 10, along a row, a column or a diagonal. Clear the grid in classic mode or take on the challenges.',
+      es: 'Une pares de números iguales o que sumen 10, en fila, columna o diagonal. Limpia la cuadrícula en el modo clásico o afronta los desafíos.',
+    },
+    modes: [
+      { id: 'classic', icon: 'pairs', label: { pt: 'Clássico', en: 'Classic', es: 'Clásico' } },
+      { id: 'challenge', icon: 'stairs', label: { pt: 'Desafios', en: 'Challenges', es: 'Desafíos' } },
+    ],
+    trophies: ['🏆', '🔢', '➕', '⭐', '🎯'],
+    load: () => import('../games/pv/numbers.js'),
+  },
+  {
+    id: 'solitaire',
+    cat: 'classic',
+    progress: 100,
+    name: { pt: 'Paciência', en: 'Solitaire', es: 'Solitario' },
+    sub: { pt: 'Klondike Clássico', en: 'Classic Klondike', es: 'Klondike Clásico' },
+    about: {
+      pt: 'O clássico jogo de cartas: monte as sequências, leve tudo para as fundações e vença. Compre de 1 ou de 3 cartas, com desfazer e dicas.',
+      en: 'The classic card game: build the sequences, move everything to the foundations and win. Draw 1 or 3 cards, with undo and hints.',
+      es: 'El clásico juego de cartas: forma las secuencias, lleva todo a las bases y gana. Roba 1 o 3 cartas, con deshacer y pistas.',
+    },
+    modes: [
+      { id: 'draw1', icon: 'one', label: { pt: 'Compra 1', en: 'Draw 1', es: 'Robar 1' } },
+      { id: 'draw3', icon: 'three', label: { pt: 'Compra 3', en: 'Draw 3', es: 'Robar 3' } },
+    ],
+    trophies: ['🏆', '🃏', '♠️', '⭐', '🎯'],
+    load: () => import('../games/pv/solitaire.js'),
+  },
+  {
+    id: 'checkers',
+    cat: 'classic',
+    progress: 100,
+    name: { pt: 'Damas', en: 'Checkers', es: 'Damas' },
+    sub: { pt: 'Damas Brasileiras', en: 'Brazilian Checkers', es: 'Damas Brasileñas' },
+    about: {
+      pt: 'Damas 8×8 com as regras brasileiras: captura obrigatória, dama voadora e a lei da maioria. Enfrente o computador em três níveis ou jogue com um amigo.',
+      en: 'Checkers on an 8×8 board with Brazilian rules: mandatory capture, flying kings and the majority rule. Face the computer on three levels or play a friend.',
+      es: 'Damas 8×8 con reglas brasileñas: captura obligatoria, dama voladora y ley de la mayoría. Enfréntate al ordenador en tres niveles o juega con un amigo.',
+    },
+    modes: [
+      { id: 'ai', icon: 'user', label: { pt: 'Contra o PC', en: 'Vs Computer', es: 'Contra la IA' } },
+      { id: '2p', icon: 'users', label: { pt: '2 Jogadores', en: '2 Players', es: '2 Jugadores' } },
+    ],
+    trophies: ['🏆', '♟️', '👑', '⭐', '🎯'],
+    load: () => import('../games/pv/checkers.js'),
+  },
+  {
+    id: 'domino',
+    cat: 'classic',
+    progress: 100,
+    name: { pt: 'Dominó', en: 'Dominoes', es: 'Dominó' },
+    sub: { pt: 'Duplo-Seis', en: 'Double Six', es: 'Doble Seis' },
+    about: {
+      pt: 'Dominó duplo-seis com monte de compra. Encaixe as pedras, bloqueie o adversário e some pontos. Jogue contra o computador ou com um amigo.',
+      en: 'Double-six dominoes with a draw pile. Match the tiles, block your opponent and score points. Play the computer or a friend.',
+      es: 'Dominó doble seis con pozo para robar. Encaja las fichas, bloquea al rival y suma puntos. Juega contra el ordenador o con un amigo.',
+    },
+    modes: [
+      { id: 'ai', icon: 'user', label: { pt: 'Contra o PC', en: 'Vs Computer', es: 'Contra la IA' } },
+      { id: '2p', icon: 'users', label: { pt: '2 Jogadores', en: '2 Players', es: '2 Jugadores' } },
+    ],
+    trophies: ['🏆', '🁣', '🎲', '⭐', '🎯'],
+    load: () => import('../games/pv/domino.js'),
+  },
+  {
+    id: 'sudoku',
+    cat: 'puzzle',
+    progress: 100,
+    name: { pt: 'Sudoku', en: 'Sudoku', es: 'Sudoku' },
+    sub: { pt: 'Lógica e Números', en: 'Logic & Numbers', es: 'Lógica y Números' },
+    about: {
+      pt: 'Preencha a grade de 1 a 9 sem repetir em linhas, colunas e blocos. Puzzles com solução única, quatro níveis, notas e dicas.',
+      en: 'Fill the grid with 1 to 9 without repeating in rows, columns or boxes. Puzzles with a single solution, four levels, notes and hints.',
+      es: 'Rellena la cuadrícula del 1 al 9 sin repetir en filas, columnas ni cajas. Puzles con solución única, cuatro niveles, notas y pistas.',
+    },
+    modes: [
+      { id: 'easy', icon: 'one', label: { pt: 'Fácil', en: 'Easy', es: 'Fácil' } },
+      { id: 'medium', icon: 'two', label: { pt: 'Médio', en: 'Medium', es: 'Medio' } },
+      { id: 'hard', icon: 'three', label: { pt: 'Difícil', en: 'Hard', es: 'Difícil' } },
+    ],
+    trophies: ['🏆', '🔟', '🧠', '⭐', '🎯'],
+    load: () => import('../games/pv/sudoku.js'),
+  },
+  {
+    id: 'g2048',
+    cat: 'puzzle',
+    progress: 100,
+    name: { pt: '2048', en: '2048', es: '2048' },
+    sub: { pt: 'Deslize e Junte', en: 'Slide & Merge', es: 'Desliza y Une' },
+    about: {
+      pt: 'Deslize as peças e junte as iguais até chegar ao 2048 — e continue se quiser mais. Com desfazer e recorde guardado.',
+      en: 'Slide the tiles and merge equal ones until you reach 2048, and keep going if you want more. With undo and a saved best score.',
+      es: 'Desliza las fichas y une las iguales hasta llegar a 2048, y sigue si quieres más. Con deshacer y récord guardado.',
+    },
+    modes: [],
+    trophies: ['🏆', '🔢', '🔥', '⭐', '🎯'],
+    load: () => import('../games/pv/g2048.js'),
+  },
+  {
+    id: 'crossword',
+    cat: 'puzzle',
+    progress: 100,
+    name: { pt: 'Palavras Cruzadas', en: 'Crossword', es: 'Crucigrama' },
+    sub: { pt: 'Cruzadas em Português', en: 'Word Puzzles', es: 'Crucigramas' },
+    about: {
+      pt: 'Resolva as dicas e complete a grade. Grades geradas para cada idioma, com verificação de letras e palavras reveladas.',
+      en: 'Solve the clues and complete the grid. Grids generated for each language, with letter checking and word reveals.',
+      es: 'Resuelve las pistas y completa la cuadrícula. Cuadrículas generadas para cada idioma, con comprobación de letras y palabras reveladas.',
+    },
+    modes: [],
+    trophies: ['🏆', '📝', '💡', '⭐', '🎯'],
+    load: () => import('../games/pv/crossword.js'),
+  },
 ];
 
 export const CATEGORIES = [
@@ -301,4 +471,5 @@ export const CATEGORIES = [
   { id: 'strategy', label: { pt: 'Estratégia', en: 'Strategy', es: 'Estrategia' } },
   { id: 'knowledge', label: { pt: 'Conhecimento', en: 'Knowledge', es: 'Conocimiento' } },
   { id: 'puzzle', label: { pt: 'Puzzles', en: 'Puzzles', es: 'Puzles' } },
+  { id: 'classic', label: { pt: 'Clássicos', en: 'Classics', es: 'Clásicos' } },
 ];
