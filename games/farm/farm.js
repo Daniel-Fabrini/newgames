@@ -81,10 +81,10 @@ export function mount(host, env) {
       if (v < density) {
         const ox = (w - 0.5) * 18, oy = (A.hash(x, y, 7) - 0.5) * 8;
         const s = 0.95 + A.hash(x, y, 8) * 0.35;
-        if (A.hash(x, y, 9) < 0.42) tall.push([x + y + 0.5, () => A.drawPine(cc, cx + ox, cy + oy, s * 1.15, w)]);
-        else tall.push([x + y + 0.5, () => A.drawTree(cc, cx + ox, cy + oy, s, 0, w)]);
+        if (A.hash(x, y, 9) < 0.42) tall.push([x + y + 0.5, () => A.pineS(cc, cx + ox, cy + oy, s * 1.15, w)]);
+        else tall.push([x + y + 0.5, () => A.treeS(cc, cx + ox, cy + oy, s, w)]);
       } else if (v < density + 0.06) {
-        tall.push([x + y + 0.5, () => A.drawBush(cc, cx, cy, 1, w, true)]);
+        tall.push([x + y + 0.5, () => A.bushS(cc, cx, cy, 1, w, true)]);
       }
     }
     // pen floors and the ruin's ash patch
@@ -156,9 +156,9 @@ export function mount(host, env) {
 
   // Villagers walking along the paths, carrying goods.
   const walkers = [
-    { from: [4.5, 6.5], to: [11.4, 6.5], speed: 0.55, look: 0, carry: 'crate', ph: 0 },
+    { from: [4.5, 6.5], to: [9.9, 6.5], speed: 0.55, look: 0, carry: 'crate', ph: 0 },
     { from: [6.5, 6.6], to: [6.5, 11.4], speed: 0.45, look: 1, carry: 'hay', ph: 3 },
-    { from: [11.2, 6.4], to: [4.7, 6.4], speed: 0.4, look: 2, carry: null, ph: 7 },
+    { from: [9.8, 6.4], to: [4.7, 6.4], speed: 0.4, look: 2, carry: null, ph: 7 },
   ];
   function walkerPos(wk, time) {
     const len = Math.hypot(wk.to[0] - wk.from[0], wk.to[1] - wk.from[1]);
@@ -252,6 +252,7 @@ export function mount(host, env) {
       const [wx, wy] = P(p.x, p.y);
       items.push({ d: p.x + p.y, f: () => A.drawPerson(c, wx, wy, time, p.dir, wk.look, p.carry) });
     }
+    if (unlocked(11, 6)) items.push({ d: 10.4 + 6.5, f: () => A.drawTruck(c, 10.3, 6.28, time) });
     items.sort((a, b) => a.d - b.d);
     for (const it of items) it.f();
     for (const f of bubbles) f();
@@ -272,11 +273,17 @@ export function mount(host, env) {
     }
   }
 
+  // Outline of the building's prism: footprint diamond extruded up by H (a convex hexagon).
   function rectOf(b, H) {
-    const x0 = P(b.x, b.y + b.h)[0], x1 = P(b.x + b.w, b.y)[0];
-    const top = P(b.x, b.y, H)[1];
-    const bottom = P(b.x + b.w, b.y + b.h)[1] + 4;
-    return { x0: x0 - 2, x1: x1 + 2, y0: top, y1: bottom };
+    const { x, y, w, h } = b;
+    return { hex: [P(x, y + h, 0), P(x + w, y + h, 0), P(x + w, y, 0), P(x + w, y, H), P(x, y, H), P(x, y + h, H)] };
+  }
+  function inHex(hex, px, py) {
+    for (let i = 0; i < hex.length; i++) {
+      const [ax, ay] = hex[i], [bx, by] = hex[(i + 1) % hex.length];
+      if ((bx - ax) * (py - ay) - (by - ay) * (px - ax) > 0) return false;
+    }
+    return true;
   }
 
   function drawDeco(c, b, time) {
@@ -354,7 +361,7 @@ export function mount(host, env) {
     }
     for (let i = hits.length - 1; i >= 0; i--) {
       const r = hits[i];
-      if (wx >= r.x0 && wx <= r.x1 && wy >= r.y0 && wy <= r.y1) {
+      if (inHex(r.hex, wx, wy)) {
         const b = r.b;
         if (b.kind === 'pen') return penTap(b, e);
         if (b.kind === 'prod') return openProd(env, b.id);
@@ -570,7 +577,6 @@ export function mount(host, env) {
     drawDynamic: (c, cam, time) => drawDyn(c, time),
     onTap,
   });
-  window.__farmDbg && (window.__farmDbg.stage = stage); // DBG
   updateChips();
 
   return {

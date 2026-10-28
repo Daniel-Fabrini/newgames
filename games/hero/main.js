@@ -1167,43 +1167,77 @@ export async function mount(root, ctx) {
   }
 
   // ------------------------------------------------------------------ LOCKER
-  function showLocker(tab = 'kit') {
-    const prev = h('div', { class: 'g-hero-preview' });
-    const drawPrev = () => clear(prev).append(avatarCanvas(260, 200, { pair: true, scale: 84 }));
-    drawPrev();
+  // Locker room: the hero stands big in the centre, customization buttons on the left.
+  let lastSheet = null;
+  function showLocker(open = null) {
+    if (!open) lastSheet = null;
+    const W0 = Math.min(app.clientWidth || 390, 600);
+    const H0 = app.clientHeight || 700;
+    const stage = h('div', { class: 'g-hero-herostage' });
+    const drawHero = () => {
+      const w = Math.round(Math.min(W0 * 0.7, 340));
+      const hh = Math.round(Math.min(H0 * 0.72, w * 2.1));
+      clear(stage).append(avatarCanvas(w, hh, { scale: hh / 2.05, feetY: hh - 8, bg: false }));
+    };
+    drawHero();
+    const own = (k) => S.hero.owned.includes(k);
+    const count = (list, prefix) => list.filter((x) => x.price === 0 || own(prefix + x.id)).length;
+    const kit = CO.kitById(S.hero.kit);
+    const groups = [
+      { id: 'number', icon: () => h('span', { class: 'lb-num' }, String(S.hero.num)), have: 99, total: 99 },
+      { id: 'kit', icon: () => shirtCanvas(kit.shirt, kit.shirt2, 44, kit.pattern), have: count(CO.KITS, 'kit:'), total: CO.KITS.length },
+      { id: 'hair', icon: () => avatarCanvas(46, 40, { scale: 120, feetY: 228, bg: false }), have: count(CO.HAIRS, 'hair:'), total: CO.HAIRS.length },
+      { id: 'hairColor', icon: () => h('span', { style: { display: 'block', width: '34px', height: '34px', borderRadius: '50%', border: '3px solid #fff', background: `conic-gradient(${CO.HAIR_COLORS.map((c) => c.color).join(',')})` } }), have: count(CO.HAIR_COLORS, 'hc:'), total: CO.HAIR_COLORS.length },
+      { id: 'beard', icon: () => h('span', { style: { fontSize: '30px', lineHeight: '1' } }, '🧔'), have: count(CO.BEARDS, 'beard:'), total: CO.BEARDS.length },
+      { id: 'boots', icon: () => h('span', { html: ico('boot'), style: { color: (CO.BOOTS.find((b) => b.id === S.hero.boots) || CO.BOOTS[0]).color, filter: 'drop-shadow(0 2px 0 rgba(0,0,0,0.4))' } }), have: count(CO.BOOTS, 'boots:'), total: CO.BOOTS.length },
+      { id: 'skin', icon: () => h('span', { style: { display: 'block', width: '34px', height: '34px', borderRadius: '50%', border: '3px solid #fff', background: CO.SKINS[S.hero.skin] } }), have: CO.SKINS.length, total: CO.SKINS.length },
+    ];
+    const btns = h(
+      'div',
+      { class: 'g-hero-lockbtns' },
+      groups.map((gr) =>
+        h(
+          'button',
+          { class: `g-hero-lockbtn ${open === gr.id ? 'on' : ''}`, onclick: () => showLocker(gr.id) },
+          h('b', null, t('lk_' + gr.id)),
+          h('span', { class: 'lb-ico' }, gr.icon()),
+          gr.id === 'number' || gr.id === 'skin' ? null : h('span', { class: 'lb-bar' }, h('i', { style: { width: (100 * gr.have) / gr.total + '%' } }), h('span', null, `${gr.have} / ${gr.total}`)),
+        ),
+      ),
+    );
     const nameIn = h('input', {
-      class: 'g-hero-input',
       maxlength: '12',
       value: S.hero.name,
       placeholder: t('defaultName'),
+      'aria-label': t('name'),
       oninput: (e) => {
         S.hero.name = e.target.value.replace(/[^\p{L}\p{N} .'-]/gu, '').slice(0, 12);
         save();
       },
     });
-    const numVal = h('b', null, String(S.hero.num));
-    const setNum = (d) => {
-      S.hero.num = ((S.hero.num - 1 + d + 99) % 99) + 1;
-      numVal.textContent = S.hero.num;
-      save();
-      drawPrev();
-    };
-    const tabs = [
-      ['kit', 'tabKit'],
-      ['boots', 'tabBoots'],
-      ['hair', 'tabHair'],
-      ['hairColor', 'tabHairColor'],
-      ['skin', 'tabSkin'],
-      ['nation', 'tabNation'],
-    ];
-    const tabRow = h(
+    const plate = h('div', { class: 'g-hero-nameplate' }, h('span', { onclick: () => showLocker('nation') }, flagImg(country())), nameIn, h('span', { html: ico('shirt'), style: { color: '#fff' } }));
+    const node = h(
       'div',
-      { class: 'chips g-hero-tabs' },
-      tabs.map(([id, key]) => h('button', { class: `chip ${id === tab ? 'active' : ''}`, onclick: () => showLocker(id) }, t(key))),
+      { class: 'g-hero-locker2' },
+      h('div', { class: 'g-hero-neon' }, t('adGame').split(' ')[0] + '! ', h('span', null, t('adGame').split(' ').slice(1).join(' '))),
+      h('div', {
+        class: 'g-hero-floor',
+        html: `<svg viewBox="0 0 400 200" preserveAspectRatio="none" width="100%" height="100%"><defs><linearGradient id="hfl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfd3da"/><stop offset="1" stop-color="#e9ebef"/></linearGradient></defs><rect width="400" height="200" fill="url(#hfl)"/><g stroke="#9ea4ae" stroke-width="1.2" opacity=".7">${Array.from({ length: 15 }, (_, i) => `<line x1="${200 + (i - 7) * 34}" y1="0" x2="${200 + (i - 7) * 120}" y2="200"/>`).join('')}${[14, 34, 60, 94, 140].map((y) => `<line x1="0" y1="${y}" x2="400" y2="${y}"/>`).join('')}</g><rect width="400" height="8" fill="#9a9fa8" opacity=".6"/></svg>`,
+      }),
+      h('div', { class: 'g-hero-shirtrack' }, shirtCanvas(kit.shirt, kit.shirt2, 70, kit.pattern)),
+      stage,
+      btns,
+      plate,
     );
-    const grid = h('div', { class: 'g-hero-items' });
+    setScreen('locker', node, () => showMenu());
+    ctx.setTitle(t('menuLocker'));
+    if (open) openSheet(node, open);
+  }
 
+  function openSheet(node, which) {
+    const grid = h('div', { class: 'g-hero-items' });
     const own = (k) => S.hero.owned.includes(k);
+    const refresh = () => showLocker(which);
     const item = (key, label, price, equipped, swatch, onEquip) => {
       const owned = price === 0 || own(key);
       return h(
@@ -1215,7 +1249,7 @@ export async function mount(root, ctx) {
               onEquip();
               sfx.play('select');
               save();
-              showLocker(tab);
+              refresh();
               return;
             }
             if (S.coins < price) {
@@ -1231,7 +1265,7 @@ export async function mount(root, ctx) {
               save();
               sfx.play('coin');
               toast(t('bought'));
-              showLocker(tab);
+              refresh();
             });
           },
         },
@@ -1240,28 +1274,40 @@ export async function mount(root, ctx) {
         h('span', { class: 'g-hero-item-price' }, equipped ? h('span', { class: 'eq' }, h('span', { html: ico('check') }), t('equipped')) : owned ? '' : h('span', { class: 'cost', html: coinSvg() }, fmt(price))),
       );
     };
-
-    if (tab === 'kit') {
-      for (const k of CO.KITS) {
-        const sw = avatarCanvas(64, 64, { kit: k.id, front: false, scale: 31, feetY: 62, bg: false });
-        grid.append(item('kit:' + k.id, t('kit_' + k.id), k.price, S.hero.kit === k.id, h('span', { class: 'g-hero-sw' }, sw), () => (S.hero.kit = k.id)));
-      }
-    } else if (tab === 'boots') {
-      for (const b of CO.BOOTS) grid.append(item('boots:' + b.id, t('boots_' + b.id), b.price, S.hero.boots === b.id, h('span', { class: 'g-hero-sw', html: ico('boot') }, null), () => (S.hero.boots = b.id)));
-      grid.querySelectorAll('.g-hero-sw').forEach((e, j) => (e.style.color = CO.BOOTS[j].color));
-    } else if (tab === 'hair') {
-      for (const hs of CO.HAIRS) {
-        const sw = avatarCanvas(64, 64, { over: { hair: hs.id }, scale: 150, feetY: 284, bg: false });
-        grid.append(item('hair:' + hs.id, t('hair_' + hs.id), hs.price, S.hero.hair === hs.id, h('span', { class: 'g-hero-sw' }, sw), () => (S.hero.hair = hs.id)));
-      }
-    } else if (tab === 'hairColor') {
+    let body = grid;
+    if (which === 'number') {
+      body = h(
+        'div',
+        { class: 'g-hero-numgrid' },
+        Array.from({ length: 30 }, (_, i) => i + 1).map((n) =>
+          h(
+            'button',
+            {
+              class: S.hero.num === n ? 'on' : '',
+              onclick: () => {
+                S.hero.num = n;
+                save();
+                sfx.play('select');
+                refresh();
+              },
+            },
+            String(n),
+          ),
+        ),
+      );
+    } else if (which === 'kit') {
+      for (const k of CO.KITS) grid.append(item('kit:' + k.id, t('kit_' + k.id), k.price, S.hero.kit === k.id, h('span', { class: 'g-hero-sw' }, shirtCanvas(k.shirt, k.shirt2, 52, k.pattern)), () => (S.hero.kit = k.id)));
+    } else if (which === 'boots') {
+      for (const b of CO.BOOTS) grid.append(item('boots:' + b.id, t('boots_' + b.id), b.price, S.hero.boots === b.id, h('span', { class: 'g-hero-sw', html: ico('boot'), style: { color: b.color } }), () => (S.hero.boots = b.id)));
+    } else if (which === 'hair') {
+      for (const hs of CO.HAIRS) grid.append(item('hair:' + hs.id, t('hair_' + hs.id), hs.price, S.hero.hair === hs.id, h('span', { class: 'g-hero-sw' }, avatarCanvas(64, 64, { over: { hair: hs.id }, scale: 150, feetY: 284, bg: false })), () => (S.hero.hair = hs.id)));
+    } else if (which === 'hairColor') {
       for (const hc of CO.HAIR_COLORS) grid.append(item('hc:' + hc.id, t('hc_' + hc.id), hc.price, S.hero.hairColor === hc.id, h('span', { class: 'g-hero-sw dot' }, h('i', { style: { background: hc.color } })), () => (S.hero.hairColor = hc.id)));
-    } else if (tab === 'skin') {
+    } else if (which === 'beard') {
+      for (const bd of CO.BEARDS) grid.append(item('beard:' + bd.id, t('beard_' + bd.id), bd.price, (S.hero.beard || 'none') === bd.id, h('span', { class: 'g-hero-sw' }, avatarCanvas(64, 64, { over: { beard: bd.id }, scale: 150, feetY: 284, bg: false })), () => (S.hero.beard = bd.id)));
+    } else if (which === 'skin') {
       CO.SKINS.forEach((c, j) => grid.append(item('skin:' + j, '', 0, S.hero.skin === j, h('span', { class: 'g-hero-sw dot' }, h('i', { style: { background: c } })), () => (S.hero.skin = j))));
-    }
-
-    let nationBox = null;
-    if (tab === 'nation') {
+    } else if (which === 'nation') {
       const listEl = h('div', { class: 'list g-hero-nations' });
       const all = COUNTRIES.filter((c) => c.independent).sort((a, b) => cname(a).localeCompare(cname(b), loc));
       const render = (q = '') => {
@@ -1278,7 +1324,7 @@ export async function mount(root, ctx) {
                   S.hero.country = c.code;
                   save();
                   sfx.play('select');
-                  showLocker('nation');
+                  showLocker();
                 },
               },
               flagImg(c, 'sm'),
@@ -1289,29 +1335,15 @@ export async function mount(root, ctx) {
         }
       };
       render();
-      nationBox = h('div', { class: 'stack' }, h('input', { class: 'g-hero-input search', placeholder: t('searchCountry'), oninput: (e) => render(e.target.value) }), listEl);
+      body = h('div', { class: 'stack' }, h('input', { class: 'g-hero-input search', placeholder: t('searchCountry'), oninput: (e) => render(e.target.value) }), listEl);
     }
-
-    const node = h(
-      'div',
-      { class: 'screen g-hero-locker' },
-      h(
-        'div',
-        { class: 'g-hero-lockhead rise' },
-        prev,
-        h(
-          'div',
-          { class: 'g-hero-fields' },
-          h('label', { class: 'g-hero-field' }, h('small', null, t('name')), nameIn),
-          h('div', { class: 'g-hero-field' }, h('small', null, t('number')), h('div', { class: 'g-hero-stepper' }, h('button', { class: 'g-hero-round sm', onclick: () => setNum(-1) }, '−'), numVal, h('button', { class: 'g-hero-round sm', onclick: () => setNum(1) }, '+'))),
-          h('div', { class: 'g-hero-field' }, h('small', null, t('tabNation')), h('button', { class: 'g-hero-natbtn', onclick: () => showLocker('nation') }, flagImg(country(), 'sm'), h('span', null, cname(country())))),
-        ),
-      ),
-      tabRow,
-      nationBox || grid,
-    );
-    setScreen('locker', node, () => showMenu());
-    ctx.setTitle(t('menuLocker'));
+    const scrim = h('div', { class: 'g-hero-sheet-scrim', onclick: () => showLocker() });
+    const sheet = h('div', { class: 'g-hero-sheet' }, h('h3', null, t('lk_' + which)), body);
+    node.append(scrim, sheet);
+    if (lastSheet === which) sheet.classList.add('show');
+    else requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.add('show')));
+    lastSheet = which;
+    backFn = () => showLocker();
   }
 
   // ------------------------------------------------------------------ TROPHIES

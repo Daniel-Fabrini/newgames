@@ -607,7 +607,7 @@ class Composer:
         specs = expand(pool)
         weights = [s[1] for s in specs]
         counts = {}
-        for _ in range(count * 3):
+        for _ in range(count * 6):
             if len(placed) >= count:
                 break
             lv = r.choices(levels, [l.area for l in levels])[0] if len(levels) > 1 else levels[0]

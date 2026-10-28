@@ -123,14 +123,14 @@ export function mountRun(host, env) {
       if (isSea(x, y)) {
         const deep = Math.max(-x, -y, x - W + 1, y - H + 1) > 2;
         A.drawWaterTile(cc, x, y, [!isSea(x, y - 1), !isSea(x + 1, y), !isSea(x, y + 1), !isSea(x - 1, y)], deep);
-        if (!deep && A.hash(x, y, 31) < 0.12) A.drawRock(cc, cx, cy + 4, 0.8, '#8c949e');
+        if (!deep && A.hash(x, y, 31) < 0.12) A.rockS(cc, cx, cy + 4, 0.8, '#8c949e');
         continue;
       }
       if (!inMap(x, y)) {
         const v = A.hash(x, y, 5);
         const ox = (A.hash(y, x, 6) - 0.5) * 16;
-        if (reg.edge === 'rocks') { if (v < 0.75) tall.push([x + y, () => A.drawRock(cc, cx + ox, cy, 1.4 + v * 0.6, v > 0.4 ? '#c98a55' : '#b07040')]); }
-        else if (v < 0.85) tall.push([x + y, () => (A.hash(x, y, 9) < 0.55 || snow) ? A.drawPine(cc, cx + ox, cy, 1.15, v, snow) : A.drawTree(cc, cx + ox, cy, 1.05, 0, v)]);
+        if (reg.edge === 'rocks') { if (v < 0.75) tall.push([x + y, () => A.rockS(cc, cx + ox, cy, 1.4 + v * 0.6, v > 0.4 ? '#c98a55' : '#b07040')]); }
+        else if (v < 0.85) tall.push([x + y, () => (A.hash(x, y, 9) < 0.55 || snow) ? A.pineS(cc, cx + ox, cy, 1.15, v, snow) : A.treeS(cc, cx + ox, cy, 1.05, v)]);
         continue;
       }
       if (run && !seenAt(idxOf(x, y))) tall.push([x + y - 0.2, () => A.drawCloudTile(cc, x, y)]);
@@ -307,7 +307,6 @@ export function mountRun(host, env) {
     onTap,
   });
   stage.invalidate();
-  window.__farmDbg && (window.__farmDbg.stage = stage); // DBG
   updateChip();
 
   return {

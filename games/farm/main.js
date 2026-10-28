@@ -18,7 +18,6 @@ export async function mount(root, ctx) {
   M.tick();
   M.save();
   let dead = false;
-  window.__farmDbg = { M }; // DBG
 
   // ------------------------------------------------------------ layout
   const app = h('div', { class: 'g-farm-app' });

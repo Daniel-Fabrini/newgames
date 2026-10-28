@@ -122,7 +122,7 @@ export function createMatch(host, cfg) {
     }
     D = Math.min(D, 45);
     let yaw = bmin < Infinity ? (bmin + bmax) / 2 : 0;
-    yaw = Math.max(-0.9, Math.min(0.9, yaw * (opt.yawK ?? 1)));
+    yaw = Math.max(-1.45, Math.min(1.45, yaw * (opt.yawK ?? 1)));
     const fxv = Math.sin(yaw);
     const fyv = -Math.cos(yaw);
     const focusY = H * (opt.focus ?? 0.8);
@@ -131,11 +131,12 @@ export function createMatch(host, cfg) {
     for (let it = 0; it < 22; it++, s *= 1.09) {
       // camera distance grows, and the camera climbs as it backs off
       const dist = (6 + 0.12 * D) * s;
-      const elev = Math.min(0.95, 0.4 + 0.045 * it + (opt.s0 > 1 ? 0.1 : 0));
+      const elev = Math.min(0.78, 0.36 + 0.035 * it + (opt.s0 > 1 ? 0.08 : 0));
       const back = dist * Math.cos(elev);
       const hgt = dist * Math.sin(elev);
-      const cx = A.x - fxv * back;
-      const cy = A.y - fyv * back;
+      // stay above the pitch (never inside the stands or behind the boards)
+      const cx = Math.max(-46, Math.min(46, A.x - fxv * back));
+      const cy = Math.max(-5, A.y - fyv * back);
       let pitch = Math.atan2(hgt, back + D * 0.5);
       for (let k = 0; k < 4; k++) {
         view.setRig(cx, cy, hgt, yaw, pitch);
@@ -173,12 +174,15 @@ export function createMatch(host, cfg) {
       const A = w.att[w.carrier];
       add(A.x, A.y + 0.8);
       add(A.x, A.y, 2.1);
-      for (const a of w.att) {
-        if (a === A) continue;
+      // nearby teammates must be in shot; far ones get edge markers
+      const mates = w.att.filter((a) => a !== A).sort((p, q) => Math.hypot(p.x - A.x, p.y - A.y) - Math.hypot(q.x - A.x, q.y - A.y));
+      mates.forEach((a, j) => {
+        const d = Math.hypot(a.x - A.x, a.y - A.y);
+        if (j > 1 && d > 16 && level.type !== 'corner') return;
         add(a.x, a.y + 0.6);
         add(a.x, a.y, 2.3);
         if (a.run) add(a.run.x, a.run.y);
-      }
+      });
       const r = rigFor({ x: A.x, y: A.y }, { x: 0, y: 0 }, pts, m, { s0: intro ? 1.5 : 1, goalMax: 0.42 });
       return r;
     }
@@ -200,7 +204,7 @@ export function createMatch(host, cfg) {
       add(sc.x, sc.y, 2.4);
     }
     const A = sc ? { x: (sc.x + b.x) / 2, y: (sc.y + Math.max(0, b.y)) / 2 + 6 } : { x: b.x, y: Math.max(2, b.y) + 6 };
-    return rigFor(A, { x: 0, y: -1 }, pts, m, { focus: 0.85 });
+    return rigFor(A, { x: 0, y: -1 }, pts, m, { focus: 0.85, s0: 1.3 });
   }
 
   function updateCamera(dt) {

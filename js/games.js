@@ -258,7 +258,7 @@ export const GAMES = [
   {
     id: 'farm',
     cat: 'strategy',
-    progress: 70,
+    progress: 100,
     name: { pt: 'Fazenda Aventura', en: 'Farm Adventure', es: 'Granja Aventura' },
     sub: { pt: 'Fazenda e Expedições', en: 'Farm & Expeditions', es: 'Granja y Expediciones' },
     about: {

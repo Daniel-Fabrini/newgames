@@ -100,7 +100,12 @@ export function createStage(host, opts) {
     const wx1 = (W - cam.ox) / cam.z, wy1 = (H - cam.oy) / cam.z;
     const i0 = Math.floor(wx0 / CH), i1 = Math.floor(wx1 / CH);
     const j0 = Math.floor(wy0 / CH), j1 = Math.floor(wy1 / CH);
-    let budget = pts.size ? 1 : 3;
+    // Build at most a couple of chunks per frame (all of them on the very first frame) so panning
+    // never stalls; while idle, pre-build a ring of chunks around the view.
+    const first = chunks.size === 0;
+    let budget = first ? 1e9 : 2;
+    const t1 = performance.now();
+    const spend = () => budget > 0 && performance.now() - t1 < 14;
     c.setTransform(1, 0, 0, 1, 0, 0);
     c.fillStyle = opts.bg || '#3f7a2c';
     c.fillRect(0, 0, canvas.width, canvas.height);
@@ -108,11 +113,19 @@ export function createStage(host, opts) {
     for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) {
       const ch = chunks.get(i + ',' + j);
       const stale = !ch || ch.gen !== gen || ch.s !== s;
-      if (!ch || (stale && budget > 0)) { buildChunk(i, j, s); if (ch) budget--; }
+      if (stale && (first || spend())) { buildChunk(i, j, s); budget--; }
       const cur = chunks.get(i + ',' + j);
+      if (!cur) continue;
       const x = (cam.ox + i * CH * cam.z) * dpr, y = (cam.oy + j * CH * cam.z) * dpr;
       const sz = (CH + 2 / cur.s) * cam.z * dpr;
       c.drawImage(cur.cv, 0, 0, cur.cv.width, cur.cv.height, x, y, sz, sz);
+    }
+    if (!pts.size && budget > 0) {
+      outer: for (let j = j0 - 1; j <= j1 + 1; j++) for (let i = i0 - 1; i <= i1 + 1; i++) {
+        if (j >= j0 && j <= j1 && i >= i0 && i <= i1) continue;
+        const ch = chunks.get(i + ',' + j);
+        if (!ch || ch.gen !== gen || ch.s !== s) { buildChunk(i, j, s); if (--budget <= 0 || performance.now() - t1 > 10) break outer; }
+      }
     }
     c.setTransform(cam.z * dpr, 0, 0, cam.z * dpr, cam.ox * dpr, cam.oy * dpr);
     opts.drawDynamic(c, cam, t, W, H);

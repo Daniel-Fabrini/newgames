@@ -49,6 +49,12 @@ export const HAIR_COLORS = [
   { id: 'green', price: 300, color: '#36d27a' },
 ];
 
+export const BEARDS = [
+  { id: 'none', price: 0 },
+  { id: 'stubble', price: 80 },
+  { id: 'full', price: 200 },
+];
+
 export const SKINS = ['#f3cfae', '#e0ac85', '#c48a5e', '#9a6440', '#6e4428', '#4b2e1c'];
 
 export const DEFAULT_HERO = {
@@ -60,7 +66,8 @@ export const DEFAULT_HERO = {
   hairColor: 'black',
   skin: 2,
   country: 'BR',
-  owned: ['kit:gold', 'kit:white', 'boots:black', 'boots:white', 'hair:short', 'hair:buzz', 'hair:bald', 'hc:black', 'hc:brown'],
+  beard: 'none',
+  owned: ['beard:none', 'kit:gold', 'kit:white', 'boots:black', 'boots:white', 'hair:short', 'hair:buzz', 'hair:bald', 'hc:black', 'hc:brown'],
 };
 
 export function kitById(id) {
@@ -73,5 +80,6 @@ export function heroLook(h) {
     hair: h.hair,
     hairColor: (HAIR_COLORS.find((c) => c.id === h.hairColor) || HAIR_COLORS[0]).color,
     boots: (BOOTS.find((b) => b.id === h.boots) || BOOTS[0]).color,
+    beard: h.beard && h.beard !== 'none' ? h.beard : null,
   };
 }

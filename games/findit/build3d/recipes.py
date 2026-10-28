@@ -759,7 +759,7 @@ def alley(L, S):
         'hung': [('exterior_aircon_unit', 1.1, 3.1, {'kind': 'set'}), ('security_light', -2.4, 3.2), ('industrial_wall_lamp', 0.3, 2.6),
                  ('security_camera_01', 2.6, 3.4)],
         'tops': ['util', 'bin', 'stove', 'barrier', 'car'], 'pool': ALLEY_SMALL, 'top_extra': 20,
-        'floor': {'region': (-5.5, -2.2, 5.5, 2.4), 'count': 22, 'pool': ALLEY, 'small': ALLEY_SMALL, 'small_count': 30},
+        'floor': {'region': (-5.5, -1.2, 5.5, 2.4), 'count': 26, 'pool': ALLEY, 'small': ALLEY_SMALL, 'small_count': 30},
         'wall_art': {'pool': [('fire_alarm', 0.5), ('garden_hose_wall_mounted_01', 0.4), ('industrial_caged_sconce', 0.4, {'scale': (0.5, 0.6)}),
                               ('dartboard', 0.3), ('wall_clock', 0.3)], 'z0': 1.4, 'z1': 2.6, 'count': 3},
         'light': daylight('german_town_street', strength=1.1, rot=1.2, sun=(-0.5, 0.8, -0.55), sun_strength=3.0),
@@ -784,7 +784,7 @@ def backyard(L, S):
                  ('ladder', 'wooden_ladder', (-4.6, 0.9), 0.3)],
         'shelves': ['raised', 'rack', 'box1', 'box2'], 'books': 0.0, 'shelf_pool': PLANTS + GARDEN[:12],
         'tops': ['bench', 'set', 'chair', 'pbench', 'barrel'], 'pool': GARDEN, 'top_extra': 25,
-        'floor': {'region': (-5.5, -2.6, 5.5, 2.4), 'count': 16,
+        'floor': {'region': (-5.5, -1.4, 5.5, 2.4), 'count': 18,
                   'pool': [('compost_bag_02', 0.6), ('wooden_bucket_01', 0.5), ('planter_pot_clay', 0.8), ('potted_plant_02', 0.6, {'scale': (0.7, 0.9)}),
                            ('potted_plant_01', 0.4, {'scale': (0.6, 0.8)}), ('watering_can_metal_01', 0.6), ('garden_gnome', 0.5),
                            ('rusted_spade_01', 0.4, {'pre': 'lie_y'}), ('picke_dirty_01', 0.3, {'pre': 'lie_y'}), ('wicker_basket_01', 0.5),
@@ -799,7 +799,7 @@ def backyard(L, S):
 # 13. smugglers' harbor
 def _harbor_set(L, R):
     water(L, R['back'] + 0.0)
-    m = L.tex_material('pier_beam', 'wood_floor_deck', rough_mul=0.9)
+    m = L.tex_material('pier_beam', 'wood_floor_deck', rough_mul=0.9, tint=(0.35, 0.3, 0.26))
     for k in range(9):
         x = -6.4 + k * 1.6
         L.box(f'post{k}', x - 0.09, R['back'] - 0.18, -1.6, x + 0.09, R['back'], 0.9, m, L.collection('set'), uv_scale=0.6)
@@ -813,12 +813,12 @@ def harbor(L, S):
         'room': dict(x0=-7, x1=7, back=2.6, front=-8, h=0.0, floor=('wood_floor_deck', 2.0), wall=('wood_floor_deck', 2.0), side=False,
                      ceiling=None, baseboard=False),
         'extras': [_harbor_set],
-        'cam': ((0.0, -3.4, 1.7), (0.0, 4.0, 1.4), 26),
+        'cam': ((0.0, -3.0, 2.0), (0.0, 4.0, 0.75), 26),
         'free': [('ship', 'dutch_ship_medium', (1.0, 15.0), math.pi / 2 + 0.08, {'z': -3.2}),
                  ('cannon', 'cannon_01', (-3.6, 0.7), 1.25, {'kind': 'prop', 'scale': 0.9}),
                  ('buoy', 'ocean_buoy', (-6.0, 6.5), 0.4, {'z': -1.6}), ('marker', 'lateral_sea_marker', (7.5, 11.0), 0.2, {'z': -2.4, 'scale': 0.8})],
         'tops': ['cannon'], 'pool': HARBOR_SMALL, 'top_extra': 6,
-        'floor': {'region': (-5.6, -2.4, 5.6, 2.35), 'count': 26, 'pool': HARBOR, 'small': HARBOR_SMALL, 'small_count': 34},
+        'floor': {'region': (-5.6, -0.6, 5.6, 2.35), 'count': 34, 'pool': HARBOR, 'small': HARBOR_SMALL, 'small_count': 44},
         'light': daylight('petit_port', strength=1.0, rot=2.2, sun=(0.35, 0.85, -0.45), sun_strength=3.4, sun_temp=5000),
     }
     return compose(L, S, cfg)
@@ -844,22 +844,22 @@ def campsite(L, S):
     return compose(L, S, {
         'room': dict(x0=-9, x1=9, back=6.0, front=-8, h=0.0, floor=('forest_leaves_02', 2.5), wall=('forest_leaves_02', 2.5), side=False,
                      ceiling=None, baseboard=False),
-        'cam': ((0.0, -3.0, 1.75), (0.0, 3.0, 0.7), 26),
+        'cam': ((0.0, -3.2, 2.3), (0.0, 3.2, 0.1), 26),
         'free': [('pit', 'stone_fire_pit', (0.2, 0.4), 0.3), ('log', 'dead_tree_trunk', (-0.6, 2.4), 0.12, {'scale': 0.75}),
                  ('log2', 'dead_tree_trunk_02', (3.8, 3.4), -0.5, {'scale': 0.6}), ('boulder', 'boulder_01', (-4.4, 3.8), 0.6, {'scale': 0.9}),
                  ('rocks', 'rock_moss_set_02', (1.0, 7.5), 0.0, {'scale': 0.6}), ('fir', 'fir_sapling', (-2.8, 5.5), 0.3, {'scale': 1.3}),
                  ('fir2', 'fir_sapling', (4.6, 6.2), 1.3, {'scale': 1.1}), ('roots', 'pine_roots', (-3.4, 1.2), 0.8, {'scale': 0.7}),
                  ('stump', 'tree_stump_01', (2.3, 0.9), 0.4, {'scale': 0.55})],
         'tops': ['log', 'stump', 'pit', 'boulder', 'log2'], 'pool': CAMP, 'top_extra': 20,
-        'floor': {'region': (-5.5, -1.6, 5.5, 4.0), 'count': 24, 'pool': CAMP_BIG, 'small': CAMP, 'small_count': 36},
+        'floor': {'region': (-5.5, -1.2, 5.5, 4.2), 'count': 30, 'pool': CAMP_BIG, 'small': CAMP, 'small_count': 46},
         'light': daylight('phalzer_forest_01', strength=1.2, rot=0.4, sun=(0.3, 0.6, -0.75), sun_strength=2.6, sun_temp=5200),
     })
 
 
 # 15. street market
 def _market_set(L, R):
-    awning(L, -5.2, -1.2, R['back'], 2.2, 2.9, 2.35, tex='fabric_pattern_07')
-    awning(L, 0.6, 4.6, R['back'], 2.2, 2.9, 2.35, tex='fabric_pattern_05', tint=(0.9, 0.85, 0.8))
+    awning(L, -5.4, -1.3, R['back'], 1.7, 2.75, 2.25, tex='fabric_pattern_07')
+    awning(L, 0.9, 5.0, R['back'], 1.7, 2.75, 2.25, tex='fabric_pattern_07')
 
 
 @scene('market', seed=151,
@@ -878,7 +878,7 @@ def market(L, S):
                  ('t3', 'small_wooden_table_01', (-1.0, -0.5), 0.15), ('t4', 'gallinera_table', (4.8, 0.2), -0.4),
                  ('lamp', 'street_lamp_02', (-0.3, 2.2), 0.0, {'z': 2.9, 'scale': 0.6})],
         'tops': ['t1', 't2', 't3', 't4'], 'pool': stall, 'top_extra': 30,
-        'floor': {'region': (-5.6, -2.4, 5.6, 2.35), 'count': 24,
+        'floor': {'region': (-5.6, -1.0, 5.6, 2.35), 'count': 26,
                   'pool': [('wooden_crate_01', 1.0, {'stack': True}), ('wooden_crate_02', 1.0, {'stack': True}), ('wicker_basket_01', 0.8, {'stack': True}),
                            ('wine_barrel_01', 0.5, {'stack': True}), ('Barrel_01', 0.3, {'stack': True}), ('wicker_basket_02', 0.6),
                            ('ceramic_pot', 0.4), ('potted_plant_02', 0.5, {'scale': (0.6, 0.8)}), ('planter_pot_clay', 0.5), ('jug_01', 0.4)],
@@ -902,7 +902,7 @@ def scrapyard(L, S):
                  ('barrier', 'concrete_road_barrier', (-0.3, 1.9), 0.1), ('stove', 'electric_stove', (-1.3, -0.2), 0.5, {'kind': 'prop'}),
                  ('press', 'old_drill_press', (5.2, 0.7), -0.6, {'kind': 'prop'}), ('bin', 'metal_trash_can', (2.8, -0.9), -0.3)],
         'tops': ['car', 'barrier', 'comp', 'stove', 'bin', 'box'], 'pool': JUNK_SMALL, 'top_extra': 30,
-        'floor': {'region': (-5.6, -2.4, 5.6, 2.35), 'count': 30, 'pool': JUNK, 'small': JUNK_SMALL, 'small_count': 34},
+        'floor': {'region': (-5.6, -1.2, 5.6, 2.35), 'count': 32, 'pool': JUNK, 'small': JUNK_SMALL, 'small_count': 34},
         'wall_art': {'pool': [('fire_alarm', 0.4), ('industrial_wall_lamp', 0.5), ('garden_hose_wall_mounted_01', 0.3), ('lifebuoy', 0.3),
                               ('dartboard', 0.3)], 'z0': 1.2, 'z1': 2.1, 'count': 3},
         'light': daylight('construction_yard', strength=1.1, rot=0.9, sun=(-0.4, 0.75, -0.55), sun_strength=3.3),
@@ -928,7 +928,7 @@ def courtyard(L, S):
         'hung': [('street_lamp_02', -1.3, 3.2, {'kind': 'set', 'scale': 0.6}), ('street_lamp_02', 2.0, 3.2, {'kind': 'set', 'scale': 0.6})],
         'shelves': ['raised', 'raised2'], 'books': 0.0, 'shelf_pool': PLANTS,
         'tops': ['bench', 'set', 'rtable', 'stool'], 'pool': COURT_SMALL, 'top_extra': 25,
-        'floor': {'region': (-5.6, -2.4, 5.6, 2.35), 'count': 22, 'pool': COURT, 'small': COURT_SMALL, 'small_count': 28},
+        'floor': {'region': (-5.6, -1.2, 5.6, 2.35), 'count': 24, 'pool': COURT, 'small': COURT_SMALL, 'small_count': 28},
         'wall_art': {'pool': [('fancy_picture_frame_01', 0.3), ('wall_clock', 0.4), ('garden_hose_wall_mounted_01', 0.4),
                               ('carved_wooden_plate', 0.5, {'pre': 'lie_x'}), ('vintage_telephone_wall_clock', 0.3)], 'z0': 1.5, 'z1': 2.4, 'count': 4},
         'light': daylight('courtyard', strength=1.1, rot=1.8, sun=(-0.5, 0.65, -0.6), sun_strength=3.4),

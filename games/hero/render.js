@@ -598,13 +598,24 @@ export function drawPitch(g, v, A) {
   }
   // LED boards behind the goal and along the touchlines
   const ad = A.ad;
-  texQuad(g, v, ad, 0, 0, ad.width, ad.height, [-45, -6, 1.0], [45, -6, 1.0], [-45, -6, 0], [45, -6, 0], 12, 1);
-  texQuad(g, v, ad, 0, 0, ad.width, ad.height, [-37, 60, 1.0], [-37, -6, 1.0], [-37, 60, 0], [-37, -6, 0], 9, 1);
-  texQuad(g, v, ad, 0, 0, ad.width, ad.height, [37, -6, 1.0], [37, 60, 1.0], [37, -6, 0], [37, 60, 0], 9, 1);
+  // only the faces turned toward the camera
+  if (v.cy > -6) texQuad(g, v, ad, 0, 0, ad.width, ad.height, [-45, -6, 1.0], [45, -6, 1.0], [-45, -6, 0], [45, -6, 0], 12, 1);
+  if (v.cx > -37) texQuad(g, v, ad, 0, 0, ad.width, ad.height, [-37, 60, 1.0], [-37, -6, 1.0], [-37, 60, 0], [-37, -6, 0], 9, 1);
+  if (v.cx < 37) texQuad(g, v, ad, 0, 0, ad.width, ad.height, [37, -6, 1.0], [37, 60, 1.0], [37, -6, 0], [37, 60, 0], 9, 1);
   // grass detail
   if (!A.patterns.grain) A.patterns.grain = g.createPattern(A.grain, 'repeat');
-  if (v.p(0, -6, 0, P0)) {
-    const top = Math.max(0, P0.y);
+  let top = Infinity;
+  for (const [x, y] of [
+    [-40, -6],
+    [40, -6],
+    [0, -6],
+    [-40, 40],
+    [40, 40],
+  ]) {
+    if (v.p(x, y, 0, P0)) top = Math.min(top, P0.y);
+  }
+  if (top < H) {
+    top = Math.max(0, top);
     g.fillStyle = A.patterns.grain;
     g.fillRect(0, top, W, H - top);
     // aerial haze near the far end, darker close to the camera
@@ -832,31 +843,28 @@ export function drawFigure(g, v, ent, look, opt = {}) {
   }
 }
 
-// tapered limb with side shading
+// Limb as a round-capped tapered capsule with cylinder shading.
 function limb(g, x1, y1, x2, y2, w1, w2, col, dark) {
   const dx = x2 - x1;
   const dy = y2 - y1;
   const l = Math.hypot(dx, dy) || 1e-6;
   const nx = -dy / l;
   const ny = dx / l;
-  g.fillStyle = col;
+  const a = Math.atan2(dy, dx);
   g.beginPath();
-  g.moveTo(x1 + nx * w1, y1 + ny * w1);
-  g.lineTo(x2 + nx * w2, y2 + ny * w2);
-  g.arc(x2, y2, w2, Math.atan2(ny, nx), Math.atan2(-ny, -nx));
-  g.lineTo(x1 - nx * w1, y1 - ny * w1);
-  g.arc(x1, y1, w1, Math.atan2(-ny, -nx), Math.atan2(ny, nx));
+  g.arc(x1, y1, w1, a + Math.PI / 2, a + (Math.PI * 3) / 2);
+  g.arc(x2, y2, w2, a - Math.PI / 2, a + Math.PI / 2);
   g.closePath();
-  g.fill();
-  // shade the right-hand side
-  g.fillStyle = dark;
-  g.beginPath();
-  const s = nx > 0 ? -1 : 1;
-  g.moveTo(x1, y1);
-  g.lineTo(x2, y2);
-  g.lineTo(x2 + s * nx * w2, y2 + s * ny * w2);
-  g.lineTo(x1 + s * nx * w1, y1 + s * ny * w1);
-  g.closePath();
+  const wm = Math.max(w1, w2);
+  const mx = (x1 + x2) / 2;
+  const my = (y1 + y2) / 2;
+  // light comes from the upper left
+  const s = nx < 0 ? 1 : -1;
+  const gr = g.createLinearGradient(mx - s * nx * wm, my - s * ny * wm, mx + s * nx * wm, my + s * ny * wm);
+  gr.addColorStop(0, col);
+  gr.addColorStop(0.45, col);
+  gr.addColorStop(1, dark);
+  g.fillStyle = gr;
   g.fill();
 }
 
@@ -908,9 +916,9 @@ export function drawBody(g, ent, look, lift = 0) {
   let bendL = 0.05 + Math.max(0, s1) * 0.18 * m;
   let bendR = 0.05 + Math.max(0, -s1) * 0.18 * m;
   let shY = -1.47;
-  let hL = { x: -0.27, y: -0.98 + s1 * 0.13 * m };
-  let hR = { x: 0.27, y: -0.98 - s1 * 0.13 * m };
-  let elbowOut = 0.05;
+  let hL = { x: -0.25, y: -0.97 + s1 * 0.13 * m };
+  let hR = { x: 0.25, y: -0.97 - s1 * 0.13 * m };
+  let elbowOut = 0.02;
   if (pose === 'kick' && t < 0.45) {
     const a = Math.min(1, t / 0.12);
     fR = { x: 0.06, y: -0.62 * a + 0.05 };
@@ -966,12 +974,6 @@ export function drawBody(g, ent, look, lift = 0) {
     const sy = ky + (F.y - 0.07 - ky) * 0.22;
     limb(g, sx, sy, F.x, F.y - 0.08, 0.06, 0.045, socks, socksD);
     // sock stripe
-    g.fillStyle = look.shirt2 || '#fff';
-    g.globalAlpha = 0.85;
-    const tx = sx + (F.x - sx) * 0.12;
-    const ty = sy + (F.y - 0.08 - sy) * 0.12;
-    g.fillRect(tx - 0.06, ty - 0.012, 0.12, 0.024);
-    g.globalAlpha = 1;
     // boot
     g.fillStyle = look.boots;
     g.beginPath();
@@ -1137,8 +1139,8 @@ export function drawBody(g, ent, look, lift = 0) {
   g.stroke();
 
   // ---- neck + head
-  const hy = -1.71;
-  limb(g, 0, shY + 0.02, 0, hy + 0.08, 0.05, 0.048, skin, skinD);
+  const hy = -1.68;
+  limb(g, 0, shY + 0.02, 0, hy + 0.07, 0.052, 0.05, skin, skinD);
   // back hair mass (front view, voluminous styles)
   if (front && (look.hair === 'afro' || look.hair === 'curly' || look.hair === 'long')) {
     g.fillStyle = look.hairColor;
@@ -1159,7 +1161,7 @@ export function drawBody(g, ent, look, lift = 0) {
   hgr.addColorStop(1, skinD);
   g.fillStyle = hgr;
   g.beginPath();
-  g.ellipse(0, hy, 0.098, 0.118, 0, 0, Math.PI * 2);
+  g.ellipse(0, hy, 0.1, 0.122, 0, 0, Math.PI * 2);
   g.fill();
   if (front) {
     // jaw shading, brows, eyes, nose, mouth
@@ -1170,15 +1172,15 @@ export function drawBody(g, ent, look, lift = 0) {
     g.fillStyle = shade(look.hairColor, 0.05);
     g.fillRect(-0.06, hy - 0.025, 0.04, 0.012);
     g.fillRect(0.02, hy - 0.025, 0.04, 0.012);
-    g.fillStyle = '#fff';
+    g.fillStyle = 'rgba(255,255,255,0.85)';
     g.beginPath();
-    g.ellipse(-0.038, hy - 0.002, 0.017, 0.009, 0, 0, Math.PI * 2);
-    g.ellipse(0.038, hy - 0.002, 0.017, 0.009, 0, 0, Math.PI * 2);
+    g.ellipse(-0.036, hy - 0.002, 0.013, 0.006, 0, 0, Math.PI * 2);
+    g.ellipse(0.036, hy - 0.002, 0.013, 0.006, 0, 0, Math.PI * 2);
     g.fill();
     g.fillStyle = '#2a1a10';
     g.beginPath();
-    g.arc(-0.036, hy - 0.001, 0.0075, 0, Math.PI * 2);
-    g.arc(0.04, hy - 0.001, 0.0075, 0, Math.PI * 2);
+    g.arc(-0.035, hy - 0.002, 0.0055, 0, Math.PI * 2);
+    g.arc(0.037, hy - 0.002, 0.0055, 0, Math.PI * 2);
     g.fill();
     g.fillStyle = skinD;
     g.beginPath();
@@ -1195,9 +1197,9 @@ export function drawBody(g, ent, look, lift = 0) {
     g.stroke();
   }
   drawHair(g, look, front, hy);
-  if (look.beard) {
+  if (look.beard && front) {
     g.fillStyle = look.hairColor;
-    g.globalAlpha = 0.85;
+    g.globalAlpha = look.beard === 'stubble' ? 0.35 : 0.9;
     g.beginPath();
     g.ellipse(0, hy + 0.07, 0.085, 0.055, 0, 0, Math.PI);
     g.fill();

@@ -275,6 +275,7 @@ export default {
     lk_nation: 'Seleção',
     beard_none: 'Sem barba',
     beard_full: 'Barba cheia',
+    beard_stubble: 'Por fazer',
     adBall: 'FUTEBOL',
   },
 
@@ -536,6 +537,7 @@ export default {
     lk_nation: 'Nation',
     beard_none: 'Clean shaven',
     beard_full: 'Full beard',
+    beard_stubble: 'Stubble',
     adBall: 'FOOTBALL',
   },
 
@@ -797,6 +799,7 @@ export default {
     lk_nation: 'Selección',
     beard_none: 'Sin barba',
     beard_full: 'Barba completa',
+    beard_stubble: 'Barba de días',
     adBall: 'FÚTBOL',
   },
 };

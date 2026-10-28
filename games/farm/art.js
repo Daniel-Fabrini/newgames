@@ -76,6 +76,57 @@ export function emoji(c, ch, x, y, size) {
   c.fillText(ch, x, y);
 }
 
+// ------------------------------------------------------------------ sprite cache
+// Static scenery repeats a few shapes thousands of times; render each variant once to a small
+// canvas (box in world units, anchor ax/ay) and stamp it with drawImage.
+const SPR = new Map();
+const SPR_RES = 2.5;
+function sprite(key, w, h, ax, ay, fn) {
+  let sp = SPR.get(key);
+  if (!sp) {
+    const cv = document.createElement('canvas');
+    cv.width = Math.ceil(w * SPR_RES);
+    cv.height = Math.ceil(h * SPR_RES);
+    const cc = cv.getContext('2d');
+    cc.scale(SPR_RES, SPR_RES);
+    cc.translate(ax, ay);
+    fn(cc);
+    sp = { cv, w, h, ax, ay };
+    SPR.set(key, sp);
+  }
+  return sp;
+}
+function stamp(c, sp, x, y, s = 1) {
+  c.drawImage(sp.cv, x - sp.ax * s, y - sp.ay * s, sp.w * s, sp.h * s);
+}
+export function pineS(c, x, y, s = 1, seed = 0, snow = false) {
+  const v = seed > 0.5 ? 1 : 0;
+  stamp(c, sprite(`pine${v}${snow ? 1 : 0}`, 52, 62, 24, 52, (cc) => drawPine(cc, 0, 0, 1, v ? 0.8 : 0.2, snow)), x, y, s);
+}
+export function treeS(c, x, y, s = 1, seed = 0) {
+  const v = seed > 0.9 ? 3 : seed > 0.66 ? 2 : seed > 0.33 ? 1 : 0;
+  stamp(c, sprite(`tree${v}`, 54, 60, 24, 50, (cc) => drawTree(cc, 0, 0, 1, 0, [0.2, 0.5, 0.8, 0.95][v])), x, y, s);
+}
+export function bushS(c, x, y, s = 1, seed = 0, flowers = false) {
+  const v = flowers ? 2 : seed > 0.7 ? 1 : 0;
+  stamp(c, sprite(`bush${v}`, 38, 30, 18, 22, (cc) => drawBush(cc, 0, 0, 1, v === 1 ? 0.8 : 0.1, v === 2)), x, y, s);
+}
+export function rockS(c, x, y, s = 1, col = '#a7adb5') {
+  stamp(c, sprite(`rock${col}`, 36, 24, 16, 17, (cc) => drawRock(cc, 0, 0, 1, col)), x, y, s);
+}
+function blobS(col) {
+  return sprite(`blob${col}`, 160, 80, 80, 40, (cc) => {
+    cc.scale(1, 0.5);
+    const g = cc.createRadialGradient(0, 0, 0, 0, 0, 78);
+    g.addColorStop(0, hexA(col, 0.5));
+    g.addColorStop(1, hexA(col, 0));
+    cc.fillStyle = g;
+    cc.beginPath();
+    cc.arc(0, 0, 78, 0, TAU);
+    cc.fill();
+  });
+}
+
 // ------------------------------------------------------------------ ground (static)
 export const GROUND = {
   grass: { base: '#7ccb45', lite: '#a8e46a', dark: '#4f9f2e', blade: ['#5aa833', '#94d85a', '#4a9128'], flowers: true },
@@ -95,18 +146,7 @@ export function paintGround(c, rect, pal, tiles) {
     const h1 = hash(x, y, 21), h2 = hash(y, x, 22);
     const px = cx + (h1 - 0.5) * 40, py = cy + (h2 - 0.5) * 20;
     const r = 34 + h1 * 40;
-    const col = h2 > 0.5 ? pal.lite : pal.dark;
-    c.save();
-    c.translate(px, py);
-    c.scale(1, 0.5);
-    const g = c.createRadialGradient(0, 0, 0, 0, 0, r);
-    g.addColorStop(0, hexA(col, 0.5));
-    g.addColorStop(1, hexA(col, 0));
-    c.fillStyle = g;
-    c.beginPath();
-    c.arc(0, 0, r, 0, TAU);
-    c.fill();
-    c.restore();
+    stamp(c, blobS(h2 > 0.5 ? pal.lite : pal.dark), px, py, r / 78);
   }
   for (const [x, y] of tiles) {
     for (let k = 0; k < 9; k++) {
@@ -390,18 +430,18 @@ function walls(c, x, y, w, h, z0, H, L, R, opt = {}) {
   if (opt.top) poly(c, [P(x, y, z0 + H), P(x + w, y, z0 + H), P(x + w, y + h, z0 + H), P(x, y + h, z0 + H)], opt.top, INK, 1);
 }
 // Window on the front-left face at u (0..1 along the face) and height z.
-function windowL(c, x, y, w, h, u, z, ww = 0.16, wh = 9, glass = '#9fd9f5') {
+function windowL(c, x, y, w, h, u, z, ww = 0.16, wh = 9, glass = '#9fd9f5', frame = '#fff7e6') {
   const a = P(x + (u - ww / 2) * w, y + h, z), b = P(x + (u + ww / 2) * w, y + h, z);
   const pts = [a, b, [b[0], b[1] - wh], [a[0], a[1] - wh]];
-  poly(c, pts, '#fff7e6', INK, 0.8);
+  poly(c, pts, frame, INK, 0.8);
   const inset = [[a[0] + 1.4, a[1] - 1.6], [b[0] - 1.4, b[1] - 0.6], [b[0] - 1.4, b[1] - wh + 1.6], [a[0] + 1.4, a[1] - wh + 0.6]];
   poly(c, inset, glass);
-  line(c, (a[0] + b[0]) / 2, (a[1] + b[1]) / 2 - 1, (a[0] + b[0]) / 2, (a[1] + b[1]) / 2 - wh + 1, '#fff7e6', 1);
-  poly(c, [[a[0] + 2, a[1] - wh + 2], [a[0] + 5, a[1] - wh + 1.4], [a[0] + 2.4, a[1] - 3]], 'rgba(255,255,255,0.5)');
+  line(c, (a[0] + b[0]) / 2, (a[1] + b[1]) / 2 - 1, (a[0] + b[0]) / 2, (a[1] + b[1]) / 2 - wh + 1, frame, 1);
+  if (frame === '#fff7e6') poly(c, [[a[0] + 2, a[1] - wh + 2], [a[0] + 5, a[1] - wh + 1.4], [a[0] + 2.4, a[1] - 3]], 'rgba(255,255,255,0.5)');
 }
-function windowR(c, x, y, w, h, u, z, ww = 0.16, wh = 9, glass = '#9fd9f5') {
+function windowR(c, x, y, w, h, u, z, ww = 0.16, wh = 9, glass = '#9fd9f5', frame = '#fff7e6') {
   const a = P(x + w, y + (u - ww / 2) * h, z), b = P(x + w, y + (u + ww / 2) * h, z);
-  poly(c, [a, b, [b[0], b[1] - wh], [a[0], a[1] - wh]], '#fff7e6', INK, 0.8);
+  poly(c, [a, b, [b[0], b[1] - wh], [a[0], a[1] - wh]], frame, INK, 0.8);
   poly(c, [[a[0] + 1.4, a[1] - 0.6], [b[0] - 1.4, b[1] - 1.6], [b[0] - 1.4, b[1] - wh + 0.6], [a[0] + 1.4, a[1] - wh + 1.6]], glass);
 }
 function doorL(c, x, y, w, h, u, ww, hh, col = '#7a4a26') {
@@ -525,20 +565,32 @@ function drawOldHouse(c, b, t, restored) {
   }
   const { x, y, w, h } = b;
   const H = 26;
-  walls(c, x, y, w, h, 0, H, '#4a423c', '#36302b', { boards: true });
-  for (let k = 0; k < 8; k++) {
-    const [sx, sy] = P(x + hash(k, 2, 1) * w, y + h, 4 + hash(2, k, 1) * (H - 6));
-    ell(c, sx, sy, 5, 3, 'rgba(15,12,10,0.55)');
+  walls(c, x, y, w, h, 0, 6, '#6e675f', '#57514a');
+  walls(c, x, y, w, h, 6, H - 6, '#5e5048', '#463b34', { boards: true });
+  for (let k = 0; k < 9; k++) {
+    const [sx, sy] = P(x + hash(k, 2, 1) * w, y + h, 6 + hash(2, k, 1) * (H - 8));
+    ell(c, sx, sy, 6, 3.4, 'rgba(15,12,10,0.5)');
   }
-  windowL(c, x, y, w, h, 0.25, 12, 0.18, 10, '#1b1714');
-  windowL(c, x, y, w, h, 0.75, 12, 0.18, 10, '#1b1714');
-  windowR(c, x, y, w, h, 0.5, 12, 0.2, 10, '#1b1714');
-  // broken roof: a few charred rafters
-  for (let k = 0; k < 5; k++) {
-    const u = 0.1 + k * 0.2;
-    line(c, ...P(x + u * w, y + h, H), ...P(x + u * w + 0.05, y + h / 2, H + 18 - (k % 2) * 8), '#2a2420', 2.4);
+  // the top of the walls is burnt away in a jagged line
+  const jag = [];
+  for (let k = 0; k <= 8; k++) jag.push(P(x + (k / 8) * w, y + h, H - (k % 2 ? 7 : 0) - hash(k, 4, 2) * 5));
+  poly(c, [...jag, P(x + w, y + h, H + 2), P(x, y + h, H + 2)], 'rgba(0,0,0,0)');
+  windowL(c, x, y, w, h, 0.25, 12, 0.18, 10, '#1b1714', '#3a302a');
+  windowL(c, x, y, w, h, 0.75, 12, 0.18, 10, '#1b1714', '#3a302a');
+  windowR(c, x, y, w, h, 0.5, 12, 0.2, 10, '#1b1714', '#3a302a');
+  // half a roof left, the rest just charred rafters
+  const e = 0.12, RH = 20;
+  poly(c, [P(x - e, y + h + e, H - 2), P(x + w * 0.45, y + h + e, H - 2), P(x + w * 0.45, y + h / 2, H + RH), P(x - e, y + h / 2, H + RH)], '#4a3a30', INK, 1);
+  for (let k = 1; k < 4; k++) {
+    const t2 = k / 4;
+    line(c, ...lerpP(P(x - e, y + h + e, H - 2), P(x - e, y + h / 2, H + RH), t2), ...lerpP(P(x + w * 0.45, y + h + e, H - 2), P(x + w * 0.45, y + h / 2, H + RH), t2), 'rgba(0,0,0,0.35)', 1);
   }
-  line(c, ...P(x, y + h / 2, H + 18), ...P(x + w * 0.55, y + h / 2, H + 18), '#2a2420', 2.6);
+  for (let k = 0; k < 4; k++) {
+    const u = 0.55 + k * 0.14;
+    line(c, ...P(x + u * w, y + h, H), ...P(x + u * w, y + h / 2, H + RH - (k % 2) * 6), '#2a2420', 2.6);
+  }
+  line(c, ...P(x - e, y + h / 2, H + RH), ...P(x + w * 0.8, y + h / 2, H + RH - 3), '#2a2420', 2.8);
+  void jag;
   // rubble and a dead tree
   for (let k = 0; k < 6; k++) {
     const [sx, sy] = P(x + 0.1 + hash(k, 7, 2) * 1.6, y + h + 0.1 + hash(7, k, 2) * 0.3);
@@ -694,6 +746,30 @@ export function drawBuilding(c, b, t, extra = {}) {
   else if (b.t === 'dairy') drawDairy(c, b, t);
   else if (b.t === 'sawmill') drawSawmill(c, b, t);
   else if (b.t === 'kitchen') drawKitchen(c, b, t);
+}
+
+// A red farm truck loaded with crates; (x, y) is the rear-left corner of the bed in tile units.
+export function drawTruck(c, x, y, t) {
+  const c0 = P(x + 0.6, y + 0.25);
+  shadow(c, c0[0] + 4, c0[1] + 4, 40, 0.38, 14);
+  // wheels on the far side peek out a little
+  for (const u of [0.15, 0.95]) { const [wx, wy] = P(x + u, y, 3); ell(c, wx, wy, 4, 4.4, '#222'); }
+  walls(c, x, y, 0.8, 0.45, 5, 7, '#a8703a', '#8a5a30', { planks: true, top: '#c99363' });
+  drawCrate(c, ...P(x + 0.3, y + 0.25, 12), 0.75);
+  drawCrate(c, ...P(x + 0.6, y + 0.2, 12), 0.7, '#d29858');
+  walls(c, x + 0.8, y, 0.38, 0.45, 4, 16, '#d8392b', '#b22a1f', { top: '#ef5a48' });
+  const a = P(x + 1.18, y + 0.06, 12), b = P(x + 1.18, y + 0.39, 12);
+  poly(c, [a, b, [b[0], b[1] - 7], [a[0], a[1] - 7]], '#9fd9f5', INK, 0.8);
+  const ga = P(x + 1.18, y + 0.08, 6), gb = P(x + 1.18, y + 0.37, 6);
+  line(c, ga[0], ga[1], gb[0], gb[1], '#e8e8e8', 2);
+  for (const u of [0.15, 0.95]) {
+    const [wx, wy] = P(x + u, y + 0.45, 3);
+    ell(c, wx, wy, 4.4, 4.8, '#2a2a2a', INK, 0.6);
+    ell(c, wx, wy, 1.8, 2, '#b8bec6');
+  }
+  const [hx, hy] = P(x + 1.18, y + 0.42, 9);
+  circ(c, hx, hy, 1.6, '#fff3b0');
+  void t;
 }
 
 // ------------------------------------------------------------------ pens and animals
@@ -963,9 +1039,9 @@ export function ring(c, wx, wy, frac, r = 9) {
 // ------------------------------------------------------------------ expeditions
 export function drawCloudTile(c, x, y) {
   const [cx, cy] = center(x, y);
-  for (let k = 0; k < 4; k++) {
-    const dx = (hash(x, y, 200 + k) - 0.5) * 40, dy = (hash(y, x, 210 + k) - 0.5) * 18;
-    const r = 18 + hash(x, y, 220 + k) * 12;
+  for (let k = 0; k < 3; k++) {
+    const dx = (hash(x, y, 200 + k) - 0.5) * 36, dy = (hash(y, x, 210 + k) - 0.5) * 16;
+    const r = 14 + hash(x, y, 220 + k) * 10;
     const g = c.createRadialGradient(cx + dx - r * 0.3, cy + dy - 14 - r * 0.4, r * 0.2, cx + dx, cy + dy - 10, r);
     g.addColorStop(0, '#ffffff');
     g.addColorStop(0.7, '#eef4fa');

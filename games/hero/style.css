@@ -2190,28 +2190,21 @@
     linear-gradient(180deg, transparent 0 78%, #6b6f7a 78% 82%, #4b4f5a 82% 86%, transparent 86%),
     linear-gradient(180deg, #c9965f, #a9773f);
 }
-.g-hero-locker2::after {
-  /* tiled floor in perspective */
-  content: '';
+.g-hero-floor {
   position: absolute;
-  left: -40%;
-  right: -40%;
-  bottom: -10%;
-  height: 52%;
-  background:
-    repeating-linear-gradient(90deg, rgba(120, 125, 135, 0.35) 0 2px, transparent 2px 70px),
-    repeating-linear-gradient(0deg, rgba(120, 125, 135, 0.35) 0 2px, transparent 2px 60px),
-    linear-gradient(180deg, #d8dbe0, #b8bcc4);
-  transform: perspective(300px) rotateX(55deg);
-  transform-origin: 50% 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  width: 100%;
 }
 .g-hero-neon {
   position: absolute;
   z-index: 1;
-  top: 6%;
-  left: 50%;
-  transform: translateX(-30%) rotate(-4deg);
-  font-size: 34px;
+  top: 4%;
+  right: 4%;
+  transform: rotate(-4deg);
+  font-size: 26px;
   font-weight: 1000;
   font-style: italic;
   color: #fff;
@@ -2247,7 +2240,7 @@
 }
 .g-hero-lockbtns {
   position: absolute;
-  z-index: 3;
+  z-index: 10;
   left: 10px;
   top: 10px;
   bottom: 86px;
@@ -2369,7 +2362,7 @@
 }
 .g-hero-sheet {
   position: absolute;
-  z-index: 10;
+  z-index: 11;
   left: 0;
   right: 0;
   bottom: 0;

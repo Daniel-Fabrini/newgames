@@ -70,6 +70,11 @@ def texture(asset, res='2k'):
     if os.path.exists(done):
         return root
     files = get_json(f'{API}/files/{asset}')
+    if 'Diffuse' not in files:
+        # fabrics come in colour variants (col_1, col_2…): take the first
+        cols = sorted(k for k in files if k.lower().startswith('col_'))
+        if cols:
+            files['Diffuse'] = files[cols[0]]
     for key, short in MAPS.items():
         if key in files and res in files[key]:
             download(files[key][res]['jpg']['url'], os.path.join(root, f'{short}.jpg'))
