@@ -7,7 +7,7 @@ import { generateLevel } from './gen.js';
 import { paintIndoor } from './paint/indoor.js';
 import { paintOutdoorBack, paintOutdoorFront } from './paint/outdoor.js';
 import { emojiName } from './catalog.js';
-import { sheet, coinIcon, starRow, ICON } from './ui.js';
+import { sheet, coinIcon, ICON } from './ui.js';
 
 const TAU = Math.PI * 2;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -133,7 +133,8 @@ export function playLevel(app, spec) {
     tiles.innerHTML = '';
     slots = [];
     if (kind === 'match') {
-      matchSlot = h('div', { class: 'g-hidden-tile g-hidden-hand' }, h('span', { class: 'g-hidden-tile-e' }, '?'));
+      matchSlot = h('button', { class: 'g-hidden-tile g-hidden-hand', 'aria-label': t('hint') }, h('span', { class: 'g-hidden-tile-e' }, '?'));
+      matchSlot.addEventListener('click', () => tilePopover(matchSlot, selected ? selected.key : -1));
       const pipBox = h('div', { class: 'g-hidden-pips' });
       pips = goals.map(() => {
         const p = h('span', { class: 'g-hidden-pip' });
@@ -214,16 +215,16 @@ export function playLevel(app, spec) {
     closePopover();
     if (wasOpen) return;
     const gl = goals[key];
-    if (!gl || gl.found >= gl.need) return;
+    if (key !== -1 && (!gl || gl.found >= gl.need)) return;
     const hintLabel = spec.zen ? t('hintFree') : app.state.hints > 0 ? `${t('hint')} · ${app.state.hints}` : `${t('hint')} · ${HINT_PRICE}`;
     pop = h(
       'div',
       { class: 'g-hidden-popover', 'data-key': String(key) },
-      h('div', { class: 'g-hidden-pop-name' }, emojiName(gl.ch, ctx.lang)),
+      gl ? h('div', { class: 'g-hidden-pop-name' }, emojiName(gl.ch, ctx.lang)) : null,
       h('button', { class: 'g-hidden-pop-hint', onclick: (e) => {
         e.stopPropagation();
         closePopover();
-        useHint(key);
+        useHint(key === -1 ? undefined : key);
       } }, h('span', { html: ICON.lens }), hintLabel, !spec.zen && app.state.hints <= 0 ? coinIcon() : null),
     );
     el.append(pop);
@@ -491,6 +492,7 @@ export function playLevel(app, spec) {
   }
 
   function found(p) {
+    progressed();
     const gl = goals[p.key];
     gl.found++;
     p.role = 'found';
@@ -529,6 +531,7 @@ export function playLevel(app, spec) {
       return;
     }
     if (selected.key === p.key) {
+      progressed();
       const a = selected, b = p;
       clearSelection(true);
       const gl = goals[a.key];
@@ -733,7 +736,27 @@ export function playLevel(app, spec) {
     else if (!paused && level && !finished) clockStart();
   };
   document.addEventListener('visibilitychange', onVis);
-  const infoTimer = setInterval(() => !destroyed && level && updateInfo(), 500);
+  // idle nudge: point at the tray (hints live there) after a long search
+  let lastProgress = performance.now();
+  let nudged = false;
+  const infoTimer = setInterval(() => {
+    if (destroyed || !level) return;
+    updateInfo();
+    if (!nudged && !finished && !paused && !openSheet && performance.now() - lastProgress > 45000) {
+      nudged = true;
+      coach.textContent = t('idleHint');
+      coach.classList.remove('hide');
+      coach.classList.add('show');
+      const first = tiles.querySelector('.g-hidden-tile:not(.done)');
+      if (first) first.classList.add('g-hidden-nudge');
+      later(() => coach.classList.add('hide'), 6000);
+    }
+  }, 500);
+  const progressed = () => {
+    lastProgress = performance.now();
+    nudged = false;
+    for (const n of tiles.querySelectorAll('.g-hidden-nudge')) n.classList.remove('g-hidden-nudge');
+  };
 
   // ---- build the level
   (async () => {
@@ -774,22 +797,26 @@ export function playLevel(app, spec) {
     loader.classList.add('hide');
     later(() => loader.remove(), 400);
     banner.append(h('b', null, spec.title), h('span', null, spec.subtitle));
-    banner.classList.add('show');
-    later(() => banner.classList.remove('show'), 2200);
-    if (!app.seen('pinch')) {
-      coach.classList.add('show');
-      later(() => coach.classList.add('hide'), 7000);
-    }
+    const firstTime = !app.seen('pinch');
+    const go = () => {
+      banner.classList.add('show');
+      later(() => banner.classList.remove('show'), 2200);
+      if (firstTime) {
+        coach.classList.add('show');
+        later(() => coach.classList.add('hide'), 7000);
+      }
+      app.markSeen('pinch');
+    };
     const intro = app.introFor(spec);
     if (intro) {
       pauseClock();
       openSheet = intro(() => {
         openSheet = null;
-        app.markSeen('pinch');
+        go();
         resumeClock();
       });
     } else {
-      app.markSeen('pinch');
+      go();
       clockStart();
     }
   })().catch((e) => {

@@ -677,7 +677,6 @@ function floor(g, W, H, fy, rnd, st) {
     const n = 13;
     for (let i = -6; i < n + 6; i++) {
       const bx0 = (i / n) * W, bx1 = ((i + 1) / n) * W;
-      const t0 = 0;
       const tt = (fy - vy) / (H - vy);
       const p = (bx, t) => vx + (bx - vx) * t;
       const c = K.vary(rnd, i % 2 ? f.c1 : f.c2, 0.06);
@@ -689,7 +688,6 @@ function floor(g, W, H, fy, rnd, st) {
         const jt = (jy - vy) / (H - vy);
         K.line(g, p(bx0, jt), jy, p(bx1, jt), jy, rgba(shade(f.c1, -0.5), 0.45), 2);
       }
-      if (t0) break;
     }
   }
   // shading: darker far away, light pool in the middle
@@ -902,14 +900,14 @@ export function paintIndoor(g, W, H, rnd, st) {
     if (chosen.length && chosen[chosen.length - 1] === m && pool.length > 1) m = pickR(rnd, pool);
     chosen.push(m);
   }
-  const order = K.clamp(chosen.length, 1, n);
+  const count = K.clamp(chosen.length, 1, n);
   const mods = [];
   for (let i = chosen.length - 1; i > 0; i--) {
     const j = Math.floor(rnd() * (i + 1));
     [chosen[i], chosen[j]] = [chosen[j], chosen[i]];
   }
   let x = 6;
-  for (let i = 0; i < order; i++) {
+  for (let i = 0; i < count; i++) {
     const w = ((W - 12) * weights[i]) / sum;
     mods.push({ type: chosen[i], x0: x, x1: x + w });
     x += w;

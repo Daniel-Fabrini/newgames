@@ -199,7 +199,211 @@ export default {
     },
   ],
 
-  tips: [],
+  tips: [
+    {
+      title: { pt: 'A voz passiva nos avisos', en: 'The passive in announcements', es: 'La voz pasiva en los avisos' },
+      body: {
+        pt: 'No aeroporto, as notícias costumam vir na **voz passiva**: o voo “foi cancelado”, “foi atrasado”. Em {lang}, reconheça essa forma para entender os avisos e o balcão.',
+        en: 'At the airport, news often comes in the **passive voice**: the flight “has been canceled” or “delayed”. Learn to spot it in {lang} to follow announcements and desk staff.',
+        es: 'En el aeropuerto, las noticias suelen venir en **voz pasiva**: el vuelo “fue cancelado”, “ha sido retrasado”. Aprende a reconocerla en {lang} para entender los avisos.',
+      },
+      examples: [
+        { en: 'Our flight has been canceled.', es: 'Nuestro vuelo fue cancelado.', pt: 'O nosso voo foi cancelado.', fr: 'Notre vol a été annulé.', it: 'Il nostro volo è stato cancellato.', de: 'Unser Flug wurde gestrichen.' },
+        { en: 'My flight has been delayed by two hours.', es: 'Mi vuelo ha sido retrasado dos horas.', pt: 'O meu voo foi atrasado em duas horas.', fr: 'Mon vol a été retardé de deux heures.', it: 'Il mio volo è stato ritardato di due ore.', de: 'Mein Flug wurde um zwei Stunden verschoben.' },
+      ],
+    },
+    {
+      for: ['en'],
+      title: { pt: 'Check in ou check a bag?', en: 'Check in or check a bag?', es: '¿Check in o check a bag?' },
+      body: {
+        pt: '**Check in** é se apresentar para o voo; **check a bag** é despachar a mala. A mala que vai com você na cabine é o **carry-on**.',
+        en: '**Check in** means reporting for your flight; **check a bag** means handing over your suitcase. The bag you keep with you in the cabin is your **carry-on**.',
+        es: '**Check in** es presentarse para el vuelo; **check a bag** es documentar la maleta. La que llevas contigo en la cabina es el **carry-on**.',
+      },
+      examples: [{ en: 'I would like to check this suitcase, please.', es: 'Quisiera documentar esta maleta, por favor.', pt: 'Eu gostaria de despachar esta mala, por favor.', fr: "Je voudrais enregistrer cette valise, s'il vous plaît.", it: 'Vorrei imbarcare questa valigia, per favore.', de: 'Ich möchte bitte diesen Koffer aufgeben.' }],
+    },
+    {
+      for: ['es'],
+      title: { pt: 'Documentar, facturar ou despachar', en: 'Documentar, facturar or despachar', es: 'Documentar, facturar o despachar' },
+      body: {
+        pt: 'Para “despachar a mala”, no México se diz **documentar**, na Espanha **facturar** e no Cone Sul **despachar**. O cartão de embarque é **pase de abordar** no México.',
+        en: 'To check a bag is **documentar** in Mexico, **facturar** in Spain and **despachar** in the Southern Cone. A boarding pass is a **pase de abordar** in Mexico.',
+        es: 'Para entregar la maleta, en México se dice **documentar**, en España **facturar** y en el Cono Sur **despachar**. La tarjeta de embarque es **pase de abordar** en México.',
+      },
+      examples: [{ en: 'I would like to check this suitcase, please.', es: 'Quisiera facturar esta maleta, por favor.', pt: 'Eu gostaria de despachar esta mala, por favor.', fr: "Je voudrais enregistrer cette valise, s'il vous plaît.", it: 'Vorrei imbarcare questa valigia, per favore.', de: 'Ich möchte bitte diesen Koffer aufgeben.' }],
+    },
+    {
+      for: ['pt'],
+      title: { pt: 'Despachar, pousar e conexão', en: 'Despachar, pousar and conexão', es: 'Despachar, pousar y conexão' },
+      body: {
+        pt: 'No Brasil, a mala é **despachada**, o avião **pousa** (ou aterrissa) e a troca de avião é a **conexão**. Também se usa muito “**assim que** + futuro do subjuntivo”: assim que chegar.',
+        en: 'In Brazil, you **despachar** your bag, the plane **pousa** (lands) and a change of planes is a **conexão**. Note “**assim que** + future subjunctive”: assim que chegar (as soon as it arrives).',
+        es: 'En Brasil, la maleta se **despacha**, el avión **pousa** (aterriza) y el cambio de avión es la **conexão**. Fíjate en “**assim que** + futuro de subjuntivo”: assim que chegar (en cuanto llegue).',
+      },
+      examples: [{ en: 'We will send it to your hotel as soon as it arrives.', es: 'Se la enviaremos a su hotel en cuanto llegue.', pt: 'Vamos enviá-la para o seu hotel assim que chegar.', fr: "Nous l'enverrons à votre hôtel dès qu'elle arrivera.", it: 'Gliela mandiamo in albergo appena arriva.', de: 'Wir schicken ihn an Ihr Hotel, sobald er ankommt.' }],
+    },
+    {
+      for: ['fr'],
+      title: { pt: 'Dès que + futuro', en: 'Dès que + future', es: 'Dès que + futuro' },
+      body: {
+        pt: 'Em francês, depois de **dès que** (assim que) e **quand** usa-se o **futuro** quando a ação ainda vai acontecer: “dès qu’elle **arrivera**”. “Perder o voo” é **rater** ou **manquer**.',
+        en: 'In French, after **dès que** (as soon as) and **quand**, use the **future** for actions still to come: “dès qu’elle **arrivera**”. “To miss a flight” is **rater** or **manquer**.',
+        es: 'En francés, después de **dès que** (en cuanto) y **quand** se usa el **futuro** si la acción aún no ha ocurrido: “dès qu’elle **arrivera**”. “Perder el vuelo” es **rater** o **manquer**.',
+      },
+      examples: [
+        { en: 'We will send it to your hotel as soon as it arrives.', es: 'Se la enviaremos a su hotel en cuanto llegue.', pt: 'Vamos enviá-la para o seu hotel assim que chegar.', fr: "Nous l'enverrons à votre hôtel dès qu'elle arrivera.", it: 'Gliela mandiamo in albergo appena arriva.', de: 'Wir schicken ihn an Ihr Hotel, sobald er ankommt.' },
+      ],
+    },
+    {
+      for: ['it'],
+      title: { pt: 'Pronomes combinados: gliela', en: 'Combined pronouns: gliela', es: 'Pronombres combinados: gliela' },
+      body: {
+        pt: 'Em italiano, “a você” (**le**) + “a mala” (**la**) viram **gliela**: “Gliela mandiamo in albergo”. É o mesmo que o espanhol “se la”.',
+        en: 'In Italian, “to you” (**le**) + “it” (**la**, the suitcase) merge into **gliela**: “Gliela mandiamo in albergo” (We will send it to you at the hotel).',
+        es: 'En italiano, “a usted” (**le**) + “la” (la maleta) se combinan en **gliela**: “Gliela mandiamo in albergo”. Es como el español “se la mandamos”.',
+      },
+      examples: [{ en: 'We will send it to your hotel as soon as it arrives.', es: 'Se la mandamos a su hotel apenas llegue.', pt: 'Vamos enviá-la para o seu hotel assim que chegar.', fr: "Nous l'enverrons à votre hôtel dès qu'elle arrivera.", it: 'Gliela mandiamo in albergo appena arriva.', de: 'Wir schicken ihn an Ihr Hotel, sobald er ankommt.' }],
+    },
+    {
+      for: ['de'],
+      title: { pt: 'Verspätung haben', en: 'Verspätung haben', es: 'Verspätung haben' },
+      body: {
+        pt: 'Em alemão, o voo “**tem** atraso”: **Der Flug hat Verspätung**. Para despachar a mala, use **aufgeben**, e para trocar de voo, **umbuchen** (ambos separáveis).',
+        en: 'In German, a flight “**has** a delay”: **Der Flug hat Verspätung**. To check a bag, use **aufgeben**; to change to another flight, **umbuchen** (both separable).',
+        es: 'En alemán, el vuelo “**tiene** retraso”: **Der Flug hat Verspätung**. Para facturar la maleta se usa **aufgeben**, y para cambiar de vuelo, **umbuchen** (ambos separables).',
+      },
+      examples: [
+        { en: 'My flight has been delayed by two hours.', es: 'Mi vuelo tiene dos horas de retraso.', pt: 'O meu voo atrasou duas horas.', fr: 'Mon vol a deux heures de retard.', it: 'Il mio volo ha due ore di ritardo.', de: 'Mein Flug hat zwei Stunden Verspätung.' },
+        { en: 'I check my suitcase.', es: 'Documento mi maleta.', pt: 'Eu despacho a minha mala.', fr: "J'enregistre ma valise.", it: 'Imbarco la mia valigia.', de: 'Ich gebe meinen Koffer auf.' },
+      ],
+    },
+  ],
 
-  stories: [],
+  stories: [
+    {
+      title: { en: 'Window or aisle?', es: '¿Ventanilla o pasillo?', pt: 'Janela ou corredor?', fr: 'Hublot ou couloir ?', it: 'Finestrino o corridoio?', de: 'Fenster oder Gang?' },
+      cast: { A: { name: 'Nina', emoji: '👩🏽‍💼' }, B: { name: 'Paulo', emoji: '👨🏻' }, C: { name: 'Max', emoji: '👮🏼‍♂️' } },
+      lines: [
+        { who: 'A', en: 'Good morning. Where are you flying to today?', es: 'Buenos días. ¿A dónde viaja hoy?', pt: 'Bom dia. Para onde o senhor vai viajar hoje?', fr: "Bonjour. Où allez-vous aujourd'hui ?", it: 'Buongiorno. Dove vola oggi?', de: 'Guten Morgen. Wohin fliegen Sie heute?' },
+        { who: 'B', en: 'To Lisbon, with a connection in Madrid. Here is my passport.', es: 'A Lisboa, con escala en Madrid. Aquí tiene mi pasaporte.', pt: 'Para Lisboa, com conexão em Madri. Aqui está o meu passaporte.', fr: 'À Lisbonne, avec une correspondance à Madrid. Voici mon passeport.', it: 'A Lisbona, con scalo a Madrid. Ecco il mio passaporto.', de: 'Nach Lissabon, mit Umstieg in Madrid. Hier ist mein Reisepass.' },
+        {
+          ask: { pt: 'Onde o Paulo vai trocar de avião?', en: 'Where will Paulo change planes?', es: '¿Dónde va a cambiar de avión Paulo?' },
+          options: [
+            { pt: 'Em Madri', en: 'In Madrid', es: 'En Madrid' },
+            { pt: 'Em Lisboa', en: 'In Lisbon', es: 'En Lisboa' },
+            { pt: 'Em Roma', en: 'In Rome', es: 'En Roma' },
+          ],
+          answer: 0,
+        },
+        { who: 'A', en: 'Thank you. Would you prefer a window or an aisle seat?', es: 'Gracias. ¿Prefiere ventanilla o pasillo?', pt: 'Obrigada. O senhor prefere janela ou corredor?', fr: 'Merci. Vous préférez une place côté hublot ou côté couloir ?', it: 'Grazie. Preferisce finestrino o corridoio?', de: 'Danke. Möchten Sie lieber am Fenster oder am Gang sitzen?' },
+        {
+          who: 'B',
+          answer: 1,
+          reply: [
+            { en: 'My suitcase did not arrive.', es: 'Mi maleta no llegó.', pt: 'A minha mala não chegou.', fr: "Ma valise n'est pas arrivée.", it: 'La mia valigia non è arrivata.', de: 'Mein Koffer ist nicht angekommen.' },
+            { en: 'Aisle, please. And I would like to check this suitcase.', es: 'Pasillo, por favor. Y quisiera documentar esta maleta.', pt: 'Corredor, por favor. E eu gostaria de despachar esta mala.', fr: "Côté couloir, s'il vous plaît. Et je voudrais enregistrer cette valise.", it: 'Corridoio, per favore. E vorrei imbarcare questa valigia.', de: 'Am Gang, bitte. Und ich möchte diesen Koffer aufgeben.' },
+            { en: 'Who pays for the hotel tonight?', es: '¿Quién paga el hotel esta noche?', pt: 'Quem paga o hotel hoje à noite?', fr: "Qui paie l'hôtel ce soir ?", it: "Chi paga l'albergo stanotte?", de: 'Wer bezahlt heute Nacht das Hotel?' },
+          ],
+        },
+        { who: 'A', en: 'Your suitcase is overweight. There is a fee of fifty euros.', es: 'Su maleta tiene sobrepeso. Hay que pagar cincuenta euros.', pt: 'A sua mala está com excesso de peso. A taxa é de cinquenta euros.', fr: 'Votre valise est trop lourde. Il y a un supplément de cinquante euros.', it: 'La valigia supera il peso consentito. Il supplemento è di cinquanta euro.', de: 'Ihr Koffer hat Übergewicht. Das kostet fünfzig Euro extra.' },
+        { who: 'B', en: 'Oh no. Then I will move some things to my backpack.', es: 'Ay, no. Entonces paso algunas cosas a mi mochila.', pt: 'Ah, não. Então vou passar algumas coisas para a minha mochila.', fr: 'Oh non. Alors je vais mettre quelques affaires dans mon sac à dos.', it: 'Oh no. Allora sposto qualcosa nello zaino.', de: 'Oh nein. Dann packe ich ein paar Sachen in meinen Rucksack um.' },
+        { who: 'A', en: 'Perfect. Here is your boarding pass. Gate twelve, at ten fifteen.', es: 'Perfecto. Aquí tiene su tarjeta de embarque. Puerta doce, a las diez y cuarto.', pt: 'Perfeito. Aqui está o seu cartão de embarque. Portão doze, às dez e quinze.', fr: "Parfait. Voici votre carte d'embarquement. Porte douze, à dix heures quinze.", it: "Perfetto. Ecco la sua carta d'imbarco. Gate dodici, alle dieci e un quarto.", de: 'Perfekt. Hier ist Ihre Bordkarte. Gate zwölf, um zehn Uhr fünfzehn.' },
+        {
+          ask: { pt: 'Por que o Paulo passa coisas para a mochila?', en: 'Why does Paulo move things to his backpack?', es: '¿Por qué Paulo pasa cosas a su mochila?' },
+          options: [
+            { pt: 'A mala estava pesada demais', en: 'His suitcase was too heavy', es: 'La maleta pesaba demasiado' },
+            { pt: 'A mala estava quebrada', en: 'His suitcase was broken', es: 'La maleta estaba rota' },
+            { pt: 'Ele não tinha mala', en: 'He had no suitcase', es: 'No tenía maleta' },
+          ],
+          answer: 0,
+        },
+        { who: 'C', en: 'Please put your liquids and your laptop in the tray.', es: 'Por favor, ponga los líquidos y la computadora en la bandeja.', pt: 'Por favor, coloque os líquidos e o notebook na bandeja.', fr: 'Veuillez mettre vos liquides et votre ordinateur dans le bac.', it: 'Per favore, metta i liquidi e il computer nella vaschetta.', de: 'Bitte legen Sie Ihre Flüssigkeiten und Ihren Laptop in die Schale.' },
+        { who: 'B', en: 'Do I have to take off my shoes too?', es: '¿Tengo que quitarme los zapatos también?', pt: 'Eu preciso tirar os sapatos também?', fr: 'Est-ce que je dois aussi enlever mes chaussures ?', it: 'Devo togliermi anche le scarpe?', de: 'Muss ich auch meine Schuhe ausziehen?' },
+        { who: 'C', en: 'No, that is not necessary. But this bottle of water is not allowed.', es: 'No, no hace falta. Pero esta botella de agua no está permitida.', pt: 'Não, não precisa. Mas esta garrafa de água não é permitida.', fr: "Non, ce n'est pas nécessaire. Mais cette bouteille d'eau est interdite.", it: "No, non serve. Ma questa bottiglia d'acqua non è ammessa.", de: 'Nein, das ist nicht nötig. Aber diese Wasserflasche ist nicht erlaubt.' },
+        {
+          who: 'B',
+          answer: 2,
+          reply: [
+            { en: 'Could you put me on the next flight?', es: '¿Me podría poner en el próximo vuelo?', pt: 'Você poderia me colocar no próximo voo?', fr: 'Pourriez-vous me mettre sur le prochain vol ?', it: 'Potrebbe mettermi sul prossimo volo?', de: 'Könnten Sie mich auf den nächsten Flug umbuchen?' },
+            { en: 'It is a large blue suitcase with wheels.', es: 'Es una maleta azul grande, con ruedas.', pt: 'É uma mala azul grande, com rodinhas.', fr: "C'est une grande valise bleue à roulettes.", it: 'È una grande valigia blu con le ruote.', de: 'Es ist ein großer blauer Koffer mit Rollen.' },
+            { en: 'Sorry, I forgot. You can throw it away.', es: 'Perdón, se me olvidó. Puede tirarla.', pt: 'Desculpe, eu esqueci. Pode jogar fora.', fr: "Pardon, j'ai oublié. Vous pouvez la jeter.", it: 'Scusi, me ne sono dimenticato. Può buttarla.', de: 'Entschuldigung, das habe ich vergessen. Sie können sie wegwerfen.' },
+          ],
+        },
+        { who: 'C', en: 'No problem. Have a good flight!', es: 'No hay problema. ¡Buen vuelo!', pt: 'Sem problema. Bom voo!', fr: 'Pas de problème. Bon vol !', it: 'Nessun problema. Buon volo!', de: 'Kein Problem. Guten Flug!' },
+        {
+          ask: { pt: 'O que o Paulo esqueceu de tirar da bagagem de mão?', en: 'What did Paulo forget to take out of his carry-on?', es: '¿Qué olvidó sacar Paulo de su equipaje de mano?' },
+          options: [
+            { pt: 'Uma garrafa de água', en: 'A bottle of water', es: 'Una botella de agua' },
+            { pt: 'O notebook', en: 'His laptop', es: 'La computadora' },
+            { pt: 'Os sapatos', en: 'His shoes', es: 'Los zapatos' },
+          ],
+          answer: 0,
+        },
+      ],
+    },
+    {
+      title: { en: 'Where is my suitcase?', es: '¿Dónde está mi maleta?', pt: 'Cadê a minha mala?', fr: 'Où est ma valise ?', it: "Dov'è la mia valigia?", de: 'Wo ist mein Koffer?' },
+      cast: { A: { name: 'Lucas', emoji: '👨🏻‍💼' }, B: { name: 'Ana', emoji: '👩🏽' } },
+      lines: [
+        { who: 'A', en: 'Good evening. How can I help you?', es: 'Buenas noches. ¿En qué puedo ayudarla?', pt: 'Boa noite. Em que posso ajudar?', fr: 'Bonsoir. Que puis-je faire pour vous ?', it: 'Buonasera. Come posso aiutarla?', de: 'Guten Abend. Wie kann ich Ihnen helfen?' },
+        {
+          who: 'B',
+          answer: 0,
+          reply: [
+            { en: 'Good evening. My suitcase did not arrive.', es: 'Buenas noches. Mi maleta no llegó.', pt: 'Boa noite. A minha mala não chegou.', fr: "Bonsoir. Ma valise n'est pas arrivée.", it: 'Buonasera. La mia valigia non è arrivata.', de: 'Guten Abend. Mein Koffer ist nicht angekommen.' },
+            { en: 'Good evening. I would like a window seat.', es: 'Buenas noches. Quisiera un asiento de ventanilla.', pt: 'Boa noite. Eu gostaria de um assento na janela.', fr: 'Bonsoir. Je voudrais une place côté hublot.', it: 'Buonasera. Vorrei un posto finestrino.', de: 'Guten Abend. Ich hätte gern einen Fensterplatz.' },
+            { en: 'Good evening. Do I have to take off my shoes?', es: 'Buenas noches. ¿Tengo que quitarme los zapatos?', pt: 'Boa noite. Eu preciso tirar os sapatos?', fr: 'Bonsoir. Est-ce que je dois enlever mes chaussures ?', it: 'Buonasera. Devo togliermi le scarpe?', de: 'Guten Abend. Muss ich meine Schuhe ausziehen?' },
+          ],
+        },
+        { who: 'A', en: 'I am sorry. Which flight did you come on?', es: 'Lo siento. ¿En qué vuelo llegó?', pt: 'Sinto muito. Em qual voo a senhora chegou?', fr: 'Je suis désolé. Vous êtes arrivée par quel vol ?', it: 'Mi dispiace. Con quale volo è arrivata?', de: 'Das tut mir leid. Mit welchem Flug sind Sie gekommen?' },
+        { who: 'B', en: 'The flight from Paris. It was three hours late.', es: 'En el vuelo de París. Llegó con tres horas de retraso.', pt: 'No voo de Paris. Ele atrasou três horas.', fr: 'Le vol de Paris. Il avait trois heures de retard.', it: 'Con il volo da Parigi. Aveva tre ore di ritardo.', de: 'Mit dem Flug aus Paris. Er hatte drei Stunden Verspätung.' },
+        {
+          ask: { pt: 'De onde vinha o voo da Ana?', en: "Where was Ana's flight from?", es: '¿De dónde venía el vuelo de Ana?' },
+          options: [
+            { pt: 'De Paris', en: 'From Paris', es: 'De París' },
+            { pt: 'De Madri', en: 'From Madrid', es: 'De Madrid' },
+            { pt: 'De Lisboa', en: 'From Lisbon', es: 'De Lisboa' },
+          ],
+          answer: 0,
+        },
+        { who: 'A', en: 'Could you describe your suitcase?', es: '¿Podría describir su maleta?', pt: 'A senhora poderia descrever a sua mala?', fr: 'Pourriez-vous décrire votre valise ?', it: 'Potrebbe descrivere la sua valigia?', de: 'Könnten Sie Ihren Koffer beschreiben?' },
+        { who: 'B', en: 'It is a large blue suitcase with wheels. It has a yellow ribbon.', es: 'Es una maleta azul grande, con ruedas. Tiene una cinta amarilla.', pt: 'É uma mala azul grande, com rodinhas. Tem uma fita amarela.', fr: "C'est une grande valise bleue à roulettes. Elle a un ruban jaune.", it: 'È una grande valigia blu con le ruote. Ha un nastro giallo.', de: 'Es ist ein großer blauer Koffer mit Rollen. Er hat ein gelbes Band.' },
+        {
+          ask: { pt: 'Como é a mala da Ana?', en: "What does Ana's suitcase look like?", es: '¿Cómo es la maleta de Ana?' },
+          options: [
+            { pt: 'Azul, com uma fita amarela', en: 'Blue, with a yellow ribbon', es: 'Azul, con una cinta amarilla' },
+            { pt: 'Amarela, com uma fita azul', en: 'Yellow, with a blue ribbon', es: 'Amarilla, con una cinta azul' },
+            { pt: 'Pequena e preta', en: 'Small and black', es: 'Pequeña y negra' },
+          ],
+          answer: 0,
+        },
+        { who: 'A', en: 'Thank you. The system says it is still in Paris.', es: 'Gracias. El sistema dice que todavía está en París.', pt: 'Obrigado. O sistema diz que ela ainda está em Paris.', fr: "Merci. D'après le système, elle est encore à Paris.", it: 'Grazie. Secondo il sistema, è ancora a Parigi.', de: 'Danke. Laut System ist er noch in Paris.' },
+        { who: 'B', en: 'In Paris? But all my clothes are in it!', es: '¿En París? ¡Pero toda mi ropa está ahí!', pt: 'Em Paris? Mas todas as minhas roupas estão nela!', fr: 'À Paris ? Mais tous mes vêtements sont dedans !', it: 'A Parigi? Ma ci sono tutti i miei vestiti!', de: 'In Paris? Aber meine ganze Kleidung ist da drin!' },
+        { who: 'A', en: "Don't worry. It will arrive on tomorrow morning's flight.", es: 'No se preocupe. Llegará en el vuelo de mañana por la mañana.', pt: 'Não se preocupe. Ela vai chegar no voo de amanhã de manhã.', fr: 'Ne vous inquiétez pas. Elle arrivera par le vol de demain matin.', it: 'Non si preoccupi. Arriverà con il volo di domani mattina.', de: 'Keine Sorge. Er kommt mit dem Flug morgen früh an.' },
+        {
+          who: 'B',
+          answer: 1,
+          reply: [
+            { en: 'Window, please.', es: 'Ventanilla, por favor.', pt: 'Janela, por favor.', fr: "Côté hublot, s'il vous plaît.", it: 'Finestrino, per favore.', de: 'Am Fenster, bitte.' },
+            { en: 'And what do I need to do now?', es: '¿Y qué tengo que hacer ahora?', pt: 'E o que eu preciso fazer agora?', fr: "Et qu'est-ce que je dois faire maintenant ?", it: 'E adesso cosa devo fare?', de: 'Und was muss ich jetzt machen?' },
+            { en: 'Can I take this backpack on board?', es: '¿Puedo llevar esta mochila a bordo?', pt: 'Posso levar esta mochila a bordo?', fr: 'Je peux prendre ce sac à dos en cabine ?', it: 'Posso portare questo zaino a bordo?', de: 'Darf ich diesen Rucksack mit an Bord nehmen?' },
+          ],
+        },
+        { who: 'A', en: 'Please fill out this form with your hotel address.', es: 'Por favor, llene este formulario con la dirección de su hotel.', pt: 'Por favor, preencha este formulário com o endereço do seu hotel.', fr: "Veuillez remplir ce formulaire avec l'adresse de votre hôtel.", it: "Compili questo modulo con l'indirizzo del suo albergo, per favore.", de: 'Bitte füllen Sie dieses Formular mit Ihrer Hoteladresse aus.' },
+        { who: 'B', en: 'Of course. Will you send it to my hotel?', es: 'Claro. ¿Me la van a mandar al hotel?', pt: 'Claro. Vocês vão mandar a mala para o meu hotel?', fr: "Bien sûr. Vous allez l'envoyer à mon hôtel ?", it: 'Certo. Me la mandate in albergo?', de: 'Natürlich. Schicken Sie ihn mir ins Hotel?' },
+        { who: 'A', en: 'Yes, we will send it to your hotel as soon as it arrives.', es: 'Sí, se la enviaremos a su hotel en cuanto llegue.', pt: 'Sim, vamos enviá-la para o seu hotel assim que chegar.', fr: "Oui, nous l'enverrons à votre hôtel dès qu'elle arrivera.", it: 'Sì, gliela mandiamo in albergo appena arriva.', de: 'Ja, wir schicken ihn an Ihr Hotel, sobald er ankommt.' },
+        { who: 'B', en: 'And in the meantime? I have nothing to wear.', es: '¿Y mientras tanto? No tengo nada que ponerme.', pt: 'E enquanto isso? Eu não tenho nada para vestir.', fr: "Et en attendant ? Je n'ai rien à me mettre.", it: 'E nel frattempo? Non ho niente da mettermi.', de: 'Und in der Zwischenzeit? Ich habe nichts anzuziehen.' },
+        { who: 'A', en: 'You can buy what you need. Keep the receipts and we will refund you.', es: 'Puede comprar lo necesario. Guarde los recibos y le devolvemos el dinero.', pt: 'A senhora pode comprar o que precisar. Guarde os recibos e nós reembolsamos.', fr: 'Vous pouvez acheter le nécessaire. Gardez les tickets et nous vous rembourserons.', it: "Può comprare l'indispensabile. Conservi gli scontrini e la rimborseremo.", de: 'Sie können das Nötigste kaufen. Heben Sie die Belege auf, wir erstatten die Kosten.' },
+        {
+          ask: { pt: 'O que a companhia aérea vai fazer?', en: 'What will the airline do?', es: '¿Qué va a hacer la aerolínea?' },
+          options: [
+            { pt: 'Devolver o dinheiro do que a Ana comprar', en: 'Pay Ana back for what she buys', es: 'Devolverle a Ana el dinero de lo que compre' },
+            { pt: 'Dar uma mala nova para a Ana', en: 'Give Ana a new suitcase', es: 'Darle a Ana una maleta nueva' },
+            { pt: 'Colocar a Ana em outro voo', en: 'Put Ana on another flight', es: 'Poner a Ana en otro vuelo' },
+          ],
+          answer: 0,
+        },
+      ],
+    },
+  ],
 };

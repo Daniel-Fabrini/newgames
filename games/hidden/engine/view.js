@@ -93,6 +93,11 @@ export class SceneView {
     c.removeEventListener('lostpointercapture', this._up);
     c.removeEventListener('wheel', this._wheel);
     c.width = c.height = 1;
+    if (this.scene) {
+      this.scene.front.width = this.scene.front.height = 0;
+      if (this.scene.back) this.scene.back.width = this.scene.back.height = 0;
+      this.scene = null;
+    }
     this.canvas.remove();
   }
 

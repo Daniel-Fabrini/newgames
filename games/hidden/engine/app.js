@@ -99,6 +99,7 @@ export async function createGame(root, ctx, cfg) {
     if (screen) screen.destroy();
     screen = null;
     for (const el of root.querySelectorAll('.g-hidden-sheet-wrap')) el.remove();
+    trimGlyphs(false);
     screen = make();
   }
 
@@ -351,6 +352,7 @@ export async function createGame(root, ctx, cfg) {
     if (screen) screen.destroy();
     screen = null;
     for (const el of root.querySelectorAll('.g-hidden-sheet-wrap')) el.remove();
+    trimGlyphs(false);
     trimGlyphs();
     if (window.__hiddenDebug) delete window.__hiddenDebug;
   };

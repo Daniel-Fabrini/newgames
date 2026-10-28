@@ -143,14 +143,17 @@
   bottom: 14px;
   z-index: 3;
   transform: translateX(-50%);
-  background: rgba(10, 10, 12, 0.8);
+  width: max-content;
+  max-width: calc(100% - 28px);
+  background: rgba(10, 10, 12, 0.82);
   border: 1px solid var(--gh-line);
-  border-radius: 999px;
+  border-radius: 16px;
   padding: 7px 14px;
   font-size: 13px;
   font-weight: 800;
+  line-height: 1.3;
+  text-align: center;
   color: #f2e6c4;
-  white-space: nowrap;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.4s;
@@ -315,6 +318,12 @@
   display: grid;
   place-items: center;
   border: 1.5px solid var(--gh-gold2);
+}
+.g-hidden-nudge {
+  animation: g-hidden-nudge 1.2s ease-in-out infinite;
+}
+@keyframes g-hidden-nudge {
+  50% { box-shadow: 0 0 0 3px var(--gh-gold), 0 0 18px rgba(226, 179, 60, 0.8); transform: translateY(-3px); }
 }
 .g-hidden-hand {
   flex: 0 0 66px;

@@ -130,7 +130,8 @@ export function supported(ch) {
 }
 
 // Frees the big sprites (called when leaving a level).
-export function trimGlyphs() {
+export function trimGlyphs(force = true) {
+  if (!force && cache.size < 90) return;
   for (const gl of cache.values()) {
     for (const k of [...gl.sprites.keys()]) if (!k.endsWith('64') && !k.startsWith('clean')) gl.sprites.delete(k);
   }
