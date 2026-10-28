@@ -82,6 +82,11 @@ const ART = {
   naval: () => `<div class="art art-naval"><span class="art-grid"></span>
     <span class="art-emoji" style="--s:44;left:10%;top:18%">🚢</span><span class="art-emoji" style="--s:20;right:12%;top:10%">💥</span>
     <span class="art-emoji" style="--s:14;right:22%;top:44%">🎯</span></div>`,
+  farm: () => `<div class="art art-farm"><span class="art-field"></span>
+    <span class="art-emoji" style="--s:20;right:10%;top:6%">☀️</span><span class="art-emoji" style="--s:40;left:6%;top:18%">🚜</span>
+    <span class="art-emoji" style="--s:22;right:10%;top:34%">🐄</span><span class="art-emoji" style="--s:14;left:52%;top:20%">🌾</span></div>`,
+  pingpong: () => `<div class="art art-pingpong"><span class="art-table"></span>
+    <span class="art-emoji" style="--s:46;left:18%;top:16%">🏓</span><span class="art-ball"></span></div>`,
 };
 
 export function gameArt(id) {

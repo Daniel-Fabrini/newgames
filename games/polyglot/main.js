@@ -339,12 +339,16 @@ export async function mount(root, ctx) {
     app.returnTab = 'learn';
     const T = app.T;
     if (kind === 'story') {
-      return runStory(app, unit, unit.stories[0], {
-        onComplete: () => {
-          if (!replay) completeNode(node);
-          return { xp: replay ? 5 : 10, gems: replay ? 0 : 5 };
-        },
-      });
+      // Units with several stories (role-play units) play them back to back.
+      const play = (i) =>
+        runStory(app, unit, unit.stories[i], {
+          onComplete: () => {
+            const last = i >= unit.stories.length - 1;
+            if (!replay && last) completeNode(node);
+            return { xp: replay ? 5 : 10, gems: replay ? 0 : 5, after: last ? undefined : () => play(i + 1) };
+          },
+        });
+      return play(0);
     }
     const gen = app.generator();
     const prev = app.prevUnits(unit.id);

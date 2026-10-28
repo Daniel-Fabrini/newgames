@@ -1926,3 +1926,49 @@ img {
   background-image: linear-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
   background-size: 12.5% 12.5%;
 }
+
+.art-farm {
+  background: linear-gradient(180deg, #8fd3ff 0%, #c8ecff 40%, #7cc95a 41%, #4f9a33 100%);
+}
+.art-farm .art-field {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 58%;
+  height: 50%;
+  background: repeating-linear-gradient(100deg, #c99a4a 0 6%, #a57a33 6% 12%);
+  transform: perspective(200px) rotateX(30deg);
+}
+.art-pingpong {
+  background: radial-gradient(80% 70% at 50% 30%, #3b4fd6, #1b2380 70%, #0d1145);
+}
+.art-pingpong .art-table {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 34%;
+  height: 34%;
+  background: #1f6fd1;
+  border: 2px solid #fff;
+  transform: perspective(160px) rotateX(38deg);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.5);
+}
+.art-pingpong .art-table::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 3px;
+  background: #fff;
+}
+.art-pingpong .art-ball {
+  position: absolute;
+  right: 20%;
+  top: 14%;
+  width: 9cqmin;
+  height: 9cqmin;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, #ffd9a0 60%, #f29e3c);
+  box-shadow: 0 0 10px rgba(255, 210, 120, 0.7);
+}

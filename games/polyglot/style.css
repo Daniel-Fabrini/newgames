@@ -3195,3 +3195,24 @@
   flex: 1;
   min-width: 0;
 }
+
+.g-polyglot .pg-audio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+}
+.g-polyglot .pg-spk.slow:not(.big) {
+  width: 34px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--pg-panel2);
+  color: var(--pg-gold-hi);
+  border: 1px solid var(--pg-line);
+  box-shadow: 0 2px 0 #050506;
+}
+.g-polyglot .pg-spk.slow:not(.big) svg {
+  width: 22px;
+  height: 22px;
+}

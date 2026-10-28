@@ -241,6 +241,42 @@ export const GAMES = [
     trophies: ['🏆', '🚢', '💣', '⭐', '🎯'],
     load: () => import('../games/naval/main.js'),
   },
+  {
+    id: 'farm',
+    cat: 'strategy',
+    name: { pt: 'Fazenda Aventura', en: 'Farm Adventure', es: 'Granja Aventura' },
+    sub: { pt: 'Fazenda e Expedições', en: 'Farm & Expeditions', es: 'Granja y Expediciones' },
+    about: {
+      pt: 'Plante, crie animais, produza na fábrica e entregue encomendas. Depois parta em expedições por terras selvagens atrás de tesouros.',
+      en: 'Grow crops, raise animals, run factories and fill orders. Then set off on expeditions into the wild in search of treasure.',
+      es: 'Cultiva, cría animales, produce en las fábricas y entrega pedidos. Luego parte en expediciones por tierras salvajes en busca de tesoros.',
+    },
+    modes: [
+      { id: 'farm', icon: 'home', label: { pt: 'Fazenda', en: 'Farm', es: 'Granja' } },
+      { id: 'expedition', icon: 'pin', label: { pt: 'Expedição', en: 'Expedition', es: 'Expedición' } },
+      { id: 'orders', icon: 'calendar', label: { pt: 'Encomendas', en: 'Orders', es: 'Pedidos' } },
+    ],
+    trophies: ['🏆', '🌾', '🐄', '⭐', '🎯'],
+    load: () => import('../games/farm/main.js'),
+  },
+  {
+    id: 'pingpong',
+    cat: 'sport',
+    name: { pt: 'Tênis de Mesa', en: 'Table Tennis', es: 'Tenis de Mesa' },
+    sub: { pt: 'Ping-Pong 3D', en: '3D Ping Pong', es: 'Ping-Pong 3D' },
+    about: {
+      pt: 'Deslize o dedo para rebater, dê efeito e solte a cortada. Vença rivais cada vez mais fortes numa volta ao mundo por arenas incríveis.',
+      en: 'Swipe to hit, add spin and unleash the smash. Beat ever tougher rivals on a world tour through stunning arenas.',
+      es: 'Desliza el dedo para golpear, dale efecto y suelta el remate. Vence a rivales cada vez más fuertes en una gira mundial por arenas increíbles.',
+    },
+    modes: [
+      { id: 'tour', icon: 'trophy', label: { pt: 'Volta ao Mundo', en: 'World Tour', es: 'Gira Mundial' } },
+      { id: 'quick', icon: 'user', label: { pt: 'Partida Rápida', en: 'Quick Match', es: 'Partida Rápida' } },
+      { id: 'training', icon: 'flag', label: { pt: 'Treino', en: 'Training', es: 'Entrenamiento' } },
+    ],
+    trophies: ['🏆', '🏓', '🔥', '⭐', '🎯'],
+    load: () => import('../games/pingpong/main.js'),
+  },
 ];
 
 export const CATEGORIES = [

@@ -39,6 +39,8 @@ export function speakerButton(env, text, lang, { slow = false, big = false, labe
     });
   }
   btn.play = play;
+  btn.dataset.text = text;
+  btn.dataset.lang = lang;
   if (!env.speech.has(lang)) btn.style.display = 'none';
   return btn;
 }
@@ -74,11 +76,16 @@ export function sentenceView(env, text, lang, { cls = '' } = {}) {
 
 function bubble(env, content, speaker, avatar) {
   const { h } = env;
+  let audio = null;
+  if (speaker && speaker.dataset.text) {
+    // normal + slow ("turtle") playback side by side
+    audio = h('div', { class: 'pg-audio' }, speaker, speakerButton(env, speaker.dataset.text, speaker.dataset.lang, { slow: true }));
+  }
   return h(
     'div',
     { class: 'pg-bubble-row' },
     avatar || h('div', { class: 'pg-bubble-ava', html: mascotSVG({ mood: 'happy' }) }),
-    h('div', { class: 'pg-bubble' }, speaker, content),
+    h('div', { class: 'pg-bubble' }, audio || speaker, content),
   );
 }
 
