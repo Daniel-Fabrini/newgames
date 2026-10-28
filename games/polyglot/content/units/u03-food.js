@@ -199,7 +199,7 @@ export default {
       for: ['de'],
       title: { pt: 'Três gêneros', en: 'Three genders', es: 'Tres géneros' },
       body: {
-        pt: 'O alemão tem três gêneros: **der** (masculino), **die** (feminino) e **das** (neutro). Depois de “ein/einen” o artigo também muda.',
+        pt: 'O alemão tem três gêneros: **der** (masculino), **die** (feminino) e **das** (neutro). Depois de um verbo, o artigo também muda: “Ich esse **einen** Apfel”.',
         en: 'German has three genders: **der** (masculine), **die** (feminine) and **das** (neuter). The article also changes after a verb: “Ich esse **einen** Apfel”.',
         es: 'El alemán tiene tres géneros: **der** (masculino), **die** (femenino) y **das** (neutro). Después de un verbo el artículo también cambia: “Ich esse **einen** Apfel”.',
       },

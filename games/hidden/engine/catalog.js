@@ -267,6 +267,7 @@ const RAW = `
 🃏|curinga|joker card|comodín
 🎭|máscaras|theater masks|máscaras
 🎪|tenda de circo|circus tent|carpa de circo
+🏰|castelo|castle|castillo
 🎫|ingresso|ticket|boleto
 🎬|claquete|clapper board|claqueta
 🎸|guitarra|guitar|guitarra|guitar

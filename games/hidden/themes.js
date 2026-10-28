@@ -59,7 +59,7 @@ export const THEMES = [
     name: { pt: 'Biblioteca', en: 'Library', es: 'Biblioteca' },
     card: ['#1f3a2a', '#6a8a4a'],
     edge: '#0a140c',
-    items: '📚 📖 📜 📝 📎 📌 📐 🔍 👓 💡 🌍 🦉 ☕ 🍵 🎓 🧮 🔬 🔭 ⌛ 🔑 🧭 🏺 🪶 📰 💌 🎻 🐈 🪴 📁 📅 🔖 🎩 ⏰ 🍎 🕯 🧸',
+    items: '📚 📖 📜 📝 📎 📌 📐 🔍 👓 💡 🌍 🦉 ☕ 🍵 🎓 🧮 🔬 🔭 ⌛ 🔑 🧭 🏺 🪶 📰 💌 🎻 🐈 🪴 📁 📅 🔖 🎩 ⏰ 🍎 🧸',
     wall: '⏰ 📅',
     paint: {
       wall: { type: 'damask', c1: '#2f5a42', accent: '#9ac08a' },
@@ -202,7 +202,7 @@ export const THEMES = [
     name: { pt: 'Torre do Mago', en: "Wizard's Tower", es: 'Torre del Mago' },
     card: ['#2a1a4a', '#7a5ac0'],
     edge: '#0a0614',
-    items: '🔮 🪄 🧪 📜 📚 🦉 🐸 🐈 🦇 🍄 💎 🧿 🌙 ⭐ 🪐 🔭 🧹 🎩 🔑 ⏳ 🧭 🪶 🐉 🐍 🦄 🫖 💀 🦴 🏺 📿 🔔 🧲 🗝',
+    items: '🔮 🪄 🧪 📜 📚 🦉 🐸 🐈 🦇 🍄 💎 🧿 🌙 ⭐ 🪐 🔭 🧹 🎩 🔑 ⏳ 🧭 🪶 🐉 🐍 🦄 🫖 💀 🦴 🏺 📿 🔔 🧲',
     fill: '🌿',
     wall: '🦇 🌙 ⭐',
     paint: {
