@@ -146,7 +146,7 @@ export async function mount(root, ctx) {
     const hero = { ...S.hero, ...(opts.over || {}) };
     const look = { ...kit, ...CO.heroLook(hero), num: hero.num, front: opts.front !== false };
     if (opts.bg !== false) {
-      const sp = g.createRadialGradient((w * dpr) / 2, hgt * dpr * 0.3, 4, (w * dpr) / 2, hgt * dpr * 0.5, w * dpr * 0.7);
+      const sp = g.createRadialGradient((w * dpr) / 2, hgt * dpr * 0.3, 4, (w * dpr) / 2, hgt * dpr * 0.4, Math.min(w, hgt) * dpr * 0.5);
       sp.addColorStop(0, 'rgba(255,226,140,0.32)');
       sp.addColorStop(1, 'rgba(255,226,140,0)');
       g.fillStyle = sp;
@@ -1129,7 +1129,7 @@ export async function mount(root, ctx) {
       grid.querySelectorAll('.g-hero-sw').forEach((e, j) => (e.style.color = CO.BOOTS[j].color));
     } else if (tab === 'hair') {
       for (const hs of CO.HAIRS) {
-        const sw = avatarCanvas(64, 64, { over: { hair: hs.id }, scale: 70, feetY: 168, bg: false });
+        const sw = avatarCanvas(64, 64, { over: { hair: hs.id }, scale: 150, feetY: 284, bg: false });
         grid.append(item('hair:' + hs.id, t('hair_' + hs.id), hs.price, S.hero.hair === hs.id, h('span', { class: 'g-hero-sw' }, sw), () => (S.hero.hair = hs.id)));
       }
     } else if (tab === 'hairColor') {

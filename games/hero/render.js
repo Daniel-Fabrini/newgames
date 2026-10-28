@@ -977,6 +977,12 @@ export function drawBody(g, ent, look, lift = 0) {
 
   // head
   const hy = -1.64;
+  if (front && (look.hair === 'afro' || look.hair === 'curly')) {
+    g.fillStyle = look.hairColor;
+    g.beginPath();
+    g.arc(0, hy - 0.05, look.hair === 'afro' ? 0.2 : 0.165, 0, Math.PI * 2);
+    g.fill();
+  }
   g.fillStyle = look.skin;
   g.beginPath();
   g.arc(0, hy, 0.135, 0, Math.PI * 2);
@@ -1045,11 +1051,17 @@ function drawHair(g, look, front, hy) {
   }
   if (st === 'curly' || st === 'afro') {
     const r = st === 'afro' ? 0.2 : 0.165;
-    g.beginPath();
-    g.arc(0, hy - 0.05, r, 0, Math.PI * 2);
-    g.fill();
+    if (!front) {
+      g.beginPath();
+      g.arc(0, hy - 0.05, r, 0, Math.PI * 2);
+      g.fill();
+    } else {
+      g.beginPath();
+      g.ellipse(0, hy - 0.11, r * 0.95, r * 0.5, 0, Math.PI, 0);
+      g.fill();
+    }
     g.fillStyle = 'rgba(255,255,255,0.12)';
-    for (let i = 0; i < 6; i++) {
+    for (let i = front ? 3 : 0; i < 6; i++) {
       g.beginPath();
       g.arc(Math.cos(i * 1.1) * r * 0.6, hy - 0.05 + Math.sin(i * 1.1) * r * 0.6, 0.025, 0, Math.PI * 2);
       g.fill();
@@ -1071,7 +1083,7 @@ function drawHair(g, look, front, hy) {
     }
     g.fill();
   } else if (st === 'long') {
-    g.fillRect(-0.15, hy - 0.04, 0.3, front ? 0.12 : 0.3);
+    if (!front) g.fillRect(-0.15, hy - 0.04, 0.3, 0.3);
     if (front) {
       g.fillRect(-0.16, hy - 0.04, 0.06, 0.28);
       g.fillRect(0.1, hy - 0.04, 0.06, 0.28);

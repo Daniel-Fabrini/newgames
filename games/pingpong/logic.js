@@ -35,9 +35,9 @@ export function aiProfile(tier, style) {
   return {
     style,
     tier: t,
-    timeErr: Math.max(0.01, 0.1 * Math.exp(-0.2 * t)),
-    aimErr: Math.max(0.025, 0.36 * Math.exp(-0.2 * t)),
-    miss: Math.max(0.015, 0.1 * Math.exp(-0.2 * t)),
+    timeErr: Math.max(0.02, 0.14 * Math.exp(-0.15 * t)),
+    aimErr: Math.max(0.05, 0.4 * Math.exp(-0.15 * t)),
+    miss: Math.max(0.03, 0.22 * Math.exp(-0.15 * t)),
     power: 0.92 + Math.min(0.5, 0.03 * t),
     speed: 2.6 + Math.min(4, 0.2 * t),
     smashChance: Math.min(0.9, 0.2 + 0.05 * t),

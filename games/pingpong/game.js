@@ -32,7 +32,6 @@ export function createGame(env) {
   let trainState = null;
   let cached = '';
   let hintCache = '';
-  let lastEvt = 0;
   let serverAtStart = 0;
   let firstBounce = null;
   let gameEnd = false;
@@ -534,9 +533,6 @@ export function createGame(env) {
     },
     get ended() {
       return ended;
-    },
-    setEnded() {
-      ended = true;
     },
   };
 }

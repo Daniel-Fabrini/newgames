@@ -277,7 +277,7 @@ export const GAMES = [
   {
     id: 'pingpong',
     cat: 'sport',
-    progress: 5,
+    progress: 100,
     name: { pt: 'Tênis de Mesa', en: 'Table Tennis', es: 'Tenis de Mesa' },
     sub: { pt: 'Ping-Pong 3D', en: '3D Ping Pong', es: 'Ping-Pong 3D' },
     about: {

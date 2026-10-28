@@ -1,7 +1,6 @@
 // Menu screens: main menu, World Tour, Quick Match, Training and the shop.
 import { ARENAS } from './render.js';
 import { ITEMS, CATS, CAT_LABEL, ITEM_NAME, ITEM_DESC, find, tourInfo, tourOpponent, arenaNeed, quickTier, QUICK_KEYS } from './data.js';
-import { STYLES } from './logic.js';
 
 const OPP_KEYS = ['opponentName0', 'opponentName1', 'opponentName2', 'opponentName3', 'opponentName4', 'opponentName5', 'opponentName6', 'opponentName7', 'opponentName8', 'opponentName9'];
 const STYLE_KEY = { chopper: 'styleChopper', smasher: 'styleSmasher', spin: 'styleSpin' };

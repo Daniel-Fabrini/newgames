@@ -208,6 +208,15 @@ def load_asset(asset):
     return meshes
 
 
+def world_matrix(o):
+    """World matrix of an appended (unlinked) object: matrix_world is not
+    evaluated for objects outside a scene, so rebuild it from the parent chain."""
+    m = o.matrix_basis.copy()
+    if o.parent is not None:
+        m = world_matrix(o.parent) @ o.matrix_parent_inverse @ m
+    return m
+
+
 class Proto:
     """A placeable thing: an asset (or some named parts of it), optionally
     pre-rotated, with its bounding box measured after that rotation."""
@@ -226,8 +235,9 @@ class Proto:
         self.src = meshes
         self.pre = pre or Matrix.Identity(4)
         pts = []
+        self.mw = {o.name: world_matrix(o) for o in meshes}
         for o in meshes:
-            mw = self.pre @ o.matrix_world
+            mw = self.pre @ self.mw[o.name]
             me = o.data
             n = len(me.vertices)
             co = np.empty(n * 3, dtype=np.float32)
@@ -264,7 +274,7 @@ class Proto:
         for o in self.src:
             c = o.copy()
             c.parent = None
-            c.matrix_world = M @ o.matrix_world
+            c.matrix_world = M @ self.mw[o.name]
             c.pass_index = index
             (coll or bpy.context.scene.collection).objects.link(c)
             out.append(c)
@@ -290,6 +300,8 @@ def expand(pool):
             for n in names:
                 out.append((f'{a}/{n}', w / len(names), opt))
         else:
+            if isinstance(spec, str) and opt.get('pre'):
+                spec = {'asset': spec.split('/')[0], 'parts': [spec.split('/', 1)[1]] if '/' in spec else None, 'pre': opt['pre'], 'key': spec}
             out.append((spec, w, opt))
     return out
 
@@ -846,8 +858,8 @@ def setup_render(w, h, samples=160, out_dir='.', look='AgX - Medium High Contras
     cy.denoising_input_passes = 'RGB_ALBEDO_NORMAL'
     cy.denoising_prefilter = 'ACCURATE'
     cy.max_bounces = bounces
-    cy.diffuse_bounces = 3
-    cy.glossy_bounces = 3
+    cy.diffuse_bounces = 2
+    cy.glossy_bounces = 2
     cy.transmission_bounces = 6
     cy.transparent_max_bounces = 16
     cy.volume_bounces = 0

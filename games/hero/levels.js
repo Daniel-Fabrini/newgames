@@ -276,7 +276,7 @@ export function dailyLevel(dateKey, progressD = 0.6) {
   const d = Math.min(1.3, Math.max(0.45, progressD + 0.15));
   const types = ['open', 'wing', 'freekick', 'counter', 'corner', 'oneTwo'];
   const L = genLevel(seed, d, types[Math.floor(R() * types.length)]);
-  return { ...L, idx: -1, daily: true, min: 85 + Math.floor(R() * 9), score: [1, 1], venue: R() < 0.5 ? 'H' : 'A' };
+  return { ...L, idx: -1, daily: true, min: 85 + (seed % 9), score: [1, 1], venue: seed % 2 ? 'H' : 'A' };
 }
 
 // ------------------------------------------------------------------ training drills
@@ -294,7 +294,7 @@ export function drillLevel(kind, ball, seed) {
       { x: -2.9, z: 0.5, r: 0.55, pts: 2 },
       { x: 2.9, z: 0.5, r: 0.55, pts: 2 },
     ];
-    return { type: 'open', drill: kind, att: [{ x, y, hero: 1 }], def: [], targets, p: { ...p, gkSpeed: 3.6, gkReact: 0.34 }, seed };
+    return { type: 'open', drill: kind, att: [{ x, y, hero: 1 }], def: [], targets, p: { ...p, gkSpeed: 4.6, gkReact: 0.26 }, seed };
   }
   if (kind === 'curl') {
     const x = rnd(R, -10, 10);

@@ -39,10 +39,13 @@ if preview:
     w, h = int(w * 0.375 * scale), int(h * 0.375 * scale)
 else:
     w, h = int(w * scale), int(h * scale)
-lib.setup_render(w, h, samples=samples or (24 if preview else 200), out_dir=out, noise=0.05 if preview else 0.02,
+lib.setup_render(w, h, samples=samples or (24 if preview else 72), out_dir=out, noise=0.05 if preview else 0.03,
                  **R.get('render', {}))
 bpy.context.view_layer.update()
 print(f'[{sid}] built in {time.time() - t0:.1f}s: {len(C.items)} items, {sum(1 for i in C.items if i["kind"] == "prop")} props {C.stats}', flush=True)
+for it in C.items:
+    sz = it['max'] - it['min']
+    if max(sz) > 2.2: print('BIG', it['key'], tuple(round(v, 2) for v in sz), tuple(round(v,2) for v in it['min']))
 lib.write_manifest(os.path.join(out, 'manifest.json'), C, cam, w, h, {'scene': sid})
 if '--save-blend' in argv:
     bpy.ops.wm.save_as_mainfile(filepath=os.path.join(out, 'scene.blend'))
