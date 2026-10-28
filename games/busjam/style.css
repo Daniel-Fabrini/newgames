@@ -1,0 +1,910 @@
+/* Bus Jam — black & gold chrome around a colorful play area. */
+
+.g-busjam {
+  --bj-gold1: #f7d774;
+  --bj-gold2: #c9971c;
+  --bj-gold: linear-gradient(135deg, #f7d774, #c9971c);
+  --bj-panel: #18181c;
+  --bj-bg: #0a0a0c;
+  background: var(--bj-bg);
+}
+
+.g-busjam-app {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bj-bg);
+  overflow: hidden;
+}
+
+.g-busjam-ico {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  flex: none;
+}
+.g-busjam-ico svg {
+  width: 100%;
+  height: 100%;
+}
+.g-busjam-ico.coin {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- HUD ---------- */
+.g-busjam-hud {
+  flex: none;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  background: linear-gradient(180deg, #17171b, #0d0d10);
+  border-bottom: 1px solid rgba(247, 215, 116, 0.32);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55), 0 1px 10px rgba(247, 215, 116, 0.08);
+  position: relative;
+  z-index: 3;
+}
+.g-busjam-round {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: linear-gradient(180deg, #24242a, #121215) padding-box, var(--bj-gold) border-box;
+  color: var(--bj-gold1);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(247, 215, 116, 0.22), 0 3px 0 rgba(0, 0, 0, 0.5);
+  flex: none;
+  padding: 0;
+}
+.g-busjam-round .g-busjam-ico {
+  width: 22px;
+  height: 22px;
+}
+.g-busjam-round:active {
+  transform: translateY(2px) scale(0.96);
+}
+.g-busjam-title {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.05;
+}
+.g-busjam-title b {
+  font-size: 20px;
+  font-weight: 1000;
+  color: #fff;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.g-busjam-tag {
+  margin-top: 3px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: 999px;
+  color: #fff;
+  background: #3a3a44;
+}
+.g-busjam-tag.hard {
+  background: linear-gradient(90deg, #ff7a2b, #e3262f);
+}
+.g-busjam-tag.super {
+  background: linear-gradient(90deg, #b44bff, #e1268f);
+}
+.g-busjam-tag.replay {
+  background: #2a2a31;
+  color: var(--bj-gold1);
+}
+
+/* ---------- stage ---------- */
+.g-busjam-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.g-busjam-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  touch-action: none;
+  cursor: pointer;
+}
+.g-busjam-probe {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: var(--safe-bottom, 0px);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ---------- boosters ---------- */
+.g-busjam-boost {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+  transition: transform 0.08s;
+}
+.g-busjam-boost .g-busjam-ico {
+  width: 58%;
+  height: 58%;
+}
+.g-busjam-boost.blue {
+  background: radial-gradient(120% 90% at 30% 15%, #8fd0ff 0%, #3d8dff 45%, #1a55d1 100%);
+  color: #fff;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.55), inset 0 -4px 0 rgba(0, 0, 0, 0.18), 0 4px 0 #123e9a, 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+.g-busjam-boost.gold {
+  background: radial-gradient(120% 90% at 30% 15%, #fff3b0 0%, #ffd34a 45%, #e29a12 100%);
+  color: #2b1d00;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.7), inset 0 -4px 0 rgba(0, 0, 0, 0.12), 0 4px 0 #a46c00, 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+.g-busjam-boost:active {
+  transform: translateY(3px);
+}
+.g-busjam-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ff5a63, #d5202f);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 1000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+  line-height: 1;
+}
+.g-busjam-badge.price {
+  background: #121215;
+  border-color: var(--bj-gold1);
+  color: var(--bj-gold1);
+  font-size: 11px;
+  padding: 0 5px 0 2px;
+}
+.g-busjam-badge .g-busjam-ico.coin {
+  width: 14px;
+  height: 14px;
+}
+.g-busjam-badge.small {
+  top: -6px;
+  right: -8px;
+  min-width: 20px;
+  height: 20px;
+  font-size: 11px;
+}
+
+/* ---------- tips / pick banner ---------- */
+.g-busjam-tip,
+.g-busjam-pick {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92%, 380px);
+  padding: 11px 14px;
+  border-radius: 16px;
+  background: rgba(14, 14, 18, 0.93);
+  border: 1px solid rgba(247, 215, 116, 0.75);
+  box-shadow: 0 0 18px rgba(247, 215, 116, 0.25), 0 10px 26px rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-weight: 800;
+  font-size: 14.5px;
+  line-height: 1.3;
+  text-align: center;
+  z-index: 4;
+  animation: g-busjam-drop 0.32s cubic-bezier(0.3, 1.5, 0.6, 1);
+}
+.g-busjam-tip.out {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.g-busjam-pick {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+.g-busjam-pick .g-busjam-ico {
+  color: var(--bj-gold1);
+  width: 26px;
+  height: 26px;
+}
+.g-busjam-pick span:not(.g-busjam-ico) {
+  flex: 1;
+}
+.g-busjam-x {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(247, 215, 116, 0.6);
+  background: #1d1d22;
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+  flex: none;
+}
+@keyframes g-busjam-drop {
+  from {
+    transform: translate(-50%, -14px) scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* ---------- level banners ---------- */
+.g-busjam-banner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 34%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 20px;
+  color: #fff;
+  z-index: 5;
+  pointer-events: none;
+  animation: g-busjam-banner 2.6s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.g-busjam-banner::before,
+.g-busjam-banner::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--bj-gold);
+}
+.g-busjam-banner::before {
+  top: 0;
+}
+.g-busjam-banner::after {
+  bottom: 0;
+}
+.g-busjam-banner.hard {
+  background: linear-gradient(90deg, rgba(180, 30, 20, 0.92), rgba(255, 106, 43, 0.96) 50%, rgba(180, 30, 20, 0.92));
+}
+.g-busjam-banner.super {
+  background: linear-gradient(90deg, rgba(70, 20, 120, 0.94), rgba(200, 40, 160, 0.96) 50%, rgba(70, 20, 120, 0.94));
+}
+.g-busjam-banner.daily,
+.g-busjam-banner.theme {
+  background: linear-gradient(90deg, rgba(14, 14, 18, 0.95), rgba(40, 34, 18, 0.96) 50%, rgba(14, 14, 18, 0.95));
+}
+.g-busjam-banner > .g-busjam-ico {
+  width: 40px;
+  height: 40px;
+  color: var(--bj-gold1);
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+}
+.g-busjam-banner.hard > .g-busjam-ico,
+.g-busjam-banner.super > .g-busjam-ico {
+  color: #fff;
+}
+.g-busjam-banner-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.g-busjam-banner-text b {
+  font-size: 26px;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
+}
+.g-busjam-banner-text small {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--bj-gold1);
+}
+@keyframes g-busjam-banner {
+  0% {
+    transform: translateX(-110%) skewX(-8deg);
+    opacity: 0;
+  }
+  14% {
+    transform: translateX(0) skewX(0);
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(110%) skewX(8deg);
+    opacity: 0;
+  }
+}
+
+/* ---------- overlays & panels ---------- */
+.g-busjam-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 56px 16px 20px;
+  background: rgba(4, 4, 7, 0.66);
+  opacity: 0;
+  transition: opacity 0.2s;
+  overflow-y: auto;
+}
+.g-busjam-overlay.show {
+  opacity: 1;
+}
+.g-busjam-overlay.hide {
+  opacity: 0;
+}
+.g-busjam-panel {
+  position: relative;
+  width: min(370px, 100%);
+  padding: 30px 18px 18px;
+  border-radius: 24px;
+  border: 1.5px solid transparent;
+  background: linear-gradient(180deg, #1e1e23, #121215) padding-box, var(--bj-gold) border-box;
+  box-shadow: 0 0 30px rgba(247, 215, 116, 0.18), 0 24px 60px rgba(0, 0, 0, 0.65);
+  text-align: center;
+  color: #fff;
+  transform: scale(0.88);
+  transition: transform 0.26s cubic-bezier(0.3, 1.5, 0.6, 1);
+}
+.g-busjam-overlay.show .g-busjam-panel {
+  transform: scale(1);
+}
+.g-busjam-panel.static {
+  transform: none;
+  margin: 40px auto 0;
+}
+.g-busjam-crown {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 35% 30%, #2c2c33, #0f0f12);
+  border: 2px solid var(--bj-gold1);
+  color: var(--bj-gold1);
+  box-shadow: 0 0 22px rgba(247, 215, 116, 0.45);
+}
+.g-busjam-crown .g-busjam-ico {
+  width: 32px;
+  height: 32px;
+}
+.g-busjam-ribbon {
+  display: inline-block;
+  margin: 6px 0 4px;
+  padding: 8px 22px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffe592, #e2ab2c);
+  color: #1d1400;
+  font-size: 22px;
+  font-weight: 1000;
+  letter-spacing: 0.3px;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.55), 0 4px 0 #8c6200, 0 0 20px rgba(247, 215, 116, 0.35);
+}
+.g-busjam-sub {
+  color: #b8b8c4;
+  font-weight: 800;
+  font-size: 14px;
+  margin: 6px 0 10px;
+}
+.g-busjam-h2 {
+  margin: 10px 0 6px;
+  font-size: 24px;
+  font-weight: 1000;
+}
+.g-busjam-p {
+  margin: 0 0 12px;
+  color: #c9c9d3;
+  font-weight: 700;
+  line-height: 1.4;
+  font-size: 15px;
+}
+.g-busjam-preview {
+  display: block;
+  margin: 10px auto 6px;
+  border-radius: 16px;
+  box-shadow: 0 0 0 1px rgba(247, 215, 116, 0.35), 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+.g-busjam-stars {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 8px 0 6px;
+}
+.g-busjam-star {
+  font-size: 42px;
+  line-height: 1;
+  color: #34343c;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.4);
+  animation: g-busjam-star 0.45s cubic-bezier(0.3, 1.8, 0.5, 1) both;
+}
+.g-busjam-star:nth-child(2) {
+  font-size: 52px;
+  margin-top: -8px;
+}
+.g-busjam-star.on {
+  color: #ffd34d;
+  background: linear-gradient(180deg, #fff1a8, #f5b81f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 8px rgba(255, 211, 77, 0.55));
+}
+@keyframes g-busjam-star {
+  from {
+    transform: scale(0) rotate(-40deg);
+    opacity: 0;
+  }
+}
+.g-busjam-reward {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  margin: 6px 0;
+  border-radius: 14px;
+  background: #0f0f12;
+  border: 1px solid rgba(247, 215, 116, 0.25);
+  font-weight: 800;
+  color: #b8b8c4;
+}
+.g-busjam-reward.total {
+  background: transparent;
+  border-color: transparent;
+  padding-top: 2px;
+}
+.g-busjam-amount {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--bj-gold1);
+  font-size: 18px;
+  font-weight: 1000;
+}
+.g-busjam-amount.big {
+  font-size: 26px;
+}
+.g-busjam-amount.big .g-busjam-ico.coin {
+  width: 26px;
+  height: 26px;
+}
+.g-busjam-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+.g-busjam-section {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--bj-gold1);
+  margin: 6px 0 10px;
+}
+.g-busjam-offers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.g-busjam-offer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 6px 10px;
+  border-radius: 16px;
+  border: 1px solid rgba(247, 215, 116, 0.45);
+  background: #0f0f12;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 900;
+}
+.g-busjam-offer:active {
+  transform: translateY(2px);
+}
+.g-busjam-offer-ico {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+.g-busjam-offer-ico .g-busjam-ico {
+  width: 26px;
+  height: 26px;
+}
+.g-busjam-offer-ico.shuffle,
+.g-busjam-buy-ico.shuffle,
+.g-busjam-day-ico.shuffle {
+  background: radial-gradient(120% 90% at 30% 15%, #8fd0ff, #3d8dff 45%, #1a55d1);
+  color: #fff;
+}
+.g-busjam-offer-ico.slot,
+.g-busjam-buy-ico.slot,
+.g-busjam-offer-ico.heli,
+.g-busjam-buy-ico.heli,
+.g-busjam-day-ico.heli {
+  background: radial-gradient(120% 90% at 30% 15%, #fff3b0, #ffd34a 45%, #e29a12);
+  color: #2b1d00;
+}
+.g-busjam-offer-ico.undo,
+.g-busjam-buy-ico.undo,
+.g-busjam-day-ico.undo {
+  background: linear-gradient(180deg, #2a2a31, #141417);
+  color: var(--bj-gold1);
+  border-color: var(--bj-gold1);
+}
+.g-busjam-offer-name {
+  font-size: 13px;
+}
+.g-busjam-offer-cost {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 13px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #e0303d;
+  color: #fff;
+}
+.g-busjam-offer-cost.price {
+  background: transparent;
+  color: var(--bj-gold1);
+  border: 1px solid rgba(247, 215, 116, 0.5);
+}
+.g-busjam-offer-cost .g-busjam-ico.coin {
+  width: 14px;
+  height: 14px;
+}
+.g-busjam-fail-ico {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 35% 30%, #ff6b74, #c21d2c);
+  color: #fff;
+  border: 2px solid #fff;
+  box-shadow: 0 0 22px rgba(255, 70, 80, 0.5);
+}
+.g-busjam-fail-ico .g-busjam-ico {
+  width: 30px;
+  height: 30px;
+}
+.g-busjam-buy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.g-busjam-buy-ico {
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+}
+.g-busjam-buy-ico .g-busjam-ico {
+  width: 34px;
+  height: 34px;
+}
+.g-busjam-have {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 900;
+  color: var(--bj-gold1, #f7d774);
+}
+
+/* ---------- daily reward ---------- */
+.g-busjam-days {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+.g-busjam-day {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border-radius: 14px;
+  background: #0f0f12;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+.g-busjam-day small {
+  font-size: 11px;
+  font-weight: 900;
+  color: #9a9aa6;
+}
+.g-busjam-day b {
+  font-size: 14px;
+  font-weight: 1000;
+  color: var(--bj-gold1);
+}
+.g-busjam-day .g-busjam-ico.coin {
+  width: 26px;
+  height: 26px;
+}
+.g-busjam-day-ico {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+}
+.g-busjam-day-ico .g-busjam-ico {
+  width: 18px;
+  height: 18px;
+}
+.g-busjam-day.big {
+  grid-column: span 2;
+}
+.g-busjam-day.done {
+  opacity: 0.55;
+}
+.g-busjam-day.today {
+  border: 2px solid var(--bj-gold1);
+  box-shadow: 0 0 16px rgba(247, 215, 116, 0.45);
+  animation: g-busjam-pulse 1.4s ease-in-out infinite;
+}
+.g-busjam-day-check {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #2fd38a;
+  color: #04220f;
+  display: grid;
+  place-items: center;
+}
+.g-busjam-day-check .g-busjam-ico {
+  width: 12px;
+  height: 12px;
+}
+@keyframes g-busjam-pulse {
+  50% {
+    box-shadow: 0 0 26px rgba(247, 215, 116, 0.75);
+  }
+}
+
+/* ---------- level map ---------- */
+.g-busjam-map {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(120% 70% at 50% 0%, #1f1a0d 0%, #0a0a0c 60%);
+}
+.g-busjam-map-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(247, 215, 116, 0.25);
+}
+.g-busjam-map-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 1000;
+  color: #fff;
+}
+.g-busjam-map-title .g-busjam-ico {
+  color: var(--bj-gold1);
+}
+.g-busjam-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px 6px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(247, 215, 116, 0.6);
+  background: #121215;
+  color: var(--bj-gold1);
+  font-weight: 1000;
+}
+.g-busjam-map-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.g-busjam-path {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0 30px;
+}
+.g-busjam-path-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+.g-busjam-path-line path {
+  fill: none;
+  stroke: rgba(247, 215, 116, 0.45);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 1 12;
+}
+.g-busjam-node-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.g-busjam-node {
+  position: relative;
+  z-index: 1;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 21px;
+  font-weight: 1000;
+  padding: 0;
+}
+.g-busjam-node.done {
+  background: radial-gradient(circle at 35% 25%, #fff0a6, #f2c13a 50%, #b98310);
+  color: #2b1d00;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5), 0 4px 0 #7d5600, 0 0 14px rgba(247, 215, 116, 0.3);
+}
+.g-busjam-node.current {
+  width: 78px;
+  height: 78px;
+  font-size: 26px;
+  background: radial-gradient(circle at 35% 25%, #2d2d34, #101013) padding-box, var(--bj-gold) border-box;
+  border-width: 3px;
+  color: var(--bj-gold1);
+  box-shadow: 0 0 24px rgba(247, 215, 116, 0.55);
+  animation: g-busjam-pulse 1.4s ease-in-out infinite;
+}
+.g-busjam-node.locked {
+  background: #17171b;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #4a4a55;
+  cursor: default;
+}
+.g-busjam-node.locked .g-busjam-ico {
+  width: 20px;
+  height: 20px;
+}
+.g-busjam-node.hard:not(.locked) {
+  box-shadow: 0 0 0 3px #ff5a2b, 0 4px 0 #7d2200, 0 0 16px rgba(255, 90, 43, 0.5);
+}
+.g-busjam-node.super:not(.locked) {
+  box-shadow: 0 0 0 3px #c03bff, 0 4px 0 #4b0a7a, 0 0 18px rgba(192, 59, 255, 0.55);
+}
+.g-busjam-node-stars {
+  font-size: 10px;
+  line-height: 1;
+  color: #6b4b00;
+  letter-spacing: 1px;
+}
+.g-busjam-node-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  border: 2px solid #0a0a0c;
+}
+.g-busjam-node-badge .g-busjam-ico {
+  width: 14px;
+  height: 14px;
+}
+.g-busjam-node-badge.hard {
+  background: linear-gradient(180deg, #ff8a3d, #e3262f);
+}
+.g-busjam-node-badge.super {
+  background: linear-gradient(180deg, #c45bff, #8a1fd1);
+}
+.g-busjam-zone {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 24px;
+  color: var(--bj-gold1);
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+.g-busjam-zone::before,
+.g-busjam-zone::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(247, 215, 116, 0.5), transparent);
+}
+.g-busjam-map-foot {
+  padding: 12px 16px calc(14px + var(--safe-bottom, 0px));
+  border-top: 1px solid rgba(247, 215, 116, 0.2);
+  background: linear-gradient(180deg, rgba(10, 10, 12, 0.6), #0a0a0c);
+}
+.g-busjam .btn .g-busjam-ico {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---------- daily done ---------- */
+.g-busjam-countdown {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 4px 0 16px;
+  color: #b8b8c4;
+  font-weight: 800;
+}
+.g-busjam-countdown b {
+  font-size: 30px;
+  color: var(--bj-gold1);
+  font-variant-numeric: tabular-nums;
+}

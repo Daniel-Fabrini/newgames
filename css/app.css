@@ -1002,7 +1002,7 @@ img {
   border: 3px solid #fff;
   display: block;
 }
-.sc-cw .art-cw {
+.sc-cw .art-ws {
   width: 30cqw;
   height: 30cqw;
   position: static;
@@ -1244,7 +1244,7 @@ img {
 .art-cross {
   background: radial-gradient(80% 70% at 50% 40%, #f3e2b8, #c8a96a 80%);
 }
-.art-cw {
+.art-ws {
   position: absolute;
   left: 50%;
   top: 38%;
@@ -1259,11 +1259,44 @@ img {
   border-radius: 4px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
-.art-cw i {
+.art-ws {
   background: #fffaf0;
+  gap: 0;
+  padding: 3cqmin;
+  border: 2px solid #c9971c;
+  overflow: hidden;
 }
-.art-cw i.b {
-  background: #1a1a1a;
+.art-ws i {
+  display: grid;
+  place-items: center;
+  font-style: normal;
+  font-weight: 1000;
+  font-size: 9cqmin;
+  color: #2a2217;
+  position: relative;
+  z-index: 1;
+}
+.sc-cw .art-ws i {
+  font-size: 4cqw;
+}
+.ws-hl {
+  position: absolute;
+  border-radius: 999px;
+  z-index: 0;
+}
+.ws-hl.h {
+  left: 4%;
+  right: 4%;
+  top: 22%;
+  height: 14.5%;
+  background: rgba(243, 194, 74, 0.75);
+}
+.ws-hl.v {
+  left: 41%;
+  width: 18%;
+  top: 40.5%;
+  height: 55%;
+  background: rgba(91, 192, 235, 0.6);
 }
 .art-pitch {
   position: absolute;

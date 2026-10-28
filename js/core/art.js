@@ -31,18 +31,13 @@ export function stickman(color) {
   return `<svg viewBox="0 0 20 34" aria-hidden="true"><circle cx="10" cy="7" r="6.5" fill="${color}"/><path d="M3 16c0-3 3-4.5 7-4.5s7 1.5 7 4.5v8c0 1-1 1.6-2 1.6v6.4a1.5 1.5 0 0 1-3 0V26h-4v6a1.5 1.5 0 0 1-3 0v-6.4c-1 0-2-.6-2-1.6v-8z" fill="${color}"/><circle cx="7.6" cy="5.6" r="1.6" fill="#fff" opacity=".5"/></svg>`;
 }
 
-const GRID = [
-  '01101',
-  '00100',
-  '10001',
-  '00100',
-  '10110',
-];
+// 5×5 letter grid with two found words highlighted (row 1 "MUNDO", column 4 "SOL").
+const LETTERS = ['RAPXE', 'MUNDO', 'TQSLB', 'VEOAK', 'HJLIZ'];
 
-function crosswordGrid() {
-  return `<div class="art-cw">${GRID.join('')
+function letterGrid() {
+  return `<div class="art-ws"><span class="ws-hl h"></span><span class="ws-hl v"></span>${LETTERS.join('')
     .split('')
-    .map((c) => `<i class="${c === '1' ? 'b' : ''}"></i>`)
+    .map((c) => `<i>${c}</i>`)
     .join('')}</div>`;
 }
 
@@ -75,7 +70,7 @@ const ART = {
     <span class="art-emoji" style="--s:15;left:6%;top:8%">🎈</span><span class="art-emoji" style="--s:15;right:8%;top:10%">🚂</span>
     <span class="art-emoji" style="--s:14;left:8%;bottom:10%">🪀</span><span class="art-emoji" style="--s:14;right:8%;bottom:10%">🎁</span>
     <span class="art-emoji c" style="--s:56">🧸</span></div>`,
-  crossword: () => `<div class="art art-cross">${crosswordGrid()}<span class="art-emoji" style="--s:40;right:2%;bottom:0%">✏️</span></div>`,
+  wordsearch: () => `<div class="art art-cross">${letterGrid()}<span class="art-emoji" style="--s:34;right:2%;top:46%">🔍</span></div>`,
 };
 
 export function gameArt(id) {
@@ -107,7 +102,7 @@ export function splashCollage() {
     <span class="sc-svg" style="left:26%;top:0;width:46%;--r:-4deg">${TANK_SVG}</span>
     <span class="sc-flag" style="right:0;top:4%;--r:12deg"><img src="${flag('ca')}" alt=""></span>
     <span class="sc-svg" style="left:-2%;top:30%;width:38%;--r:-8deg">${BUS_SVG}</span>
-    <span class="sc-cw" style="right:0;top:30%;--r:8deg">${crosswordGrid()}</span>
+    <span class="sc-cw" style="right:0;top:30%;--r:8deg">${letterGrid()}</span>
     <span class="sc-flag" style="left:2%;top:62%;--r:-10deg"><img src="${flag('br')}" alt=""></span>
     <span class="sc-item" style="left:27%;top:66%;--s:18;--r:12deg">🧩</span>
     <span class="sc-item" style="left:46%;top:68%;--s:16;--r:0deg">♟️</span>

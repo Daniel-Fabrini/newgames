@@ -33,7 +33,7 @@ export function showResults(app, view, scope, r) {
   xpFill.style.width = (before.into / before.need) * 100 + '%';
   xpText.textContent = `${before.into} / ${before.need} XP`;
 
-  view.append(
+  const parts = [
     h(
       'div',
       { class: 'g-flags-reshero' },
@@ -67,7 +67,8 @@ export function showResults(app, view, scope, r) {
       { class: 'g-flags-resactions' },
       r.actions.map((a) => h('button', { class: `btn block ${a.primary ? 'primary big' : ''} ${a.ghost ? 'ghost' : ''}`, onclick: a.onclick }, a.label)),
     ),
-  );
+  ];
+  view.append(...parts.filter(Boolean));
 
   // ---------- choreography ----------
   if (r.tone === 'win' || r.tone === 'time') sfx.play('win');

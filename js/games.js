@@ -150,22 +150,22 @@ export const GAMES = [
     load: () => import('../games/findit/main.js'),
   },
   {
-    id: 'crossword',
+    id: 'wordsearch',
     cat: 'puzzle',
-    name: { pt: 'Palavras Cruzadas', en: 'Crosswords', es: 'Crucigramas' },
-    sub: { pt: 'Diretas', en: 'Classic Grid', es: 'Directos' },
+    name: { pt: 'Caça-Palavras', en: 'Word Search', es: 'Sopa de Letras' },
+    sub: { pt: 'Volta ao Mundo', en: 'World Tour', es: 'Vuelta al Mundo' },
     about: {
-      pt: 'Palavras cruzadas sem fim, do fácil ao difícil. Dicas grátis, verificação na hora e progresso salvo automaticamente.',
-      en: 'Endless crosswords, from easy to hard. Free hints, instant checking and automatic saving.',
-      es: 'Crucigramas sin fin, de fácil a difícil. Pistas gratis, comprobación al instante y progreso guardado automáticamente.',
+      pt: 'Deslize o dedo pelas letras e encontre as palavras escondidas. Cada fase completa leva você a um novo destino ao redor do mundo.',
+      en: 'Swipe across the letters to find the hidden words. Every puzzle you finish takes you to a new destination around the world.',
+      es: 'Desliza el dedo por las letras y encuentra las palabras ocultas. Cada nivel completado te lleva a un nuevo destino por el mundo.',
     },
     modes: [
-      { id: 'easy', icon: 'one', label: { pt: 'Fácil', en: 'Easy', es: 'Fácil' } },
-      { id: 'medium', icon: 'two', label: { pt: 'Médio', en: 'Medium', es: 'Medio' } },
-      { id: 'hard', icon: 'three', label: { pt: 'Difícil', en: 'Hard', es: 'Difícil' } },
+      { id: 'journey', icon: 'pin', label: { pt: 'Jornada', en: 'Journey', es: 'Viaje' } },
+      { id: 'daily', icon: 'calendar', label: { pt: 'Desafio Diário', en: 'Daily Challenge', es: 'Desafío Diario' } },
+      { id: 'timed', icon: 'clock', label: { pt: 'Contra o Tempo', en: 'Time Attack', es: 'Contrarreloj' } },
     ],
-    trophies: ['🏆', '✏️', '📖', '⭐', '🎯'],
-    load: () => import('../games/crossword/main.js'),
+    trophies: ['🏆', '🔤', '🧭', '⭐', '🎯'],
+    load: () => import('../games/wordsearch/main.js'),
   },
 ];
 

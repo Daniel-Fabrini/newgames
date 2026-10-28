@@ -588,7 +588,6 @@ export async function mount(root, ctx) {
         });
         later(() => countUp(totalNum, before, S.coins, 900), 850);
       }, 600);
-      void o;
     }, 900);
   }
 
@@ -698,6 +697,7 @@ export async function mount(root, ctx) {
     const nodes = [];
     let currentEl = null;
     for (let n = to; n >= from; n--) {
+      if (n === to || n % 20 === 0) list.append(h('div', { class: 'g-busjam-zone' }, h('span', null, t('theme' + (Math.floor((n - 1) / 20) % 6)))));
       const kind = levelKind(n);
       const state = n < cur ? 'done' : n === cur ? 'current' : 'locked';
       const off = Math.sin(n * 0.9) * 32;
@@ -721,15 +721,9 @@ export async function mount(root, ctx) {
         state === 'done' ? h('small', { class: 'g-busjam-node-stars' }, '★'.repeat(S.stars[n] || 1)) : null,
         kind !== 'normal' ? h('span', { class: `g-busjam-node-badge ${kind}` }, icon(kind === 'super' ? 'skull' : 'flame')) : null,
       );
-      if (n % 20 === 0 && n >= from) {
-        list.append(h('div', { class: 'g-busjam-zone' }, h('span', null, t('theme' + (Math.floor(n / 20) % 6)))));
-      }
       list.append(h('div', { class: 'g-busjam-node-row' }, node));
       nodes.push(node);
       if (state === 'current') currentEl = node;
-      if (n === 1 || (n - 1) % 20 === 0) {
-        if (n !== from || n === 1) list.append(h('div', { class: 'g-busjam-zone' }, h('span', null, t('theme' + (Math.floor((n - 1) / 20) % 6)))));
-      }
     }
     const coins = h('b', null, S.coins.toLocaleString());
     const screen = h(
@@ -840,7 +834,6 @@ export async function mount(root, ctx) {
     timers.clear();
     for (const id of rafs) cancelAnimationFrame(id);
     rafs.clear();
-    document.querySelectorAll('.modal-overlay').forEach(() => {});
     delete root.__busjam;
   };
 }

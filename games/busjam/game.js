@@ -991,6 +991,12 @@ export class Game {
     v.speed = 0;
     v.dist = 0;
     const b = this.L.bays[v.bay];
+    const sd = this.slotDims(v);
+    v.x = b.x;
+    v.y = b.y;
+    v.ang = Math.PI / 2;
+    v.L = sd.L;
+    v.W = sd.W;
     this.confetti(b.x, b.y - b.h * 0.2, 16);
     this.sparkle(b.x, b.y, v.col.light, 10);
     this.sfx.tone({ freq: 440, dur: 0.09, type: 'square', vol: 0.09 });
@@ -1190,7 +1196,6 @@ export class Game {
 
   drawLotVehicle(v) {
     const g = this.g;
-    const ul = this.L.ul;
     const p = this.lotPos(v);
     const d = this.lotDims(v);
     let ang = dirAngle(v.dir);
@@ -1221,7 +1226,6 @@ export class Game {
     } else {
       art.drawBadge(g, bx, by, d.W * 0.22, col);
     }
-    void ul;
   }
 
   drawMoving(v) {
@@ -1312,7 +1316,23 @@ export class Game {
         g.textAlign = 'center';
         g.textBaseline = 'middle';
         g.fillStyle = '#f7d774';
-        g.fillText(this.slotLabel, cx, b.y + b.h * 0.33);
+        const ty = b.y + b.h * 0.33;
+        if (this.slotCoin) {
+          const tw = g.measureText(this.slotLabel).width;
+          const cr = Math.max(4, b.w * 0.09);
+          const cx0 = cx - (tw + cr * 2 + 3) / 2 + cr;
+          const cg = g.createLinearGradient(0, ty - cr, 0, ty + cr);
+          cg.addColorStop(0, '#ffe98a');
+          cg.addColorStop(1, '#d79b12');
+          g.fillStyle = cg;
+          g.beginPath();
+          g.arc(cx0, ty, cr, 0, Math.PI * 2);
+          g.fill();
+          g.fillStyle = '#f7d774';
+          g.fillText(this.slotLabel, cx0 + cr + 3 + tw / 2, ty);
+        } else {
+          g.fillText(this.slotLabel, cx, ty);
+        }
       }
       g.restore();
     }

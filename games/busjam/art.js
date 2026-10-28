@@ -420,10 +420,6 @@ export function drawVehicle(g, v, x, y, ang, L, W, dpr, o = {}) {
   g.rotate(ang);
   g.scale(sx, sy);
   g.drawImage(body.img, -body.w / 2, -body.h / 2, body.w, body.h);
-  if (o.flash) {
-    g.globalCompositeOperation = 'source-atop';
-    g.globalAlpha = o.flash;
-  }
   g.restore();
   if (o.flash) {
     g.save();
