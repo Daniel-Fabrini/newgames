@@ -4,6 +4,17 @@
 
 import { TTS } from './corpus.js';
 
+// Ring buffer of recent speech events, shown by Settings → "Test sound and voice".
+function logEv(msg) {
+  try {
+    const arr = (window.__speechLog = window.__speechLog || []);
+    arr.push(new Date().toLocaleTimeString() + ' ' + msg);
+    if (arr.length > 40) arr.shift();
+  } catch {
+    /* ignore */
+  }
+}
+
 export function createSpeech(onProblem) {
   const synth = typeof window !== 'undefined' && window.speechSynthesis ? window.speechSynthesis : null;
   const Utter = typeof window !== 'undefined' ? window.SpeechSynthesisUtterance : null;
@@ -41,13 +52,14 @@ export function createSpeech(onProblem) {
       .getSupportedLanguages()
       .then((r) => {
         nativeLangs = (r && r.languages ? r.languages : []).map(norm);
+        logEv(`native: ${nativeLangs.length} langs; it=${nativeLangs.some((t) => t.startsWith('it'))}`);
         listeners.forEach((fn) => fn());
       })
       .catch(() => {
         nativeLangs = null;
       });
   }
-  const nativeHas = (lang) => !!nativeTTS && (nativeLangs === null || nativeLangs.some((t) => t === lang || t.startsWith(lang + '-')));
+  const nativeHas = () => !!nativeTTS; // always try: Android falls back or the promise rejects
   if (synth && !nativeTTS) {
     load();
     if (synth.addEventListener) synth.addEventListener('voiceschanged', load);
@@ -113,8 +125,14 @@ export function createSpeech(onProblem) {
       return false;
     }
     const entry = { onEnd: opts.onEnd };
-    stop();
+    if (current && current.onEnd) {
+      const prev = current.onEnd;
+      current = null;
+      prev();
+    }
     current = entry;
+    const t0 = performance.now();
+    logEv(`speak ${lang} "${String(text).slice(0, 40)}"`);
     const finish = () => {
       if (current === entry) {
         current = null;
@@ -124,10 +142,17 @@ export function createSpeech(onProblem) {
     opts.onStart && opts.onStart();
     nativeTTS
       .speak({ text: String(text), lang: TTS[lang], rate: opts.slow ? 0.55 : 0.92, pitch: 1.0, volume: 1.0, category: 'ambient', queueStrategy: 0 })
-      .then(finish, (e) => {
-        problem('error', String((e && (e.message || e.code)) || e || ''));
-        finish();
-      });
+      .then(
+        () => {
+          logEv(`  ok ${Math.round(performance.now() - t0)} ms`);
+          finish();
+        },
+        (e) => {
+          logEv(`  ERRO ${String((e && (e.message || e.code)) || e || '')}`);
+          problem('error', String((e && (e.message || e.code)) || e || ''));
+          finish();
+        },
+      );
     return true;
   }
 

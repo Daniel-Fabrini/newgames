@@ -91,5 +91,8 @@ export async function audioDiagnostics(log, lang = 'it-IT', sample = 'Ciao, come
       });
     }
   }
+  const evs = (typeof window !== 'undefined' && window.__speechLog) || [];
+  log('7) Falas recentes do jogo:' + (evs.length ? '' : ' (nenhuma ainda: abra o Poliglota e toque numa palavra)'));
+  evs.slice(-10).forEach((e) => log('   ' + e));
   log('— fim do teste —');
 }
