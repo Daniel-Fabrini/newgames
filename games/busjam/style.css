@@ -204,6 +204,13 @@
   height: 20px;
   font-size: 11px;
 }
+.g-busjam-badge.price,
+.g-busjam-badge.small.price {
+  top: auto;
+  bottom: -10px;
+  right: 50%;
+  transform: translateX(50%);
+}
 
 /* ---------- tips / pick banner ---------- */
 .g-busjam-tip,
@@ -461,12 +468,8 @@
   margin-top: -8px;
 }
 .g-busjam-star.on {
-  color: #ffd34d;
-  background: linear-gradient(180deg, #fff1a8, #f5b81f);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 8px rgba(255, 211, 77, 0.55));
+  color: #ffd84a;
+  text-shadow: 0 3px 0 #b07a00, 0 0 14px rgba(255, 211, 77, 0.7);
 }
 @keyframes g-busjam-star {
   from {

@@ -388,6 +388,12 @@ export function createState(store) {
     },
 
     // ---------- course progress ----------
+    resetCourse(T) {
+      courses.delete(T);
+      store.remove('course:' + T);
+      delete P.courses[T];
+      save();
+    },
     coursesStarted: () => LANGS6.filter((l) => P.courses[l]),
     markStarted(T) {
       if (!P.courses[T]) {

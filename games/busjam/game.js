@@ -15,7 +15,7 @@ const angLerp = (a, b, t) => {
   while (d < -Math.PI) d += Math.PI * 2;
   return a + d * t;
 };
-const SLOT_LEN = { car: 0.64, van: 0.76, bus: 0.86, coach: 0.92 };
+const SLOT_LEN = { car: 0.7, van: 0.8, bus: 0.88, coach: 0.93 };
 
 // ---------------------------------------------------------------- paths
 class Path {
@@ -102,6 +102,7 @@ export class Game {
     this.last = 0;
     this.dead = false;
     this.paused = false;
+    this.timeScale = 1;
     this.reset();
 
     this.onDown = (e) => this.pointerDown(e);
@@ -211,7 +212,7 @@ export class Game {
     const areaW = gw - 2 * side - 2 * boost - 16;
     const sg = 6;
     const sw = Math.min(66, (areaW - sg * (nb - 1)) / nb);
-    const sh = Math.min(sw * 1.4, 86);
+    const sh = Math.min(sw * 1.58, 92);
     const rowCY = H - safeB - 12 - sh / 2;
     const totalW = nb * sw + (nb - 1) * sg;
     L.bays = this.bays.map((_, i) => ({ x: ox + gw / 2 - totalW / 2 + sw / 2 + i * (sw + sg), y: rowCY, w: sw, h: sh }));
@@ -249,7 +250,7 @@ export class Game {
       if (k % 2 === 0) L.ropes.push([qx0 - 6, qx1 - sp * 1.3, y]);
       else L.ropes.push([qx0 + sp * 1.3, qx1 + 6, y]);
     }
-    L.sign = { x: ox + 26, y: rowsY[0] };
+    L.sign = { x: ox + Math.max(28, gw * 0.2), y: rowsY[0] };
 
     // ring road + lot in the remaining space
     const top = 4;
@@ -305,7 +306,7 @@ export class Game {
   }
   slotDims(v) {
     const b = this.L.bays[0];
-    return { L: b.h * SLOT_LEN[v.type], W: b.w * 0.6 };
+    return { L: b.h * SLOT_LEN[v.type], W: Math.min(b.w * 0.74, b.h * 0.5) };
   }
 
   // ------------------------------------------------------------ rules
@@ -345,10 +346,10 @@ export class Game {
     };
   }
 
-  computeHint() {
+  computeHint(budget = 6000) {
     const st = this.solverState();
     const front = this.queue[0];
-    const res = solve(this.def, st, 6000);
+    const res = solve(this.def, st, budget);
     if (res.ok && res.moves.length) return res.moves[0];
     const ex = this.vehicles.filter((v) => this.exitable(v));
     const m = ex.find((v) => v.color === front);
@@ -389,6 +390,7 @@ export class Game {
     for (const b of this.bays) b.vid = -1;
     s.vs.forEach((o, i) => {
       const v = this.vehicles[i];
+      const wasLot = v.state === 'lot';
       v.state = o.state;
       v.bay = o.bay;
       v.seq = o.seq;
@@ -401,7 +403,7 @@ export class Game {
       v.wobble = 0;
       v.wiggle = 0;
       if (o.state === 'parked') this.bays[o.bay].vid = v.id;
-      if (o.state === 'lot') {
+      if (o.state === 'lot' && !wasLot) {
         v.popT = 1;
         const p = this.lotPos(v);
         this.puff(p.x, p.y, 6, '#ffffff');
@@ -779,7 +781,10 @@ export class Game {
     if (document.hidden) return;
     const dt = this.last ? Math.min(0.05, (ts - this.last) / 1000) : 0.016;
     this.last = ts;
-    if (!this.paused) this.update(dt);
+    if (!this.paused) {
+      const steps = Math.max(1, Math.round(this.timeScale));
+      for (let i = 0; i < steps; i++) this.update(dt);
+    }
     this.render();
   }
 
@@ -845,9 +850,9 @@ export class Game {
         v.lift = Math.sin(Math.PI * k) * 0.9;
         v.L = lerp(ld.L, sd.L, smooth(k));
         v.W = lerp(ld.W, sd.W, smooth(k));
-        if (Math.random() < dt * 14 && k === 0) {
+        if (Math.random() < dt * 9 && k === 0) {
           const back = v.L / 2;
-          this.particles.push({ kind: 'puff', x: v.x - Math.cos(v.ang) * back, y: v.y - Math.sin(v.ang) * back, vx: -Math.cos(v.ang) * 20, vy: -Math.sin(v.ang) * 20, life: 0, max: 0.45, size: 3 + Math.random() * 3, color: '#ffffff' });
+          this.particles.push({ kind: 'puff', x: v.x - Math.cos(v.ang) * back, y: v.y - Math.sin(v.ang) * back, vx: -Math.cos(v.ang) * 16, vy: -Math.sin(v.ang) * 16, life: 0, max: 0.35, size: 1.5 + Math.random() * 2, color: '#f4f4f4' });
         }
         if (v.dist >= p.length - 0.01) this.arrive(v);
       }
@@ -863,7 +868,7 @@ export class Game {
         const b = L.bays[v.bay];
         v.y = b.y + v.dist;
         if (v.bay >= 0 && this.bays[v.bay].vid === v.id && v.dist > b.h / 2 + v.L / 2 + 2) this.bays[v.bay].vid = -1;
-        if (Math.random() < dt * 20) this.particles.push({ kind: 'puff', x: v.x + (Math.random() - 0.5) * 6, y: v.y - v.L / 2, vx: 0, vy: -30, life: 0, max: 0.4, size: 3 + Math.random() * 3, color: '#ffffff' });
+        if (Math.random() < dt * 12) this.particles.push({ kind: 'puff', x: v.x + (Math.random() - 0.5) * 6, y: v.y - v.L / 2, vx: 0, vy: -26, life: 0, max: 0.35, size: 1.5 + Math.random() * 2, color: '#f4f4f4' });
         if (v.y - v.L > L.H + 20) v.state = 'gone';
       }
     }
@@ -1182,12 +1187,21 @@ export class Game {
       const v = this.vehicles[this.hintId];
       if (v && v.state === 'lot') {
         const p = this.lotPos(v);
+        const d = this.lotDims(v);
         g.save();
-        g.globalAlpha = 0.35 + Math.sin(time * 5) * 0.15;
-        g.fillStyle = '#fff3b0';
-        g.beginPath();
-        g.arc(p.x, p.y, ul * 0.7, 0, Math.PI * 2);
+        g.translate(p.x, p.y);
+        g.rotate(dirAngle(v.dir));
+        g.globalAlpha = 0.25 + Math.sin(time * 6) * 0.12;
+        g.fillStyle = '#fff6b0';
+        art.rrect(g, -d.L / 2 - 6, -d.W / 2 - 6, d.L + 12, d.W + 12, d.W * 0.45);
         g.fill();
+        g.globalAlpha = 0.75 + Math.sin(time * 6) * 0.25;
+        g.strokeStyle = '#ffd21f';
+        g.lineWidth = 4;
+        g.shadowColor = 'rgba(255,214,90,0.9)';
+        g.shadowBlur = 10;
+        art.rrect(g, -d.L / 2 - 4, -d.W / 2 - 4, d.L + 8, d.W + 8, d.W * 0.4);
+        g.stroke();
         g.restore();
         art.drawHand(g, p.x, p.y, Math.max(34, ul * 0.95), time);
       }
@@ -1377,13 +1391,38 @@ export class Game {
       g.fillText(txt, x + tw / 2, y + L.ps * 0.32);
       g.restore();
     }
-    art.drawStopSign(g, L.sign.x, L.sign.y, L.ps * 1.15, n);
+    // passengers still waiting (pill on the free half of the front row)
+    {
+      const txt = String(n);
+      const hgt = L.ps * 0.78;
+      g.save();
+      g.font = `900 ${Math.round(L.ps * 0.5)}px Nunito, system-ui, sans-serif`;
+      const tw = g.measureText(txt).width;
+      const w = tw + hgt * 1.5;
+      const x = L.sign.x - w / 2;
+      const y = L.sign.y - hgt - L.ps * 0.12;
+      g.fillStyle = 'rgba(0,0,0,0.18)';
+      art.rrect(g, x, y + 2, w, hgt, hgt / 2);
+      g.fill();
+      g.fillStyle = 'rgba(16,16,20,0.88)';
+      art.rrect(g, x, y, w, hgt, hgt / 2);
+      g.fill();
+      g.strokeStyle = 'rgba(247,215,116,0.85)';
+      g.lineWidth = 1.2;
+      g.stroke();
+      art.drawPax(g, PALETTE[3], x + hgt * 0.5, y + hgt * 0.86, hgt * 0.72, this.dpr, 0, false);
+      g.fillStyle = '#f7d774';
+      g.textAlign = 'center';
+      g.textBaseline = 'middle';
+      g.fillText(txt, x + hgt * 0.95 + tw / 2, y + hgt / 2 + 1);
+      g.restore();
+    }
   }
 
   drawHelicopter(H) {
     const g = this.g;
     const v = H.v;
-    const s = Math.max(16, this.L.ul * 0.55);
+    const s = Math.max(20, this.L.ul * 0.78);
     const t = H.t;
     let hx;
     let hy;

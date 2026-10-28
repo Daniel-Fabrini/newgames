@@ -221,7 +221,6 @@ function mid(g, W, H, horizon, st, rnd, out) {
       g.fillRect(0, horizon, W, seaBottom - horizon + 4);
       for (let i = 0; i < 260; i++) {
         const y = R(rnd, horizon + 4, seaBottom), w = R(rnd, 10, 40) * (0.5 + (y - horizon) / (seaBottom - horizon));
-        K.line(g, R(rnd, 0, W), y, 0, 0, 'rgba(0,0,0,0)', 0);
         g.fillStyle = rgba('#ffffff', R(rnd, 0.12, 0.35));
         g.fillRect(R(rnd, 0, W), y, w, 2);
       }

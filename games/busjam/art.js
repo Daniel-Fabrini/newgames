@@ -968,37 +968,6 @@ export function drawScene(g, L, st, rnd) {
   }
 }
 
-// Bus-stop sign with the number of passengers still waiting.
-export function drawStopSign(g, x, y, s, n) {
-  g.save();
-  g.translate(x, y);
-  g.fillStyle = 'rgba(0,0,0,0.18)';
-  g.beginPath();
-  g.ellipse(2, 0, s * 0.35, s * 0.1, 0, 0, Math.PI * 2);
-  g.fill();
-  g.fillStyle = '#5b606c';
-  rrect(g, -s * 0.05, -s * 1.15, s * 0.1, s * 1.15, s * 0.04);
-  g.fill();
-  const gg = g.createLinearGradient(0, -s * 1.6, 0, -s * 1.05);
-  gg.addColorStop(0, '#ffe27a');
-  gg.addColorStop(1, '#e0a51e');
-  g.fillStyle = gg;
-  rrect(g, -s * 0.62, -s * 1.62, s * 1.24, s * 0.56, s * 0.14);
-  g.fill();
-  g.strokeStyle = 'rgba(0,0,0,0.35)';
-  g.lineWidth = 1;
-  g.stroke();
-  // tiny bus glyph
-  g.fillStyle = '#3a2a00';
-  rrect(g, -s * 0.5, -s * 1.48, s * 0.36, s * 0.26, s * 0.05);
-  g.fill();
-  g.font = `900 ${s * 0.36}px Nunito, system-ui, sans-serif`;
-  g.textAlign = 'center';
-  g.textBaseline = 'middle';
-  g.fillText(String(n), s * 0.2, -s * 1.33);
-  g.restore();
-}
-
 // ---------------------------------------------------------------- helicopter
 export function drawHeli(g, x, y, s, t, ang = 0) {
   g.save();
@@ -1134,6 +1103,7 @@ export const ICONS = {
   gift: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="8" width="18" height="4.5" rx="1.2"/><rect x="4.5" y="12.5" width="15" height="9" rx="1.5"/><rect x="10.8" y="8" width="2.4" height="13.5" fill="#000" opacity=".25"/><path d="M12 8c-1.5-3.5-5.5-4.5-6-2s3.5 2 6 2Zm0 0c1.5-3.5 5.5-4.5 6-2s-3.5 2-6 2Z"/></svg>',
   crown: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 7.2 7.3 11 11.2 4a.9.9 0 0 1 1.6 0l3.9 7 4.8-3.8a.6.6 0 0 1 1 .6l-2.2 9.7a1 1 0 0 1-1 .8H4.7a1 1 0 0 1-1-.8L1.5 7.8a.6.6 0 0 1 1-.6Z"/><rect x="4.2" y="18.6" width="15.6" height="2.4" rx="1"/></svg>',
   play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.6v14.8a1 1 0 0 0 1.5.9l12-7.4a1 1 0 0 0 0-1.8l-12-7.4A1 1 0 0 0 7 4.6Z"/></svg>',
+  warn: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.3 3.6a2 2 0 0 1 3.4 0l8.1 14.1a2 2 0 0 1-1.7 3H3.9a2 2 0 0 1-1.7-3Z"/><rect x="10.8" y="8.5" width="2.4" height="6.5" rx="1.2" fill="#c21d2c"/><circle cx="12" cy="17.6" r="1.4" fill="#c21d2c"/></svg>',
   slot: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="3.5" y="4" width="11" height="16" rx="3"/><path d="M19 8v8M15 12h8"/></svg>',
 };
 

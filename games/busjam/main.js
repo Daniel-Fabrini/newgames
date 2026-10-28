@@ -24,7 +24,14 @@ const DAILY = [
 export async function mount(root, ctx) {
   const t = ctx.makeT(STRINGS);
   const { h, clear, toast, modal } = ctx.ui;
-  const sfx = ctx.sfx;
+  // Sounds and vibration only after the first user gesture (browsers block them before).
+  const active = () => !navigator.userActivation || navigator.userActivation.hasBeenActive;
+  const sfx = {
+    play: (n) => active() && ctx.sfx.play(n),
+    tone: (o) => active() && ctx.sfx.tone(o),
+    noise: (o) => active() && ctx.sfx.noise(o),
+    vibrate: (p) => active() && ctx.sfx.vibrate(p),
+  };
   const store = ctx.store;
   await ctx.loadCSS(new URL('./style.css', import.meta.url));
 
@@ -619,7 +626,7 @@ export async function mount(root, ctx) {
       }
       o = overlay(
         'fail',
-        h('div', { class: 'g-busjam-fail-ico' }, icon('slot')),
+        h('div', { class: 'g-busjam-fail-ico' }, icon('warn')),
         h('h2', { class: 'g-busjam-h2' }, t('failTitle')),
         h('p', { class: 'g-busjam-p' }, t('failText')),
         kinds.length ? h('div', { class: 'g-busjam-section' }, t('continueWith')) : null,
@@ -697,7 +704,6 @@ export async function mount(root, ctx) {
     const nodes = [];
     let currentEl = null;
     for (let n = to; n >= from; n--) {
-      if (n === to || n % 20 === 0) list.append(h('div', { class: 'g-busjam-zone' }, h('span', null, t('theme' + (Math.floor((n - 1) / 20) % 6)))));
       const kind = levelKind(n);
       const state = n < cur ? 'done' : n === cur ? 'current' : 'locked';
       const off = Math.sin(n * 0.9) * 32;
@@ -722,6 +728,7 @@ export async function mount(root, ctx) {
         kind !== 'normal' ? h('span', { class: `g-busjam-node-badge ${kind}` }, icon(kind === 'super' ? 'skull' : 'flame')) : null,
       );
       list.append(h('div', { class: 'g-busjam-node-row' }, node));
+      if ((n - 1) % 20 === 0) list.append(h('div', { class: 'g-busjam-zone' }, h('span', null, t('theme' + (Math.floor((n - 1) / 20) % 6)))));
       nodes.push(node);
       if (state === 'current') currentEl = node;
     }

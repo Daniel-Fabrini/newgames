@@ -217,7 +217,7 @@ export function levelParams(L, kindOverride) {
   const mystery = L >= 40 ? Math.min(0.3, 0.12 + (L - 40) / 600) : 0;
   const locks = L >= 55 ? (kind === 'normal' ? 1 : 2) + (r() < 0.3 ? 1 : 0) : 0;
   const pEdge = clamp(0.85 - d * 0.8, 0.12, 0.85);
-  const density = clamp(0.52 + d * 0.28, 0.52, 0.8);
+  const density = clamp(0.6 + d * 0.24, 0.6, 0.84);
 
   return { L, kind, d, n, colors, kWin, burstFull, burstMax, oldBias, w, diag, mystery, locks, pEdge, density };
 }

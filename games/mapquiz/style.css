@@ -647,6 +647,9 @@
   border-radius: 18px;
   border: 2px solid transparent;
   background:
+    radial-gradient(closest-side, rgba(10, 10, 12, 0) 40%, #111113 100%) padding-box,
+    repeating-linear-gradient(0deg, rgba(227, 184, 74, 0.07) 0 1px, transparent 1px 34px) padding-box,
+    repeating-linear-gradient(90deg, rgba(227, 184, 74, 0.07) 0 1px, transparent 1px 34px) padding-box,
     radial-gradient(120% 90% at 50% 0%, #2a2414, #111113 70%) padding-box,
     var(--mq-gold-grad) border-box;
   box-shadow: 0 0 28px rgba(232, 191, 74, 0.22);

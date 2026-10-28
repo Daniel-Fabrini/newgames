@@ -132,7 +132,8 @@ export async function mount(root, ctx) {
       right = h('div', { class: 'li-right g-flags-liright' }, miniStars(r ? r.s : 0), h('small', null, t('bestShort', { n: r ? r.b : 0 })));
     } else if (mode) {
       const r = P.rec(set.id, mode);
-      right = h('div', { class: 'li-right g-flags-liright' }, miniStars(r ? r.s : 0), h('small', null, Math.round(s.pct * 100) + '%'));
+      const run = P.run(set.id, mode);
+      right = h('div', { class: 'li-right g-flags-liright' }, miniStars(r ? r.s : 0), run && run.q ? h('small', { class: 'g-flags-resume' }, `▶ ${run.total - run.q.length}/${run.total}`) : null);
     } else {
       right = h('div', { class: 'li-right g-flags-liright' }, h('b', null, icon('star', 'sm'), String(P.setStars(set.id))), h('small', null, '/' + MAX_SET_STARS));
     }

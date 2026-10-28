@@ -1,7 +1,8 @@
 /* World Flags — black & gold. Every class is prefixed with g-flags-. */
 
 .g-flags,
-.g-flags-ghost {
+.g-flags-ghost,
+.g-flags-modal {
   --gf-gold: var(--gold, #f3c24a);
   --gf-line: var(--line, rgba(233, 189, 82, 0.42));
   --gf-grad: var(--gold-grad, linear-gradient(180deg, #fff0a8 0%, #f6cf55 38%, #e3a723 72%, #c98a10 100%));
@@ -459,6 +460,12 @@
   font-weight: 800;
   font-size: 12px;
 }
+.g-flags-liright small.g-flags-resume {
+  color: var(--gf-gold);
+}
+.g-flags-q-rev {
+  padding-top: 6px;
+}
 .g-flags-ministars {
   color: #34343c;
   letter-spacing: 1px;
@@ -864,17 +871,15 @@
   margin-top: -6px;
 }
 .g-flags-flaggrid {
-  flex: 1;
-  min-height: 0;
-  max-height: 520px;
+  flex: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
   gap: 14px;
+  margin-top: 4px;
 }
 .g-flags-flagopt {
   position: relative;
-  container-type: size;
+  aspect-ratio: 4 / 3;
   border: 0;
   background: transparent;
   padding: 0;
@@ -885,7 +890,6 @@
   color: #fff;
   animation: g-flags-ans-in 0.34s cubic-bezier(0.2, 0.9, 0.3, 1.2) backwards;
 }
-.g-flags-flagopt > .g-flags-card,
 .g-flags-mcell > .g-flags-card {
   width: min(100cqw, 133.33cqh);
   height: auto;
@@ -1317,7 +1321,16 @@
 .g-flags-fchud {
   grid-template-columns: 1fr;
   min-height: 0;
-  padding: 8px 8px 10px;
+  padding: 0 0 10px;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+}
+.g-flags-fchud .g-flags-hline {
+  left: 8px;
+  right: 8px;
 }
 .g-flags-fcstats {
   flex: none;

@@ -2,7 +2,7 @@
 
 import * as P from './physics.js';
 import { think } from './ai.js';
-import { layout, drawStatic, drawGoals, capSprite, loadFlag, flagSrc, ballPattern, rollBall, drawBall, BALL_SKINS, SIDES } from './render.js';
+import { layout, drawStatic, drawGoals, capSprite, loadFlag, flagSrc, ballPattern, rollBall, drawBall, BALL_SKINS, FRAME } from './render.js';
 
 const { W, L, GX0, GX1, CAP_R, BALL_R } = P;
 const TURN_TIME = 15;
@@ -120,6 +120,9 @@ export function createMatch(host, ctx, t, o) {
     dpr = Math.min(window.devicePixelRatio || 1, 3);
     canvas.width = Math.round(r.width * dpr);
     canvas.height = Math.round(r.height * dpr);
+    // keep the scoreboard on the wooden table (matters on wide screens)
+    const est = layout(r.width, r.height, board.offsetTop + board.offsetHeight + 4);
+    board.style.width = `${Math.min(420, Math.max(240, (W + 2 * FRAME) * est.s - 12))}px`;
     lay = layout(r.width, r.height, board.offsetTop + board.offsetHeight + 4);
     stat = document.createElement('canvas');
     stat.width = canvas.width;
@@ -895,4 +898,3 @@ export function createMatch(host, ctx, t, o) {
   };
 }
 
-export { SIDES };

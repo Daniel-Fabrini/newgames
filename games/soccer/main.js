@@ -3,7 +3,7 @@
 
 import STRINGS from './strings.js';
 import { byCode } from '../../js/data/countries.js';
-import { TEAMS, PITCHES, BALLS, RIMS, teamByCode, levelFromXP, tierStyle, roman, CHAMPIONS_TIER, QUICK_SKILL, LEAGUE_SIZE } from './data.js';
+import { TEAMS, PITCHES, BALLS, RIMS, levelFromXP, tierStyle, roman, CHAMPIONS_TIER, QUICK_SKILL, LEAGUE_SIZE } from './data.js';
 import * as C from './career.js';
 import { createMatch } from './match.js';
 import { capPreview, ballPreview, pitchPreview, flagSrc } from './render.js';
@@ -212,7 +212,13 @@ export async function mount(root, ctx) {
       S.cup = C.newCup(S.prof.cups, S.team);
       save();
     }
-    if (S.cup.opps.includes(S.team)) S.cup.opps = S.cup.opps.map((c) => (c === S.team ? S.team === 'AR' ? 'UY' : 'AR' : c));
+    const j = S.cup.opps.indexOf(S.team);
+    if (j >= 0) {
+      // the player switched to a team that was in the draw: swap in another rival
+      const free = TEAMS.find((x) => x.code !== S.team && !S.cup.opps.includes(x.code));
+      S.cup.opps[j] = free.code;
+      save();
+    }
     return S.cup;
   }
   const cupRoundName = (r) => t(['r16', 'qf', 'sf', 'final'][r]);
@@ -672,7 +678,7 @@ export async function mount(root, ctx) {
   }
 
   async function askLeave() {
-    if (!match || result) return;
+    if (!match || result || match.over) return;
     match.pause();
     const counts = matchCfg.kind === 'career' || matchCfg.kind === 'cup';
     const ok = await modal({

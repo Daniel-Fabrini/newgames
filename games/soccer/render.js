@@ -1,7 +1,7 @@
 // Drawing: wooden table + pitch (pre-rendered per turf style), caps
 // (pre-rendered sprites with a flag emblem), the rolling ball, nets, previews.
 
-import { W, L, GOAL_D, GX0, GX1, CAP_R, BALL_R, POST_R } from './physics.js';
+import { W, L, GOAL_D, GX0, GX1, POST_R } from './physics.js';
 import { rng } from '../../js/core/ui.js';
 import { byCode, flagUrl } from '../../js/data/countries.js';
 
@@ -16,10 +16,6 @@ export function shade(hex, amt) {
   const [r, g, b] = hexToRgb(hex);
   const f = (c) => Math.round(amt < 0 ? c * (1 + amt) : c + (255 - c) * amt);
   return `rgb(${f(r)},${f(g)},${f(b)})`;
-}
-export function rgba(hex, a) {
-  const [r, g, b] = hexToRgb(hex);
-  return `rgba(${r},${g},${b},${a})`;
 }
 
 // ---------- flags ----------

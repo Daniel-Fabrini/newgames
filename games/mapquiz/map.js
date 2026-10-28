@@ -392,7 +392,10 @@ export class MapView {
     const ah = Math.max(40, this.vh - top - bottom - pad * 2);
     const sContain = Math.min(aw / (x1 - x0), ah / (y1 - y0));
     const sCover = Math.max(aw / (x1 - x0), ah / (y1 - y0));
-    const s = clamp(Math.min(sContain * Math.pow(sCover / sContain, fill), maxS), this.sMin, this.sMax);
+    // blend towards "cover" but keep at least 85% of the rect's width/height visible
+    const sKeep = Math.min(aw / (0.85 * (x1 - x0)), ah / (0.85 * (y1 - y0)));
+    const sFill = Math.max(sContain, Math.min(sContain * Math.pow(sCover / sContain, fill), sKeep));
+    const s = clamp(Math.min(sFill, maxS), this.sMin, this.sMax);
     const cx = (x0 + x1) / 2 - (left - right) / 2 / s;
     const cy = (y0 + y1) / 2 - (top - bottom) / 2 / s;
     return this.clampCam({ cx, cy, s });

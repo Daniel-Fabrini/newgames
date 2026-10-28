@@ -777,6 +777,7 @@ export async function mount(root, ctx) {
         b.disabled = false;
         b.style.animationDelay = i * 40 + 'ms';
         b.textContent = nameOf(q.options[i]);
+        b.dataset.code = q.options[i].code;
         b.classList.toggle('mq-long', b.textContent.length > 18);
       });
       // preload the next flag
