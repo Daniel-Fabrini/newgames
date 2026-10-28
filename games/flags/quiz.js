@@ -312,12 +312,12 @@ function renderChoice(api, q, wrap) {
     if (locked || api.timeUp) return;
     locked = true;
     grid.classList.add('g-flags-locked');
-    b.classList.add('g-flags-chosen');
+    b.classList.add('selected');
     api.sfx.play('tap');
     const ok = c === q.c;
     api.qscope.timeout(() => {
       const right = btns[opts.indexOf(q.c)];
-      b.classList.remove('g-flags-chosen');
+      b.classList.remove('selected');
       if (ok) {
         b.classList.add('correct', 'g-flags-bump');
         api.good(q.kind, q.c);
@@ -357,12 +357,12 @@ function renderReverse(api, q, wrap) {
     if (locked || api.timeUp) return;
     locked = true;
     grid.classList.add('g-flags-locked');
-    b.classList.add('g-flags-chosen');
+    b.classList.add('selected');
     api.sfx.play('tap');
     const ok = c === q.c;
     api.qscope.timeout(() => {
       const right = btns[opts.indexOf(q.c)];
-      b.classList.remove('g-flags-chosen');
+      b.classList.remove('selected');
       grid.classList.add('g-flags-named');
       if (ok) {
         b.classList.add('correct', 'g-flags-bump');

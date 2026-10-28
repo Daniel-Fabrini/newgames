@@ -82,13 +82,13 @@ export async function mount(root, ctx) {
     return id;
   };
   // Counts a number up inside an element.
-  function countUp(el, from, to, ms = 900, prefix = '') {
+  function countUp(el, from, to, ms = 900, prefix = '', suffix = '') {
     const t0 = performance.now();
     const stepFn = (now) => {
       if (!alive) return;
       const k = Math.min(1, (now - t0) / ms);
       const e = 1 - Math.pow(1 - k, 3);
-      el.textContent = prefix + fmt(from + (to - from) * e);
+      el.textContent = prefix + fmt(from + (to - from) * e) + suffix;
       if (k < 1) requestAnimationFrame(stepFn);
     };
     requestAnimationFrame(stepFn);
@@ -195,7 +195,10 @@ export async function mount(root, ctx) {
 
   // ---------- career / cup state ----------
   function ensureCareer() {
-    if (!S.career) S.career = { tier: 0, seasonNo: 1, season: C.newSeason(0, S.team, 1) };
+    if (!S.career) {
+      S.career = { tier: 0, seasonNo: 1, season: C.newSeason(0, S.team, 1) };
+      save();
+    }
     const se = S.career.season;
     if (se.teams[0] !== S.team) {
       const j = se.teams.indexOf(S.team);
@@ -205,7 +208,10 @@ export async function mount(root, ctx) {
     return S.career;
   }
   function ensureCup() {
-    if (!S.cup || S.cup.out) S.cup = C.newCup(S.prof.cups, S.team);
+    if (!S.cup || S.cup.out) {
+      S.cup = C.newCup(S.prof.cups, S.team);
+      save();
+    }
     if (S.cup.opps.includes(S.team)) S.cup.opps = S.cup.opps.map((c) => (c === S.team ? S.team === 'AR' ? 'UY' : 'AR' : c));
     return S.cup;
   }
@@ -363,9 +369,8 @@ export async function mount(root, ctx) {
         return h(
           'div',
           { class: `g-soccer-rung ${st}` },
-          h('span', { class: 'rn' }, cupRoundName(r)),
           flagImg(code),
-          h('span', { class: 'nm' }, tname(code)),
+          h('span', { class: 'g-soccer-rbody' }, h('small', { class: 'rn' }, cupRoundName(r)), h('span', { class: 'nm' }, tname(code))),
           h('span', { class: 'st' }, st === 'done' ? icon(h, 'check') : st === 'lock' ? icon(h, 'lock') : icon(h, 'play')),
         );
       });
@@ -412,12 +417,12 @@ export async function mount(root, ctx) {
         clear(body);
         const items =
           tab === 'teams'
-            ? TEAMS.map((x) => ({ id: x.code, p: x.p, name: tname(x.code), prev: () => capCanvas(x.code, 0, S.equip.rim, 58) }))
+            ? TEAMS.map((x) => ({ id: x.code, p: x.p, name: tname(x.code), prev: () => flagImg(x.code, 'sq') }))
             : tab === 'pitch'
               ? PITCHES.map((x) => ({ id: x.id, p: x.p, name: t('pitch_' + x.id), prev: () => pitchPreview(x.id, 64, 88) }))
               : tab === 'ball'
-                ? BALLS.map((x) => ({ id: x.id, p: x.p, name: t('ball_' + x.id), prev: () => ballPreview(x.id, 54) }))
-                : RIMS.map((x) => ({ id: x.id, p: x.p, name: t('rim_' + x.id), prev: () => capCanvas(S.team, 0, x.id, 58) }));
+                ? BALLS.map((x) => ({ id: x.id, p: x.p, name: t('ball_' + x.id), prev: () => ballPreview(x.id, 76) }))
+                : RIMS.map((x) => ({ id: x.id, p: x.p, name: t('rim_' + x.id), prev: () => capCanvas(S.team, 0, x.id, 72) }));
         const ownedList = S.owned[tab];
         const equipped = tab === 'teams' ? S.team : S.equip[tab];
         // owned first, then by price
@@ -620,7 +625,7 @@ export async function mount(root, ctx) {
   async function showHelp() {
     if (helpOpen) return;
     helpOpen = true;
-    sfx.play('tap');
+    if (S.seenHelp) sfx.play('tap');
     if (match) match.pause();
     const steps = [
       ['👆', t('help1')],
@@ -807,7 +812,7 @@ export async function mount(root, ctx) {
       if (e.type === 'cupOut') rows.push(h('div', { class: 'g-soccer-event' }, h('span', { class: 'ev-ic' }, '💔'), h('div', null, h('b', null, t('cupOut', { r: cupRoundName(e.round) })), h('span', null, t('cupRetry')))));
     }
     const coinEl = h('b', null, '+0');
-    const cxpEl = h('b', null, '+0');
+    const cxpEl = h('b', null, '+0 XP');
     const bar = h('i', { style: { width: `${(100 * lvBefore.into) / lvBefore.need}%` } });
     const lvNum = h('b', { class: 'g-soccer-rlv' }, lvBefore.level);
     const rewardBox = pvp
@@ -854,7 +859,7 @@ export async function mount(root, ctx) {
       // reward animations
       later(() => countUp(coinEl, 0, out.coins, 900, '+'), 450);
       later(() => {
-        countUp(cxpEl, 0, out.cxp, 900, '+');
+        countUp(cxpEl, 0, out.cxp, 900, '+', ' XP');
         const after = levelFromXP(S.prof.xp);
         if (out.levelUp) {
           bar.style.width = '100%';

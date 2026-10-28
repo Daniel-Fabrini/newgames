@@ -137,7 +137,8 @@ const mod = (v, m) => ((v % m) + m) % m;
 
 // ---------------------------------------------------------------- MapView
 export class MapView {
-  // opts: { onTap(code|null, {x,y}), onPress(code), labelFor(code) -> string, labels: bool, tapDelay }
+  // opts: { onTap(code|null, {x,y}), onPress(code), labelFor(code) -> string, labels: bool, tapDelay,
+  //         markers: 'all' | 'states' (only countries with a state), markerBelow: px }
   constructor(parent, opts = {}) {
     this.opts = opts;
     this.geo = geometry();
@@ -148,6 +149,7 @@ export class MapView {
     this.pinsEl = document.createElement('div');
     this.pinsEl.className = 'g-mapquiz-pins';
     this.el.append(this.canvas, this.pinsEl);
+    this.el.mapView = this; // handy for debugging / automated tests
     parent.append(this.el);
     this.ctx = this.canvas.getContext('2d');
 
@@ -431,6 +433,16 @@ export class MapView {
     return x > margin && x < this.vw - margin && y > this.insets.top + margin && y < this.vh - this.insets.bottom - margin;
   }
 
+  // pans (without zooming) so the country is not hidden under overlays
+  ensureVisible(code) {
+    if (this.isInView(code, 40)) return;
+    const g = this.geo.shapes[code];
+    if (!g) return;
+    const { top, bottom } = this.insets;
+    const s = this.cam.s;
+    this.flyTo(this.clampCam({ s, cx: g.p[0], cy: g.p[1] - (top - bottom) / 2 / s }), 500);
+  }
+
   flyTo(target, dur) {
     const from = { ...this.cam };
     const to = { ...target };
@@ -651,7 +663,8 @@ export class MapView {
 
   // ------------------------------------------------------------ hit testing
   markerVisible(g) {
-    return !g.hasGeo || g.size * this.cam.s < MARKER_BELOW;
+    if (this.opts.markers === 'states' && !this.states.has(g.code)) return false;
+    return !g.hasGeo || g.size * this.cam.s < (this.opts.markerBelow ?? MARKER_BELOW);
   }
 
   markerRadius() {

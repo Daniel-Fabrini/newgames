@@ -76,6 +76,20 @@ export function createMatch(host, ctx, t, o) {
   const tip = h('div', { class: 'g-soccer-tip' }, t('tipDrag'));
   const el = h('div', { class: 'g-soccer-match' }, canvas, board, banner, goalEl, tip);
   host.append(el);
+  // read-only handle used by automated tests (no globals)
+  el.__soccer = {
+    world,
+    score,
+    get state() {
+      return state;
+    },
+    get turn() {
+      return turn;
+    },
+    get layout() {
+      return lay;
+    },
+  };
 
   function updateBoard() {
     scoreEls[0].textContent = score[0];
@@ -383,7 +397,7 @@ export function createMatch(host, ctx, t, o) {
       const gy = top ? 0 : L;
       if (top ? b.vy >= 0 : b.vy <= 0) continue;
       const tc = (gy - b.y) / b.vy;
-      if (tc <= 0 || tc > 0.42) continue;
+      if (tc <= 0 || tc > 0.42 || Math.abs(gy - b.y) > 42) continue;
       const xc = b.x + b.vx * tc;
       if (xc > GX0 - 1.5 && xc < GX1 + 1.5) {
         slow.on = true;

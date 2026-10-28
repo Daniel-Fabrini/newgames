@@ -189,6 +189,7 @@ export async function mount(root, ctx) {
   let cur = null;
   const stack = [];
   let overlay = null;
+  const screens = new Set(); // every screen not destroyed yet (incl. ones animating out)
 
   function makeScreen(cls, title = null) {
     const s = { el: h('div', { class: `mq-screen ${cls}` }), title, timers: new Set(), dead: false, cleanups: [] };
@@ -209,8 +210,10 @@ export async function mount(root, ctx) {
     };
     s.destroy = () => {
       s.kill();
+      screens.delete(s);
       s.cleanups.splice(0).forEach((f) => f());
     };
+    screens.add(s);
     return s;
   }
 
@@ -294,7 +297,7 @@ export async function mount(root, ctx) {
 
   function helpButton(kind) {
     return h('button', {
-      class: 'icon-btn mq-help',
+      class: 'icon-btn g-mapquiz-help',
       'aria-label': t('help'),
       title: t('help'),
       html: ICON.question,
@@ -398,7 +401,7 @@ export async function mount(root, ctx) {
         'span',
         { class: 'mq-daily-body' },
         h('span', { class: 'mq-kicker' }, t('daily')),
-        h('span', { class: 'mq-daily-title' }, new Intl.DateTimeFormat(locale, { weekday: 'long', day: 'numeric', month: 'long' }).format(today)),
+        h('span', { class: 'mq-daily-title' }, new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(today)),
         h('span', { class: 'mq-small' }, res ? t('dailyDone', { time: untilMidnight() }) : t('dailySub')),
       ),
       res ? starsRow(res.stars) : h('span', { class: 'mq-play-pill' }, icon('play'), t('play')),
@@ -765,7 +768,7 @@ export async function mount(root, ctx) {
         if (q.picture === 'map') {
           map.setState(q.target.code, 'gold');
           map.pulse(q.target.code, 'reveal');
-          map.focus(q.target.code, { minSize: 2600, pad: 24, dur: st.i === 0 ? 1100 : undefined });
+          map.focus(q.target.code, { minSize: 2000, pad: 24, dur: st.i === 0 ? 1100 : undefined });
         }
       }
       btns.forEach((b, i) => {
@@ -908,7 +911,7 @@ export async function mount(root, ctx) {
     };
 
     s.mounted = () => {
-      map = new MapView(mapBox, { labels: false });
+      map = new MapView(mapBox, { labels: false, markers: 'states', markerBelow: 7 });
       map.fitView('world');
       updateHud();
       if (!isMarathon && !qs.length) return;
@@ -1338,7 +1341,7 @@ export async function mount(root, ctx) {
     unmounted = true;
     for (const id of globalTimers) clearTimeout(id);
     globalTimers.clear();
-    if (cur) cur.destroy();
+    for (const s of [...screens]) s.destroy();
     for (const el of stage.querySelectorAll('.mq-screen')) el.remove();
     ctx.setHeaderRight(null);
   };

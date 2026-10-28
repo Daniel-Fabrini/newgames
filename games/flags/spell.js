@@ -89,7 +89,6 @@ export function renderSpell(api, q, wrap) {
       if (pos >= slots.length) complete();
       else slots[pos].el.classList.add('cur');
     } else {
-      restartAnim(tile, 'shake');
       restartAnim(tile, 'g-flags-tile-bad');
       const dead = api.bad(q.kind, q.c, { mastery: !slipped });
       slipped = true;

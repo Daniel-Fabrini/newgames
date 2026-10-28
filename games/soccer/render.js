@@ -63,6 +63,7 @@ export function layout(cw, ch, top = 0) {
 }
 
 function roundRect(g, x, y, w, h, r) {
+  r = Math.max(0, Math.min(r, w / 2, h / 2));
   g.beginPath();
   g.moveTo(x + r, y);
   g.arcTo(x + w, y, x + w, y + h, r);

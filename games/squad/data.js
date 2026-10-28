@@ -81,9 +81,10 @@ export function heroStats(id, lvl, towerLvl = 1) {
   const l = Math.max(0, lvl - 1);
   const pm = 1 + 0.08 * (towerLvl - 1);
   const cm = 1 / (1 + 0.03 * (towerLvl - 1));
-  if (id === 'tank') return { cd: (7 + 9 / (1 + 0.12 * l)) * cm, dur: 3 + 3 * (1 - 1 / (1 + 0.18 * l)), k: (1 + 0.35 * l) * pm, radius: 140 };
-  if (id === 'jet') return { cd: (6 + 8 / (1 + 0.12 * l)) * cm, k: (2.4 + 0.45 * l) * pm, radius: 85 };
-  return { cd: (5 + 7 / (1 + 0.12 * l)) * cm, k: (4 + 0.7 * l) * pm, radius: 150 };
+  const q = Math.sqrt(l);
+  if (id === 'tank') return { cd: (7 + 9 / (1 + 0.12 * l)) * cm, dur: 3 + 3 * (1 - 1 / (1 + 0.18 * l)), k: (1 + 0.4 * q) * pm, radius: 140 };
+  if (id === 'jet') return { cd: (6 + 8 / (1 + 0.12 * l)) * cm, k: (1.8 + 0.5 * q) * pm, radius: 85 };
+  return { cd: (5 + 7 / (1 + 0.12 * l)) * cm, k: (3 + 1.2 * q) * pm, radius: 150 };
 }
 
 // ---------------------------------------------------------------- save

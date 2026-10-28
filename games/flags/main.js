@@ -167,15 +167,19 @@ export async function mount(root, ctx) {
         const player = h(
           'div',
           { class: 'g-flags-player card' },
-          ring({ size: 74, stroke: 5, a: li.into / li.need, cls: 'xp', inner: h('div', { class: 'g-flags-lvl' }, h('small', null, t('lvlShort')), h('b', null, String(li.level))) }),
           h(
             'div',
-            { class: 'g-flags-pinfo' },
-            h('div', { class: 'g-flags-rank' }, icon('crown', 'sm'), t('rank' + rankIndex(li.level))),
-            h('div', { class: 'g-flags-xpbar' }, h('i', { style: { width: (li.into / li.need) * 100 + '%' } })),
-            h('div', { class: 'g-flags-xptext' }, t('xpToNext', { a: li.into, b: li.need, n: li.level + 1 })),
-            h('div', { class: 'g-flags-pstats' }, stat('flag', fl.learned, t('statLearned')), stat('crown', fl.mastered, t('statMastered')), stat('star', P.totalStars(), t('statStars'))),
+            { class: 'g-flags-ptop' },
+            ring({ size: 74, stroke: 5, a: li.into / li.need, cls: 'xp', inner: h('div', { class: 'g-flags-lvl' }, h('small', null, t('lvlShort')), h('b', null, String(li.level))) }),
+            h(
+              'div',
+              { class: 'g-flags-pinfo' },
+              h('div', { class: 'g-flags-rank' }, icon('crown', 'sm'), t('rank' + rankIndex(li.level))),
+              h('div', { class: 'g-flags-xpbar' }, h('i', { style: { width: (li.into / li.need) * 100 + '%' } })),
+              h('div', { class: 'g-flags-xptext' }, t('xpToNext', { a: li.into, b: li.need, n: li.level + 1 })),
+            ),
           ),
+          h('div', { class: 'g-flags-pstats' }, stat('flag', fl.learned, t('statLearned')), stat('crown', fl.mastered, t('statMastered')), stat('star', P.totalStars(), t('statStars'))),
         );
 
         const due = reviewItems().length;

@@ -9,12 +9,16 @@
 //   down word starting at (r,c), r>0    → clue in (r-1,c), "below" slot  (↓)
 //   down word starting at (0,c)         → clue in (0,c-1), "right" slot  (↱)
 // Every black cell holds one or two clues (at most one per slot), every letter
-// belongs to at least one word, and no word repeats in a grid. The same grid is
-// shown as a classic numbered crossword (black blocks + clue lists) by default.
+// belongs to at least one word, and no word repeats in a grid. The game shows
+// the same grid as a classic numbered crossword (black blocks + clue lists) by
+// default, or with the clues written inside the black cells ("diretas" view).
 //
-// The filler walks the cells in reading order and decides "black or letter"
-// for each one, keeping every horizontal and vertical run a valid prefix of a
-// dictionary word (trie), with randomized ordering and restarts.
+// Generation has two phases:
+//  1. makeTemplate: decides black/white cells (structure only, very fast),
+//     following the rules above plus some taste (few adjacent blacks, few
+//     2-letter words, most letters crossed).
+//  2. fillTemplate: fills the word slots from the dictionary — a small CSP
+//     solver (most-constrained slot first, forward checking with bitsets).
 
 import { ALPHABETS } from './dict.js';
 
@@ -40,7 +44,15 @@ export function hashSeed(...parts) {
   return h >>> 0;
 }
 
-// ---------- word index (trie over the grid alphabet) ----------
+function popcount32(x) {
+  x -= (x >>> 1) & 0x55555555;
+  x = (x & 0x33333333) + ((x >>> 2) & 0x33333333);
+  return (((x + (x >>> 4)) & 0x0f0f0f0f) * 0x01010101) >>> 24;
+}
+
+// ---------- word index ----------
+// words: [{ w, tier, clues, display }]; per length: bitsets of the words that
+// have letter `a` at position `p`.
 export function buildIndex(entries, lang, { maxTier = 3, maxLen = 10, minLen = 2 } = {}) {
   const alpha = ALPHABETS[lang] || ALPHABETS.en;
   const A1 = alpha.length + 1;
@@ -54,43 +66,32 @@ export function buildIndex(entries, lang, { maxTier = 3, maxLen = 10, minLen = 2
     if (!clues.length) continue;
     words.push({ w: e.w, tier: Math.min(...clues.map((c) => c.tier)), clues, display: e.display });
   }
-  let total = 1;
-  for (const w of words) total += w.w.length;
-  const child = new Int32Array(total * A1);
-  const wordAt = new Int32Array(total);
-  let nNodes = 1;
+  const byLen = new Map();
   words.forEach((wd, wi) => {
-    let n = 0;
-    for (const ch of wd.w) {
-      const L = code[ch];
-      let nx = child[n * A1 + L];
-      if (!nx) {
-        nx = nNodes++;
-        child[n * A1 + L] = nx;
-      }
-      n = nx;
-    }
-    wordAt[n] = wi + 1;
+    const L = wd.w.length;
+    if (!byLen.has(L)) byLen.set(L, []);
+    byLen.get(L).push(wi);
   });
-  const minRem = new Uint8Array(nNodes);
-  const count = new Int32Array(nNodes);
-  for (let n = nNodes - 1; n >= 0; n--) {
-    let mr = 99;
-    let cnt = wordAt[n] ? 1 : 0;
-    for (let L = 1; L < A1; L++) {
-      const ch = child[n * A1 + L];
-      if (ch) {
-        mr = Math.min(mr, 1 + minRem[ch]);
-        cnt += count[ch];
-      }
-    }
-    minRem[n] = wordAt[n] ? 0 : mr;
-    count[n] = cnt;
+  const lens = new Map();
+  for (const [L, ids] of byLen) {
+    const nW = (ids.length + 31) >>> 5;
+    const bits = new Array(L * A1);
+    for (let i = 0; i < L * A1; i++) bits[i] = new Uint32Array(nW);
+    const all = new Uint32Array(nW);
+    ids.forEach((wi, j) => {
+      all[j >>> 5] |= 1 << (j & 31);
+      const w = words[wi].w;
+      for (let p = 0; p < L; p++) bits[p * A1 + code[w[p]]][j >>> 5] |= 1 << (j & 31);
+    });
+    lens.set(L, { ids: Int32Array.from(ids), nW, bits, all });
   }
-  return { lang, alpha, A1, code, words, child, wordAt, minRem, count, nNodes };
+  // longest slot length the dictionary can comfortably fill
+  let goodMax = 2;
+  while ((byLen.get(goodMax + 1) || []).length >= 30) goodMax++;
+  return { lang, alpha, A1, code, words, lens, goodMax };
 }
 
-// ---------- the filler ----------
+// ---------- phase 1: template ----------
 const ABORT = { abort: true };
 
 // Static check: can a black cell at (r,c) ever hold a clue?
@@ -100,192 +101,106 @@ function blackPossible(r, c, W, H) {
   return right || below;
 }
 
-// Fills a W×H grid. Returns { cells: Int8Array (-1 black, letter codes), words } or null.
-export function fillGrid(index, W, H, rnd, opts = {}) {
-  const { child, wordAt, minRem, count, A1 } = index;
-  const nWords = index.words.length;
-  const maxNodes = opts.maxNodes || 60000;
-  const allow = opts.allow || null; // (wordIndex) => boolean, extra filter (usage caps)
+// Returns Int8Array (1 = letter, -1 = black) or null.
+export function makeTemplate(W, H, rnd, opts = {}) {
+  const maxSlot = Math.min(opts.maxSlot || 8, Math.max(W, H));
   const blackTarget = opts.blackTarget ?? 0.3;
-  const twoPenalty = opts.twoPenalty ?? 0.6;
+  const maxNodes = opts.maxNodes || 3000;
   const N = W * H;
   const g = new Int8Array(N);
-  const hn = new Int32Array(N);
-  const vn = new Int32Array(N);
   const hl = new Uint8Array(N);
   const vl = new Uint8Array(N);
   const clR = new Uint8Array(N);
   const clB = new Uint8Array(N);
-  const used = new Uint8Array(nWords);
-  // per-cell undo info
   const claimA = new Int32Array(N).fill(-1);
   const claimB = new Int32Array(N).fill(-1);
-  const doneA = new Int32Array(N).fill(-1);
-  const doneB = new Int32Array(N).fill(-1);
   let blacks = 0;
   let nodes = 0;
+  const isW = (i) => g[i] === 1;
+  const isB = (i) => g[i] === -1;
 
-  const isBlack = (i) => g[i] === -1;
+  // Is the clue slot for a run starting at (r,c) available?
+  const acrossFree = (r, c, k) => (c > 0 ? isB(k - 1) && !clR[k - 1] : r > 0 && isB(k - W) && !clB[k - W]);
+  const downFree = (r, c, k) => (r > 0 ? isB(k - W) && !clB[k - W] : c > 0 && isB(k - 1) && !clR[k - 1]);
 
-  function wordOk(node) {
-    if (node <= 0) return -1;
-    const wi = wordAt[node] - 1;
-    if (wi < 0 || used[wi]) return -1;
-    if (allow && !allow(wi)) return -1;
-    return wi;
+  function undoClaims(k) {
+    for (const v of [claimA[k], claimB[k]]) if (v >= 0) (v & 1 ? clB : clR)[v >> 1] = 0;
+    claimA[k] = claimB[k] = -1;
   }
-
-  function claim(slotArr, b, k, which) {
-    slotArr[b] = 1;
-    if (which === 0) claimA[k] = slotArr === clR ? b * 2 : b * 2 + 1;
-    else claimB[k] = slotArr === clR ? b * 2 : b * 2 + 1;
-  }
-
   function release(k) {
-    for (const v of [claimA[k], claimB[k]]) {
-      if (v >= 0) (v & 1 ? clB : clR)[v >> 1] = 0;
-    }
-    if (doneA[k] >= 0) used[doneA[k]] = 0;
-    if (doneB[k] >= 0) used[doneB[k]] = 0;
-    claimA[k] = claimB[k] = doneA[k] = doneB[k] = -1;
+    undoClaims(k);
     if (g[k] === -1) blacks--;
     g[k] = 0;
   }
+  function fail(k) {
+    undoClaims(k);
+    g[k] = 0;
+    return false;
+  }
+  function claim(isRight, b, k, which) {
+    (isRight ? clR : clB)[b] = 1;
+    const v = b * 2 + (isRight ? 0 : 1);
+    if (which === 0) claimA[k] = v;
+    else claimB[k] = v;
+  }
 
-  // Can black cell b still receive a clue, given the cells filled so far?
   function dead(b) {
     if (clR[b] || clB[b]) return false;
     const rb = (b / W) | 0;
     const cb = b - rb * W;
-    if (cb + 2 < W && !isBlack(b + 1) && !isBlack(b + 2)) return false;
-    if (rb === 0 && cb + 1 < W && H > 1 && !isBlack(b + 1) && !isBlack(b + 1 + W)) return false;
-    if (rb + 2 < H && !isBlack(b + W) && !isBlack(b + 2 * W)) return false;
-    if (cb === 0 && rb + 1 < H && W > 1 && !isBlack(b + W) && !isBlack(b + W + 1)) return false;
+    if (cb + 2 < W && !isB(b + 1) && !isB(b + 2)) return false;
+    if (rb === 0 && cb + 1 < W && H > 1 && !isB(b + 1) && !isB(b + 1 + W)) return false;
+    if (rb + 2 < H && !isB(b + W) && !isB(b + 2 * W)) return false;
+    if (cb === 0 && rb + 1 < H && W > 1 && !isB(b + W) && !isB(b + W + 1)) return false;
     return true;
   }
 
-  function placeLetter(k, r, c, L) {
-    // horizontal
-    let nh;
-    let lh;
-    if (c > 0 && g[k - 1] > 0) {
-      const p = hn[k - 1];
-      if (p < 0) return false;
-      nh = child[p * A1 + L];
-      if (!nh) return false;
-      lh = hl[k - 1] + 1;
-      if (!wordAt[nh] && minRem[nh] > W - 1 - c) return false;
-    } else {
-      nh = child[L] || -1;
-      lh = 1;
-      if (nh > 0 && minRem[nh] > W - 1 - c) nh = -1;
-    }
-    // vertical
-    let nv;
-    let lv;
-    if (r > 0 && g[k - W] > 0) {
-      const p = vn[k - W];
-      if (p < 0) return false;
-      nv = child[p * A1 + L];
-      if (!nv) return false;
-      lv = vl[k - W] + 1;
-      if (!wordAt[nv] && minRem[nv] > H - 1 - r) return false;
-    } else {
-      nv = child[L] || -1;
-      lv = 1;
-      if (nv > 0 && minRem[nv] > H - 1 - r) nv = -1;
-    }
-    // a letter must be able to belong to some word
-    if (lh === 1 && nh < 0 && lv === 1 && nv < 0) return false;
-    if (c === W - 1 && lh === 1 && lv === 1 && (nv < 0 || r === H - 1)) return false;
-    if (r === H - 1 && lv === 1 && lh === 1 && (nh < 0 || c === W - 1)) return false;
-    // word births: claim the clue slot
+  function placeWhite(k, r, c) {
+    const lh = c > 0 && isW(k - 1) ? hl[k - 1] + 1 : 1;
+    const lv = r > 0 && isW(k - W) ? vl[k - W] + 1 : 1;
+    if (lh > maxSlot || lv > maxSlot) return false;
+    const hCan = lh >= 2 || (c + 1 < W && acrossFree(r, c, k));
+    const vCan = lv >= 2 || (r + 1 < H && downFree(r, c, k));
+    if (!hCan && !vCan) return false;
+    if (c === W - 1 && lh === 1 && !vCan) return false;
+    if (r === H - 1 && lv === 1 && !hCan) return false;
     if (lh === 2) {
-      const s = c - 1;
-      if (s > 0) {
-        const b = k - 2;
-        if (clR[b]) return false;
-        claim(clR, b, k, 0);
+      if (c - 1 > 0) {
+        if (clR[k - 2]) return false;
+        claim(true, k - 2, k, 0);
       } else {
-        if (r === 0) return false;
         const b = k - 1 - W;
-        if (!isBlack(b) || clB[b]) return false;
-        claim(clB, b, k, 0);
+        if (r === 0 || !isB(b) || clB[b]) return false;
+        claim(false, b, k, 0);
       }
     }
     if (lv === 2) {
-      const s = r - 1;
-      let b;
-      let arr;
-      if (s > 0) {
-        b = k - 2 * W;
-        arr = clB;
+      if (r - 1 > 0) {
+        const b = k - 2 * W;
+        if (clB[b]) return fail(k);
+        claim(false, b, k, 1);
       } else {
-        if (c === 0) return fail(k);
-        b = c - 1;
-        arr = clR;
-        if (!isBlack(b)) return fail(k);
+        const b = c - 1;
+        if (c === 0 || !isB(b) || clR[b]) return fail(k);
+        claim(true, b, k, 1);
       }
-      if (arr[b]) return fail(k);
-      claim(arr, b, k, 1);
     }
-    // runs ending at the grid edge
-    if (c === W - 1 && lh >= 2) {
-      const wi = wordOk(nh);
-      if (wi < 0) return fail(k);
-      used[wi] = 1;
-      doneA[k] = wi;
-    }
-    if (r === H - 1 && lv >= 2) {
-      const wi = wordOk(nv);
-      if (wi < 0) return fail(k);
-      used[wi] = 1;
-      doneB[k] = wi;
-    }
-    g[k] = L;
-    hn[k] = nh;
+    g[k] = 1;
     hl[k] = lh;
-    vn[k] = nv;
     vl[k] = lv;
     return true;
   }
 
-  // undo partial work of a failed placement
-  function fail(k) {
-    for (const v of [claimA[k], claimB[k]]) if (v >= 0) (v & 1 ? clB : clR)[v >> 1] = 0;
-    if (doneA[k] >= 0) used[doneA[k]] = 0;
-    if (doneB[k] >= 0) used[doneB[k]] = 0;
-    claimA[k] = claimB[k] = doneA[k] = doneB[k] = -1;
-    g[k] = 0;
-    return false;
-  }
-
   function placeBlack(k, r, c) {
     if (!blackPossible(r, c, W, H)) return false;
-    // horizontal run ending at (r, c-1)
-    if (c > 0 && g[k - 1] > 0) {
-      if (hl[k - 1] >= 2) {
-        const wi = wordOk(hn[k - 1]);
-        if (wi < 0) return false;
-        used[wi] = 1;
-        doneA[k] = wi;
-      } else if (!(r > 0 && g[k - 1 - W] > 0)) {
-        // single letter across: it must continue downwards
-        if (r === H - 1 || vn[k - 1] <= 0) return fail(k);
-      }
+    if (c > 0 && isW(k - 1) && hl[k - 1] === 1 && !(r > 0 && isW(k - 1 - W))) {
+      // single letter across: it has to start a down word
+      if (r === H - 1 || !downFree(r, c - 1, k - 1)) return false;
     }
-    // vertical run ending at (r-1, c)
-    if (r > 0 && g[k - W] > 0) {
-      if (vl[k - W] >= 2) {
-        const wi = wordOk(vn[k - W]);
-        if (wi < 0) return fail(k);
-        used[wi] = 1;
-        doneB[k] = wi;
-      } else {
-        const left = c > 0 && g[k - W - 1] > 0;
-        const right = c < W - 1 && g[k - W + 1] > 0;
-        if (!left && !right) return fail(k);
-      }
+    if (r > 0 && isW(k - W) && vl[k - W] === 1) {
+      const left = c > 0 && isW(k - W - 1);
+      const right = c < W - 1 && isW(k - W + 1);
+      if (!left && !right) return false;
     }
     g[k] = -1;
     blacks++;
@@ -297,91 +212,226 @@ export function fillGrid(index, W, H, rnd, opts = {}) {
     if (r === 1 && c >= 1) cand.push(c - 1);
     if (c <= 1 && r >= 1) cand.push((r - 1) * W);
     for (const b of cand) {
-      if (g[b] === -1 && dead(b)) {
+      if (isB(b) && dead(b)) {
         blacks--;
-        return fail(k);
+        g[k] = 0;
+        return false;
       }
     }
     return true;
   }
 
   function finalOk() {
-    for (let i = 0; i < N; i++) if (g[i] === -1 && !clR[i] && !clB[i]) return false;
+    for (let i = 0; i < N; i++) if (isB(i) && !clR[i] && !clB[i]) return false;
     return true;
   }
 
-  // Ordered options for cell k: letter codes, and -1 for black.
-  function options(k, r, c) {
-    const out = [];
-    const hMid = c > 0 && g[k - 1] > 0;
-    const vMid = r > 0 && g[k - W] > 0;
-    const hp = hMid ? hn[k - 1] : 0;
-    const vp = vMid ? vn[k - W] : 0;
-    if (!(hMid && hp < 0) && !(vMid && vp < 0)) {
-      for (let L = 1; L < A1; L++) {
-        let sh;
-        let sv;
-        if (hMid) {
-          const ch = child[hp * A1 + L];
-          if (!ch) continue;
-          sh = Math.log(1 + count[ch]) + (wordAt[ch] ? 0.3 : 0);
-        } else {
-          const ch = child[L];
-          sh = ch ? Math.log(1 + count[ch]) * 0.6 : -0.5;
-        }
-        if (vMid) {
-          const ch = child[vp * A1 + L];
-          if (!ch) continue;
-          sv = Math.log(1 + count[ch]) + (wordAt[ch] ? 0.3 : 0);
-        } else {
-          const ch = child[L];
-          sv = ch ? Math.log(1 + count[ch]) * 0.6 : -0.5;
-        }
-        let edge = 0;
-        // Along the top row / left column a letter inside a word forces a
-        // black cell next to it (no clue fits there): prefer the alternating
-        // "black, letter, black" frame of real arrowword grids.
-        if (r === 0 && hMid) edge -= 1.6;
-        if (c === 0 && vMid) edge -= 1.6;
-        out.push({ v: L, s: sh + sv + edge + rnd() * 2.2 });
-      }
-    }
-    // black cell desirability
-    if (blackPossible(r, c, W, H)) {
-      let s = 2.2;
-      const lhPrev = hMid ? hl[k - 1] : 0;
-      const lvPrev = vMid ? vl[k - W] : 0;
-      if (hMid) {
-        if (lhPrev >= 2) s += wordAt[hp] ? 1.2 + 0.25 * lhPrev - (lhPrev === 2 ? twoPenalty : 0) : -9;
-        else s -= 1.2;
-      } else if (c > 0) s -= 2.2; // two blacks side by side
-      if (vMid) {
-        if (lvPrev >= 2) s += wordAt[vp] ? 1.2 + 0.25 * lvPrev - (lvPrev === 2 ? twoPenalty : 0) : -9;
-        else s -= 1.2;
-      } else if (r > 0) s -= 2.2;
-      const ratio = k ? blacks / k : 0;
-      s += (blackTarget - ratio) * 14;
-      out.push({ v: -1, s: s + rnd() * 2.2 });
-    }
-    out.sort((a, b) => b.s - a.s);
-    return out;
+  // probability of trying a black cell first
+  function blackFirst(k, r, c) {
+    const lh = c > 0 && isW(k - 1) ? hl[k - 1] : 0;
+    const lv = r > 0 && isW(k - W) ? vl[k - W] : 0;
+    const runP = (len, edge) => {
+      if (edge) return 0.5;
+      if (len === 0) return 0.08; // black next to black
+      if (len === 1) return 0.18;
+      if (len === 2) return 0.22;
+      return Math.min(0.9, 0.3 + (len - 3) * 0.16);
+    };
+    let p = Math.sqrt(runP(lh, c === 0) * runP(lv, r === 0));
+    // top row / left column: alternate black and letter, like real arrowwords
+    if (r === 0 && c > 0) p = lh >= 1 ? 0.93 : 0.06;
+    if (c === 0 && r > 0) p = lv >= 1 ? 0.93 : 0.06;
+    const ratio = k ? blacks / k : blackTarget;
+    p += (blackTarget - ratio) * 1.5;
+    return rnd() < p;
   }
 
-  let maxK = 0;
   function solve(k) {
-    if (k > maxK) {
-      maxK = k;
-      if (opts.stats) opts.stats.snap = Array.from(g);
-    }
     if (k === N) return finalOk();
     if (++nodes > maxNodes) throw ABORT;
     const r = (k / W) | 0;
     const c = k - r * W;
-    for (const o of options(k, r, c)) {
-      const ok = o.v === -1 ? placeBlack(k, r, c) : placeLetter(k, r, c, o.v);
+    const order = k === 0 ? [-1] : blackFirst(k, r, c) ? [-1, 1] : [1, -1];
+    for (const v of order) {
+      const ok = v === -1 ? placeBlack(k, r, c) : placeWhite(k, r, c);
       if (!ok) continue;
       if (solve(k + 1)) return true;
       release(k);
+    }
+    return false;
+  }
+
+  try {
+    if (solve(0)) return g;
+  } catch (e) {
+    if (e !== ABORT) throw e;
+  }
+  return null;
+}
+
+// Word slots of a template / grid. `isBlack(i)` decides black cells.
+function slotsOf(isBlack, W, H) {
+  const slots = [];
+  for (let r = 0; r < H; r++) {
+    for (let c = 0; c < W; c++) {
+      const k = r * W + c;
+      if (isBlack(k)) continue;
+      if ((c === 0 || isBlack(k - 1)) && c + 1 < W && !isBlack(k + 1)) {
+        const cells = [];
+        for (let x = c; x < W && !isBlack(r * W + x); x++) cells.push(r * W + x);
+        slots.push({ dir: 0, cells, clueCell: c > 0 ? k - 1 : r > 0 ? k - W : -1, slot: c > 0 ? 0 : 1 });
+      }
+      if ((r === 0 || isBlack(k - W)) && r + 1 < H && !isBlack(k + W)) {
+        const cells = [];
+        for (let y = r; y < H && !isBlack(y * W + c); y++) cells.push(y * W + c);
+        slots.push({ dir: 1, cells, clueCell: r > 0 ? k - W : c > 0 ? k - 1 : -1, slot: r > 0 ? 1 : 0 });
+      }
+    }
+  }
+  return slots;
+}
+
+export function templateStats(tpl, W, H) {
+  const slots = slotsOf((i) => tpl[i] === -1, W, H);
+  return statsFromSlots(slots, (i) => tpl[i] === -1, W, H);
+}
+
+function statsFromSlots(slots, isBlack, W, H) {
+  const N = W * H;
+  const member = new Uint8Array(N);
+  for (const s of slots) for (const k of s.cells) member[k]++;
+  let letters = 0;
+  let crossed = 0;
+  let blacks = 0;
+  for (let i = 0; i < N; i++) {
+    if (isBlack(i)) blacks++;
+    else {
+      letters++;
+      if (member[i] >= 2) crossed++;
+    }
+  }
+  const twos = slots.filter((s) => s.cells.length === 2).length;
+  const avgLen = slots.reduce((a, s) => a + s.cells.length, 0) / Math.max(1, slots.length);
+  const longest = Math.max(0, ...slots.map((s) => s.cells.length));
+  return { words: slots.length, letters, blacks, crossed, crossRatio: crossed / Math.max(1, letters), blackRatio: blacks / N, twos, twoRatio: twos / Math.max(1, slots.length), avgLen, longest };
+}
+
+// ---------- phase 2: fill ----------
+// Returns Int8Array of letter codes (-1 for black) or null.
+export function fillTemplate(index, tpl, W, H, rnd, opts = {}) {
+  const { lens, A1 } = index;
+  const maxNodes = opts.maxNodes || 4000;
+  const allow = opts.allow || null; // (wordIndex) => boolean
+  const pref = opts.pref || null; // (wordIndex) => score bonus (higher = preferred)
+  const N = W * H;
+  const slots = slotsOf((i) => tpl[i] === -1, W, H);
+  const S = slots.length;
+  for (const s of slots) if (!lens.has(s.cells.length)) return null;
+  const cellSlots = Array.from({ length: N }, () => []);
+  slots.forEach((s, si) => s.cells.forEach((k, p) => cellSlots[k].push([si, p])));
+  const letters = new Int8Array(N);
+  const assigned = new Int32Array(S).fill(-1);
+  // per-length masks: allowed and used words
+  const allowMask = new Map();
+  const used = new Map();
+  for (const [L, info] of lens) {
+    const m = new Uint32Array(info.nW);
+    info.ids.forEach((wi, j) => {
+      if (!allow || allow(wi)) m[j >>> 5] |= 1 << (j & 31);
+    });
+    allowMask.set(L, m);
+    used.set(L, new Uint32Array(info.nW));
+  }
+  let maxW = 1;
+  for (const info of lens.values()) maxW = Math.max(maxW, info.nW);
+  const scratch = new Uint32Array(maxW);
+  let nodes = 0;
+
+  function candBits(si, out) {
+    const s = slots[si];
+    const L = s.cells.length;
+    const info = lens.get(L);
+    const nW = info.nW;
+    const am = allowMask.get(L);
+    const um = used.get(L);
+    for (let i = 0; i < nW; i++) out[i] = am[i] & ~um[i];
+    for (let p = 0; p < L; p++) {
+      const a = letters[s.cells[p]];
+      if (!a) continue;
+      const b = info.bits[p * A1 + a];
+      for (let i = 0; i < nW; i++) out[i] &= b[i];
+    }
+    let n = 0;
+    for (let i = 0; i < nW; i++) if (out[i]) n += popcount32(out[i]);
+    return n;
+  }
+
+  function solve(depth) {
+    if (++nodes > maxNodes) throw ABORT;
+    // most constrained open slot
+    let best = -1;
+    let bestN = 1e9;
+    let bestTie = 0;
+    for (let si = 0; si < S; si++) {
+      if (assigned[si] >= 0) continue;
+      const n = candBits(si, scratch);
+      if (n === 0) return false;
+      const tie = rnd() + slots[si].cells.length * 0.05;
+      if (n < bestN || (n === bestN && tie > bestTie)) {
+        best = si;
+        bestN = n;
+        bestTie = tie;
+      }
+    }
+    if (best < 0) return true;
+    const s = slots[best];
+    const L = s.cells.length;
+    const info = lens.get(L);
+    const bits = new Uint32Array(info.nW);
+    candBits(best, bits);
+    const list = [];
+    for (let i = 0; i < info.nW; i++) {
+      let x = bits[i];
+      while (x) {
+        const t = x & -x;
+        const j = (i << 5) + (31 - Math.clz32(t));
+        const wi = info.ids[j];
+        list.push({ j, wi, s: rnd() + (pref ? pref(wi) : 0) });
+        x ^= t;
+      }
+    }
+    list.sort((a, b) => b.s - a.s);
+    const limit = Math.min(list.length, depth < 2 ? 12 : 24);
+    const um = used.get(L);
+    for (let n = 0; n < limit; n++) {
+      const { j, wi } = list[n];
+      const w = index.words[wi].w;
+      const newly = [];
+      for (let p = 0; p < L; p++) {
+        const k = s.cells[p];
+        if (!letters[k]) {
+          letters[k] = index.code[w[p]];
+          newly.push(k);
+        }
+      }
+      assigned[best] = j;
+      um[j >>> 5] |= 1 << (j & 31);
+      // forward check the crossing slots
+      let ok = true;
+      for (const k of newly) {
+        for (const [si] of cellSlots[k]) {
+          if (si === best || assigned[si] >= 0) continue;
+          if (candBits(si, scratch) === 0) {
+            ok = false;
+            break;
+          }
+        }
+        if (!ok) break;
+      }
+      if (ok && solve(depth + 1)) return true;
+      um[j >>> 5] &= ~(1 << (j & 31));
+      assigned[best] = -1;
+      for (const k of newly) letters[k] = 0;
     }
     return false;
   }
@@ -392,62 +442,23 @@ export function fillGrid(index, W, H, rnd, opts = {}) {
   } catch (e) {
     if (e !== ABORT) throw e;
   }
-  if (opts.stats) {
-    opts.stats.maxK = maxK;
-    opts.stats.nodes = nodes;
-  }
+  if (opts.stats) opts.stats.nodes = nodes;
   if (!ok) return null;
-  return { W, H, cells: g, nodes };
+  const out = new Int8Array(N);
+  for (let i = 0; i < N; i++) out[i] = tpl[i] === -1 ? -1 : letters[i];
+  return out;
 }
 
-// ---------- from a filled grid to a puzzle ----------
+// ---------- grid helpers ----------
 
-// Words of a grid string ('#' = black). Returns [{ dir, cells:[k..], text, clueCell, slot }].
+// Words of a grid string ('#' = black): [{ dir, cells, text, clueCell, slot }].
 export function gridWords(grid, W, H) {
-  const words = [];
-  const at = (r, c) => grid[r * W + c];
-  for (let r = 0; r < H; r++) {
-    for (let c = 0; c < W; c++) {
-      if (at(r, c) === '#') continue;
-      // across start
-      if ((c === 0 || at(r, c - 1) === '#') && c + 1 < W && at(r, c + 1) !== '#') {
-        const cells = [];
-        for (let x = c; x < W && at(r, x) !== '#'; x++) cells.push(r * W + x);
-        const clueCell = c > 0 ? r * W + c - 1 : r > 0 ? (r - 1) * W : -1;
-        words.push({ dir: 0, cells, text: cells.map((i) => grid[i]).join(''), clueCell, slot: c > 0 ? 0 : 1 });
-      }
-      // down start
-      if ((r === 0 || at(r - 1, c) === '#') && r + 1 < H && at(r + 1, c) !== '#') {
-        const cells = [];
-        for (let y = r; y < H && at(y, c) !== '#'; y++) cells.push(y * W + c);
-        const clueCell = r > 0 ? (r - 1) * W + c : c > 0 ? c - 1 : -1;
-        words.push({ dir: 1, cells, text: cells.map((i) => grid[i]).join(''), clueCell, slot: r > 0 ? 1 : 0 });
-      }
-    }
-  }
-  return words;
+  return slotsOf((i) => grid[i] === '#', W, H).map((s) => ({ ...s, text: s.cells.map((k) => grid[k]).join('') }));
 }
 
-// Grid statistics used to rank candidate fills.
 export function gridStats(grid, W, H) {
-  const words = gridWords(grid, W, H);
-  const N = W * H;
-  const inWords = new Uint8Array(N);
-  for (const w of words) for (const k of w.cells) inWords[k]++;
-  let letters = 0;
-  let crossed = 0;
-  let blacks = 0;
-  for (let i = 0; i < N; i++) {
-    if (grid[i] === '#') blacks++;
-    else {
-      letters++;
-      if (inWords[i] >= 2) crossed++;
-    }
-  }
-  const twos = words.filter((w) => w.text.length === 2).length;
-  const avgLen = words.reduce((a, w) => a + w.text.length, 0) / Math.max(1, words.length);
-  const longest = Math.max(0, ...words.map((w) => w.text.length));
-  return { words: words.length, letters, blacks, crossed, crossRatio: crossed / Math.max(1, letters), blackRatio: blacks / N, twos, twoRatio: twos / Math.max(1, words.length), avgLen, longest };
+  const isBlack = (i) => grid[i] === '#';
+  return statsFromSlots(slotsOf(isBlack, W, H), isBlack, W, H);
 }
 
 export function quality(st) {
@@ -455,12 +466,12 @@ export function quality(st) {
 }
 
 // Chooses one clue per word. `level` 1..3 shifts the choice towards later
-// (harder) clues; `shortFor` is a set of clue cells that hold two clues, where
-// shorter clues are preferred so they stay legible inside the grid.
+// (harder) clues; cells holding two clues prefer shorter ones so they stay
+// legible in the "diretas" view.
 function pickClue(word, level, rnd, twoInCell, clueUse) {
   const options = word.clues.filter((c) => c.tier <= level);
   const list = options.length ? options : word.clues;
-  let best = null;
+  let best = list[0];
   let bestScore = -1e9;
   list.forEach((c, i) => {
     let s = rnd() * 1.5;
@@ -479,11 +490,10 @@ function pickClue(word, level, rnd, twoInCell, clueUse) {
   return best.t;
 }
 
-// Builds the compact puzzle object stored in data files / produced at runtime:
+// Compact puzzle object stored in data files / produced at runtime:
 //   { w, h, g: 'grid string', c: [[clueCell, slot(0 right|1 below), dir(0 across|1 down), 'clue'], ...] }
-export function makePuzzle(fill, index, rnd, { level = 1, clueUse = null } = {}) {
-  const { W, H, cells } = fill;
-  const grid = [...cells].map((v) => (v === -1 ? '#' : index.alpha[v - 1])).join('');
+export function makePuzzle(cells, W, H, index, rnd, { level = 1, clueUse = null } = {}) {
+  const grid = Array.from(cells, (v) => (v === -1 ? '#' : index.alpha[v - 1])).join('');
   const words = gridWords(grid, W, H);
   const perCell = new Map();
   for (const w of words) perCell.set(w.clueCell, (perCell.get(w.clueCell) || 0) + 1);
@@ -504,7 +514,7 @@ export function makePuzzle(fill, index, rnd, { level = 1, clueUse = null } = {})
 export function validatePuzzle(p, dict) {
   const errs = [];
   const { w: W, h: H, g } = p;
-  if (g.length !== W * H) return ['grid size mismatch'];
+  if (!g || g.length !== W * H) return ['grid size mismatch'];
   const words = gridWords(g, W, H);
   const N = W * H;
   const member = new Uint8Array(N);
@@ -517,7 +527,6 @@ export function validatePuzzle(p, dict) {
     if (dict && !dict.has(w.text)) errs.push(`word not in dictionary: ${w.text}`);
   }
   for (let i = 0; i < N; i++) if (g[i] !== '#' && !member[i]) errs.push(`cell ${i} is in no word`);
-  // clues ↔ words, one per slot
   const slots = new Set();
   const byKey = new Map(words.map((w) => [`${w.clueCell}:${w.slot}:${w.dir}`, w]));
   for (const [cell, slot, dir, text] of p.c) {
@@ -530,7 +539,7 @@ export function validatePuzzle(p, dict) {
       const e = dict.get(w.text);
       if (e && !e.clues.some((c) => c.t === text)) errs.push(`clue "${text}" not listed for ${w.text}`);
     }
-    if (!text || !text.trim()) errs.push(`empty clue at ${key}`);
+    if (!text || !String(text).trim()) errs.push(`empty clue at ${key}`);
   }
   if (p.c.length !== words.length) errs.push(`clue count ${p.c.length} != word count ${words.length}`);
   for (let i = 0; i < N; i++) {
@@ -540,28 +549,37 @@ export function validatePuzzle(p, dict) {
   return errs;
 }
 
-// Generates one puzzle: several fills, keeps the best by quality.
-// Deterministic for a given seed. Returns the puzzle or null.
-export function generatePuzzle(index, { W, H, seed, level = 1, tries = 6, fills = 2, maxNodes = 40000, allow = null, clueUse = null, minQuality = -99, blackTarget = 0.3 }) {
+// Generates one puzzle; deterministic for a given seed. Several templates are
+// tried; each template gets a few fill attempts; the best fill by quality wins.
+export function generatePuzzle(index, o) {
+  const { W, H, seed, level = 1, maxSlot = 8, blackTarget = 0.3, minCross = 0.72, maxTwo = 0.42 } = o;
+  const templates = o.templates || 40;
+  const fillsPerTemplate = o.fillsPerTemplate || 3;
+  const wanted = o.fills || 1;
   const rnd = mulberry32(seed);
+  const slotMax = Math.max(4, Math.min(maxSlot, index.goodMax));
   let best = null;
   let bestQ = -1e9;
   let found = 0;
-  for (let t = 0; t < tries && found < fills; t++) {
-    const fill = fillGrid(index, W, H, rnd, { maxNodes, allow, blackTarget });
-    if (!fill) continue;
-    const grid = [...fill.cells].map((v) => (v === -1 ? '#' : index.alpha[v - 1])).join('');
-    const st = gridStats(grid, W, H);
-    const q = quality(st);
-    if (q < minQuality) continue;
-    found++;
-    if (q > bestQ) {
-      bestQ = q;
-      best = { fill, st, q };
+  for (let t = 0; t < templates && found < wanted; t++) {
+    const tpl = makeTemplate(W, H, rnd, { maxSlot: slotMax, blackTarget });
+    if (!tpl) continue;
+    const ts = templateStats(tpl, W, H);
+    if (ts.crossRatio < minCross || ts.twoRatio > maxTwo || ts.blackRatio > blackTarget + 0.1) continue;
+    for (let f = 0; f < fillsPerTemplate; f++) {
+      const cells = fillTemplate(index, tpl, W, H, rnd, { maxNodes: o.maxNodes || 2500, allow: o.allow, pref: o.pref });
+      if (!cells) continue;
+      const q = quality(ts) + rnd() * 0.01;
+      found++;
+      if (q > bestQ) {
+        bestQ = q;
+        best = cells;
+      }
+      break;
     }
   }
   if (!best) return null;
-  const p = makePuzzle(best.fill, index, rnd, { level, clueUse });
-  p.q = Math.round(best.q * 100) / 100;
+  const p = makePuzzle(best, W, H, index, rnd, { level, clueUse: o.clueUse || null });
+  p.q = Math.round(bestQ * 100) / 100;
   return p;
 }

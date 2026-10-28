@@ -60,7 +60,7 @@ export class Gen {
   }
   Etarget(z) {
     if (this.mode === 'campaign') return this.E0 + (this.Eend - this.E0) * Math.min(1, z / this.length);
-    return this.E0 * (1.6 + z / 1400) + 6 + z / 120;
+    return this.E0 * (1.3 + z / 4000) + 4 + z / 450;
   }
   Tk(x) {
     if (this.mode === 'campaign') return (1.4 + 1.6 * sat(x, 18) + 0.006 * x) * this.ease;
@@ -79,6 +79,9 @@ export class Gen {
       return;
     }
     while (this.z < toZ) {
+      // survival adapts to the real squad so it can never snowball forever
+      this.E = Math.max(this.E0 * 0.6, 0.4 * this.E + 0.6 * w.sq.n);
+      this.pNom = w.lo.dmg * w.lo.rate * w.buff.dmg * w.buff.rate;
       if (this.z >= this.nextBoss) {
         const vL = this.vLevel(this.z);
         this.placeBoss(w, this.z + 200, vL, this.xAt(this.z), true);
@@ -184,7 +187,7 @@ export class Gen {
     const E = this.E;
     const h = Math.max(1, Math.min(3, gatesLeft));
     const tgt = this.Etarget(z + 1100 * h);
-    const need = Math.min(3.2, Math.max(1.18, Math.pow(Math.max(1, tgt) / E, 1 / h)));
+    const need = Math.min(3.2, Math.max(this.mode === 'endless' ? 1.08 : 1.18, Math.pow(Math.max(1, tgt) / E, 1 / h)));
     const roll = this.r();
     let A;
     let B;

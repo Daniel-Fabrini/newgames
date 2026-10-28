@@ -92,6 +92,19 @@ export function tokenize(s) {
 }
 export const words = (s) => tokenize(s).map((x) => x.text);
 
+// Like tokenize but keeps the punctuation around each word (for rendering sentences).
+export function segments(s) {
+  const raw = String(s).trim().split(/\s+/);
+  let initial = true;
+  return raw.map((r) => {
+    const m = r.match(/^([¿¡"“”«(\-–—]*)(.*?)([.,!?;:"“”»)…]*)$/u) || ['', '', r, ''];
+    const seg = { pre: m[1], word: m[2], post: m[3], initial: initial || /^[¿¡]/.test(r) };
+    if (/[.!?…]["”»)]*$/.test(r)) initial = true;
+    else if (seg.word) initial = false;
+    return seg;
+  });
+}
+
 const ARTICLES = {
   en: /^(the|a|an|to) /i,
   es: /^(el|la|los|las|un|una) /i,
