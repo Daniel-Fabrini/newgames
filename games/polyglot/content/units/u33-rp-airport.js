@@ -246,9 +246,9 @@ export default {
       for: ['fr'],
       title: { pt: 'Dès que + futuro', en: 'Dès que + future', es: 'Dès que + futuro' },
       body: {
-        pt: 'Em francês, depois de **dès que** (assim que) e **quand** usa-se o **futuro** quando a ação ainda vai acontecer: “dès qu’elle **arrivera**”. “Perder o voo” é **rater** ou **manquer**.',
-        en: 'In French, after **dès que** (as soon as) and **quand**, use the **future** for actions still to come: “dès qu’elle **arrivera**”. “To miss a flight” is **rater** or **manquer**.',
-        es: 'En francés, después de **dès que** (en cuanto) y **quand** se usa el **futuro** si la acción aún no ha ocurrido: “dès qu’elle **arrivera**”. “Perder el vuelo” es **rater** o **manquer**.',
+        pt: 'Em francês, depois de **dès que** (assim que) e **quand** usa-se o **futuro** quando a ação ainda vai acontecer: “dès qu\'elle **arrivera**”. “Perder o voo” é **rater** ou **manquer**.',
+        en: 'In French, after **dès que** (as soon as) and **quand**, use the **future** for actions still to come: “dès qu\'elle **arrivera**”. “To miss a flight” is **rater** or **manquer**.',
+        es: 'En francés, después de **dès que** (en cuanto) y **quand** se usa el **futuro** si la acción aún no ha ocurrido: “dès qu\'elle **arrivera**”. “Perder el vuelo” es **rater** o **manquer**.',
       },
       examples: [
         { en: 'We will send it to your hotel as soon as it arrives.', es: 'Se la enviaremos a su hotel en cuanto llegue.', pt: 'Vamos enviá-la para o seu hotel assim que chegar.', fr: "Nous l'enverrons à votre hôtel dès qu'elle arrivera.", it: 'Gliela mandiamo in albergo appena arriva.', de: 'Wir schicken ihn an Ihr Hotel, sobald er ankommt.' },

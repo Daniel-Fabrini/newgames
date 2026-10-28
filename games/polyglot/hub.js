@@ -121,7 +121,8 @@ function calendar(app) {
   const days = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
   const offset = (first.getDay() + 6) % 7;
   const fmt = new Intl.DateTimeFormat(app.locale, { weekday: 'narrow' });
-  const month = new Intl.DateTimeFormat(app.locale, { month: 'long', year: 'numeric' }).format(today);
+  const monthRaw = new Intl.DateTimeFormat(app.locale, { month: 'long', year: 'numeric' }).format(today);
+  const month = monthRaw.charAt(0).toLocaleUpperCase() + monthRaw.slice(1);
   const grid = h('div', { class: 'pg-cal-grid' });
   for (let i = 0; i < 7; i++) {
     const d = new Date(2024, 0, 1 + i);

@@ -2349,7 +2349,6 @@
 .g-polyglot .pg-cal-month {
   text-align: center;
   font-weight: 900;
-  text-transform: capitalize;
   margin-bottom: 8px;
 }
 .g-polyglot .pg-cal-grid {
@@ -3188,4 +3187,11 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+.g-polyglot .pg-notice .pg-gold {
+  color: var(--pg-gold-hi);
+}
+.g-polyglot .pg-bubble > div:not(.pg-story-tr) {
+  flex: 1;
+  min-width: 0;
 }

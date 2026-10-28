@@ -169,6 +169,78 @@ export const GAMES = [
     trophies: ['🏆', '🔤', '🔍', '⭐', '🎯'],
     load: () => import('../games/wordsearch/main.js'),
   },
+  {
+    id: 'hero',
+    cat: 'sport',
+    name: { pt: 'Herói da Bola', en: 'Ball Hero', es: 'Héroe del Balón' },
+    sub: { pt: 'Carreira no Futebol', en: 'Soccer Career', es: 'Carrera de Fútbol' },
+    about: {
+      pt: 'Desenhe o passe perfeito, faça a bola fazer a curva e marque o gol decisivo. Viva a carreira de um craque, lance a lance.',
+      en: 'Draw the perfect pass, curl the ball and score the winning goal. Live a star player\'s career, one moment at a time.',
+      es: 'Dibuja el pase perfecto, curva el balón y marca el gol decisivo. Vive la carrera de un crack, jugada a jugada.',
+    },
+    modes: [
+      { id: 'career', icon: 'stairs', label: { pt: 'Carreira', en: 'Career', es: 'Carrera' } },
+      { id: 'daily', icon: 'calendar', label: { pt: 'Desafio Diário', en: 'Daily Challenge', es: 'Desafío Diario' } },
+      { id: 'training', icon: 'flag', label: { pt: 'Treino', en: 'Training', es: 'Entrenamiento' } },
+    ],
+    trophies: ['🏆', '⚽', '🥅', '⭐', '🎯'],
+    load: () => import('../games/hero/main.js'),
+  },
+  {
+    id: 'million',
+    cat: 'knowledge',
+    name: { pt: 'Rumo ao Milhão', en: 'Road to a Million', es: 'Rumbo al Millón' },
+    sub: { pt: 'Quiz de Perguntas', en: 'Trivia Quiz', es: 'Quiz de Preguntas' },
+    about: {
+      pt: 'Responda 16 perguntas e chegue ao prêmio de 1 milhão. Use as cartas, os universitários, as placas e os pulos com sabedoria.',
+      en: 'Answer 16 questions to reach the one-million prize. Use the cards, the students, the audience and the skips wisely.',
+      es: 'Responde 16 preguntas y llega al premio de un millón. Usa las cartas, los universitarios, el público y los saltos con sabiduría.',
+    },
+    modes: [
+      { id: 'classic', icon: 'crown', label: { pt: 'Jogar', en: 'Play', es: 'Jugar' } },
+      { id: 'league', icon: 'trophy', label: { pt: 'Liga', en: 'League', es: 'Liga' } },
+      { id: 'practice', icon: 'question', label: { pt: 'Treino', en: 'Practice', es: 'Práctica' } },
+    ],
+    trophies: ['🏆', '💰', '🃏', '⭐', '🎯'],
+    load: () => import('../games/million/main.js'),
+  },
+  {
+    id: 'towers',
+    cat: 'strategy',
+    name: { pt: 'Batalha de Torres', en: 'Tower Battles', es: 'Batalla de Torres' },
+    sub: { pt: 'Defesa de Torres', en: 'Tower Defense', es: 'Defensa de Torres' },
+    about: {
+      pt: 'Monte suas torres, estoure as ondas de inimigos e mande ataques para o campo do adversário. Quem resistir mais vence!',
+      en: 'Build your towers, pop the enemy waves and send attacks to your opponent\'s side. Whoever lasts longer wins!',
+      es: 'Construye tus torres, revienta las oleadas enemigas y envía ataques al campo del rival. ¡Gana quien resista más!',
+    },
+    modes: [
+      { id: 'assault', icon: 'skull', label: { pt: 'Ataque', en: 'Assault', es: 'Asalto' } },
+      { id: 'defense', icon: 'castle', label: { pt: 'Defesa', en: 'Defense', es: 'Defensa' } },
+      { id: 'arena', icon: 'trophy', label: { pt: 'Arena', en: 'Arena', es: 'Arena' } },
+    ],
+    trophies: ['🏆', '🏰', '💥', '⭐', '🎯'],
+    load: () => import('../games/towers/main.js'),
+  },
+  {
+    id: 'naval',
+    cat: 'strategy',
+    name: { pt: 'Batalha Naval', en: 'Sea Battle', es: 'Batalla Naval' },
+    sub: { pt: 'Guerra no Mar', en: 'Naval Warfare', es: 'Guerra en el Mar' },
+    about: {
+      pt: 'Posicione sua frota, dispare contra o inimigo e afunde todos os navios dele primeiro. Suba de Marinheiro a Almirante!',
+      en: 'Place your fleet, fire at the enemy and sink all their ships first. Rise from Seaman to Admiral!',
+      es: 'Coloca tu flota, dispara al enemigo y hunde todos sus barcos primero. ¡Asciende de Marinero a Almirante!',
+    },
+    modes: [
+      { id: '1p', icon: 'user', label: { pt: '1 Jogador', en: '1 Player', es: '1 Jugador' } },
+      { id: '2p', icon: 'users', label: { pt: '2 Jogadores', en: '2 Players', es: '2 Jugadores' } },
+      { id: 'salvo', icon: 'infinity', label: { pt: 'Salvo', en: 'Salvo', es: 'Salva' } },
+    ],
+    trophies: ['🏆', '🚢', '💣', '⭐', '🎯'],
+    load: () => import('../games/naval/main.js'),
+  },
 ];
 
 export const CATEGORIES = [

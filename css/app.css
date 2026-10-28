@@ -1854,3 +1854,75 @@ img {
   padding: 7px 12px;
   font-size: 13px;
 }
+
+.art-hero {
+  background:
+    radial-gradient(70% 50% at 50% 30%, rgba(255, 255, 255, 0.22), transparent 70%),
+    repeating-linear-gradient(0deg, #3aa34a 0 10%, #2f9140 10% 20%);
+}
+.art-hero .art-goal {
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  top: 8%;
+  height: 22%;
+  border: 3px solid #fff;
+  border-bottom: 0;
+  background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.35) 0 2px, transparent 2px 8px), repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.35) 0 2px, transparent 2px 8px);
+}
+.art-hero .art-curve {
+  position: absolute;
+  left: 24%;
+  top: 22%;
+  width: 46%;
+  height: 40%;
+  border: 3px dashed #ffe27a;
+  border-color: #ffe27a transparent transparent #ffe27a;
+  border-radius: 100% 0 0 0;
+  transform: rotate(8deg);
+  filter: drop-shadow(0 0 4px rgba(255, 210, 90, 0.8));
+}
+.art-million {
+  background: radial-gradient(80% 70% at 50% 40%, #3a2a8a, #1a1145 70%, #0b0822);
+}
+.art-million .art-rays {
+  position: absolute;
+  inset: -30%;
+  background: repeating-conic-gradient(from 0deg, rgba(255, 210, 90, 0.16) 0 8deg, transparent 8deg 20deg);
+}
+.art-million .art-money {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 7%;
+  text-align: center;
+  font-weight: 1000;
+  font-size: 15cqmin;
+  background: var(--gold-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 0 #4a3100);
+}
+.art-towers {
+  background: radial-gradient(80% 70% at 50% 40%, #7ccf5a, #3f8a2c 70%, #2a5f1d);
+}
+.art-towers .art-path {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 40%;
+  height: 16%;
+  background: #d9b77a;
+  transform: rotate(-12deg);
+  box-shadow: 0 0 0 3px #b8925a;
+}
+.art-naval {
+  background: radial-gradient(80% 70% at 50% 40%, #2e8fd6, #145a9c 70%, #0b335c);
+}
+.art-naval .art-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+  background-size: 12.5% 12.5%;
+}

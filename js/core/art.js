@@ -71,6 +71,17 @@ const ART = {
     <span class="art-emoji" style="--s:14;left:8%;bottom:10%">🪀</span><span class="art-emoji" style="--s:14;right:8%;bottom:10%">🎁</span>
     <span class="art-emoji c" style="--s:56">🧸</span></div>`,
   wordsearch: () => `<div class="art art-cross">${letterGrid()}<span class="art-emoji" style="--s:34;right:2%;top:46%">🔍</span></div>`,
+  hero: () => `<div class="art art-hero"><span class="art-goal"></span><span class="art-curve"></span>
+    <span class="art-emoji" style="--s:30;left:12%;top:52%">⚽</span><span class="art-emoji" style="--s:20;right:12%;top:8%">⭐</span></div>`,
+  million: () => `<div class="art art-million"><span class="art-rays"></span><span class="art-money">1.000.000</span>
+    <span class="art-emoji c" style="--s:44;top:48%">💰</span></div>`,
+  towers: () => `<div class="art art-towers"><span class="art-path"></span>
+    <span class="art-emoji" style="--s:38;left:8%;top:14%">🏰</span><span class="art-emoji" style="--s:16;right:10%;top:12%">🫧</span>
+    <span class="art-emoji" style="--s:14;right:26%;top:34%">🫧</span><span class="art-emoji" style="--s:12;right:14%;top:48%">🫧</span>
+    <span class="art-emoji" style="--s:20;left:46%;top:30%">💥</span></div>`,
+  naval: () => `<div class="art art-naval"><span class="art-grid"></span>
+    <span class="art-emoji" style="--s:44;left:10%;top:18%">🚢</span><span class="art-emoji" style="--s:20;right:12%;top:10%">💥</span>
+    <span class="art-emoji" style="--s:14;right:22%;top:44%">🎯</span></div>`,
 };
 
 export function gameArt(id) {
