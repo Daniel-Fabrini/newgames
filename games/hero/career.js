@@ -156,3 +156,9 @@ export function keeperKit(ours, theirs) {
   for (const k of opts) if (colorDist(k.shirt, ours.shirt) > 140 && colorDist(k.shirt, theirs.shirt) > 140) return k;
   return opts[0];
 }
+
+export function dailyOpponent(day, s) {
+  const tier = clubForSeason(s).tier;
+  const pool = OPP[tier];
+  return pool[Number(String(day).slice(-3)) % pool.length];
+}

@@ -1059,7 +1059,7 @@ export function solve(L, opt = {}) {
   const root = createWorld(L);
   const goals = [];
   let frontier = [{ w: root, seq: [] }];
-  const wanted = (r) => r && r.goal && (!needHero || r.hero);
+  const wanted = opt.want || ((r) => r && r.goal && (!needHero || r.hero));
   for (let depth = 0; depth <= maxPasses; depth++) {
     const next = [];
     for (const node of frontier) {

@@ -171,6 +171,7 @@ export function mountRun(host, env) {
     if (ok) {
       const r = M.finishRun(true);
       hud();
+      for (let i = 0; i < 4; i++) setTimeout(() => flyTo('🪙', window.innerWidth / 2, window.innerHeight / 2, env.hudEl('coins')), i * 120);
       if (r.reward) toast(t('winBody', { c: fmtNum(r.reward.coins), g: r.reward.gems, x: r.reward.xp }));
       env.go('exp');
     }
@@ -232,7 +233,6 @@ export function mountRun(host, env) {
     onTap,
   });
   stage.invalidate();
-  window.__farmDbg && (window.__farmDbg.stage = stage); // DBG
   updateChip();
 
   return {

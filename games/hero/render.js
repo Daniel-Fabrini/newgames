@@ -345,9 +345,6 @@ function lineQuads() {
   const a = Math.acos((BOX_Y - PEN_Y) / 9.15);
   arc(0, PEN_Y, 9.15, Math.PI / 2 - a, Math.PI / 2 + a, 12);
   arc(0, HALF_Y, 9.15, 0, Math.PI * 2, 28);
-  // penalty spot + center spot
-  arc(0, PEN_Y, 0.12, 0, Math.PI * 2, 6);
-  arc(0, HALF_Y, 0.15, 0, Math.PI * 2, 6);
   // corner arcs
   arc(-PITCH_X, 0, 1, 0, Math.PI / 2, 4);
   arc(PITCH_X, 0, 1, Math.PI / 2, Math.PI, 4);
@@ -528,9 +525,17 @@ export function drawPitch(g, v, A, fx) {
   }
   g.fillStyle = 'rgba(255,255,255,0.035)';
   g.fill();
-  // lines
+  // lines + spots
   g.beginPath();
   for (const q of lineQuads()) polyPath(g, v, q);
+  for (const [sx, sy, r] of [
+    [0, PEN_Y, 0.16],
+    [0, HALF_Y, 0.2],
+  ]) {
+    const ring = [];
+    for (let i = 0; i < 12; i++) ring.push([sx + Math.cos((i / 12) * Math.PI * 2) * r, sy + Math.sin((i / 12) * Math.PI * 2) * r, 0]);
+    polyPath(g, v, ring);
+  }
   g.fillStyle = 'rgba(255,255,255,0.86)';
   g.fill();
 
@@ -934,7 +939,7 @@ export function drawBody(g, ent, look, lift = 0) {
       g.closePath();
       g.fill();
     } else if (look.pattern === 'halves') g.fillRect(0, shY - 0.1, 0.4, 0.7);
-    else if (look.pattern === 'band') g.fillRect(-0.3, shY + 0.16, 0.6, 0.1);
+    else if (look.pattern === 'band') g.fillRect(-0.3, shY + 0.02, 0.6, 0.08);
     g.restore();
   }
   // shading + collar
@@ -961,7 +966,7 @@ export function drawBody(g, ent, look, lift = 0) {
     g.textAlign = 'center';
     g.textBaseline = 'middle';
     g.fillStyle = look.numColor || '#fff';
-    g.fillText(String(look.num), 0, -118);
+    g.fillText(String(look.num), 0, -121);
     g.restore();
   } else if (front) {
     g.fillStyle = look.shirt2;

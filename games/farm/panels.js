@@ -48,6 +48,7 @@ export function openWarehouse(env) {
             if (!r.ok) return toast(errText(r.err));
             sfx.play('coin');
             floatText(t('sold', { c: r.coins }), ev.clientX, ev.clientY - 14, 'coin');
+            env.flyTo('🪙', ev.clientX, ev.clientY, env.hudEl('coins'));
             hud();
             re();
           } }, t('whSell', { v: it.v })),
@@ -56,6 +57,7 @@ export function openWarehouse(env) {
             if (!r.ok) return toast(errText(r.err));
             sfx.play('coin');
             floatText(t('sold', { c: r.coins }), ev.clientX, ev.clientY - 14, 'coin');
+            env.flyTo('🪙', ev.clientX, ev.clientY, env.hudEl('coins'));
             hud();
             re();
           } }, `×${n}`) : null));
@@ -123,7 +125,7 @@ export function openProd(env, bid) {
         return j ? j.end - M.now() : 0;
       };
       queue.append(h('div', { class: 'g-farm-row static' },
-        h('span', { class: 'g-farm-row-ico' }, recipeText(r.out)),
+        h('span', { class: 'g-farm-row-ico wide' }, recipeText(r.out)),
         h('span', { class: 'g-farm-row-body' },
           env.live(h('b'), () => (remain() > 0 ? t('prodLeft', { t: fmtTime(remain()) }) : t('err_full'))),
           h('small', {}, recipeText(r.in) + ' → ' + recipeText(r.out))),
@@ -148,7 +150,7 @@ export function openProd(env, bid) {
         hud();
         re();
       } },
-        h('span', { class: 'g-farm-row-ico' }, recipeText(r.out)),
+        h('span', { class: 'g-farm-row-ico wide' }, recipeText(r.out)),
         h('span', { class: 'g-farm-row-body' },
           h('b', {}, recipeText(r.in) + ' → ' + recipeText(r.out)),
           h('small', {}, locked ? t('needLvl', { n: r.lvl }) : fmtTime(r.t))),

@@ -110,7 +110,7 @@ export function createMatch(host, cfg) {
     }
     return true;
   }
-  function fit(pts, m, minD = 14, maxD = 130) {
+  function fit(pts, m, minD = 24, maxD = 130) {
     let x0 = Infinity;
     let x1 = -Infinity;
     let y0 = Infinity;

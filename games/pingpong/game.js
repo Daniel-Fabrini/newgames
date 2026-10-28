@@ -36,10 +36,11 @@ export function createGame(env) {
   let serverAtStart = 0;
   let firstBounce = null;
   let gameEnd = false;
+  let serveAnn = false;
 
   const look = {
-    player: { shirt: '#1b4d9e', shirt2: '#f4c542', skin: '#e9b98c', shorts: '#f4f4f6', shoe: '#222', rubber: '#d6252b', wood: '#c48a3e', hair: '#2b1c10' },
-    ai: { shirt: '#f4c542', shirt2: '#c4282c', skin: '#c98e5f', shorts: '#16161c', shoe: '#eee', rubber: '#16161c', wood: '#8a5a2b', hair: '#0c0c0c' },
+    player: { shirt: '#1b4d9e', shirt2: '#f4c542', skin: '#e9b98c', shorts: '#f4f4f6', legs: '#22283f', shoe: '#eeeeee', rubber: '#d6252b', wood: '#c48a3e', hair: '#2b1c10' },
+    ai: { shirt: '#f4c542', shirt2: '#c4282c', skin: '#c98e5f', shorts: '#16161c', legs: '#1a1a24', shoe: '#222', rubber: '#16161c', wood: '#8a5a2b', hair: '#0c0c0c' },
   };
 
   function mkStage() {
@@ -390,7 +391,16 @@ export function createGame(env) {
     if (paused) return;
     swing.player = Math.max(0, swing.player - dt * 4);
     swing.ai = Math.max(0, swing.ai - dt * 4);
-    if (match.phase === 'serveWait') serverAtStart = match.server;
+    if (match.phase === 'serveWait') {
+      serverAtStart = match.server;
+      if (!serveAnn) {
+        serveAnn = true;
+        if (meta.type === 'match') {
+          if (match.matchPoint) say(t('matchPoint'), 'gold');
+          else if (match.score[0] === 10 && match.score[1] === 10) say(t('deuce'), 'gold');
+        }
+      }
+    } else serveAnn = false;
     const near = match.phase === 'rally' && match.matchPoint;
     match.slowmo += ((near ? 0.45 : 1) - match.slowmo) * Math.min(1, dt * 4);
     if (trainState?.kind === 'target' && !gameEnd) {
@@ -406,7 +416,7 @@ export function createGame(env) {
     else excite += (0.2 - excite) * Math.min(1, dt * 1.5);
     // trail
     let trail = null;
-    if (skinOf() !== 'std' && match.hist.length > 4) {
+    if (match.hist.length > 4) {
       trail = [];
       const h = match.hist;
       for (let i = Math.max(0, h.length - 16); i < h.length; i += 2) trail.push(h[i].p);

@@ -356,7 +356,7 @@ export function mount(host, env) {
   }
 
   function plantSheet(x, y) {
-    dynSheet(t('sheetPlant'), (re) => {
+    dynSheet(t('sheetPlant'), () => {
       const list = h('div', { class: 'g-farm-list' });
       for (const id of Object.keys(CROPS)) {
         const C = CROPS[id];
@@ -375,7 +375,6 @@ export function mount(host, env) {
             h('small', {}, locked ? t('needLvl', { n: C.lvl }) : t('growTime', { t: fmtTime(C.grow) }) + ' · ' + t('yieldLine', { c: C.cost, y: C.yield }))),
           h('span', { class: 'g-farm-row-end' }, `🪙${C.cost}`)));
       }
-      void re;
       return list;
     });
   }
@@ -431,7 +430,6 @@ export function mount(host, env) {
     onTap,
   });
   stage.invalidate();
-  window.__farmDbg && (window.__farmDbg.stage = stage); // DBG
   updateChips();
 
   return {

@@ -10,8 +10,9 @@ GROUPS = {
     'brass_vase': ('vaso de latão', 'brass vase', 'jarrón de latón', ['brass_vase_01', 'brass_vase_02', 'brass_vase_03', 'brass_vase_04']),
     'brass_pot': ('pote de latão', 'brass pot', 'olla de latón', ['brass_pot_01', 'brass_pot_02']),
     'brass_pan': ('panela de latão', 'brass pan', 'sartén de latón', ['brass_pan_01']),
-    'goblets': ('taças de latão', 'brass goblets', 'copas de latón', ['brass_goblets']),
-    'candelabra': ('candelabro', 'candelabra', 'candelabro', ['brass_candleholders']),
+    'goblet': ('cálice de latão', 'brass goblet', 'cáliz de latón', ['brass_goblets/brass_goblet']),
+    'candle_holder': ('castiçal de latão', 'brass candle holder', 'portavelas de latón', ['brass_candleholders/brass_candleholder_01', 'brass_candleholders/brass_candleholder_02']),
+    'candelabra': ('candelabro', 'candelabra', 'candelabro', ['brass_candleholders/brass_candleholder_03']),
     'diya': ('lamparina de latão', 'brass oil lamp', 'lamparilla de latón', ['brass_diya_lantern']),
     'ceramic_vase': ('vaso de cerâmica', 'ceramic vase', 'jarrón de cerámica', ['ceramic_vase_01', 'ceramic_vase_02', 'ceramic_vase_03', 'ceramic_vase_04']),
     'antique_vase': ('vaso antigo', 'antique vase', 'jarrón antiguo', ['antique_ceramic_vase_01']),
@@ -51,7 +52,8 @@ GROUPS = {
     'ginger': ('gengibre', 'ginger', 'jengibre', ['food_ginger_01']),
     'onion': ('cebola', 'onion', 'cebolla', ['yellow_onion']),
     'sweet_potato': ('batata-doce', 'sweet potato', 'batata', ['sweet_potato']),
-    'bananas': ('bananas', 'bananas', 'plátanos', ['bananas']),
+    'bananas': ('cacho de bananas', 'bunch of bananas', 'racimo de plátanos', ['bananas/bunch']),
+    'banana': ('banana', 'banana', 'plátano', ['bananas/bananas_a', 'bananas/bananas_b', 'bananas/bananas_c', 'bananas/bananas_d']),
     'croissant': ('croissant', 'croissant', 'cruasán', ['croissant']),
     'cake': ('bolo', 'cake', 'pastel', ['carrot_cake', 'strawberry_chocolate_cake']),
     'buns': ('pães de hambúrguer', 'burger buns', 'panes de hamburguesa', ['hamburger_buns']),
@@ -62,12 +64,15 @@ GROUPS = {
     'cassette': ('toca-fitas', 'cassette player', 'casetera', ['cassette_player', 'portable_cassette_player']),
     'stapler': ('grampeador', 'stapler', 'engrapadora', ['vintage_stapler']),
     'dagger': ('punhal', 'dagger', 'daga', ['ornate_medieval_dagger']),
-    'tea_set': ('jogo de chá', 'tea set', 'juego de té', ['tea_set_01']),
+    'teapot': ('bule', 'teapot', 'tetera', ['tea_set_01/teapot_01']),
+    'teacup': ('xícara', 'teacup', 'taza', ['tea_set_01/cup_small']),
+    'sugar_bowl': ('açucareiro', 'sugar bowl', 'azucarero', ['tea_set_01/sugar_cup_01']),
+    'saucer': ('pires', 'saucer', 'platillo', ['tea_set_01/saucer', 'tea_set_01/plate_large']),
     'horse_head': ('cabeça de cavalo', 'horse head', 'cabeza de caballo', ['horse_head']),
     'lion_head': ('cabeça de leão', 'lion head', 'cabeza de león', ['lion_head']),
     'bull_head': ('cabeça de touro', 'bull head', 'cabeza de toro', ['bull_head']),
     'ukulele': ('cavaquinho', 'ukulele', 'ukelele', ['Ukulele_01']),
-    'wine': ('garrafas de vinho', 'wine bottles', 'botellas de vino', ['wine_bottles_01']),
+    'wine': ('garrafa de vinho', 'wine bottle', 'botella de vino', ['wine_bottles_01/wine_bottles_01', 'wine_bottles_01']),
     'treasure_chest': ('baú do tesouro', 'treasure chest', 'cofre del tesoro', ['treasure_chest']),
     'suitcase': ('mala antiga', 'old suitcase', 'maleta antigua', ['vintage_suitcase']),
     'globe_lamp': ('lustre', 'chandelier', 'candelabro de techo', []),
@@ -101,7 +106,9 @@ GROUPS = {
     'cutting_board': ('tábua de corte', 'cutting board', 'tabla de cortar', ['wooden_cutting_board']),
     'spoon': ('colher de pau', 'wooden spoon', 'cuchara de madera', ['wooden_spoon']),
     'cheese_box': ('caixa de queijo', 'cheese box', 'caja de queso', ['CheeseBox_01']),
-    'food_cans': ('latas de conserva', 'food cans', 'latas de conserva', ['russian_food_cans_01']),
+    'food_cans': ('lata de conserva', 'food can', 'lata de conserva', ['russian_food_cans_01/can_']),
+    'salt_box': ('caixinha de sal', 'salt box', 'cajita de sal', ['russian_food_cans_01/salt_box']),
+    'magazine': ('revista', 'magazine', 'revista', ['decorative_book_set_01/magazine']),
     'thermos': ('garrafa térmica', 'thermos', 'termo', ['modified_thermos', 'plastic_thermos']),
     'wrench': ('chave inglesa', 'wrench', 'llave inglesa', ['adjustable_wrench']),
     'pipe_wrench': ('chave de cano', 'pipe wrench', 'llave de tubo', ['pipe_wrench']),
@@ -110,7 +117,7 @@ GROUPS = {
     'hammer': ('martelo', 'hammer', 'martillo', ['cross_pein_hammer']),
     'mallet': ('marreta de madeira', 'wooden mallet', 'mazo de madera', ['wooden_hammer_01']),
     'sledgehammer': ('marreta', 'sledgehammer', 'almádena', ['sledgehammer_01']),
-    'screwdriver': ('chave de fenda', 'screwdriver', 'destornillador', ['screwdriver', 'flathead_screwdriver', 'screwdrivers_02']),
+    'screwdriver': ('chave de fenda', 'screwdriver', 'destornillador', ['screwdriver', 'flathead_screwdriver', 'screwdrivers_02/screwdrivers_02']),
     'pliers': ('alicate', 'pliers', 'alicate', ['pliers', 'tongue_groove_pliers']),
     'saw': ('serrote', 'handsaw', 'serrucho', ['handsaw_wood']),
     'hacksaw': ('serra de arco', 'hacksaw', 'sierra de arco', ['rusted_hacksaw']),
@@ -121,7 +128,8 @@ GROUPS = {
     'tape': ('trena', 'measuring tape', 'cinta métrica', ['measuring_tape_01']),
     'oil_can': ('almotolia', 'oil can', 'aceitera', ['small_oil_can_01']),
     'oil_tin': ('lata de óleo', 'oil tin', 'lata de aceite', ['oil_tin']),
-    'spray': ('tinta spray', 'spray paint', 'pintura en aerosol', ['spray_paint_bottles', 'spray_paint_bottles_02']),
+    'spray': ('tinta spray', 'spray paint', 'pintura en aerosol', ['spray_paint_bottles/spray_paint_bottles', 'spray_paint_bottles_02']),
+    'compost_bag2': ('saco de terra', 'soil bag', 'saco de tierra', ['compost_bags/compost_bags']),
     'lube_spray': ('spray lubrificante', 'lubricant spray', 'aerosol lubricante', ['lubricant_spray']),
     'cleaner': ('frasco de limpeza', 'cleaner bottle', 'botella de limpiador', ['all_purpose_cleaner', 'multi_cleaner_bottle', 'bleach_bottle']),
     'cleaner_tin': ('lata de cera', 'polish tin', 'lata de cera', ['cleaner_tin_01', 'leather_cleaner_can']),
@@ -212,7 +220,7 @@ GROUPS = {
     'chalkboard': ('quadro-negro', 'chalkboard', 'pizarra', ['standing_chalkboard_01']),
     'postcards': ('cartões-postais', 'postcards', 'postales', ['postcard_set_01']),
     'sungka': ('tabuleiro sungka', 'sungka board', 'tablero sungka', ['sungka_board', 'sungka_board_02']),
-    'pillows': ('almofadas', 'cushions', 'cojines', ['throw_pillows_01']),
+    'pillows': ('almofada', 'cushion', 'cojín', ['throw_pillows_01/pillow']),
     'crutches': ('muletas', 'crutches', 'muletas', ['vintage_crutches_01']),
     'cement_bag': ('saco de cimento', 'cement bag', 'saco de cemento', ['cement_bag']),
     'compost_bag': ('saco de adubo', 'compost bag', 'saco de abono', ['compost_bag_02']),
@@ -257,10 +265,19 @@ for _g, (_pt, _en, _es, _assets) in GROUPS.items():
         _BY_ASSET[_a] = _g
 
 
+_PARTS = [(a.split('/', 1)[0], a.split('/', 1)[1], g) for a, g in _BY_ASSET.items() if '/' in a]
+
+
 def group_of(asset, key=None):
-    """Name group of a placed prop (its key may be 'asset/part')."""
+    """Name group of a placed prop (its key may be 'asset/part name')."""
     if key and key in _BY_ASSET:
         return _BY_ASSET[key]
+    if key and '/' in key:
+        a, part = key.split('/', 1)
+        for pa, sub, g in _PARTS:
+            if pa == a and sub.lower() in part.lower():
+                return g
+        return None
     return _BY_ASSET.get(asset)
 
 

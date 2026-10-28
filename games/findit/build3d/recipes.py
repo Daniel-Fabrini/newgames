@@ -78,6 +78,16 @@ def room(L, *, x0=-3.6, x1=3.6, back=2.0, front=-3.6, h=3.1, floor=('herringbone
     return {'x0': x0, 'x1': x1, 'back': back, 'front': front, 'h': h}
 
 
+def rug(L, rect, inner=('velour_velvet', 0.5, (0.42, 0.08, 0.07)), border=('caban', 0.6, (0.35, 0.22, 0.1))):
+    """A rug: patterned border band around a velvet field."""
+    coll = L.collection('set')
+    x0, y0, x1, y1 = rect
+    bm = L.tex_material('rug_border', border[0], tint=border[2], bump=0.5)
+    L.box('rug_border', x0, y0, 0, x1, y1, 0.010, bm, coll, uv_scale=1 / border[1])
+    im = L.tex_material('rug_field', inner[0], tint=inner[2], bump=0.5)
+    L.box('rug_field', x0 + 0.14, y0 + 0.14, 0, x1 - 0.14, y1 - 0.14, 0.013, im, coll, uv_scale=1 / inner[1])
+
+
 def against(L, C, spec, x, wall_y, yaw=0.0, scale=1.0, gap=0.01, kind='set', z=0.0):
     """Put furniture with its back against the back wall."""
     hx, hy = L.proto(spec).footprint(yaw, scale)
@@ -92,23 +102,47 @@ def levels_of(L, C, items, **kw):
 
 
 # ---------------------------------------------------------------- pools
+TEAPOT = {'asset': 'tea_set_01', 'parts': ['tea_set_01_teapot_01', 'tea_set_01_teapot_01_lid'], 'key': 'tea_set_01/teapot_01'}
+SUGAR = {'asset': 'tea_set_01', 'parts': ['tea_set_01_sugar_cup_01', 'tea_set_01_sugar_cup_01_lid'], 'key': 'tea_set_01/sugar_cup_01'}
+CUP = 'tea_set_01/tea_set_01_cup_small_01'
+
 CURIOS = [
-    ('brass_vase_01', 1.0), ('brass_vase_02', 1.0), ('brass_vase_03', 1.2), ('brass_vase_04', 1.2), ('brass_pot_01', 1.0),
-    ('brass_pot_02', 0.8), ('brass_goblets', 0.8), ('brass_candleholders', 0.5), ('brass_diya_lantern', 0.8),
-    ('antique_ceramic_vase_01', 1.0), ('ceramic_vase_01', 1.0), ('ceramic_vase_02', 1.0), ('ceramic_vase_03', 1.0), ('ceramic_vase_04', 1.0),
-    ('carved_wooden_elephant', 1.4), ('carved_wooden_plate', 0.6), ('mantel_clock_01', 1.0), ('alarm_clock_01', 1.2),
-    ('Lantern_01', 1.0), ('vintage_oil_lamp', 0.8), ('wooden_candlestick', 1.2), ('magnifying_glass_01', 1.0),
-    ('marble_bust_01', 0.8), ('horse_statue_01', 1.0), ('concrete_cat_statue', 0.8), ('lambis_shell', 1.2),
-    ('pocket_watch', 1.0), ('vintage_pocket_watch', 1.0), ('round_spectacles', 1.0), ('seadogs_compass', 1.2),
-    ('vintage_binocular', 1.0), ('Camera_01', 1.0), ('standing_picture_frame_01', 1.0), ('standing_picture_frame_02', 1.0),
-    ('jug_01', 0.8), ('metal_jug', 0.8), ('wooden_bowl_02', 0.8), ('pot_enamel_01', 0.6), ('chess_set', 0.5),
-    ('cigarette_case', 0.6), ('vintage_lighter', 0.8), ('food_apple_01', 0.8), ('food_pomegranate_01', 0.8), ('lemon', 0.6),
-    ('potted_plant_04', 0.8), ('wicker_basket_02', 0.6), ('rubber_duck_toy', 0.5), ('baseball_01', 0.5),
-    ('cassette_player', 0.6), ('vintage_stapler', 0.5), ('ornate_medieval_dagger', 0.6), ('tea_set_01', 0.4),
-    ('horse_head', 0.5), ('lion_head', 0.5), ('bull_head', 0.4), ('Ukulele_01', 0.3), ('wine_bottles_01', 0.4),
+    ('brass_vase_01', 1.0), ('brass_vase_02', 1.0), ('brass_vase_03', 1.2), ('brass_vase_04', 1.2), ('brass_pot_01', 0.8),
+    ('brass_pot_02', 0.6), ('brass_goblets/*', 1.2), ('brass_candleholders/brass_candleholder_01', 0.6),
+    ('brass_candleholders/brass_candleholder_02', 0.4), ('brass_diya_lantern', 0.8),
+    ('antique_ceramic_vase_01', 0.8), ('ceramic_vase_01', 0.6), ('ceramic_vase_02', 0.6), ('ceramic_vase_04', 0.6),
+    ('carved_wooden_elephant', 1.4), ('carved_wooden_plate', 0.5), ('Lantern_01', 1.0), ('vintage_oil_lamp', 0.8),
+    ('wooden_candlestick', 1.2), ('magnifying_glass_01', 1.0), ('marble_bust_01', 0.8), ('horse_statue_01', 1.0),
+    ('concrete_cat_statue', 0.8), ('lambis_shell', 1.2), ('pocket_watch', 1.0), ('vintage_pocket_watch', 1.0),
+    ('round_spectacles', 1.0), ('seadogs_compass', 1.2), ('vintage_binocular', 1.0), ('Camera_01', 1.0),
+    ('standing_picture_frame_01', 0.8), ('standing_picture_frame_02', 0.8), ('jug_01', 0.8), ('metal_jug', 0.6),
+    ('wooden_bowl_02', 0.8), ('pot_enamel_01', 0.5), ('chess_set', 0.4), ('cigarette_case', 0.6), ('food_apple_01', 0.8),
+    ('food_pomegranate_01', 0.8), ('lemon', 0.5), ('potted_plant_04', 0.8), ('wicker_basket_02', 0.5),
+    ('rubber_duck_toy', 0.4), ('baseball_01', 0.4), ('cassette_player', 0.5), ('vintage_stapler', 0.4),
+    ('ornate_medieval_dagger', 0.6, {'face': 0.0, 'jitter': 0.3}), (TEAPOT, 0.6), (SUGAR, 0.4), (CUP, 0.6),
+    ('horse_head', 0.6), ('lion_head', 0.5), ('bull_head', 0.4), ('wine_bottles_01/*', 0.6),
+    ('vintage_telephone_wall_clock', 0.3), ('vintage_microscope', 0.4), ('vintage_flashlight', 0.4),
+    ('bronze_whale_statue', 0.3), ('bronze_shark_statue', 0.3), ('vintage_video_camera', 0.4),
+    ('portable_cassette_player', 0.3), ('sungka_board', 0.3), ('digital_wrist_watch', 0.3),
 ]
 
-BOOKS = [('book_encyclopedia_set_01', 1.0, {'kind': 'set', 'jitter': 0.05, 'scale': (0.95, 1.05)})]
+WALL_ART = [('fancy_picture_frame_01', 1.0, {'scale': (0.6, 0.9)}), ('fancy_picture_frame_02', 1.0, {'scale': (0.6, 0.85)}),
+            ('hanging_picture_frame_01', 0.6, {'scale': (0.45, 0.6)}), ('hanging_picture_frame_02', 0.8, {'scale': (0.5, 0.7)}),
+            ('hanging_picture_frame_03', 0.8, {'scale': (0.6, 0.8)}), ('wall_clock', 0.6, {'scale': (0.8, 1.0)}),
+            ('ornate_mirror_01', 0.5, {'scale': (0.6, 0.75)}), ('vintage_telephone_wall_clock', 0.3, {'scale': (0.9, 1.0)})]
+
+BOOKROW = [('decorative_book_set_01/*', 1.0, {'kind': 'set', 'jitter': 0.05, 'scale': (0.88, 1.03)}),
+           ('book_encyclopedia_set_01/*', 0.7, {'kind': 'set', 'jitter': 0.03, 'scale': (0.9, 0.98)})]
+
+
+def shelves_mixed(C, levels, books=0.55, curios=CURIOS):
+    """Some boards get rows of books with gaps, the rest get curios; then
+    curios go into every gap that is left."""
+    r = C.rnd
+    bl = [l for l in levels if r.random() < books]
+    C.pack(bl, BOOKROW, rows=(0.9,), gap=(0.0, 0.003), fill_prob=0.9, skip=0.16, jitter=0.03)
+    C.build_occluder()
+    C.pack(levels, curios, rows=(0.8, 0.25), gap=(0.005, 0.05), fill_prob=0.85)
 
 
 # ---------------------------------------------------------------- 1. antique study
@@ -123,7 +157,8 @@ BOOKS = [('book_encyclopedia_set_01', 1.0, {'kind': 'set', 'jitter': 0.05, 'scal
 def study(L, S):
     R = room(L, x0=-3.6, x1=3.6, back=2.0, front=-3.4, h=3.1, floor=('herringbone_parquet', 3.4), floor_tint=(0.62, 0.48, 0.38),
              wall=('red_plaster_weathered', 2.0), wall_tint=(0.62, 0.42, 0.36), wainscot=('wooden_panels', 1.6), wainscot_h=1.05,
-             beams='wood_cabinet_worn_long', rug=('velour_velvet', 0.6, (-1.7, -0.9, 1.9, 1.25)))
+             beams='wood_cabinet_worn_long')
+    rug(L, (-1.7, -0.9, 1.9, 1.25))
     cam = L.camera((0.0, -3.0, 1.5), (0.0, 2.0, 1.25), lens=25)
     C = L.Composer(S['seed'], cam)
     W = R['back']
@@ -140,18 +175,15 @@ def study(L, S):
     C.place_fixed('Chandelier_01', (0.0, 0.0, R['h'] - 0.85), kind='set')
     C.build_occluder()
     shelves = levels_of(L, C, [shelf_l, shelf_r, wall_shelf, hutch])
-    C.fill(shelves, [('book_encyclopedia_set_01', 1.0, {'kind': 'set', 'jitter': 0.05, 'scale': (0.82, 0.94)})], 14)
+    shelves_mixed(C, shelves)
     C.build_occluder()
     tops = levels_of(L, C, [desk, stand, clock, chest, case, chair])
-    C.fill(shelves + tops, CURIOS, 170)
+    C.fill(tops, CURIOS + [('decorative_book_set_01/*', 0.6, {'kind': 'set', 'stack': True})], 40)
     floor = L.flat_level(0.0, R['x0'] + 0.2, -1.6, R['x1'] - 0.2, R['back'] - 0.05, tag='floor')
-    C.fill([floor], [('wicker_basket_01', 1), ('potted_plant_02', 1), ('decorative_book_set_01', 0.5, {'kind': 'set'}),
+    C.fill([floor], [('wicker_basket_01', 1), ('potted_plant_02', 1), 
                      ('brass_vase_01', 1), ('antique_ceramic_vase_01', 1), ('wooden_candlestick', 0.5), ('horse_statue_01', 0.5),
-                     ('Lantern_01', 0.5), ('ceramic_vase_03', 0.5), ('wine_bottles_01', 0.4), ('Ukulele_01', 0.4)], 12)
-    for spec, x, z, s in [('fancy_picture_frame_02', 0.2, 2.5, 0.85), ('hanging_picture_frame_03', -2.0, 2.6, 0.8),
-                          ('wall_clock', 1.05, 2.6, 0.9), ('hanging_picture_frame_01', 2.1, 2.7, 0.5),
-                          ('fancy_picture_frame_01', -0.5, 2.55, 0.35), ('ornate_mirror_01', 3.25, 2.5, 0.6)]:
-        C.hang(spec, W, x, z, s)
+                     ('Lantern_01', 0.5), ('wine_bottles_01', 0.4), ('Ukulele_01', 0.4)], 12)
+    C.decorate_wall(WALL_ART, W, R['x0'] + 0.3, R['x1'] - 0.3, 1.3, 2.75, 7)
     L.world_hdri('comfy_cafe', strength=0.25)
     L.area_light('window', (-3.45, -0.8, 2.3), (0.5, 1.4, 0.9), size=2.0, size_y=1.5, power=750, temp=4800)
     L.area_light('fill', (0.4, -3.2, 2.4), (0, 1.5, 1.0), size=3.0, power=90, temp=5600)

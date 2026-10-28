@@ -17,7 +17,6 @@ export async function mount(root, ctx) {
   M.tick();
   M.save();
   let dead = false;
-  window.__farmDbg = { M }; // DBG
 
   // ------------------------------------------------------------ layout
   const app = h('div', { class: 'g-farm-app' });
@@ -112,7 +111,6 @@ export async function mount(root, ctx) {
 
   // ------------------------------------------------------------ sheets
   let sheetEl = null, sheetRefresh = null;
-  let env_live = null;
   function closeSheet() {
     if (!sheetEl) return false;
     const el = sheetEl;
@@ -166,12 +164,12 @@ export async function mount(root, ctx) {
     sheetRefresh = () => render(false);
     return close;
   }
-  env_live = (el, fn, prop) => {
-    const apply = () => (prop ? (el.style[prop] = fn()) : (el.textContent = fn()));
+  function setLive(el, fn, prop) {
     if (liveReg) liveReg.push([el, fn, prop]);
-    apply();
+    if (prop) el.style[prop] = fn();
+    else el.textContent = fn();
     return el;
-  };
+  }
 
   function openHelp() {
     sheet(t('help'), h('p', { class: 'g-farm-text' }, t('helpBody')), { });
@@ -192,12 +190,13 @@ export async function mount(root, ctx) {
   // ------------------------------------------------------------ views
   const env = {
     ctx, t, M, lang: ctx.lang, h, ui: ctx.ui, sfx: ctx.sfx,
-    toast, errText, floatText, flyTo, burst, sheet, dynSheet, closeSheet, setBar, live: (el, fn, prop) => env_live(el, fn, prop),
+    toast, errText, floatText, flyTo, burst, sheet, dynSheet, closeSheet, setBar, live: setLive,
     hud: hudUpdate,
     go: (name, arg) => go(name, arg),
     isDead: () => dead,
     fmtTime, fmtNum,
     barEl: (id) => bar.querySelector(`[data-id="${id}"]`),
+    hudEl: (k) => (k === 'coins' ? ui.coinPill : k === 'gems' ? ui.gemPill : ui.lvlBox),
     flyCoins: (cx, cy, n) => {
       floatText('+' + fmtNum(n) + ' 🪙', cx, cy - 10, 'coin');
       flyTo('🪙', cx, cy, ui.coinPill);
@@ -208,7 +207,6 @@ export async function mount(root, ctx) {
     layer: viewHost,
   };
 
-  window.__farmDbg.env = env; // DBG
   let view = null, viewName = null;
   function go(name, arg) {
     if (dead) return;

@@ -48,6 +48,27 @@ function ballAt(p, v) {
   return { p: [...p], v: [...v], w: [0, 0, 0], rest: false, restT: 0 };
 }
 
+// Height of the ball centre when it crosses the net plane (z = 0), or null.
+function simNetHeight(p0, v0, w0) {
+  let p = [...p0];
+  let v = [...v0];
+  const h = 1 / 240;
+  for (let i = 0; i < 400; i++) {
+    const sp = Math.hypot(v[0], v[1], v[2]);
+    const ax = MAG * (w0[1] * v[2] - w0[2] * v[1]) - DRAG * sp * v[0];
+    const ay = -G + MAG * (w0[2] * v[0] - w0[0] * v[2]) - DRAG * sp * v[1];
+    const az = MAG * (w0[0] * v[1] - w0[1] * v[0]) - DRAG * sp * v[2];
+    v = [v[0] + ax * h, v[1] + ay * h, v[2] + az * h];
+    const q = [p[0] + v[0] * h, p[1] + v[1] * h, p[2] + v[2] * h];
+    if ((p[2] > 0) !== (q[2] > 0)) {
+      const f = p[2] / (p[2] - q[2]);
+      return p[1] + (q[1] - p[1]) * f;
+    }
+    p = q;
+  }
+  return null;
+}
+
 // Predicts the first table contact of a shot (ignores the net) for aiming.
 function simLanding(p0, v0, w0) {
   let p = [...p0];
@@ -238,11 +259,12 @@ export class Match {
       const vx = (xt - p0[0]) / T;
       const vz = (zt - p0[2]) / T;
       let vy = (yEnd - p0[1] + 0.5 * G * T * T) / T;
-      const tn = -p0[2] / vz;
-      if (tn > 0 && tn < T) {
-        const need = NET_TOP + R + 0.045;
-        const yAt = p0[1] + vy * tn - 0.5 * G * tn * tn;
-        if (yAt < need) vy = Math.max(vy, (need - p0[1] + 0.5 * G * tn * tn) / tn);
+      // clear the net, including the spin dip (checked by simulation)
+      const need = NET_TOP + R + 0.06;
+      for (let k = 0; k < 4; k++) {
+        const hn = simNetHeight(p0, [vx, vy, vz], w0);
+        if (hn === null || hn >= need) break;
+        vy += (need - hn) * 1.3 / Math.max(0.05, -p0[2] / vz) * 0.5;
       }
       return [vx, vy, vz];
     };

@@ -30,6 +30,18 @@ export function analyzeSwipe(pts, W, H) {
       bestI = i;
     }
   }
+  // contact = speed-weighted centre of the stroke (the moment the paddle is fastest on average)
+  let wsum = 0;
+  let tsum = 0;
+  for (let i = 1; i < pts.length; i++) {
+    const a = pts[i - 1];
+    const b = pts[i];
+    const seg = Math.hypot(b.x - a.x, b.y - a.y);
+    const sp = seg / Math.max(0.008, b.t - a.t);
+    wsum += sp;
+    tsum += sp * (a.t + b.t) / 2;
+  }
+  const contactT = wsum > 0 ? tsum / wsum : pts[bestI].t;
   const dur = Math.max(0.03, last.t - first.t);
   const avgSp = len / dur;
   const speed = Math.max(avgSp * 0.8 + bestSp * 0.2, 0);
@@ -52,5 +64,5 @@ export function analyzeSwipe(pts, W, H) {
   shot.smash = shot.power > 0.72 && shot.depth > 0.55 && shot.top > 0.2;
   // when the hit is very straight, keep side spin off
   if (Math.abs(shot.side) < 0.12) shot.side = 0;
-  return { shot, speed, len, contactT: pts[bestI].t, dur, dx, dy };
+  return { shot, speed, len, contactT, dur, dx, dy };
 }

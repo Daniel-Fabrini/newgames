@@ -197,6 +197,10 @@ def load_asset(asset):
         dst.objects = list(src.objects)
     objs = [o for o in dst.objects if o is not None]
     meshes = [o for o in objs if o.type == 'MESH']
+    # drop helper meshes (stash spheres, ground cubes) that carry no material
+    real = [o for o in meshes if any(m for m in o.data.materials)]
+    if real:
+        meshes = real
     for o in objs:
         if o.type not in ('MESH', 'EMPTY'):
             bpy.data.objects.remove(o)
@@ -213,7 +217,8 @@ class Proto:
         self.key = key or asset
         meshes = load_asset(asset)
         if parts:
-            meshes = [o for o in meshes if any(p.lower() in o.name.lower() for p in parts)]
+            exact = [o for o in meshes if o.name in parts]
+            meshes = exact or [o for o in meshes if any(p.lower() in o.name.lower() for p in parts)]
         if exclude:
             meshes = [o for o in meshes if not any(p.lower() in o.name.lower() for p in exclude)]
         if not meshes:
@@ -267,6 +272,27 @@ class Proto:
 
 
 _protos = {}
+
+
+def part_names(asset):
+    return sorted(o.name for o in load_asset(asset))
+
+
+def expand(pool):
+    """Pool entries 'asset/*' become one entry per part (weight shared)."""
+    out = []
+    for e in pool:
+        e = e if isinstance(e, tuple) else (e, 1.0, {})
+        spec, w, opt = e[0], (e[1] if len(e) > 1 else 1.0), (e[2] if len(e) > 2 else {})
+        if isinstance(spec, str) and spec.endswith('/*'):
+            a = spec[:-2]
+            names = part_names(a)
+            for n in names:
+                out.append((f'{a}/{n}', w / len(names), opt))
+        else:
+            out.append((spec, w, opt))
+    return out
+
 
 
 def proto(spec):
@@ -566,8 +592,7 @@ class Composer:
         r = self.rnd
         total = sum(l.area for l in levels) or 1
         placed = []
-        specs = [(e if isinstance(e, tuple) else (e, 1.0, {})) for e in pool]
-        specs = [(s[0], s[1] if len(s) > 1 else 1.0, s[2] if len(s) > 2 else {}) for s in specs]
+        specs = expand(pool)
         weights = [s[1] for s in specs]
         for _ in range(count * 3):
             if len(placed) >= count:
@@ -590,8 +615,7 @@ class Composer:
         """Pack levels row by row (left to right), like a real shelf: a front row
         and, where the board is deep enough, a back row of taller things."""
         r = self.rnd
-        specs = [(e if isinstance(e, tuple) else (e, 1.0, {})) for e in pool]
-        specs = [(s[0], s[1] if len(s) > 1 else 1.0, s[2] if len(s) > 2 else {}) for s in specs]
+        specs = expand(pool)
         placed = []
         for lv in levels:
             ys, xs = np.nonzero(lv.mask)
@@ -650,9 +674,11 @@ class Composer:
         hx, hy = p.footprint(yaw, scale)
         mn = Vector((loc[0] - hx, loc[1] - hy, loc[2]))
         mx = Vector((loc[0] + hx, loc[1] + hy, loc[2] + p.size.z * scale))
-        if self.collides(mn, mx, 0.0):
+        if self.collides(mn - Vector((0.04, 0, 0.04)), mx + Vector((0.04, 0, 0.04)), 0.0):
+            self.stats['hang_collide'] = self.stats.get('hang_collide', 0) + 1
             return None
-        if not self.in_view((mn + mx) / 2, 0.0):
+        if not (self.in_view(mn, 0.0) and self.in_view(mx, 0.0)):
+            self.stats['hang_view'] = self.stats.get('hang_view', 0) + 1
             return None
         return self.place_fixed(spec, loc, yaw, scale, kind=kind, key=key)
 
@@ -661,6 +687,25 @@ class Composer:
         for l in lv:
             l.ignore = {item['index']} | set(kw.get('ignore', ()))
         return lv
+
+    def decorate_wall(self, pool, wall_y, x0, x1, z0, z1, count, tries=60, scale=(0.8, 1.1)):
+        """Hang `count` things (frames, clocks, trophies) on the back wall at
+        random free spots between x0..x1 and heights z0..z1."""
+        r = self.rnd
+        specs = expand(pool)
+        done = []
+        for _ in range(tries):
+            if len(done) >= count:
+                break
+            spec, w, opt = r.choices(specs, [s[1] for s in specs])[0]
+            if any(d['key'] == proto(spec).key for d in done) and r.random() < 0.8:
+                continue
+            sc = r.uniform(*opt.get('scale', scale))
+            it = self.hang(spec, wall_y, r.uniform(x0, x1), r.uniform(z0, z1), sc, kind=opt.get('kind', 'prop'))
+            if it:
+                done.append(it)
+        self.stats['wall'] = len(done)
+        return done
 
     def build_occluder(self, objs=None):
         objs = objs if objs is not None else [o for it in self.items for o in it['objs']] + list(self.coll_set.all_objects)

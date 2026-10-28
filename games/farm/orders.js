@@ -32,6 +32,12 @@ export function mount(host, env, arg) {
     }));
   }
 
+  // Reward icons fly from the button to the HUD counters.
+  function rewardFly(ev, reward) {
+    for (let i = 0; i < 3; i++) setTimeout(() => env.flyTo('🪙', ev.clientX, ev.clientY, env.hudEl('coins')), i * 110);
+    if (reward.gems) env.flyTo('💎', ev.clientX, ev.clientY, env.hudEl('gems'));
+  }
+
   function deliverBtn(id, need) {
     const can = M.has(need);
     return h('button', { class: 'btn small primary', disabled: !can, onclick: (ev) => {
@@ -39,6 +45,7 @@ export function mount(host, env, arg) {
       if (!r.ok) return toast(errText(r.err));
       sfx.play('win');
       floatText(rewardText(r.reward), ev.clientX, ev.clientY - 20, 'gain');
+      rewardFly(ev, r.reward);
       toast(t('delivered'));
       hud();
       render(true);
@@ -82,6 +89,7 @@ export function mount(host, env, arg) {
           if (!r.ok) return toast(errText(r.err));
           sfx.play('levelup');
           floatText(rewardText(r.reward), ev.clientX, ev.clientY - 20, 'gain');
+          rewardFly(ev, r.reward);
           hud();
           render(true);
         } }, t('claim'))));

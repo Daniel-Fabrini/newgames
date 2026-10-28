@@ -261,6 +261,8 @@ export default {
     help4: 'Onde o traço termina no gol define a altura: em cima para o ângulo, embaixo para o rasteiro.',
     help5: 'Cumpra o objetivo para 1 estrela e os bônus para chegar a 3. Moedas compram visual novo no vestiário.',
     gotIt: 'Entendi!',
+    adGame: 'HERÓI DA BOLA',
+    adBall: 'FUTEBOL',
   },
 
   en: {
@@ -507,6 +509,8 @@ export default {
     help4: 'Where your line ends inside the goal sets the height: up top for the corner, down low for a ground shot.',
     help5: 'Complete the objective for 1 star and the bonuses for 3. Coins buy new looks in the locker room.',
     gotIt: 'Got it!',
+    adGame: 'BALL HERO',
+    adBall: 'FOOTBALL',
   },
 
   es: {
@@ -753,5 +757,7 @@ export default {
     help4: 'Dónde termina el trazo dentro del arco define la altura: arriba para el ángulo, abajo para el rasante.',
     help5: 'Cumple el objetivo para 1 estrella y los bonus para llegar a 3. Las monedas compran estilo nuevo en el vestuario.',
     gotIt: '¡Entendido!',
+    adGame: 'HÉROE DEL BALÓN',
+    adBall: 'FÚTBOL',
   },
 };

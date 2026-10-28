@@ -189,8 +189,6 @@ export function drawPond(c, x, y, t) {
     const [lx, ly] = P(x + dx, y + dy);
     ell(c, lx, ly, 3.2, 1.6, '#3f9a4a');
   }
-  const [rx, ry] = P(x + 1.8, y + 0.4);
-  void rx; void ry;
 }
 
 // ------------------------------------------------------------------ crops
@@ -661,7 +659,6 @@ export function drawGoal(c, x, y, kind, color, t) {
   c.font = '11px sans-serif';
   c.textAlign = 'center';
   c.textBaseline = 'middle';
-  void kind;
 }
 
 export function drawFog(c, x, y, t) {
@@ -687,5 +684,4 @@ export function drawAdventurer(c, x, y, t, moving) {
   c.fillStyle = '#2a2a33';
   c.fillRect(cx - 3, py - 2, 2.2, 3);
   c.fillRect(cx + 1, py - 2, 2.2, moving ? 1.8 : 3);
-  void moving;
 }

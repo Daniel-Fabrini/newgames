@@ -15,10 +15,10 @@ export const ARENAS = [
   { id: 9, key: 'arenaName9', table: '#5b4a1c', tableEdge: '#3a2f10', floor: '#120c04', wall: '#1d1606', light: '#ffd768', crowd: ['#f7d774', '#c9971c', '#ffffff', '#8e5a1a', '#fff1b8'], glow: '#ffd768' },
 ];
 
-const CAM_POS = [0, 2.05, 5.0];
-const CAM_TGT = [0, 0.78, -0.2];
+const CAM_POS = [0, 2.2, 5.6];
+const CAM_TGT = [0, 0.78, -0.3];
 const BALL_SKINS = {
-  std: { fill: '#fdfdfb', glow: null, trail: null },
+  std: { fill: '#fdfdfb', glow: null, trail: [225, 235, 255] },
   fire: { fill: '#ffe2a6', glow: '#ff7a1a', trail: [255, 140, 40] },
   ice: { fill: '#eaf8ff', glow: '#7fd8ff', trail: [120, 210, 255] },
   neon: { fill: '#fff0fa', glow: '#ff4fd8', trail: [255, 80, 200] },
@@ -87,7 +87,7 @@ export function createRenderer(canvas, arena0) {
     dpr = Math.min(2, window.devicePixelRatio || 1);
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
-    f = Math.min(W * 1.75, H * 1.0);
+    f = Math.min(W * 1.95, H * 1.05);
     cx = W / 2;
     cy = H * 0.5;
     buildBasis();
@@ -123,7 +123,7 @@ export function createRenderer(canvas, arena0) {
   function drawBackdrop(t, exc) {
     // wall gradient
     const g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, shade(arena.wall, 0.4));
+    g.addColorStop(0, mixHex(arena.light, arena.wall, 0.35));
     g.addColorStop(0.45, arena.wall);
     g.addColorStop(1, arena.floor);
     ctx.fillStyle = g;
@@ -135,7 +135,7 @@ export function createRenderer(canvas, arena0) {
     for (let i = 0; i < 3; i++) {
       const bx = W * (0.2 + i * 0.3) + Math.sin(t * 0.4 + i) * 20;
       const gr = ctx.createRadialGradient(bx, -40, 10, bx, -40, H * 0.9);
-      gr.addColorStop(0, withAlpha(arena.light, 0.28 + 0.06 * exc));
+      gr.addColorStop(0, withAlpha(arena.light, 0.16 + 0.05 * exc));
       gr.addColorStop(1, withAlpha(arena.light, 0));
       ctx.fillStyle = gr;
       ctx.fillRect(0, 0, W, H);
@@ -150,10 +150,24 @@ export function createRenderer(canvas, arena0) {
     // back wall (z = -6.2) and crowd stand rows
     const wallQ = [proj(-6, 0, -6.4), proj(6, 0, -6.4), proj(6, 4.5, -6.4), proj(-6, 4.5, -6.4)];
     if (wallQ.every(Boolean)) {
-      ctx.fillStyle = shade(arena.wall, 0.15);
+      ctx.fillStyle = mixHex(arena.wall, arena.light, 0.8);
       ctx.beginPath();
       ctx.moveTo(wallQ[0][0], wallQ[0][1]);
       for (let i = 1; i < 4; i++) ctx.lineTo(wallQ[i][0], wallQ[i][1]);
+      ctx.closePath();
+      ctx.fill();
+    }
+    // sponsor board across the back wall
+    const bq = [proj(-6, 1.7, -6.3), proj(6, 1.7, -6.3), proj(6, 2.25, -6.3), proj(-6, 2.25, -6.3)];
+    if (bq.every(Boolean)) {
+      const bg = ctx.createLinearGradient(bq[0][0], 0, bq[1][0], 0);
+      bg.addColorStop(0, withAlpha(arena.light, 0.15));
+      bg.addColorStop(0.5, withAlpha(arena.light, 0.55));
+      bg.addColorStop(1, withAlpha(arena.light, 0.15));
+      ctx.fillStyle = bg;
+      ctx.beginPath();
+      ctx.moveTo(bq[0][0], bq[0][1]);
+      for (let i = 1; i < 4; i++) ctx.lineTo(bq[i][0], bq[i][1]);
       ctx.closePath();
       ctx.fill();
     }
@@ -330,7 +344,7 @@ export function createRenderer(canvas, arena0) {
   // ---------- players ----------
   // side 0 = player (near), 1 = opponent (far). fx.swing = 0..1 (swing progress)
   function drawPlayer(side, paddleX, paddleY, paddleZ, swing, look) {
-    const zb = side === 0 ? 2.6 : -2.6;
+    const zb = side === 0 ? 3.1 : -2.9;
     const shirt = side === 0 ? look.shirt : look.shirt2;
     const skin = look.skin;
     const hip = [paddleX * 0.25, 0.92, zb];
@@ -355,7 +369,7 @@ export function createRenderer(canvas, arena0) {
     const s = pts.hip[2];
     // legs (shorts) and shoes
     ctx.lineCap = 'round';
-    ctx.strokeStyle = look.shorts;
+    ctx.strokeStyle = look.legs;
     ctx.lineWidth = Math.max(3, 0.1 * s);
     ctx.beginPath();
     ctx.moveTo(pts.hip[0] - 0.12 * s, pts.hip[1]);
@@ -543,10 +557,10 @@ export function createRenderer(canvas, arena0) {
     drawTable();
     drawNet();
     if (!b.hold || m.phase !== 'serveWait') drawBallShadow(b);
+    drawPlayer(0, m.px, 0.98, 1.55, st.swing.player || 0, st.look.player);
     if (st.trail && st.trail.length) drawBall(b, st.ballSkin, st.trail);
     else drawBall(b, st.ballSkin, null);
     drawParticles();
-    drawPlayer(0, m.px, 0.98, 1.55, st.swing.player || 0, st.look.player);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
   }
 
@@ -579,6 +593,12 @@ export function createRenderer(canvas, arena0) {
 }
 
 // helpers for colours
+export function mixHex(a, b, k) {
+  const pa = parseInt(a.replace("#", ""), 16);
+  const pb = parseInt(b.replace("#", ""), 16);
+  const ch = (sh) => Math.round(((pa >> sh) & 255) * k + ((pb >> sh) & 255) * (1 - k));
+  return `rgb(${ch(16)},${ch(8)},${ch(0)})`;
+}
 export function withAlpha(hex, a) {
   if (hex.startsWith('rgba')) return hex;
   const h = hex.replace('#', '');
