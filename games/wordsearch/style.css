@@ -156,6 +156,26 @@
   letter-spacing: 0.2px;
 }
 
+.g-wordsearch-dots {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 5px;
+}
+.g-wordsearch-dots i {
+  width: 16px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.14);
+}
+.g-wordsearch-dots i.done {
+  background: #f3c24a;
+}
+.g-wordsearch-dots i.cur {
+  background: #fff3b8;
+  box-shadow: 0 0 8px rgba(247, 215, 116, 0.8);
+  width: 24px;
+}
 .g-wordsearch-round {
   width: 44px;
   height: 44px;
@@ -442,13 +462,12 @@
 }
 
 .g-wordsearch-tip {
-  position: absolute;
-  left: 50%;
-  bottom: -14px;
-  transform: translateX(-50%);
-  width: max-content;
-  max-width: 92%;
-  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 10px auto 2px;
   padding: 7px 14px;
   border-radius: 999px;
   background: linear-gradient(180deg, #24242a, #121215) padding-box, var(--ws-gold) border-box;
@@ -468,7 +487,7 @@
 @keyframes g-ws-tip {
   from {
     opacity: 0;
-    transform: translate(-50%, 10px);
+    transform: translateY(10px);
   }
 }
 
@@ -476,8 +495,9 @@
 .g-wordsearch-panel {
   width: 100%;
   max-width: 560px;
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   min-height: 0;
+  margin-bottom: auto;
   overflow-y: auto;
   overscroll-behavior: contain;
   border-radius: 16px;
@@ -574,6 +594,14 @@
   transition:
     color 0.3s,
     background 0.2s;
+}
+.g-wordsearch-list.few .g-wordsearch-word {
+  font-size: 17px;
+  padding: 5px 10px;
+}
+.g-wordsearch-list.many .g-wordsearch-word {
+  font-size: 14px;
+  padding: 3px 6px;
 }
 .g-wordsearch-word-t {
   position: relative;
@@ -1487,7 +1515,6 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  max-width: calc(50% - 64px);
   padding: 5px 11px 5px 7px;
   border-radius: 999px;
   background: rgba(18, 18, 22, 0.88);
@@ -1689,6 +1716,10 @@
 .g-wordsearch-play.wide .g-wordsearch-panel {
   grid-area: panel;
   align-self: stretch;
+  margin: 0;
+}
+.g-wordsearch-play.wide .g-wordsearch-boardwrap {
+  margin: 0;
 }
 .g-wordsearch-play.wide .g-wordsearch-tools {
   grid-area: tools;

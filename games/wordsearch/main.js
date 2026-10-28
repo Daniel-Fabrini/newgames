@@ -248,6 +248,7 @@ export async function mount(root, ctx) {
           h('span', { class: 'g-wordsearch-theme-name' }, nm(opts.theme.name)),
         ),
         h('div', { class: 'g-wordsearch-sub' }, opts.subtitle || ''),
+        opts.dots || null,
       ),
       h('div', { class: 'g-wordsearch-hud-side right' }, opts.hudRight || coinPill),
     );
@@ -285,7 +286,7 @@ export async function mount(root, ctx) {
       puzzle.bonus.length ? bonusChip : null,
       progress,
     );
-    const list = h('div', { class: 'g-wordsearch-list' }, items);
+    const list = h('div', { class: `g-wordsearch-list ${words.length <= 6 ? 'few' : words.length >= 12 ? 'many' : ''}` }, items);
     const panel = h('div', { class: 'g-wordsearch-panel' }, listHead, list);
 
     // --- tools
@@ -528,8 +529,8 @@ export async function mount(root, ctx) {
     let tipEl = null;
     if (opts.tutorial && P.found.length === 0) {
       tutorialOn = true;
-      tipEl = h('div', { class: 'g-wordsearch-tip' }, t('tutorial'));
-      boardWrap.append(tipEl);
+      tipEl = h('div', { class: 'g-wordsearch-tip' }, h('span', { class: 'g-wordsearch-emo' }, '👆'), t('tutorial'));
+      panel.append(tipEl);
       later(() => tutorialOn && board.demo(words[0]), 500);
     }
     function stopTutorial() {
@@ -702,6 +703,14 @@ export async function mount(root, ctx) {
       puzzle,
       theme: info.theme,
       subtitle: `${t('level', { n: level })} · ${nm(info.pack.name)}`,
+      dots: h(
+        'div',
+        { class: 'g-wordsearch-dots', style: `--pc:${info.pack.color}` },
+        Array.from({ length: E.CHAPTER_LEN }, (_, j) => {
+          const l = info.first + j;
+          return h('i', { class: l < level ? 'done' : l === level ? 'cur' : '' });
+        }),
+      ),
       hudLeft: mapBtn,
       saved,
       tools: coinTools(levelGame, (snap) => store.set('cur', { key, ...snap })),
@@ -763,7 +772,7 @@ export async function mount(root, ctx) {
         { class: 'g-wordsearch-chapterdone' },
         h('div', { class: 'g-wordsearch-cd-title' }, ico('trophy'), t('chapterDone')),
         h('div', { class: 'g-wordsearch-cd-row' }, h('span', null, t('chapterBonus')), h('b', null, ico('coin'), `+${CHAPTER_COINS}`)),
-        h('div', { class: 'g-wordsearch-cd-next', style: { '--pc': nextCh.pack.color } }, h('span', { class: 'g-wordsearch-emo' }, nextCh.pack.emoji), t('nextChapter', { name: nm(nextCh.pack.name) })),
+        h('div', { class: 'g-wordsearch-cd-next', style: `--pc:${nextCh.pack.color}` }, h('span', { class: 'g-wordsearch-emo' }, nextCh.pack.emoji), t('nextChapter', { name: nm(nextCh.pack.name) })),
       );
     }
     const nextBtn = h('button', { class: 'btn primary big block', onclick: () => playLevel(S.level) }, t('next'), h('span', { class: 'btn-ico', html: icon('play') }));
@@ -875,14 +884,14 @@ export async function mount(root, ctx) {
         inner.append(
           h('div', {
             class: 'g-wordsearch-sec',
-            style: { top: `${yb - SEC}px`, height: `${SEC}px`, '--pc': info.pack.color },
+            style: `top:${yb - SEC}px;height:${SEC}px;--pc:${info.pack.color}`,
             'data-emoji': info.pack.emoji,
           }),
         );
         inner.append(
           h(
             'div',
-            { class: `g-wordsearch-plaque ${locked ? 'locked' : ''} ${doneCount === E.CHAPTER_LEN ? 'done' : ''}`, style: { top: `${yb - HEAD / 2}px`, '--pc': info.pack.color } },
+            { class: `g-wordsearch-plaque ${locked ? 'locked' : ''} ${doneCount === E.CHAPTER_LEN ? 'done' : ''}`, style: `top:${yb - HEAD / 2}px;--pc:${info.pack.color}` },
             h('div', { class: 'g-wordsearch-medal' }, h('span', null, info.pack.emoji), locked ? h('i', { html: icon('lock') }) : null),
             h(
               'div',
@@ -919,7 +928,7 @@ export async function mount(root, ctx) {
           'button',
           {
             class: `g-wordsearch-node ${state}`,
-            style: { left: `${x}px`, top: `${y}px`, '--pc': info.pack.color },
+            style: `left:${x}px;top:${y}px;--pc:${info.pack.color}`,
             'aria-label': `${t('level', { n: l })} · ${nm(info.theme.name)}`,
             onclick: () => {
               if (state === 'locked') {
@@ -937,9 +946,14 @@ export async function mount(root, ctx) {
           state === 'done' ? h('span', { class: 'g-wordsearch-node-stars' }, [0, 1, 2].map((k) => h('i', { html: icon(k < st ? 'star' : 'starEmpty') }))) : null,
         );
         const side = x > W / 2 ? 'left' : 'right';
+        const gapN = state === 'current' ? 46 : 38;
+        const room = Math.max(70, (side === 'left' ? x - gapN : W - x - gapN) - 8);
         const label = h(
           'div',
-          { class: `g-wordsearch-label ${side} ${state}`, style: { top: `${y}px`, [side === 'left' ? 'right' : 'left']: side === 'left' ? `${W - x + 42}px` : `${x + 42}px` } },
+          {
+            class: `g-wordsearch-label ${side} ${state}`,
+            style: `top:${y}px;max-width:${room}px;${side === 'left' ? `right:${W - x + gapN}px` : `left:${x + gapN}px`}`,
+          },
           h('span', { class: 'g-wordsearch-emo' }, info.theme.emoji),
           h('span', null, nm(info.theme.name)),
         );
