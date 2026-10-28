@@ -14,13 +14,26 @@ export const BY_CODE = new Map(PLAYABLE.map((c) => [c.code, c]));
 //   flag: flag <-> country                 map: recognise a highlighted country
 export const KINDS = ['name', 'capital', 'flag', 'map'];
 
+// Flags that look the same (French overseas regions use the French flag,
+// Saint Helena's file is the Union Jack; Indonesia/Monaco and Chad/Romania are
+// near-identical). Twins are never offered together and the territory copies
+// are never asked by flag.
+const FLAG_TWINS = [['FR', 'GF', 'GP', 'YT', 'RE', 'BL', 'MF', 'PM', 'WF'], ['GB', 'SH'], ['ID', 'MC'], ['TD', 'RO']];
+const TWIN = new Map();
+FLAG_TWINS.forEach((group, i) => group.forEach((code) => TWIN.set(code, i)));
+const NO_FLAG_QUESTION = new Set(['GF', 'GP', 'YT', 'RE', 'BL', 'MF', 'PM', 'WF', 'SH']);
+export const flagTwins = (a, b) => a !== b && TWIN.has(a) && TWIN.get(a) === TWIN.get(b);
+export const canAskFlag = (code) => !NO_FLAG_QUESTION.has(code);
+
 export function inCont(c, cont) {
   return cont === 'world' || c.cont === cont;
 }
 
 // Countries that can be asked. Territories (non-independent) only on request.
 export function pool(cont, { territories = false, kind = 'name' } = {}) {
-  return PLAYABLE.filter((c) => inCont(c, cont) && (territories || c.independent) && (kind !== 'capital' || c.capital));
+  return PLAYABLE.filter(
+    (c) => inCont(c, cont) && (territories || c.independent) && (kind !== 'capital' || c.capital) && (kind !== 'flag' || canAskFlag(c.code)),
+  );
 }
 
 export function contCodes(cont) {
@@ -38,7 +51,7 @@ export function mapDistance(a, b) {
 // Three wrong options for `target`. `near` (0..1) = share of geographic
 // neighbours (harder); the rest come from the same continent when possible.
 export function distractors(target, candidates, rnd = Math.random, near = 0.34, n = 3) {
-  const others = candidates.filter((c) => c.code !== target.code);
+  const others = candidates.filter((c) => c.code !== target.code && !flagTwins(c.code, target.code));
   const out = [];
   const sorted = others
     .map((c) => ({ c, d: mapDistance(target.code, c.code) }))

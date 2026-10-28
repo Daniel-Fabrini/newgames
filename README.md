@@ -1,4 +1,4 @@
-# NewGames 🎮
+# DA Games 👑
 
 Coleção de jogos para celular num só app, em **português (BR)**, **inglês** e **espanhol**.
 Funciona no navegador e pode ser instalado na tela inicial (PWA): abre em tela cheia e roda até sem internet.
@@ -12,7 +12,7 @@ Funciona no navegador e pode ser instalado na tela inicial (PWA): abre em tela c
 | 🦜 **Poliglota** — aprenda inglês, espanhol, português, francês, italiano e alemão | Duolingo |
 | 🚌 **Todos a Bordo** — tire os carros do estacionamento e embarque os passageiros da cor certa | Bus Escape: Traffic Jam |
 | 🔍 **Caça-Objetos** — ache os objetos escondidos em cenários lotados | Find It / Find It Out |
-| ✏️ **Cruzadas Diretas** — palavras cruzadas com as dicas dentro da grade | Palavras Cruzadas Diretas |
+| 🔤 **Caça-Palavras** — ache as palavras escondidas, temas variados e níveis infinitos | Word Search Explorer |
 
 Os jogos são recriações originais das mecânicas; não usam nomes, artes ou textos dos jogos originais.
 

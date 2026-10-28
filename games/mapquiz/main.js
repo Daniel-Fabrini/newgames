@@ -7,7 +7,7 @@
 import STRINGS from './strings.js';
 import { MapView, geometry } from './map.js';
 import { VIEWS, MAP_W } from './map-data.js';
-import { CONTS, PLAYABLE, BY_CODE, pool, contCodes, distractors, dailyQuestions, dayKey, levelInfo, rankIndex, Progress } from './quiz.js';
+import { CONTS, PLAYABLE, BY_CODE, pool, contCodes, distractors, dailyQuestions, levelInfo, rankIndex, Progress, flagTwins, canAskFlag } from './quiz.js';
 import { flagUrl } from '../../js/data/countries.js';
 import { shuffle } from '../../js/core/ui.js';
 
@@ -741,6 +741,7 @@ export async function mount(root, ctx) {
       const pics = stage === 1 ? ['map', 'flag'] : stage === 2 ? ['map', 'flag', 'map'] : ['map', 'flag', 'capital'];
       let picture = pics[Math.floor(Math.random() * pics.length)];
       if (picture === 'capital' && !target.capital) picture = 'map';
+      if (picture === 'flag' && !canAskFlag(target.code)) picture = 'map';
       const near = [0, 0.34, 0.67, 1, 1][stage - 1];
       return { target, picture, options: shuffle([target, ...distractors(target, base, Math.random, near)]) };
     }
@@ -942,7 +943,7 @@ export async function mount(root, ctx) {
       locked: false,
       done: false,
       t0: performance.now(),
-      revealCam: null,
+      savedCam: null, // camera before a reveal / hint moved it
     };
 
     const progEl = h('b');
@@ -1014,7 +1015,7 @@ export async function mount(root, ctx) {
         map.pin(code, t('already', { name: nameOf(code) }), 'info', 1200);
         return;
       }
-      if (code === target.code) correct(code);
+      if (code === target.code || (kind === 'flag' && flagTwins(code, target.code))) correct(target.code);
       else wrong(code);
     }
 
@@ -1071,7 +1072,7 @@ export async function mount(root, ctx) {
       map.setState(c.code, 'miss');
       map.flash(c.code, 'reveal');
       map.pin(c.code, nameOf(c), 'reveal', 0);
-      st.revealCam = { ...map.cam };
+      if (!st.savedCam) st.savedCam = { ...map.cam };
       const g = geometry().shapes[c.code];
       const tooSmall = g.size * map.cam.s < 18;
       if (!map.isInView(c.code, 40) || tooSmall) {
@@ -1093,12 +1094,12 @@ export async function mount(root, ctx) {
       const c = qs[st.i];
       map.stopFlash(c.code);
       map.clearPins();
-      if (st.revealCam) map.flyTo(st.revealCam, 600);
-      st.revealCam = null;
       advance();
     }
 
     function advance() {
+      if (st.savedCam) map.flyTo(st.savedCam, 650);
+      st.savedCam = null;
       st.i++;
       st.tries = 3;
       if (st.i >= qs.length) return finish();
@@ -1123,6 +1124,7 @@ export async function mount(root, ctx) {
       }
       st.hints--;
       updateHud();
+      if (!st.savedCam) st.savedCam = { ...map.cam };
       const g = geometry().shapes[qs[st.i].code];
       const size = Math.max(g.b[2] - g.b[0], g.b[3] - g.b[1]);
       const r = Math.max(size * 0.85, 850);
