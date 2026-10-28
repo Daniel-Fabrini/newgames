@@ -201,7 +201,7 @@ export const GAMES = [
   {
     id: 'million',
     cat: 'knowledge',
-    progress: 60,
+    progress: 100,
     name: { pt: 'Rumo ao Milhão', en: 'Road to a Million', es: 'Rumbo al Millón' },
     sub: { pt: 'Quiz de Perguntas', en: 'Trivia Quiz', es: 'Quiz de Preguntas' },
     about: {
