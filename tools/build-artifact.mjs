@@ -47,8 +47,8 @@ css = css.replace(/url\('\.\.\/assets\/fonts\/([\w.-]+\.woff2)'\)/g, (m, file) =
 fs.writeFileSync(cssPath, css);
 for (const f of fs.readdirSync(path.join(out, 'assets', 'fonts'))) fs.unlinkSync(path.join(out, 'assets', 'fonts', f));
 
-const page = `<title>NewGames</title>
-<meta name="theme-color" content="#12142b">
+const page = `<title>DA Games</title>
+<meta name="theme-color" content="#060607">
 <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/app.css">
 <div id="app"></div>
