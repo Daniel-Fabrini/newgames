@@ -1,0 +1,1735 @@
+/* Word search — black & gold chrome, cream-paper grid and word list. */
+
+.g-wordsearch {
+  --ws-g1: #f7d774;
+  --ws-g2: #c9971c;
+  --ws-gold: linear-gradient(135deg, #f7d774, #c9971c);
+  --ws-gold-v: linear-gradient(180deg, #fff0a8 0%, #f6cf55 40%, #e3a723 75%, #c98a10 100%);
+  --ws-paper: #f6efdf;
+  --ws-ink: #2a2217;
+  --ws-ink-2: #6b5226;
+  background: #0a0a0c;
+}
+
+.g-wordsearch-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.g-wordsearch-app {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 45% at 50% -8%, rgba(243, 194, 74, 0.13), transparent 62%),
+    radial-gradient(80% 30% at 50% 108%, rgba(243, 194, 74, 0.07), transparent 70%),
+    #0a0a0c;
+}
+
+.g-wordsearch-ico {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  vertical-align: middle;
+}
+.g-wordsearch-ico.big {
+  width: 30px;
+  height: 30px;
+}
+.g-wordsearch-ico.ok {
+  color: #5fd38d;
+}
+.g-wordsearch-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.g-wordsearch-emo {
+  font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+  line-height: 1;
+}
+
+/* ---------- coins pill ---------- */
+.g-wordsearch-coins {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 36px;
+  padding: 0 11px 0 5px;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  background: linear-gradient(180deg, #212127, #0f0f12) padding-box, var(--ws-gold) border-box;
+  box-shadow: 0 0 12px rgba(247, 215, 116, 0.2), 0 3px 8px rgba(0, 0, 0, 0.5);
+  font-weight: 1000;
+  font-size: 15px;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.g-wordsearch-coins .g-wordsearch-ico {
+  width: 24px;
+  height: 24px;
+}
+.g-wordsearch-coins.bump,
+.g-wordsearch-score.bump,
+.g-wordsearch-count.bump {
+  animation: g-ws-bump 0.35s cubic-bezier(0.3, 1.6, 0.6, 1);
+}
+@keyframes g-ws-bump {
+  40% {
+    transform: scale(1.18);
+  }
+}
+
+/* ---------- play screen ---------- */
+.g-wordsearch-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px calc(12px + var(--safe-bottom));
+}
+
+.g-wordsearch-hud {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  min-height: 50px;
+}
+.g-wordsearch-hud-side {
+  flex: none;
+  display: flex;
+  align-items: center;
+  min-width: 44px;
+}
+.g-wordsearch-hud-side.right {
+  justify-content: flex-end;
+}
+.g-wordsearch-title {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+.g-wordsearch-theme {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 21px;
+  font-weight: 1000;
+  line-height: 1.15;
+}
+.g-wordsearch-theme.long {
+  font-size: 17px;
+}
+.g-wordsearch-theme .g-wordsearch-emo {
+  font-size: 1.05em;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+.g-wordsearch-theme-name {
+  background: var(--ws-gold-v);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.6));
+}
+.g-wordsearch-sub {
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.2px;
+}
+
+.g-wordsearch-round {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  background: linear-gradient(180deg, #24242a, #121215) padding-box, var(--ws-gold) border-box;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(247, 215, 116, 0.2), 0 3px 0 rgba(0, 0, 0, 0.5);
+}
+.g-wordsearch-round span {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+.g-wordsearch-round:active {
+  transform: translateY(2px) scale(0.95);
+}
+
+/* ---------- board ---------- */
+.g-wordsearch-boardwrap {
+  position: relative;
+  flex: none;
+  display: flex;
+  justify-content: center;
+}
+.g-wordsearch-board {
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #fff3b8 0%, #f7d774 18%, #c9971c 48%, #f3c24a 72%, #a8740c 100%);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.7),
+    0 0 26px rgba(247, 215, 116, 0.24),
+    0 16px 34px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 0 rgba(90, 60, 10, 0.6);
+}
+.g-wordsearch-paper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--ws-paper);
+  background-image:
+    linear-gradient(to right, rgba(120, 90, 40, 0.13) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(120, 90, 40, 0.13) 1px, transparent 1px),
+    radial-gradient(130% 100% at 50% 0%, #fdf9ef 0%, #f3e9d2 70%, #eadcbc 100%);
+  background-size:
+    var(--cs) var(--cs),
+    var(--cs) var(--cs),
+    100% 100%;
+  box-shadow:
+    inset 0 0 0 1px rgba(90, 60, 10, 0.4),
+    inset 0 2px 10px rgba(90, 60, 10, 0.22);
+  touch-action: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.g-wordsearch-caps,
+.g-wordsearch-letters,
+.g-wordsearch-fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.g-wordsearch-caps {
+  z-index: 1;
+}
+.g-wordsearch-letters {
+  z-index: 2;
+  display: grid;
+}
+.g-wordsearch-fx {
+  z-index: 3;
+}
+.g-wordsearch-cell {
+  display: grid;
+  place-items: center;
+  position: relative;
+  font-weight: 900;
+  color: var(--ws-ink);
+  line-height: 1;
+  transition:
+    transform 0.12s,
+    color 0.12s;
+}
+.g-wordsearch-cell.sel {
+  transform: scale(1.2);
+  color: #120c03;
+}
+.g-wordsearch-cell.found {
+  color: #3a2c15;
+}
+.g-wordsearch-cell.wave {
+  animation: g-ws-wave 0.55s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+}
+@keyframes g-ws-wave {
+  40% {
+    transform: translateY(-16%) scale(1.32);
+  }
+}
+.g-wordsearch-cell.hint::before {
+  content: '';
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  border: 2.5px solid #d39a12;
+  background: radial-gradient(circle, rgba(255, 214, 90, 0.75), rgba(255, 214, 90, 0.1) 70%);
+  animation: g-ws-hint 1.1s ease-in-out infinite;
+  z-index: -1;
+}
+@keyframes g-ws-hint {
+  50% {
+    transform: scale(1.18);
+    opacity: 0.55;
+  }
+}
+
+/* capsules (highlighter marks) */
+.g-wordsearch-cap {
+  --th: calc(var(--cs) * 0.8);
+  position: absolute;
+  left: calc((var(--c0) + 0.5) * var(--cs) - var(--th) / 2);
+  top: calc((var(--r0) + 0.5) * var(--cs) - var(--th) / 2);
+  height: var(--th);
+  width: calc(var(--d) * var(--cs) + var(--th));
+  border-radius: 999px;
+  transform-origin: calc(var(--th) / 2) 50%;
+  transform: rotate(calc(var(--a) * 1deg));
+  background: var(--col, #f3c24a);
+  opacity: 0.78;
+  mix-blend-mode: multiply;
+}
+.g-wordsearch-cap.live {
+  opacity: 0.62;
+  transition:
+    width 0.08s ease-out,
+    transform 0.08s ease-out;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12) inset;
+}
+.g-wordsearch-cap.armed {
+  animation: g-ws-armed 0.9s ease-in-out infinite;
+}
+@keyframes g-ws-armed {
+  50% {
+    opacity: 0.3;
+  }
+}
+.g-wordsearch-cap.found {
+  transition: none;
+}
+.g-wordsearch-cap.lock {
+  animation: g-ws-lock 0.55s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+@keyframes g-ws-lock {
+  0% {
+    scale: 1;
+    filter: brightness(1.5);
+  }
+  35% {
+    scale: 1.14;
+    filter: brightness(1.25);
+  }
+  100% {
+    scale: 1;
+    filter: none;
+  }
+}
+.g-wordsearch-cap.draw {
+  animation: g-ws-draw 0.75s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+@keyframes g-ws-draw {
+  from {
+    width: var(--th);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.78;
+  }
+}
+.g-wordsearch-cap.bad {
+  background: #ff5a5a;
+  animation: g-ws-bad 0.5s ease forwards;
+}
+@keyframes g-ws-bad {
+  20% {
+    translate: -4px 0;
+  }
+  40% {
+    translate: 4px 0;
+  }
+  60% {
+    translate: -3px 0;
+    opacity: 0.6;
+  }
+  100% {
+    translate: 0 0;
+    opacity: 0;
+  }
+}
+.g-wordsearch-cap.dup {
+  animation: g-ws-fade 0.5s ease forwards;
+}
+.g-wordsearch-cap.bonus {
+  background: #ffcf3a;
+  mix-blend-mode: normal;
+  opacity: 0.85;
+  box-shadow: 0 0 16px 4px rgba(255, 207, 58, 0.8);
+  animation: g-ws-bonus 1.1s ease forwards;
+}
+@keyframes g-ws-bonus {
+  25% {
+    scale: 1.12;
+  }
+  70% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    scale: 1.05;
+  }
+}
+@keyframes g-ws-fade {
+  to {
+    opacity: 0;
+  }
+}
+.g-wordsearch-cap.ghost {
+  background: rgba(243, 194, 74, 0.55);
+  mix-blend-mode: multiply;
+  outline: 2px dashed rgba(168, 116, 12, 0.7);
+  outline-offset: -2px;
+  transition:
+    width 0.22s linear,
+    opacity 0.3s;
+}
+.g-wordsearch-cap.ghost.hide,
+.g-wordsearch-hand.hide {
+  opacity: 0;
+}
+.g-wordsearch-hand {
+  position: absolute;
+  left: calc((var(--hx) + 0.5) * var(--cs));
+  top: calc((var(--hy) + 0.5) * var(--cs));
+  font-size: calc(var(--cs) * 0.95);
+  transform: translate(-30%, 0);
+  transition:
+    left 0.22s linear,
+    top 0.22s linear,
+    opacity 0.3s;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.45));
+  font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+}
+
+/* spotlight hint */
+.g-wordsearch-spot {
+  position: absolute;
+  left: calc(var(--c0) * var(--cs) + 1px);
+  top: calc(var(--r0) * var(--cs) + 1px);
+  width: calc(var(--cw) * var(--cs) - 2px);
+  height: calc(var(--rh) * var(--cs) - 2px);
+  border-radius: 12px;
+  border: 2px solid #f7d774;
+  box-shadow:
+    0 0 0 999px rgba(14, 11, 6, 0.62),
+    0 0 18px 2px rgba(255, 214, 90, 0.75),
+    inset 0 0 14px rgba(255, 214, 90, 0.5);
+  animation: g-ws-spot 0.4s cubic-bezier(0.2, 1.3, 0.5, 1);
+  transition: opacity 0.45s;
+}
+.g-wordsearch-spot.out {
+  opacity: 0;
+}
+@keyframes g-ws-spot {
+  from {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
+.g-wordsearch-tip {
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 92%;
+  z-index: 5;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #24242a, #121215) padding-box, var(--ws-gold) border-box;
+  border: 1.5px solid transparent;
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);
+  animation: g-ws-tip 0.5s cubic-bezier(0.2, 1.3, 0.5, 1) both;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.g-wordsearch-tip.out {
+  opacity: 0;
+}
+@keyframes g-ws-tip {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+}
+
+/* ---------- word list (cream paper) ---------- */
+.g-wordsearch-panel {
+  width: 100%;
+  max-width: 560px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 16px;
+  padding: 8px 12px 12px;
+  color: var(--ws-ink);
+  background: linear-gradient(180deg, #fbf5e6 0%, #f3e8cf 100%);
+  box-shadow:
+    0 0 0 1px rgba(247, 215, 116, 0.6),
+    0 0 0 3px rgba(0, 0, 0, 0.55),
+    0 0 18px rgba(247, 215, 116, 0.16),
+    0 10px 24px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 #fff,
+    inset 0 -3px 8px rgba(120, 90, 40, 0.14);
+}
+.g-wordsearch-listhead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 2px 7px;
+  margin-bottom: 7px;
+  border-bottom: 1px dashed rgba(120, 90, 40, 0.32);
+}
+.g-wordsearch-listlabel {
+  font-weight: 1000;
+  font-size: 13px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--ws-ink-2);
+}
+.g-wordsearch-count {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px 2px 7px;
+  border-radius: 999px;
+  background: #2a2217;
+  color: #f7d774;
+  font-size: 13px;
+  font-weight: 1000;
+  font-variant-numeric: tabular-nums;
+}
+.g-wordsearch-count .g-wordsearch-ico {
+  width: 14px;
+  height: 14px;
+  color: #f7d774;
+}
+.g-wordsearch-count.done {
+  background: linear-gradient(180deg, #4be38f, #1fae5c);
+  color: #04260f;
+}
+.g-wordsearch-count.done .g-wordsearch-ico {
+  color: #04260f;
+}
+.g-wordsearch-bonuschip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px 2px 4px;
+  border-radius: 999px;
+  border: 1px solid rgba(168, 116, 12, 0.45);
+  color: #8a5c05;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.g-wordsearch-bonuschip .g-wordsearch-ico {
+  width: 15px;
+  height: 15px;
+}
+.g-wordsearch-bonuschip.done {
+  background: linear-gradient(180deg, #fff0a8, #f3c24a);
+  border-color: #c9971c;
+}
+.g-wordsearch-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 6px;
+}
+.g-wordsearch-word {
+  position: relative;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 900;
+  font-size: 15px;
+  line-height: 1.2;
+  letter-spacing: 0.4px;
+  color: var(--ws-ink);
+  padding: 4px 8px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition:
+    color 0.3s,
+    background 0.2s;
+}
+.g-wordsearch-word-t {
+  position: relative;
+  display: inline-block;
+}
+.g-wordsearch-word-t::after {
+  content: '';
+  position: absolute;
+  left: -3px;
+  right: -3px;
+  top: 50%;
+  height: 3px;
+  margin-top: -1px;
+  border-radius: 2px;
+  background: var(--col, #c9971c);
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.15);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.g-wordsearch-word::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: 8px;
+  background: var(--col, transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.g-wordsearch-word.found {
+  color: #8f7f60;
+}
+.g-wordsearch-word.found::before {
+  opacity: 0.22;
+}
+.g-wordsearch-word.found .g-wordsearch-word-t::after {
+  transform: scaleX(1);
+}
+.g-wordsearch-word.just {
+  animation: g-ws-pop 0.45s cubic-bezier(0.3, 1.7, 0.5, 1);
+}
+@keyframes g-ws-pop {
+  40% {
+    transform: scale(1.22);
+  }
+}
+.g-wordsearch-word.target {
+  background: rgba(247, 215, 116, 0.35);
+  box-shadow: inset 0 0 0 2px #c9971c;
+}
+.g-wordsearch-word.pulse {
+  animation: g-ws-wpulse 0.65s ease-in-out 4;
+}
+@keyframes g-ws-wpulse {
+  50% {
+    background: rgba(247, 215, 116, 0.75);
+    transform: scale(1.08);
+  }
+}
+
+/* ---------- tools ---------- */
+.g-wordsearch-tools {
+  width: 100%;
+  max-width: 560px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  flex: none;
+  padding-top: 4px;
+}
+.g-wordsearch-tool {
+  position: relative;
+  height: 68px;
+  border-radius: 16px;
+  border: 1.5px solid transparent;
+  background: linear-gradient(180deg, #212127, #111114) padding-box, linear-gradient(135deg, #f7d774, #c9971c 55%, #f7d774) border-box;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-weight: 900;
+  font-size: 13.5px;
+  cursor: pointer;
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.55),
+    0 0 14px rgba(247, 215, 116, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  transition: transform 0.08s;
+  padding: 0 4px;
+}
+.g-wordsearch-tool:active {
+  transform: translateY(2px) scale(0.97);
+}
+.g-wordsearch-tool-ico {
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 0 7px rgba(247, 215, 116, 0.45));
+}
+.g-wordsearch-tool-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.g-wordsearch-price {
+  position: absolute;
+  top: -9px;
+  right: -5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 8px 2px 3px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #2c2c33, #121215);
+  border: 1px solid #c9971c;
+  color: #f7d774;
+  font-size: 12px;
+  font-weight: 1000;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+}
+.g-wordsearch-price .g-wordsearch-ico {
+  width: 16px;
+  height: 16px;
+}
+.g-wordsearch-price.time {
+  padding: 2px 8px;
+  color: #ff9aa5;
+  border-color: rgba(255, 106, 120, 0.7);
+}
+
+/* ---------- HUD pills (daily / timed) ---------- */
+.g-wordsearch-streak,
+.g-wordsearch-score,
+.g-wordsearch-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 38px;
+  padding: 0 12px 0 8px;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  background: linear-gradient(180deg, #212127, #0f0f12) padding-box, var(--ws-gold) border-box;
+  font-weight: 1000;
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 12px rgba(247, 215, 116, 0.18);
+}
+.g-wordsearch-streak span,
+.g-wordsearch-score span,
+.g-wordsearch-timer span {
+  width: 22px;
+  height: 22px;
+  display: block;
+  color: #5fd38d;
+}
+.g-wordsearch-timer {
+  font-size: 19px;
+  min-width: 92px;
+  justify-content: center;
+}
+.g-wordsearch-timer.low {
+  background: linear-gradient(180deg, #3a1418, #1a0a0c) padding-box, linear-gradient(135deg, #ff8a95, #d92e42) border-box;
+  color: #ffd1d6;
+  animation: g-ws-low 0.8s ease-in-out infinite;
+}
+@keyframes g-ws-low {
+  50% {
+    box-shadow: 0 0 18px rgba(255, 74, 92, 0.6);
+    transform: scale(1.05);
+  }
+}
+
+/* ---------- floating feedback ---------- */
+.g-wordsearch-float {
+  position: absolute;
+  z-index: 40;
+  transform: translate(-50%, -50%);
+  font-weight: 1000;
+  font-size: 19px;
+  white-space: nowrap;
+  pointer-events: none;
+  color: #ffe58a;
+  text-shadow:
+    0 2px 0 #6b4600,
+    0 0 12px rgba(0, 0, 0, 0.8);
+  animation: g-ws-float 1.25s ease-out forwards;
+}
+.g-wordsearch-float.good {
+  color: #7cf0ad;
+  text-shadow:
+    0 2px 0 #0b4d26,
+    0 0 12px rgba(0, 0, 0, 0.8);
+}
+.g-wordsearch-float.bad {
+  color: #ff9aa5;
+  text-shadow:
+    0 2px 0 #5a0c16,
+    0 0 12px rgba(0, 0, 0, 0.8);
+}
+@keyframes g-ws-float {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -20%) scale(0.7);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -60%) scale(1.12);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -190%) scale(1);
+  }
+}
+.g-wordsearch-fly {
+  position: absolute;
+  z-index: 40;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: var(--col, #f3c24a);
+  color: #1a1205;
+  font-weight: 1000;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.g-wordsearch-flycoin {
+  position: fixed;
+  z-index: 300;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* ---------- overlays & cards ---------- */
+.g-wordsearch-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 16px 16px calc(16px + var(--safe-bottom));
+  background: rgba(0, 0, 0, 0.74);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.22s;
+  overflow-y: auto;
+}
+.g-wordsearch-overlay.show {
+  opacity: 1;
+}
+.g-wordsearch-card {
+  position: relative;
+  width: min(380px, 100%);
+  border-radius: 24px;
+  padding: 24px 18px 18px;
+  text-align: center;
+  border: 1.5px solid transparent;
+  background: linear-gradient(180deg, #1c1c21, #0c0c0f) padding-box, linear-gradient(160deg, #f7d774, #c9971c 50%, #f7d774) border-box;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(247, 215, 116, 0.18);
+  transform: scale(0.88) translateY(12px);
+  transition: transform 0.35s cubic-bezier(0.2, 1.4, 0.4, 1);
+  overflow: hidden;
+}
+.g-wordsearch-overlay.show .g-wordsearch-card,
+.g-wordsearch-card.static {
+  transform: none;
+}
+.g-wordsearch-card > * {
+  position: relative;
+}
+.g-wordsearch-rays {
+  position: absolute !important;
+  left: 50%;
+  top: 110px;
+  width: 560px;
+  height: 560px;
+  margin: -280px 0 0 -280px;
+  background: repeating-conic-gradient(from 0deg, rgba(247, 215, 116, 0.09) 0deg 10deg, transparent 10deg 24deg);
+  -webkit-mask: radial-gradient(circle, #000 18%, transparent 62%);
+  mask: radial-gradient(circle, #000 18%, transparent 62%);
+  animation: g-ws-rays 18s linear infinite;
+  pointer-events: none;
+}
+@keyframes g-ws-rays {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.g-wordsearch-ribbon {
+  display: inline-block;
+  padding: 9px 30px;
+  margin: 2px 0 8px;
+  background: var(--ws-gold-v);
+  color: #1a1102;
+  font-weight: 1000;
+  font-size: 19px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, 100% 0, 94% 50%, 100% 100%, 0 100%, 6% 50%);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+.g-wordsearch-wintheme {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--text-2);
+}
+.g-wordsearch-stars {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+  margin: 12px 0 2px;
+  height: 74px;
+}
+.g-wordsearch-star {
+  width: 56px;
+  height: 56px;
+  opacity: 0;
+  transform: scale(0.2) rotate(-40deg);
+  filter: drop-shadow(0 0 10px rgba(247, 215, 116, 0.55));
+}
+.g-wordsearch-star.s1 {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 6px;
+}
+.g-wordsearch-star.in {
+  opacity: 1;
+  transform: none;
+  transition:
+    transform 0.45s cubic-bezier(0.3, 1.8, 0.5, 1),
+    opacity 0.2s;
+}
+.g-wordsearch-praise {
+  font-size: 22px;
+  font-weight: 1000;
+  margin: 4px 0 8px;
+}
+.g-wordsearch-stats {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 6px 0 4px;
+}
+.g-wordsearch-stats > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(247, 215, 116, 0.28);
+  font-weight: 900;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+.g-wordsearch-stats small {
+  color: var(--text-2);
+  font-weight: 800;
+}
+.g-wordsearch-stats .g-wordsearch-ico {
+  width: 18px;
+  height: 18px;
+}
+.g-wordsearch-reward {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 4px;
+  padding: 8px 22px 8px 14px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(247, 215, 116, 0.16), rgba(247, 215, 116, 0.04));
+  border: 1px solid rgba(247, 215, 116, 0.45);
+}
+.g-wordsearch-reward b {
+  font-size: 30px;
+  font-weight: 1000;
+  background: var(--ws-gold-v);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-variant-numeric: tabular-nums;
+  min-width: 2.6ch;
+  text-align: left;
+}
+.g-wordsearch-chapterdone {
+  margin: 12px 0 2px;
+  padding: 12px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fbf5e6, #efe3c7);
+  color: var(--ws-ink);
+  box-shadow: inset 0 0 0 1px rgba(201, 151, 28, 0.6);
+  animation: g-ws-tip 0.5s 0.9s cubic-bezier(0.2, 1.3, 0.5, 1) both;
+}
+.g-wordsearch-cd-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 1000;
+  font-size: 17px;
+}
+.g-wordsearch-cd-title .g-wordsearch-ico {
+  width: 24px;
+  height: 24px;
+}
+.g-wordsearch-cd-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--ws-ink-2);
+}
+.g-wordsearch-cd-row b {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--ws-ink);
+  font-weight: 1000;
+}
+.g-wordsearch-cd-next {
+  margin-top: 8px;
+  padding: 7px 10px;
+  border-radius: 12px;
+  background: #1c1c21;
+  color: #fff;
+  font-weight: 900;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: inset 0 0 0 1.5px var(--pc);
+}
+.g-wordsearch-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+.g-wordsearch-actions .btn-ico {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+}
+.g-wordsearch-secondary {
+  min-height: 46px;
+  font-size: 16px;
+  color: #f7d774;
+}
+.g-wordsearch-secondary .g-wordsearch-ico {
+  width: 22px;
+  height: 22px;
+}
+
+/* centered screens (daily done, timed intro) */
+.g-wordsearch-center {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 16px calc(20px + var(--safe-bottom));
+}
+.g-wordsearch-center > .g-wordsearch-card {
+  margin: auto 0;
+  flex-shrink: 0;
+}
+.g-wordsearch-cornercoins {
+  align-self: flex-end;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+.g-wordsearch-bigico {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 8px;
+  filter: drop-shadow(0 0 16px rgba(247, 215, 116, 0.5));
+}
+.g-wordsearch-note {
+  color: var(--text-2);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.45;
+  margin: 8px 4px;
+}
+.g-wordsearch-note.small {
+  font-size: 13px;
+  color: var(--text-3);
+}
+.g-wordsearch-streakrow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 10px 0;
+}
+.g-wordsearch-streakbig {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 12px 8px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(247, 215, 116, 0.3);
+}
+.g-wordsearch-streakbig span {
+  width: 30px;
+  height: 30px;
+}
+.g-wordsearch-streakbig b {
+  font-size: 30px;
+  font-weight: 1000;
+  line-height: 1.1;
+}
+.g-wordsearch-streakbig small {
+  color: var(--text-2);
+  font-weight: 800;
+  font-size: 12px;
+}
+.g-wordsearch-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin: 6px 0;
+}
+.g-wordsearch-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.g-wordsearch-day small {
+  font-weight: 900;
+  font-size: 11px;
+  color: var(--text-3);
+}
+.g-wordsearch-day span {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1.5px dashed rgba(247, 215, 116, 0.35);
+  color: #1a1102;
+  padding: 6px;
+}
+.g-wordsearch-day.ok span {
+  background: var(--ws-gold-v);
+  border: 0;
+  box-shadow: 0 0 10px rgba(247, 215, 116, 0.4);
+}
+.g-wordsearch-day.today small {
+  color: #f7d774;
+}
+.g-wordsearch-dreward {
+  margin: 8px 0;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fbf5e6, #efe3c7);
+  color: var(--ws-ink);
+  font-weight: 800;
+  font-size: 14px;
+}
+.g-wordsearch-dreward > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 0;
+}
+.g-wordsearch-dreward b {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 1000;
+}
+.g-wordsearch-dreward .tot {
+  border-top: 1px dashed rgba(120, 90, 40, 0.35);
+  margin-top: 4px;
+  padding-top: 7px;
+  font-size: 16px;
+}
+.g-wordsearch-dreward .tot b {
+  font-size: 22px;
+}
+.g-wordsearch-next {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  margin-top: 4px;
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--text-2);
+}
+.g-wordsearch-countdown {
+  font-size: 26px;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+  background: var(--ws-gold-v);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-wordsearch-bestbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(247, 215, 116, 0.4);
+  background: rgba(247, 215, 116, 0.07);
+  font-weight: 900;
+}
+.g-wordsearch-bestbox span {
+  width: 26px;
+  height: 26px;
+}
+.g-wordsearch-bestbox small {
+  color: var(--text-2);
+  font-size: 14px;
+}
+.g-wordsearch-bestbox b {
+  font-size: 24px;
+}
+.g-wordsearch-bigscore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 6px 0;
+}
+.g-wordsearch-bigscore b {
+  font-size: 64px;
+  font-weight: 1000;
+  line-height: 1;
+  background: var(--ws-gold-v);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 12px rgba(247, 215, 116, 0.35));
+}
+.g-wordsearch-bigscore small {
+  color: var(--text-2);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 12px;
+}
+.g-wordsearch-record {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0 6px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #4be38f, #1fae5c);
+  color: #04260f;
+  font-weight: 1000;
+  animation: g-ws-bump 0.6s 0.3s cubic-bezier(0.3, 1.6, 0.6, 1) both;
+}
+.g-wordsearch-countov {
+  background: rgba(0, 0, 0, 0.55);
+}
+.g-wordsearch-count.pop,
+.g-wordsearch-countov .g-wordsearch-count {
+  margin: 0;
+  padding: 0;
+  background: none;
+  font-size: 110px;
+  font-weight: 1000;
+  color: transparent;
+  background-image: var(--ws-gold-v);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 24px rgba(247, 215, 116, 0.55));
+}
+.g-wordsearch-countov .g-wordsearch-count.pop {
+  animation: g-ws-countpop 0.65s cubic-bezier(0.2, 1.5, 0.4, 1) both;
+}
+@keyframes g-ws-countpop {
+  from {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* ---------- level map ---------- */
+.g-wordsearch-mapview {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+.g-wordsearch-maptop {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px 6px;
+  position: relative;
+  z-index: 3;
+}
+.g-wordsearch-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 36px;
+  padding: 0 12px 0 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(247, 215, 116, 0.45);
+  background: linear-gradient(180deg, #1d1d22, #0f0f12);
+  font-weight: 900;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.g-wordsearch-chip .g-wordsearch-ico {
+  width: 20px;
+  height: 20px;
+}
+.g-wordsearch-mapscroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  -webkit-mask: linear-gradient(transparent 0, #000 22px, #000 calc(100% - 26px), transparent);
+  mask: linear-gradient(transparent 0, #000 22px, #000 calc(100% - 26px), transparent);
+}
+.g-wordsearch-mapinner {
+  position: relative;
+  margin: 0 auto;
+}
+.g-wordsearch-sec {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+.g-wordsearch-sec::before {
+  content: '';
+  position: absolute;
+  inset: 4% -10%;
+  background: radial-gradient(closest-side, var(--pc), transparent);
+  opacity: 0.17;
+}
+.g-wordsearch-sec::after {
+  content: attr(data-emoji);
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  transform: translate(-50%, -50%) rotate(-12deg);
+  font-size: 190px;
+  opacity: 0.07;
+  font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+  filter: saturate(0.6);
+}
+.g-wordsearch-pathwrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.g-wordsearch-path {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: visible;
+}
+.g-wordsearch-path path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.g-wordsearch-path .todo {
+  stroke: rgba(247, 215, 116, 0.32);
+  stroke-width: 5;
+  stroke-dasharray: 1 13;
+}
+.g-wordsearch-path .done-glow {
+  stroke: rgba(247, 215, 116, 0.18);
+  stroke-width: 18;
+}
+.g-wordsearch-path .done {
+  stroke: #f3c24a;
+  stroke-width: 6;
+}
+.g-wordsearch-node {
+  position: absolute;
+  z-index: 2;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-weight: 1000;
+  font-size: 19px;
+  border: 2px solid transparent;
+  transition: transform 0.1s;
+}
+.g-wordsearch-node:active {
+  transform: scale(0.93);
+}
+.g-wordsearch-node.done {
+  background: linear-gradient(180deg, #2a2418, #15120b) padding-box, var(--ws-gold) border-box;
+  color: #f7d774;
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.55),
+    0 0 12px rgba(247, 215, 116, 0.25);
+}
+.g-wordsearch-node.current {
+  width: 70px;
+  height: 70px;
+  margin: -35px 0 0 -35px;
+  font-size: 24px;
+  background: var(--ws-gold-v) padding-box, linear-gradient(135deg, #fff3b8, #a8740c) border-box;
+  color: #1a1102;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.6),
+    0 0 26px rgba(247, 215, 116, 0.6);
+}
+.g-wordsearch-node.current::after {
+  content: '';
+  position: absolute;
+  inset: -9px;
+  border-radius: 50%;
+  border: 2px solid rgba(247, 215, 116, 0.75);
+  animation: g-ws-ring 1.6s ease-out infinite;
+}
+@keyframes g-ws-ring {
+  from {
+    transform: scale(0.85);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+.g-wordsearch-node.locked {
+  background: linear-gradient(180deg, #1c1c21, #111114);
+  border-color: rgba(247, 215, 116, 0.22);
+  color: #6f6858;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+.g-wordsearch-node.locked i {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.g-wordsearch-node.shake {
+  animation: g-ws-nshake 0.35s;
+}
+@keyframes g-ws-nshake {
+  25% {
+    translate: -6px 0;
+  }
+  75% {
+    translate: 6px 0;
+  }
+}
+.g-wordsearch-node-n {
+  display: grid;
+  place-items: center;
+}
+.g-wordsearch-node-stars {
+  position: absolute;
+  bottom: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0;
+}
+.g-wordsearch-node-stars i {
+  width: 17px;
+  height: 17px;
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8));
+}
+.g-wordsearch-node-stars i:nth-child(2) {
+  margin-top: 3px;
+}
+.g-wordsearch-label {
+  position: absolute;
+  z-index: 2;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  max-width: calc(50% - 64px);
+  padding: 5px 11px 5px 7px;
+  border-radius: 999px;
+  background: rgba(18, 18, 22, 0.88);
+  border: 1px solid rgba(247, 215, 116, 0.32);
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--text-2);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.g-wordsearch-label > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-wordsearch-label.current {
+  color: #fff;
+  border-color: #f7d774;
+  box-shadow: 0 0 12px rgba(247, 215, 116, 0.3);
+}
+.g-wordsearch-label.locked {
+  opacity: 0.5;
+}
+.g-wordsearch-pin {
+  position: absolute;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--ws-gold-v);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  animation: g-ws-pin 1.2s ease-in-out infinite;
+  pointer-events: none;
+  color: #1a1102;
+}
+.g-wordsearch-pin span {
+  width: 16px;
+  height: 16px;
+  display: block;
+  transform: rotate(45deg);
+}
+@keyframes g-ws-pin {
+  50% {
+    translate: 0 -7px;
+  }
+}
+.g-wordsearch-plaque {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 232px;
+  max-width: calc(100% - 24px);
+  padding: 9px 18px 9px 9px;
+  border-radius: 20px;
+  border: 1.5px solid transparent;
+  background: linear-gradient(180deg, #202026, #0e0e11) padding-box, var(--ws-gold) border-box;
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.65),
+    0 0 22px rgba(247, 215, 116, 0.14);
+  text-align: left;
+}
+.g-wordsearch-plaque.locked {
+  filter: saturate(0.4) brightness(0.75);
+}
+.g-wordsearch-medal {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex: none;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  background: radial-gradient(circle at 50% 30%, var(--pc), #111 125%);
+  box-shadow:
+    0 0 0 3px #f3c24a,
+    0 0 0 5px rgba(0, 0, 0, 0.6),
+    0 0 18px var(--pc);
+  font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+}
+.g-wordsearch-medal i {
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  width: 22px;
+  height: 22px;
+  padding: 3px;
+  border-radius: 50%;
+  background: #17171b;
+  color: #f7d774;
+  border: 1px solid #c9971c;
+}
+.g-wordsearch-plaque-t {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.g-wordsearch-plaque-t small {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #f3c24a;
+}
+.g-wordsearch-plaque-t b {
+  font-size: 19px;
+  font-weight: 1000;
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-wordsearch-plaque-p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--text-2);
+  margin-top: 2px;
+}
+.g-wordsearch-plaque-p em {
+  font-style: normal;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+.g-wordsearch-plaque-p .g-wordsearch-ico {
+  width: 14px;
+  height: 14px;
+}
+.g-wordsearch-plaque.done .g-wordsearch-plaque-p {
+  color: #7cf0ad;
+}
+.g-wordsearch-ahead {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-weight: 900;
+  font-size: 13px;
+  color: #f3c24a;
+  opacity: 0.85;
+}
+.g-wordsearch-earlier {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 3;
+}
+.g-wordsearch-mapbottom {
+  flex: none;
+  padding: 8px 16px calc(12px + var(--safe-bottom));
+  display: flex;
+  justify-content: center;
+}
+.g-wordsearch-mapplay {
+  max-width: 420px;
+}
+.g-wordsearch-mapplay .btn-ico {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+}
+
+/* ---------- wide screens (desktop / landscape) ---------- */
+.g-wordsearch-play.wide {
+  display: grid;
+  grid-template-columns: auto minmax(280px, 380px);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    'hud hud'
+    'board panel'
+    'board tools';
+  justify-content: center;
+  align-content: center;
+  column-gap: 22px;
+  row-gap: 12px;
+}
+.g-wordsearch-play.wide .g-wordsearch-hud {
+  grid-area: hud;
+  max-width: none;
+}
+.g-wordsearch-play.wide .g-wordsearch-boardwrap {
+  grid-area: board;
+  align-self: center;
+}
+.g-wordsearch-play.wide .g-wordsearch-panel {
+  grid-area: panel;
+  align-self: stretch;
+}
+.g-wordsearch-play.wide .g-wordsearch-tools {
+  grid-area: tools;
+}
+
+/* timed: fresh grid slides in */
+.g-wordsearch-play.slide-in .g-wordsearch-boardwrap,
+.g-wordsearch-play.slide-in .g-wordsearch-panel {
+  animation: g-ws-slide 0.35s cubic-bezier(0.2, 1.1, 0.4, 1) both;
+}
+@keyframes g-ws-slide {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+@media (max-height: 640px) {
+  .g-wordsearch-tool {
+    height: 56px;
+    flex-direction: row;
+    gap: 6px;
+  }
+  .g-wordsearch-tool-ico {
+    width: 24px;
+    height: 24px;
+  }
+  .g-wordsearch-hud {
+    min-height: 44px;
+  }
+  .g-wordsearch-play {
+    gap: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .g-wordsearch-rays,
+  .g-wordsearch-node.current::after,
+  .g-wordsearch-pin,
+  .g-wordsearch-cell.hint::before,
+  .g-wordsearch-timer.low {
+    animation: none;
+  }
+}
