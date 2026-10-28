@@ -258,9 +258,9 @@ export default {
       for: ['fr'],
       title: { pt: 'Pourquoi? Parce que…', en: 'Pourquoi? Parce que…', es: '¿Pourquoi? Parce que…' },
       body: {
-        pt: 'Em francês, pergunte com **pourquoi** e responda com **parce que**. Antes de vogal, que vira **qu’**: parce qu’il pleut.',
-        en: 'In French, ask with **pourquoi** and answer with **parce que**. Before a vowel, que becomes **qu’**: parce qu’il pleut.',
-        es: 'En francés, se pregunta con **pourquoi** y se responde con **parce que**. Delante de vocal, que se convierte en **qu’**: parce qu’il pleut.',
+        pt: "Em francês, pergunte com **pourquoi** e responda com **parce que**. Antes de vogal, que vira **qu'**: parce qu'il pleut.",
+        en: "In French, ask with **pourquoi** and answer with **parce que**. Before a vowel, que becomes **qu'**: parce qu'il pleut.",
+        es: "En francés, se pregunta con **pourquoi** y se responde con **parce que**. Delante de vocal, que se convierte en **qu'**: parce qu'il pleut.",
       },
       examples: [
         { en: 'Why are you sad?', es: '¿Por qué estás triste?', pt: 'Por que você está triste?', fr: 'Pourquoi es-tu triste ?', it: 'Perché sei triste?', de: 'Warum bist du traurig?' },

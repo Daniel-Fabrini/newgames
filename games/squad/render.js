@@ -175,7 +175,7 @@ export class Renderer {
       this.part({ x, z, y: 18, life: 0.16, size: r * 1.6, grow: r * 3, add: true, g: 0, img: 'white', fade: 1 });
       this.part({ x, z, y: 22, life: 0.55, size: r * 0.9, grow: r * 1.4, add: true, g: 0, img: toxic ? 'green' : 'fire' });
       this.burst(x, z, 14, big ? 22 : 14, { col: toxic ? ['#d8ff5a', '#9be03a', '#f4ffb0'] : ['#ffd36b', '#ff8a1e', '#ff5a1e', '#fff1b0'], speed: r * 2.2, up: 380, life: 0.6, size: 5, add: true, g: 300, drag: 1.5 });
-      this.burst(x, z, 16, big ? 14 : 9, { col: toxic ? ['rgba(120,160,60,.55)'] : ['rgba(70,64,60,.6)', 'rgba(110,100,95,.55)'], speed: r * 0.9, up: 120, life: 1.3, size: 14, grow: 40, g: -40, drag: 2, sh: 'c' });
+      this.burst(x, z, 16, big ? 12 : 8, { col: toxic ? ['rgba(120,160,60,.4)'] : ['rgba(70,64,60,.45)', 'rgba(110,100,95,.4)'], speed: r * 0.8, up: 120, life: 1.1, size: 9, grow: 16, g: -40, drag: 2, sh: 'c' });
       this.burst(x, z, 10, big ? 16 : 10, { col: ['#2b2420', '#4a3a30', '#5a5048'], speed: r * 2.6, up: 420, life: 1, size: 3.5, sh: 'r', g: 900 });
       this.decal(x, z, r * 0.55, toxic ? [70, 110, 20] : [20, 16, 14], 0.6);
     } else {
