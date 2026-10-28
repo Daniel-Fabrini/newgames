@@ -158,7 +158,7 @@ export function showMap(app, modeId) {
     if (c === curCh) currentCard = card;
   }
   requestAnimationFrame(() => {
-    if (currentCard && curCh > 0) scroller.scrollTop = Math.max(0, currentCard.offsetTop - 140);
+    if (currentCard && curCh > 0) scroller.scrollTop = Math.max(0, currentCard.offsetTop + currentCard.offsetHeight - scroller.clientHeight + 70);
   });
 
   return {

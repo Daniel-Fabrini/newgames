@@ -150,6 +150,7 @@ export function runLesson(app, opts) {
     if (ex.type === 'listen' && !caps.listen) ex = L.queue[L.pos] = { ...opts.gen.withoutListening(ex, opts.units), uid: ex.uid, retry: ex.retry };
     if (ex.type === 'speak' && !caps.speak) ex = L.queue[L.pos] = { ...opts.gen.withoutSpeaking(ex, opts.units), uid: ex.uid, retry: ex.retry };
     curEx = ex;
+    el.pgExercise = ex; // handy for automated tests
     cur = renderExercise(ex, env);
     app.clear(body);
     const titleRow = h('div', { class: 'pg-extitle' }, cur.badge || null, h('h2', null, cur.title));
