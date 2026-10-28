@@ -15,7 +15,7 @@ function logEv(msg) {
   }
 }
 
-export const SPEECH_VERSION = 'speech-v5';
+export const SPEECH_VERSION = 'speech-v6';
 
 export function createSpeech(onProblem) {
   try {
@@ -26,14 +26,39 @@ export function createSpeech(onProblem) {
   const synth = typeof window !== 'undefined' && window.speechSynthesis ? window.speechSynthesis : null;
   const Utter = typeof window !== 'undefined' ? window.SpeechSynthesisUtterance : null;
   const Recognition = typeof window !== 'undefined' ? window.SpeechRecognition || window.webkitSpeechRecognition : null;
-  const cap = typeof window !== 'undefined' ? window.Capacitor : null;
-  const nativeTTS = cap && cap.isNativePlatform && cap.isNativePlatform() && cap.registerPlugin ? cap.registerPlugin('TextToSpeech') : null;
   let nativeLangs = null; // null = unknown yet (assume available)
   const reported = new Set();
   const problem = (kind, detail) => {
     if (reported.has(kind)) return;
     reported.add(kind);
     onProblem && onProblem(kind, detail);
+  };
+  // The Android plugin handle is created lazily (and retried) so a late-ready
+  // Capacitor bridge cannot leave the game permanently silent.
+  let nativeTTS = null;
+  let nativeNoted = false;
+  const native = () => {
+    if (nativeTTS) return nativeTTS;
+    const c = typeof window !== 'undefined' ? window.Capacitor : null;
+    const isNat = !!(c && c.isNativePlatform && c.isNativePlatform());
+    if (!isNat || !c.registerPlugin) {
+      if (!nativeNoted) {
+        nativeNoted = true;
+        logEv(`sem voz nativa (Capacitor=${!!c} nativo=${isNat})`);
+      }
+      return null;
+    }
+    nativeTTS = (c.Plugins && c.Plugins.TextToSpeech) || c.registerPlugin('TextToSpeech');
+    logEv('voz nativa pronta');
+    const norm = (l) => String(l).replace(/_/g, '-').toLowerCase();
+    Promise.resolve(nativeTTS.getSupportedLanguages())
+      .then((r) => {
+        nativeLangs = (r && r.languages ? r.languages : []).map(norm);
+        logEv(`native: ${nativeLangs.length} langs; it=${nativeLangs.some((t) => t.startsWith('it'))}`);
+        listeners.forEach((fn) => fn());
+      })
+      .catch((e) => logEv('getSupportedLanguages falhou: ' + String((e && (e.message || e.code)) || e)));
+    return nativeTTS;
   };
   let voices = [];
   const listeners = new Set();
@@ -53,21 +78,9 @@ export function createSpeech(onProblem) {
     chosen.clear();
     listeners.forEach((fn) => fn());
   }
-  if (nativeTTS) {
-    const norm = (l) => String(l).replace(/_/g, '-').toLowerCase();
-    nativeTTS
-      .getSupportedLanguages()
-      .then((r) => {
-        nativeLangs = (r && r.languages ? r.languages : []).map(norm);
-        logEv(`native: ${nativeLangs.length} langs; it=${nativeLangs.some((t) => t.startsWith('it'))}`);
-        listeners.forEach((fn) => fn());
-      })
-      .catch(() => {
-        nativeLangs = null;
-      });
-  }
+  native();
   const nativeHas = () => !!nativeTTS; // always try: Android falls back or the promise rejects
-  if (synth && !nativeTTS) {
+  if (synth && !native()) {
     load();
     if (synth.addEventListener) synth.addEventListener('voiceschanged', load);
     else synth.onvoiceschanged = load;
@@ -102,7 +115,7 @@ export function createSpeech(onProblem) {
   }
 
   function stop() {
-    if (nativeTTS) {
+    if (native()) {
       try {
         nativeTTS.stop();
       } catch {
@@ -164,7 +177,8 @@ export function createSpeech(onProblem) {
   }
 
   function speak(text, lang, opts = {}) {
-    if (nativeTTS) return speakNative(text, lang, opts);
+    logEv(`speak() ${lang} "${String(text).slice(0, 30)}" native=${!!native()} synth=${!!synth}`);
+    if (native()) return speakNative(text, lang, opts);
     if (!synth || !Utter || disposed) return false;
     const voice = voiceFor(lang);
     if (!voice) return false;
@@ -266,11 +280,11 @@ export function createSpeech(onProblem) {
 
   return {
     get supported() {
-      return !!nativeTTS || !!(synth && Utter);
+      return !!native() || !!(synth && Utter);
     },
     canRecognize: !!Recognition,
-    has: (lang) => (nativeTTS ? nativeHas(lang) : !!(synth && Utter && voiceFor(lang))),
-    voiceName: (lang) => (nativeTTS ? 'Android' : (voiceFor(lang) || {}).name || ''),
+    has: (lang) => (native() ? nativeHas(lang) : !!(synth && Utter && voiceFor(lang))),
+    voiceName: (lang) => (native() ? 'Android' : (voiceFor(lang) || {}).name || ''),
     speak,
     stop,
     listen,
