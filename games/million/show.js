@@ -34,6 +34,7 @@ export function playShow(app, { league = false } = {}) {
         done: false,
       };
       const timer = { left: TIME_PER_Q, active: false, holds: 0, last: performance.now(), whole: TIME_PER_Q };
+      el._gm = G; // read by automated tests
 
       // ---------- DOM ----------
       const stage = makeStage(scope, { outfit: app.P.outfit, variant: 'game', hostName: t('hostName') });
@@ -203,7 +204,7 @@ export function playShow(app, { league = false } = {}) {
         stage.say(league ? t('introLeague') : t('intro'), 'happy');
         fx.applause(1.4, 0.7);
         stage.cheer();
-        await scope.wait(1500);
+        await scope.wait(1200);
         loadQuestion();
       }
 

@@ -47,9 +47,9 @@ const GLASSES_DECOY = [null, null, null, null, null, 'round', 'square', 'sun'];
 export function randomPerson(rnd, pal, lvl) {
   const pick = (a) => a[(rnd() * a.length) | 0];
   const boost = Math.min(lvl, 25);
-  const stripeP = 0.07 + boost * 0.006;
-  const roundP = 0.1 + boost * 0.006;
-  const bobbleP = 0.07 + boost * 0.003;
+  const stripeP = 0.1 + boost * 0.006;
+  const roundP = 0.14 + boost * 0.006;
+  const bobbleP = 0.08 + boost * 0.003;
 
   // Tops: red-and-white stripes (the target's look, shared by some decoys),
   // other stripes, or plain / patterned clothes.
@@ -57,7 +57,7 @@ export function randomPerson(rnd, pal, lvl) {
   let pat;
   if (rnd() < stripeP) {
     pat = 'hstripe';
-    top = rnd() < 0.4 ? { c: RED, c2: WHITE } : { c: pick(['#2f6fb3', '#3aa36b', '#e5b93a', '#2c4a86', '#f08a24', '#7a4bc2', '#17a2b8']), c2: WHITE };
+    top = rnd() < 0.45 ? { c: RED, c2: WHITE } : { c: pick(['#2f6fb3', '#3aa36b', '#e5b93a', '#2c4a86', '#f08a24', '#7a4bc2', '#17a2b8']), c2: WHITE };
   } else {
     pat = pick(['solid', 'solid', 'solid', 'vstripe', 'dots', 'hoops', 'jacket', 'zig']);
     top = { c: pick(pal.tops), c2: pick(pal.tops2 || [WHITE]) };
@@ -75,7 +75,7 @@ export function randomPerson(rnd, pal, lvl) {
   } else if (hatRoll < bobbleP + 0.025) {
     hat = { t: 'beanie', c: RED, band: RED, pom: null };
   } else {
-    hat = { t: pick(HAT_DECOY), c: pick(['#f2d15c', '#5b3a86', '#1f6f5c', '#3a4a68', '#d9d4c2', '#b33a3a', '#2e2e36']), band: WHITE, pom: null };
+    hat = { t: pick(HAT_DECOY), c: pick(['#f2d15c', '#5b3a86', '#1f6f5c', '#3a4a68', '#d9d4c2', RED, RED, '#2e2e36']), band: WHITE, pom: null };
   }
 
   // Never reproduce the complete target look: break the combination.

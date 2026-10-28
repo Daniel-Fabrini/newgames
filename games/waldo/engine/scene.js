@@ -90,7 +90,7 @@ export function buildScene(theme, seed, lvl) {
     hazePerson(target, (1 - d) * 0.2, sc.haze);
     target.bb = bb;
   }
-  if (!target) throw new Error('waldo: no room for the character');
+  if (!target) throw new Error('crowd: no room for the character');
   // Clear the crowd around the character so it is never half hidden.
   for (let i = people.length - 1; i >= 0; i--) {
     if (overlaps(boxOf(people[i].x, people[i].y, people[i].h), target.bb)) people.splice(i, 1);

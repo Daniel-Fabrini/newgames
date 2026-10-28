@@ -680,7 +680,7 @@ export async function mount(root, ctx) {
     later(() => {
       if (!sess) return;
       showCard({
-        title: t('dailyDone'),
+        title: sess.practice ? t('sceneDone') : t('dailyDone'),
         lines: [t('timeLine', { s: secs.toFixed(1) }), sess.practice ? null : t('dailyStreakLine', { n: streakN }), sess.practice ? null : t('coinsGained', { n: DAILY_COINS })],
         actions: [
           { label: t('menu'), primary: true, onClick: () => goMenu() },

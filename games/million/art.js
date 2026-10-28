@@ -170,7 +170,7 @@ const I = {
   help: '<circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M9.3 9.3a2.8 2.8 0 1 1 3.9 2.6c-.8.3-1.2.9-1.2 1.7v.5" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17.3" r="1.3" fill="#111"/>',
   play: '<path d="M7 4.6v14.8a1 1 0 0 0 1.5.9l12-7.4a1 1 0 0 0 0-1.8l-12-7.4A1 1 0 0 0 7 4.6Z" fill="currentColor"/>',
   trophy: '<path fill="currentColor" d="M7 3h10v2h3a1 1 0 0 1 1 1v1.5a4.5 4.5 0 0 1-4.1 4.5A5.5 5.5 0 0 1 13 15.9V18h3a1 1 0 0 1 1 1v2H7v-2a1 1 0 0 1 1-1h3v-2.1A5.5 5.5 0 0 1 7.1 12 4.5 4.5 0 0 1 3 7.5V6a1 1 0 0 1 1-1h3V3Zm10 4v2.9A2.5 2.5 0 0 0 19 7.5V7h-2ZM5 7v.5a2.5 2.5 0 0 0 2 2.4V7H5Z"/>',
-  book: '<path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H11v17H5.5A1.5 1.5 0 0 1 4 18.5v-14ZM13 3h5.5A1.5 1.5 0 0 1 20 4.5v14a1.5 1.5 0 0 1-1.5 1.5H13V3Z" fill="currentColor"/>',
+  book: '<path d="M12 6.2C9.8 4.6 6.6 4 3 4.3a1 1 0 0 0-.9 1v12.4a1 1 0 0 0 1.1 1c3.3-.3 6.2.3 8.8 1.9V6.2Z" fill="currentColor"/><path d="M12 6.2c2.2-1.6 5.4-2.2 9-1.9a1 1 0 0 1 .9 1v12.4a1 1 0 0 1-1.1 1c-3.3-.3-6.2.3-8.8 1.9V6.2Z" fill="currentColor" opacity="0.7"/><path d="M5 8.2c1.8 0 3.4.3 4.8 1M5 11.2c1.8 0 3.4.3 4.8 1M14.2 9.2c1.4-.7 3-1 4.8-1M14.2 12.2c1.4-.7 3-1 4.8-1" stroke="#1a1102" stroke-width="1.1" stroke-linecap="round" opacity="0.55"/>',
   fire: '<path d="M12 2c1 3.5 5 5.8 5 11a5 5 0 0 1-10 0c0-2.4 1.2-4 2.4-5 .1 1.6.8 2.7 2 3.2C11 8.6 11.3 5 12 2Z" fill="currentColor"/>',
 };
 
