@@ -128,8 +128,10 @@ export class SceneView {
   computeLimits() {
     const { W, H, fit } = this.scene;
     const contain = Math.min(this.w / W, this.h / H);
-    this.minZ = fit === 'height' ? Math.max(contain, this.h / H) : contain;
-    this.maxZ = Math.max(this.minZ * 2.5, this.opts.maxZoom || 2.6);
+    const cover = Math.max(this.w / W, this.h / H);
+    // 'cover' fills the panel (small pan on one axis); 'height' fits a panorama's height.
+    this.minZ = fit === 'height' ? Math.max(contain, this.h / H) : fit === 'cover' ? Math.min(cover, contain * 1.35) : contain;
+    this.maxZ = Math.max(this.minZ * 4, this.opts.maxZoom || 1.8);
   }
 
   fit(animate = true) {

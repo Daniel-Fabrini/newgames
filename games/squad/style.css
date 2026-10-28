@@ -1,0 +1,1617 @@
+/* Survivor Squad — black & gold premium chrome. All classes prefixed g-squad-. */
+
+.g-squad {
+  --sq-gold1: #f7d774;
+  --sq-gold2: #c9971c;
+  --sq-gold: linear-gradient(180deg, #f7d774, #c9971c);
+  --sq-bg: #0a0a0c;
+  --sq-panel: #18181c;
+  --sq-panel2: #121215;
+  --sq-line: rgba(247, 215, 116, 0.38);
+  --sq-tabs: 104px;
+  background: #0a0a0c;
+  color: #fff;
+}
+.g-squad-app {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  font-family: var(--font);
+}
+.g-squad-ico {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  line-height: 0;
+}
+.g-squad-ico svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ------------------------------------------------------------------ base */
+.g-squad-main {
+  position: absolute;
+  inset: 0;
+  background: #2f5622;
+}
+.g-squad-basecv {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  cursor: grab;
+}
+.g-squad-basecv:active {
+  cursor: grabbing;
+}
+.g-squad-res {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px 9px;
+  background: linear-gradient(180deg, #0a0a0c 0%, rgba(10, 10, 12, 0.92) 100%);
+  border-bottom: 1px solid rgba(201, 151, 28, 0.45);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+.g-squad-pill {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 5px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #1d1d22, #131316);
+  border: 1px solid var(--sq-line, rgba(247, 215, 116, 0.38));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 10px rgba(201, 151, 28, 0.12);
+}
+.g-squad-pill .g-squad-ico {
+  width: 28px;
+  height: 28px;
+}
+.g-squad-pill b {
+  font-weight: 900;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-squad-pill.bump {
+  animation: g-squad-bump 0.4s ease;
+}
+@keyframes g-squad-bump {
+  40% {
+    transform: scale(1.12);
+    box-shadow: 0 0 18px rgba(247, 215, 116, 0.6);
+  }
+}
+.g-squad-plus {
+  flex: none;
+  width: 42px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid #b8f5c4;
+  background: linear-gradient(180deg, #52d96e, #1f9a3a);
+  box-shadow: 0 3px 0 #0f5a22, 0 0 12px rgba(80, 220, 110, 0.35);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.g-squad-plus .g-squad-ico {
+  width: 22px;
+  height: 22px;
+}
+.g-squad-plus:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #0f5a22;
+}
+
+.g-squad-tabs {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 7;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  padding: 10px 10px calc(10px + var(--safe-bottom, 0px));
+  background: linear-gradient(180deg, rgba(10, 10, 12, 0) 0%, rgba(10, 10, 12, 0.85) 30%, #0a0a0c 100%);
+}
+.g-squad-tab {
+  position: relative;
+  height: 84px;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  background: linear-gradient(180deg, #1f1f25, #0f0f13) padding-box, linear-gradient(180deg, #f7d774, #a67a12) border-box;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.55), 0 0 14px rgba(201, 151, 28, 0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  color: #fff;
+  padding: 4px 2px 6px;
+  transition: transform 0.08s;
+}
+.g-squad-tab:active {
+  transform: translateY(3px);
+}
+.g-squad-tab.active {
+  background: linear-gradient(180deg, #3a2e10, #17130a) padding-box, linear-gradient(180deg, #fff1b0, #c9971c) border-box;
+  box-shadow: 0 0 22px rgba(247, 215, 116, 0.45), inset 0 0 14px rgba(247, 215, 116, 0.25);
+}
+.g-squad-tab-ico .g-squad-ico {
+  width: 46px;
+  height: 46px;
+  filter: drop-shadow(0 3px 2px rgba(0, 0, 0, 0.5));
+}
+.g-squad-tab-lbl {
+  font-weight: 900;
+  font-size: 13px;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+}
+.g-squad-dot {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff8a8a, #e01c2c);
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  display: none;
+}
+.g-squad-dot.on {
+  display: block;
+  animation: g-squad-dot 1.6s ease-in-out infinite;
+}
+@keyframes g-squad-dot {
+  50% {
+    transform: scale(1.18);
+  }
+}
+.g-squad-tab.pulse {
+  animation: g-squad-glow 1.2s ease-in-out infinite;
+}
+@keyframes g-squad-glow {
+  50% {
+    box-shadow: 0 0 28px rgba(247, 215, 116, 0.85), 0 4px 0 rgba(0, 0, 0, 0.55);
+    transform: translateY(-2px);
+  }
+}
+
+/* ------------------------------------------------------------------ sheets */
+.g-squad-sheethost {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+.g-squad-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.25s;
+  pointer-events: auto;
+}
+.g-squad-scrim.open {
+  opacity: 1;
+}
+.g-squad-sheet {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 60px;
+  bottom: calc(var(--sq-tabs) + var(--safe-bottom, 0px));
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  border: 1.5px solid transparent;
+  background: linear-gradient(180deg, #16161a, #0e0e11) padding-box, linear-gradient(180deg, #f7d774, rgba(201, 151, 28, 0.35)) border-box;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7), 0 0 26px rgba(201, 151, 28, 0.2);
+  transform: translateY(26px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.26s cubic-bezier(0.2, 0.9, 0.3, 1.2), opacity 0.2s;
+  pointer-events: auto;
+  overflow: hidden;
+}
+.g-squad-sheet.open {
+  transform: none;
+  opacity: 1;
+}
+.g-squad-sheet-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px 10px 14px;
+  border-bottom: 1px solid rgba(201, 151, 28, 0.3);
+  background: linear-gradient(180deg, rgba(247, 215, 116, 0.08), rgba(247, 215, 116, 0));
+}
+.g-squad-sheet-head h2 {
+  flex: 1;
+  margin: 0;
+  font-size: 21px;
+  font-weight: 1000;
+  letter-spacing: 0.3px;
+  background: linear-gradient(180deg, #fff3c4, #e8b84a 60%, #c9971c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-squad-sheet-ico .g-squad-ico {
+  width: 34px;
+  height: 34px;
+}
+.g-squad-x {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #c9971c;
+  background: #0e0e12;
+  color: #f7d774;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.g-squad-x .g-squad-ico {
+  width: 18px;
+  height: 18px;
+}
+.g-squad-sheet-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.g-squad-sec {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 2px 0;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #e8b84a;
+}
+.g-squad-sec::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(201, 151, 28, 0.6), rgba(201, 151, 28, 0));
+}
+.g-squad-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #a8a8b4;
+  font-weight: 800;
+  order: 2;
+}
+.g-squad-timer .g-squad-ico {
+  width: 14px;
+  height: 14px;
+}
+
+/* ------------------------------------------------------------------ cards */
+.g-squad-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.g-squad-card {
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #1c1c21, #141418);
+  border: 1px solid rgba(247, 215, 116, 0.32);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  align-items: flex-start;
+}
+.g-squad-card.focus {
+  animation: g-squad-focus 1.4s ease 0.2s 2;
+}
+@keyframes g-squad-focus {
+  50% {
+    border-color: #f7d774;
+    box-shadow: 0 0 24px rgba(247, 215, 116, 0.55);
+  }
+}
+.g-squad-thumb {
+  flex: none;
+  width: 76px;
+  height: 76px;
+  border-radius: 12px;
+  background: radial-gradient(circle at 50% 75%, #3d5a2a, #142010 75%);
+  border: 1px solid rgba(247, 215, 116, 0.25);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.g-squad-thumb canvas {
+  width: 76px;
+  height: 76px;
+  display: block;
+}
+.g-squad-thumb.rankthumb {
+  background: radial-gradient(circle at 50% 40%, #3a2e10, #0e0e12 75%);
+}
+.g-squad-rank {
+  width: 52px;
+  height: 58px;
+  display: block;
+}
+.g-squad-rank svg {
+  width: 100%;
+  height: 100%;
+}
+.g-squad-thumb.inf {
+  background: radial-gradient(circle at 50% 40%, #3a2e10, #0e0e12 75%);
+  color: #f7d774;
+}
+.g-squad-thumb.inf .g-squad-ico {
+  width: 50px;
+  height: 50px;
+}
+.g-squad-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.g-squad-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.g-squad-name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 1.15;
+}
+.g-squad-name small {
+  flex-basis: 100%;
+  font-size: 12px;
+  font-weight: 800;
+  color: #a8a8b4;
+}
+.g-squad-lvl {
+  font-size: 11px;
+  font-weight: 1000;
+  color: #1a1300;
+  background: linear-gradient(180deg, #f7d774, #c9971c);
+  border-radius: 999px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+.g-squad-desc {
+  font-size: 12.5px;
+  color: #a8a8b4;
+  line-height: 1.3;
+}
+.g-squad-eff {
+  font-size: 13px;
+  color: #f7d774;
+  font-weight: 800;
+}
+.g-squad-act {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.g-squad-costs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.g-squad-cost {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px 2px 3px;
+  border-radius: 999px;
+  background: #0b0b0e;
+  border: 1px solid #2c2c33;
+  font-weight: 900;
+  font-size: 13px;
+  color: #fff;
+  white-space: nowrap;
+}
+.g-squad-cost .g-squad-ico {
+  width: 20px;
+  height: 20px;
+}
+.g-squad-cost.short {
+  color: #ff6b7f;
+  border-color: rgba(255, 84, 112, 0.45);
+}
+.g-squad-btn {
+  appearance: none;
+  border: 0;
+  border-radius: 12px;
+  min-height: 42px;
+  padding: 9px 16px;
+  font: inherit;
+  font-weight: 1000;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  color: #1a1300;
+  background: linear-gradient(180deg, #ffe58a 0%, #f2c94c 45%, #c9971c 100%);
+  box-shadow: 0 3px 0 #7a5a10, 0 0 14px rgba(247, 215, 116, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.06s, filter 0.15s;
+  white-space: nowrap;
+}
+.g-squad-btn .g-squad-ico {
+  width: 18px;
+  height: 18px;
+}
+.g-squad-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #7a5a10;
+}
+.g-squad-btn.big {
+  min-height: 52px;
+  font-size: 18px;
+  padding: 12px 22px;
+  border-radius: 14px;
+}
+.g-squad-btn.dim {
+  filter: saturate(0.35) brightness(0.7);
+}
+.g-squad-btn:disabled {
+  cursor: default;
+}
+.g-squad-btn.ghost {
+  background: #141418;
+  color: #f7d774;
+  border: 1.5px solid #c9971c;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.5);
+}
+.g-squad-btn.ghost.on {
+  color: #1a1300;
+  background: linear-gradient(180deg, rgba(247, 215, 116, 0.85), rgba(201, 151, 28, 0.85));
+  opacity: 0.85;
+}
+.g-squad-btn.wide {
+  width: 100%;
+  margin-top: 4px;
+}
+.g-squad-need {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #ff9f43;
+}
+.g-squad-need .g-squad-ico {
+  width: 15px;
+  height: 15px;
+}
+.g-squad-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: #0b0b0e;
+  border: 1px solid #2c2c33;
+  overflow: hidden;
+}
+.g-squad-bar i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #c9971c, #f7d774);
+  border-radius: inherit;
+  transition: width 0.4s;
+}
+.g-squad-stock {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #d0d0d8;
+}
+.g-squad-stock .g-squad-bar {
+  flex: 1 1 90px;
+}
+.g-squad-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #c9971c;
+  background: #241c08;
+  color: #f7d774;
+  font: inherit;
+  font-weight: 900;
+  font-size: 12.5px;
+  border-radius: 999px;
+  padding: 3px 10px 3px 4px;
+  cursor: pointer;
+}
+.g-squad-mini .g-squad-ico {
+  width: 18px;
+  height: 18px;
+}
+
+/* army */
+.g-squad-power {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 4px 12px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: radial-gradient(120% 140% at 0% 0%, rgba(247, 215, 116, 0.22), rgba(247, 215, 116, 0) 60%), linear-gradient(180deg, #1c1c21, #121215);
+  border: 1.5px solid rgba(247, 215, 116, 0.55);
+  box-shadow: 0 0 22px rgba(201, 151, 28, 0.2);
+}
+.g-squad-power > .g-squad-ico {
+  width: 44px;
+  height: 44px;
+}
+.g-squad-power small {
+  display: block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #e8b84a;
+}
+.g-squad-power > div > b {
+  font-size: 30px;
+  font-weight: 1000;
+  line-height: 1;
+}
+.g-squad-statgrid {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 6px;
+}
+.g-squad-statgrid > div {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid #2c2c33;
+  border-radius: 10px;
+  padding: 5px 4px;
+  text-align: center;
+}
+.g-squad-statgrid small {
+  letter-spacing: 0;
+  font-size: 10.5px;
+  color: #a8a8b4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-squad-statgrid b {
+  font-size: 15px;
+  font-weight: 1000;
+}
+.g-squad-hero {
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #1c1c21, #141418);
+  border: 1px solid rgba(247, 215, 116, 0.3);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+.g-squad-hero.sel {
+  border: 1.5px solid #f7d774;
+  box-shadow: 0 0 20px rgba(247, 215, 116, 0.35);
+}
+.g-squad-hero-art {
+  position: relative;
+  flex: none;
+  width: 84px;
+  height: 84px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 40% 30%, var(--c1), var(--c2));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.35);
+}
+.g-squad-hero-art .g-squad-ico.hero {
+  width: 64px;
+  height: 64px;
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.45));
+}
+.g-squad-hero-art .g-squad-lvl {
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.g-squad-hero.locked .g-squad-hero-art .g-squad-ico.hero {
+  filter: grayscale(1) brightness(0.55);
+}
+.g-squad-lockb {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #0e0e12;
+  border: 2px solid #c9971c;
+  color: #f7d774;
+  display: grid;
+  place-items: center;
+}
+.g-squad-lockb .g-squad-ico {
+  width: 14px;
+  height: 14px;
+}
+.g-squad-ab {
+  font-weight: 900;
+  font-size: 14px;
+  color: #fff;
+}
+.g-squad-hero .g-squad-act {
+  justify-content: flex-start;
+}
+
+/* missions */
+.g-squad-campaign {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1.5px solid rgba(247, 215, 116, 0.6);
+  box-shadow: 0 0 22px rgba(201, 151, 28, 0.25);
+  background: #0e0e12;
+  flex: none;
+}
+.g-squad-preview {
+  display: block;
+  width: 100%;
+  height: 150px;
+}
+.g-squad-camp-over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 14px 24px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0));
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+.g-squad-camp-over small {
+  font-size: 11.5px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #f7d774;
+  text-transform: uppercase;
+}
+.g-squad-camp-over b {
+  font-size: 30px;
+  font-weight: 1000;
+  line-height: 1.05;
+}
+.g-squad-camp-over span {
+  font-size: 13px;
+  font-weight: 800;
+}
+.g-squad-camp-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  background: linear-gradient(180deg, #17171b, #101013);
+  border-top: 1px solid rgba(201, 151, 28, 0.35);
+}
+.g-squad-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.g-squad-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 900;
+  color: #ffb3bd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-squad-tag .g-squad-ico {
+  width: 16px;
+  height: 16px;
+}
+.g-squad-tag.new {
+  align-self: flex-start;
+  color: #fff;
+  background: #e01c2c;
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 10.5px;
+  letter-spacing: 1px;
+}
+.g-squad-card.survival {
+  align-items: center;
+}
+.g-squad-mission {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #1c1c21, #141418);
+  border: 1px solid rgba(247, 215, 116, 0.25);
+}
+.g-squad-mission.ready {
+  border-color: #2fd38a;
+  box-shadow: 0 0 16px rgba(47, 211, 138, 0.25);
+}
+.g-squad-mission.claimed {
+  opacity: 0.55;
+}
+.g-squad-mtext {
+  font-weight: 900;
+  font-size: 14px;
+}
+.g-squad-mfoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #a8a8b4;
+}
+.g-squad-costs.reward .g-squad-cost {
+  font-size: 12px;
+  border-color: rgba(247, 215, 116, 0.3);
+}
+.g-squad-done {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #2fd38a;
+  font-weight: 900;
+  font-size: 13px;
+}
+
+/* map */
+.g-squad-region-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 6px 4px 0;
+}
+.g-squad-region-head small {
+  display: block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #e8b84a;
+}
+.g-squad-region-head b {
+  font-size: 18px;
+  font-weight: 1000;
+}
+.g-squad-rstars {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 900;
+  font-size: 13px;
+  color: #f7d774;
+}
+.g-squad-rstars .g-squad-ico {
+  width: 16px;
+  height: 16px;
+}
+.g-squad-region {
+  position: relative;
+  flex: none;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(247, 215, 116, 0.35);
+}
+.g-squad-region.locked .g-squad-regioncv {
+  filter: grayscale(0.6) brightness(0.6);
+}
+.g-squad-regioncv {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  display: block;
+}
+.g-squad-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 3px solid #c9971c;
+  background: radial-gradient(circle at 40% 30%, #2a2a30, #0e0e12);
+  color: #f7d774;
+  font: inherit;
+  font-weight: 1000;
+  font-size: 16px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.45), 0 0 12px rgba(247, 215, 116, 0.3);
+  padding: 0;
+}
+.g-squad-node .g-squad-ico {
+  width: 20px;
+  height: 20px;
+}
+.g-squad-node.current {
+  background: linear-gradient(180deg, #ffe58a, #c9971c);
+  color: #1a1300;
+  border-color: #fff4c0;
+  animation: g-squad-nodepulse 1.4s ease-in-out infinite;
+}
+@keyframes g-squad-nodepulse {
+  50% {
+    box-shadow: 0 0 0 8px rgba(247, 215, 116, 0.25), 0 0 26px rgba(247, 215, 116, 0.8);
+  }
+}
+.g-squad-node.locked {
+  border-color: #3a3a42;
+  color: #6a6a74;
+  background: #16161a;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.45);
+}
+.g-squad-node.boss {
+  width: 56px;
+  height: 56px;
+  border-color: #ff5470;
+}
+.g-squad-node.boss .g-squad-ico {
+  width: 28px;
+  height: 28px;
+}
+.g-squad-nstars {
+  position: absolute;
+  bottom: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0;
+}
+.g-squad-nstars .g-squad-ico {
+  width: 14px;
+  height: 14px;
+}
+
+/* ------------------------------------------------------------------ fly-to-bar */
+.g-squad-fly {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  z-index: 30;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+.g-squad-floattext {
+  position: absolute;
+  z-index: 31;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  font-weight: 1000;
+  font-size: 22px;
+  color: #f7d774;
+  text-shadow: 0 2px 0 #3a2a00, 0 0 10px rgba(0, 0, 0, 0.6);
+  animation: g-squad-float 1s ease-out forwards;
+}
+@keyframes g-squad-float {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20%) scale(0.7);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -60%) scale(1.1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -160%) scale(1);
+  }
+}
+
+/* ------------------------------------------------------------------ modals content */
+.g-squad-help {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  margin-top: 4px;
+}
+.g-squad-help-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(247, 215, 116, 0.18);
+  border-radius: 12px;
+  padding: 8px 10px;
+}
+.g-squad-help-row .g-squad-ico {
+  width: 38px;
+  height: 38px;
+}
+.g-squad-help-row p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.35;
+}
+.g-squad-supply {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.g-squad-supply-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 16px;
+  background: radial-gradient(circle at 50% 20%, rgba(247, 215, 116, 0.18), rgba(0, 0, 0, 0) 70%), #141418;
+  border: 1px solid rgba(247, 215, 116, 0.4);
+}
+.g-squad-supply-box .g-squad-ico.chest {
+  width: 72px;
+  height: 72px;
+  animation: g-squad-chest 1.6s ease-in-out infinite;
+}
+@keyframes g-squad-chest {
+  50% {
+    transform: translateY(-4px) rotate(-3deg);
+  }
+}
+.g-squad-supply-box .g-squad-timer {
+  font-size: 13px;
+}
+.g-squad-trade {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 14px;
+  background: #141418;
+  border: 1.5px solid #c9971c;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+.g-squad-trade.dim {
+  opacity: 0.5;
+}
+.g-squad-arrow {
+  color: #f7d774;
+  font-weight: 1000;
+  font-size: 18px;
+}
+
+/* ------------------------------------------------------------------ runner */
+.g-squad-run {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.g-squad-runcv {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.g-squad-hudtop {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  pointer-events: none;
+}
+.g-squad-round {
+  pointer-events: auto;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #c9971c;
+  background: rgba(10, 10, 12, 0.85);
+  color: #f7d774;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(201, 151, 28, 0.3);
+}
+.g-squad-round .g-squad-ico {
+  width: 18px;
+  height: 18px;
+}
+.g-squad-hudpill {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: rgba(10, 10, 12, 0.85);
+  border: 1px solid rgba(247, 215, 116, 0.6);
+  font-weight: 1000;
+  font-size: 13px;
+  white-space: nowrap;
+  color: #f7d774;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+.g-squad-hudpill b {
+  color: inherit;
+}
+.g-squad-hudpill.coin {
+  color: #fff;
+  padding-left: 5px;
+}
+.g-squad-hudpill .g-squad-ico {
+  width: 20px;
+  height: 20px;
+}
+.g-squad-prog {
+  position: relative;
+  flex: 1;
+  min-width: 40px;
+  height: 12px;
+  margin-right: 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(247, 215, 116, 0.55);
+}
+.g-squad-prog > i {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #c9971c, #f7d774);
+  box-shadow: 0 0 8px rgba(247, 215, 116, 0.6);
+}
+.g-squad-prog-end {
+  position: absolute;
+  right: -13px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #120a0c;
+  border: 2px solid #ff5470;
+  display: grid;
+  place-items: center;
+}
+.g-squad-prog-end .g-squad-ico {
+  width: 17px;
+  height: 17px;
+}
+.g-squad-distbox {
+  flex: 1;
+  text-align: center;
+  font-weight: 1000;
+  font-size: 22px;
+  color: #fff;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+.g-squad-distbox.record {
+  color: #7cf0b8;
+}
+.g-squad-bossbar {
+  position: absolute;
+  top: 54px;
+  left: 50%;
+  z-index: 2;
+  width: min(84%, 360px);
+  transform: translate(-50%, -8px);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+.g-squad-bossbar.on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.g-squad-bossname {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-weight: 1000;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffd0d6;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.8);
+  margin-bottom: 3px;
+}
+.g-squad-bossname .g-squad-ico {
+  width: 16px;
+  height: 16px;
+}
+.g-squad-bosshp {
+  height: 14px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1.5px solid #ff5470;
+  box-shadow: 0 0 12px rgba(255, 60, 80, 0.4);
+}
+.g-squad-bosshp > i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #ff9a5a, #e0283c);
+  transition: width 0.15s;
+}
+.g-squad-buffs {
+  position: absolute;
+  left: 10px;
+  bottom: calc(22px + var(--safe-bottom, 0px));
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+.g-squad-buff {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px 4px 6px;
+  border-radius: 999px;
+  background: rgba(10, 10, 12, 0.85);
+  border: 1px solid rgba(247, 215, 116, 0.6);
+  font-weight: 1000;
+  font-size: 13px;
+  color: #f7d774;
+}
+.g-squad-buff .g-squad-ico {
+  width: 16px;
+  height: 16px;
+}
+.g-squad-hint {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  z-index: 3;
+  max-width: 86%;
+  transform: translate(-50%, -10px);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  padding: 9px 14px;
+  border-radius: 14px;
+  background: rgba(10, 10, 12, 0.9);
+  border: 1.5px solid #c9971c;
+  box-shadow: 0 0 18px rgba(201, 151, 28, 0.35);
+  font-weight: 900;
+  font-size: 14px;
+  text-align: center;
+  line-height: 1.3;
+}
+.g-squad-hint.on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.g-squad-ability {
+  position: absolute;
+  right: 14px;
+  bottom: calc(22px + var(--safe-bottom, 0px));
+  z-index: 3;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: radial-gradient(circle at 40% 30%, #34343c, #0e0e12);
+  box-shadow: 0 0 0 3px #c9971c, 0 6px 16px rgba(0, 0, 0, 0.55);
+  display: grid;
+  place-items: center;
+  --p: 0;
+}
+.g-squad-ability .g-squad-ico.hero {
+  width: 54px;
+  height: 54px;
+  filter: drop-shadow(0 3px 2px rgba(0, 0, 0, 0.5));
+}
+.g-squad-ab-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(rgba(0, 0, 0, 0.72) calc(var(--p) * 360deg), rgba(0, 0, 0, 0) 0);
+  z-index: 1;
+  pointer-events: none;
+}
+.g-squad-ab-lbl {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-size: 10.5px;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  color: #1a1300;
+  background: linear-gradient(180deg, #f7d774, #c9971c);
+  border-radius: 999px;
+  padding: 2px 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+.g-squad-ability.ready {
+  animation: g-squad-ready 1.3s ease-in-out infinite;
+}
+.g-squad-ability.ready .g-squad-ab-lbl {
+  opacity: 1;
+}
+@keyframes g-squad-ready {
+  50% {
+    box-shadow: 0 0 0 3px #fff1b0, 0 0 26px rgba(247, 215, 116, 0.85), 0 6px 16px rgba(0, 0, 0, 0.55);
+  }
+}
+.g-squad-ability.fire {
+  animation: g-squad-fire 0.35s ease;
+}
+@keyframes g-squad-fire {
+  40% {
+    transform: scale(1.18);
+  }
+}
+.g-squad-ability.nudge {
+  animation: g-squad-nudge 0.9s ease-in-out infinite;
+}
+@keyframes g-squad-nudge {
+  50% {
+    transform: translateY(-8px) scale(1.06);
+    box-shadow: 0 0 0 4px #fff1b0, 0 0 30px rgba(247, 215, 116, 0.9);
+  }
+}
+.g-squad-ability.shield {
+  box-shadow: 0 0 0 3px #8fd0ff, 0 0 24px rgba(110, 190, 255, 0.8);
+}
+.g-squad-start {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 70px 18px 110px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.35));
+  pointer-events: none;
+  transition: opacity 0.35s;
+}
+.g-squad-start.gone {
+  opacity: 0;
+}
+.g-squad-startcard {
+  max-width: 320px;
+  width: 100%;
+  padding: 12px 16px 14px;
+  border-radius: 18px;
+  text-align: center;
+  background: rgba(10, 10, 12, 0.86);
+  border: 1.5px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 0 1.5px #c9971c, 0 0 26px rgba(201, 151, 28, 0.35);
+  animation: pop-in 0.35s cubic-bezier(0.3, 1.6, 0.6, 1);
+}
+.g-squad-startcard > small {
+  display: block;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #e8b84a;
+}
+.g-squad-startcard > b {
+  display: block;
+  font-size: 32px;
+  font-weight: 1000;
+  line-height: 1.1;
+  background: linear-gradient(180deg, #fff3c4, #e8b84a 60%, #c9971c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-squad-intro {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #18181c;
+  border: 1px solid rgba(255, 84, 112, 0.45);
+  text-align: left;
+}
+.g-squad-intro small {
+  display: block;
+  font-size: 11px;
+  font-weight: 1000;
+  letter-spacing: 1.2px;
+  color: #ff5470;
+}
+.g-squad-intro b {
+  display: block;
+  font-size: 16px;
+}
+.g-squad-intro span {
+  display: block;
+  font-size: 12.5px;
+  color: #b9b9c4;
+  line-height: 1.25;
+}
+.g-squad-sprthumb {
+  flex: none;
+  border-radius: 10px;
+  background: radial-gradient(circle at 50% 70%, #3a2a2a, #121214 70%);
+}
+.g-squad-hand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-weight: 1000;
+  font-size: 16px;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.6);
+}
+.g-squad-hand i {
+  position: relative;
+  width: 150px;
+  height: 34px;
+}
+.g-squad-hand i::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 50%;
+  height: 4px;
+  border-radius: 4px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, rgba(247, 215, 116, 0), rgba(247, 215, 116, 0.8), rgba(247, 215, 116, 0));
+}
+.g-squad-hand i::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #fff, #e8e8f0);
+  box-shadow: 0 0 0 3px #c9971c, 0 0 16px rgba(247, 215, 116, 0.8);
+  animation: g-squad-swipe 1.6s ease-in-out infinite;
+}
+@keyframes g-squad-swipe {
+  0%,
+  100% {
+    transform: translateX(-52px);
+  }
+  50% {
+    transform: translateX(52px);
+  }
+}
+
+/* results */
+.g-squad-result {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(4, 4, 8, 0.62);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  animation: fade-in 0.3s;
+  overflow-y: auto;
+}
+.g-squad-rcard {
+  width: min(360px, 100%);
+  padding: 18px 16px 16px;
+  border-radius: 22px;
+  text-align: center;
+  border: 2px solid transparent;
+  background: linear-gradient(180deg, #1b1b20, #0f0f12) padding-box, linear-gradient(180deg, #f7d774, #8a6510) border-box;
+  box-shadow: 0 0 40px rgba(247, 215, 116, 0.25), 0 20px 50px rgba(0, 0, 0, 0.6);
+  animation: pop-in 0.35s cubic-bezier(0.3, 1.6, 0.6, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.g-squad-rcard.lose {
+  background: linear-gradient(180deg, #1b1b20, #0f0f12) padding-box, linear-gradient(180deg, #ff8a8a, #5a1018) border-box;
+  box-shadow: 0 0 40px rgba(255, 84, 112, 0.2), 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+.g-squad-rtitle {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  line-height: 1.05;
+  background: linear-gradient(180deg, #fff6d0, #f2c94c 55%, #b8860b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.6));
+}
+.g-squad-rcard.lose .g-squad-rtitle {
+  background: linear-gradient(180deg, #ffd0d6, #ff5470 60%, #a3142c);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.g-squad-rsub {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #a8a8b4;
+  margin-top: -4px;
+}
+.g-squad-rstarsbig {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 4px;
+}
+.g-squad-rstarsbig:empty {
+  display: none;
+}
+.g-squad-ico.bigstar {
+  width: 54px;
+  height: 54px;
+  animation: g-squad-star 0.5s cubic-bezier(0.3, 1.8, 0.5, 1) both;
+}
+.g-squad-ico.bigstar:nth-child(2) {
+  width: 66px;
+  height: 66px;
+  margin-bottom: 8px;
+}
+@keyframes g-squad-star {
+  from {
+    transform: scale(0) rotate(-90deg);
+    opacity: 0;
+  }
+}
+.g-squad-record {
+  font-weight: 1000;
+  font-size: 18px;
+  color: #7cf0b8;
+  animation: g-squad-dot 1s ease-in-out infinite;
+}
+.g-squad-rrows {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 2px 0;
+}
+.g-squad-rrows > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 14px;
+  color: #c8c8d2;
+}
+.g-squad-rrows b {
+  color: #fff;
+  font-weight: 1000;
+}
+.g-squad-rewards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.g-squad-rewards:empty {
+  display: none;
+}
+.g-squad-rew {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px 5px 6px;
+  border-radius: 999px;
+  background: #0b0b0e;
+  border: 1px solid rgba(247, 215, 116, 0.45);
+}
+.g-squad-rew .g-squad-ico {
+  width: 28px;
+  height: 28px;
+}
+.g-squad-rew b {
+  font-size: 20px;
+  font-weight: 1000;
+}
+.g-squad-tip {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #b9b9c4;
+  line-height: 1.35;
+}
+.g-squad-rbtns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+@media (max-width: 360px) {
+  .g-squad-tab {
+    height: 76px;
+  }
+  .g-squad-tab-ico .g-squad-ico {
+    width: 40px;
+    height: 40px;
+  }
+  .g-squad-tab-lbl {
+    font-size: 12px;
+  }
+  .g-squad-pill b {
+    font-size: 13.5px;
+  }
+}

@@ -2,10 +2,10 @@
 // the searchable table of every country.
 
 import { h, clear, norm, shuffle } from '../../js/core/ui.js';
-import { COUNTRIES } from '../../js/data/countries.js';
-import { CONTS, setTitle } from './data.js';
+import { COUNTRIES, flagUrl } from '../../js/data/countries.js';
+import { CONTS } from './data.js';
 import { MAX_BOX } from './progress.js';
-import { flagCard, flagImg, restartAnim } from './widgets.js';
+import { flagCard } from './widgets.js';
 
 function dots(box) {
   const el = h('span', { class: 'g-flags-dots', 'aria-hidden': 'true' });
@@ -68,11 +68,11 @@ export function showFlashcards(app, view, scope, set, onDone) {
     total = deck.length;
     known = 0;
     again = 0;
-    renderChips();
     renderCard();
   }
 
   function updateStats() {
+    renderChips();
     line.style.width = total ? (known / total) * 100 + '%' : '100%';
     clear(stats).append(
       h('span', { class: 'ok' }, '✓ ' + known),
@@ -260,7 +260,7 @@ export function showTable(app, view, scope) {
       const el = h(
         'button',
         { class: 'g-flags-trow', onclick: () => details(c) },
-        h('span', { class: 'g-flags-tflag' }, h('img', { src: flagImg(c).src, alt: '', loading: 'lazy', decoding: 'async' })),
+        h('span', { class: 'g-flags-tflag' }, h('img', { src: flagUrl(c), alt: '', loading: 'lazy', decoding: 'async' })),
         h('span', { class: 'g-flags-tbody' }, h('b', null, c.name[lang]), h('small', null, c.capital ? c.capital[lang] : '—')),
         dots(box),
       );
@@ -299,8 +299,4 @@ export function showTable(app, view, scope) {
     );
     await app.ctx.ui.modal({ title: c.name[lang], body, actions: [{ label: t('close'), value: true, primary: true }], dismissible: true, className: 'g-flags-modal' });
   }
-}
-
-export function learnSetTitle(t, set) {
-  return setTitle(t, set);
 }

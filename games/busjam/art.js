@@ -265,9 +265,9 @@ function drawBody(g, type, c, L, W, opts) {
         g.fill();
       }
     }
-    // roof units
+    // roof units (hidden on parked vehicles, where the seats are shown)
     const units = type === 'coach' ? [0.22, -0.32] : [0.14, -0.26];
-    for (const f of units) {
+    for (const f of opts.arrow ? units : []) {
       const ug = g.createLinearGradient(0, -W * 0.2, 0, W * 0.2);
       ug.addColorStop(0, '#ffffff');
       ug.addColorStop(1, '#c9d0db');

@@ -142,8 +142,8 @@ export function playLevel(app, spec) {
       });
       tiles.append(matchSlot, pipBox);
     } else {
-      const w = tray.clientWidth || 360;
-      const max = kind === 'findall' ? goals.length : clamp(Math.floor((w - 20) / 70), 3, 6);
+      const w = tiles.clientWidth || 340;
+      const max = kind === 'findall' ? goals.length : clamp(Math.floor((w + 8) / 62), 3, 6);
       const order = goals.map((g, i) => i);
       const first = order.slice(0, max);
       queue = order.slice(max);
@@ -760,7 +760,7 @@ export function playLevel(app, spec) {
       props: level.props,
       variant: spec.theme.variant || 'shadow',
       edge: spec.theme.edge || '#0a0a0c',
-      fit: spec.look === 'indoor' ? 'contain' : 'height',
+      fit: spec.look === 'indoor' ? 'cover' : 'height',
       startX: spec.W * 0.5,
     });
     app.debug({ spec, level, view, goals, useHint, elapsed });

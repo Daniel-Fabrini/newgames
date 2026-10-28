@@ -12,6 +12,7 @@ import { APP_NAME, APP_BY } from './config.js';
 import { LANGS, getLang, setLang, makeT, pick, onLangChange } from './core/i18n.js';
 import { createStore, clearAll } from './core/store.js';
 import { sfx } from './core/sfx.js';
+import { music } from './core/music.js';
 import { h, clear, toast, modal, confetti, loadCSS, norm } from './core/ui.js';
 import { icon } from './core/icons.js';
 import { gameArt, gamePreview, splashCollage } from './core/art.js';
@@ -142,7 +143,10 @@ function route() {
     prevRoute = lastHere;
     lastHere = here;
   }
-  if (r.view !== 'play') unmountGame();
+  if (r.view !== 'play') {
+    unmountGame();
+    music.setLevel(1);
+  }
   if (r.view === 'home' && !splashSeen()) showSplash();
   else if (r.view === 'home') showHome();
   else if (r.view === 'favs') showFavorites();
@@ -446,6 +450,7 @@ function settingsRows(rerender, { inGame = false } = {}) {
   return [
     h('div', { class: 'settings-row' }, h('span', null, t('language')), langSwitch(rerender)),
     h('div', { class: 'settings-row' }, h('span', null, t('sound')), sw(!sfx.muted, () => (sfx.muted = !sfx.muted))),
+    h('div', { class: 'settings-row' }, h('span', null, t('music')), sw(music.enabled, () => (music.enabled = !music.enabled))),
     h('div', { class: 'settings-row' }, h('span', null, t('vibration')), sw(sfx.vibration, () => (sfx.vibration = !sfx.vibration))),
     inGame
       ? null
@@ -603,6 +608,7 @@ async function openGame(id, mode = null, force = false) {
   const token = loadToken;
   document.title = `${pick(meta.name)} · ${APP_NAME}`;
   setBottomNav(null);
+  music.setLevel(meta.music === false ? 0 : 0.5); // quieter under game sounds, off where audio matters
 
   const parent = lobbyHash(id);
   const backBtn = iconBtn('back', t('back'), () => {
@@ -693,6 +699,7 @@ document.addEventListener(
   (e) => {
     const el = e.target.closest && e.target.closest('button, [role="button"], .btn, .tile, label.search');
     if (el && !el.disabled && !el.closest('[data-silent]')) sfx.play('tap');
+    music.start(); // browsers only allow audio after a gesture
   },
   true,
 );

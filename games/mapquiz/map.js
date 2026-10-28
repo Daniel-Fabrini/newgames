@@ -670,11 +670,14 @@ export class MapView {
   // ------------------------------------------------------------ hit testing
   markerVisible(g) {
     if (this.opts.markers === 'states' && !this.states.has(g.code)) return false;
-    return !g.hasGeo || g.size * this.cam.s < (this.opts.markerBelow ?? MARKER_BELOW);
+    if (!g.hasGeo) return true;
+    const px = g.size * this.cam.s; // on-screen size of the country
+    // small countries, or anything that is only a few pixels wide right now
+    return px < (this.opts.markerBelow ?? MARKER_BELOW) && (px < 4 || g.size < 150);
   }
 
   markerRadius() {
-    return clamp(4 + Math.log2(this.cam.s / this.sMin) * 0.6, 4.5, 8);
+    return clamp(2.6 + Math.log2(this.cam.s / this.sMin) * 1.1, 2.6, 7.5);
   }
 
   hitTest(sx, sy) {
@@ -977,11 +980,19 @@ export class MapView {
         ctx.fillStyle = GOLD_A;
         ctx.fill();
         ctx.restore();
+      } else if (r < 4 && !f && !st) {
+        // zoomed out: discreet gold dot
+        ctx.fillStyle = g.code === this.hover || g.code === this.press ? '#fff1c2' : 'rgba(232, 191, 74, 0.85)';
+        ctx.fill();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = 'rgba(10, 10, 12, 0.75)';
+        ctx.stroke();
+        continue;
       } else {
         ctx.fillStyle = f ? COLORS[f.kind] : st && st !== 'seen' ? COLORS[st] || st : g.code === this.hover || g.code === this.press ? '#6a6553' : '#45444b';
         ctx.fill();
       }
-      ctx.lineWidth = g.code === this.press || g.code === this.hover ? 2.6 : 1.7;
+      ctx.lineWidth = g.code === this.press || g.code === this.hover ? 2.6 : r < 4 ? 1.2 : 1.7;
       ctx.strokeStyle = st && st !== 'seen' ? '#fff6d6' : '#e3b84a';
       ctx.stroke();
     }

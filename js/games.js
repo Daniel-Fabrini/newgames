@@ -7,6 +7,7 @@
 //   modes   lobby mode buttons → mount(root, ctx) with ctx.mode = id
 //   trophies  icons for the lobby achievements row (unlocked by plays / game level)
 //   lobby   false → the game opens directly, without the lobby page
+//   music   false → background music is silenced while the game is open
 
 export const GAMES = [
   {
@@ -85,6 +86,7 @@ export const GAMES = [
     id: 'polyglot',
     cat: 'knowledge',
     lobby: false,
+    music: false, // lessons speak and listen
     name: { pt: 'Poliglota', en: 'Polyglot', es: 'Políglota' },
     sub: { pt: 'Vários Idiomas', en: 'Many Languages', es: 'Varios Idiomas' },
     about: {

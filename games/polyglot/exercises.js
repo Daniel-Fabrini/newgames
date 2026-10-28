@@ -95,7 +95,7 @@ function selectable(env, buttons, onSelect) {
     b.addEventListener('click', () => {
       if (b.disabled) return;
       sel = i;
-      buttons.forEach((x, j) => x.classList.toggle('sel', j === i));
+      buttons.forEach((x, j) => x.classList.toggle('is-sel', j === i));
       env.sfx.play('tap');
       onSelect && onSelect(i);
       env.changed();
@@ -110,8 +110,8 @@ function selectable(env, buttons, onSelect) {
     },
     reveal(answer, ok) {
       buttons.forEach((b) => (b.disabled = true));
-      if (buttons[answer]) buttons[answer].classList.add('ok');
-      if (!ok && sel !== null && buttons[sel]) buttons[sel].classList.add('bad');
+      if (buttons[answer]) buttons[answer].classList.add('is-ok');
+      if (!ok && sel !== null && buttons[sel]) buttons[sel].classList.add('is-bad');
     },
   };
 }
@@ -207,13 +207,13 @@ function matchEx(ex, env) {
     if (busy || b.classList.contains('done')) return;
     if (side === 'L') {
       env.speech.speak(primary(x.w.item[T]), T);
-      if (selL) selL.btn.classList.remove('sel');
+      if (selL) selL.btn.classList.remove('is-sel');
       selL = selL === x ? null : x;
     } else {
-      if (selR) selR.btn.classList.remove('sel');
+      if (selR) selR.btn.classList.remove('is-sel');
       selR = selR === x ? null : x;
     }
-    b.classList.toggle('sel', side === 'L' ? selL === x : selR === x);
+    b.classList.toggle('is-sel', side === 'L' ? selL === x : selR === x);
     sfx.play('tap');
     if (selL && selR) test();
   }
@@ -224,8 +224,8 @@ function matchEx(ex, env) {
     if (a.i === b.i) {
       matched++;
       [a.btn, b.btn].forEach((x) => {
-        x.classList.remove('sel');
-        x.classList.add('ok');
+        x.classList.remove('is-sel');
+        x.classList.add('is-ok');
       });
       sfx.tone({ freq: 440 + matched * 90, to: 660 + matched * 110, dur: 0.12, type: 'triangle', vol: 0.35 });
       sfx.vibrate(10);
@@ -238,14 +238,14 @@ function matchEx(ex, env) {
       wrong++;
       busy = true;
       [a.btn, b.btn].forEach((x) => {
-        x.classList.remove('sel');
-        x.classList.add('bad');
+        x.classList.remove('is-sel');
+        x.classList.add('is-bad');
       });
       sfx.play('error');
       sfx.vibrate([30, 30, 30]);
       env.later(() => {
-        a.btn.classList.remove('bad');
-        b.btn.classList.remove('bad');
+        a.btn.classList.remove('is-bad');
+        b.btn.classList.remove('is-bad');
         busy = false;
       }, 520);
     }
@@ -507,7 +507,7 @@ function fillEx(ex, env) {
     reveal: (res) => {
       s.reveal(ex.answer, res.ok);
       slot.textContent = ex.options[ex.answer];
-      slot.classList.add(res.ok ? 'ok' : 'bad');
+      slot.classList.add(res.ok ? 'is-ok' : 'is-bad');
     },
     onKey: (e) => {
       const i = digitKey(e);

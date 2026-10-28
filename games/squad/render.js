@@ -67,8 +67,13 @@ export class Renderer {
     this.dpr = dpr;
     this.cv.width = Math.round(w * dpr);
     this.cv.height = Math.round(h * dpr);
-    this.s0 = Math.min((w * 0.8) / (ROAD * 2), h / 560);
-    this.sY = h * 0.77;
+    if (this.opts.preview) {
+      this.s0 = (w * 0.62) / (ROAD * 2);
+      this.sY = h * 1.08;
+    } else {
+      this.s0 = Math.min((w * 0.8) / (ROAD * 2), h / 560);
+      this.sY = h * 0.77;
+    }
     const K = 0.72 * this.s0 * D0;
     this.hY = Math.min(this.sY - K, -0.28 * this.sY);
     this.F = this.s0 * D0;

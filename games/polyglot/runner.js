@@ -615,13 +615,13 @@ export function runStory(app, unit, story, { onComplete }) {
         if (b.disabled) return;
         if (lang === T) speech.speak(txt, T);
         if (i === answer) {
-          b.classList.add('ok');
+          b.classList.add('is-ok');
           box.querySelectorAll('button').forEach((x) => (x.disabled = true));
           sfx.play('success');
           sfx.vibrate(12);
           onRight();
         } else {
-          b.classList.add('bad', 'shake');
+          b.classList.add('is-bad', 'shake');
           b.disabled = true;
           sfx.play('error');
           sfx.vibrate([30, 30, 30]);

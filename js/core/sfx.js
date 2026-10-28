@@ -7,7 +7,7 @@ const prefs = createStore('app');
 let ctx = null;
 let master = null;
 
-function audio() {
+export function audio() {
   if (!ctx) {
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return null;
