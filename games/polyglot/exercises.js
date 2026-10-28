@@ -541,6 +541,16 @@ function speakEx(ex, env) {
     mic.classList.add('rec');
     status.textContent = t('listening');
     heard.textContent = '';
+    const session = {};
+    env.later(() => {
+      // Some engines never answer (offline, no service): give up after a while.
+      if (stop && stop.session === session) {
+        stop();
+        stop = null;
+        mic.classList.remove('rec');
+        status.textContent = t('noSpeech');
+      }
+    }, 9000);
     stop = env.speech.listen(T, {
       onPartial: (txt) => (heard.textContent = txt),
       onResult: (list) => {
@@ -579,6 +589,7 @@ function speakEx(ex, env) {
         else env.pauseSpeaking(true);
       },
     });
+    stop.session = session;
   });
   const el = h(
     'div',

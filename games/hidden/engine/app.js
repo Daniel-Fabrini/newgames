@@ -320,7 +320,7 @@ export async function createGame(root, ctx, cfg) {
         'div',
         { class: 'g-hidden-tips' },
         needMode ? h('div', { class: 'g-hidden-tip g-hidden-tip-mode' }, h('span', { class: 'g-hidden-tip-ico', html: ICON[cfg.modes[spec.modeId].icon] || ICON.lens }), h('span', null, t(modeText))) : null,
-        needHow ? [tip(ICON.hand, t('tipTap')), tip(ICON.pinch, t('tipZoom')), tip(ICON.lens, t('tipHint')), spec.zen ? null : tip(ICON.clock, t('tipMiss'))] : null,
+        needHow ? [tip(ICON.hand, t('tipTap')), tip(ICON.pinch, t('tipZoom')), cfg.extraTip ? tip(ICON.map, t(cfg.extraTip)) : null, tip(ICON.lens, t('tipHint')), spec.zen ? null : tip(ICON.clock, t('tipMiss'))] : null,
       );
       return sheet(app, {
         icon: ICON.lens,
@@ -337,7 +337,6 @@ export async function createGame(root, ctx, cfg) {
     if (!screen) return false;
     return screen.back() === true;
   });
-  const onHashLeave = () => {};
   const mode = ctx.mode && cfg.modes[ctx.mode] ? ctx.mode : null;
   if (!mode) app.startLevel(cfg.defaultMode, app.track(cfg.defaultMode).n);
   else if (cfg.modes[mode].daily) startDaily();
@@ -352,6 +351,5 @@ export async function createGame(root, ctx, cfg) {
     for (const el of root.querySelectorAll('.g-hidden-sheet-wrap')) el.remove();
     trimGlyphs();
     if (window.__hiddenDebug) delete window.__hiddenDebug;
-    void onHashLeave;
   };
 }

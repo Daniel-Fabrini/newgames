@@ -161,6 +161,7 @@ export function runLesson(app, opts) {
     for (const x of cur.extras || []) extrasEl.append(h('button', { class: 'pg-btn ghost small', onclick: x.onclick }, x.label));
     checkBtn.style.display = cur.auto ? 'none' : '';
     foot.classList.toggle('auto', !!cur.auto);
+    foot.style.visibility = cur.auto && !(cur.extras || []).length ? 'hidden' : '';
     updateCheck();
     scope.later(() => cur && cur.onShow && cur.onShow(), 260);
   }
@@ -253,7 +254,7 @@ export function runLesson(app, opts) {
         h('div', { class: 'pg-fb-title' }, title),
         res.speakText && speech.has(T) ? speakerButton(app, res.speakText, T) : null,
       ),
-      lines,
+      ...lines,
       cont,
     );
     requestAnimationFrame(() => fb.classList.add('show'));

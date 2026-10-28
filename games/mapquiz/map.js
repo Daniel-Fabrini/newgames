@@ -852,7 +852,8 @@ export class MapView {
       }
       const pathOf = (g) => (lo ? g.lo : g.hi);
 
-      // drop shadow + coastal glow
+      // drop shadow under the land
+      if (!this.noShadow) {
       ctx.save();
       ctx.translate(0, 2.2 * px);
       ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
@@ -862,6 +863,7 @@ export class MapView {
         ctx.fill(this.geo.otherHi, 'evenodd');
       }
       ctx.restore();
+      }
 
       // inactive land
       ctx.fillStyle = '#202025';

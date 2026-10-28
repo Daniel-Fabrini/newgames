@@ -1,0 +1,15 @@
+/* "findit" look: the engine styles come from ../hidden/style.css; these only
+   tune the panoramic map cards and the brighter, sunnier chrome accents. */
+
+.g-findit .g-hidden-ch-art {
+  height: 128px;
+}
+.g-findit .g-hidden-ch-canvas {
+  object-position: center 58%;
+}
+.g-findit .g-hidden-ch-art::after {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(6, 10, 18, 0.88));
+}
+.g-findit .g-hidden-scene {
+  background: linear-gradient(#0a0a0c, #0a0a0c) padding-box, linear-gradient(200deg, #f7d774, #7a5512 45%, #c9971c 75%, #fff0b0) border-box;
+}

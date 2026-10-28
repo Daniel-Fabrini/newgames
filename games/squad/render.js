@@ -159,8 +159,8 @@ export class Renderer {
       });
     }
   }
-  popup(text, x, z, y, col, size = 30, life = 1) {
-    this.pops.push({ text, x, z, y, col, size, t: 0, life });
+  popup(text, x, z, y, col, size = 30, life = 1, follow = false) {
+    this.pops.push({ text, x, z, y, col, size, t: 0, life, follow });
     if (this.pops.length > 14) this.pops.shift();
   }
   decal(x, z, r, col, a = 0.55) {
@@ -214,14 +214,14 @@ export class Renderer {
           this.decal(e.x, e.z, 8, [110, 15, 15], 0.45);
           break;
         case 'lost':
-          this.popup('−' + e.n, w.sq.x + (Math.random() - 0.5) * 30, w.sq.z, 46, '#ff5470', 26, 0.8);
+          this.popup('−' + e.n, (Math.random() - 0.5) * 40, 0, 46, '#ff5470', 26, 0.8, true);
           this.shake = Math.min(14, this.shake + 3);
           this.hurtFlash = 0.25;
           break;
         case 'gate': {
           const col = e.good ? ['#7fc0ff', '#3d8bff', '#d6ecff'] : ['#ff8a8a', '#ff3b4f', '#ffd0d0'];
           this.burst(e.x, e.z + 6, 40, 26, { col, speed: 260, up: 260, life: 0.8, size: 4.5, sh: 'r', g: 700 });
-          this.popup((e.delta >= 0 ? '+' : '−') + fmt(Math.abs(e.delta)), w.sq.x, w.sq.z, 70, e.good ? '#7cf0b8' : '#ff5470', 40, 1.1);
+          this.popup((e.delta >= 0 ? '+' : '−') + fmt(Math.abs(e.delta)), 0, 0, 74, e.good ? '#7cf0b8' : '#ff5470', 40, 1.1, true);
           this.labelK = 1.6;
           if (!e.good) this.shake = Math.min(14, this.shake + 7);
           break;
@@ -705,7 +705,7 @@ export class Renderer {
     // ---- overlays: HP bars, squad label, popups
     this.drawBars(ctx, w, zNear, zFar);
     this.drawLabel(ctx, w, dt);
-    this.drawPops(ctx, dt);
+    this.drawPops(ctx, dt, sq);
   }
 
   drawProps(ctx, zNear, zFar) {
@@ -1023,14 +1023,14 @@ export class Renderer {
     ctx.fillText(txt, x + 21 * s, y + hpx / 2 + 1 * s);
   }
 
-  drawPops(ctx, dt) {
+  drawPops(ctx, dt, sq) {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     for (const p of this.pops) {
       p.t += dt;
       const u = p.t / p.life;
       if (u >= 1) continue;
-      const P = this.proj(p.x, p.z, p.y);
+      const P = p.follow ? this.proj(sq.x + p.x, sq.z + p.z, p.y) : this.proj(p.x, p.z, p.y);
       const k = u < 0.15 ? 0.5 + (u / 0.15) * 0.7 : 1.2 - Math.min(0.2, (u - 0.15) * 0.6);
       const fs = p.size * k;
       ctx.globalAlpha = u > 0.7 ? 1 - (u - 0.7) / 0.3 : 1;

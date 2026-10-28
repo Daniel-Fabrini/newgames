@@ -696,7 +696,6 @@
   font-weight: 800;
   font-size: 12.5px;
   pointer-events: none;
-  backdrop-filter: blur(6px);
 }
 .g-mapquiz .mq-picture[data-kind='flag'] .mq-picture-tag,
 .g-mapquiz .mq-picture[data-kind='capital'] .mq-picture-tag {
@@ -898,7 +897,6 @@
   background:
     linear-gradient(180deg, rgba(29, 29, 34, 0.94), rgba(20, 20, 23, 0.94)) padding-box,
     var(--mq-gold-edge) border-box;
-  backdrop-filter: blur(8px);
 }
 .g-mapquiz .mq-find .mq-hud-item {
   font-size: 17px;
@@ -916,7 +914,6 @@
   background:
     linear-gradient(180deg, rgba(31, 30, 36, 0.95), rgba(20, 20, 23, 0.95)) padding-box,
     var(--mq-gold-grad) border-box;
-  backdrop-filter: blur(8px);
   transition: box-shadow 0.25s;
 }
 .g-mapquiz .mq-prompt-text {

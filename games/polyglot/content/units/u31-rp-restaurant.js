@@ -285,5 +285,132 @@ export default {
     },
   ],
 
-  stories: [],
+  stories: [
+    {
+      title: { en: 'A table for Saturday, please!', es: '¡Una mesa para el sábado, por favor!', pt: 'Uma mesa para sábado, por favor!', fr: "Une table pour samedi, s'il vous plaît !", it: 'Un tavolo per sabato, per favore!', de: 'Einen Tisch für Samstag, bitte!' },
+      cast: { A: { name: 'Marco', emoji: '🧑🏻‍🍳' }, B: { name: 'Clara', emoji: '👩🏼' } },
+      lines: [
+        { who: 'A', en: 'Luna Restaurant, good evening. How can I help you?', es: 'Restaurante Luna, buenas noches. ¿En qué le puedo ayudar?', pt: 'Restaurante Luna, boa noite. Em que posso ajudar?', fr: 'Restaurant Luna, bonsoir. Que puis-je faire pour vous ?', it: 'Ristorante Luna, buonasera. Come posso aiutarla?', de: 'Restaurant Luna, guten Abend. Was kann ich für Sie tun?' },
+        {
+          who: 'B',
+          answer: 0,
+          reply: [
+            { en: 'Good evening. I would like to book a table for Saturday.', es: 'Buenas noches. Quisiera reservar una mesa para el sábado.', pt: 'Boa noite. Eu gostaria de reservar uma mesa para sábado.', fr: 'Bonsoir. Je voudrais réserver une table pour samedi.', it: 'Buonasera. Vorrei prenotare un tavolo per sabato.', de: 'Guten Abend. Ich möchte einen Tisch für Samstag reservieren.' },
+            { en: 'Good evening. The check, please.', es: 'Buenas noches. La cuenta, por favor.', pt: 'Boa noite. A conta, por favor.', fr: "Bonsoir. L'addition, s'il vous plaît.", it: 'Buonasera. Il conto, per favore.', de: 'Guten Abend. Die Rechnung, bitte.' },
+            { en: 'Good evening. The soup is cold.', es: 'Buenas noches. La sopa está fría.', pt: 'Boa noite. A sopa está fria.', fr: 'Bonsoir. La soupe est froide.', it: 'Buonasera. La zuppa è fredda.', de: 'Guten Abend. Die Suppe ist kalt.' },
+          ],
+        },
+        { who: 'A', en: 'Of course. For how many people, and at what time?', es: 'Claro. ¿Para cuántas personas y a qué hora?', pt: 'Claro. Para quantas pessoas e a que horas?', fr: 'Bien sûr. Pour combien de personnes, et à quelle heure ?', it: 'Certo. Per quante persone e a che ora?', de: 'Gern. Für wie viele Personen und um wie viel Uhr?' },
+        { who: 'B', en: 'For four people, at eight thirty, please.', es: 'Para cuatro personas, a las ocho y media, por favor.', pt: 'Para quatro pessoas, às oito e meia, por favor.', fr: "Pour quatre personnes, à vingt heures trente, s'il vous plaît.", it: 'Per quattro persone, alle otto e mezza, per favore.', de: 'Für vier Personen, um halb neun, bitte.' },
+        {
+          ask: { pt: 'Para quantas pessoas é a reserva?', en: 'How many people is the reservation for?', es: '¿Para cuántas personas es la reserva?' },
+          options: [
+            { pt: 'Quatro', en: 'Four', es: 'Cuatro' },
+            { pt: 'Duas', en: 'Two', es: 'Dos' },
+            { pt: 'Oito', en: 'Eight', es: 'Ocho' },
+          ],
+          answer: 0,
+        },
+        { who: 'A', en: "I am sorry, we are fully booked at that time. Would nine o'clock work?", es: 'Lo siento, a esa hora estamos completos. ¿Le parece bien a las nueve?', pt: 'Sinto muito, nesse horário estamos lotados. Pode ser às nove?', fr: "Désolé, à cette heure-là, c'est complet. Vingt et une heures, ça vous va ?", it: "Mi dispiace, a quell'ora siamo al completo. Le andrebbe bene alle nove?", de: 'Tut mir leid, um diese Zeit sind wir ausgebucht. Wäre Ihnen neun Uhr recht?' },
+        {
+          who: 'B',
+          answer: 1,
+          reply: [
+            { en: 'Yes, the fish, please.', es: 'Sí, el pescado, por favor.', pt: 'Sim, o peixe, por favor.', fr: "Oui, le poisson, s'il vous plaît.", it: 'Sì, il pesce, per favore.', de: 'Ja, den Fisch, bitte.' },
+            { en: "Yes, nine o'clock is perfect.", es: 'Sí, a las nueve está perfecto.', pt: 'Sim, às nove está ótimo.', fr: "Oui, vingt et une heures, c'est parfait.", it: 'Sì, alle nove va benissimo.', de: 'Ja, neun Uhr passt perfekt.' },
+            { en: 'Everything was delicious, thank you.', es: 'Todo estuvo delicioso, gracias.', pt: 'Estava tudo delicioso, obrigada.', fr: 'Tout était délicieux, merci.', it: 'Era tutto buonissimo, grazie.', de: 'Es war alles köstlich, danke.' },
+          ],
+        },
+        {
+          ask: { pt: 'A que horas é a reserva?', en: 'What time is the reservation?', es: '¿A qué hora es la reserva?' },
+          options: [
+            { pt: 'Às oito e meia', en: 'At eight thirty', es: 'A las ocho y media' },
+            { pt: 'Às nove', en: 'At nine', es: 'A las nueve' },
+            { pt: 'Às oito', en: 'At eight', es: 'A las ocho' },
+          ],
+          answer: 1,
+        },
+        { who: 'A', en: 'Very good. What name is the reservation under?', es: 'Muy bien. ¿A nombre de quién hago la reserva?', pt: 'Muito bem. Em nome de quem fica a reserva?', fr: 'Très bien. Ce sera à quel nom ?', it: 'Benissimo. A che nome faccio la prenotazione?', de: 'Sehr gut. Auf welchen Namen darf ich reservieren?' },
+        { who: 'B', en: 'Clara Martins. Oh, and my brother is vegetarian.', es: 'Clara Martins. Ah, y mi hermano es vegetariano.', pt: 'Clara Martins. Ah, e o meu irmão é vegetariano.', fr: 'Clara Martins. Ah, et mon frère est végétarien.', it: 'Clara Martins. Ah, e mio fratello è vegetariano.', de: 'Clara Martins. Ach ja, und mein Bruder ist Vegetarier.' },
+        { who: 'A', en: 'No problem. We have several vegetarian dishes on the menu.', es: 'No hay problema. Tenemos varios platos vegetarianos en la carta.', pt: 'Sem problema. Temos vários pratos vegetarianos no cardápio.', fr: 'Pas de problème. Nous avons plusieurs plats végétariens à la carte.', it: 'Nessun problema. Abbiamo diversi piatti vegetariani nel menù.', de: 'Kein Problem. Wir haben mehrere vegetarische Gerichte auf der Karte.' },
+        { who: 'B', en: 'Great! And could we sit by the window?', es: '¡Genial! ¿Y podríamos sentarnos junto a la ventana?', pt: 'Ótimo! E será que podemos sentar perto da janela?', fr: 'Parfait ! Et pourrions-nous être près de la fenêtre ?', it: 'Perfetto! E potremmo sederci vicino alla finestra?', de: 'Super! Und könnten wir am Fenster sitzen?' },
+        { who: 'A', en: 'I will make a note of that. See you on Saturday!', es: 'Lo anoto. ¡Hasta el sábado!', pt: 'Vou anotar. Até sábado!', fr: 'Je le note. À samedi !', it: 'Lo segno. A sabato!', de: 'Das notiere ich mir. Bis Samstag!' },
+        { who: 'B', en: 'Thank you so much. Have a good evening!', es: 'Muchas gracias. ¡Que tenga una buena noche!', pt: 'Muito obrigada. Boa noite!', fr: 'Merci beaucoup. Bonne soirée !', it: 'Grazie mille. Buona serata!', de: 'Vielen Dank. Schönen Abend noch!' },
+        {
+          ask: { pt: 'Quem do grupo não come carne?', en: 'Who in the group does not eat meat?', es: '¿Quién del grupo no come carne?' },
+          options: [
+            { pt: 'O irmão da Clara', en: "Clara's brother", es: 'El hermano de Clara' },
+            { pt: 'A Clara', en: 'Clara', es: 'Clara' },
+            { pt: 'O Marco', en: 'Marco', es: 'Marco' },
+          ],
+          answer: 0,
+        },
+      ],
+    },
+    {
+      title: { en: 'Enjoy your meal!', es: '¡Buen provecho!', pt: 'Bom apetite!', fr: 'Bon appétit !', it: 'Buon appetito!', de: 'Guten Appetit!' },
+      cast: { A: { name: 'Marco', emoji: '🤵🏻' }, B: { name: 'Leo', emoji: '🧑🏽' } },
+      lines: [
+        { who: 'A', en: 'Good evening! Are you ready to order?', es: '¡Buenas noches! ¿Ya saben qué van a pedir?', pt: 'Boa noite! Vocês já querem fazer o pedido?', fr: 'Bonsoir ! Vous avez choisi ?', it: 'Buonasera! Avete deciso?', de: 'Guten Abend! Haben Sie schon gewählt?' },
+        { who: 'B', en: 'Almost. I am allergic to nuts. Does the chicken dish contain nuts?', es: 'Casi. Soy alérgico a los frutos secos. ¿El pollo lleva frutos secos?', pt: 'Quase. Eu sou alérgico a castanhas. O prato de frango tem castanhas?', fr: 'Presque. Je suis allergique aux fruits à coque. Le plat au poulet en contient ?', it: "Quasi. Sono allergico alla frutta secca. C'è frutta secca nel pollo?", de: 'Fast. Ich bin allergisch gegen Nüsse. Sind im Hähnchengericht Nüsse?' },
+        { who: 'A', en: 'Yes, the sauce has almonds. But the fish is nut-free.', es: 'Sí, la salsa lleva almendras. Pero el pescado no tiene frutos secos.', pt: 'Sim, o molho leva amêndoas. Mas o peixe não tem castanhas.', fr: "Oui, la sauce contient des amandes. Mais le poisson n'en contient pas.", it: 'Sì, nella salsa ci sono le mandorle. Il pesce invece è senza frutta secca.', de: 'Ja, in der Soße sind Mandeln. Aber der Fisch ist ohne Nüsse.' },
+        {
+          ask: { pt: 'Por que o Leo não pode comer o frango?', en: 'Why can Leo not have the chicken?', es: '¿Por qué Leo no puede comer el pollo?' },
+          options: [
+            { pt: 'O molho tem amêndoas', en: 'The sauce has almonds', es: 'La salsa lleva almendras' },
+            { pt: 'Ele é vegetariano', en: 'He is vegetarian', es: 'Es vegetariano' },
+            { pt: 'É muito apimentado', en: 'It is too spicy', es: 'Es muy picante' },
+          ],
+          answer: 0,
+        },
+        {
+          who: 'B',
+          answer: 2,
+          reply: [
+            { en: 'Then I will have the chicken with almonds.', es: 'Entonces quiero el pollo con almendras.', pt: 'Então eu quero o frango com amêndoas.', fr: 'Alors je prends le poulet aux amandes.', it: 'Allora prendo il pollo alle mandorle.', de: 'Dann nehme ich das Hähnchen mit Mandeln.' },
+            { en: 'Then the check, please.', es: 'Entonces la cuenta, por favor.', pt: 'Então a conta, por favor.', fr: "Alors l'addition, s'il vous plaît.", it: 'Allora il conto, per favore.', de: 'Dann die Rechnung, bitte.' },
+            { en: 'Then I will have the fish, please.', es: 'Entonces voy a querer el pescado, por favor.', pt: 'Então eu vou querer o peixe, por favor.', fr: "Alors je vais prendre le poisson, s'il vous plaît.", it: 'Allora prendo il pesce, per favore.', de: 'Dann nehme ich den Fisch, bitte.' },
+          ],
+        },
+        { who: 'A', en: 'Very good. And to drink?', es: 'Muy bien. ¿Y para tomar?', pt: 'Muito bem. E para beber?', fr: 'Très bien. Et comme boisson ?', it: 'Benissimo. E da bere?', de: 'Sehr gern. Und zu trinken?' },
+        { who: 'B', en: 'A sparkling water, please. Without ice.', es: 'Un agua con gas, por favor. Sin hielo.', pt: 'Uma água com gás, por favor. Sem gelo.', fr: "Une eau gazeuse, s'il vous plaît. Sans glaçons.", it: "Un'acqua frizzante, per favore. Senza ghiaccio.", de: 'Ein Wasser mit Kohlensäure, bitte. Ohne Eis.' },
+        { who: 'A', en: 'Here is your fish. Enjoy your meal!', es: 'Aquí tiene su pescado. ¡Buen provecho!', pt: 'Aqui está o seu peixe. Bom apetite!', fr: 'Voici votre poisson. Bon appétit !', it: 'Ecco il suo pesce. Buon appetito!', de: 'Hier ist Ihr Fisch. Guten Appetit!' },
+        { who: 'B', en: 'Excuse me, the fish is a bit cold. Could you heat it up?', es: 'Disculpe, el pescado está un poco frío. ¿Me lo podría calentar?', pt: 'Com licença, o peixe está um pouco frio. Poderia esquentar?', fr: 'Excusez-moi, le poisson est un peu froid. Pourriez-vous le réchauffer ?', it: "Mi scusi, il pesce è un po' freddo. Potrebbe riscaldarlo?", de: 'Entschuldigung, der Fisch ist etwas kalt. Könnten Sie ihn aufwärmen?' },
+        { who: 'A', en: 'I am very sorry! I will bring you a new one right away.', es: '¡Lo siento mucho! Le traigo otro enseguida.', pt: 'Mil desculpas! Já trago outro para o senhor.', fr: 'Je suis vraiment désolé ! Je vous en apporte un autre tout de suite.', it: 'Mi scusi tanto! Gliene porto subito un altro.', de: 'Das tut mir sehr leid! Ich bringe Ihnen sofort einen neuen.' },
+        {
+          ask: { pt: 'Qual era o problema do peixe?', en: 'What was wrong with the fish?', es: '¿Qué problema tenía el pescado?' },
+          options: [
+            { pt: 'Estava frio', en: 'It was cold', es: 'Estaba frío' },
+            { pt: 'Tinha amêndoas', en: 'It had almonds', es: 'Tenía almendras' },
+            { pt: 'Estava salgado demais', en: 'It was too salty', es: 'Estaba demasiado salado' },
+          ],
+          answer: 0,
+        },
+        { who: 'A', en: 'How was everything? Would you like some dessert?', es: '¿Qué tal estuvo todo? ¿Desea algo de postre?', pt: 'Estava tudo bem? Vai querer uma sobremesa?', fr: 'Ça vous a plu ? Vous prendrez un dessert ?', it: 'Tutto bene? Desidera un dolce?', de: 'Hat es Ihnen geschmeckt? Möchten Sie noch ein Dessert?' },
+        {
+          who: 'B',
+          answer: 0,
+          reply: [
+            { en: 'It was delicious, thanks. No dessert, just the check, please.', es: 'Estuvo delicioso, gracias. Sin postre, solo la cuenta, por favor.', pt: 'Estava delicioso, obrigado. Sem sobremesa, só a conta, por favor.', fr: "C'était délicieux, merci. Pas de dessert, juste l'addition, s'il vous plaît.", it: 'Era buonissimo, grazie. Niente dolce, solo il conto, per favore.', de: 'Es war köstlich, danke. Kein Dessert, nur die Rechnung, bitte.' },
+            { en: 'I would like to book a table for Saturday.', es: 'Quisiera reservar una mesa para el sábado.', pt: 'Eu gostaria de reservar uma mesa para sábado.', fr: 'Je voudrais réserver une table pour samedi.', it: 'Vorrei prenotare un tavolo per sabato.', de: 'Ich möchte einen Tisch für Samstag reservieren.' },
+            { en: 'Yes, I am ready to order.', es: 'Sí, ya sé qué voy a pedir.', pt: 'Sim, já quero fazer o pedido.', fr: 'Oui, je suis prêt à commander.', it: 'Sì, sono pronto per ordinare.', de: 'Ja, ich möchte jetzt bestellen.' },
+          ],
+        },
+        { who: 'A', en: 'Here you are. Will you pay by card or in cash?', es: 'Aquí tiene. ¿Va a pagar con tarjeta o en efectivo?', pt: 'Aqui está. Vai pagar no cartão ou em dinheiro?', fr: 'Voici. Vous réglez par carte ou en espèces ?', it: 'Ecco a lei. Paga con la carta o in contanti?', de: 'Bitte schön. Zahlen Sie mit Karte oder bar?' },
+        { who: 'B', en: 'By card. Is service included?', es: 'Con tarjeta. ¿El servicio está incluido?', pt: 'No cartão. O serviço está incluído?', fr: 'Par carte. Le service est compris ?', it: 'Con la carta. Il servizio è incluso?', de: 'Mit Karte. Ist die Bedienung inklusive?' },
+        { who: 'A', en: 'Yes, it is included in the price.', es: 'Sí, está incluido en el precio.', pt: 'Sim, já está incluído no preço.', fr: 'Oui, il est compris dans le prix.', it: 'Sì, è incluso nel prezzo.', de: 'Ja, sie ist im Preis inbegriffen.' },
+        { who: 'B', en: 'Perfect. And this is for you. Thanks for everything!', es: 'Perfecto. Y esto es para usted. ¡Gracias por todo!', pt: 'Perfeito. E isto é para você. Obrigado por tudo!', fr: 'Parfait. Et ceci est pour vous. Merci pour tout !', it: 'Perfetto. E questo è per lei. Grazie di tutto!', de: 'Perfekt. Und das ist für Sie. Danke für alles!' },
+        { who: 'A', en: 'Thank you very much! Have a good evening.', es: '¡Muchas gracias! Que tenga una buena noche.', pt: 'Muito obrigado! Tenha uma boa noite.', fr: 'Merci beaucoup ! Bonne soirée.', it: 'Grazie mille! Buona serata.', de: 'Vielen Dank! Einen schönen Abend noch.' },
+        {
+          ask: { pt: 'O que o Leo faz no final?', en: 'What does Leo do at the end?', es: '¿Qué hace Leo al final?' },
+          options: [
+            { pt: 'Paga com cartão e deixa uma gorjeta', en: 'He pays by card and leaves a tip', es: 'Paga con tarjeta y deja propina' },
+            { pt: 'Pede uma sobremesa', en: 'He orders a dessert', es: 'Pide un postre' },
+            { pt: 'Paga em dinheiro sem gorjeta', en: 'He pays cash with no tip', es: 'Paga en efectivo sin propina' },
+          ],
+          answer: 0,
+        },
+      ],
+    },
+  ],
 };

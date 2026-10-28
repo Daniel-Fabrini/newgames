@@ -139,9 +139,10 @@ export function renderLearn(app, sc) {
           row.append(h('div', { class: 'pg-startbub' }, kind === 'chest' ? t('open') : t('start')));
           row.classList.add('cur');
           currentEl = row;
-          row.append(h('div', { class: 'pg-path-frog', style: { [sign > 0 ? 'right' : 'left']: '-118px' }, html: mascotSVG({ mood: 'happy' }) }));
+          const side = x > 0 ? 'left' : x < 0 ? 'right' : sign > 0 ? 'left' : 'right';
+          row.append(h('div', { class: 'pg-path-frog', style: { [side]: '-112px' }, html: mascotSVG({ mood: 'happy' }) }));
         }
-        if (k === 2 && !isCur) row.append(h('div', { class: 'pg-deco', style: { [sign > 0 ? 'right' : 'left']: '-120px' } }, entry.emoji));
+        if (k === 2 && !isCur) row.append(h('div', { class: 'pg-deco', style: { [sign > 0 ? 'left' : 'right']: '-128px' } }, entry.emoji));
         btn.addEventListener('click', () => onNode(entry, k, kind, status, row, x, btn));
         nodes.append(row);
       });
