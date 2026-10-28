@@ -45,10 +45,6 @@ export async function mount(root, ctx) {
     timers.add(id);
     return id;
   };
-  const cancel = (id) => {
-    clearTimeout(id);
-    timers.delete(id);
-  };
   const rafs = new Set();
   const raf = (fn) => {
     const id = requestAnimationFrame((ts) => {
@@ -83,8 +79,7 @@ export async function mount(root, ctx) {
   root.append(defs, app);
 
   const coinNum = h('b', null, fmt(S.coins));
-  const coinPill = h('div', { class: 'g-wordsearch-coins', title: '' }, ico('coin'), coinNum);
-  ctx.setHeaderRight(coinPill);
+  const coinPill = h('div', { class: 'g-wordsearch-coins' }, ico('coin'), coinNum);
   let shownCoins = S.coins;
   function showCoins(v = S.coins) {
     shownCoins = v;
@@ -237,9 +232,8 @@ export async function mount(root, ctx) {
     const el = h('div', { class: `g-wordsearch-play mode-${mode}` });
 
     // --- HUD: theme name above the grid
-    const ringFg = h('div', { class: 'g-wordsearch-ring' });
-    const ringTxt = h('b', null, '');
-    const progress = h('div', { class: 'g-wordsearch-progress' }, ringFg, ringTxt);
+    const countTxt = h('b', null, '');
+    const progress = h('span', { class: 'g-wordsearch-count' }, ico('check'), countTxt);
     const hud = h(
       'div',
       { class: 'g-wordsearch-hud' },
@@ -247,10 +241,15 @@ export async function mount(root, ctx) {
       h(
         'div',
         { class: 'g-wordsearch-title' },
-        h('div', { class: 'g-wordsearch-theme' }, h('span', { class: 'g-wordsearch-emo' }, opts.theme.emoji), h('span', { class: 'g-wordsearch-theme-name' }, nm(opts.theme.name))),
+        h(
+          'div',
+          { class: `g-wordsearch-theme ${nm(opts.theme.name).length > 14 ? 'long' : ''}` },
+          h('span', { class: 'g-wordsearch-emo' }, opts.theme.emoji),
+          h('span', { class: 'g-wordsearch-theme-name' }, nm(opts.theme.name)),
+        ),
         h('div', { class: 'g-wordsearch-sub' }, opts.subtitle || ''),
       ),
-      h('div', { class: 'g-wordsearch-hud-side right' }, opts.hudRight || progress),
+      h('div', { class: 'g-wordsearch-hud-side right' }, opts.hudRight || coinPill),
     );
 
     // --- board
@@ -284,6 +283,7 @@ export async function mount(root, ctx) {
       { class: 'g-wordsearch-listhead' },
       h('span', { class: 'g-wordsearch-listlabel' }, t('words')),
       puzzle.bonus.length ? bonusChip : null,
+      progress,
     );
     const list = h('div', { class: 'g-wordsearch-list' }, items);
     const panel = h('div', { class: 'g-wordsearch-panel' }, listHead, list);
@@ -319,8 +319,8 @@ export async function mount(root, ctx) {
 
     function updateCounters(bump = true) {
       const n = P.found.length;
-      ringTxt.textContent = `${n}/${words.length}`;
-      ringFg.style.setProperty('--p', words.length ? n / words.length : 0);
+      countTxt.textContent = `${n}/${words.length}`;
+      progress.classList.toggle('done', n === words.length);
       if (bump) {
         progress.classList.remove('bump');
         void progress.offsetWidth;
@@ -811,8 +811,8 @@ export async function mount(root, ctx) {
       'div',
       { class: 'g-wordsearch-maptop' },
       h('div', { class: 'g-wordsearch-chip' }, ico('star'), h('b', null, fmt(totalStars))),
-      h('div', { class: 'g-wordsearch-chip' }, h('span', null, t('level', { n: cur }))),
       h('div', { class: 'g-wordsearch-chip' }, h('span', null, t('season', { n: curInfo.season + 1 }))),
+      coinPill,
     );
     const scroller = h('div', { class: 'g-wordsearch-mapscroll' });
     const inner = h('div', { class: 'g-wordsearch-mapinner' });
@@ -1383,7 +1383,6 @@ export async function mount(root, ctx) {
     rafs.clear();
     for (const [target, type, fn, opts] of docListeners) target.removeEventListener(type, fn, opts);
     document.querySelectorAll('.g-wordsearch-flycoin').forEach((el) => el.remove());
-    ctx.setHeaderRight(null);
     try {
       delete window.__wordsearch;
     } catch {

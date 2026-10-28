@@ -3191,7 +3191,7 @@
 .g-polyglot .pg-notice .pg-gold {
   color: var(--pg-gold-hi);
 }
-.g-polyglot .pg-bubble > div:not(.pg-story-tr) {
+.g-polyglot .pg-bubble > div:not(.pg-story-tr):not(.pg-audio) {
   flex: 1;
   min-width: 0;
 }
