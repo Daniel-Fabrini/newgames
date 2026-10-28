@@ -104,7 +104,7 @@ export default {
     },
     {
       en: 'Maybe we will go to the beach tomorrow.|Maybe we are going to the beach tomorrow.|Maybe we are going to go to the beach tomorrow.|Maybe tomorrow we will go to the beach.',
-      es: 'Quizás vamos a la playa mañana.|Tal vez vamos a la playa mañana.|A lo mejor vamos a la playa mañana.|A lo mejor mañana vamos a la playa.|Quizás vayamos a la playa mañana.|Quizá vayamos a la playa mañana.|Tal vez vayamos a la playa mañana.',
+      es: 'Quizás vayamos a la playa mañana.|Quizá vayamos a la playa mañana.|Tal vez vayamos a la playa mañana.|Quizás vamos a la playa mañana.|Tal vez vamos a la playa mañana.|A lo mejor vamos a la playa mañana.|A lo mejor mañana vamos a la playa.',
       pt: 'Talvez a gente vá à praia amanhã.|Talvez amanhã a gente vá à praia.|Talvez nós vamos à praia amanhã.|Talvez vamos à praia amanhã.|Talvez a gente vá para a praia amanhã.',
       fr: "On va peut-être aller à la plage demain.|Nous allons peut-être aller à la plage demain.|Peut-être qu'on va à la plage demain.|On ira peut-être à la plage demain.|Peut-être que nous irons à la plage demain.|Demain, on va peut-être à la plage.",
       it: 'Forse domani andiamo al mare.|Forse andiamo al mare domani.|Forse domani andremo al mare.|Forse andremo al mare domani.|Forse domani andiamo in spiaggia.',

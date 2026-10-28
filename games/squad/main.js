@@ -1086,6 +1086,7 @@ export async function mount(root, ctx) {
     run = {
       mode, level, world, renderer, cv, el, startOv, hint, abBtn, bossBar, bossI, bossName, buffs, coinVal, progI, distBox,
       paused: false, ended: false, resultShown: false, sfxT: {}, lastCoins: -1, lastBuff: '', hintQ: [], hintT: 0, drag: null, keys: {}, abilityHinted: false,
+      q: { ema: 1 / 60, n: 0, dpr: dpr() },
     };
     resizeRun();
     renderer.frame(world, 0);
@@ -1109,7 +1110,7 @@ export async function mount(root, ctx) {
   function resizeRun() {
     const w = root.clientWidth || 360;
     const hh = root.clientHeight || 640;
-    run.renderer.resize(w, hh, dpr());
+    run.renderer.resize(w, hh, Math.min(dpr(), run.q.dpr));
   }
 
   function onRunDown(e) {
@@ -1350,6 +1351,17 @@ export async function mount(root, ctx) {
 
   function frameRun(dt) {
     const w = run.world;
+    // adaptive resolution: keep the frame rate smooth on slower devices
+    const q = run.q;
+    if (!run.paused && dt > 0) {
+      q.ema = q.ema * 0.95 + dt * 0.05;
+      if (++q.n > 90 && q.ema > 0.0215 && q.dpr > 1.25) {
+        q.dpr = Math.max(1.25, Math.min(dpr(), q.dpr) - 0.25);
+        q.n = 0;
+        q.ema = 1 / 60;
+        resizeRun();
+      }
+    }
     if (!run.paused) {
       if (run.keys.l || run.keys.r) w.steer(w.sq.tx + (run.keys.r ? 1 : -1) * 460 * dt);
       const steps = Math.max(1, Math.min(3, Math.ceil(dt / (1 / 60) - 0.01)));

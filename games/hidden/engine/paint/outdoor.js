@@ -105,11 +105,26 @@ function far(g, x0, x1, horizon, st, rnd) {
   switch (st.far) {
     case 'mountains':
     case 'snowpeaks': {
-      const base = st.far === 'snowpeaks' ? '#7a8fb8' : '#5f7fa6';
+      const base = st.far === 'snowpeaks' ? '#6f88b8' : '#5a7aa2';
       for (let layer = 0; layer < 2; layer++) {
-        const pts = K.ridge(g, x0, x1, horizon - 20 + layer * 50, 260 - layer * 100, bottom, rnd, { step: 120 - layer * 30, jag: 0.15, smooth: false });
-        g.fillStyle = lin(g, 0, horizon - 280, 0, bottom, [haze(shade(base, -0.1 * layer), 0.55 - layer * 0.25), haze(base, 0.7 - layer * 0.2)]);
+        const pts = K.ridge(g, x0, x1, horizon - 10 + layer * 55, 300 - layer * 110, bottom, rnd, { step: 150 - layer * 40, jag: 0.55, smooth: false });
+        const c = shade(base, -0.12 * layer);
+        g.fillStyle = lin(g, 0, horizon - 320, 0, bottom, [haze(shade(c, 0.12), 0.38 - layer * 0.18), haze(c, 0.5 - layer * 0.2)]);
         g.fill();
+        // sunlit faces: lighter wedge on the left side of each peak
+        g.save();
+        g.clip();
+        for (let i = 1; i < pts.length - 1; i++) {
+          const [px, py] = pts[i];
+          if (py < pts[i - 1][1] && py < pts[i + 1][1]) poly(g, [px, py, pts[i - 1][0], pts[i - 1][1], px - 30, bottom, px + 12, bottom], rgba('#ffffff', 0.13));
+        }
+        g.restore();
+        K.ridge(g, x0, x1, horizon - 10 + layer * 55, 0, bottom, rnd);
+        g.beginPath();
+        g.moveTo(pts[0][0], bottom);
+        for (const [px, py] of pts) g.lineTo(px, py);
+        g.lineTo(pts[pts.length - 1][0], bottom);
+        g.closePath();
         g.save();
         g.clip();
         const snowLine = horizon - (st.far === 'snowpeaks' ? 120 : 175) + layer * 50;
