@@ -29,26 +29,28 @@ sphere(0.15, bow, loc=(0, -0.78, z0 + 0.95))
 
 # toys: ball, duck, key
 ball = glossy('#2f6bff', 0.2, 0.8, name='ball')
-b = sphere(0.7, ball, loc=(-2.45, -1.0, 0.7))
+b = sphere(0.7, ball, loc=(2.5, -0.3, 0.7))
 for ang, col in ((0, '#ffd21f'), (120, '#ff3b3b')):
     pass
-band = torus(0.7, 0.07, glossy('#ffd21f', 0.2, 0.8, name='bandy'), loc=(-2.45, -1.0, 0.7), rot=(70, 20, 0))
-band2 = torus(0.7, 0.07, glossy('#ff3b3b', 0.2, 0.8, name='bandr'), loc=(-2.45, -1.0, 0.7), rot=(20, 70, 0))
+band = torus(0.72, 0.07, glossy('#ffd21f', 0.2, 0.8, name='bandy'), loc=(2.5, -0.3, 0.7), rot=(70, 20, 0))
+band2 = torus(0.72, 0.07, glossy('#ff3b3b', 0.2, 0.8, name='bandr'), loc=(2.5, -0.3, 0.7), rot=(20, 70, 0))
 # duck
-yel = glossy('#ffd21f', 0.2, 0.8, name='duck')
+yel = glossy('#ffbd00', 0.2, 0.8, name='duck')
 org = glossy('#ff7a1a', 0.2, 0.8, name='beak')
-dx, dy = 2.3, -1.1
+dx, dy = -2.3, -1.2
 sphere(0.65, yel, loc=(dx, dy, 0.65), scale=(1.2, 1, 0.85))
 sphere(0.42, yel, loc=(dx - 0.35, dy - 0.2, 1.45))
-sphere(0.3, yel, loc=(dx + 0.8, dy, 0.9), scale=(0.9, 0.5, 0.9))
+sphere(0.3, yel, loc=(dx + 0.8, dy + 0.1, 0.9), scale=(0.9, 0.5, 0.9))
 sphere(0.2, org, loc=(dx - 0.62, dy - 0.55, 1.4), scale=(1, 1, 0.5))
 sphere(0.06, dark, loc=(dx - 0.55, dy - 0.55, 1.62))
 sphere(0.06, dark, loc=(dx - 0.12, dy - 0.5, 1.62))
 # key
 kc = metal('#ffcf3a', 0.2, name='key')
-torus(0.3, 0.1, kc, loc=(1.0, -2.2, 0.15), rot=(0, 0, 0))
-box((1.3, 0.2, 0.2), kc, loc=(1.9, -2.2, 0.15), bevel=0.05)
-box((0.2, 0.2, 0.4), kc, loc=(2.35, -2.2, 0.15), bevel=0.04)
+torus(0.3, 0.1, kc, loc=(-1.6, -2.4, 0.15), rot=(0, 0, 0))
+box((1.3, 0.2, 0.2), kc, loc=(-0.7, -2.4, 0.15), bevel=0.05)
+box((0.2, 0.2, 0.4), kc, loc=(-0.25, -2.4, 0.15), bevel=0.04)
 # magnifier in front
-magnifier(0.95, loc=(1.5, -2.3, 2.5), ang=-45)
+magnifier(0.95, loc=(0.8, -2.3, 2.4), ang=-45)
+podium('#ff8a1e', 3.1)
+fit(0.82, -0.05)
 render('findit')
