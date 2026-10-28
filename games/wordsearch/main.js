@@ -8,7 +8,7 @@
 
 import STRINGS from './strings.js';
 import * as E from './engine.js';
-import { PACKS, THEMES } from './themes.js';
+import { THEMES } from './themes.js';
 import { createBoard, CAP_COLORS } from './board.js';
 import { DEFS, icon } from './icons.js';
 
@@ -513,6 +513,7 @@ export async function mount(root, ctx) {
           return false;
         }
         wordFound(i, { color: P.found.length, reveal: true });
+        toast(t('revealed'));
         return true;
       },
     };
