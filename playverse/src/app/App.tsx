@@ -15,6 +15,7 @@ import { ToastHost, toast } from '../components/Toast';
 import { Button } from '../components/Button';
 import { Icon } from '../components/Icon';
 import { onStorageIssue } from '../services/storage/storage';
+import { EMBED, postExit } from './embed';
 
 function StorageWatcher() {
   const { m } = useI18n();
@@ -76,6 +77,37 @@ function NotFound() {
   );
 }
 
+/** Embed mode (inside DA Games): only the game page, no home, bottom nav or skip link. */
+function EmbedShell() {
+  const route = useRoute();
+  useEffect(() => {
+    if (route.name !== 'game') postExit();
+  }, [route.name]);
+  const routeKey = route.name === 'game' ? route.gameId : 'none';
+  return (
+    <>
+      <ErrorBoundary
+        resetKey={routeKey}
+        fallback={(reset) => (
+          <div className="page-center" role="alert">
+            <Icon name="info" size={40} />
+            <Button onClick={reset} icon="restart">
+              Retry
+            </Button>
+          </div>
+        )}
+      >
+        {route.name === 'game' && (
+          <div className="app-shell">
+            <GamePage gameId={route.gameId} />
+          </div>
+        )}
+      </ErrorBoundary>
+      <ToastHost />
+    </>
+  );
+}
+
 function Shell() {
   const route = useRoute();
   const { m } = useI18n();
@@ -133,7 +165,7 @@ export function App() {
     <I18nProvider>
       <ThemeController />
       <StorageWatcher />
-      <Shell />
+      {EMBED ? <EmbedShell /> : <Shell />}
     </I18nProvider>
   );
 }

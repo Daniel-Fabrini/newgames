@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { GameLayout, GameSetup } from '../../components/GameLayout';
+import { EMBED_MODE, useBackHandler } from '../../app/embed';
 import { HelpDialog, PauseMenu, ResultDialog, type HelpSection } from '../../components/GameDialogs';
 import { ConfirmDialog } from '../../components/Modal';
 import { Button } from '../../components/Button';
@@ -117,6 +118,9 @@ function recordRun(state: GameState): RunResult {
     comboBest: res.stats.metrics[key] ?? state.score,
   };
 }
+
+/** Lobby mode from DA Games (a snake mode id): preselects that mode, and starts a run when none is saved. */
+const hintedMode: Mode | null = EMBED_MODE !== null && (MODES as readonly string[]).includes(EMBED_MODE) ? (EMBED_MODE as Mode) : null;
 
 export default function SnakeGame() {
   const { m, fmt } = useI18n();
@@ -277,6 +281,21 @@ export default function SnakeGame() {
     setDialog('none');
     setCountdown(0);
   };
+
+  useEffect(() => {
+    if (hintedMode === null) return;
+    if (!runRef.current) startRun(hintedMode, prefs.difficulty);
+    else updatePrefs({ ...prefs, mode: hintedMode });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on mount
+  }, []);
+
+  // Embed mode (host back button / header back): pause a live run, otherwise return to the setup screen.
+  useBackHandler(() => {
+    if (phase !== 'play') return false;
+    if (active) pause();
+    else toSetup();
+    return true;
+  });
 
   const doTurn = useCallback(
     (dir: Direction) => {

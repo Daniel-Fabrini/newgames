@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, type ReactNode } from 'react';
 import { IconButton } from './Button';
 import { useI18n } from '../i18n';
+import { useBackHandler } from '../app/embed';
 
 export interface ModalProps {
   open: boolean;
@@ -37,6 +38,13 @@ export function Modal({ open, onClose, title, children, footer, dismissible = tr
       else dialog.removeAttribute('open');
     }
   }, [open]);
+
+  // Embed mode: the host's back button closes the topmost dismissible dialog.
+  useBackHandler(() => {
+    if (!dismissible) return false;
+    onClose();
+    return true;
+  }, open);
 
   if (!open) return null;
 

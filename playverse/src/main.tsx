@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './app/App';
+import { EMBED } from './app/embed';
 import { registerServiceWorker } from './app/pwa';
 import { dictionaries } from './i18n';
 import { settingsStore } from './services/settings';
@@ -19,4 +20,5 @@ createRoot(container).render(
   </StrictMode>,
 );
 
-registerServiceWorker(() => dictionaries[settingsStore.get().locale].common.pwa.updateReady);
+// Embedded in DA Games: no service worker (the host app caches everything) and no install prompt.
+if (!EMBED) registerServiceWorker(() => dictionaries[settingsStore.get().locale].common.pwa.updateReady);

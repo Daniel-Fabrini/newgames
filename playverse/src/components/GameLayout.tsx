@@ -4,6 +4,7 @@ import { Icon, type IconName } from './Icon';
 import { GameIcon } from './brand/GameIcon';
 import { Crown } from './brand/Crown';
 import { goBack } from '../app/router';
+import { EMBED, requestBack } from '../app/embed';
 import { useI18n } from '../i18n';
 import type { GameId } from '../types/game';
 
@@ -49,7 +50,7 @@ export function GameLayout({ gameId, title, subtitle, stats, onPause, onHelp, ac
   return (
     <div className={['game-screen', className].filter(Boolean).join(' ')} data-game={gameId} style={style}>
       <header className="game-topbar">
-        <IconButton icon="back" label={m.common.nav.back} onClick={() => (onExit ? onExit() : goBack())} />
+        <IconButton icon="back" label={m.common.nav.back} onClick={() => (onExit ? onExit() : EMBED ? requestBack() : goBack())} />
         <div className="game-topbar__title">
           <GameIcon id={gameId} size={30} className="game-topbar__icon" />
           <div className="game-topbar__text">

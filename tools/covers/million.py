@@ -2,13 +2,13 @@ import os, sys, math, random
 sys.path.insert(0, os.path.dirname(__file__))
 from props import *
 
-new_scene('#9a4dff', '#1b0a5c', samples=int(os.environ.get('S', 96)), key_energy=1000)
+new_scene('#9a4dff', '#1b0a5c', samples=int(os.environ.get('S', 96)), key_energy=720)
 random.seed(7)
-gold = metal('#ffc533', 0.2, name='gold')
-gold2 = metal('#ffdf6a', 0.25, name='gold2')
-wood = glossy('#6b2f12', 0.45, 0.4, name='wood')
-wood2 = glossy('#8a421a', 0.45, 0.4, name='wood2')
-band = metal('#e0a020', 0.28, name='band')
+gold = glossy('#f2b000', 0.3, 0.25, name='gold')
+gold2 = glossy('#ffd230', 0.3, 0.25, name='gold2')
+wood = glossy('#4a1a0a', 0.45, 0.4, name='wood')
+wood2 = glossy('#8f2f1a', 0.45, 0.4, name='wood2')
+band = glossy('#e8a000', 0.35, 0.25, name='band')
 
 # chest body (open): lower box + front lid hinged open at back
 W_, D_, Hh = 3.2, 2.0, 1.4
@@ -34,12 +34,12 @@ def coin(loc, rot=(0, 0, 0), r=0.42, m=gold):
     cylinder(r * 0.78, 0.115, gold2 if m is gold else gold, loc=loc, rot=rot, bevel=0.02, seg=48)  # inner emboss
     return c
 # coins heaped on pile
-for i in range(26):
+for i in range(44):
     a = random.uniform(0, 6.28)
-    rr = random.uniform(0, 1.0)
+    rr = random.uniform(0, 1.0) ** 0.7
     x, y = math.cos(a) * rr * 1.2, math.sin(a) * rr * 0.65 - 0.1
     z = Hh + 0.55 + (1 - rr) * 0.5
-    coin((x, y, z), rot=(random.uniform(-60, 60), random.uniform(-60, 60), random.uniform(0, 360)), r=random.uniform(0.3, 0.42), m=random.choice([gold, gold, gold2]))
+    coin((x, y, z), rot=(random.uniform(-60, 60), random.uniform(-60, 60), random.uniform(0, 360)), r=random.uniform(0.36, 0.5), m=random.choice([gold, gold, gold2]))
 # overflow coins falling out front + scattered on floor
 for (x, y, z, rx) in [(-1.2, -1.4, 0.07, 0), (-0.5, -1.9, 0.07, 0), (1.5, -1.5, 0.07, 0), (2.1, -1.0, 0.07, 0), (0.8, -2.2, 0.07, 0), (-2.0, -0.9, 0.07, 0)]:
     coin((x, y, z), rot=(rx, 0, random.uniform(0, 360)), r=0.4)
@@ -63,7 +63,7 @@ gem((0.7, -0.9, Hh + 0.75), '#3dff8a', 0.32, (0, 40, 20))
 gem((-2.1, -1.8, 0.35), '#ff2f6e', 0.3, (0, 0, 0))
 gem((2.4, -1.9, 0.3), '#2fe0ff', 0.28, (0, 0, 10))
 # "?" coin: big coin standing on the pile with question mark
-q = cylinder(0.85, 0.2, metal('#ffd84a', 0.18, name='qcoin'), loc=(0.15, -1.05, Hh + 1.75), rot=(90, 0, 0), bevel=0.06, seg=64)
+q = cylinder(0.85, 0.2, glossy('#f5b400', 0.3, 0.25, name='qcoin'), loc=(0.15, -1.05, Hh + 1.75), rot=(90, 0, 0), bevel=0.06, seg=64)
 torus(0.8, 0.07, gold2, loc=(0.15, -1.17, Hh + 1.75), rot=(90, 0, 0))
 qm = glossy('#6a22d9', 0.25, 0.8, name='qmark')
 qt = text('?', qm, size=1.25, extrude=0.1, loc=(0.15, -1.22, Hh + 1.72), rot=(90, 0, 0), bevel=0.03)

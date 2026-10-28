@@ -1,4 +1,5 @@
-import { createPersistedStore, useStore } from './store';
+import { createPersistedStore, createStore, useStore, type PersistedStore } from './store';
+import { EMBED, EMBED_HAPTICS, EMBED_LANG, EMBED_SOUND } from '../app/embed';
 import { v, type Validator } from './storage/schema';
 import { LOCALES, detectLocale, type Locale } from '../i18n/locales';
 
@@ -14,11 +15,11 @@ export interface Settings {
 }
 
 export const defaultSettings = (): Settings => ({
-  locale: detectLocale(),
+  locale: EMBED && EMBED_LANG ? EMBED_LANG : detectLocale(),
   theme: 'dark',
   motion: 'system',
-  sound: true,
-  haptics: true,
+  sound: EMBED ? EMBED_SOUND : true,
+  haptics: EMBED ? EMBED_HAPTICS : true,
 });
 
 // Each field falls back individually so one bad value never resets every preference.
@@ -33,7 +34,13 @@ const settingsValidator: Validator<Settings> = (input, path) => {
   })(input, path);
 };
 
-export const settingsStore = createPersistedStore<Settings>('settings', { validate: settingsValidator, version: 1 }, defaultSettings);
+/**
+ * In embed mode the settings come from the host (DA Games) through the URL and are kept in memory only,
+ * so nothing here fights the host's own language/sound settings.
+ */
+export const settingsStore: PersistedStore<Settings> = EMBED
+  ? { ...createStore<Settings>(defaultSettings()), reload: () => undefined }
+  : createPersistedStore<Settings>('settings', { validate: settingsValidator, version: 1 }, defaultSettings);
 
 export function useSettings(): Settings {
   return useStore(settingsStore);

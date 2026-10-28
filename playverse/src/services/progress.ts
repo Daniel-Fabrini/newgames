@@ -1,6 +1,7 @@
 import { createPersistedStore, useStore, type PersistedStore } from './store';
 import { v, type Validator } from './storage/schema';
 import type { GameId } from '../types/game';
+import { markLevelCompleted } from '../app/embed';
 
 /**
  * Level-based progression for games with campaigns (Water Sort, Number Match challenges…).
@@ -111,6 +112,7 @@ export function completeLevel(gameId: GameId, level: number, input: CompleteLeve
   const store = progressStore(gameId, track);
   const outcome = applyLevelCompletion(store.get(), level, input);
   store.set(outcome.progress);
+  markLevelCompleted();
   return outcome;
 }
 

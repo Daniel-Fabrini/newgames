@@ -14,6 +14,7 @@ import { feedback } from '../../services/feedback';
 import { loadGame, useAutosave } from '../../services/saves';
 import { recordMatch, useGameStats, winRate, type RecordResult } from '../../services/stats';
 import { randomSeed } from '../../utils/random';
+import { EMBED_MODE } from '../../app/embed';
 import { Board } from './Board';
 import { autoMoveFor, findHint, isStuck, type Hint } from './assist';
 import { cardName, pileName } from './describe';
@@ -58,6 +59,9 @@ function initial(): { game: GameState | null; elapsedMs: number } {
   if (saved && !saved.game.won) return saved;
   return { game: null, elapsedMs: 0 };
 }
+
+/** Lobby mode from DA Games (`draw1` / `draw3`): deals a new game with that draw mode. */
+const hintedDraw: DrawMode | null = EMBED_MODE === 'draw1' ? 1 : EMBED_MODE === 'draw3' ? 3 : null;
 
 export default function Solitaire() {
   const { m, fmt } = useI18n();
@@ -283,6 +287,17 @@ export default function Solitaire() {
     saveDrawPreference(mode);
     feedback('place');
   };
+
+  // Lobby mode: deal right away, or ask before replacing a game in progress with the other draw mode.
+  useEffect(() => {
+    if (hintedDraw === null) return;
+    if (!boot.game || (boot.game.draw !== hintedDraw && boot.game.moves === 0)) startGame(randomSeed(), hintedDraw);
+    else if (boot.game.draw !== hintedDraw) {
+      setNewDraw(hintedDraw);
+      setDialog('newGame');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on mount
+  }, []);
 
   /** An unfinished game with moves counts as a loss when it is abandoned. */
   const inProgress = game !== null && game.moves > 0 && !game.won;

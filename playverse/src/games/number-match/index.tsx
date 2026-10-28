@@ -10,6 +10,7 @@ import { Icon } from '../../components/Icon';
 import { useI18n } from '../../i18n';
 import { loadGame, saveGame, type SaveSpec } from '../../services/saves';
 import { recordMatch, useGameStats } from '../../services/stats';
+import { EMBED_MODE } from '../../app/embed';
 import { totalStars, useLevelProgress } from '../../services/progress';
 import { readValue, writeValue } from '../../services/storage/storage';
 import { v } from '../../services/storage/schema';
@@ -36,11 +37,14 @@ function loadResumable(spec: SaveSpec<SavedNumberMatch>): SavedNumberMatch | nul
   return saved;
 }
 
+/** Lobby mode from DA Games (`classic` / `challenge`): opens that mode (resuming its saved game, if any). */
+const hintedMode: Mode | null = EMBED_MODE === 'classic' || EMBED_MODE === 'challenge' ? EMBED_MODE : null;
+
 /** Resumes the last mode played when it has a save, otherwise the other mode's save; else shows the setup screen. */
 function initialScreen(): Screen {
-  const pref = readValue<Mode | null>(MODE_PREF, { validate: modeValidator }, null);
+  const pref = hintedMode ?? readValue<Mode | null>(MODE_PREF, { validate: modeValidator }, null);
   const order: Mode[] = pref === 'challenge' ? ['challenge', 'classic'] : ['classic', 'challenge'];
-  for (const mode of order) {
+  for (const mode of hintedMode ? [hintedMode] : order) {
     const saved = loadResumable(saveSpecFor(mode));
     if (saved) return { kind: 'play', mode, boot: saved, key: 0 };
   }

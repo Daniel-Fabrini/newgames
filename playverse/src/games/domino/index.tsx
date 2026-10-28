@@ -16,6 +16,7 @@ import { recordMatch, type RecordResult } from '../../services/stats';
 import { readValue, writeValue } from '../../services/storage/storage';
 import { v } from '../../services/storage/schema';
 import { Rng, randomSeed } from '../../utils/random';
+import { EMBED_MODE, useBackHandler } from '../../app/embed';
 import { chooseAction, viewFor } from './ai';
 import {
   DIFFICULTIES,
@@ -58,6 +59,9 @@ const prefsValidator = v.object({
 });
 
 const AI_DELAY = { play: 750, draw: 450, pass: 650 } as const;
+
+/** Lobby mode from DA Games (`ai` / `2p`): preselects the match type and starts a new match when nothing is in progress. */
+const hintedMode: MatchConfig['mode'] | null = EMBED_MODE === 'ai' || EMBED_MODE === '2p' ? EMBED_MODE : null;
 
 function boot(): { match: MatchState | null; elapsedMs: number } {
   const saved = loadGame(saveSpec);
@@ -109,9 +113,18 @@ export default function DominoGame() {
   const { m, fmt } = useI18n();
   const g = m.common.game;
   const t = m.domino;
-  const [bootState] = useState(boot);
+  const [bootState] = useState(() => {
+    const saved = boot();
+    // A saved match of the other type stays untouched: the setup screen opens with the hinted type instead.
+    return hintedMode && saved.match && saved.match.config.mode !== hintedMode
+      ? { match: null, elapsedMs: 0, hadSaved: true }
+      : { ...saved, hadSaved: saved.match !== null };
+  });
   const [match, setMatch] = useState<MatchState | null>(bootState.match);
-  const [config, setConfig] = useState<MatchConfig>(() => bootState.match?.config ?? readValue(PREFS_KEY, { validate: prefsValidator }, DEFAULT_CONFIG));
+  const [config, setConfig] = useState<MatchConfig>(() => {
+    const base = bootState.match?.config ?? readValue(PREFS_KEY, { validate: prefsValidator }, DEFAULT_CONFIG);
+    return hintedMode ? { ...base, mode: hintedMode } : base;
+  });
   const [dialog, setDialog] = useState<Dialog>('none');
   const [selected, setSelected] = useState<TileId | null>(null);
   const [dragging, setDragging] = useState<TileId | null>(null);
@@ -265,6 +278,11 @@ export default function DominoGame() {
     setDialog('none');
   };
 
+  useEffect(() => {
+    if (hintedMode && !bootState.hadSaved) startMatch({ ...config, mode: hintedMode });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on mount
+  }, []);
+
   const abandonCounts = Boolean(match && !match.over && match.config.mode === 'ai' && hasActed(match, 0));
 
   const recordAbandon = () => {
@@ -308,6 +326,14 @@ export default function DominoGame() {
     resetRoundUi();
     setDialog('none');
   };
+
+  // Embed mode (host back button / header back): from a match open the restart/setup options.
+  useBackHandler(() => {
+    if (!match) return false;
+    if (match.over) toSetup();
+    else setDialog('restart');
+    return true;
+  });
 
   const goNextRound = () => {
     if (!match) return;

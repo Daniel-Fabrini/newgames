@@ -2,6 +2,7 @@ import { useStore } from './store';
 import { createPersistedStore, type PersistedStore } from './store';
 import { v, type Validator } from './storage/schema';
 import type { GameId, Outcome } from '../types/game';
+import { postResult } from '../app/embed';
 
 /**
  * Common statistics with game-specific metrics.
@@ -174,6 +175,8 @@ export function recordMatch(
   const store = statsStore(gameId);
   const result = applyMatch(store.get(), { ...match, at: match.at ?? Date.now() }, rules);
   store.set(result.stats);
+  // Embedded in DA Games: tell the host a real match finished (it awards the XP).
+  postResult({ game: gameId, outcome: match.outcome, ...(match.score !== undefined ? { score: match.score } : {}) });
   return result;
 }
 

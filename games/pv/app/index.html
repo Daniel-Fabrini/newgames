@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0a2a" />
+    <meta name="color-scheme" content="light dark" />
+    <title>PlayVerse (DA Games)</title>
+    <script>
+      // Apply the saved theme before first paint to avoid a light/dark flash.
+      // Embedded in DA Games (?embed=1): always dark, themed black & gold by styles/embed.css.
+      (function () {
+        try {
+          if (/[?&]embed=1(&|$)/.test(location.search) && window.parent !== window) {
+            document.documentElement.setAttribute('data-embed', '1');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            return;
+          }
+          var raw = localStorage.getItem('playverse:settings');
+          var theme = (raw && (JSON.parse(raw).d || {}).theme) || 'dark';
+          var dark = theme === 'dark' || (theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        } catch (e) {
+          /* storage unavailable: keep default */
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="./assets/index-UqzE3DTi.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CY8vOfCk.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>O PlayVerse precisa de JavaScript. · PlayVerse requires JavaScript. · PlayVerse necesita JavaScript.</noscript>
+  </body>
+</html>

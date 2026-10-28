@@ -15,6 +15,7 @@ import { loadGame, useAutosave } from '../../services/saves';
 import { getStats, recordMatch, useGameStats, type RecordResult } from '../../services/stats';
 import { readValue, writeValue } from '../../services/storage/storage';
 import { randomSeed } from '../../utils/random';
+import { EMBED_MODE, useBackHandler } from '../../app/embed';
 import type { Outcome } from '../../types/game';
 import { Board, cellToSquare, squareToCell, type TargetKind } from './Board';
 import { MiniPiece, MoveList, PlayerBar } from './Panels';
@@ -62,6 +63,9 @@ function boot(): { session: Session | null; elapsedMs: number } {
   return { session: null, elapsedMs: 0 };
 }
 
+/** Lobby mode from DA Games (`ai` / `2p`): preselects the match type and starts a new match when nothing is in progress. */
+const hintedMode: CheckersConfig['mode'] | null = EMBED_MODE === 'ai' || EMBED_MODE === '2p' ? EMBED_MODE : null;
+
 const loadSetup = (): CheckersConfig => readValue(SETUP_KEY, { validate: configValidator }, DEFAULT_CONFIG);
 
 export default function Checkers() {
@@ -70,9 +74,16 @@ export default function Checkers() {
   const t = m.checkers;
   const reduced = useReducedMotion();
   const stats = useGameStats('checkers');
-  const [start] = useState(boot);
+  const [start] = useState(() => {
+    const saved = boot();
+    // A saved match of the other type stays untouched: the setup screen opens with the hinted type instead.
+    return hintedMode && saved.session && saved.session.config.mode !== hintedMode ? { session: null, elapsedMs: 0, hadSaved: true } : { ...saved, hadSaved: saved.session !== null };
+  });
   const [session, setSession] = useState<Session | null>(start.session);
-  const [setup, setSetup] = useState<CheckersConfig>(() => start.session?.config ?? loadSetup());
+  const [setup, setSetup] = useState<CheckersConfig>(() => {
+    const base = start.session?.config ?? loadSetup();
+    return hintedMode ? { ...base, mode: hintedMode } : base;
+  });
   const [selection, setSelection] = useState<Selection | null>(null);
   const [anim, setAnim] = useState<Anim | null>(null);
   const [fresh, setFresh] = useState(false);
@@ -260,6 +271,11 @@ export default function Checkers() {
     [resetClock, t],
   );
 
+  useEffect(() => {
+    if (hintedMode && !start.hadSaved) startGame({ ...setup, mode: hintedMode });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on mount
+  }, []);
+
   const goToSetup = useCallback(() => {
     if (session) setSetup(session.config);
     setSession(null);
@@ -295,6 +311,13 @@ export default function Checkers() {
     if (pendingAction === 'restart' && session) startGame(session.config);
     else goToSetup();
   };
+
+  // Embed mode (host back button / header back): from a match go back to the setup screen.
+  useBackHandler(() => {
+    if (!session) return false;
+    request('setup');
+    return true;
+  });
 
   const undoCount = session && !result ? undoPlies(session) : 0;
   const doUndo = () => {

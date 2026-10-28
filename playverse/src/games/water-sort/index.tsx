@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { GameLayout, ToolButton, type GameStat } from '../../components/GameLayout';
 import { HelpDialog, PauseMenu, ResultDialog } from '../../components/GameDialogs';
 import { ConfirmDialog } from '../../components/Modal';
+import { useBackHandler } from '../../app/embed';
 import { Button } from '../../components/Button';
 import { Switch } from '../../components/Controls';
 import { Icon } from '../../components/Icon';
@@ -344,6 +345,13 @@ export default function WaterSort() {
     setDialog('none');
     setScreen('select');
   };
+
+  // Embed mode (host back button / header back): from a level go back to the level map (the level is saved).
+  useBackHandler(() => {
+    if (screen !== 'play') return false;
+    openLevels();
+    return true;
+  });
 
   const toggleSymbols = (value = !prefs.symbols) => {
     const next = { ...prefs, symbols: value };

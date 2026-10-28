@@ -17,8 +17,14 @@
     <title>PlayVerse</title>
     <script>
       // Apply the saved theme before first paint to avoid a light/dark flash.
+      // Embedded in DA Games (?embed=1): always dark, themed black & gold by styles/embed.css.
       (function () {
         try {
+          if (/[?&]embed=1(&|$)/.test(location.search) && window.parent !== window) {
+            document.documentElement.setAttribute('data-embed', '1');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            return;
+          }
           var raw = localStorage.getItem('playverse:settings');
           var theme = (raw && (JSON.parse(raw).d || {}).theme) || 'dark';
           var dark = theme === 'dark' || (theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);

@@ -9,6 +9,7 @@ import { useI18n } from '../i18n';
 import { updateSettings, useSettings } from '../services/settings';
 import { supportsVibration } from '../services/feedback';
 import { goBack } from '../app/router';
+import { EMBED } from '../app/embed';
 import { useReducedMotion } from '../hooks/useMediaQuery';
 
 interface PauseMenuProps {
@@ -50,28 +51,30 @@ export function PauseMenu({ open, onResume, onRestart, onHelp, onExit, children,
           {g.exitToHome}
         </Button>
         {children}
-        <section className="pause-menu__settings" aria-label={g.quickSettings}>
-          <div className="pause-menu__row">
-            <span className="pause-menu__label">
-              <Icon name="globe" size={18} /> {m.common.settings.language}
-            </span>
-            <LanguageSelect />
-          </div>
-          <Switch
-            checked={settings.sound}
-            onChange={(sound) => updateSettings({ sound })}
-            label={m.common.settings.sound}
-            icon={<Icon name={settings.sound ? 'volume' : 'volumeOff'} size={18} />}
-          />
-          {supportsVibration() && (
+        {!EMBED && (
+          <section className="pause-menu__settings" aria-label={g.quickSettings}>
+            <div className="pause-menu__row">
+              <span className="pause-menu__label">
+                <Icon name="globe" size={18} /> {m.common.settings.language}
+              </span>
+              <LanguageSelect />
+            </div>
             <Switch
-              checked={settings.haptics}
-              onChange={(haptics) => updateSettings({ haptics })}
-              label={m.common.settings.haptics}
-              icon={<Icon name="vibrate" size={18} />}
+              checked={settings.sound}
+              onChange={(sound) => updateSettings({ sound })}
+              label={m.common.settings.sound}
+              icon={<Icon name={settings.sound ? 'volume' : 'volumeOff'} size={18} />}
             />
-          )}
-        </section>
+            {supportsVibration() && (
+              <Switch
+                checked={settings.haptics}
+                onChange={(haptics) => updateSettings({ haptics })}
+                label={m.common.settings.haptics}
+                icon={<Icon name="vibrate" size={18} />}
+              />
+            )}
+          </section>
+        )}
         <p className="pause-menu__note">{g.savedAutomatically}</p>
       </div>
     </Modal>

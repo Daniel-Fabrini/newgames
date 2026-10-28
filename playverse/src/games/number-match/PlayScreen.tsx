@@ -32,6 +32,7 @@ import {
 } from './engine';
 import { colOf, digitCount, hasPair, isDigit, rowOf, type Pair } from './match';
 import { saveSpecFor, type SavedNumberMatch } from './save';
+import { useBackHandler } from '../../app/embed';
 import { meta } from './meta';
 
 type Dialog = 'none' | 'pause' | 'help' | 'restart' | 'stage' | 'over' | 'level' | 'stuck';
@@ -331,6 +332,12 @@ export function PlayScreen({ mode, boot, onChangeMode, onLevels }: PlayScreenPro
     persistNow();
     onChangeMode();
   };
+
+  // Embed mode (host back button / header back): back to the setup / level screen (the game is saved).
+  useBackHandler(() => {
+    changeMode();
+    return true;
+  });
 
   const toLevels = () => {
     persistNow();

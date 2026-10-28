@@ -13,6 +13,7 @@ import { useStopwatch } from '../../hooks/useStopwatch';
 import { feedback } from '../../services/feedback';
 import { loadGame, useAutosave } from '../../services/saves';
 import { recordMatch, useGameStats, type RecordResult } from '../../services/stats';
+import { EMBED_MODE, useBackHandler } from '../../app/embed';
 import { Board } from './Board';
 import { NumberPad } from './NumberPad';
 import { COL, ROW, cellAt, unitIndex, unitKind } from './grid';
@@ -70,6 +71,9 @@ function initial(): SavedSudoku | null {
   const saved = loadGame(saveSpec);
   return saved && !saved.game.solved ? saved : null;
 }
+
+/** Lobby mode from DA Games (`easy` / `medium` / `hard`): starts a puzzle of that difficulty. */
+const hintedDifficulty: Difficulty | null = EMBED_MODE !== null && (DIFFICULTIES as readonly string[]).includes(EMBED_MODE) ? (EMBED_MODE as Difficulty) : null;
 
 const SAVE_TICK_MS = 2000;
 
@@ -183,6 +187,13 @@ export default function Sudoku() {
     begin(difficulty);
   };
 
+  useEffect(() => {
+    if (hintedDifficulty === null) return;
+    if (boot && boot.game.difficulty === hintedDifficulty) return; // same difficulty: just continue
+    requestStart(hintedDifficulty);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on mount
+  }, []);
+
   const confirmAbandon = () => {
     if (game && !game.solved && hasProgress(game)) recordAbandon(game);
     setDialog('none');
@@ -230,6 +241,13 @@ export default function Sudoku() {
     setDialog('none');
     setPhase('setup');
   };
+
+  // Embed mode (host back button / header back): from a puzzle go back to the difficulty screen.
+  useBackHandler(() => {
+    if (phase !== 'playing' || generating) return false;
+    goToSetup();
+    return true;
+  });
 
   /* ───────────── Actions ───────────── */
 

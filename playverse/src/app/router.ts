@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from 'react';
 import { isGameId, type GameId } from '../types/game';
+import { EMBED, postExit } from './embed';
 
 /** Hash-based routes: work on any static host and inside the installed PWA without server config. */
 export type Route =
@@ -93,6 +94,11 @@ export function navigate(route: Route, options: { replace?: boolean } = {}): voi
 
 /** Goes back within the app when possible, otherwise to `fallback` (home by default). */
 export function goBack(fallback: Route = { name: 'home' }): void {
+  if (EMBED) {
+    // Inside DA Games there is no PlayVerse home: leaving the game means leaving the iframe.
+    postExit();
+    return;
+  }
   if (stack.length >= 2) window.history.back();
   else navigate(fallback, { replace: true });
 }
