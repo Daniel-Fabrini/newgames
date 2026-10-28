@@ -16,7 +16,6 @@ const STAT_LABEL = {
   pierce: 'st_pierce', burnDps: 'st_burn', shredMax: 'st_shred', acid: 'st_acid', stun: 'st_stun', buff: 'st_buff',
   haste: 'st_haste', sorte: 'st_sorte', puddle: 'st_puddle', armorIgnore: 'st_armor',
 };
-const SEND_TIER_NAME = (opt) => opt.id;
 
 export async function mount(root, ctx) {
   const t = ctx.makeT(STRINGS);
@@ -368,6 +367,7 @@ export async function mount(root, ctx) {
 
   // Shop: tower cards. Tower panel: shown when a tower is selected.
   function renderShop() {
+    panel.classList.remove('tall');
     if (panelMode !== 'shop') {
       panelMode = 'shop';
       clear(panel);
@@ -407,6 +407,7 @@ export async function mount(root, ctx) {
     if (panelMode !== 'tower' || towerPanelKey !== key) {
       towerPanelKey = key;
       panelMode = 'tower';
+      panel.classList.add('tall');
       clear(panel);
       const head = h('div', { class: 'tw-tp-head' },
         towerIcon(tw.type, 40),

@@ -88,7 +88,8 @@
 .g-towers .tw-banner.good { color: #9dff9d; }
 .g-towers .tw-banner.bad { color: #ff9aa6; border-color: rgba(255,74,92,.6); }
 
-.g-towers .tw-panel { flex: none; height: 172px; padding: 8px 8px 4px; background: linear-gradient(180deg, #121217, #0b0b0f); border-top: 1px solid var(--line); overflow: hidden; }
+.g-towers .tw-panel { flex: none; height: 138px; padding: 8px 8px 4px; background: linear-gradient(180deg, #121217, #0b0b0f); border-top: 1px solid var(--line); overflow: hidden; }
+.g-towers .tw-panel.tall { height: 176px; }
 .g-towers .tw-shop { display: flex; gap: 7px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
 .g-towers .tw-shop::-webkit-scrollbar { display: none; }
 .g-towers .tw-card { flex: none; width: 76px; display: grid; justify-items: center; gap: 2px; padding: 6px 4px 5px; border-radius: 13px; background: linear-gradient(180deg, #22222a, #15151a); border: 1px solid var(--line-soft); color: var(--text); cursor: pointer; position: relative; touch-action: manipulation; }

@@ -35,6 +35,7 @@ export function createMatch(host, cfg) {
   let nextMurmur = 0;
   let hintPulse = 0;
   let paused = false;
+  let inputOn = cfg.input !== false;
   const cam = { tx: 0, ty: 20, dist: 50, th: 0.6, ready: false };
   const looks = { att: [], def: [] };
 
@@ -263,7 +264,7 @@ export function createMatch(host, cfg) {
   }
 
   function onDown(e) {
-    if (dead || paused || !world || world.result || introT < 0.55) return;
+    if (dead || paused || !inputOn || !world || world.result || introT < 0.55) return;
     const p = local(e);
     let mode = null;
     if (world.phase === 'aim') {
@@ -592,7 +593,7 @@ export function createMatch(host, cfg) {
     handleEvents();
 
     // auto action (training crosses)
-    if (level.auto && world.phase === 'aim' && !world.result && introT > 0.9 && !fx.autoDone) {
+    if (level.auto && inputOn && world.phase === 'aim' && !world.result && introT > 0.9 && !fx.autoDone) {
       fx.autoDone = true;
       const F2 = S.launch(world, level.auto);
       if (F2) fx.plan = previewOf(level.auto, null, F2);
@@ -959,12 +960,11 @@ export function createMatch(host, cfg) {
     const tu = cfg.tutorial;
     const w = world;
     let pts = null;
-    if (tu.first) {
-      if (!S.firstTimeOpen(w) || w.flight.s / w.flight.curve.len < 0.3 || stroke) return;
+    if (!inputOn || stroke) return;
+    if (tu.first && S.firstTimeOpen(w) && w.flight.s / w.flight.curve.len > 0.3) {
       const p2 = w.flight.curve.p2;
       pts = demoPoints({ x: p2.x, y: p2.y }, tu.first);
-    } else {
-      if (w.phase !== 'aim' || stroke || w.passes !== (tu.after || 0)) return;
+    } else if (tu.plan && w.phase === 'aim' && w.passes === 0 && introT > 1.2) {
       pts = demoPoints({ x: w.ball.x, y: w.ball.y }, tu.plan);
     }
     if (!pts || pts.length < 2) return;
@@ -1025,6 +1025,12 @@ export function createMatch(host, cfg) {
   return {
     restart(newLevel) {
       reset(newLevel);
+    },
+    setInput(on) {
+      inputOn = !!on;
+    },
+    setTutorial(tu) {
+      cfg.tutorial = tu;
     },
     setPaused(p) {
       paused = !!p;

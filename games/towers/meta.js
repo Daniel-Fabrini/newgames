@@ -30,5 +30,5 @@ export function rankInfo(medals) {
 
 // Medals needed for the next level after `medals`.
 export function nextRankAt(level) {
-  return 5 * level * (level + 1) / 2 - 0;
+  return 5 * level * (level + 1) / 2;
 }
