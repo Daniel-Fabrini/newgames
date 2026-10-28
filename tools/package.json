@@ -1,0 +1,16 @@
+{
+  "name": "newgames-tools",
+  "private": true,
+  "type": "module",
+  "description": "Build-time scripts that generate static data files for the app. Not needed to run the games.",
+  "scripts": {
+    "countries": "node build-countries.mjs"
+  },
+  "devDependencies": {
+    "d3-geo": "^3.1.1",
+    "flag-icons": "^7.2.3",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2",
+    "world-countries": "^5.0.0"
+  }
+}
