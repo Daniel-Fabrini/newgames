@@ -1,0 +1,446 @@
+/* Number Match — class prefix `nm-`. */
+
+.nm-play {
+  --nm-gap: 4px;
+  --nm-pad: 8px;
+  /* 9 columns inside the stage width (capped), keeping room for the panel padding, border and a thin scrollbar. */
+  --nm-scrollbar: 14px;
+  --nm-cell: clamp(28px, calc((min(100cqw, 580px) - 2 * var(--nm-pad) - 8 * var(--nm-gap) - var(--nm-scrollbar)) / 9), 58px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Touch screens use overlay scrollbars: no width reserve needed, so the cells can be bigger. */
+@media (pointer: coarse) {
+  .nm-play {
+    --nm-scrollbar: 0px;
+  }
+}
+
+@media (max-width: 400px) {
+  .nm-play {
+    --nm-gap: 3px;
+    --nm-pad: 6px;
+  }
+}
+
+/* Only the grid scrolls; the header, stats and toolbar stay on screen. */
+.nm-board {
+  flex: 0 1 auto;
+  min-height: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-border-strong) transparent;
+  padding: var(--nm-pad);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, #27247c, #16144f);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 36px rgba(79, 70, 229, 0.28);
+  /* Vertical panning stays available for scrolling; zoom gestures and text selection are disabled. */
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root[data-theme='light'] .nm-board {
+  background: linear-gradient(160deg, #d9dcfb, #c4c9f3);
+}
+
+.nm-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nm-gap);
+}
+
+.nm-grid:focus {
+  outline: none;
+}
+
+.nm-row {
+  display: grid;
+  grid-template-columns: repeat(9, var(--nm-cell));
+  gap: var(--nm-gap);
+  height: var(--nm-cell);
+}
+
+.nm-row.is-collapsing {
+  overflow: hidden;
+  animation: nm-collapse 260ms var(--ease-in-out) forwards;
+}
+
+@keyframes nm-collapse {
+  0% {
+    height: var(--nm-cell);
+    opacity: 1;
+  }
+  35% {
+    opacity: 0;
+  }
+  100% {
+    height: 0;
+    margin-bottom: calc(-1 * var(--nm-gap));
+    opacity: 0;
+  }
+}
+
+/* ───────────── Cells ───────────── */
+.nm-cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--nm-cell);
+  height: var(--nm-cell);
+  border-radius: 24%;
+  font-size: calc(var(--nm-cell) * 0.54);
+  font-weight: var(--fw-black);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  outline: none;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-med),
+    box-shadow var(--dur-med);
+}
+
+.nm-cell.is-digit {
+  cursor: pointer;
+  color: var(--nm-ink, #fff);
+  background: linear-gradient(180deg, #3d3aa8 0%, #2b2887 55%, #221f71 100%);
+  box-shadow:
+    inset 0 -3px 0 rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 2px 5px rgba(3, 2, 20, 0.35);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+@media (hover: hover) {
+  .nm-cell.is-digit:hover {
+    filter: brightness(1.14);
+  }
+}
+
+.nm-cell.is-digit:active {
+  transform: scale(0.93);
+}
+
+.nm-cell[data-d='1'] {
+  --nm-ink: #7dd3fc;
+}
+.nm-cell[data-d='2'] {
+  --nm-ink: #c4b5fd;
+}
+.nm-cell[data-d='3'] {
+  --nm-ink: #f9a8d4;
+}
+.nm-cell[data-d='4'] {
+  --nm-ink: #fde68a;
+}
+.nm-cell[data-d='5'] {
+  --nm-ink: #86efac;
+}
+.nm-cell[data-d='6'] {
+  --nm-ink: #fdba74;
+}
+.nm-cell[data-d='7'] {
+  --nm-ink: #a5f3fc;
+}
+.nm-cell[data-d='8'] {
+  --nm-ink: #fca5a5;
+}
+.nm-cell[data-d='9'] {
+  --nm-ink: #d9f99d;
+}
+
+:root[data-theme='light'] .nm-cell.is-digit {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f2ff 60%, #e2e5fb 100%);
+  box-shadow:
+    inset 0 -3px 0 rgba(23, 21, 74, 0.12),
+    inset 0 1px 0 #fff,
+    0 2px 4px rgba(23, 21, 74, 0.14);
+  text-shadow: none;
+}
+:root[data-theme='light'] .nm-cell[data-d='1'] {
+  --nm-ink: #0369a1;
+}
+:root[data-theme='light'] .nm-cell[data-d='2'] {
+  --nm-ink: #6d28d9;
+}
+:root[data-theme='light'] .nm-cell[data-d='3'] {
+  --nm-ink: #be185d;
+}
+:root[data-theme='light'] .nm-cell[data-d='4'] {
+  --nm-ink: #a16207;
+}
+:root[data-theme='light'] .nm-cell[data-d='5'] {
+  --nm-ink: #15803d;
+}
+:root[data-theme='light'] .nm-cell[data-d='6'] {
+  --nm-ink: #c2410c;
+}
+:root[data-theme='light'] .nm-cell[data-d='7'] {
+  --nm-ink: #0e7490;
+}
+:root[data-theme='light'] .nm-cell[data-d='8'] {
+  --nm-ink: #b91c1c;
+}
+:root[data-theme='light'] .nm-cell[data-d='9'] {
+  --nm-ink: #4d7c0f;
+}
+
+/* Cleared: an empty, recessed slot with a small dot (shape, not just colour). */
+.nm-cell.is-cleared {
+  cursor: default;
+  color: var(--c-text-3);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+:root[data-theme='light'] .nm-cell.is-cleared {
+  background: rgba(23, 21, 74, 0.05);
+  box-shadow: inset 0 2px 4px rgba(23, 21, 74, 0.12);
+}
+
+.nm-cell__hole {
+  width: 14%;
+  height: 14%;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.4;
+  animation: nm-hole 220ms var(--ease-out) both;
+}
+
+@keyframes nm-hole {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Selected: gold, raised and ringed. */
+.nm-cell.is-selected {
+  z-index: 1;
+  color: #3a2100;
+  text-shadow: none;
+  background: linear-gradient(180deg, #ffe58f, #ffc83d 60%, #f5a524);
+  box-shadow:
+    0 0 0 2px #fff6d6,
+    0 0 0 4px var(--brand-gold),
+    0 0 18px rgba(255, 200, 61, 0.6);
+  transform: translateY(-2px) scale(1.06);
+}
+
+:root[data-theme='light'] .nm-cell.is-selected {
+  color: #3a2100;
+  background: linear-gradient(180deg, #ffe58f, #ffc83d 60%, #f5a524);
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px #f5a524,
+    0 0 14px rgba(245, 165, 36, 0.55);
+}
+
+/* Hint: dashed, pulsing outline. */
+.nm-cell.is-hint::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border: 2px dashed #9cc0ff;
+  border-radius: 28%;
+  pointer-events: none;
+  animation: nm-hint 1.1s ease-in-out infinite;
+}
+
+.nm-cell.is-hint {
+  box-shadow:
+    inset 0 -3px 0 rgba(0, 0, 0, 0.28),
+    0 0 16px rgba(61, 123, 255, 0.7);
+}
+
+:root[data-theme='light'] .nm-cell.is-hint::after {
+  border-color: var(--c-primary);
+}
+
+@keyframes nm-hint {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.55;
+  }
+}
+
+/* Invalid attempt: red ring + shake. */
+.nm-cell.is-error {
+  box-shadow:
+    0 0 0 3px var(--c-danger),
+    0 0 14px rgba(244, 63, 94, 0.5);
+}
+
+.nm-cell__digit {
+  display: block;
+}
+
+.nm-cell__digit.is-shake {
+  animation: nm-shake 320ms ease-in-out;
+}
+
+@keyframes nm-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-18%);
+  }
+  40% {
+    transform: translateX(16%);
+  }
+  60% {
+    transform: translateX(-10%);
+  }
+  80% {
+    transform: translateX(6%);
+  }
+}
+
+/* Removed pair: expanding gold ring. */
+.nm-cell__burst {
+  position: absolute;
+  inset: 0;
+  border: 3px solid var(--brand-gold);
+  border-radius: inherit;
+  box-shadow: 0 0 14px rgba(255, 200, 61, 0.7);
+  pointer-events: none;
+  animation: nm-burst 360ms var(--ease-out) forwards;
+}
+
+@keyframes nm-burst {
+  from {
+    transform: scale(0.7);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+.nm-cell:focus-visible {
+  z-index: 2;
+  outline: 3px solid var(--c-focus);
+  outline-offset: 1px;
+}
+
+/* ───────────── Status line ───────────── */
+.nm-status {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 100%;
+  max-width: 560px;
+  min-height: 2.8em;
+  padding: 0 var(--space-2);
+  text-align: center;
+}
+
+.nm-status__text {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  line-height: 1.35;
+  color: var(--c-text-2);
+}
+
+.nm-status__text.is-error {
+  color: var(--c-danger-text);
+}
+
+.nm-score {
+  position: relative;
+  display: inline-block;
+}
+
+/* Points just earned, rising from the score. */
+.nm-gain {
+  position: absolute;
+  left: 50%;
+  top: -0.2em;
+  z-index: 1;
+  padding: 0 8px;
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 55%, transparent);
+  border-radius: var(--radius-full);
+  background: var(--c-surface-solid);
+  color: var(--c-gold-text);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-black);
+  line-height: 1.5;
+  white-space: nowrap;
+  box-shadow: 0 0 14px rgba(255, 200, 61, 0.35);
+  pointer-events: none;
+  animation: nm-gain 950ms var(--ease-out) forwards;
+}
+
+@keyframes nm-gain {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 30%) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1.05);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -110%) scale(1);
+  }
+}
+
+/* ───────────── Setup ───────────── */
+.nm-setup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.nm-setup .nm-setup__mode {
+  margin-bottom: 0;
+}
+
+.nm-setup__rules {
+  font-size: var(--fs-sm);
+  color: var(--c-text-2);
+  text-align: center;
+}
+
+.nm-setup__note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--c-gold-text);
+  text-align: center;
+}

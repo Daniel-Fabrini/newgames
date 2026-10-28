@@ -1,0 +1,572 @@
+/* ───────────── Solitaire (Klondike) — prefix sol- ───────────── */
+
+.game-screen[data-game='solitaire'] .game-stage {
+  padding: var(--space-1) var(--space-2);
+}
+
+.sol-wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.sol-board {
+  --sol-radius: calc(var(--cw) * 0.1);
+  --sol-red: #cf1239;
+  --sol-black: #1b1d45;
+  --sol-shadow: 0 1px 2px rgba(5, 4, 30, 0.35), 0 2px 6px rgba(5, 4, 30, 0.22);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+/* ───────────── Pile slots ───────────── */
+
+.sol-slot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--sol-radius);
+  outline: none;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sol-slot--stock {
+  cursor: pointer;
+}
+
+.sol-slot__mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  border-radius: var(--sol-radius);
+  border: 1.5px dashed rgba(139, 132, 255, 0.42);
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(207, 205, 245, 0.42);
+}
+
+.sol-slot--foundation .sol-slot__mark {
+  border-style: solid;
+  border-color: rgba(255, 200, 61, 0.32);
+  background: radial-gradient(circle at 50% 40%, rgba(255, 200, 61, 0.1), transparent 70%), rgba(255, 255, 255, 0.03);
+  color: rgba(255, 211, 92, 0.55);
+}
+
+.sol-slot--stock.is-empty .sol-slot__mark {
+  color: var(--c-text-2);
+}
+
+.sol-slot__glyph {
+  font-size: calc(var(--cw) * 0.44);
+  font-weight: var(--fw-black);
+  line-height: 1;
+}
+
+.sol-slot.is-hint .sol-slot__mark {
+  animation: sol-hint-ring 0.9s var(--ease-in-out) infinite alternate;
+}
+
+.sol-count {
+  position: absolute;
+  z-index: 3000;
+  min-width: calc(var(--cw) * 0.46);
+  padding: 1px 6px;
+  transform: translate(-50%, -70%);
+  border-radius: var(--radius-full);
+  background: rgba(11, 10, 42, 0.82);
+  border: 1px solid rgba(255, 200, 61, 0.55);
+  color: var(--c-gold-text);
+  font-size: clamp(10px, calc(var(--cw) * 0.24), 14px);
+  font-weight: var(--fw-black);
+  line-height: 1.35;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* ───────────── Cards ───────────── */
+
+.sol-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--cw);
+  height: var(--ch);
+  transition: transform 190ms var(--ease-out);
+  will-change: transform;
+  touch-action: none;
+}
+
+.sol-card.is-up {
+  cursor: grab;
+}
+
+.sol-board.is-dragging,
+.sol-board.is-dragging .sol-card {
+  cursor: grabbing;
+}
+
+.sol-card.is-dragging {
+  transition: none;
+}
+
+.sol-card__inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--sol-radius);
+  box-shadow: var(--sol-shadow);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast);
+}
+
+.sol-card.is-buried .sol-card__inner {
+  box-shadow: none;
+}
+
+.sol-card.is-dragging .sol-card__inner {
+  transform: scale(1.04) rotate(-1deg);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.4),
+    0 14px 26px rgba(5, 4, 30, 0.45);
+}
+
+.sol-card.is-picked .sol-card__inner {
+  transform: translateY(calc(var(--ch) * -0.05));
+  box-shadow:
+    0 0 0 2px var(--brand-gold),
+    0 10px 20px rgba(5, 4, 30, 0.45);
+}
+
+.sol-card.is-hint .sol-card__inner {
+  animation: sol-hint 0.9s var(--ease-in-out) infinite alternate;
+}
+
+.sol-card.is-shake .sol-card__inner {
+  animation: sol-shake 360ms var(--ease-out);
+}
+
+.sol-board.is-celebrating .sol-card.is-celebrate .sol-card__inner {
+  animation: sol-celebrate 700ms var(--ease-spring) calc(var(--i) * 120ms) 2 both;
+}
+
+/* Face */
+.sol-card__face {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--sol-radius);
+  border: 1px solid rgba(23, 21, 74, 0.28);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 45%),
+    linear-gradient(180deg, #ffffff 0%, #f2f3fc 100%);
+  color: var(--sol-black);
+}
+
+.sol-card__face.is-red {
+  color: var(--sol-red);
+}
+
+.sol-card__index {
+  position: absolute;
+  top: calc(var(--ch) * 0.03);
+  left: calc(var(--cw) * 0.07);
+  right: calc(var(--cw) * 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1px;
+  font-size: clamp(11px, calc(var(--cw) * 0.33), 25px);
+  font-weight: var(--fw-black);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.sol-card__rank {
+  font-variant-numeric: tabular-nums;
+}
+
+.sol-card__face[data-rank='10'] .sol-card__rank {
+  letter-spacing: -0.09em;
+}
+
+.sol-card__suit {
+  flex: none;
+  width: 0.82em;
+  height: 0.82em;
+  fill: currentColor;
+}
+
+.sol-card__index.is-bottom {
+  display: none;
+}
+
+.sol-board.is-large .sol-card__index.is-bottom {
+  display: flex;
+  top: auto;
+  bottom: calc(var(--ch) * 0.03);
+  transform: rotate(180deg);
+}
+
+.sol-board.is-large .sol-card__index {
+  font-size: clamp(11px, calc(var(--cw) * 0.24), 25px);
+}
+
+.sol-card__pip {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  width: calc(var(--cw) * 0.52);
+  height: calc(var(--cw) * 0.52);
+  transform: translate(-50%, -50%);
+  fill: currentColor;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.6));
+}
+
+.sol-board.is-large .sol-card__pip {
+  top: 50%;
+  width: calc(var(--cw) * 0.46);
+  height: calc(var(--cw) * 0.46);
+}
+
+.sol-card__pip.is-ace {
+  width: calc(var(--cw) * 0.62);
+  height: calc(var(--cw) * 0.62);
+}
+
+.sol-card__court {
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  /* Below the strip left visible when the card is covered in a column. */
+  top: 33%;
+  bottom: 7%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2%;
+  border-radius: calc(var(--cw) * 0.07);
+  border: 1.5px solid #e7a91c;
+  background: linear-gradient(180deg, #fff8e1, #ffe7a6);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.75);
+}
+
+.sol-board.is-large .sol-card__court {
+  bottom: 22%;
+}
+
+.sol-card__court-rank {
+  font-size: calc(var(--cw) * 0.34);
+  font-weight: var(--fw-black);
+  line-height: 1;
+}
+
+.sol-card__court-suit {
+  width: calc(var(--cw) * 0.22);
+  height: calc(var(--cw) * 0.22);
+  fill: currentColor;
+}
+
+.sol-board.is-small .sol-card__court-suit {
+  display: none;
+}
+
+/* Back: PlayVerse indigo with a gold lattice */
+.sol-card__back {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: var(--sol-radius);
+  border: 1px solid rgba(8, 6, 36, 0.7);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 40%),
+    repeating-linear-gradient(45deg, rgba(255, 200, 61, 0.2) 0 1px, transparent 1px 6px),
+    repeating-linear-gradient(-45deg, rgba(255, 200, 61, 0.2) 0 1px, transparent 1px 6px),
+    radial-gradient(120% 90% at 30% 15%, #5a50ea 0%, #2f289f 48%, #1a1567 100%);
+  box-shadow:
+    inset 0 0 0 calc(var(--cw) * 0.055) #1d1870,
+    inset 0 0 0 calc(var(--cw) * 0.055 + 1.5px) rgba(255, 200, 61, 0.85);
+}
+
+.sol-card__back-emblem {
+  width: calc(var(--cw) * 0.28);
+  height: calc(var(--cw) * 0.28);
+  transform: rotate(45deg);
+  border-radius: 18%;
+  border: 1.5px solid var(--brand-gold);
+  background: radial-gradient(circle, #ffe08a 0 22%, #f5a524 24% 40%, #2a2390 42%);
+  box-shadow: 0 0 8px rgba(255, 200, 61, 0.55);
+}
+
+/* ───────────── Targets, hints and keyboard cursor ───────────── */
+
+.sol-target {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3000;
+  pointer-events: none;
+  border-radius: var(--sol-radius);
+  box-shadow:
+    0 0 0 2px var(--brand-blue),
+    0 0 14px rgba(61, 123, 255, 0.65);
+  background: rgba(61, 123, 255, 0.1);
+}
+
+.sol-target > svg {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  padding: 2px;
+  border-radius: var(--radius-full);
+  background: var(--brand-blue);
+  color: #fff;
+  stroke-width: 3;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.sol-target.is-over {
+  box-shadow:
+    0 0 0 3px var(--brand-gold),
+    0 0 20px rgba(255, 200, 61, 0.7);
+  background: rgba(255, 200, 61, 0.14);
+}
+
+.sol-target.is-over > svg {
+  background: var(--brand-gold);
+  color: #3a2100;
+}
+
+.sol-target.is-hint {
+  background: transparent;
+  box-shadow: none;
+  border: 2px dashed var(--brand-gold);
+  animation: sol-hint-ring 0.9s var(--ease-in-out) infinite alternate;
+}
+
+.sol-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4000;
+  pointer-events: none;
+  border-radius: calc(var(--sol-radius) + 3px);
+  box-shadow:
+    0 0 0 3px var(--c-focus),
+    0 0 0 6px rgba(11, 10, 42, 0.45);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    height var(--dur-fast) var(--ease-out);
+}
+
+.sol-cursor.is-carrying {
+  box-shadow:
+    0 0 0 3px var(--brand-gold),
+    0 0 0 6px rgba(11, 10, 42, 0.45);
+}
+
+/* ───────────── Toolbar, setup and dialogs ───────────── */
+
+.sol-auto {
+  display: contents;
+}
+
+.sol-auto > .tool-btn {
+  border-color: color-mix(in srgb, var(--brand-gold) 70%, transparent);
+  background: linear-gradient(180deg, var(--c-gold-soft), var(--c-surface));
+  color: var(--c-gold-text);
+  box-shadow: 0 0 16px rgba(255, 200, 61, 0.25);
+}
+
+.sol-setup,
+.sol-newgame {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sol-mode-desc {
+  color: var(--c-text-2);
+  font-size: var(--fs-sm);
+  min-height: 2.6em;
+}
+
+.sol-record {
+  color: var(--c-gold-text);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+}
+
+.sol-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--c-danger-soft);
+  color: var(--c-danger-text);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+}
+
+.sol-warning > svg {
+  flex: none;
+  margin-top: 1px;
+}
+
+.sol-pause-mode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  color: var(--c-text-2);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+}
+
+/* ───────────── Light theme ───────────── */
+
+:root[data-theme='light'] .sol-slot__mark {
+  border-color: #a9aee8;
+  background: rgba(255, 255, 255, 0.55);
+  color: #8e92cc;
+}
+
+:root[data-theme='light'] .sol-slot--foundation .sol-slot__mark {
+  border-color: rgba(214, 150, 20, 0.55);
+  background: radial-gradient(circle at 50% 40%, rgba(255, 200, 61, 0.2), transparent 70%), rgba(255, 255, 255, 0.6);
+  color: #b07a0c;
+}
+
+:root[data-theme='light'] .sol-board {
+  --sol-shadow: 0 1px 2px rgba(23, 21, 74, 0.2), 0 3px 8px rgba(23, 21, 74, 0.14);
+}
+
+:root[data-theme='light'] .sol-card__face {
+  border-color: rgba(23, 21, 74, 0.32);
+}
+
+:root[data-theme='light'] .sol-count {
+  background: #1d1870;
+  color: var(--brand-gold);
+}
+
+/* ───────────── Short landscape screens: toolbar on the side, stats in the top row ───────────── */
+
+@media (orientation: landscape) and (max-height: 540px) {
+  .game-screen[data-game='solitaire'] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas:
+      'top stats stats'
+      'stage stage tools';
+  }
+
+  .game-screen[data-game='solitaire'] .game-topbar {
+    grid-area: top;
+    min-height: 0;
+    padding-block: var(--space-1);
+  }
+
+  .game-screen[data-game='solitaire'] .game-stats {
+    grid-area: stats;
+    align-items: center;
+    padding: var(--space-1) var(--space-3) var(--space-1) 0;
+  }
+
+  .game-screen[data-game='solitaire'] .stat-pill {
+    min-width: 76px;
+    padding-block: 2px;
+  }
+
+  .game-screen[data-game='solitaire'] .stat-pill__value {
+    font-size: var(--fs-md);
+  }
+
+  .game-screen[data-game='solitaire'] .game-stage {
+    grid-area: stage;
+  }
+
+  .game-screen[data-game='solitaire'] .game-toolbar {
+    grid-area: tools;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-1) var(--space-3) var(--space-2) var(--space-1);
+  }
+
+  .game-screen[data-game='solitaire'] .tool-btn {
+    flex: 0 0 auto;
+    width: 78px;
+    min-height: 52px;
+    padding-block: var(--space-1);
+  }
+}
+
+/* ───────────── Animations ───────────── */
+
+@keyframes sol-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-10%);
+  }
+  40% {
+    transform: translateX(9%);
+  }
+  60% {
+    transform: translateX(-6%);
+  }
+  80% {
+    transform: translateX(3%);
+  }
+}
+
+@keyframes sol-hint {
+  from {
+    box-shadow:
+      0 0 0 2px rgba(255, 200, 61, 0.5),
+      0 2px 6px rgba(5, 4, 30, 0.3);
+  }
+  to {
+    box-shadow:
+      0 0 0 3px var(--brand-gold),
+      0 0 18px rgba(255, 200, 61, 0.8);
+  }
+}
+
+@keyframes sol-hint-ring {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sol-celebrate {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  45% {
+    transform: translateY(-12%) scale(1.06);
+    box-shadow:
+      0 0 0 2px var(--brand-gold),
+      0 0 24px rgba(255, 200, 61, 0.85);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}

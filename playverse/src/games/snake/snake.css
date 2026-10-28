@@ -1,0 +1,376 @@
+/* ───────────── Snake (prefix sn-) ───────────── */
+
+.sn-wrap {
+  container: sn-wrap / size;
+  width: 100%;
+  height: 100%;
+}
+
+.sn-layout {
+  --pad-w: 72px;
+  --pad-h: 60px;
+  --dpad-w: calc(var(--pad-w) * 3 + var(--space-2) * 2);
+  --dpad-h: calc(var(--pad-h) * 2 + var(--space-2));
+  --sn-gap: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sn-gap);
+  width: 100%;
+  height: 100%;
+}
+
+/* Board: the largest square that fits above the D-pad (never cropped). */
+.sn-board {
+  position: relative;
+  flex: none;
+  width: min(100cqw, 100cqh - var(--dpad-h) - var(--sn-gap));
+  max-width: 680px;
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--c-border-strong);
+  background: var(--board-bg);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 4px rgba(139, 132, 255, 0.08),
+    0 0 40px rgba(34, 197, 94, 0.14);
+  overflow: hidden;
+  container-type: size;
+  cursor: grab;
+}
+
+.sn-board:active {
+  cursor: grabbing;
+}
+
+/* Endless mode: dashed frame = the edges are open (also explained in the help). */
+.sn-board--endless {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--c-success) 70%, var(--c-border-strong));
+}
+
+.sn-board.is-crashed {
+  animation: sn-shake 380ms var(--ease-out);
+  border-color: var(--c-danger);
+}
+
+.sn-board.is-won {
+  border-color: var(--brand-gold);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 3px color-mix(in srgb, var(--brand-gold) 60%, transparent),
+    0 0 44px rgba(255, 200, 61, 0.45);
+}
+
+:root[data-theme='light'] .sn-board {
+  box-shadow:
+    var(--shadow-md),
+    0 0 0 4px rgba(47, 91, 240, 0.06),
+    0 0 32px rgba(22, 163, 74, 0.12);
+}
+
+.sn-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes sn-shake {
+  0%,
+  100% {
+    transform: none;
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+/* 3-2-1 countdown over the board */
+.sn-countdown {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(11, 10, 42, 0.32);
+  pointer-events: none;
+}
+
+:root[data-theme='light'] .sn-countdown {
+  background: rgba(238, 240, 255, 0.4);
+}
+
+.sn-countdown__num {
+  display: grid;
+  place-items: center;
+  width: 24cqmin;
+  height: 24cqmin;
+  border-radius: 50%;
+  border: 3px solid var(--brand-gold);
+  background: radial-gradient(circle at 35% 30%, var(--c-surface-3), var(--c-surface-solid));
+  color: var(--c-text);
+  font-size: 13cqmin;
+  font-weight: var(--fw-black);
+  line-height: 1;
+  box-shadow:
+    0 0 0 6px var(--c-gold-soft),
+    0 0 36px rgba(255, 200, 61, 0.4),
+    var(--shadow-md);
+  animation: sn-count 420ms var(--ease-spring) both;
+}
+
+@keyframes sn-count {
+  from {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* D-pad (inverted T, like keyboard arrows) */
+.sn-controls {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.sn-dpad {
+  display: grid;
+  grid-template-columns: repeat(3, var(--pad-w));
+  grid-template-rows: repeat(2, var(--pad-h));
+  gap: var(--space-2);
+}
+
+.sn-pad {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--c-surface-3), var(--c-surface-2));
+  color: var(--c-text);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 4px 0 rgba(3, 2, 20, 0.35),
+    var(--shadow-sm);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast);
+}
+
+.sn-pad:hover:not(:disabled) {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--c-surface-3) 80%, #ffffff 8%), var(--c-surface-3));
+}
+
+.sn-pad:active:not(:disabled) {
+  transform: translateY(3px);
+  color: var(--c-success-text);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 1px 0 rgba(3, 2, 20, 0.35),
+    0 0 18px rgba(34, 197, 94, 0.35);
+}
+
+.sn-pad:disabled {
+  opacity: 0.45;
+}
+
+.sn-pad--up {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.sn-pad--left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.sn-pad--down {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.sn-pad--right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+:root[data-theme='light'] .sn-pad {
+  background: linear-gradient(180deg, #ffffff, var(--c-surface-2));
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    0 4px 0 rgba(23, 21, 74, 0.16),
+    var(--shadow-sm);
+}
+
+/* Keyboard hint: only on wide layouts with a fine pointer (desktop). */
+.sn-keys {
+  display: none;
+  max-width: var(--dpad-w);
+  margin: 0;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  color: var(--c-text-3);
+  text-align: center;
+}
+
+/* Tall portrait stages: bigger pads for thumbs (the board is limited by the width anyway). */
+@container sn-wrap (min-height: 660px) {
+  .sn-layout {
+    --pad-w: 84px;
+    --pad-h: 68px;
+    --sn-gap: var(--space-4);
+  }
+}
+
+/* Short screens: slightly smaller pads so the board stays big. */
+@container sn-wrap (max-height: 560px) {
+  .sn-layout {
+    --pad-w: 64px;
+    --pad-h: 50px;
+    --sn-gap: var(--space-2);
+  }
+}
+
+/* Wide stage (landscape / desktop): D-pad beside the board. */
+@container sn-wrap (min-aspect-ratio: 6 / 5) {
+  .sn-layout {
+    --pad-w: 72px;
+    --pad-h: 62px;
+    flex-direction: row;
+    gap: var(--space-6);
+  }
+
+  .sn-board {
+    width: min(100cqh, 100cqw - var(--dpad-w) - var(--space-6));
+  }
+
+  .sn-dpad {
+    grid-template-rows: repeat(3, var(--pad-h));
+  }
+
+  .sn-pad--left,
+  .sn-pad--right {
+    grid-row: 2;
+  }
+
+  .sn-pad--down {
+    grid-row: 3;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .sn-keys {
+      display: block;
+    }
+  }
+}
+
+/* Setup screen */
+.sn-saved {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 55%, transparent);
+  background: linear-gradient(180deg, var(--c-gold-soft), transparent);
+  color: var(--c-gold-text);
+}
+
+.sn-saved__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sn-saved__text strong {
+  font-weight: var(--fw-black);
+}
+
+.sn-saved__text span {
+  font-size: var(--fs-sm);
+  color: var(--c-text-2);
+}
+
+.sn-option {
+  margin-bottom: var(--space-4);
+}
+
+.sn-option .field {
+  margin-bottom: var(--space-2);
+}
+
+.sn-option__hint {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--c-text-3);
+}
+
+.sn-best {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--c-surface-2);
+}
+
+.sn-best__label {
+  flex: 1;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--c-text-2);
+}
+
+.sn-best__value {
+  font-weight: var(--fw-black);
+  color: var(--c-gold-text);
+}
+
+.sn-best__empty {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--c-text-3);
+}
+
+/* Mode/difficulty line under the game-over subtitle */
+.sn-result-variant {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--c-text-3);
+}
+
+/* Pause menu extras */
+.sn-pause-extra {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.sn-pause-extra__variant {
+  margin: 0;
+  text-align: center;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--c-text-3);
+}

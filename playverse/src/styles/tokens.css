@@ -1,0 +1,160 @@
+/*
+ * PlayVerse design tokens.
+ * Brand: deep indigo night sky, electric blue for primary actions, gold for records/rewards.
+ * Dark is the brand default; light keeps the same accents on lavender surfaces.
+ */
+:root {
+  --font-sans: 'Nunito', ui-rounded, 'SF Pro Rounded', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --fs-2xs: 0.6875rem;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.75rem;
+  --fs-3xl: 2.25rem;
+  --fw-regular: 500;
+  --fw-semibold: 700;
+  --fw-bold: 800;
+  --fw-black: 900;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  --tap-min: 44px;
+  --page-max: 960px;
+  --gutter: 16px;
+  --bottom-nav-h: 72px;
+  --header-h: 56px;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+
+  --dur-fast: 120ms;
+  --dur-med: 220ms;
+  --dur-slow: 380ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Brand constants (same in both themes) */
+  --brand-gold: #ffc83d;
+  --brand-gold-2: #ff9e1b;
+  --brand-blue: #3d7bff;
+  --brand-blue-2: #2450e6;
+  --brand-purple: #7c3aed;
+  --brand-night: #0b0a2a;
+
+  /* Per-game accents (card tints) */
+  --g-block-puzzle: #1d4ed8;
+  --g-water-sort: #6d28d9;
+  --g-snake: #0f766e;
+  --g-number-match: #4f46e5;
+  --g-game-2048: #b45309;
+  --g-solitaire: #047857;
+  --g-checkers: #b91c1c;
+  --g-domino: #5b21b6;
+  --g-sudoku: #1e40af;
+  --g-crossword: #4338ca;
+}
+
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --c-bg: #0b0a2a;
+  --c-bg-glow-1: rgba(124, 58, 237, 0.38);
+  --c-bg-glow-2: rgba(37, 99, 235, 0.28);
+  --c-surface: rgba(28, 26, 88, 0.78);
+  --c-surface-solid: #1a1852;
+  --c-surface-2: #242270;
+  --c-surface-3: #302e86;
+  --c-overlay: rgba(6, 5, 24, 0.72);
+  --c-border: rgba(139, 132, 255, 0.26);
+  --c-border-strong: rgba(139, 132, 255, 0.55);
+  --c-text: #ffffff;
+  --c-text-2: #cfcdf5;
+  --c-text-3: #a09ed6;
+  --c-primary: #2f5bf0;
+  --c-primary-hover: #4470ff;
+  --c-primary-press: #2349cf;
+  --c-primary-soft: rgba(61, 123, 255, 0.2);
+  --c-on-primary: #ffffff;
+  --c-gold: var(--brand-gold);
+  --c-gold-text: #ffd35c;
+  --c-gold-soft: rgba(255, 200, 61, 0.16);
+  --c-success: #22c55e;
+  --c-success-text: #4ade80;
+  --c-success-soft: rgba(34, 197, 94, 0.16);
+  --c-danger: #f43f5e;
+  --c-danger-text: #fb7185;
+  --c-danger-soft: rgba(244, 63, 94, 0.16);
+  --c-warning: #f59e0b;
+  --c-warning-soft: rgba(245, 158, 11, 0.16);
+  --c-focus: #8fb2ff;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 6px 18px rgba(3, 2, 20, 0.45);
+  --shadow-lg: 0 18px 48px rgba(3, 2, 20, 0.6);
+  --shadow-glow: 0 0 0 1px rgba(139, 132, 255, 0.25), 0 8px 28px rgba(76, 60, 255, 0.25);
+  --board-bg: #15134a;
+  --board-cell: #211f63;
+  --board-line: rgba(139, 132, 255, 0.22);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --c-bg: #eef0ff;
+  --c-bg-glow-1: rgba(124, 58, 237, 0.16);
+  --c-bg-glow-2: rgba(37, 99, 235, 0.14);
+  --c-surface: rgba(255, 255, 255, 0.9);
+  --c-surface-solid: #ffffff;
+  --c-surface-2: #f1f2ff;
+  --c-surface-3: #e2e4fb;
+  --c-overlay: rgba(20, 18, 60, 0.45);
+  --c-border: #d8dbf6;
+  --c-border-strong: #aeb3ea;
+  --c-text: #17154a;
+  --c-text-2: #3f3d78;
+  --c-text-3: #5f5d96;
+  --c-primary: #2f5bf0;
+  --c-primary-hover: #2349cf;
+  --c-primary-press: #1c3db0;
+  --c-primary-soft: rgba(47, 91, 240, 0.12);
+  --c-on-primary: #ffffff;
+  --c-gold: #f5a524;
+  --c-gold-text: #9a5b00;
+  --c-gold-soft: rgba(245, 165, 36, 0.16);
+  --c-success: #16a34a;
+  --c-success-text: #15803d;
+  --c-success-soft: rgba(22, 163, 74, 0.12);
+  --c-danger: #e11d48;
+  --c-danger-text: #be123c;
+  --c-danger-soft: rgba(225, 29, 72, 0.1);
+  --c-warning: #d97706;
+  --c-warning-soft: rgba(217, 119, 6, 0.12);
+  --c-focus: #2f5bf0;
+  --shadow-sm: 0 1px 2px rgba(23, 21, 74, 0.08);
+  --shadow-md: 0 6px 18px rgba(23, 21, 74, 0.1);
+  --shadow-lg: 0 18px 48px rgba(23, 21, 74, 0.18);
+  --shadow-glow: 0 0 0 1px rgba(47, 91, 240, 0.12), 0 8px 24px rgba(47, 91, 240, 0.12);
+  --board-bg: #dfe2fb;
+  --board-cell: #f7f8ff;
+  --board-line: #c9cdf3;
+}

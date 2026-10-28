@@ -1,0 +1,140 @@
+import type { CheckersMessages } from '../pt/checkers';
+
+export const checkers: CheckersMessages = {
+  help: {
+    intro:
+      'Brazilian checkers: international (FMJD) draughts rules on an 8×8 board, with flying kings and compulsory capture under the majority rule. You win by capturing all of your opponent’s pieces or leaving them with no move.',
+    sections: [
+      {
+        title: 'Board and set-up',
+        items: [
+          'Play takes place on the dark squares of an 8×8 board only, with a dark square in each player’s bottom-left corner.',
+          'Each player starts with 12 men on the first three rows on their side.',
+          'White always moves first; after that the players take turns.',
+        ],
+      },
+      {
+        title: 'Moving',
+        items: [
+          'Men move one square diagonally, always forwards.',
+          'Kings fly: they move any number of free squares diagonally, forwards or backwards.',
+          'A man that ends its move on the far row is promoted to a king and gets a crown.',
+        ],
+      },
+      {
+        title: 'Capturing',
+        items: [
+          'Capturing is compulsory: if you can capture, you must.',
+          'A man captures by jumping over an adjacent opposing piece onto the free square just beyond it, forwards or backwards.',
+          'A king captures an opposing piece at any distance on the same diagonal (with only free squares in between) and may land on any free square beyond it.',
+          'If another capture is possible after a capture, the move continues and the whole sequence must be completed.',
+          'Majority rule: you must choose the sequence that captures the most pieces; men and kings count the same. Among sequences with the same number of captures you may choose freely.',
+          'Captured pieces are only removed at the end of the move: until then they cannot be jumped again and they block the way (Turkish strike rule).',
+          'If a man reaches the far row in the middle of a capture and can keep capturing, it carries on as a man and is not promoted.',
+        ],
+      },
+      {
+        title: 'End of the game',
+        items: [
+          'You lose if you have no pieces left or no legal move on your turn.',
+          'Draw by repetition: the same position, with the same player to move, occurs three times.',
+          'Draw by king moves: 20 consecutive moves by each player (40 in total) in which only kings move and nothing is captured.',
+          'In two-player mode you can offer a draw; if your opponent accepts, the game ends in a draw.',
+        ],
+      },
+      {
+        title: 'Notation',
+        items: [
+          'The dark squares are numbered 1 to 32: seen from White, 1 to 4 are on the top row (Red’s side) and 29 to 32 on the bottom row, from left to right.',
+          'A move is written with a hyphen (11-15) and a capture with “x” and every square the piece lands on (22x15x8).',
+          'The history lists every move of the game, numbered in pairs (White and Red).',
+        ],
+      },
+      {
+        title: 'Controls',
+        items: [
+          'Tap a highlighted piece to select it; its destination squares are marked. Tap a destination to move.',
+          'For multiple captures, tap each landing square in order. When only one route is left, the move completes by itself.',
+          'Keyboard: arrow keys move the cursor, Enter or Space selects and moves, Esc cancels the selection, U undoes and P pauses.',
+          'Undo: against the computer it takes back your last move and the computer’s reply; with two players it takes back the last move.',
+        ],
+      },
+      {
+        title: 'Modes and statistics',
+        items: [
+          'Against the computer you choose your colour and the difficulty: easy, medium or hard.',
+          'Wins, losses and draws in the statistics only count games against the computer. Two-player games are recorded as played, with no winner.',
+          'Starting a new game against the computer after you have already moved counts as a loss.',
+          'The game is saved automatically and resumed when you come back.',
+        ],
+      },
+    ],
+  },
+  sides: { w: 'White', b: 'Red' },
+  sideWins: { w: 'White wins!', b: 'Red wins!' },
+  turnOf: { w: 'White to move', b: 'Red to move' },
+  pieces: {
+    wMan: 'white man',
+    wKing: 'white king',
+    bMan: 'red man',
+    bKing: 'red king',
+  },
+  setup: {
+    colour: 'Your colour',
+    whiteFirst: 'White always moves first.',
+    rules: 'Brazilian rules: flying kings and compulsory capture under the majority rule.',
+  },
+  subtitleAi: (difficulty: string) => `Against the computer · ${difficulty}`,
+  subtitleTwoPlayers: 'Two players on one device',
+  playerYou: (side: string) => `You · ${side}`,
+  playerComputer: (difficulty: string) => `Computer · ${difficulty}`,
+  boardLabel: 'Checkers board, 8 by 8',
+  squareLabel: (n: number, content: string) => `Square ${n}: ${content}`,
+  emptySquare: 'empty',
+  states: {
+    selected: 'selected',
+    movable: 'can move',
+    target: 'possible destination',
+    captured: 'captured this move',
+    lastMove: 'last move',
+  },
+  status: {
+    selectPiece: 'Choose a highlighted piece.',
+    selectDestination: 'Choose the destination square.',
+    mustCapture: (n: number) => (n === 1 ? 'Capture required: 1 piece.' : `Capture required: ${n} pieces (majority rule).`),
+    continueCapture: (left: number) => (left === 1 ? 'Keep capturing: 1 piece to go.' : `Keep capturing: ${left} pieces to go.`),
+    lastMove: (notation: string) => `Last move: ${notation}`,
+    waiting: 'The computer is thinking…',
+  },
+  cannotMove: 'That piece has no moves.',
+  mustCaptureHint: 'Capturing is compulsory: choose one of the highlighted pieces.',
+  toMove: 'To move',
+  capturedCount: (n: number) => (n === 1 ? '1 piece captured' : `${n} pieces captured`),
+  offerDraw: 'Draw',
+  offerDrawDescription: 'Offer your opponent a draw',
+  drawOfferTitle: { w: 'White offers a draw', b: 'Red offers a draw' },
+  drawOfferBody: {
+    w: 'Red: do you accept the draw? The game will end with no winner.',
+    b: 'White: do you accept the draw? The game will end with no winner.',
+  },
+  acceptDraw: 'Accept draw',
+  declineDraw: 'Decline',
+  drawDeclined: 'Draw declined. The game goes on.',
+  changeMode: 'Change mode',
+  abandonBody: 'If you start a new game, this game against the computer will count as a loss.',
+  results: {
+    noPieces: { w: 'White has no pieces left.', b: 'Red has no pieces left.' },
+    noMoves: { w: 'White has no legal moves left.', b: 'Red has no legal moves left.' },
+    repetition: 'The same position occurred three times.',
+    kingMoves: 'Each side made 20 moves with kings only and no captures.',
+    agreement: 'Draw agreed by both players.',
+  },
+  captures: 'Captures',
+  bestStreak: 'Best streak',
+  announceMove: (player: string, notation: string) => `${player}: ${notation}`,
+  announcePromotion: 'Crowned a king!',
+  announceSelected: (n: number) => `Piece on square ${n} selected`,
+  announceYourTurn: 'Your turn.',
+  moveNumber: (n: number) => `${n}.`,
+  historyLabel: 'Moves of the game',
+};

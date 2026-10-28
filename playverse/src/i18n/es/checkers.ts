@@ -1,0 +1,140 @@
+import type { CheckersMessages } from '../pt/checkers';
+
+export const checkers: CheckersMessages = {
+  help: {
+    intro:
+      'Damas brasileñas: las reglas internacionales (FMJD) en un tablero de 8×8, con damas de largo alcance y captura obligatoria por la ley de la mayoría. Gana quien captura todas las fichas del rival o lo deja sin movimientos.',
+    sections: [
+      {
+        title: 'Tablero y posición inicial',
+        items: [
+          'Solo se juega en las casillas oscuras de un tablero de 8×8, con una casilla oscura en la esquina inferior izquierda de cada jugador.',
+          'Cada jugador empieza con 12 peones en las tres primeras filas de su lado.',
+          'Las blancas siempre mueven primero; después los jugadores se turnan.',
+        ],
+      },
+      {
+        title: 'Movimientos',
+        items: [
+          'Los peones se mueven una casilla en diagonal, siempre hacia delante.',
+          'Las damas son de largo alcance: se mueven cualquier número de casillas libres en diagonal, hacia delante o hacia atrás.',
+          'Un peón que termina su jugada en la última fila del lado contrario se corona dama y lleva una corona.',
+        ],
+      },
+      {
+        title: 'Capturas',
+        items: [
+          'La captura es obligatoria: si puedes capturar, tienes que hacerlo.',
+          'Un peón captura saltando por encima de una ficha rival contigua hasta la casilla libre que hay justo detrás, hacia delante o hacia atrás.',
+          'Una dama captura una ficha rival a cualquier distancia en la misma diagonal (solo con casillas libres en medio) y puede detenerse en cualquier casilla libre detrás de ella.',
+          'Si después de capturar se puede volver a capturar, la jugada continúa y la secuencia tiene que completarse.',
+          'Ley de la mayoría: tienes que elegir la secuencia que captura más fichas; peones y damas valen lo mismo. Entre secuencias con el mismo número de capturas eliges libremente.',
+          'Las fichas capturadas solo se retiran al final de la jugada: hasta entonces no se pueden saltar de nuevo y bloquean el paso (golpe turco).',
+          'Si un peón llega a la última fila en mitad de una captura y puede seguir capturando, continúa como peón y no se corona.',
+        ],
+      },
+      {
+        title: 'Final de la partida',
+        items: [
+          'Pierde quien se queda sin fichas o no tiene ningún movimiento posible en su turno.',
+          'Tablas por repetición: la misma posición, con el mismo jugador al turno, aparece tres veces.',
+          'Tablas por jugadas de damas: 20 jugadas seguidas de cada jugador (40 en total) en las que solo se mueven damas y no hay capturas.',
+          'En el modo de dos jugadores puedes proponer tablas; si el rival acepta, la partida termina en tablas.',
+        ],
+      },
+      {
+        title: 'Notación',
+        items: [
+          'Las casillas oscuras están numeradas del 1 al 32: vistas desde las blancas, la 1 a la 4 están en la fila de arriba (lado de las rojas) y la 29 a la 32 en la fila de abajo, de izquierda a derecha.',
+          'Un movimiento se escribe con guion (11-15) y una captura con «x» y todas las casillas donde se detiene la ficha (22x15x8).',
+          'El historial muestra todas las jugadas de la partida, numeradas por parejas (blancas y rojas).',
+        ],
+      },
+      {
+        title: 'Controles',
+        items: [
+          'Toca una ficha resaltada para seleccionarla; sus casillas de destino quedan marcadas. Toca un destino para mover.',
+          'En las capturas múltiples, toca cada casilla de parada por orden. Cuando solo queda un camino, la jugada se completa sola.',
+          'Teclado: las flechas mueven el cursor, Intro o Espacio selecciona y mueve, Esc cancela la selección, U deshace y P pausa.',
+          'Deshacer: contra el ordenador anula tu última jugada y la respuesta del ordenador; a dos jugadores anula la última jugada.',
+        ],
+      },
+      {
+        title: 'Modos y estadísticas',
+        items: [
+          'Contra el ordenador eliges tu color y la dificultad: fácil, media o difícil.',
+          'Las victorias, derrotas y tablas de las estadísticas solo cuentan las partidas contra el ordenador. Las partidas a dos se registran como jugadas, sin ganador.',
+          'Empezar una partida nueva contra el ordenador cuando ya has movido cuenta como derrota.',
+          'La partida se guarda automáticamente y se reanuda cuando vuelves.',
+        ],
+      },
+    ],
+  },
+  sides: { w: 'Blancas', b: 'Rojas' },
+  sideWins: { w: '¡Ganan las blancas!', b: '¡Ganan las rojas!' },
+  turnOf: { w: 'Turno de las blancas', b: 'Turno de las rojas' },
+  pieces: {
+    wMan: 'peón blanco',
+    wKing: 'dama blanca',
+    bMan: 'peón rojo',
+    bKing: 'dama roja',
+  },
+  setup: {
+    colour: 'Tu color',
+    whiteFirst: 'Las blancas siempre mueven primero.',
+    rules: 'Reglas brasileñas: damas de largo alcance y captura obligatoria por la ley de la mayoría.',
+  },
+  subtitleAi: (difficulty: string) => `Contra el ordenador · ${difficulty}`,
+  subtitleTwoPlayers: 'Dos jugadores en el mismo dispositivo',
+  playerYou: (side: string) => `Tú · ${side}`,
+  playerComputer: (difficulty: string) => `Ordenador · ${difficulty}`,
+  boardLabel: 'Tablero de damas, 8 por 8',
+  squareLabel: (n: number, content: string) => `Casilla ${n}: ${content}`,
+  emptySquare: 'vacía',
+  states: {
+    selected: 'seleccionada',
+    movable: 'puede mover',
+    target: 'destino posible',
+    captured: 'capturada en esta jugada',
+    lastMove: 'última jugada',
+  },
+  status: {
+    selectPiece: 'Elige una ficha resaltada.',
+    selectDestination: 'Elige la casilla de destino.',
+    mustCapture: (n: number) => (n === 1 ? 'Captura obligatoria: 1 ficha.' : `Captura obligatoria: ${n} fichas (ley de la mayoría).`),
+    continueCapture: (left: number) => (left === 1 ? 'Sigue capturando: falta 1 ficha.' : `Sigue capturando: faltan ${left} fichas.`),
+    lastMove: (notation: string) => `Última jugada: ${notation}`,
+    waiting: 'El ordenador está pensando…',
+  },
+  cannotMove: 'Esa ficha no tiene movimientos.',
+  mustCaptureHint: 'La captura es obligatoria: elige una de las fichas resaltadas.',
+  toMove: 'Al turno',
+  capturedCount: (n: number) => (n === 1 ? '1 ficha capturada' : `${n} fichas capturadas`),
+  offerDraw: 'Tablas',
+  offerDrawDescription: 'Proponer tablas al rival',
+  drawOfferTitle: { w: 'Las blancas proponen tablas', b: 'Las rojas proponen tablas' },
+  drawOfferBody: {
+    w: 'Rojas: ¿aceptas las tablas? La partida terminará sin ganador.',
+    b: 'Blancas: ¿aceptas las tablas? La partida terminará sin ganador.',
+  },
+  acceptDraw: 'Aceptar tablas',
+  declineDraw: 'Rechazar',
+  drawDeclined: 'Tablas rechazadas. La partida continúa.',
+  changeMode: 'Cambiar modo',
+  abandonBody: 'Si empiezas una partida nueva, esta partida contra el ordenador contará como derrota.',
+  results: {
+    noPieces: { w: 'Las blancas se han quedado sin fichas.', b: 'Las rojas se han quedado sin fichas.' },
+    noMoves: { w: 'Las blancas se han quedado sin movimientos.', b: 'Las rojas se han quedado sin movimientos.' },
+    repetition: 'La misma posición se ha repetido tres veces.',
+    kingMoves: 'Cada bando ha hecho 20 jugadas solo con damas y sin capturas.',
+    agreement: 'Tablas de mutuo acuerdo.',
+  },
+  captures: 'Capturas',
+  bestStreak: 'Mejor racha',
+  announceMove: (player: string, notation: string) => `${player}: ${notation}`,
+  announcePromotion: '¡Coronada dama!',
+  announceSelected: (n: number) => `Ficha de la casilla ${n} seleccionada`,
+  announceYourTurn: 'Es tu turno.',
+  moveNumber: (n: number) => `${n}.`,
+  historyLabel: 'Jugadas de la partida',
+};

@@ -1,0 +1,140 @@
+export const checkers = {
+  help: {
+    intro:
+      'Damas brasileiras: as regras internacionais (FMJD) em um tabuleiro de 8×8, com damas de longo alcance e captura obrigatória pela lei da maioria. Vence quem capturar todas as peças do adversário ou deixá-lo sem jogadas.',
+    sections: [
+      {
+        title: 'Tabuleiro e início',
+        items: [
+          'O jogo usa só as casas escuras de um tabuleiro de 8×8, com uma casa escura no canto inferior esquerdo de cada jogador.',
+          'Cada jogador começa com 12 peças nas três primeiras fileiras do seu lado.',
+          'As brancas sempre jogam primeiro; depois a vez alterna entre os dois jogadores.',
+        ],
+      },
+      {
+        title: 'Movimentos',
+        items: [
+          'As peças simples andam uma casa na diagonal, sempre para a frente.',
+          'As damas são de longo alcance: andam qualquer número de casas livres na diagonal, para a frente ou para trás.',
+          'Uma peça simples que termina o lance na última fileira do lado adversário é promovida a dama e ganha uma coroa.',
+        ],
+      },
+      {
+        title: 'Capturas',
+        items: [
+          'A captura é obrigatória: se você puder capturar, precisa capturar.',
+          'Uma peça simples captura saltando por cima de uma peça adversária vizinha para a casa livre logo depois dela, para a frente ou para trás.',
+          'Uma dama captura uma peça adversária a qualquer distância na mesma diagonal (só com casas livres no caminho) e pode parar em qualquer casa livre depois dela.',
+          'Se depois de capturar for possível capturar de novo, a captura continua no mesmo lance e precisa ser completada.',
+          'Lei da maioria: você deve escolher a sequência que captura mais peças; peças simples e damas valem o mesmo. Entre sequências com o mesmo número de capturas, a escolha é livre.',
+          'As peças capturadas só saem do tabuleiro no fim do lance: até lá não podem ser saltadas de novo e bloqueiam a passagem (lance turco).',
+          'Se uma peça simples chegar à última fileira no meio de uma captura e puder continuar capturando, ela continua como peça simples e não é promovida.',
+        ],
+      },
+      {
+        title: 'Fim da partida',
+        items: [
+          'Perde quem ficar sem peças ou, na sua vez, não tiver nenhuma jogada possível.',
+          'Empate por repetição: a mesma posição, com o mesmo jogador na vez, aparece três vezes.',
+          'Empate por lances de damas: 20 lances seguidos de cada jogador (40 no total) em que só damas se movem e não há capturas.',
+          'No modo de dois jogadores você pode propor empate; se o adversário aceitar, a partida termina empatada.',
+        ],
+      },
+      {
+        title: 'Notação',
+        items: [
+          'As casas escuras são numeradas de 1 a 32: vistas pelas brancas, a 1 a 4 ficam na fileira de cima (lado das vermelhas) e a 29 a 32 na fileira de baixo, da esquerda para a direita.',
+          'Um movimento se escreve com hífen (11-15) e uma captura com “x” e todas as casas onde a peça para (22x15x8).',
+          'O histórico mostra todos os lances da partida, numerados em pares (brancas e vermelhas).',
+        ],
+      },
+      {
+        title: 'Controles',
+        items: [
+          'Toque em uma peça destacada para selecioná-la; as casas de destino ficam marcadas. Toque em um destino para jogar.',
+          'Nas capturas múltiplas, toque em cada casa de parada, em ordem. Quando só resta um caminho, o lance se completa sozinho.',
+          'Teclado: as setas movem o cursor, Enter ou Espaço seleciona e joga, Esc cancela a seleção, U desfaz e P pausa.',
+          'Desfazer: contra o computador, anula o seu último lance e a resposta do computador; no modo de dois jogadores, anula o último lance.',
+        ],
+      },
+      {
+        title: 'Modos e estatísticas',
+        items: [
+          'Contra o computador, você escolhe a cor e a dificuldade: fácil, média ou difícil.',
+          'As vitórias, derrotas e empates das estatísticas contam apenas as partidas contra o computador. As partidas de dois jogadores ficam registradas como jogadas, sem vencedor.',
+          'Começar um novo jogo contra o computador depois de já ter jogado conta como derrota.',
+          'A partida é salva automaticamente e retomada quando você voltar.',
+        ],
+      },
+    ],
+  },
+  sides: { w: 'Brancas', b: 'Vermelhas' },
+  sideWins: { w: 'As brancas venceram!', b: 'As vermelhas venceram!' },
+  turnOf: { w: 'Vez das brancas', b: 'Vez das vermelhas' },
+  pieces: {
+    wMan: 'peça branca',
+    wKing: 'dama branca',
+    bMan: 'peça vermelha',
+    bKing: 'dama vermelha',
+  },
+  setup: {
+    colour: 'Sua cor',
+    whiteFirst: 'As brancas sempre jogam primeiro.',
+    rules: 'Regras brasileiras: damas de longo alcance e captura obrigatória pela lei da maioria.',
+  },
+  subtitleAi: (difficulty: string) => `Contra o computador · ${difficulty}`,
+  subtitleTwoPlayers: 'Dois jogadores no mesmo dispositivo',
+  playerYou: (side: string) => `Você · ${side}`,
+  playerComputer: (difficulty: string) => `Computador · ${difficulty}`,
+  boardLabel: 'Tabuleiro de damas, 8 por 8',
+  squareLabel: (n: number, content: string) => `Casa ${n}: ${content}`,
+  emptySquare: 'vazia',
+  states: {
+    selected: 'selecionada',
+    movable: 'pode jogar',
+    target: 'destino possível',
+    captured: 'capturada neste lance',
+    lastMove: 'último lance',
+  },
+  status: {
+    selectPiece: 'Escolha uma peça destacada.',
+    selectDestination: 'Escolha a casa de destino.',
+    mustCapture: (n: number) => (n === 1 ? 'Captura obrigatória: 1 peça.' : `Captura obrigatória: ${n} peças (lei da maioria).`),
+    continueCapture: (left: number) => (left === 1 ? 'Continue a captura: falta 1 peça.' : `Continue a captura: faltam ${left} peças.`),
+    lastMove: (notation: string) => `Último lance: ${notation}`,
+    waiting: 'O computador está pensando…',
+  },
+  cannotMove: 'Essa peça não tem jogadas.',
+  mustCaptureHint: 'A captura é obrigatória: escolha uma das peças destacadas.',
+  toMove: 'Na vez',
+  capturedCount: (n: number) => (n === 1 ? '1 peça capturada' : `${n} peças capturadas`),
+  offerDraw: 'Empate',
+  offerDrawDescription: 'Propor empate ao adversário',
+  drawOfferTitle: { w: 'As brancas propõem empate', b: 'As vermelhas propõem empate' },
+  drawOfferBody: {
+    w: 'Vermelhas: vocês aceitam o empate? A partida termina sem vencedor.',
+    b: 'Brancas: vocês aceitam o empate? A partida termina sem vencedor.',
+  },
+  acceptDraw: 'Aceitar empate',
+  declineDraw: 'Recusar',
+  drawDeclined: 'Empate recusado. A partida continua.',
+  changeMode: 'Mudar modo',
+  abandonBody: 'Se você começar um novo jogo, esta partida contra o computador conta como derrota.',
+  results: {
+    noPieces: { w: 'As brancas ficaram sem peças.', b: 'As vermelhas ficaram sem peças.' },
+    noMoves: { w: 'As brancas ficaram sem jogadas possíveis.', b: 'As vermelhas ficaram sem jogadas possíveis.' },
+    repetition: 'A mesma posição se repetiu três vezes.',
+    kingMoves: 'Houve 20 lances de cada lado só com damas e sem capturas.',
+    agreement: 'Empate por acordo entre os jogadores.',
+  },
+  captures: 'Capturas',
+  bestStreak: 'Melhor sequência',
+  announceMove: (player: string, notation: string) => `${player}: ${notation}`,
+  announcePromotion: 'Promoção a dama!',
+  announceSelected: (n: number) => `Peça da casa ${n} selecionada`,
+  announceYourTurn: 'Sua vez.',
+  moveNumber: (n: number) => `${n}.`,
+  historyLabel: 'Lances da partida',
+};
+
+export type CheckersMessages = typeof checkers;
