@@ -2,8 +2,10 @@
 
 NewGames is a static web app (no build step, plain ES modules) that runs on phones
 in the browser and can be installed as a PWA. The hub (`js/main.js`) lists the
-games registered in `js/games.js`; each game lives in `games/<id>/` and opens at
-`index.html#<id>`.
+games registered in `js/games.js`; each game lives in `games/<id>/`. `#<id>` shows
+the game's lobby page (shell-made: art, "Play now", modes, achievements) and
+`#<id>-play[-<mode>]` mounts the game. The look is black & gold — see
+`docs/design/mockup.png`.
 
 ## File layout of a game
 
@@ -48,6 +50,7 @@ layout from `root.clientWidth/clientHeight` and handle `resize`.
 
 | member | description |
 |---|---|
+| `ctx.mode` | mode id chosen on the lobby page (see `modes` in `js/games.js`), or `undefined`/`null` for "Play now" → show the game's main menu; with a mode, jump straight into that mode |
 | `ctx.lang` | `'pt' \| 'en' \| 'es'` — UI language at mount time (the hub is the only place it changes) |
 | `ctx.makeT(strings)` | returns `t(key, params)`; strings shaped `{ pt: {...}, en: {...}, es: {...} }`; `{name}` placeholders; a value can be a function `(params, lang) => string` for plurals |
 | `ctx.pick(obj)` | picks `obj[lang]` from an inline `{ pt, en, es }` object |

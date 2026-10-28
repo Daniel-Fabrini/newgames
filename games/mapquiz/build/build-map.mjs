@@ -121,7 +121,32 @@ function simplifyArc(points, tol) {
 }
 
 const lonlatArcs = decodeArcs(topo);
-const projectedArcs = lonlatArcs.map((arc) => arc.map(([lng, lat]) => [projX(lng), projY(lat)]));
+// Rings may cross the antimeridian (world-atlas v2 keeps spherical
+// topology), so make x continuous along every arc and later along every ring.
+function unwrapLine(points) {
+  let off = 0;
+  let prev = null;
+  return points.map(([x, y]) => {
+    if (prev !== null) {
+      while (x + off - prev > W / 2) off -= W;
+      while (x + off - prev < -W / 2) off += W;
+    }
+    prev = x + off;
+    return [x + off, y];
+  });
+}
+const projectedArcs = lonlatArcs.map((arc) => unwrapLine(arc.map(([lng, lat]) => [projX(lng), projY(lat)])));
+
+function fixPolygon(poly) {
+  const rings = poly.map(unwrapLine);
+  const [ox] = ringCentroid(rings[0]);
+  return rings.map((r, i) => {
+    if (i === 0) return r;
+    const [hx] = ringCentroid(r);
+    const k = Math.round((ox - hx) / W);
+    return shiftPoly([r], k * W)[0];
+  });
+}
 
 function featuresAt(tol) {
   const t = { type: 'Topology', objects: topo.objects, arcs: projectedArcs.map((a) => simplifyArc(a, tol)) };
@@ -197,7 +222,8 @@ function collect(features) {
     if (f.id && SPLIT[f.id]) codes = SPLIT[f.id];
     else if (f.id && byNum.has(f.id)) codes = [byNum.get(f.id).code];
     else if (BY_NAME[f.properties.name]) codes = BY_NAME[f.properties.name];
-    for (const poly of polysOf(f.geometry)) {
+    for (const raw of polysOf(f.geometry)) {
+      const poly = fixPolygon(raw);
       const [cx, cy] = ringCentroid(poly[0]);
       if (!codes) {
         other.push(poly);
