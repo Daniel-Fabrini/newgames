@@ -32,7 +32,8 @@ export const FLAG_NAMES = { [FAST]: 'flag_fast', [CAMO]: 'flag_camo', [REGEN]: '
 // Hp multiplier that grows forever with the round number.
 export function hpScale(round) {
   const x = Math.max(0, round - 1);
-  return 1 + 0.1 * x + 0.011 * x * x;
+  // Quadratic growth, plus a steeper term after round 30 so endless matches always end.
+  return 1 + 0.1 * x + 0.011 * x * x + 0.02 * Math.max(0, x - 29) ** 2;
 }
 
 export function roundInterval(round) {
