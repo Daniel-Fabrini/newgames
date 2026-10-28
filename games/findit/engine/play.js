@@ -548,14 +548,15 @@ export function playLevel(app, spec) {
     if (!open.length) return null;
     let keys = key !== undefined && open.includes(key) ? [key] : open.filter((i) => slots.some((s) => s.key === i));
     if (!keys.length) keys = open;
+    // the most visible copy of the nearest wanted object
     const c = view.center();
-    let best = null, bestD = Infinity;
+    let best = null, bestS = -Infinity;
     for (const k of keys) {
       for (const it of goals[k].items) {
         if (it.found || it.n < 120) continue;
-        const d = Math.hypot(it.c.x - c.x, it.c.y - c.y) - it.n * 0.002;
-        if (d < bestD) {
-          bestD = d;
+        const sc = Math.log(it.n) * 600 + (it.t ? 800 : 0) - Math.hypot(it.c.x - c.x, it.c.y - c.y);
+        if (sc > bestS) {
+          bestS = sc;
           best = it;
         }
       }

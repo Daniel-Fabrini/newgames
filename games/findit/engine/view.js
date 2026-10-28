@@ -101,8 +101,8 @@ export class SceneView {
     const { W, H } = this.scene;
     // fill the panel (the photo is wider than the phone: pan sideways)
     this.minZ = Math.max(this.w / W, this.h / H);
-    // up to ~1.5 CSS px per photo pixel: still sharp on a phone
-    this.maxZ = Math.max(this.minZ * 3.2, this.opts.maxZoom || 1.5);
+    // up to ~1.35 CSS px per photo pixel: still sharp on a phone
+    this.maxZ = Math.max(this.minZ * 3, this.opts.maxZoom || 1.35);
   }
 
   fit(animate = true) {

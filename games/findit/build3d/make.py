@@ -46,6 +46,12 @@ def main(argv):
         print(f'{sid}: rendered in {time.time() - t:.0f}s', flush=True)
         if not preview:
             subprocess.run([py, '-I', os.path.join(HERE, 'post.py'), out, sid, out_scenes], check=False)
+    if not preview and '--no-thumbs' not in flags:
+        thumbs = os.path.join(work, 'thumbs')
+        subprocess.run([blender, '-b', '--factory-startup', '-P', os.path.join(HERE, 'thumbs.py'), '--', out_scenes, thumbs],
+                       env={**os.environ, 'HOG3D_CACHE': cache}, capture_output=True, text=True)
+        subprocess.run([py, '-I', os.path.join(HERE, 'post.py'), '--thumbs', thumbs, out_scenes], check=False)
+        subprocess.run([py, '-I', os.path.join(HERE, 'post.py'), '--index', out_scenes], check=False)
     return 0
 
 

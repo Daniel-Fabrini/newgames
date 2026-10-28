@@ -182,7 +182,7 @@ export const GAMES = [
   {
     id: 'hero',
     cat: 'sport',
-    progress: 70,
+    progress: 100,
     name: { pt: 'Herói da Bola', en: 'Ball Hero', es: 'Héroe del Balón' },
     sub: { pt: 'Carreira no Futebol', en: 'Soccer Career', es: 'Carrera de Fútbol' },
     about: {
