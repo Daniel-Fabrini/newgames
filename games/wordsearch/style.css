@@ -1694,15 +1694,17 @@
 /* ---------- wide screens (desktop / landscape) ---------- */
 .g-wordsearch-play.wide {
   display: grid;
-  grid-template-columns: auto minmax(280px, 380px);
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(280px, 360px);
+  grid-template-rows: auto minmax(0, 1fr) auto auto minmax(0, 1fr);
   grid-template-areas:
     'hud hud'
+    'board .'
     'board panel'
-    'board tools';
+    'board tools'
+    'board .';
   justify-content: center;
-  align-content: center;
-  column-gap: 22px;
+  align-content: stretch;
+  column-gap: 24px;
   row-gap: 12px;
 }
 .g-wordsearch-play.wide .g-wordsearch-hud {
@@ -1712,14 +1714,12 @@
 .g-wordsearch-play.wide .g-wordsearch-boardwrap {
   grid-area: board;
   align-self: center;
+  margin: 0;
 }
 .g-wordsearch-play.wide .g-wordsearch-panel {
   grid-area: panel;
-  align-self: stretch;
   margin: 0;
-}
-.g-wordsearch-play.wide .g-wordsearch-boardwrap {
-  margin: 0;
+  max-height: 60vh;
 }
 .g-wordsearch-play.wide .g-wordsearch-tools {
   grid-area: tools;

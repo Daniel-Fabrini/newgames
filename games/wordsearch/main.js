@@ -553,7 +553,7 @@ export async function mount(root, ctx) {
       el.classList.toggle('wide', wide);
       let size;
       if (wide) {
-        size = Math.min(H - hud.offsetHeight - 36, W - 420, 640);
+        size = Math.min(H - hud.offsetHeight - 40, W - 400, 640);
       } else {
         panel.style.maxHeight = '';
         const cs = getComputedStyle(el);
