@@ -220,7 +220,7 @@ export const GAMES = [
   {
     id: 'towers',
     cat: 'strategy',
-    progress: 5,
+    progress: 100,
     name: { pt: 'Batalha de Torres', en: 'Tower Battles', es: 'Batalla de Torres' },
     sub: { pt: 'Defesa de Torres', en: 'Tower Defense', es: 'Defensa de Torres' },
     about: {

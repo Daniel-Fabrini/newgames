@@ -48,6 +48,24 @@ function ballAt(p, v) {
   return { p: [...p], v: [...v], w: [0, 0, 0], rest: false, restT: 0 };
 }
 
+// Predicts the first table contact of a shot (ignores the net) for aiming.
+function simLanding(p0, v0, w0) {
+  let p = [...p0];
+  let v = [...v0];
+  const h = 1 / 240;
+  for (let i = 0; i < 600; i++) {
+    const sp = Math.hypot(v[0], v[1], v[2]);
+    const ax = MAG * (w0[1] * v[2] - w0[2] * v[1]) - DRAG * sp * v[0];
+    const ay = -G + MAG * (w0[2] * v[0] - w0[0] * v[2]) - DRAG * sp * v[1];
+    const az = MAG * (w0[0] * v[1] - w0[1] * v[0]) - DRAG * sp * v[2];
+    v = [v[0] + ax * h, v[1] + ay * h, v[2] + az * h];
+    p = [p[0] + v[0] * h, p[1] + v[1] * h, p[2] + v[2] * h];
+    if (v[1] < 0 && p[1] - R <= TABLE_Y) return { x: p[0], z: p[2] };
+    if (p[1] < 0) return null;
+  }
+  return null;
+}
+
 export class Match {
   // cfg: { mode: 'match'|'serve'|'rally'|'target', bestOf, tier, style, eq:{power,control,spin,move,rubber}, firstServer }
   constructor(cfg) {
@@ -209,23 +227,38 @@ export class Match {
 
     const zt = smash ? s * (0.95 + 0.3 * depth) : s * (0.35 + 0.9 * depth);
     const xt = clamp(aim * 0.62, -0.7, 0.7);
-    const sh = smash ? 9 + 6 * pw : 4.2 + 7 * pw;
+    let sh = smash ? 9 + 6 * pw : 4.2 + 7 * pw;
     const p0 = b.p;
-    const D = Math.abs(zt - p0[2]);
-    const T = Math.max(0.18, D / sh);
-    const vx = (xt - p0[0]) / T;
-    const vz = (zt - p0[2]) / T;
+    const w0 = [s * (top - back) * MAX_SPIN, 0, s * side_ * SIDE_MAX];
     const yEnd = TABLE_Y + R + 0.005;
-    let vy = (yEnd - p0[1] + 0.5 * G * T * T) / T;
-    // make sure the ball clears the net
-    const tn = -p0[2] / vz;
-    if (tn > 0 && tn < T) {
-      const need = NET_TOP + R + 0.045;
-      const yAt = p0[1] + vy * tn - 0.5 * G * tn * tn;
-      if (yAt < need) vy = Math.max(vy, (need - p0[1] + 0.5 * G * tn * tn) / tn);
+    // velocity for a given horizontal speed: arc with clearance over the net
+    const build = (speed) => {
+      const D = Math.hypot(zt - p0[2], xt - p0[0]);
+      const T = Math.max(0.16, D / speed);
+      const vx = (xt - p0[0]) / T;
+      const vz = (zt - p0[2]) / T;
+      let vy = (yEnd - p0[1] + 0.5 * G * T * T) / T;
+      const tn = -p0[2] / vz;
+      if (tn > 0 && tn < T) {
+        const need = NET_TOP + R + 0.045;
+        const yAt = p0[1] + vy * tn - 0.5 * G * tn * tn;
+        if (yAt < need) vy = Math.max(vy, (need - p0[1] + 0.5 * G * tn * tn) / tn);
+      }
+      return [vx, vy, vz];
+    };
+    // correct the speed so that the predicted first bounce lands where aimed (drag, Magnus)
+    let v = build(sh);
+    for (let it = 0; it < 3; it++) {
+      const land = simLanding(p0, v, w0);
+      if (!land) break;
+      const want = zt - p0[2];
+      const got = land.z - p0[2];
+      if (Math.abs(got) < 0.04) break;
+      sh *= clamp(want / got, 0.75, 1.35);
+      v = build(sh);
     }
-    b.v = [vx, vy, vz];
-    b.w = [s * (top - back) * MAX_SPIN, 0, s * side_ * SIDE_MAX];
+    b.v = v;
+    b.w = w0;
     b.rest = false;
     b.hold = false;
     this.lastHit = side;
