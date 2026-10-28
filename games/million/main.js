@@ -233,7 +233,7 @@ export async function mount(root, ctx) {
       'button',
       { class: 'list-item g-million-li', onclick },
       h('span', { class: 'li-icon g-million-li-ico', html: ico(icon) }),
-      h('span', { class: 'li-body' }, h('span', { class: 'li-title' }, title), h('span', { class: 'li-sub' }, sub)),
+      h('span', { class: 'li-body' }, h('div', { class: 'li-title' }, title), h('div', { class: 'li-sub' }, sub)),
       h('span', { class: 'li-right g-million-chev' }, '›'),
     );
   }

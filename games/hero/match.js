@@ -42,6 +42,8 @@ export function createMatch(host, cfg) {
   function buildLooks() {
     const home = cfg.kits.home;
     const away = cfg.kits.away;
+    const pool = [9, 7, 11, 8, 10, 5, 4, 6, 3, 2].filter((n) => n !== cfg.heroNum);
+    const nums = world.att.map((a, i) => pool[i % pool.length]);
     looks.att = world.att.map((a, i) => {
       const base = a.hero ? cfg.heroLook : R.npcLook(i + 3 + (level.seed || 0));
       return {
@@ -50,7 +52,7 @@ export function createMatch(host, cfg) {
         hair: base.hair,
         hairColor: base.hairColor,
         boots: a.hero ? cfg.heroLook.boots : '#15151a',
-        num: a.hero ? cfg.heroNum : level.nums?.[i] || [9, 7, 10, 11, 8, 5, 4][i % 7],
+        num: a.hero ? cfg.heroNum : nums[i],
         front: false,
       };
     });
@@ -80,6 +82,7 @@ export function createMatch(host, cfg) {
     cam.tx = d.tx;
     cam.ty = d.ty + 14;
     cam.dist = d.dist * 1.45;
+    cam.th = d.th;
     cam.ready = true;
     if (cfg.onState) cfg.onState('intro');
     sfx.play('whistle');
@@ -106,7 +109,7 @@ export function createMatch(host, cfg) {
     }
     return true;
   }
-  function fit(pts, m, minD = 12, maxD = 95) {
+  function fit(pts, m, minD = 14, maxD = 130) {
     let x0 = Infinity;
     let x1 = -Infinity;
     let y0 = Infinity;
@@ -151,7 +154,8 @@ export function createMatch(host, cfg) {
       const spB = H - m.b - by1;
       const spL = bx0 - m.l;
       const spR = W - m.r - bx1;
-      ty += ((spT - spB) / 2 / (k * view.st)) * 0.85;
+      // keep the action low on screen; spare room goes to the stadium above
+      ty += ((spT - spB) / 2 / (k * view.st)) * 0.85 - (Math.max(0, spB) * 0.5) / (k * view.st);
       tx += ((spL - spR) / 2 / k) * 0.85;
     }
     return { tx, ty, dist };
@@ -165,7 +169,7 @@ export function createMatch(host, cfg) {
     add(GW + 1.5, -1, GH + 1.2);
     add(0, -2.4, 0);
     const b = w.ball;
-    const m = { l: 16, r: 16, t: H * 0.15 + 8, b: H * 0.11 + 10 };
+    const m = { l: 14, r: 14, t: H * 0.15 + 8, b: H * 0.08 + 8 };
     if (intro || w.phase === 'aim' || w.phase === 'settle') {
       const A = w.att[w.carrier];
       add(A.x, A.y + 2.2);
@@ -199,7 +203,27 @@ export function createMatch(host, cfg) {
         m.t = H * 0.22;
       }
     }
-    return fit(pts, m);
+    // try a few camera pitches: steeper angles spread the action vertically,
+    // flatter ones look more like TV; pick the best compromise
+    let best = null;
+    for (const th of [0.55, 0.65, 0.75, 0.85]) {
+      view.setPitch(th);
+      const r = fit(pts, m);
+      r.th = th;
+      view.setCam(r.tx, r.ty, r.dist);
+      let y0 = Infinity;
+      let y1 = -Infinity;
+      for (const p of pts) {
+        if (!view.p(p.x, p.y, p.z, PP)) continue;
+        y0 = Math.min(y0, PP.y);
+        y1 = Math.max(y1, PP.y);
+      }
+      const fill = (y1 - y0) / (H - m.t - m.b);
+      r.score = r.dist * (1 + 0.3 * (th - 0.55)) * (1 + 0.6 * Math.max(0, 0.85 - fill));
+      if (!best || r.score < best.score) best = r;
+    }
+    view.setPitch(cam.th);
+    return best;
   }
 
   function updateCamera(dt) {
@@ -211,11 +235,11 @@ export function createMatch(host, cfg) {
     cam.tx += (d.tx - cam.tx) * a;
     cam.ty += (d.ty - cam.ty) * a;
     cam.dist += (d.dist - cam.dist) * a;
+    cam.th += (d.th - cam.th) * a;
   }
 
   function applyCamera() {
-    const th = Math.min(0.72, Math.max(0.5, 0.46 + cam.dist * 0.0042));
-    view.setPitch(th);
+    view.setPitch(cam.th);
     let sx = 0;
     let sy = 0;
     if (fx.shake > 0) {

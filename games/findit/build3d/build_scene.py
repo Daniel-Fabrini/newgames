@@ -42,10 +42,12 @@ else:
 lib.setup_render(w, h, samples=samples or (24 if preview else 200), out_dir=out, noise=0.05 if preview else 0.02,
                  **R.get('render', {}))
 bpy.context.view_layer.update()
-print(f'[{sid}] built in {time.time() - t0:.1f}s: {len(C.items)} items, {sum(1 for i in C.items if i["kind"] == "prop")} props', flush=True)
+print(f'[{sid}] built in {time.time() - t0:.1f}s: {len(C.items)} items, {sum(1 for i in C.items if i["kind"] == "prop")} props {C.stats}', flush=True)
 lib.write_manifest(os.path.join(out, 'manifest.json'), C, cam, w, h, {'scene': sid})
 if '--save-blend' in argv:
     bpy.ops.wm.save_as_mainfile(filepath=os.path.join(out, 'scene.blend'))
+if '--norender' in argv:
+    sys.exit(0)
 t1 = time.time()
 lib.render(out)
 print(f'[{sid}] rendered {w}x{h} in {time.time() - t1:.1f}s', flush=True)

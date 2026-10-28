@@ -35,6 +35,7 @@ export function playShow(app, { league = false } = {}) {
       };
       const timer = { left: TIME_PER_Q, active: false, holds: 0, last: performance.now(), whole: TIME_PER_Q };
       el._gm = G; // read by automated tests
+      el._gmT = timer;
 
       // ---------- DOM ----------
       const stage = makeStage(scope, { outfit: app.P.outfit, variant: 'game', hostName: t('hostName') });
@@ -320,7 +321,7 @@ export function playShow(app, { league = false } = {}) {
         const v = await app.sheets.open({
           title: t('stopTitle'),
           sub: t('stopText', { prize: $(stakes(G.i).stop) }),
-          icon: ico('stop'),
+          icon: ico('bag'),
           cls: 'stopq',
           actions: [
             { label: t('stopYes'), value: true, primary: true },
@@ -577,7 +578,8 @@ export function playShow(app, { league = false } = {}) {
         const prize = reason === 'win' ? PRIZES[LAST] : reason === 'stop' ? st.stop : st.wrong;
         const answered = G.correct + (reason === 'wrong' || reason === 'timeout' ? 1 : 0);
         const rewards = app.recordGame({ prize, correct: G.correct, answered, lifelines: G.lifelines, win: reason === 'win', league });
-        showResults(app, { reason, prize, correct: G.correct, league, ...rewards });
+        const last = reason === 'win' || !G.q ? null : { q: pick(G.q.q), a: pick(G.q.a[G.q.ok]), letter: LETTERS[G.q.ok], img: G.q.img };
+        showResults(app, { reason, prize, correct: G.correct, league, last, ...rewards });
       }
 
       intro();
@@ -604,24 +606,34 @@ export function playShow(app, { league = false } = {}) {
     );
     let waiters = [];
     const closeBtn = h('button', { class: 'g-million-x', 'aria-label': t('close'), html: ico('close'), onclick: () => api.close() });
-    const panel = h('div', { class: 'g-million-ladder' }, h('div', { class: 'g-million-ladder-head' }, h('b', null, t('ladderTitle')), closeBtn), h('div', { class: 'g-million-rungs' }, rows.slice().reverse()));
+    const list = h('div', { class: 'g-million-rungs' }, rows.slice().reverse());
+    const panel = h('div', { class: 'g-million-ladder' }, h('div', { class: 'g-million-ladder-head' }, h('b', null, t('ladderTitle')), closeBtn), list);
     const wrap = h('div', { class: 'g-million-ladder-wrap', onclick: (e) => e.target === wrap && api.close() }, panel);
     const api = {
       el: wrap,
       isOpen: false,
+      cur: 0,
       update(cur) {
+        api.cur = cur;
         rows.forEach((r, i) => {
           r.classList.toggle('done', i < cur);
           r.classList.toggle('cur', i === cur);
         });
-        const curRow = rows[cur];
-        if (curRow && api.isOpen) curRow.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        if (api.isOpen) api.center(true);
       },
       open(auto = false) {
         api.isOpen = true;
         wrap.classList.add('show');
+        api.center(false);
         wrap.classList.toggle('auto', auto);
         if (!auto) fx.whoosh();
+      },
+      // Scrolls the rung list (only the list, never the page) to the current rung.
+      center(smooth) {
+        const row = rows[api.cur];
+        if (!row) return;
+        const top = Math.max(0, row.offsetTop - list.clientHeight / 2 + row.offsetHeight / 2);
+        list.scrollTo({ top, behavior: smooth ? 'smooth' : 'auto' });
       },
       close() {
         if (!api.isOpen) return;
@@ -696,6 +708,17 @@ export function showResults(app, R) {
         R.newBest ? h('div', { class: 'g-million-res-best' }, h('span', { html: ico('star') }), t('newBest')) : null,
         chips,
         R.leagueState ? h('p', { class: 'g-million-res-league' }, t('leagueTotal', { pts: fmtInt(R.leagueState.pts, lang) })) : null,
+        R.last
+          ? h(
+              'div',
+              { class: 'g-million-res-last' },
+              h('small', null, t('lastQ')),
+              R.last.img ? h('img', { src: R.last.img, alt: '' }) : null,
+              h('p', null, R.last.q),
+              h('div', { class: 'g-million-res-ans' }, h('span', { class: 'g-million-letter' }, R.last.letter), h('b', null, R.last.a)),
+            )
+          : null,
+        h('p', { class: 'g-million-res-note' }, t('fictional')),
         h(
           'div',
           { class: 'g-million-res-actions' },

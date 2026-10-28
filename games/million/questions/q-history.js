@@ -728,17 +728,6 @@ export default [
   },
   {
     d: 2,
-    q: { pt: 'Quem foi a primeira mulher a ganhar um Prêmio Nobel?', en: 'Who was the first woman to win a Nobel Prize?', es: '¿Quién fue la primera mujer en ganar un Premio Nobel?' },
-    a: [
-      { pt: 'Florence Nightingale', en: 'Florence Nightingale', es: 'Florence Nightingale' },
-      { pt: 'Ada Lovelace', en: 'Ada Lovelace', es: 'Ada Lovelace' },
-      { pt: 'Marie Curie', en: 'Marie Curie', es: 'Marie Curie' },
-      { pt: 'Rosalind Franklin', en: 'Rosalind Franklin', es: 'Rosalind Franklin' },
-    ],
-    ok: 2,
-  },
-  {
-    d: 2,
     q: { pt: 'Qual foi o primeiro satélite artificial, lançado em 1957?', en: 'What was the first artificial satellite, launched in 1957?', es: '¿Cuál fue el primer satélite artificial, lanzado en 1957?' },
     a: [
       { pt: 'Explorer 1', en: 'Explorer 1', es: 'Explorer 1' },
@@ -926,17 +915,6 @@ export default [
   },
   {
     d: 2,
-    q: { pt: 'Qual sábio grego teria gritado "Eureka!" ao entrar na banheira?', en: 'Which Greek scholar supposedly shouted "Eureka!" in his bath?', es: '¿Qué sabio griego habría gritado "¡Eureka!" al entrar en la bañera?' },
-    a: [
-      { pt: 'Euclides', en: 'Euclid', es: 'Euclides' },
-      { pt: 'Pitágoras', en: 'Pythagoras', es: 'Pitágoras' },
-      { pt: 'Aristóteles', en: 'Aristotle', es: 'Aristóteles' },
-      { pt: 'Arquimedes', en: 'Archimedes', es: 'Arquímedes' },
-    ],
-    ok: 3,
-  },
-  {
-    d: 2,
     q: { pt: 'Em 1955, Rosa Parks se recusou a ceder seu assento em qual lugar?', en: 'In 1955, Rosa Parks refused to give up her seat where?', es: 'En 1955, ¿dónde se negó Rosa Parks a ceder su asiento?' },
     a: [
       { pt: 'Em um trem', en: 'On a train', es: 'En un tren' },
@@ -991,6 +969,28 @@ export default [
     ok: 3,
   },
   {
+    d: 2,
+    q: { pt: 'Qual czar russo fundou a cidade de São Petersburgo, em 1703?', en: 'Which Russian tsar founded the city of Saint Petersburg in 1703?', es: '¿Qué zar ruso fundó la ciudad de San Petersburgo en 1703?' },
+    a: [
+      { pt: 'Ivan, o Terrível', en: 'Ivan the Terrible', es: 'Iván el Terrible' },
+      { pt: 'Nicolau II', en: 'Nicholas II', es: 'Nicolás II' },
+      { pt: 'Pedro, o Grande', en: 'Peter the Great', es: 'Pedro el Grande' },
+      { pt: 'Alexandre I', en: 'Alexander I', es: 'Alejandro I' },
+    ],
+    ok: 2,
+  },
+  {
+    d: 2,
+    q: { pt: 'Qual rainha da Inglaterra reinava quando a Armada Espanhola foi derrotada, em 1588?', en: 'Which English queen reigned when the Spanish Armada was defeated in 1588?', es: '¿Qué reina de Inglaterra reinaba cuando fue derrotada la Armada Invencible, en 1588?' },
+    a: [
+      { pt: 'Elizabeth I', en: 'Elizabeth I', es: 'Isabel I' },
+      { pt: 'Maria I', en: 'Mary I', es: 'María I' },
+      { pt: 'Vitória', en: 'Victoria', es: 'Victoria' },
+      { pt: 'Ana', en: 'Anne', es: 'Ana' },
+    ],
+    ok: 0,
+  },
+  {
     d: 3,
     q: { pt: 'Qual povo da Mesopotâmia criou a escrita cuneiforme?', en: 'Which Mesopotamian people created cuneiform writing?', es: '¿Qué pueblo de Mesopotamia creó la escritura cuneiforme?' },
     a: [
@@ -1000,17 +1000,6 @@ export default [
       { pt: 'Sumérios', en: 'Sumerians', es: 'Sumerios' },
     ],
     ok: 3,
-  },
-  {
-    d: 3,
-    q: { pt: 'Qual médico inglês desenvolveu a vacina contra a varíola, em 1796?', en: 'Which English doctor developed the smallpox vaccine in 1796?', es: '¿Qué médico inglés desarrolló la vacuna contra la viruela en 1796?' },
-    a: [
-      { pt: 'Louis Pasteur', en: 'Louis Pasteur', es: 'Louis Pasteur' },
-      { pt: 'Joseph Lister', en: 'Joseph Lister', es: 'Joseph Lister' },
-      { pt: 'Edward Jenner', en: 'Edward Jenner', es: 'Edward Jenner' },
-      { pt: 'Alexander Fleming', en: 'Alexander Fleming', es: 'Alexander Fleming' },
-    ],
-    ok: 2,
   },
   {
     d: 3,
@@ -1385,6 +1374,17 @@ export default [
       { pt: 'Quéops', en: 'Khufu', es: 'Keops' },
     ],
     ok: 3,
+  },
+  {
+    d: 3,
+    q: { pt: 'Qual viajante marroquino do século XIV percorreu a África e a Ásia por quase 30 anos?', en: 'Which 14th-century Moroccan traveler roamed Africa and Asia for nearly 30 years?', es: '¿Qué viajero marroquí del siglo XIV recorrió África y Asia durante casi 30 años?' },
+    a: [
+      { pt: 'Ibn Battuta', en: 'Ibn Battuta', es: 'Ibn Battuta' },
+      { pt: 'Marco Polo', en: 'Marco Polo', es: 'Marco Polo' },
+      { pt: 'Zheng He', en: 'Zheng He', es: 'Zheng He' },
+      { pt: 'Ibn Khaldun', en: 'Ibn Khaldun', es: 'Ibn Jaldún' },
+    ],
+    ok: 0,
   },
   {
     d: 4,

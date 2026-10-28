@@ -3,7 +3,7 @@
 // explosions with fire and smoke, sinking ships, radar sweep and the aim reticle.
 
 import { N, CELLS, cellsOf, cellName } from './rules.js';
-import { paintWater, paintGrid, paintFrame, paintShip, paintMiss, paintFire, paintHitPeg, FX, sweepSprite, shipSprite, shipTint, rr } from './render.js';
+import { paintWater, paintGrid, paintFrame, paintShip, paintMiss, paintFire, paintEmber, paintHitPeg, FX, sweepSprite, shipSprite, shipTint, rr } from './render.js';
 
 const ease = (k) => (k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2);
 const lerp = (a, b, k) => a + (b - a) * k;
@@ -111,23 +111,26 @@ export class BattleView {
       L.smallLabel = { x: L.small.x, y: L.small.y - 9 };
       L.log = { x: cx, y: L.small.y + s2 + 12, w: cw, h: Math.max(60, H - (L.small.y + s2 + 12) - pad) };
     } else {
-      const top = 58;
       const stripH = 30;
       const minBottom = Math.min(170, Math.max(120, H * 0.21));
-      let S = Math.min(W - pad * 2 - gut, H - top - gut - stripH - minBottom - 14, 560);
+      let S = Math.min(W - pad * 2 - gut, H - 58 - gut - stripH - minBottom - 14, 560);
       S = Math.floor(S / N) * N;
+      // bottom: small board + log; any leftover height is spread above and below
+      let s2 = Math.min((S + gut) * 0.54, 260);
+      const need = 58 + gut + S + stripH + 16 + 12;
+      s2 = Math.max(80, Math.floor(Math.min(s2, H - need) / N) * N);
+      const used = need + s2;
+      const off = Math.max(0, Math.floor((H - used) * 0.32));
+      const top = 58 + off;
       const bx = Math.round((W - S - gut) / 2 + gut);
-      L.banner = { x: Math.max(pad, bx - gut), y: 8, w: Math.min(W - pad * 2, S + gut), h: 44 };
+      L.banner = { x: Math.max(pad, bx - gut), y: 8 + off * 0.6, w: Math.min(W - pad * 2, S + gut), h: 44 };
       L.big = { x: bx, y: top + gut, s: S };
       L.strip = { x: bx - gut, y: L.big.y + S + 7, w: S + gut, h: 22 };
       const y0 = L.strip.y + stripH;
-      const avail = H - y0 - 12;
-      let s2 = Math.min(avail - 16, (S + gut) * 0.46);
-      s2 = Math.max(80, Math.floor(s2 / N) * N);
       L.small = { x: bx - gut + 2, y: y0 + 16, s: s2 };
       L.smallLabel = { x: L.small.x, y: y0 + 8 };
       const lx = L.small.x + s2 + 12;
-      L.log = { x: lx, y: y0, w: bx + S - lx, h: Math.max(60, Math.min(avail, s2 + 16)) };
+      L.log = { x: lx, y: y0, w: bx + S - lx, h: s2 + 16 };
     }
     this.L = L;
     if (this.o.onLayout) this.o.onLayout(L);
@@ -345,7 +348,7 @@ export class BattleView {
   frame(now) {
     if (this.dead) return;
     this.raf = requestAnimationFrame(this.frame);
-    const dt = Math.min(0.05, (now - this.last) / 1000);
+    const dt = Math.min(0.05, (now - this.last) / 1000) * (this.timeScale || 1);
     this.last = now;
     this.update(dt);
     this.draw();
@@ -488,8 +491,10 @@ export class BattleView {
         const s = b.ships[b.map[i]];
         const sunk = s.sunk && !this.hiddenSunk.has(owner + ':' + s.id);
         if (sunk) {
-          paintFire(g, cx, cy, cs, t, i, 0.3);
+          paintEmber(g, cx, cy, cs, t, i);
         } else {
+          g.fillStyle = 'rgba(255,70,30,0.16)';
+          g.fillRect(cx - cs / 2 + 1, cy - cs / 2 + 1, cs - 2, cs - 2);
           if (!mine) paintHitPeg(g, cx, cy, cs);
           paintFire(g, cx, cy, cs, t, i, 1);
         }
@@ -683,8 +688,9 @@ export class BattleView {
     g.textBaseline = 'middle';
     for (let k = 0; k < N; k++) {
       g.fillText('ABCDEFGHIJ'[k], big.x + k * cs + cs / 2, big.y - 9);
-      g.fillText(String(k + 1), big.x - 10, big.y + k * cs + cs / 2);
     }
+    g.textAlign = 'right';
+    for (let k = 0; k < N; k++) g.fillText(String(k + 1), big.x - 5, big.y + k * cs + cs / 2);
     // small board caption
     const small = 1 - this.bigOwner();
     const sl = this.L.smallLabel;

@@ -160,6 +160,7 @@ const I = {
   skip: '<path d="M3 5.5v13l8-6.5-8-6.5Zm8.5 0v13l8-6.5-8-6.5Z" fill="currentColor"/><rect x="19.5" y="5" width="2.2" height="14" rx="1" fill="currentColor"/>',
   ladder: '<path d="M6 2v20M18 2v20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M6 6h12M6 11h12M6 16h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
   stop: '<rect x="4" y="4" width="16" height="16" rx="4" fill="currentColor"/>',
+  bag: '<path d="M8.6 2.8h6.8l-1.9 3.6h-3L8.6 2.8Z" fill="currentColor"/><path d="M10.2 7.4h3.6c3.9 2.1 6.7 6 6.7 9.6 0 2.7-2.3 4.4-5.1 4.4H8.6c-2.8 0-5.1-1.7-5.1-4.4 0-3.6 2.8-7.5 6.7-9.6Z" fill="currentColor"/><path d="M13.9 11.6c-.4-.6-1.1-.9-1.9-.9-1.1 0-1.9.6-1.9 1.4 0 2 3.9 1.1 3.9 3.3 0 .9-.9 1.5-2 1.5-.9 0-1.6-.3-2-1M12 9.8v8.4" fill="none" stroke="#1a1102" stroke-width="1.4" stroke-linecap="round"/>',
   coin: '<circle cx="12" cy="12" r="10" fill="#e4a21c"/><circle cx="12" cy="12" r="8" fill="#ffd768"/><circle cx="12" cy="12" r="6.2" fill="none" stroke="#b97f0e" stroke-width="1.2"/><path d="M12 7.5v9M14.2 9.2c-.5-.7-1.3-1-2.2-1-1.3 0-2.2.7-2.2 1.7 0 2.4 4.6 1.3 4.6 3.9 0 1-1 1.8-2.4 1.8-1 0-1.9-.4-2.4-1.2" fill="none" stroke="#7a5200" stroke-width="1.4" stroke-linecap="round"/>',
   star: '<path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z" fill="currentColor"/>',
   check: '<path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>',

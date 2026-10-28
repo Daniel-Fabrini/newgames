@@ -529,6 +529,39 @@ export default [
     ok: 2,
   },
   {
+    d: 1,
+    q: { pt: 'Qual é o menor país do mundo?', en: 'What is the smallest country in the world?', es: '¿Cuál es el país más pequeño del mundo?' },
+    a: [
+      { pt: 'Vaticano', en: 'Vatican City', es: 'Ciudad del Vaticano' },
+      { pt: 'Mônaco', en: 'Monaco', es: 'Mónaco' },
+      { pt: 'San Marino', en: 'San Marino', es: 'San Marino' },
+      { pt: 'Liechtenstein', en: 'Liechtenstein', es: 'Liechtenstein' },
+    ],
+    ok: 0,
+  },
+  {
+    d: 1,
+    q: { pt: 'Qual canal liga os oceanos Atlântico e Pacífico pela América Central?', en: 'Which canal links the Atlantic and Pacific through Central America?', es: '¿Qué canal une el Atlántico y el Pacífico a través de Centroamérica?' },
+    a: [
+      { pt: 'Canal do Panamá', en: 'Panama Canal', es: 'Canal de Panamá' },
+      { pt: 'Canal de Suez', en: 'Suez Canal', es: 'Canal de Suez' },
+      { pt: 'Canal de Kiel', en: 'Kiel Canal', es: 'Canal de Kiel' },
+      { pt: 'Canal de Corinto', en: 'Corinth Canal', es: 'Canal de Corinto' },
+    ],
+    ok: 0,
+  },
+  {
+    d: 1,
+    q: { pt: 'Qual mar é tão salgado que as pessoas boiam nele com facilidade?', en: 'Which sea is so salty that people float in it easily?', es: '¿Qué mar es tan salado que la gente flota en él con facilidad?' },
+    a: [
+      { pt: 'Mar Morto', en: 'Dead Sea', es: 'Mar Muerto' },
+      { pt: 'Mar Cáspio', en: 'Caspian Sea', es: 'Mar Caspio' },
+      { pt: 'Mar Negro', en: 'Black Sea', es: 'Mar Negro' },
+      { pt: 'Mar Báltico', en: 'Baltic Sea', es: 'Mar Báltico' },
+    ],
+    ok: 0,
+  },
+  {
     d: 2,
     q: { pt: 'Qual é a capital do Canadá?', en: 'What is the capital of Canada?', es: '¿Cuál es la capital de Canadá?' },
     a: [
@@ -617,17 +650,6 @@ export default [
     ok: 3,
   },
   {
-    d: 1,
-    q: { pt: 'Qual é o menor país do mundo?', en: 'What is the smallest country in the world?', es: '¿Cuál es el país más pequeño del mundo?' },
-    a: [
-      { pt: 'Vaticano', en: 'Vatican City', es: 'Ciudad del Vaticano' },
-      { pt: 'Mônaco', en: 'Monaco', es: 'Mónaco' },
-      { pt: 'San Marino', en: 'San Marino', es: 'San Marino' },
-      { pt: 'Liechtenstein', en: 'Liechtenstein', es: 'Liechtenstein' },
-    ],
-    ok: 0,
-  },
-  {
     d: 2,
     q: { pt: 'Qual é a capital da Nova Zelândia?', en: 'What is the capital of New Zealand?', es: '¿Cuál es la capital de Nueva Zelanda?' },
     a: [
@@ -648,17 +670,6 @@ export default [
       { pt: 'Estreito de Ormuz', en: 'Strait of Hormuz', es: 'Estrecho de Ormuz' },
     ],
     ok: 1,
-  },
-  {
-    d: 1,
-    q: { pt: 'Qual canal liga os oceanos Atlântico e Pacífico pela América Central?', en: 'Which canal links the Atlantic and Pacific through Central America?', es: '¿Qué canal une el Atlántico y el Pacífico a través de Centroamérica?' },
-    a: [
-      { pt: 'Canal do Panamá', en: 'Panama Canal', es: 'Canal de Panamá' },
-      { pt: 'Canal de Suez', en: 'Suez Canal', es: 'Canal de Suez' },
-      { pt: 'Canal de Kiel', en: 'Kiel Canal', es: 'Canal de Kiel' },
-      { pt: 'Canal de Corinto', en: 'Corinth Canal', es: 'Canal de Corinto' },
-    ],
-    ok: 0,
   },
   {
     d: 2,
@@ -846,17 +857,6 @@ export default [
       { pt: 'Chelsea', en: 'Chelsea', es: 'Chelsea' },
     ],
     ok: 2,
-  },
-  {
-    d: 1,
-    q: { pt: 'Qual mar é tão salgado que as pessoas boiam nele com facilidade?', en: 'Which sea is so salty that people float in it easily?', es: '¿Qué mar es tan salado que la gente flota en él con facilidad?' },
-    a: [
-      { pt: 'Mar Morto', en: 'Dead Sea', es: 'Mar Muerto' },
-      { pt: 'Mar Cáspio', en: 'Caspian Sea', es: 'Mar Caspio' },
-      { pt: 'Mar Negro', en: 'Black Sea', es: 'Mar Negro' },
-      { pt: 'Mar Báltico', en: 'Baltic Sea', es: 'Mar Báltico' },
-    ],
-    ok: 0,
   },
   {
     d: 2,

@@ -1,0 +1,1118 @@
+/* Sea Battle — black & gold chrome around a living sea. */
+
+.g-naval {
+  background:
+    radial-gradient(120% 70% at 50% -10%, rgba(32, 72, 120, 0.35) 0%, rgba(8, 10, 16, 0) 60%),
+    radial-gradient(90% 60% at 50% 110%, rgba(243, 194, 74, 0.06) 0%, rgba(0, 0, 0, 0) 60%),
+    #07080b;
+}
+.g-naval-app {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.g-naval-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.g-naval-insignia {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.g-naval-help {
+  font-weight: 1000;
+  font-size: 19px;
+  color: var(--gold);
+}
+
+/* ------------------------------------------------------------------ menu */
+.g-naval-menu {
+  gap: 12px;
+}
+.g-naval-hero {
+  position: relative;
+  height: 196px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 26px rgba(243, 194, 74, 0.12);
+  background: #04182c;
+}
+.g-naval-hero-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.g-naval-hero-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px 13px;
+}
+.g-naval-hero-badge {
+  width: 66px;
+  height: 66px;
+  flex: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 10px rgba(243, 194, 74, 0.25));
+}
+.g-naval-hero-text {
+  flex: 1;
+  min-width: 0;
+}
+.g-naval-hero-kicker {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--text-2);
+}
+.g-naval-hero-rank {
+  font-size: 21px;
+  font-weight: 1000;
+  line-height: 1.1;
+  background: var(--gold-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 1px 0 7px;
+}
+.g-naval-xpbar.progress {
+  height: 8px;
+  flex: none;
+}
+.g-naval-xpbar > i {
+  display: block;
+  height: 100%;
+  background: var(--gold-grad);
+  box-shadow: 0 0 10px rgba(243, 194, 74, 0.55);
+  border-radius: 999px;
+  transition: width 0.3s;
+}
+.g-naval-hero-xp {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+.g-naval-hero-xp span {
+  color: var(--gold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-naval-cta {
+  justify-content: flex-start;
+  text-align: left;
+  gap: 14px;
+}
+.g-naval-cta > span:last-child {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.g-naval-cta small {
+  font-size: 12.5px;
+  font-weight: 800;
+  opacity: 0.72;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-naval-cta-ico {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  flex: none;
+  background: rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+.btn:not(.primary) .g-naval-cta-ico {
+  background: linear-gradient(180deg, #2a2a31, #17171b);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.g-naval-cta.two {
+  min-height: 58px;
+}
+.g-naval-card {
+  padding: 12px 14px 14px;
+}
+.g-naval-setup .section-title {
+  margin: 10px 2px 7px;
+}
+.g-naval-setup .section-title:first-child {
+  margin-top: 2px;
+}
+.g-naval-chips {
+  gap: 6px;
+}
+.g-naval-chips .chip {
+  padding: 7px 11px;
+  font-size: 13px;
+}
+.g-naval-desc {
+  margin: 7px 2px 0;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--text-2);
+}
+.g-naval-fleetdots {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 6px;
+}
+.g-naval-fleetdots i {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--gold-grad);
+}
+.g-naval-tiles {
+  gap: 9px;
+}
+.g-naval-tile {
+  appearance: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 12px 6px 10px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, #1a1a1f, #111114);
+  color: var(--text);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  min-width: 0;
+}
+.g-naval-tile:active {
+  transform: scale(0.97);
+}
+.g-naval-tile-ico {
+  font-size: 26px;
+  line-height: 1.2;
+}
+.g-naval-tile b {
+  font-size: 14px;
+  font-weight: 900;
+}
+.g-naval-tile small {
+  font-size: 11px;
+  color: var(--text-3);
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ------------------------------------------------------------------ placement */
+.g-naval-place {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0 calc(12px + var(--safe-bottom));
+}
+.g-naval-place-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 0 14px;
+}
+.g-naval-place-title {
+  font-size: 20px;
+  max-width: 100%;
+  font-weight: 1000;
+  background: var(--gold-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.g-naval-pill {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, #1c1c21, #111114);
+  color: var(--text-2);
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  flex-shrink: 1;
+}
+.g-naval-pill.static {
+  cursor: default;
+}
+.g-naval-pill-gear {
+  color: var(--gold);
+  font-size: 13px;
+}
+.g-naval-hint {
+  padding: 4px 14px 2px;
+  font-size: 12.5px;
+  color: var(--text-2);
+  font-weight: 700;
+}
+.g-naval-hint b {
+  color: #ff8a96;
+}
+.g-naval-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+.g-naval-place-actions {
+  display: flex;
+  gap: 8px;
+  padding: 6px 14px 0;
+}
+.g-naval-act {
+  flex: none;
+  gap: 6px;
+  min-height: 50px;
+  padding: 8px 12px;
+}
+.g-naval-act-ico {
+  font-size: 16px;
+}
+.g-naval-ready {
+  flex: 1;
+  min-height: 50px;
+}
+.g-naval-ready.pulse {
+  animation: g-naval-pulse 1.6s ease-in-out infinite;
+}
+@keyframes g-naval-pulse {
+  0%,
+  100% {
+    box-shadow: 0 6px 0 #8a5c05, 0 10px 26px rgba(243, 180, 40, 0.35), inset 0 2px 0 rgba(255, 255, 255, 0.55);
+  }
+  50% {
+    box-shadow: 0 6px 0 #8a5c05, 0 10px 34px rgba(243, 180, 40, 0.75), inset 0 2px 0 rgba(255, 255, 255, 0.55);
+  }
+}
+
+/* ------------------------------------------------------------------ battle */
+.g-naval-battle {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.g-naval-battle > .g-naval-stage {
+  position: absolute;
+  inset: 0;
+}
+.g-naval-banner {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px 0 8px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #1b1b20, #0e0e11);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(243, 194, 74, 0.12);
+  z-index: 5;
+  pointer-events: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.g-naval-banner-ico {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: none;
+  color: #1a1102;
+  background: var(--gold-grad);
+  box-shadow: 0 0 12px rgba(243, 194, 74, 0.45);
+}
+.g-naval-banner-ico svg {
+  width: 20px;
+  height: 20px;
+}
+.g-naval-banner-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+.g-naval-banner-text b {
+  font-size: 15.5px;
+  font-weight: 1000;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: var(--gold-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-naval-banner-text small {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-naval-banner.enemy {
+  border-color: rgba(255, 74, 92, 0.6);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 18px rgba(255, 74, 92, 0.25);
+  animation: g-naval-alert 1.2s ease-in-out infinite;
+}
+.g-naval-banner.enemy .g-naval-banner-ico {
+  background: linear-gradient(180deg, #ff8a96, #d92e42);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(255, 74, 92, 0.55);
+}
+.g-naval-banner.enemy .g-naval-banner-text b {
+  background: linear-gradient(180deg, #ffd0d5, #ff6b7a);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.g-naval-banner.peek .g-naval-banner-text small {
+  color: var(--gold);
+}
+@keyframes g-naval-alert {
+  50% {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 28px rgba(255, 74, 92, 0.45);
+  }
+}
+.g-naval-pips {
+  display: flex;
+  gap: 4px;
+  flex: none;
+}
+.g-naval-pips i {
+  width: 9px;
+  height: 18px;
+  border-radius: 5px 5px 2px 2px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(243, 194, 74, 0.3);
+  transition: background 0.2s;
+}
+.g-naval-pips i.on {
+  background: linear-gradient(180deg, #fff0a8, #e3a723 60%, #9c6a0b);
+  box-shadow: 0 0 8px rgba(243, 194, 74, 0.5);
+}
+.g-naval-turnno {
+  flex: none;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--text-2);
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(243, 194, 74, 0.3);
+  font-variant-numeric: tabular-nums;
+}
+.g-naval-log {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(24, 24, 29, 0.92), rgba(12, 12, 15, 0.92));
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  padding: 7px 9px 4px;
+  overflow: hidden;
+  z-index: 4;
+}
+.g-naval-log-title {
+  font-size: 9.5px;
+  font-weight: 1000;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-naval-loglist {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  scrollbar-width: none;
+}
+.g-naval-loglist::-webkit-scrollbar {
+  display: none;
+}
+.g-naval-logrow {
+  display: grid;
+  grid-template-columns: 8px auto auto 1fr;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 0;
+  font-size: 12px;
+  font-weight: 800;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  white-space: nowrap;
+}
+.g-naval-logrow i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #cfe4f3;
+}
+.g-naval-logrow.hit i {
+  background: #ff9a3c;
+  box-shadow: 0 0 6px #ff7a1c;
+}
+.g-naval-logrow.sunk i {
+  background: #ff3b4f;
+  box-shadow: 0 0 8px #ff3b4f;
+}
+.g-naval-logrow b {
+  color: var(--gold);
+  font-weight: 900;
+}
+.g-naval-logrow.p1 b {
+  color: #ff8a96;
+}
+.g-naval-logrow .cell {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.g-naval-logrow .res {
+  color: var(--text-2);
+  text-align: right;
+  white-space: normal;
+  line-height: 1.15;
+}
+.g-naval-logrow.hit .res {
+  color: #ffb36b;
+}
+.g-naval-logrow.sunk .res {
+  color: #ff7a88;
+}
+.g-naval-logrow.new {
+  animation: g-naval-logIn 0.5s ease-out;
+}
+@keyframes g-naval-logIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+    background: rgba(243, 194, 74, 0.2);
+  }
+}
+.g-naval-callout {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  white-space: nowrap;
+  animation: g-naval-call 0.9s ease-out forwards;
+}
+.g-naval-callout b {
+  font-size: 30px;
+  font-weight: 1000;
+  letter-spacing: 1.5px;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.6);
+}
+.g-naval-callout small {
+  font-size: 14px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+.g-naval-callout.miss b {
+  color: #d6efff;
+  font-size: 24px;
+}
+.g-naval-callout.hit b {
+  color: #ffc35a;
+  text-shadow: 0 3px 0 #6b3500, 0 0 24px rgba(255, 140, 30, 0.9);
+}
+.g-naval-callout.hurt b {
+  color: #ff6b7a;
+  text-shadow: 0 3px 0 #5a0710, 0 0 24px rgba(255, 60, 80, 0.8);
+}
+.g-naval-callout.sunk,
+.g-naval-callout.start {
+  padding: 12px 26px 12px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(20, 20, 24, 0.94), rgba(8, 8, 10, 0.94));
+  border: 1px solid #f3c24a;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 34px rgba(243, 194, 74, 0.45), 0 14px 30px rgba(0, 0, 0, 0.6);
+  animation: g-naval-callBig 1.9s ease-out forwards;
+}
+.g-naval-callout.sunk b,
+.g-naval-callout.start b {
+  font-size: 32px;
+  background: var(--gold-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.6));
+}
+.g-naval-callout.sunk.lost {
+  border-color: #ff4a5c;
+  box-shadow: 0 0 34px rgba(255, 74, 92, 0.45), 0 14px 30px rgba(0, 0, 0, 0.6);
+}
+.g-naval-callout.sunk.lost b {
+  background: linear-gradient(180deg, #ffd0d5, #ff4a5c);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.g-naval-callout.start {
+  white-space: normal;
+  width: max-content;
+  max-width: 88%;
+}
+.g-naval-callout.start b {
+  font-size: 26px;
+}
+@keyframes g-naval-call {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  18% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+  30% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -62%) scale(1);
+  }
+}
+@keyframes g-naval-callBig {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  12% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+  20% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  85% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}
+
+/* ------------------------------------------------------------------ pass-and-play */
+.g-naval-pass {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 24px calc(24px + var(--safe-bottom));
+  text-align: center;
+  background:
+    radial-gradient(80% 50% at 50% 35%, rgba(30, 64, 110, 0.55), rgba(0, 0, 0, 0) 70%),
+    repeating-linear-gradient(0deg, rgba(243, 194, 74, 0.035) 0 1px, transparent 1px 34px),
+    repeating-linear-gradient(90deg, rgba(243, 194, 74, 0.035) 0 1px, transparent 1px 34px),
+    #06070a;
+  animation: g-naval-fade 0.3s ease-out;
+}
+.g-naval-pass .btn {
+  margin-top: 12px;
+  min-width: 220px;
+}
+.g-naval-pass-ring {
+  position: relative;
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 50px;
+  background: radial-gradient(circle at 35% 30%, #1d2a44, #070b14);
+  border: 2px solid #f3c24a;
+  box-shadow: 0 0 30px rgba(243, 194, 74, 0.35), inset 0 0 20px rgba(0, 0, 0, 0.6);
+  margin-bottom: 8px;
+}
+.g-naval-pass-ring::after {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 2px dashed rgba(243, 194, 74, 0.45);
+  animation: g-naval-spin 12s linear infinite;
+}
+@keyframes g-naval-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes g-naval-fade {
+  from {
+    opacity: 0;
+  }
+}
+.g-naval-pass-kicker {
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  color: var(--text-2);
+}
+.g-naval-pass-name {
+  font-size: 38px;
+  font-weight: 1000;
+  line-height: 1.05;
+  background: var(--gold-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-naval-pass-recap {
+  max-width: 320px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, #18181c, #101013);
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--text);
+}
+.g-naval-pass-sub {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-2);
+}
+.g-naval-pass-note {
+  font-size: 12px;
+  color: var(--text-3);
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------------ results */
+.g-naval-results {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 14px calc(14px + var(--safe-bottom));
+  background: rgba(3, 4, 6, 0.72);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.3s;
+  overflow-y: auto;
+}
+.g-naval-results.show {
+  opacity: 1;
+}
+.g-naval-results.peek {
+  opacity: 0;
+  pointer-events: none;
+}
+.g-naval-res-panel {
+  width: min(390px, 100%);
+  margin: auto;
+  padding: 16px 14px 14px;
+  border-radius: 22px;
+  border: 1px solid #f3c24a;
+  background: linear-gradient(180deg, #1a1a1f, #0d0d10);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.7), 0 0 40px rgba(243, 194, 74, 0.25), 0 20px 40px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: g-naval-pop 0.45s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+.g-naval-res-panel.lose {
+  border-color: rgba(255, 74, 92, 0.7);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 74, 92, 0.18), 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+@keyframes g-naval-pop {
+  from {
+    transform: scale(0.85) translateY(20px);
+    opacity: 0;
+  }
+}
+.g-naval-res-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  line-height: 1;
+  background: var(--gold-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.6)) drop-shadow(0 0 16px rgba(243, 194, 74, 0.35));
+}
+.g-naval-res-panel.lose .g-naval-res-title {
+  background: linear-gradient(180deg, #ffffff, #c8c2b4 55%, #8a8478);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.6));
+}
+.g-naval-res-sub {
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--text-2);
+  margin-top: -4px;
+}
+.g-naval-res-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+.g-naval-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px 7px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #1f1f25, #141418);
+  border: 1px solid rgba(243, 194, 74, 0.22);
+  min-width: 0;
+}
+.g-naval-stat b {
+  font-size: 19px;
+  font-weight: 1000;
+  font-variant-numeric: tabular-nums;
+}
+.g-naval-stat small {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.g-naval-res-xp {
+  padding: 10px 12px 12px;
+  border-radius: 14px;
+  background: rgba(243, 194, 74, 0.06);
+  border: 1px solid rgba(243, 194, 74, 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.g-naval-res-xphead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 1000;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+}
+.g-naval-xpnum {
+  font-size: 22px;
+  letter-spacing: 0;
+  color: #ffe08a;
+  text-shadow: 0 0 12px rgba(243, 194, 74, 0.5);
+  font-variant-numeric: tabular-nums;
+}
+.g-naval-res-parts > div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--text-2);
+  padding: 1px 0;
+}
+.g-naval-res-parts b {
+  color: var(--text);
+}
+.g-naval-res-rank {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-weight: 900;
+  font-size: 14px;
+}
+.g-naval-res-badge {
+  width: 34px;
+  height: 34px;
+  flex: none;
+}
+.g-naval-res-rankname {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-naval-res-rank.promoted .g-naval-res-badge {
+  animation: g-naval-promo 0.8s ease-out;
+}
+@keyframes g-naval-promo {
+  0% {
+    transform: scale(0.6) rotate(-20deg);
+    filter: drop-shadow(0 0 0 #f3c24a);
+  }
+  60% {
+    transform: scale(1.25) rotate(6deg);
+    filter: drop-shadow(0 0 14px #f3c24a);
+  }
+}
+.g-naval-promo {
+  flex: none;
+  font-size: 11px;
+  font-weight: 1000;
+  color: #1a1102;
+  background: var(--gold-grad);
+  border-radius: 999px;
+  padding: 3px 8px;
+  animation: g-naval-pop 0.5s ease-out;
+}
+.g-naval-res-medals .section-title {
+  margin: 0 2px 6px;
+}
+.g-naval-res-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.g-naval-medal-chip {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 900;
+  border: 1px solid #f3c24a;
+  background: linear-gradient(180deg, rgba(243, 194, 74, 0.2), rgba(243, 194, 74, 0.06));
+  animation: g-naval-pop 0.5s ease-out both;
+}
+.g-naval-medal-chip.unlock {
+  border-color: rgba(120, 200, 255, 0.7);
+  background: linear-gradient(180deg, rgba(90, 170, 255, 0.2), rgba(90, 170, 255, 0.05));
+}
+.g-naval-res-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 2px;
+}
+.g-naval-grow {
+  flex: 1;
+}
+.g-naval-peekback {
+  position: absolute;
+  left: 50%;
+  bottom: calc(14px + var(--safe-bottom));
+  transform: translateX(-50%);
+  z-index: 45;
+  box-shadow: 0 6px 0 #8a5c05, 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* ------------------------------------------------------------------ arsenal, medals, career */
+.g-naval-sub {
+  gap: 12px;
+}
+.g-naval-item {
+  appearance: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 7px 7px 9px;
+  border-radius: 16px;
+  border: 1px solid rgba(243, 194, 74, 0.22);
+  background: linear-gradient(180deg, #19191e, #111114);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  transition: transform 0.08s;
+}
+.g-naval-item:active {
+  transform: scale(0.97);
+}
+.g-naval-item canvas {
+  display: block;
+  border-radius: 11px;
+  margin-bottom: 3px;
+}
+.g-naval-item b {
+  font-size: 13.5px;
+  font-weight: 900;
+  padding: 0 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-naval-item small {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--text-3);
+  padding: 0 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-naval-item.sel {
+  border-color: #f3c24a;
+  box-shadow: 0 0 0 1px #f3c24a, 0 0 22px rgba(243, 194, 74, 0.35);
+}
+.g-naval-item.sel small {
+  color: var(--gold);
+}
+.g-naval-item.locked canvas {
+  filter: grayscale(0.85) brightness(0.55);
+}
+.g-naval-medal .g-naval-medal-ico {
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  background: radial-gradient(circle at 35% 30%, #2a2a33, #0c0c10);
+  border: 2px solid #f3c24a;
+  box-shadow: 0 0 14px rgba(243, 194, 74, 0.3);
+}
+.g-naval-medal.no .g-naval-medal-ico {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: none;
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+.g-naval-medal.no .li-title {
+  color: var(--text-2);
+}
+.g-naval-medal .li-right {
+  font-size: 13px;
+}
+.g-naval-medal.no .li-right {
+  color: var(--text-3);
+}
+.g-naval-careerhead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+.g-naval-careerhead .g-naval-xpbar {
+  width: 100%;
+}
+.g-naval-career-badge {
+  width: 96px;
+  height: 96px;
+  filter: drop-shadow(0 0 14px rgba(243, 194, 74, 0.35));
+}
+.g-naval-aiwins {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+.g-naval-aiwins > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 2px;
+  border-radius: 12px;
+  border: 1px solid rgba(243, 194, 74, 0.22);
+  background: linear-gradient(180deg, #1c1c21, #121215);
+}
+.g-naval-aiwins b {
+  font-size: 18px;
+  font-weight: 1000;
+}
+.g-naval-aiwins small {
+  font-size: 11px;
+  color: var(--text-3);
+  font-weight: 800;
+}
+.g-naval-ranks {
+  gap: 7px;
+}
+.g-naval-rankrow {
+  padding: 8px 12px;
+  cursor: default;
+}
+.g-naval-rank-ico {
+  width: 40px;
+  height: 40px;
+  flex: none;
+}
+.g-naval-rankrow .li-title {
+  font-size: 15px;
+}
+.g-naval-rankrow.current {
+  border-color: #f3c24a;
+  box-shadow: 0 0 0 1px #f3c24a, 0 0 18px rgba(243, 194, 74, 0.3);
+}
+.g-naval-rankrow.locked {
+  opacity: 0.55;
+}
+.g-naval-rankrow.beyond {
+  border-style: dashed;
+}
+.g-naval-rules p {
+  margin: 0 0 9px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-2);
+  text-align: left;
+}
+.g-naval-rules b {
+  color: var(--gold);
+}

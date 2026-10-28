@@ -132,14 +132,14 @@ export class PlacementView {
       }
       return { pos, rows: row + 1, gap };
     };
-    let dc = Math.min(34, (S / N) * 0.8);
+    let dc = Math.min(40, (S / N) * 0.92);
     let fl = flow(dc);
     let dockH = fl.rows * (dc + 12) + 18;
     if (!wide) {
       const maxS = H - gut - 8 - dockH - 14;
       if (S > maxS) {
         S = Math.max(150, Math.floor(maxS / N) * N);
-        dc = Math.min(dc, (S / N) * 0.8);
+        dc = Math.min(dc, (S / N) * 0.92);
         fl = flow(dc);
         dockH = fl.rows * (dc + 12) + 18;
       }
@@ -149,7 +149,8 @@ export class PlacementView {
       this.grid = { x: gx, y: gut + 6, s: S };
       this.dock = { x: gx + S + pad * 2, y: gut + 6, w: dockW, h: dockH };
     } else {
-      this.grid = { x: Math.round((W - S - gut) / 2 + gut), y: gut + 6, s: S };
+      const off = Math.max(0, Math.floor((H - (gut + 6 + S + 14 + dockH)) * 0.4));
+      this.grid = { x: Math.round((W - S - gut) / 2 + gut), y: gut + 6 + off, s: S };
       this.dock = { x: pad, y: this.grid.y + S + 14, w: dockW, h: dockH };
     }
     // centre each dock row
@@ -362,8 +363,9 @@ export class PlacementView {
     g.textBaseline = 'middle';
     for (let k = 0; k < N; k++) {
       g.fillText('ABCDEFGHIJ'[k], x + k * cs + cs / 2, y - 9);
-      g.fillText(String(k + 1), x - 10, y + k * cs + cs / 2);
     }
+    g.textAlign = 'right';
+    for (let k = 0; k < N; k++) g.fillText(String(k + 1), x - 5, y + k * cs + cs / 2);
     g.restore();
     // forbidden halo for no-touch fleets
     if (!this.touch) {

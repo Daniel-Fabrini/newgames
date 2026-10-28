@@ -84,10 +84,10 @@ def against(L, C, spec, x, wall_y, yaw=0.0, scale=1.0, gap=0.01, kind='set', z=0
     return C.place_fixed(spec, (x, wall_y - hy - gap, z), yaw, scale, kind=kind)
 
 
-def levels_of(L, items, **kw):
+def levels_of(L, C, items, **kw):
     out = []
     for it in items:
-        out += L.scan_levels(it['objs'], **kw)
+        out += C.levels(it, **kw)
     return out
 
 
@@ -140,10 +140,10 @@ def study(L, S):
     C.place_fixed('Chandelier_01', (0.0, 0.2, R['h'] - 0.8), kind='set')
     C.build_occluder()
     # shelves: books first, then curios
-    shelves = levels_of(L, [shelf_l, shelf_r, wall_shelf, hutch])
+    shelves = levels_of(L, C, [shelf_l, shelf_r, wall_shelf, hutch])
     C.fill([l for l in shelves], BOOKS, 18)
     C.build_occluder()
-    tops = levels_of(L, [desk, stand, clock, chest, case])
+    tops = levels_of(L, C, [desk, stand, clock, chest, case])
     C.fill(shelves + tops, CURIOS, 140)
     floor = L.flat_level(0.0, R['x0'] + 0.2, -1.4, R['x1'] - 0.2, R['back'] - 0.05, tag='floor')
     C.fill([floor], [('wicker_basket_01', 1), ('potted_plant_02', 1), ('decorative_book_set_01', 0.5, {'kind': 'set'}),

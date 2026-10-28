@@ -595,7 +595,7 @@ export function shipSprite(cls, len, skinId, variant = 'body') {
     const g = c.getContext('2d');
     g.drawImage(body, 0, 0);
     g.globalCompositeOperation = 'source-atop';
-    g.fillStyle = 'rgba(6,14,22,0.62)';
+    g.fillStyle = 'rgba(8,18,28,0.5)';
     g.fillRect(0, 0, c.width, c.height);
     const rnd = seeded(hashStr(key));
     for (let k = 0; k < len * 3; k++) {
@@ -1003,7 +1003,7 @@ export function sweepSprite(themeId) {
   for (let k = 0; k < steps; k++) {
     const a0 = -span + (span * k) / steps;
     const a1 = -span + (span * (k + 1)) / steps + 0.01;
-    g.fillStyle = `rgba(${th.sweep},${0.28 * Math.pow(k / steps, 2.2)})`;
+    g.fillStyle = `rgba(${th.sweep},${0.42 * Math.pow(k / steps, 1.8)})`;
     g.beginPath();
     g.moveTo(cx, cx);
     g.arc(cx, cx, cx, a0, a1);
@@ -1059,6 +1059,21 @@ export function paintFire(g, cx, cy, cs, t, seed, power = 1) {
     g.globalAlpha = 0.85 * power;
     g.drawImage(fx.fire, cx - s / 2 + ox, cy - s / 2 + oy, s, s);
   }
+  g.restore();
+}
+
+// Smouldering glow on the wreck of a sunk ship.
+export function paintEmber(g, cx, cy, cs, t, seed) {
+  const fx = FX();
+  g.save();
+  g.globalCompositeOperation = 'lighter';
+  const f = 0.5 + 0.5 * Math.sin(t * 3 + seed * 1.7);
+  g.globalAlpha = 0.25 + 0.2 * f;
+  const s = cs * 0.7;
+  g.drawImage(fx.glow, cx - s / 2, cy - s / 2, s, s);
+  g.globalAlpha = 0.5 + 0.3 * f;
+  const k = cs * 0.16;
+  g.drawImage(fx.spark, cx - k / 2 + Math.sin(seed) * cs * 0.12, cy - k / 2, k, k);
   g.restore();
 }
 

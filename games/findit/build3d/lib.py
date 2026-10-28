@@ -376,6 +376,8 @@ def scan_levels(objs, cell=0.02, min_area=0.012, max_clear=0.9, tag='', bvh=None
     if region:
         mn = Vector((max(mn.x, region[0]), max(mn.y, region[1]), mn.z))
         mx = Vector((min(mx.x, region[2]), min(mx.y, region[3]), mx.z))
+    if mx.x - mn.x > 12 or mx.y - mn.y > 12:
+        return []
     nx = max(1, int((mx.x - mn.x) / cell))
     ny = max(1, int((mx.y - mn.y) / cell))
     top = mx.z + 0.05
@@ -451,6 +453,7 @@ class Composer:
         self.occluder = None  # BVH used for camera visibility of candidates
         self.coll_props = collection('props')
         self.coll_set = collection('set')
+        self.stats = {}
 
     # --- AABB registry
     def _cells(self, mn, mx):
@@ -459,20 +462,22 @@ class Composer:
             for j in range(int(math.floor(mn.y / g)), int(math.floor(mx.y / g)) + 1):
                 yield (i, j)
 
-    def add_box(self, mn, mx):
+    def add_box(self, mn, mx, owner=None):
         k = len(self.boxes)
-        self.boxes.append((mn.copy(), mx.copy()))
+        self.boxes.append((mn.copy(), mx.copy(), owner))
         for c in self._cells(mn, mx):
             self.grid.setdefault(c, []).append(k)
 
-    def collides(self, mn, mx, pad=0.0):
+    def collides(self, mn, mx, pad=0.0, ignore=()):
         seen = set()
         for c in self._cells(mn, mx):
             for k in self.grid.get(c, ()):
                 if k in seen:
                     continue
                 seen.add(k)
-                a, b = self.boxes[k]
+                a, b, ow = self.boxes[k]
+                if ow is not None and ow in ignore:
+                    continue
                 if mn.x < b.x - pad and mx.x > a.x + pad and mn.y < b.y - pad and mx.y > a.y + pad and mn.z < b.z - pad and mx.z > a.z + pad:
                     return True
         return False
@@ -515,7 +520,7 @@ class Composer:
         objs = p.instance(loc, yaw, scale, self.coll_set if kind == 'set' else self.coll_props, idx, extra)
         mn, mx = aabb_of(objs)
         if register:
-            self.add_box(mn, mx)
+            self.add_box(mn, mx, idx)
         it = {'index': idx, 'key': key or p.key, 'asset': p.asset, 'objs': objs, 'kind': kind, 'min': mn, 'max': mx}
         self.items.append(it)
         return it
@@ -532,22 +537,26 @@ class Composer:
             hx, hy = p.footprint(yw, scale)
             h = p.size.z * scale
             if not level.fits(x, y, hx, hy, h + 0.004):
+                self.stats['fit'] = self.stats.get('fit', 0) + 1
                 if xy:
                     return None
                 continue
             z = level.z + 0.0008
             mn = Vector((x - hx, y - hy, z + 0.001))
             mx = Vector((x + hx, y + hy, z + h))
-            if self.collides(mn, mx, pad):
+            if self.collides(mn, mx, pad, getattr(level, 'ignore', ())):
+                self.stats['collide'] = self.stats.get('collide', 0) + 1
                 if xy:
                     return None
                 continue
             c = (mn + mx) / 2
             if not self.in_view(c, 0.02):
+                self.stats['view'] = self.stats.get('view', 0) + 1
                 continue
             if need_visible:
                 pts = [c, Vector((x, y, z + h * 0.9)), Vector((x - hx * 0.6, y - hy, z + h * 0.5)), Vector((x + hx * 0.6, y - hy, z + h * 0.5))]
                 if not self.visible_from_cam(pts, min_vis):
+                    self.stats['hidden'] = self.stats.get('hidden', 0) + 1
                     continue
             return self.place_fixed(spec, (x, y, z), yw, scale, kind=kind, key=key)
         return None
@@ -573,6 +582,7 @@ class Composer:
                 if opt.get('stack') or it['asset'] in stack_kinds:
                     for nl in scan_levels(it['objs'], cell=0.02, max_clear=lv_clear_above(lv, it), tag='stack'):
                         if nl.z > it['min'].z + 0.02:
+                            nl.ignore = {it['index']} | set(getattr(lv, 'ignore', ()))
                             levels.append(nl)
         return placed
 
@@ -596,6 +606,12 @@ class Composer:
         if not self.in_view((mn + mx) / 2, 0.0):
             return None
         return self.place_fixed(spec, loc, yaw, scale, kind=kind, key=key)
+
+    def levels(self, item, **kw):
+        lv = scan_levels(item['objs'], **kw)
+        for l in lv:
+            l.ignore = {item['index']} | set(kw.get('ignore', ()))
+        return lv
 
     def build_occluder(self, objs=None):
         objs = objs if objs is not None else [o for it in self.items for o in it['objs']] + list(self.coll_set.all_objects)
@@ -778,10 +794,16 @@ def render(out_dir):
     bpy.ops.render.render(write_still=True)
     img = bpy.data.images['Render Result']
     st = sc.render.image_settings
-    st.file_format = 'OPEN_EXR_MULTILAYER'
+    if 'media_type' in st.bl_rna.properties:
+        st.media_type = 'MULTI_LAYER_IMAGE'
+        st.file_format = 'OPEN_EXR'
+    else:
+        st.file_format = 'OPEN_EXR_MULTILAYER'
     st.color_depth = '32'
     st.exr_codec = 'ZIP'
     img.save_render(os.path.join(out_dir, 'passes.exr'), scene=sc)
+    if 'media_type' in st.bl_rna.properties:
+        st.media_type = 'IMAGE'
     st.file_format = 'PNG'
     st.color_depth = '8'
     return os.path.join(out_dir, 'beauty.png')

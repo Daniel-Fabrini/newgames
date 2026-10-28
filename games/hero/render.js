@@ -4,7 +4,7 @@
 
 import { GW, GH, NET_D, PITCH_X, HALF_Y, BOX_X, BOX_Y, SIX_X, SIX_Y, PEN_Y, BR } from './sim.js';
 
-const FIG = 1.42; // players are drawn bigger than life so they read on a phone
+const FIG = 1.55; // players are drawn bigger than life so they read on a phone
 const BALL_VIS = 2.5;
 
 export class View {
@@ -12,7 +12,7 @@ export class View {
     this.W = 390;
     this.H = 700;
     this.dpr = 1;
-    this.fov = (56 * Math.PI) / 180;
+    this.fov = (46 * Math.PI) / 180;
     this.F = 600;
     this.H0 = 350;
     this.cx = 0;
@@ -31,7 +31,7 @@ export class View {
     this.dpr = dpr;
     this.F = H / (2 * Math.tan(this.fov / 2));
     // wide screens: keep a sensible focal length
-    this.F = Math.min(this.F, W * 1.6);
+    this.F = Math.min(this.F, Math.max(W, H) * 2.2);
     this.H0 = H * 0.5;
   }
   setCam(tx, ty, dist) {
@@ -153,50 +153,76 @@ function seeded(seed) {
 
 export function makeAssets(homeColor, awayColor, adText) {
   const R = seeded(7);
-  // crowd texture (behind the goal)
-  const cw = 1024;
-  const ch = 384;
+  // crowd texture (behind the goal): one 60 m wide tile, ~0.5 m per fan
+  const cw = 2048;
+  const ch = 512;
   const crowd = document.createElement('canvas');
   crowd.width = cw;
   crowd.height = ch;
   const g = crowd.getContext('2d');
-  const bg = g.createLinearGradient(0, 0, 0, ch);
-  bg.addColorStop(0, '#07070b');
-  bg.addColorStop(1, '#14141c');
-  g.fillStyle = bg;
+  g.fillStyle = '#0a0a10';
   g.fillRect(0, 0, cw, ch);
-  const palette = [homeColor, homeColor, homeColor, '#f1f1f1', '#d9d9de', '#2a2a33', '#3b3b46', awayColor, '#c9a24a', '#8a8a96'];
-  const skins = ['#f1c9a5', '#d9a47c', '#b07a52', '#7b4f32', '#e8b892'];
-  const rows = 26;
+  const palette = [homeColor, homeColor, homeColor, homeColor, '#e9e9ee', '#c9c9d2', '#2a2a33', '#3b3b46', '#55556a', awayColor, '#d9b24a'];
+  const skins = ['#e9c3a0', '#cf9a72', '#a87048', '#74492e', '#e2b28a'];
+  const rows = 48;
+  const rh = ch / rows;
+  const band0 = 21;
+  const band1 = 24;
   for (let r = 0; r < rows; r++) {
-    const y = (r + 0.8) * (ch / rows);
-    const light = 0.35 + 0.65 * (r / rows);
-    const sz = ch / rows;
-    for (let x = R() * 8; x < cw; x += sz * (0.62 + R() * 0.25)) {
+    const y = (r + 1) * rh;
+    if (r >= band0 && r < band1) continue;
+    // seat-row step shading
+    g.fillStyle = r % 2 ? '#0d0d14' : '#101018';
+    g.fillRect(0, y - rh, cw, rh);
+    const depthLight = 0.45 + 0.55 * (r / rows);
+    for (let x = 4 + (r % 2) * 8; x < cw; x += 17) {
+      if (x % 341 < 14) continue; // aisle
+      if (R() < 0.06) continue; // empty seat
       const col = palette[(R() * palette.length) | 0];
-      g.globalAlpha = 0.55 + 0.45 * light;
+      const jx = x + (R() - 0.5) * 4;
+      g.globalAlpha = 0.5 + 0.5 * depthLight;
       g.fillStyle = col;
-      g.beginPath();
-      g.ellipse(x, y - sz * 0.05, sz * 0.32, sz * 0.42, 0, Math.PI, 0);
+      rr(g, jx - 6, y - rh * 0.62, 12, rh * 0.62, 3);
       g.fill();
-      g.fillRect(x - sz * 0.32, y - sz * 0.06, sz * 0.64, sz * 0.36);
       g.fillStyle = skins[(R() * skins.length) | 0];
       g.beginPath();
-      g.arc(x, y - sz * 0.48, sz * 0.18, 0, Math.PI * 2);
+      g.arc(jx, y - rh * 0.72, rh * 0.26, 0, Math.PI * 2);
       g.fill();
-      if (R() < 0.12) {
-        // scarf / raised arms
-        g.fillStyle = col === homeColor ? '#fff' : homeColor;
-        g.fillRect(x - sz * 0.4, y - sz * 0.9, sz * 0.8, sz * 0.12);
+      if (R() < 0.07) {
+        // scarf held up
+        g.fillStyle = col === homeColor ? '#ffffff' : homeColor;
+        g.fillRect(jx - 9, y - rh * 1.1, 18, 2.5);
       }
     }
   }
   g.globalAlpha = 1;
-  // darken the top rows (under the roof)
+  // aisles (stairs)
+  for (let x = 0; x < cw; x += 341) {
+    g.fillStyle = '#26262e';
+    g.fillRect(x + 1, 0, 11, ch);
+    g.fillStyle = 'rgba(255,255,255,0.08)';
+    for (let y = 0; y < ch; y += rh) g.fillRect(x + 1, y, 11, 1);
+  }
+  // tier band with an LED ribbon
+  const by0 = band0 * rh;
+  const bh = (band1 - band0) * rh;
+  const bgd = g.createLinearGradient(0, by0, 0, by0 + bh);
+  bgd.addColorStop(0, '#1b1b22');
+  bgd.addColorStop(1, '#0b0b10');
+  g.fillStyle = bgd;
+  g.fillRect(0, by0, cw, bh);
+  const led = g.createLinearGradient(0, by0 + bh * 0.35, 0, by0 + bh * 0.75);
+  led.addColorStop(0, '#fff2b8');
+  led.addColorStop(1, '#c98a10');
+  g.fillStyle = led;
+  g.fillRect(0, by0 + bh * 0.4, cw, bh * 0.28);
+  g.fillStyle = 'rgba(0,0,0,0.45)';
+  for (let x = 0; x < cw; x += 6) g.fillRect(x, by0 + bh * 0.4, 1, bh * 0.28);
+  // haze: back rows darker
   const sh = g.createLinearGradient(0, 0, 0, ch);
-  sh.addColorStop(0, 'rgba(0,0,0,0.62)');
-  sh.addColorStop(0.5, 'rgba(0,0,0,0.25)');
-  sh.addColorStop(1, 'rgba(0,0,0,0.05)');
+  sh.addColorStop(0, 'rgba(0,0,4,0.7)');
+  sh.addColorStop(0.45, 'rgba(0,0,4,0.35)');
+  sh.addColorStop(1, 'rgba(0,0,0,0.1)');
   g.fillStyle = sh;
   g.fillRect(0, 0, cw, ch);
 
@@ -344,15 +370,15 @@ export function drawBackground(g, v, A, fx) {
   g.fillStyle = sky;
   g.fillRect(0, 0, W, H);
 
-  // stand behind the goal: a sloped plane rendered in strips
-  const strips = 14;
+  // stand behind the goal: a sloped plane rendered in strips, tiled every 30 m
+  const strips = 16;
   const y0 = -7.5;
   const y1 = -46;
   const z0 = 1.2;
   const z1 = 24;
   const tex = A.crowd;
   const jump = fx.crowdJump || 0;
-  let lastTop = null;
+  const tileM = 60;
   for (let i = 0; i < strips; i++) {
     const ua = i / strips;
     const ub = (i + 1) / strips;
@@ -360,16 +386,35 @@ export function drawBackground(g, v, A, fx) {
     const za = z0 + (z1 - z0) * ua;
     const yb = y0 + (y1 - y0) * ub;
     const zb = z0 + (z1 - z0) * ub;
-    if (!v.p(-60, ya, za, P0) || !v.p(60, yb, zb, P1)) continue;
+    if (!v.p(-60, ya, za, P0) || !v.p(-60, yb, zb, P1)) continue;
     const top = P1.y;
     const bot = P0.y;
     if (bot < -40 || top > H) continue;
-    const x0 = P0.x;
-    const x1 = v.W / 2 + (60 - v.cx) * P0.k;
+    const k = (P0.k + P1.k) / 2;
+    const xL = v.W / 2 + (-60 - v.cx) * k;
+    const tw = tileM * k;
     const sy = (tex.height * (strips - 1 - i)) / strips;
-    const jy = jump ? Math.sin(fx.t * 18 + i * 1.7) * jump * (bot - top) * 0.12 : 0;
-    g.drawImage(tex, 0, sy, tex.width, tex.height / strips, x0, top + jy, x1 - x0, bot - top + 1);
-    lastTop = top;
+    const jy = jump ? Math.sin(fx.t * 18 + i * 1.7) * jump * (bot - top) * 0.14 : 0;
+    const first = Math.max(0, Math.floor(-xL / tw));
+    for (let tI = first; tI < 2; tI++) {
+      const x = xL + tI * tw;
+      if (x > W) break;
+      g.drawImage(tex, 0, sy, tex.width, tex.height / strips, x, top + jy, tw + 0.5, bot - top + 1);
+    }
+  }
+  // camera flashes during celebrations
+  if (jump > 0.05 && v.p(0, -20, 10, P0)) {
+    const n = Math.round(jump * 14);
+    for (let i = 0; i < n; i++) {
+      const fxp = (Math.sin(fx.t * 31 + i * 12.9898) * 43758.5453) % 1;
+      const fyp = (Math.sin(fx.t * 17 + i * 78.233) * 12543.123) % 1;
+      const x = Math.abs(fxp) * W;
+      const y = P0.y - Math.abs(fyp) * P0.k * 14;
+      g.fillStyle = 'rgba(255,255,255,0.85)';
+      g.beginPath();
+      g.arc(x, y, 1.6, 0, Math.PI * 2);
+      g.fill();
+    }
   }
   // roof edge
   if (v.p(0, y1, z1, P0)) {
@@ -386,7 +431,6 @@ export function drawBackground(g, v, A, fx) {
       g.fillRect(0, ry, W, Math.max(1, P0.k * 0.15));
     }
   }
-  void lastTop;
 
   // side stands (x = ±40 … ±75), pattern-filled
   if (!A.patterns.side) A.patterns.side = g.createPattern(A.side, 'repeat');
@@ -689,7 +733,8 @@ export function drawFigure(g, v, ent, look, opt = {}) {
   let ux = P1.x - fx;
   let uy = P1.y - fy;
   const ul = Math.hypot(ux, uy) || 1;
-  const kh = (ul / 1.8) * FIG;
+  // billboard: never squash figures much under steep cameras
+  const kh = Math.max((ul / 1.8) * FIG, k * 0.86);
   ux /= ul;
   uy /= ul;
   const dpr = v.dpr;

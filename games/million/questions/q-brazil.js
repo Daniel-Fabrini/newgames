@@ -24,17 +24,6 @@ export default [
   },
   {
     d: 1,
-    q: { pt: 'Até 2022, quantas Copas do Mundo masculinas o Brasil tinha vencido?', en: 'Up to 2022, how many men\'s World Cups had Brazil won?', es: 'Hasta 2022, ¿cuántos Mundiales masculinos había ganado Brasil?' },
-    a: [
-      { pt: '4', en: '4', es: '4' },
-      { pt: '5', en: '5', es: '5' },
-      { pt: '3', en: '3', es: '3' },
-      { pt: '6', en: '6', es: '6' },
-    ],
-    ok: 1,
-  },
-  {
-    d: 1,
     q: { pt: 'Qual é a maior cidade do Brasil?', en: 'What is the largest city in Brazil?', es: '¿Cuál es la ciudad más grande de Brasil?' },
     a: [
       { pt: 'Rio de Janeiro', en: 'Rio de Janeiro', es: 'Rio de Janeiro' },
@@ -131,17 +120,6 @@ export default [
       { pt: 'Tango', en: 'Tango', es: 'Tango' },
     ],
     ok: 1,
-  },
-  {
-    d: 1,
-    q: { pt: 'A canção "Garota de Ipanema" é um clássico de qual gênero?', en: 'The song "The Girl from Ipanema" is a classic of which genre?', es: '¿La canción "La chica de Ipanema" es un clásico de qué género?' },
-    a: [
-      { pt: 'Axé', en: 'Axé', es: 'Axé' },
-      { pt: 'Frevo', en: 'Frevo', es: 'Frevo' },
-      { pt: 'Bossa nova', en: 'Bossa nova', es: 'Bossa nova' },
-      { pt: 'Pagode', en: 'Pagode', es: 'Pagode' },
-    ],
-    ok: 2,
   },
   {
     d: 1,
@@ -332,17 +310,6 @@ export default [
   },
   {
     d: 1,
-    q: { pt: 'Em qual clube Pelé jogou a maior parte de sua carreira?', en: 'Which club did Pelé play for during most of his career?', es: '¿En qué club jugó Pelé la mayor parte de su carrera?' },
-    a: [
-      { pt: 'Santos', en: 'Santos', es: 'Santos' },
-      { pt: 'Flamengo', en: 'Flamengo', es: 'Flamengo' },
-      { pt: 'Corinthians', en: 'Corinthians', es: 'Corinthians' },
-      { pt: 'New York Cosmos', en: 'New York Cosmos', es: 'New York Cosmos' },
-    ],
-    ok: 0,
-  },
-  {
-    d: 1,
     q: { pt: 'Qual era o famoso número da camisa de Pelé?', en: 'What was Pelé\'s famous shirt number?', es: '¿Cuál era el famoso número de la camiseta de Pelé?' },
     a: [
       { pt: '9', en: '9', es: '9' },
@@ -417,17 +384,6 @@ export default [
       { pt: 'Juiz de Fora', en: 'Juiz de Fora', es: 'Juiz de Fora' },
     ],
     ok: 1,
-  },
-  {
-    d: 1,
-    q: { pt: 'Qual cidade brasileira sediou os Jogos Olímpicos de 2016?', en: 'Which Brazilian city hosted the 2016 Olympic Games?', es: '¿Qué ciudad brasileña organizó los Juegos Olímpicos de 2016?' },
-    a: [
-      { pt: 'São Paulo', en: 'São Paulo', es: 'São Paulo' },
-      { pt: 'Brasília', en: 'Brasília', es: 'Brasilia' },
-      { pt: 'Salvador', en: 'Salvador', es: 'Salvador' },
-      { pt: 'Rio de Janeiro', en: 'Rio de Janeiro', es: 'Río de Janeiro' },
-    ],
-    ok: 3,
   },
   {
     d: 1,
@@ -508,14 +464,58 @@ export default [
   },
   {
     d: 1,
-    q: { pt: 'Na Copa de 2014, o Brasil perdeu por 7 a 1 para qual seleção?', en: 'In the 2014 World Cup, Brazil lost 7–1 to which team?', es: 'En el Mundial de 2014, ¿contra qué selección perdió Brasil 7 a 1?' },
+    q: { pt: 'Qual salgado brasileiro tem formato de gota e recheio de frango?', en: 'Which Brazilian snack is shaped like a teardrop and filled with chicken?', es: '¿Qué bocadillo brasileño tiene forma de gota y relleno de pollo?' },
     a: [
-      { pt: 'Holanda', en: 'Netherlands', es: 'Países Bajos' },
-      { pt: 'Alemanha', en: 'Germany', es: 'Alemania' },
-      { pt: 'Argentina', en: 'Argentina', es: 'Argentina' },
-      { pt: 'Espanha', en: 'Spain', es: 'España' },
+      { pt: 'Pastel', en: 'Pastel', es: 'Pastel' },
+      { pt: 'Empada', en: 'Empada', es: 'Empada' },
+      { pt: 'Esfiha', en: 'Esfiha', es: 'Esfiha' },
+      { pt: 'Coxinha', en: 'Coxinha', es: 'Coxinha' },
     ],
-    ok: 1,
+    ok: 3,
+  },
+  {
+    d: 1,
+    q: { pt: 'O guaraná, fruta que dá nome a um refrigerante famoso, é nativo de qual região?', en: 'Guaraná, the fruit behind a famous soda, is native to which region?', es: '¿De qué región es nativo el guaraná, fruta que da nombre a un famoso refresco?' },
+    a: [
+      { pt: 'Pampa', en: 'Pampa', es: 'Pampa' },
+      { pt: 'Pantanal', en: 'Pantanal', es: 'Pantanal' },
+      { pt: 'Amazônia', en: 'Amazon', es: 'Amazonia' },
+      { pt: 'Sertão nordestino', en: 'Northeastern backlands', es: 'Sertón nordestino' },
+    ],
+    ok: 2,
+  },
+  {
+    d: 1,
+    q: { pt: 'Qual personagem de Ziraldo usa uma panela na cabeça?', en: 'Which Ziraldo character wears a saucepan on his head?', es: '¿Qué personaje de Ziraldo lleva una cacerola en la cabeza?' },
+    a: [
+      { pt: 'Cascão', en: 'Cascão', es: 'Cascão' },
+      { pt: 'Pererê', en: 'Pererê', es: 'Pererê' },
+      { pt: 'Chico Bento', en: 'Chico Bento', es: 'Chico Bento' },
+      { pt: 'Menino Maluquinho', en: 'Menino Maluquinho (Nutty Boy)', es: 'Menino Maluquinho' },
+    ],
+    ok: 3,
+  },
+  {
+    d: 1,
+    q: { pt: 'Quais festas de junho, com quadrilha e fogueira, são enormes no Nordeste?', en: 'Which June festivals, with square dances and bonfires, are huge in the Northeast?', es: '¿Qué fiestas de junio, con cuadrillas y hogueras, son enormes en el Nordeste?' },
+    a: [
+      { pt: 'Carnaval', en: 'Carnival', es: 'Carnaval' },
+      { pt: 'Oktoberfest', en: 'Oktoberfest', es: 'Oktoberfest' },
+      { pt: 'Círio de Nazaré', en: 'Círio de Nazaré', es: 'Círio de Nazaré' },
+      { pt: 'Festas Juninas', en: 'Festas Juninas', es: 'Fiestas Juninas' },
+    ],
+    ok: 3,
+  },
+  {
+    d: 1,
+    q: { pt: 'Qual item, herdado dos povos indígenas, muitos brasileiros usam para dormir ou descansar?', en: 'Which item, inherited from Indigenous peoples, do many Brazilians use to sleep or relax?', es: '¿Qué objeto, heredado de los pueblos indígenas, usan muchos brasileños para dormir o descansar?' },
+    a: [
+      { pt: 'Rede', en: 'Hammock', es: 'Hamaca' },
+      { pt: 'Futon', en: 'Futon', es: 'Futon' },
+      { pt: 'Beliche', en: 'Bunk bed', es: 'Litera' },
+      { pt: 'Tatame', en: 'Tatami', es: 'Tatami' },
+    ],
+    ok: 0,
   },
   {
     d: 2,
@@ -629,17 +629,6 @@ export default [
   },
   {
     d: 2,
-    q: { pt: 'Às margens de qual riacho foi proclamada a independência do Brasil?', en: 'On the banks of which stream was Brazil\'s independence proclaimed?', es: '¿A orillas de qué arroyo se proclamó la independencia de Brasil?' },
-    a: [
-      { pt: 'Tietê', en: 'Tietê', es: 'Tieté' },
-      { pt: 'Pinheiros', en: 'Pinheiros', es: 'Pinheiros' },
-      { pt: 'Ipiranga', en: 'Ipiranga', es: 'Ipiranga' },
-      { pt: 'Anhangabaú', en: 'Anhangabaú', es: 'Anhangabaú' },
-    ],
-    ok: 2,
-  },
-  {
-    d: 2,
     q: { pt: 'Qual herói da Inconfidência Mineira é homenageado em 21 de abril?', en: 'Which hero of the Inconfidência Mineira is honored on April 21?', es: '¿Qué héroe de la Inconfidência Mineira es homenajeado el 21 de abril?' },
     a: [
       { pt: 'Tiradentes', en: 'Tiradentes', es: 'Tiradentes' },
@@ -684,17 +673,6 @@ export default [
   },
   {
     d: 2,
-    q: { pt: 'Qual cantora brasileira ficou famosa em Hollywood com chapéus de frutas?', en: 'Which Brazilian singer became famous in Hollywood wearing fruit hats?', es: '¿Qué cantante brasileña se hizo famosa en Hollywood con sombreros de frutas?' },
-    a: [
-      { pt: 'Elis Regina', en: 'Elis Regina', es: 'Elis Regina' },
-      { pt: 'Gal Costa', en: 'Gal Costa', es: 'Gal Costa' },
-      { pt: 'Carmen Miranda', en: 'Carmen Miranda', es: 'Carmen Miranda' },
-      { pt: 'Maria Bethânia', en: 'Maria Bethânia', es: 'Maria Bethânia' },
-    ],
-    ok: 2,
-  },
-  {
-    d: 2,
     q: { pt: 'Caetano Veloso e Gilberto Gil lideraram qual movimento musical nos anos 1960?', en: 'Caetano Veloso and Gilberto Gil led which musical movement in the 1960s?', es: '¿Qué movimiento musical lideraron Caetano Veloso y Gilberto Gil en los años 60?' },
     a: [
       { pt: 'Jovem Guarda', en: 'Jovem Guarda', es: 'Jovem Guarda' },
@@ -703,17 +681,6 @@ export default [
       { pt: 'Mangue beat', en: 'Mangue beat', es: 'Manguebeat' },
     ],
     ok: 2,
-  },
-  {
-    d: 2,
-    q: { pt: 'Quem é conhecido como o "Rei do Baião"?', en: 'Who is known as the "King of Baião"?', es: '¿Quién es conocido como el "Rey del Baião"?' },
-    a: [
-      { pt: 'Luiz Gonzaga', en: 'Luiz Gonzaga', es: 'Luiz Gonzaga' },
-      { pt: 'Dominguinhos', en: 'Dominguinhos', es: 'Dominguinhos' },
-      { pt: 'Jackson do Pandeiro', en: 'Jackson do Pandeiro', es: 'Jackson do Pandeiro' },
-      { pt: 'Gilberto Gil', en: 'Gilberto Gil', es: 'Gilberto Gil' },
-    ],
-    ok: 0,
   },
   {
     d: 2,
@@ -734,83 +701,6 @@ export default [
       { pt: 'Londres', en: 'London', es: 'Londres' },
       { pt: 'Nova York', en: 'New York', es: 'Nueva York' },
       { pt: 'Paris', en: 'Paris', es: 'París' },
-    ],
-    ok: 3,
-  },
-  {
-    d: 2,
-    q: { pt: 'Qual piloto brasileiro foi campeão de Fórmula 1 em 1988, 1990 e 1991?', en: 'Which Brazilian driver won the F1 title in 1988, 1990 and 1991?', es: '¿Qué piloto brasileño fue campeón de F1 en 1988, 1990 y 1991?' },
-    a: [
-      { pt: 'Ayrton Senna', en: 'Ayrton Senna', es: 'Ayrton Senna' },
-      { pt: 'Nelson Piquet', en: 'Nelson Piquet', es: 'Nelson Piquet' },
-      { pt: 'Emerson Fittipaldi', en: 'Emerson Fittipaldi', es: 'Emerson Fittipaldi' },
-      { pt: 'Rubens Barrichello', en: 'Rubens Barrichello', es: 'Rubens Barrichello' },
-    ],
-    ok: 0,
-  },
-  {
-    d: 2,
-    q: { pt: 'No "Maracanazo" de 1950, o Brasil perdeu a Copa para qual seleção?', en: 'In the 1950 "Maracanazo", Brazil lost the World Cup to which team?', es: 'En el "Maracanazo" de 1950, ¿ante qué selección perdió Brasil el Mundial?' },
-    a: [
-      { pt: 'Uruguai', en: 'Uruguay', es: 'Uruguay' },
-      { pt: 'Argentina', en: 'Argentina', es: 'Argentina' },
-      { pt: 'Itália', en: 'Italy', es: 'Italia' },
-      { pt: 'Suécia', en: 'Sweden', es: 'Suecia' },
-    ],
-    ok: 0,
-  },
-  {
-    d: 2,
-    q: { pt: 'Qual jogadora brasileira foi eleita a melhor do mundo pela FIFA seis vezes?', en: 'Which Brazilian player was named FIFA World Player of the Year six times?', es: '¿Qué jugadora brasileña fue elegida mejor del mundo por la FIFA seis veces?' },
-    a: [
-      { pt: 'Formiga', en: 'Formiga', es: 'Formiga' },
-      { pt: 'Cristiane', en: 'Cristiane', es: 'Cristiane' },
-      { pt: 'Marta', en: 'Marta', es: 'Marta' },
-      { pt: 'Sissi', en: 'Sissi', es: 'Sissi' },
-    ],
-    ok: 2,
-  },
-  {
-    d: 2,
-    q: { pt: 'Quem marcou os dois gols do Brasil na final da Copa de 2002?', en: 'Who scored both of Brazil\'s goals in the 2002 World Cup final?', es: '¿Quién marcó los dos goles de Brasil en la final del Mundial 2002?' },
-    a: [
-      { pt: 'Rivaldo', en: 'Rivaldo', es: 'Rivaldo' },
-      { pt: 'Ronaldinho', en: 'Ronaldinho', es: 'Ronaldinho' },
-      { pt: 'Ronaldo', en: 'Ronaldo', es: 'Ronaldo' },
-      { pt: 'Romário', en: 'Romário', es: 'Romário' },
-    ],
-    ok: 2,
-  },
-  {
-    d: 2,
-    q: { pt: 'Em qual país o Brasil conquistou o tricampeonato mundial, em 1970?', en: 'In which country did Brazil win its third World Cup, in 1970?', es: '¿En qué país ganó Brasil su tercer Mundial, en 1970?' },
-    a: [
-      { pt: 'Itália', en: 'Italy', es: 'Italia' },
-      { pt: 'Alemanha', en: 'Germany', es: 'Alemania' },
-      { pt: 'México', en: 'Mexico', es: 'México' },
-      { pt: 'Argentina', en: 'Argentina', es: 'Argentina' },
-    ],
-    ok: 2,
-  },
-  {
-    d: 2,
-    q: { pt: 'Contra qual seleção o Brasil venceu a final da Copa de 1994, nos pênaltis?', en: 'Which team did Brazil beat on penalties in the 1994 World Cup final?', es: '¿A qué selección venció Brasil en los penaltis en la final del Mundial 1994?' },
-    a: [
-      { pt: 'Itália', en: 'Italy', es: 'Italia' },
-      { pt: 'Holanda', en: 'Netherlands', es: 'Países Bajos' },
-      { pt: 'Suécia', en: 'Sweden', es: 'Suecia' },
-      { pt: 'Argentina', en: 'Argentina', es: 'Argentina' },
-    ],
-    ok: 0,
-  },
-  {
-    d: 2,
-    q: { pt: 'Qual tenista brasileiro venceu Roland Garros três vezes?', en: 'Which Brazilian tennis player won Roland Garros three times?', es: '¿Qué tenista brasileño ganó Roland Garros tres veces?' },
-    a: [
-      { pt: 'Fernando Meligeni', en: 'Fernando Meligeni', es: 'Fernando Meligeni' },
-      { pt: 'Thomaz Bellucci', en: 'Thomaz Bellucci', es: 'Thomaz Bellucci' },
-      { pt: 'Thomaz Koch', en: 'Thomaz Koch', es: 'Thomaz Koch' },
-      { pt: 'Gustavo Kuerten', en: 'Gustavo Kuerten', es: 'Gustavo Kuerten' },
     ],
     ok: 3,
   },
@@ -981,34 +871,12 @@ export default [
   },
   {
     d: 2,
-    q: { pt: 'Quem criou a Turma da Mônica?', en: 'Who created Monica\'s Gang?', es: '¿Quién creó la Pandilla de Mónica?' },
-    a: [
-      { pt: 'Ziraldo', en: 'Ziraldo', es: 'Ziraldo' },
-      { pt: 'Monteiro Lobato', en: 'Monteiro Lobato', es: 'Monteiro Lobato' },
-      { pt: 'Mauricio de Sousa', en: 'Mauricio de Sousa', es: 'Mauricio de Sousa' },
-      { pt: 'Henfil', en: 'Henfil', es: 'Henfil' },
-    ],
-    ok: 2,
-  },
-  {
-    d: 2,
     q: { pt: 'O Dia da Consciência Negra, em 20 de novembro, homenageia qual líder?', en: 'Black Consciousness Day, on November 20, honors which leader?', es: '¿El Día de la Conciencia Negra, el 20 de noviembre, homenajea a qué líder?' },
     a: [
       { pt: 'Zumbi dos Palmares', en: 'Zumbi dos Palmares', es: 'Zumbi dos Palmares' },
       { pt: 'Tiradentes', en: 'Tiradentes', es: 'Tiradentes' },
       { pt: 'Chico Rei', en: 'Chico Rei', es: 'Chico Rei' },
       { pt: 'André Rebouças', en: 'André Rebouças', es: 'André Rebouças' },
-    ],
-    ok: 0,
-  },
-  {
-    d: 2,
-    q: { pt: 'A corrida do ouro do século XVIII aconteceu principalmente em qual região?', en: 'The 18th-century gold rush happened mainly in which region?', es: '¿En qué región ocurrió principalmente la fiebre del oro del siglo XVIII?' },
-    a: [
-      { pt: 'Minas Gerais', en: 'Minas Gerais', es: 'Minas Gerais' },
-      { pt: 'Bahia', en: 'Bahia', es: 'Bahia' },
-      { pt: 'Pernambuco', en: 'Pernambuco', es: 'Pernambuco' },
-      { pt: 'Rio Grande do Sul', en: 'Rio Grande do Sul', es: 'Rio Grande do Sul' },
     ],
     ok: 0,
   },
@@ -1025,14 +893,102 @@ export default [
   },
   {
     d: 2,
-    q: { pt: 'Qual é o nome verdadeiro de Pelé?', en: 'What is Pelé\'s real name?', es: '¿Cuál es el nombre real de Pelé?' },
+    q: { pt: 'Qual animal ameaçado aparece na nota de 20 reais?', en: 'Which endangered animal appears on Brazil\'s 20-real banknote?', es: '¿Qué animal amenazado aparece en el billete de 20 reales?' },
     a: [
-      { pt: 'Manuel Francisco dos Santos', en: 'Manuel Francisco dos Santos', es: 'Manuel Francisco dos Santos' },
-      { pt: 'Jair Ventura Filho', en: 'Jair Ventura Filho', es: 'Jair Ventura Filho' },
-      { pt: 'Ronaldo Nazário de Lima', en: 'Ronaldo Nazário de Lima', es: 'Ronaldo Nazário de Lima' },
-      { pt: 'Edson Arantes do Nascimento', en: 'Edson Arantes do Nascimento', es: 'Edson Arantes do Nascimento' },
+      { pt: 'Onça-pintada', en: 'Jaguar', es: 'Jaguar' },
+      { pt: 'Arara-vermelha', en: 'Scarlet macaw', es: 'Guacamayo rojo' },
+      { pt: 'Mico-leão-dourado', en: 'Golden lion tamarin', es: 'Tití león dorado' },
+      { pt: 'Tartaruga-marinha', en: 'Sea turtle', es: 'Tortuga marina' },
     ],
-    ok: 3,
+    ok: 2,
+  },
+  {
+    d: 2,
+    q: { pt: 'Qual personagem do folclore é uma serpente de fogo que protege as matas?', en: 'Which folklore figure is a fiery serpent that protects the forests?', es: '¿Qué personaje del folclore es una serpiente de fuego que protege los bosques?' },
+    a: [
+      { pt: 'Boitatá', en: 'Boitatá', es: 'Boitatá' },
+      { pt: 'Curupira', en: 'Curupira', es: 'Curupira' },
+      { pt: 'Iara', en: 'Iara', es: 'Iara' },
+      { pt: 'Cuca', en: 'Cuca', es: 'Cuca' },
+    ],
+    ok: 0,
+  },
+  {
+    d: 2,
+    q: { pt: 'Qual doce amarelinho é feito de gema de ovo, açúcar e coco?', en: 'Which bright yellow sweet is made of egg yolks, sugar and coconut?', es: '¿Qué dulce amarillo se hace con yemas de huevo, azúcar y coco?' },
+    a: [
+      { pt: 'Pé de moleque', en: 'Pé de moleque', es: 'Pé de moleque (turrón)' },
+      { pt: 'Paçoca', en: 'Paçoca', es: 'Paçoca' },
+      { pt: 'Quindim', en: 'Quindim', es: 'Quindim' },
+      { pt: 'Cocada branca', en: 'White cocada', es: 'Cocada blanca' },
+    ],
+    ok: 2,
+  },
+  {
+    d: 2,
+    q: { pt: 'Em qual cidade fica o Elevador Lacerda, que liga a Cidade Baixa à Alta?', en: 'In which city is the Lacerda Elevator, linking the Lower and Upper City?', es: '¿En qué ciudad está el Elevador Lacerda, que une la Ciudad Baja y la Alta?' },
+    a: [
+      { pt: 'Salvador', en: 'Salvador', es: 'Salvador' },
+      { pt: 'Rio de Janeiro', en: 'Rio de Janeiro', es: 'Río de Janeiro' },
+      { pt: 'Recife', en: 'Recife', es: 'Recife' },
+      { pt: 'Ouro Preto', en: 'Ouro Preto', es: 'Ouro Preto' },
+    ],
+    ok: 0,
+  },
+  {
+    d: 2,
+    q: { pt: 'Qual bloco de Recife é reconhecido pelo Guinness como o maior desfile de Carnaval do mundo?', en: 'Which Recife carnival group is listed by Guinness as the world\'s largest carnival parade?', es: '¿Qué comparsa de Recife figura en el Guinness como el mayor desfile de Carnaval del mundo?' },
+    a: [
+      { pt: 'Olodum', en: 'Olodum', es: 'Olodum' },
+      { pt: 'Cordão da Bola Preta', en: 'Cordão da Bola Preta', es: 'Cordão da Bola Preta' },
+      { pt: 'Galo da Madrugada', en: 'Galo da Madrugada', es: 'Galo da Madrugada' },
+      { pt: 'Filhos de Gandhy', en: 'Filhos de Gandhy', es: 'Filhos de Gandhy' },
+    ],
+    ok: 2,
+  },
+  {
+    d: 2,
+    q: { pt: 'Qual é a capital de Santa Catarina?', en: 'What is the capital of Santa Catarina?', es: '¿Cuál es la capital de Santa Catarina?' },
+    a: [
+      { pt: 'Joinville', en: 'Joinville', es: 'Joinville' },
+      { pt: 'Blumenau', en: 'Blumenau', es: 'Blumenau' },
+      { pt: 'Florianópolis', en: 'Florianópolis', es: 'Florianópolis' },
+      { pt: 'Balneário Camboriú', en: 'Balneário Camboriú', es: 'Balneário Camboriú' },
+    ],
+    ok: 2,
+  },
+  {
+    d: 2,
+    q: { pt: 'Qual é a capital do Ceará?', en: 'What is the capital of Ceará?', es: '¿Cuál es la capital de Ceará?' },
+    a: [
+      { pt: 'Juazeiro do Norte', en: 'Juazeiro do Norte', es: 'Juazeiro do Norte' },
+      { pt: 'Sobral', en: 'Sobral', es: 'Sobral' },
+      { pt: 'Fortaleza', en: 'Fortaleza', es: 'Fortaleza' },
+      { pt: 'Jericoacoara', en: 'Jericoacoara', es: 'Jericoacoara' },
+    ],
+    ok: 2,
+  },
+  {
+    d: 2,
+    q: { pt: 'Qual prato baiano é um creme feito com pão, camarão, amendoim e leite de coco?', en: 'Which Bahian dish is a cream of bread, shrimp, peanuts and coconut milk?', es: '¿Qué plato bahiano es una crema de pan, camarón, maní y leche de coco?' },
+    a: [
+      { pt: 'Caruru', en: 'Caruru', es: 'Caruru' },
+      { pt: 'Abará', en: 'Abará', es: 'Abará' },
+      { pt: 'Vatapá', en: 'Vatapá', es: 'Vatapá' },
+      { pt: 'Sarapatel', en: 'Sarapatel', es: 'Sarapatel' },
+    ],
+    ok: 2,
+  },
+  {
+    d: 2,
+    q: { pt: 'Qual capital nordestina, cortada por rios e pontes, é chamada de "Veneza Brasileira"?', en: 'Which northeastern capital, crossed by rivers and bridges, is called the "Brazilian Venice"?', es: '¿Qué capital del Nordeste, cruzada por ríos y puentes, es llamada la "Venecia brasileña"?' },
+    a: [
+      { pt: 'Recife', en: 'Recife', es: 'Recife' },
+      { pt: 'Salvador', en: 'Salvador', es: 'Salvador' },
+      { pt: 'Natal', en: 'Natal', es: 'Natal' },
+      { pt: 'São Luís', en: 'São Luís', es: 'São Luís' },
+    ],
+    ok: 0,
   },
   {
     d: 3,
@@ -1102,56 +1058,12 @@ export default [
   },
   {
     d: 3,
-    q: { pt: 'Quem compôs "Aquarela do Brasil"?', en: 'Who composed "Aquarela do Brasil" (Brazil)?', es: '¿Quién compuso "Aquarela do Brasil"?' },
-    a: [
-      { pt: 'Pixinguinha', en: 'Pixinguinha', es: 'Pixinguinha' },
-      { pt: 'Ary Barroso', en: 'Ary Barroso', es: 'Ary Barroso' },
-      { pt: 'Noel Rosa', en: 'Noel Rosa', es: 'Noel Rosa' },
-      { pt: 'Cartola', en: 'Cartola', es: 'Cartola' },
-    ],
-    ok: 1,
-  },
-  {
-    d: 3,
-    q: { pt: 'Qual cantora era apelidada de "Pimentinha"?', en: 'Which singer was nicknamed "Pimentinha" (Little Pepper)?', es: '¿Qué cantante era apodada "Pimentinha" (Pimientita)?' },
-    a: [
-      { pt: 'Elis Regina', en: 'Elis Regina', es: 'Elis Regina' },
-      { pt: 'Gal Costa', en: 'Gal Costa', es: 'Gal Costa' },
-      { pt: 'Rita Lee', en: 'Rita Lee', es: 'Rita Lee' },
-      { pt: 'Clara Nunes', en: 'Clara Nunes', es: 'Clara Nunes' },
-    ],
-    ok: 0,
-  },
-  {
-    d: 3,
     q: { pt: 'Qual compositor erudito escreveu as "Bachianas Brasileiras"?', en: 'Which classical composer wrote the "Bachianas Brasileiras"?', es: '¿Qué compositor clásico escribió las "Bachianas Brasileiras"?' },
     a: [
       { pt: 'Carlos Gomes', en: 'Carlos Gomes', es: 'Carlos Gomes' },
       { pt: 'Ernesto Nazareth', en: 'Ernesto Nazareth', es: 'Ernesto Nazareth' },
       { pt: 'Camargo Guarnieri', en: 'Camargo Guarnieri', es: 'Camargo Guarnieri' },
       { pt: 'Heitor Villa-Lobos', en: 'Heitor Villa-Lobos', es: 'Heitor Villa-Lobos' },
-    ],
-    ok: 3,
-  },
-  {
-    d: 3,
-    q: { pt: 'Quem foi o primeiro brasileiro campeão mundial de Fórmula 1, em 1972?', en: 'Who was the first Brazilian Formula 1 world champion, in 1972?', es: '¿Quién fue el primer brasileño campeón mundial de Fórmula 1, en 1972?' },
-    a: [
-      { pt: 'Emerson Fittipaldi', en: 'Emerson Fittipaldi', es: 'Emerson Fittipaldi' },
-      { pt: 'Nelson Piquet', en: 'Nelson Piquet', es: 'Nelson Piquet' },
-      { pt: 'Ayrton Senna', en: 'Ayrton Senna', es: 'Ayrton Senna' },
-      { pt: 'José Carlos Pace', en: 'José Carlos Pace', es: 'José Carlos Pace' },
-    ],
-    ok: 0,
-  },
-  {
-    d: 3,
-    q: { pt: 'Em qual país o Brasil ganhou sua primeira Copa do Mundo, em 1958?', en: 'In which country did Brazil win its first World Cup, in 1958?', es: '¿En qué país ganó Brasil su primer Mundial, en 1958?' },
-    a: [
-      { pt: 'Chile', en: 'Chile', es: 'Chile' },
-      { pt: 'Suíça', en: 'Switzerland', es: 'Suiza' },
-      { pt: 'Inglaterra', en: 'England', es: 'Inglaterra' },
-      { pt: 'Suécia', en: 'Sweden', es: 'Suecia' },
     ],
     ok: 3,
   },
@@ -1289,17 +1201,6 @@ export default [
   },
   {
     d: 3,
-    q: { pt: 'A Revolta da Vacina, de 1904, foi contra a campanha liderada por qual sanitarista?', en: 'The 1904 Vaccine Revolt opposed a campaign led by which public health doctor?', es: '¿La Revuelta de la Vacuna de 1904 fue contra la campaña de qué médico sanitarista?' },
-    a: [
-      { pt: 'Oswaldo Cruz', en: 'Oswaldo Cruz', es: 'Oswaldo Cruz' },
-      { pt: 'Carlos Chagas', en: 'Carlos Chagas', es: 'Carlos Chagas' },
-      { pt: 'Vital Brazil', en: 'Vital Brazil', es: 'Vital Brazil' },
-      { pt: 'Adolfo Lutz', en: 'Adolfo Lutz', es: 'Adolfo Lutz' },
-    ],
-    ok: 0,
-  },
-  {
-    d: 3,
     q: { pt: 'Em 1808, a família real portuguesa instalou sua corte em qual cidade?', en: 'In 1808, the Portuguese royal family set up its court in which city?', es: 'En 1808, ¿en qué ciudad instaló su corte la familia real portuguesa?' },
     a: [
       { pt: 'Salvador', en: 'Salvador', es: 'Salvador' },
@@ -1388,28 +1289,6 @@ export default [
   },
   {
     d: 3,
-    q: { pt: 'Qual banda de heavy metal de Belo Horizonte ficou famosa no mundo todo?', en: 'Which heavy metal band from Belo Horizonte became famous worldwide?', es: '¿Qué banda de heavy metal de Belo Horizonte se hizo famosa en todo el mundo?' },
-    a: [
-      { pt: 'Angra', en: 'Angra', es: 'Angra' },
-      { pt: 'Os Mutantes', en: 'Os Mutantes', es: 'Os Mutantes' },
-      { pt: 'Titãs', en: 'Titãs', es: 'Titãs' },
-      { pt: 'Sepultura', en: 'Sepultura', es: 'Sepultura' },
-    ],
-    ok: 3,
-  },
-  {
-    d: 3,
-    q: { pt: 'Qual italiano perdeu o pênalti decisivo na final da Copa de 1994?', en: 'Which Italian missed the decisive penalty in the 1994 World Cup final?', es: '¿Qué italiano falló el penalti decisivo en la final del Mundial 1994?' },
-    a: [
-      { pt: 'Gianluca Pagliuca', en: 'Gianluca Pagliuca', es: 'Gianluca Pagliuca' },
-      { pt: 'Roberto Baggio', en: 'Roberto Baggio', es: 'Roberto Baggio' },
-      { pt: 'Paolo Maldini', en: 'Paolo Maldini', es: 'Paolo Maldini' },
-      { pt: 'Demetrio Albertini', en: 'Demetrio Albertini', es: 'Demetrio Albertini' },
-    ],
-    ok: 1,
-  },
-  {
-    d: 3,
     q: { pt: 'Qual clube brasileiro venceu o primeiro Mundial de Clubes da FIFA, em 2000?', en: 'Which Brazilian club won the first FIFA Club World Championship in 2000?', es: '¿Qué club brasileño ganó el primer Mundial de Clubes de la FIFA, en 2000?' },
     a: [
       { pt: 'Vasco da Gama', en: 'Vasco da Gama', es: 'Vasco da Gama' },
@@ -1420,6 +1299,83 @@ export default [
     ok: 2,
   },
   {
+    d: 3,
+    q: { pt: 'Qual animal aparece na nota de 200 reais, lançada em 2020?', en: 'Which animal appears on the 200-real banknote, launched in 2020?', es: '¿Qué animal aparece en el billete de 200 reales, lanzado en 2020?' },
+    a: [
+      { pt: 'Onça-pintada', en: 'Jaguar', es: 'Jaguar' },
+      { pt: 'Lobo-guará', en: 'Maned wolf', es: 'Aguará guazú' },
+      { pt: 'Garoupa', en: 'Grouper', es: 'Mero' },
+      { pt: 'Tamanduá-bandeira', en: 'Giant anteater', es: 'Oso hormiguero' },
+    ],
+    ok: 1,
+  },
+  {
+    d: 3,
+    q: { pt: 'Qual cidade histórica do litoral fluminense sedia a Festa Literária Internacional (FLIP)?', en: 'Which historic coastal town in Rio state hosts the FLIP literary festival?', es: '¿Qué ciudad histórica de la costa de Río alberga el festival literario FLIP?' },
+    a: [
+      { pt: 'Paraty', en: 'Paraty', es: 'Paraty' },
+      { pt: 'Petrópolis', en: 'Petrópolis', es: 'Petrópolis' },
+      { pt: 'Búzios', en: 'Búzios', es: 'Búzios' },
+      { pt: 'Angra dos Reis', en: 'Angra dos Reis', es: 'Angra dos Reis' },
+    ],
+    ok: 0,
+  },
+  {
+    d: 3,
+    q: { pt: 'Qual escritor narrou a Guerra de Canudos no livro "Os Sertões"?', en: 'Which writer chronicled the Canudos War in the book "Os Sertões" (Rebellion in the Backlands)?', es: '¿Qué escritor narró la guerra de Canudos en el libro "Os Sertões"?' },
+    a: [
+      { pt: 'Graciliano Ramos', en: 'Graciliano Ramos', es: 'Graciliano Ramos' },
+      { pt: 'Lima Barreto', en: 'Lima Barreto', es: 'Lima Barreto' },
+      { pt: 'Monteiro Lobato', en: 'Monteiro Lobato', es: 'Monteiro Lobato' },
+      { pt: 'Euclides da Cunha', en: 'Euclides da Cunha', es: 'Euclides da Cunha' },
+    ],
+    ok: 3,
+  },
+  {
+    d: 3,
+    q: { pt: 'Qual cidade serrana era o refúgio de verão de Dom Pedro II?', en: 'Which mountain town was Emperor Pedro II\'s summer retreat?', es: '¿Qué ciudad serrana era el refugio de verano del emperador Pedro II?' },
+    a: [
+      { pt: 'Teresópolis', en: 'Teresópolis', es: 'Teresópolis' },
+      { pt: 'Campos do Jordão', en: 'Campos do Jordão', es: 'Campos do Jordão' },
+      { pt: 'Nova Friburgo', en: 'Nova Friburgo', es: 'Nova Friburgo' },
+      { pt: 'Petrópolis', en: 'Petrópolis', es: 'Petrópolis' },
+    ],
+    ok: 3,
+  },
+  {
+    d: 3,
+    q: { pt: 'Qual parque nacional do Piauí é famoso por milhares de pinturas rupestres pré-históricas?', en: 'Which national park in Piauí is famous for thousands of prehistoric rock paintings?', es: '¿Qué parque nacional de Piauí es famoso por miles de pinturas rupestres prehistóricas?' },
+    a: [
+      { pt: 'Chapada Diamantina', en: 'Chapada Diamantina', es: 'Chapada Diamantina' },
+      { pt: 'Itatiaia', en: 'Itatiaia', es: 'Itatiaia' },
+      { pt: 'Serra da Capivara', en: 'Serra da Capivara', es: 'Serra da Capivara' },
+      { pt: 'Jalapão', en: 'Jalapão', es: 'Jalapão' },
+    ],
+    ok: 2,
+  },
+  {
+    d: 3,
+    q: { pt: 'Qual cidade paulista é famosa pela maior Festa do Peão de Boiadeiro do Brasil?', en: 'Which São Paulo state city is famous for Brazil\'s biggest rodeo festival?', es: '¿Qué ciudad paulista es famosa por la mayor fiesta de rodeo de Brasil?' },
+    a: [
+      { pt: 'Ribeirão Preto', en: 'Ribeirão Preto', es: 'Ribeirão Preto' },
+      { pt: 'Barretos', en: 'Barretos', es: 'Barretos' },
+      { pt: 'Campinas', en: 'Campinas', es: 'Campinas' },
+      { pt: 'Sorocaba', en: 'Sorocaba', es: 'Sorocaba' },
+    ],
+    ok: 1,
+  },
+  {
+    d: 3,
+    q: { pt: 'Como se chama a grande onda que sobe o rio Amazonas no encontro com o mar?', en: 'What is the big tidal wave that travels up the Amazon from the sea called?', es: '¿Cómo se llama la gran ola que remonta el río Amazonas desde el mar?' },
+    a: [
+      { pt: 'Piracema', en: 'Piracema', es: 'Piracema' },
+      { pt: 'Pororoca', en: 'Pororoca', es: 'Pororoca' },
+      { pt: 'Maré-cheia', en: 'High tide', es: 'Pleamar' },
+      { pt: 'Tsunami', en: 'Tsunami', es: 'Tsunami' },
+    ],
+    ok: 1,
+  },
+  {
     d: 4,
     q: { pt: 'Em qual cidade mineira estão os Doze Profetas esculpidos por Aleijadinho?', en: 'In which Minas Gerais town are Aleijadinho\'s Twelve Prophets?', es: '¿En qué ciudad de Minas Gerais están los Doce Profetas de Aleijadinho?' },
     a: [
@@ -1427,17 +1383,6 @@ export default [
       { pt: 'Congonhas', en: 'Congonhas', es: 'Congonhas' },
       { pt: 'Mariana', en: 'Mariana', es: 'Mariana' },
       { pt: 'São João del-Rei', en: 'São João del-Rei', es: 'São João del-Rei' },
-    ],
-    ok: 1,
-  },
-  {
-    d: 4,
-    q: { pt: 'Qual capitão ergueu a Taça Jules Rimet na Copa de 1970?', en: 'Which captain lifted the Jules Rimet Trophy at the 1970 World Cup?', es: '¿Qué capitán levantó la Copa Jules Rimet en el Mundial de 1970?' },
-    a: [
-      { pt: 'Pelé', en: 'Pelé', es: 'Pelé' },
-      { pt: 'Carlos Alberto Torres', en: 'Carlos Alberto Torres', es: 'Carlos Alberto Torres' },
-      { pt: 'Gérson', en: 'Gérson', es: 'Gérson' },
-      { pt: 'Rivellino', en: 'Rivellino', es: 'Rivellino' },
     ],
     ok: 1,
   },
@@ -1575,17 +1520,6 @@ export default [
   },
   {
     d: 4,
-    q: { pt: 'Quem conquistou a primeira medalha de ouro olímpica do Brasil, em 1920?', en: 'Who won Brazil\'s first Olympic gold medal, in 1920?', es: '¿Quién ganó la primera medalla de oro olímpica de Brasil, en 1920?' },
-    a: [
-      { pt: 'Adhemar Ferreira da Silva', en: 'Adhemar Ferreira da Silva', es: 'Adhemar Ferreira da Silva' },
-      { pt: 'João do Pulo', en: 'João do Pulo', es: 'João do Pulo' },
-      { pt: 'Joaquim Cruz', en: 'Joaquim Cruz', es: 'Joaquim Cruz' },
-      { pt: 'Guilherme Paraense', en: 'Guilherme Paraense', es: 'Guilherme Paraense' },
-    ],
-    ok: 3,
-  },
-  {
-    d: 4,
     q: { pt: 'Qual compositora, primeira maestrina do Brasil, criou a marchinha "Ó Abre Alas"?', en: 'Which composer, Brazil\'s first female conductor, wrote the march "Ó Abre Alas"?', es: '¿Qué compositora, primera directora de orquesta de Brasil, creó la marcha "Ó Abre Alas"?' },
     a: [
       { pt: 'Dolores Duran', en: 'Dolores Duran', es: 'Dolores Duran' },
@@ -1603,6 +1537,28 @@ export default [
       { pt: 'São Paulo', en: 'São Paulo', es: 'São Paulo' },
       { pt: 'Bahia', en: 'Bahia', es: 'Bahia' },
       { pt: 'Rio Grande do Sul', en: 'Rio Grande do Sul', es: 'Rio Grande do Sul' },
+    ],
+    ok: 0,
+  },
+  {
+    d: 4,
+    q: { pt: 'Com qual nome a cidade de São Paulo foi fundada em 1554?', en: 'Under what name was the city of São Paulo founded in 1554?', es: '¿Con qué nombre se fundó la ciudad de São Paulo en 1554?' },
+    a: [
+      { pt: 'Santo André da Borda do Campo', en: 'Santo André da Borda do Campo', es: 'Santo André da Borda do Campo' },
+      { pt: 'Vila de São Vicente', en: 'Vila de São Vicente', es: 'Vila de São Vicente' },
+      { pt: 'São Paulo de Piratininga', en: 'São Paulo de Piratininga', es: 'São Paulo de Piratininga' },
+      { pt: 'São Paulo de Luanda', en: 'São Paulo de Luanda', es: 'São Paulo de Luanda' },
+    ],
+    ok: 2,
+  },
+  {
+    d: 4,
+    q: { pt: 'Como princesa regente, quem assinou em 2 de setembro de 1822 o decreto de separação de Portugal?', en: 'As acting regent, who signed the decree of separation from Portugal on 2 September 1822?', es: 'Como princesa regente, ¿quién firmó el 2 de septiembre de 1822 el decreto de separación de Portugal?' },
+    a: [
+      { pt: 'Maria Leopoldina', en: 'Maria Leopoldina', es: 'Maria Leopoldina' },
+      { pt: 'Princesa Isabel', en: 'Princess Isabel', es: 'Princesa Isabel' },
+      { pt: 'Carlota Joaquina', en: 'Carlota Joaquina', es: 'Carlota Joaquina' },
+      { pt: 'Amélia de Leuchtenberg', en: 'Amélie of Leuchtenberg', es: 'Amelia de Leuchtenberg' },
     ],
     ok: 0,
   },
