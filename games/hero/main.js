@@ -44,6 +44,8 @@ export async function mount(root, ctx) {
     helpSeen: !!store.get('helpSeen', false),
   };
   if (!Array.isArray(S.hero.owned)) S.hero.owned = [...CO.DEFAULT_HERO.owned];
+  if (!S.career.clubs) S.career.clubs = {};
+  CA.setChosenClubs(S.career.clubs);
   const save = () => {
     store.set('hero', S.hero);
     store.set('coins', S.coins);
@@ -430,6 +432,11 @@ export async function mount(root, ctx) {
 
   function startCareer(i) {
     sfx.play('select');
+    const season = Math.floor(i / CA.SEASON_LEN);
+    if (i % CA.SEASON_LEN === 0 && CA.isTransfer(season) && !S.career.clubs[season]) {
+      showClubChoice(season, () => startCareer(i));
+      return;
+    }
     const meta = CA.levelMeta(i, S.hero.country);
     const go = () => withLevel(() => LV.careerLevel(i), (L) => playLevel({ kind: 'career', idx: i, L, meta }));
     if (meta.story && !S.seen[i]) {
@@ -463,6 +470,117 @@ export async function mount(root, ctx) {
     };
   }
 
+  function ribbon() {
+    const words = t('adGame').split(' ');
+    return h('div', { class: 'g-hero-ribbon' }, h('b', null, words[0] + '!'), h('span', null, words.slice(1).join(' ') || '★'));
+  }
+
+  // A flat front-view shirt (club cards, kits).
+  function shirtCanvas(c1, c2, w = 62, pattern = 'plain') {
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const hh = Math.round(w * 0.86);
+    const c = h('canvas', { class: 'g-hero-shirt' });
+    c.width = w * dpr;
+    c.height = hh * dpr;
+    c.style.width = w + 'px';
+    c.style.height = hh + 'px';
+    const g = c.getContext('2d');
+    g.scale((dpr * w) / 100, (dpr * hh) / 86);
+    const path = () => {
+      g.beginPath();
+      g.moveTo(32, 4);
+      g.quadraticCurveTo(50, 14, 68, 4);
+      g.lineTo(96, 18);
+      g.lineTo(88, 40);
+      g.lineTo(76, 35);
+      g.lineTo(76, 84);
+      g.lineTo(24, 84);
+      g.lineTo(24, 35);
+      g.lineTo(12, 40);
+      g.lineTo(4, 18);
+      g.closePath();
+    };
+    path();
+    g.fillStyle = c1;
+    g.fill();
+    g.save();
+    path();
+    g.clip();
+    g.fillStyle = c2;
+    if (pattern === 'stripes') for (let x = 18; x < 90; x += 16) g.fillRect(x, 0, 7, 90);
+    else if (pattern === 'hoops') for (let y = 20; y < 90; y += 15) g.fillRect(0, y, 100, 7);
+    else if (pattern === 'halves') g.fillRect(50, 0, 50, 90);
+    else if (pattern === 'sash') {
+      g.beginPath();
+      g.moveTo(20, 10);
+      g.lineTo(34, 6);
+      g.lineTo(84, 84);
+      g.lineTo(68, 86);
+      g.closePath();
+      g.fill();
+    } else {
+      g.fillRect(0, 0, 100, 3);
+      g.fillRect(4, 18, 9, 22);
+      g.fillRect(87, 18, 9, 22);
+    }
+    const sh = g.createLinearGradient(0, 0, 100, 0);
+    sh.addColorStop(0, 'rgba(255,255,255,0.18)');
+    sh.addColorStop(0.5, 'rgba(255,255,255,0)');
+    sh.addColorStop(1, 'rgba(0,0,0,0.22)');
+    g.fillStyle = sh;
+    g.fillRect(0, 0, 100, 90);
+    g.restore();
+    path();
+    g.strokeStyle = 'rgba(0,0,0,0.75)';
+    g.lineWidth = 2.5;
+    g.stroke();
+    g.fillStyle = c2 === c1 ? '#fff' : c2;
+    g.font = 'italic 900 13px Nunito, system-ui, sans-serif';
+    g.textAlign = 'center';
+    g.fillText('★', 50, 52);
+    return c;
+  }
+
+  function showClubChoice(season, onDone) {
+    const opts = CA.clubOptions(season);
+    const tier = opts[0].tier;
+    const cards = h(
+      'div',
+      { class: 'g-hero-clubcards' },
+      opts.map((c) =>
+        h(
+          'button',
+          {
+            class: 'g-hero-clubcard',
+            onclick: () => {
+              S.career.clubs[season] = c.id;
+              CA.setChosenClubs(S.career.clubs);
+              save();
+              sfx.play('success');
+              sfx.vibrate(30);
+              o.close();
+              later(onDone, 240);
+            },
+          },
+          shirtCanvas(c.colors[0], c.colors[1], 62, 'stripes'),
+          shirtCanvas(c.colors[1], c.colors[0], 44),
+          h('span', { class: 'g-hero-cc-body' }, h('b', null, c.name), h('small', null, t(CA.divisionKey(tier)))),
+        ),
+      ),
+    );
+    const panel = h(
+      'div',
+      { class: 'g-hero-panel g-hero-clubs' },
+      ribbon(),
+      h('h2', { class: 'g-hero-ptitle', style: { marginTop: '12px' } }, t('congrats')),
+      h('p', { class: 'g-hero-story-text', style: { marginBottom: '4px' } }, t('clubOffer', { div: t(CA.divisionKey(tier)) })),
+      h('p', { class: 'g-hero-story-text', style: { margin: '0', fontWeight: 900, color: '#141c33' } }, t('whichClub')),
+      cards,
+    );
+    const o = overlay('clubs', panel);
+    sfx.play('whoosh');
+  }
+
   function showStory(meta, onDone) {
     const key = meta.story.key;
     const p = storyParams(meta);
@@ -474,7 +592,8 @@ export async function mount(root, ctx) {
     const panel = h(
       'div',
       { class: 'g-hero-panel g-hero-story' },
-      h('div', { class: 'g-hero-story-kicker' }, t('season', { n: meta.season + 1 }), ' · ', `${meta.min}'`),
+      ribbon(),
+      h('div', { class: 'g-hero-story-kicker', style: { marginTop: '10px' } }, t('season', { n: meta.season + 1 }), ' · ', `${meta.min}'`),
       art,
       h('h2', { class: 'g-hero-ptitle' }, t(`st_${key}_t`, p)),
       h('p', { class: 'g-hero-story-text' }, t(`st_${key}`, p)),
@@ -609,7 +728,8 @@ export async function mount(root, ctx) {
       const card = h(
         'div',
         { class: 'g-hero-panel g-hero-intro' },
-        h('div', { class: 'g-hero-intro-top' }, h('span', { class: 'g-hero-intro-min' }, `${L.min || 90}'`), h('span', null, `${L.score ? L.score[0] : 0}–${L.score ? L.score[1] : 0} · ${venue}`)),
+        ribbon(),
+        h('div', { class: 'g-hero-intro-top', style: { marginTop: '8px' } }, h('span', { class: 'g-hero-intro-min' }, `${L.min || 90}'`), h('span', null, `${L.score ? L.score[0] : 0}–${L.score ? L.score[1] : 0} · ${venue}`)),
         o.kind === 'daily' ? h('div', { class: 'g-hero-intro-kicker' }, t('dailyTitle')) : null,
         h('div', { class: 'g-hero-intro-vs' }, teamTag('us', meta), h('span', null, t('vs')), teamTag('them', meta)),
         h('div', { class: 'g-hero-intro-label' }, t('objectives')),
@@ -708,7 +828,8 @@ export async function mount(root, ctx) {
       const panel = h(
         'div',
         { class: 'g-hero-panel g-hero-fail' },
-        h('div', { class: 'g-hero-fail-title' }, title),
+        ribbon(),
+        h('div', { class: 'g-hero-fail-title', style: { marginTop: '8px' } }, title),
         h('p', { class: 'g-hero-tip' }, tip),
         h('button', { class: 'btn primary block big', onclick: () => retry() }, h('span', { html: ico('retry') }), t('retry')),
         h('button', { class: 'btn ghost block', onclick: () => parent() }, t('back')),
@@ -926,6 +1047,7 @@ export async function mount(root, ctx) {
       'div',
       { class: 'g-hero-panel g-hero-reveal' },
       h('div', { class: 'g-hero-rays' }),
+      ribbon(),
       h('div', { class: 'g-hero-reveal-art', html: trophySvg(tr.key, 140) }),
       h('h2', { class: 'g-hero-ptitle gold' }, individual ? t('seasonDone', { n: tr.s + 1 }) : t('trophyWon')),
       h('p', { class: 'g-hero-story-text' }, t(individual ? 'awardText' : 'trophyWonText', { trophy: t('tr_' + tr.key) })),

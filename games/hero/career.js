@@ -16,7 +16,18 @@ export const CLUBS = [
   { id: 'valdoro', name: 'Real Valdoro', short: 'RVD', colors: ['#f4f4f6', '#c9a227'], tier: 0 },
   { id: 'rheinstahl', name: 'Rheinstahl 04', short: 'RHS', colors: ['#d32f2f', '#212121'], tier: 0 },
   { id: 'lumiere', name: 'Olympique Lumière', short: 'OLU', colors: ['#00acc1', '#ffffff'], tier: 0 },
+  { id: 'marbrava', name: 'Sport Mar Bravo', short: 'SMB', colors: ['#e3222c', '#111111'], tier: 2 },
+  { id: 'cerrado', name: 'Cerrado EC', short: 'CER', colors: ['#f4f4f6', '#1d5fe0'], tier: 2 },
+  { id: 'imperial', name: 'Olímpico Imperial', short: 'OIM', colors: ['#2fb34a', '#ffffff'], tier: 1 },
+  { id: 'northgate', name: 'Northgate United', short: 'NGU', colors: ['#e3222c', '#ffffff'], tier: 0 },
 ];
+
+// Player choices made at transfer moments: { season: clubId }
+let CHOSEN = {};
+export function setChosenClubs(map) {
+  CHOSEN = map || {};
+}
+const byId = (id) => CLUBS.find((c) => c.id === id);
 
 // Opponent clubs by tier (invented).
 const OPP = {
@@ -25,11 +36,35 @@ const OPP = {
   1: ['Dínamo Capital', 'Real Aurora', 'Olímpico Imperial', 'Inter Vale Dourado', 'Athletic Porto Bravo', 'Racing Metrópole', 'Sporting Atlântico', 'Corsários FC'],
   0: ['Kingsbridge Rovers', 'Montebello Calcio', 'Real Valdoro', 'Rheinstahl 04', 'Olympique Lumière', 'AC Serenissima', 'Northgate United', 'Sporting Alvorada', 'Dynamo Borealis', 'Ajaxburg'],
 };
-const RIVAL = { ventura: 'Atlético Serrano', portobelo: 'Sporting Brisamar', aurora: 'Dínamo Capital', capital: 'Real Aurora', kingsbridge: 'Northgate United', montebello: 'AC Serenissima', valdoro: 'Sporting Alvorada', rheinstahl: 'Dynamo Borealis', lumiere: 'Ajaxburg' };
+const RIVAL = { ventura: 'Atlético Serrano', portobelo: 'Sporting Brisamar', aurora: 'Dínamo Capital', capital: 'Real Aurora', kingsbridge: 'Northgate United', montebello: 'AC Serenissima', valdoro: 'Sporting Alvorada', rheinstahl: 'Dynamo Borealis', lumiere: 'Ajaxburg', marbrava: 'Sporting Brisamar', cerrado: 'Inter Monteverde', imperial: 'Real Aurora', northgate: 'Kingsbridge Rovers' };
 
 // Season → club. After the hand-made path the hero moves between elite clubs.
 export function clubForSeason(s) {
-  if (s < 4) return CLUBS[s];
+  for (let k = s; k >= 1; k--) {
+    if (CHOSEN[k] && byId(CHOSEN[k])) return byId(CHOSEN[k]);
+    if (isTransfer(k)) break; // a later transfer replaces older choices
+  }
+  return defaultClub(s);
+}
+
+// Three clubs of the next level to pick from when a transfer happens in season s.
+export function clubOptions(s) {
+  const target = defaultClub(s);
+  const pool = CLUBS.filter((c) => c.tier === target.tier && c.id !== clubForSeason(Math.max(0, s - 1)).id);
+  const out = [target];
+  for (let i = 0; out.length < 3 && i < pool.length; i++) {
+    const c = pool[(i + s * 2) % pool.length];
+    if (!out.includes(c)) out.push(c);
+  }
+  return out;
+}
+
+export function isTransfer(s) {
+  return s > 0 && (defaultClub(s).id !== defaultClub(s - 1).id);
+}
+
+function defaultClub(s) {
+  if (s < 4) return CLUBS[Math.max(0, s)];
   const elite = [4, 5, 6, 7, 8];
   const block = Math.floor((s - 4) / 2);
   return CLUBS[elite[block % elite.length]];
@@ -73,6 +108,7 @@ export function opponentFor(i, heroCountry) {
   const lvl = i < HAND.length ? HAND[i] : null;
   if (lvl && (lvl.story === 'derby' || lvl.story === 'bigDerby')) return { kind: 'club', name: RIVAL[club.id] };
   const pool = OPP[club.tier].filter((n) => n !== club.name);
+  if (!pool.length) return { kind: 'club', name: OPP[1][i % OPP[1].length] };
   return { kind: 'club', name: pool[(i * 7 + s * 3) % pool.length] };
 }
 
