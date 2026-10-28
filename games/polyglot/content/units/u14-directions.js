@@ -251,9 +251,9 @@ export default {
       for: ['pt'],
       title: { pt: 'À esquerda, à direita', en: 'À esquerda, à direita', es: 'À esquerda, à direita' },
       body: {
-        pt: 'Em português, **à esquerda** e **à direita** levam crase (a + a). No Brasil, na fala do dia a dia, o imperativo informal é muito comum: **vira**, **segue**, **pega**.',
-        en: 'In Portuguese, **à esquerda** and **à direita** take an accent (a + a). In everyday Brazilian speech, the casual imperative is very common: **vira**, **segue**, **pega**.',
-        es: 'En portugués, **à esquerda** y **à direita** llevan acento grave (a + a). En el habla cotidiana de Brasil, el imperativo informal es muy común: **vira**, **segue**, **pega**.',
+        pt: 'Em português, **à esquerda** e **à direita** levam crase (a + a = à). No Brasil, na fala do dia a dia, o imperativo informal é muito comum: **vira**, **segue**, **pega**.',
+        en: 'In Portuguese, **à esquerda** and **à direita** are written with a grave accent (a + a = à). In everyday Brazilian speech, the casual imperative is very common: **vira**, **segue**, **pega**.',
+        es: 'En portugués, **à esquerda** y **à direita** llevan acento grave (a + a = à). En el habla cotidiana de Brasil, el imperativo informal es muy común: **vira**, **segue**, **pega**.',
       },
       examples: [
         { en: 'Turn right.', es: 'Gire a la derecha.', pt: 'Vire à direita.', fr: 'Tournez à droite.', it: 'Giri a destra.', de: 'Biegen Sie rechts ab.' },

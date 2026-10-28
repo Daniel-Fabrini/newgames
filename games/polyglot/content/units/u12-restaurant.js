@@ -124,7 +124,7 @@ export default {
       pt: 'A gorjeta está incluída?|A gorjeta já está incluída?',
       fr: 'Le pourboire est compris ?|Est-ce que le pourboire est compris ?|Le service est compris ?|Le pourboire est inclus ?',
       it: 'La mancia è inclusa?|Il servizio è incluso?',
-      de: 'Ist das Trinkgeld inbegriffen?|Ist das Trinkgeld inklusive?|Ist das Trinkgeld schon dabei?',
+      de: 'Ist das Trinkgeld inbegriffen?|Ist das Trinkgeld inklusive?|Ist das Trinkgeld schon inbegriffen?',
     },
     {
       en: 'For dessert, I would like a chocolate cake.|For dessert, I would like chocolate cake.',
@@ -170,7 +170,7 @@ export default {
     {
       en: 'The waiter is very nice.|The waiter is very kind.|The waiter is very friendly.|The server is very nice.',
       es: 'El mesero es muy amable.|El camarero es muy amable.|El mesero es muy simpático.|El camarero es muy simpático.|El mozo es muy amable.',
-      pt: 'O garçom é muito simpático.|O garçom é muito gentil.|O garçom é muito legal.|O garçom é muito educado.',
+      pt: 'O garçom é muito simpático.|O garçom é muito gentil.|O garçom é muito legal.',
       fr: 'Le serveur est très gentil.|Le serveur est très sympathique.|Le serveur est très sympa.|Le serveur est très aimable.',
       it: 'Il cameriere è molto gentile.|Il cameriere è molto simpatico.',
       de: 'Der Kellner ist sehr nett.|Der Kellner ist sehr freundlich.',
@@ -253,7 +253,7 @@ export default {
         es: 'En francés, **je voudrais** es la forma educada de pedir. Después de una negación, **du**, **de la** y **des** se convierten en **de**: je mange de la viande → je ne mange pas **de** viande.',
       },
       examples: [
-        { en: 'I would like some bread.', es: 'Quisiera pan.', pt: 'Eu gostaria de pão.', fr: 'Je voudrais du pain.', it: 'Vorrei del pane.', de: 'Ich hätte gern Brot.' },
+        { en: 'I would like some bread.', es: 'Quisiera un poco de pan.', pt: 'Eu gostaria de um pouco de pão.', fr: 'Je voudrais du pain.', it: 'Vorrei del pane.', de: 'Ich hätte gern etwas Brot.' },
         { en: "I don't eat meat.", es: 'No como carne.', pt: 'Eu não como carne.', fr: 'Je ne mange pas de viande.', it: 'Non mangio carne.', de: 'Ich esse kein Fleisch.' },
       ],
     },

@@ -21,7 +21,7 @@ export default {
     { e: '☂️', en: 'the umbrella', es: 'el paraguas|la sombrilla', pt: 'o guarda-chuva', fr: 'le parapluie', it: "l'ombrello", de: 'der Regenschirm|der Schirm' },
     { e: '⛈️', en: 'the storm', es: 'la tormenta', pt: 'a tempestade', fr: "l'orage|la tempête", it: 'il temporale|la tempesta', de: 'das Gewitter|der Sturm' },
     { en: 'the season', es: 'la estación', pt: 'a estação', fr: 'la saison', it: 'la stagione', de: 'die Jahreszeit' },
-    { en: 'the month', es: 'el mes', pt: 'o mês', fr: 'le mois', it: 'il mese', de: 'der Monat' },
+    { en: 'the sky', es: 'el cielo', pt: 'o céu', fr: 'le ciel', it: 'il cielo', de: 'der Himmel' },
   ],
 
   sentences: [
@@ -115,7 +115,7 @@ export default {
       pt: 'O céu está cinza, tem muitas nuvens.|O céu está cinza, há muitas nuvens.|O céu está cinzento, há muitas nuvens.|O céu está cinzento, tem muitas nuvens.',
       fr: 'Le ciel est gris, il y a beaucoup de nuages.',
       it: 'Il cielo è grigio, ci sono molte nuvole.|Il cielo è grigio, ci sono tante nuvole.',
-      de: 'Der Himmel ist grau, es gibt viele Wolken.|Der Himmel ist grau, es sind viele Wolken da.',
+      de: 'Der Himmel ist grau, es gibt viele Wolken.',
     },
     {
       en: "I don't like storms.",

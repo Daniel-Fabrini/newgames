@@ -130,7 +130,7 @@ export class SceneView {
     const contain = Math.min(this.w / W, this.h / H);
     const cover = Math.max(this.w / W, this.h / H);
     // 'cover' fills the panel (small pan on one axis); 'height' fits a panorama's height.
-    this.minZ = fit === 'height' ? Math.max(contain, this.h / H) : fit === 'cover' ? Math.min(cover, contain * 1.35) : contain;
+    this.minZ = fit === 'height' ? cover : fit === 'cover' ? Math.min(cover, contain * 1.35) : contain;
     this.maxZ = Math.max(this.minZ * 4, this.opts.maxZoom || 1.8);
   }
 
@@ -389,8 +389,14 @@ export class SceneView {
       const ox = (cx - W / 2) * (1 - f);
       const oy = (cy - H / 2) * (1 - f) * 0.5;
       const br = sc.backRect;
+      g.save();
+      g.setTransform(1, 0, 0, 1, 0, 0);
+      g.beginPath();
+      g.rect(dpr * tx, dpr * ty, dpr * W * z, dpr * H * z);
+      g.clip();
       g.setTransform(dpr * z, 0, 0, dpr * z, dpr * (tx + z * ox), dpr * (ty + z * oy));
       g.drawImage(sc.back, br.x, br.y, br.w, br.h);
+      g.restore();
     }
     g.setTransform(dpr * z, 0, 0, dpr * z, dpr * tx, dpr * ty);
     g.drawImage(sc.front, 0, 0, W, H);

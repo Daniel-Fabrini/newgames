@@ -330,7 +330,7 @@ export default {
           ],
           answer: 0,
         },
-        { who: 'A', en: 'And that one? It costs only forty euros.', es: '¿Y esa? Cuesta solo cuarenta euros.', pt: 'E aquela? Custa só quarenta euros.', fr: 'Et celle-là ? Elle ne coûte que quarante euros.', it: 'E quella? Costa solo quaranta euro.', de: 'Und die da? Sie kostet nur vierzig Euro.' },
+        { who: 'A', en: 'And that one? It only costs forty euros.', es: '¿Y esa? Cuesta solo cuarenta euros.', pt: 'E aquela? Custa só quarenta euros.', fr: 'Et celle-là ? Elle ne coûte que quarante euros.', it: 'E quella? Costa solo quaranta euro.', de: 'Und die da? Sie kostet nur vierzig Euro.' },
         { who: 'B', en: 'It is pretty! Can I try on that one?', es: '¡Es bonita! ¿Puedo probarme esa?', pt: 'É bonita! Posso experimentar aquela?', fr: 'Elle est jolie ! Je peux essayer celle-là ?', it: 'È carina! Posso provare quella?', de: 'Sie ist schön! Kann ich die da anprobieren?' },
         { who: 'A', en: 'Of course. The fitting room is over there.', es: 'Claro. El probador está allí.', pt: 'Claro. O provador fica ali.', fr: "Bien sûr. La cabine d'essayage est là-bas.", it: 'Certo. Il camerino è lì.', de: 'Natürlich. Die Umkleidekabine ist dort drüben.' },
         { who: 'B', en: 'It fits perfectly! I will take this one.', es: '¡Me queda perfecta! Me llevo esta.', pt: 'Ficou perfeita! Vou levar esta.', fr: 'Elle me va parfaitement ! Je prends celle-ci.', it: 'Mi sta benissimo! Prendo questa.', de: 'Sie passt perfekt! Ich nehme diese.' },
