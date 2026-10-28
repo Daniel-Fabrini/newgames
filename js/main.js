@@ -10,6 +10,7 @@ import { createStore, clearAll } from './core/store.js';
 import { sfx } from './core/sfx.js';
 import { h, clear, toast, modal, confetti, loadCSS } from './core/ui.js';
 import STRINGS from './core/strings.js';
+import { addXP, levelInfo, totalXP, gameXP, streak, touchStreak, rankFor, lastPlayed, setLastPlayed } from './core/progress.js';
 
 const t = makeT(STRINGS);
 const app = document.getElementById('app');
@@ -132,6 +133,57 @@ function langSwitch(onChange) {
   return wrap;
 }
 
+function ring(progress, size = 64, stroke = 6) {
+  const r = (size - stroke) / 2;
+  const c = 2 * Math.PI * r;
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+  svg.setAttribute('class', 'ring');
+  svg.innerHTML = `<circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="${stroke}"/>
+    <circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="url(#ringGrad)" stroke-width="${stroke}" stroke-linecap="round"
+      stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - progress)}" transform="rotate(-90 ${size / 2} ${size / 2})"/>
+    <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe27a"/><stop offset="1" stop-color="#ff9f1c"/></linearGradient></defs>`;
+  return svg;
+}
+
+function profileCard() {
+  const info = levelInfo(totalXP());
+  const rank = rankFor(info.level);
+  const days = streak();
+  return h(
+    'section',
+    { class: 'profile-card rise-in' },
+    h('div', { class: 'pc-avatar' }, ring(info.progress, 72, 6), h('span', { class: 'pc-level' }, info.level)),
+    h(
+      'div',
+      { class: 'pc-body' },
+      h('div', { class: 'pc-rank' }, pick(rank)),
+      h('div', { class: 'pc-title' }, `${t('level')} ${info.level}`),
+      h('div', { class: 'progress pc-bar' }, h('i', { style: { width: `${Math.round(info.progress * 100)}%` } })),
+      h('div', { class: 'pc-xp' }, `${info.into} / ${info.need} XP · ${t('toNext')}`),
+    ),
+    h('div', { class: 'pc-streak', title: t('streak') }, h('span', { class: 'pc-fire' }, days ? '🔥' : '💤'), h('b', null, days), h('small', null, t('days'))),
+  );
+}
+
+function continueCard(g) {
+  return h(
+    'button',
+    {
+      class: 'continue-card rise-in',
+      style: { background: g.bg },
+      onclick: () => {
+        sfx.play('select');
+        navigate(gameHash(g.id));
+      },
+    },
+    h('span', { class: 'cc-icon', 'aria-hidden': 'true' }, g.icon),
+    h('span', { class: 'cc-body' }, h('small', null, t('continue')), h('b', null, pick(g.name))),
+    h('span', { class: 'cc-play', 'aria-hidden': 'true' }, '▶'),
+  );
+}
+
 function showHub() {
   loadToken++;
   unmountCurrent();
@@ -142,25 +194,29 @@ function showHub() {
     right: [langSwitch(), iconButton('gear', t('settings'), openSettings)],
   });
 
+  const last = GAMES.find((g) => g.id === lastPlayed());
   const grid = h('div', { class: 'game-grid' });
-  for (const g of GAMES) {
+  GAMES.forEach((g, i) => {
+    const lvl = gameXP(g.id) > 0 ? levelInfo(gameXP(g.id)).level : 0;
     grid.append(
       h(
         'button',
         {
-          class: 'game-card pop-in',
-          style: { background: g.bg },
+          class: 'game-card rise-in',
+          style: { background: g.bg, animationDelay: `${i * 40}ms` },
           onclick: () => {
             sfx.play('select');
             navigate(gameHash(g.id));
           },
         },
+        h('span', { class: 'gc-shine', 'aria-hidden': 'true' }),
         h('span', { class: 'gc-icon', 'aria-hidden': 'true' }, g.icon),
+        lvl ? h('span', { class: 'gc-tag' }, `${t('lvl')} ${lvl}`) : null,
         h('span', { class: 'gc-name' }, pick(g.name)),
         h('span', { class: 'gc-desc' }, pick(g.desc)),
       ),
     );
-  }
+  });
 
   let install = null;
   if (!isStandalone()) {
@@ -188,8 +244,10 @@ function showHub() {
   const screen = h(
     'div',
     { class: 'screen hub' },
-    h('div', { class: 'hub-hero' }, h('h1', { class: 'title-xl' }, t('tagline'))),
+    profileCard(),
     install,
+    last ? continueCard(last) : null,
+    h('div', { class: 'section-title' }, t('allGames')),
     grid,
     h('div', { class: 'footer-note' }, `${GAMES.length} ${t('games')} · PT · EN · ES`),
   );
@@ -247,6 +305,29 @@ onLangChange(() => {
   if (!current) showHub();
 });
 
+// ---------- XP feedback ----------
+function celebrateXP({ gained, before, after }) {
+  const pill = h('div', { class: 'xp-pill' }, h('span', null, '⭐'), `+${gained} XP`);
+  document.body.append(pill);
+  setTimeout(() => pill.remove(), 1900);
+  if (after.level > before.level) {
+    setTimeout(() => {
+      sfx.play('levelup');
+      confetti(90);
+      const rank = rankFor(after.level);
+      const banner = h(
+        'div',
+        { class: 'levelup', role: 'status' },
+        h('div', { class: 'lu-badge' }, after.level),
+        h('div', { class: 'lu-text' }, h('small', null, t('levelUp')), h('b', null, `${t('level')} ${after.level}`), h('span', null, pick(rank))),
+      );
+      document.body.append(banner);
+      setTimeout(() => banner.classList.add('out'), 2600);
+      setTimeout(() => banner.remove(), 3100);
+    }, 500);
+  }
+}
+
 // ---------- games ----------
 async function openGame(id) {
   const meta = GAMES.find((g) => g.id === id);
@@ -286,6 +367,8 @@ async function openGame(id) {
 
   const root = h('div', { class: `game g-${id}` });
   clear(stage).append(root);
+  touchStreak();
+  setLastPlayed(id);
   current = { id, cleanup: null, back: null };
   const entry = current;
 
@@ -307,6 +390,11 @@ async function openGame(id) {
     },
     onBack: (fn) => {
       entry.back = fn;
+    },
+    addXP: (amount) => {
+      const result = addXP(amount, id);
+      if (result.gained) celebrateXP(result);
+      return result;
     },
     exit: exitToHub,
   };

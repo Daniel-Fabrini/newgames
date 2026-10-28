@@ -63,6 +63,7 @@ layout from `root.clientWidth/clientHeight` and handle `resize`.
 | `ctx.setHeaderRight(node)` | puts a node (e.g. a coins pill or a help button) on the right of the top bar; `null` clears it |
 | `ctx.onBack(fn)` | registers the back handler described above |
 | `ctx.exit()` | goes back to the hub |
+| `ctx.addXP(amount)` | adds XP to the player's global level (shown in the hub, never capped) and to this game's level; shows a "+N XP" pill and a level-up banner. Call it once per meaningful result (end of a level/round/lesson), not per tap. Guard with `ctx.addXP?.(n)` |
 
 Shared helpers you can import directly (relative to your folder):
 
