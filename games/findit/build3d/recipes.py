@@ -79,7 +79,7 @@ def room(L, *, x0=-3.6, x1=3.6, back=2.0, front=-3.6, h=3.1, floor=('herringbone
     return {'x0': x0, 'x1': x1, 'back': back, 'front': front, 'h': h}
 
 
-def rug(L, rect, inner=('velour_velvet', 0.5, (0.42, 0.08, 0.07)), border=('caban', 0.6, (0.35, 0.22, 0.1))):
+def rug(L, rect, inner=('velour_velvet', 0.5, (0.3, 0.085, 0.07)), border=('fabric_pattern_05', 0.35, (0.55, 0.42, 0.28))):
     """A rug: patterned border band around a velvet field."""
     coll = L.collection('set')
     x0, y0, x1, y1 = rect
@@ -620,7 +620,7 @@ def keeper(L, S):
        textures={'red_plaster_weathered', 'dark_wooden_planks', 'wooden_panels'}, hdris={'comfy_cafe'})
 def teahouse(L, S):
     return compose(L, S, {
-        'room': dict(floor=('dark_wooden_planks', 2.0), wall=('red_plaster_weathered', 2.0), wall_tint=(0.55, 0.22, 0.16),
+        'room': dict(floor=('dark_wooden_planks', 2.0), wall=('red_plaster_weathered', 2.0), wall_tint=(0.62, 0.4, 0.32),
                      wainscot=('wooden_panels', 1.4), wainscot_h=0.9, h=3.2),
         'rug': (-1.6, -1.0, 1.8, 0.9),
         'cam': ((0.0, -3.0, 1.5), (0.0, 2.0, 1.15), 25),
