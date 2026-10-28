@@ -81,7 +81,10 @@ export async function mount(root, ctx) {
   await ctx.loadCSS(new URL('./style.css', import.meta.url));
 
   const S = createState(ctx.store);
-  const speech = createSpeech();
+  const speech = createSpeech((kind, detail) => {
+    const names = { en: 'English', es: 'Español', fr: 'Français', de: 'Deutsch', it: 'Italiano', pt: 'Português' };
+    toast(kind === 'novoice' ? t('ttsNoVoice', { lang: names[detail] || detail }) : t('ttsError'));
+  });
   const shell = h('div', { class: 'pg-app' });
   const layer = h('div', { class: 'pg-layer' });
   root.append(shell, layer);

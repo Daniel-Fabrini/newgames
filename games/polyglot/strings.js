@@ -4,6 +4,8 @@ const plural = (one, many) => (p) => (Number(p.n) === 1 ? one : many).replace('{
 
 export default {
   pt: {
+    ttsNoVoice: 'Seu celular não tem a voz de {lang}. Instale em Configurações → Saída de texto para fala.',
+    ttsError: 'Não consegui falar agora. Veja se o volume de mídia está ligado e se o celular não está no mudo.',
     tagline: 'Aprenda novos idiomas de forma divertida!',
     moreLangs: 'E mais idiomas…',
     moreLangsTitle: 'Mais idiomas',
@@ -242,6 +244,8 @@ export default {
   },
 
   en: {
+    ttsNoVoice: 'Your phone has no {lang} voice. Install it in Settings → Text-to-speech output.',
+    ttsError: 'Could not speak right now. Check that media volume is on and the phone is not muted.',
     tagline: 'Learn new languages the fun way!',
     moreLangs: 'And more languages…',
     moreLangsTitle: 'More languages',
@@ -470,6 +474,8 @@ export default {
   },
 
   es: {
+    ttsNoVoice: 'Tu teléfono no tiene la voz de {lang}. Instálala en Ajustes → Salida de texto a voz.',
+    ttsError: 'No pude hablar ahora. Revisa que el volumen multimedia esté activado y que el teléfono no esté en silencio.',
     tagline: '¡Aprende nuevos idiomas de forma divertida!',
     moreLangs: 'Y más idiomas…',
     moreLangsTitle: 'Más idiomas',

@@ -4,13 +4,19 @@
 
 import { TTS } from './corpus.js';
 
-export function createSpeech() {
+export function createSpeech(onProblem) {
   const synth = typeof window !== 'undefined' && window.speechSynthesis ? window.speechSynthesis : null;
   const Utter = typeof window !== 'undefined' ? window.SpeechSynthesisUtterance : null;
   const Recognition = typeof window !== 'undefined' ? window.SpeechRecognition || window.webkitSpeechRecognition : null;
   const cap = typeof window !== 'undefined' ? window.Capacitor : null;
   const nativeTTS = cap && cap.isNativePlatform && cap.isNativePlatform() && cap.registerPlugin ? cap.registerPlugin('TextToSpeech') : null;
   let nativeLangs = null; // null = unknown yet (assume available)
+  const reported = new Set();
+  const problem = (kind, detail) => {
+    if (reported.has(kind)) return;
+    reported.add(kind);
+    onProblem && onProblem(kind, detail);
+  };
   let voices = [];
   const listeners = new Set();
   const chosen = new Map();
@@ -101,7 +107,11 @@ export function createSpeech() {
 
   // Speaks `text` in course language `lang`. opts: { slow, onStart, onEnd }
   function speakNative(text, lang, opts) {
-    if (disposed || !nativeHas(lang)) return false;
+    if (disposed) return false;
+    if (!nativeHas(lang)) {
+      problem('novoice', lang);
+      return false;
+    }
     const entry = { onEnd: opts.onEnd };
     stop();
     current = entry;
@@ -114,7 +124,10 @@ export function createSpeech() {
     opts.onStart && opts.onStart();
     nativeTTS
       .speak({ text: String(text), lang: TTS[lang], rate: opts.slow ? 0.55 : 0.92, pitch: 1.0, volume: 1.0, category: 'ambient', queueStrategy: 0 })
-      .then(finish, finish);
+      .then(finish, (e) => {
+        problem('error', String((e && (e.message || e.code)) || e || ''));
+        finish();
+      });
     return true;
   }
 
