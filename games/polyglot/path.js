@@ -251,12 +251,18 @@ export function renderLearn(app, sc) {
   });
 
   // Scroll to the current node (and celebrate a freshly unlocked one).
-  sc.later(() => {
-    if (!currentEl) return;
+  const center = () => {
+    if (!currentEl || !currentEl.isConnected) return;
     const body = sc.body;
     const r = currentEl.getBoundingClientRect();
     const b = body.getBoundingClientRect();
-    body.scrollTop += r.top - b.top - b.height * 0.42;
+    const off = r.top + r.height / 2 - (b.top + b.height * 0.5);
+    if (Math.abs(off) > 40) body.scrollTop += off;
+  };
+  sc.later(center, 400);
+  sc.later(() => {
+    center();
+    if (!currentEl) return;
     if (app.celebrate) {
       app.celebrate = false;
       currentEl.classList.add('celebrate');

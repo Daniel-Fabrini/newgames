@@ -1972,3 +1972,21 @@ img {
   background: radial-gradient(circle at 35% 30%, #fff, #ffd9a0 60%, #f29e3c);
   box-shadow: 0 0 10px rgba(255, 210, 120, 0.7);
 }
+
+.art-waldo {
+  background:
+    radial-gradient(70% 60% at 50% 35%, rgba(255, 236, 170, 0.5), transparent 70%),
+    linear-gradient(180deg, #7fb8e8 0%, #d8ecff 40%, #c9a878 41%, #9c7a4e 100%);
+}
+.art-waldo .art-crowd {
+  position: absolute;
+  inset: 52% -4% -4% -4%;
+  background:
+    radial-gradient(circle at 12% 40%, #d7433e 0 3%, transparent 3.5%),
+    radial-gradient(circle at 30% 60%, #2a6fb3 0 3%, transparent 3.5%),
+    radial-gradient(circle at 48% 30%, #f1c23c 0 3%, transparent 3.5%),
+    radial-gradient(circle at 66% 70%, #3a9d5c 0 3%, transparent 3.5%),
+    radial-gradient(circle at 84% 45%, #8e44ad 0 3%, transparent 3.5%);
+  background-size: 22% 40%;
+  opacity: 0.85;
+}

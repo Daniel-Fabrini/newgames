@@ -60,7 +60,6 @@ export default {
     courseDone: 'Você chegou ao fim do caminho!',
     courseDoneSub: 'Novas unidades estão a caminho. Enquanto isso, pratique para não esquecer.',
     unitComplete: 'Unidade concluída: {name}',
-    soonUnit: 'Em breve',
     // guidebook
     grammarTips: 'Dicas',
     keyPhrases: 'Frases-chave',
@@ -297,7 +296,6 @@ export default {
     courseDone: "You've reached the end of the path!",
     courseDoneSub: 'New units are on the way. Meanwhile, keep practicing so you don’t forget.',
     unitComplete: 'Unit complete: {name}',
-    soonUnit: 'Coming soon',
     grammarTips: 'Tips',
     keyPhrases: 'Key phrases',
     wordsTitle: 'Words',
@@ -526,7 +524,6 @@ export default {
     courseDone: '¡Llegaste al final del camino!',
     courseDoneSub: 'Vienen nuevas unidades. Mientras tanto, practica para no olvidar.',
     unitComplete: 'Unidad completada: {name}',
-    soonUnit: 'Pronto',
     grammarTips: 'Consejos',
     keyPhrases: 'Frases clave',
     wordsTitle: 'Palabras',

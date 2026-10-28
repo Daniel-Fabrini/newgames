@@ -640,8 +640,7 @@ export async function mount(root, ctx) {
   }
 
   // Mounts a play screen as the current view, with resize + visibility handling.
-  function mountPlay(name, game, extraCleanup) {
-    const g = game.current;
+  function mountPlay(name, g, extraCleanup) {
     const onResize = () => g.layout();
     const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => g.layout()) : null;
     setView(name, g.el, () => {

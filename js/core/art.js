@@ -62,10 +62,8 @@ const ART = {
   busjam: () => `<div class="art art-bus"><span class="art-road"></span>
     <span class="art-svg" style="left:16%;right:4%;top:8%">${BUS_SVG}</span>
     <span class="art-people">${['#a855f7', '#facc15', '#3b82f6', '#22c55e'].map((c) => `<span>${stickman(c)}</span>`).join('')}</span></div>`,
-  hidden: () => `<div class="art art-hidden">
-    <span class="art-emoji" style="--s:16;left:6%;top:8%;opacity:.8">🏺</span><span class="art-emoji" style="--s:15;right:8%;top:10%;opacity:.8">🕰️</span>
-    <span class="art-emoji" style="--s:15;left:8%;bottom:8%;opacity:.8">📚</span><span class="art-emoji" style="--s:15;right:6%;bottom:10%;opacity:.8">🗝️</span>
-    <span class="art-emoji c" style="--s:58">🔍</span></div>`,
+  waldo: () => `<div class="art art-waldo"><span class="art-crowd"></span>
+    <span class="art-emoji c" style="--s:46;top:42%">🧑‍🤝‍🧑</span><span class="art-emoji" style="--s:18;right:10%;top:10%">🔎</span></div>`,
   findit: () => `<div class="art art-findit">
     <span class="art-emoji" style="--s:15;left:6%;top:8%">🎈</span><span class="art-emoji" style="--s:15;right:8%;top:10%">🚂</span>
     <span class="art-emoji" style="--s:14;left:8%;bottom:10%">🪀</span><span class="art-emoji" style="--s:14;right:8%;bottom:10%">🎁</span>
