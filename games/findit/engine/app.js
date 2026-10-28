@@ -28,7 +28,7 @@ export async function createGame(root, ctx, cfg) {
   const t = ctx.makeT(cfg.strings);
   const { h } = ctx.ui;
   const store = ctx.store;
-  root.classList.add('g-hidden-app', `g-hidden-look-${cfg.look}`);
+  root.classList.add('g-findit-app', `g-findit-look-${cfg.look}`);
   let screen = null;
   let destroyed = false;
 
@@ -67,14 +67,14 @@ export async function createGame(root, ctx, cfg) {
       store.set('track:' + modeId, tr);
     },
     debug(info) {
-      if (!window.__HIDDEN_TEST__) return;
+      if (!window.__FINDIT_TEST__) return;
       const { level, view, goals } = info;
       const toClient = (x, y) => {
         const r = view.canvas.getBoundingClientRect();
         const s = view.worldToScreen(x, y);
         return { x: r.left + s.x, y: r.top + s.y };
       };
-      window.__hiddenDebug = {
+      window.__finditDebug = {
         spec: { ...info.spec, theme: info.spec.theme.id, p: info.spec.p },
         goals: () => goals.map((g) => ({ ...g })),
         targets: () => level.props.filter((p) => p.alive && (p.role === 'target' || p.role === 'pair')).map((p) => ({ ch: p.ch, key: p.key, x: p.x, y: p.y, s: p.s, role: p.role, client: toClient(p.x, p.y) })),
@@ -98,7 +98,7 @@ export async function createGame(root, ctx, cfg) {
   function show(make) {
     if (screen) screen.destroy();
     screen = null;
-    for (const el of root.querySelectorAll('.g-hidden-sheet-wrap')) el.remove();
+    for (const el of root.querySelectorAll('.g-findit-sheet-wrap')) el.remove();
     trimGlyphs(false);
     screen = make();
   }
@@ -192,24 +192,24 @@ export async function createGame(root, ctx, cfg) {
     const mins = Math.max(1, Math.round((tomorrow - now) / 60000));
     const el = h(
       'div',
-      { class: 'g-hidden-map screen g-hidden-enter g-hidden-daily' },
+      { class: 'g-findit-map screen g-findit-enter g-findit-daily' },
       h(
         'div',
-        { class: 'g-hidden-daily-card' },
-        h('div', { class: 'g-hidden-sheet-icon', html: ICON.calendar }),
-        h('h2', { class: 'g-hidden-sheet-title' }, t('modeDaily')),
-        h('p', { class: 'g-hidden-sheet-text' }, t('dailyAgain')),
+        { class: 'g-findit-daily-card' },
+        h('div', { class: 'g-findit-sheet-icon', html: ICON.calendar }),
+        h('h2', { class: 'g-findit-sheet-title' }, t('modeDaily')),
+        h('p', { class: 'g-findit-sheet-text' }, t('dailyAgain')),
         rec.best[rec.last] ? starRow(rec.best[rec.last].stars || 0, 3, 'big') : null,
         h(
           'div',
-          { class: 'g-hidden-statgrid' },
+          { class: 'g-findit-statgrid' },
           h('div', null, h('small', null, t('time')), h('b', null, rec.best[rec.last] ? fmtTime(rec.best[rec.last].ms) : '–')),
           h('div', null, h('small', null, '🔥'), h('b', null, t('streak', { n: rec.streak }))),
         ),
-        h('p', { class: 'g-hidden-muted' }, t('nextDaily', { h: Math.floor(mins / 60), m: mins % 60 })),
-        h('div', { class: 'g-hidden-sheet-actions' },
-          h('button', { class: 'g-hidden-btn gold', onclick: () => ctx.exit() }, t('quit')),
-          h('button', { class: 'g-hidden-btn outline', onclick: () => startDaily(true) }, t('playAgain'), h('small', { class: 'g-hidden-muted' }, ' · ' + t('noReward'))),
+        h('p', { class: 'g-findit-muted' }, t('nextDaily', { h: Math.floor(mins / 60), m: mins % 60 })),
+        h('div', { class: 'g-findit-sheet-actions' },
+          h('button', { class: 'g-findit-btn gold', onclick: () => ctx.exit() }, t('quit')),
+          h('button', { class: 'g-findit-btn outline', onclick: () => startDaily(true) }, t('playAgain'), h('small', { class: 'g-findit-muted' }, ' · ' + t('noReward'))),
         ),
       ),
     );
@@ -269,19 +269,19 @@ export async function createGame(root, ctx, cfg) {
 
     const body = h(
       'div',
-      { class: 'g-hidden-result' },
+      { class: 'g-findit-result' },
       spec.zen ? null : starRow(stars, 3, 'big'),
       h(
         'div',
-        { class: 'g-hidden-statgrid' },
+        { class: 'g-findit-statgrid' },
         spec.zen ? null : h('div', null, h('small', null, t('time')), h('b', null, fmtTime(res.ms))),
         h('div', null, h('small', null, t('misses')), h('b', null, String(res.misses))),
         h('div', null, h('small', null, t('hintsUsed')), h('b', null, String(res.hints))),
       ),
       coins || xp
-        ? h('div', { class: 'g-hidden-reward' }, coins ? h('span', null, `+${coins}`, coinIcon()) : null, xp ? h('span', null, `+${xp} XP`) : null)
-        : h('p', { class: 'g-hidden-muted' }, t('noReward')),
-      note ? h('div', { class: 'g-hidden-note' }, note) : null,
+        ? h('div', { class: 'g-findit-reward' }, coins ? h('span', null, `+${coins}`, coinIcon()) : null, xp ? h('span', null, `+${xp} XP`) : null)
+        : h('p', { class: 'g-findit-muted' }, t('noReward')),
+      note ? h('div', { class: 'g-findit-note' }, note) : null,
     );
     const actions = spec.daily
       ? [
@@ -290,11 +290,11 @@ export async function createGame(root, ctx, cfg) {
         ]
       : spec.zen
         ? [
-            { label: [h('span', { class: 'g-hidden-btn-ico', html: ICON.play }), t('nextScene')], primary: true, onclick: () => app.startLevel(spec.modeId, spec.n + 1) },
+            { label: [h('span', { class: 'g-findit-btn-ico', html: ICON.play }), t('nextScene')], primary: true, onclick: () => app.startLevel(spec.modeId, spec.n + 1) },
             { label: t('quit'), onclick: () => ctx.exit() },
           ]
         : [
-            { label: [h('span', { class: 'g-hidden-btn-ico', html: ICON.play }), t('nextLevel')], primary: true, onclick: () => app.startLevel(spec.modeId, spec.n + 1) },
+            { label: [h('span', { class: 'g-findit-btn-ico', html: ICON.play }), t('nextLevel')], primary: true, onclick: () => app.startLevel(spec.modeId, spec.n + 1) },
             { label: t('toMap'), onclick: () => app.showMap(spec.modeId) },
           ];
     sheet(app, {
@@ -304,7 +304,7 @@ export async function createGame(root, ctx, cfg) {
       body,
       actions,
       dismissible: false,
-      cls: 'g-hidden-win',
+      cls: 'g-findit-win',
     });
   };
 
@@ -318,11 +318,11 @@ export async function createGame(root, ctx, cfg) {
     return (done) => {
       app.markSeen('howto');
       if (modeText) app.markSeen('intro:' + modeKey);
-      const tip = (icon, text) => h('div', { class: 'g-hidden-tip' }, h('span', { class: 'g-hidden-tip-ico', html: icon }), h('span', null, text));
+      const tip = (icon, text) => h('div', { class: 'g-findit-tip' }, h('span', { class: 'g-findit-tip-ico', html: icon }), h('span', null, text));
       const body = h(
         'div',
-        { class: 'g-hidden-tips' },
-        needMode ? h('div', { class: 'g-hidden-tip g-hidden-tip-mode' }, h('span', { class: 'g-hidden-tip-ico', html: ICON[cfg.modes[spec.modeId].icon] || ICON.lens }), h('span', null, t(modeText))) : null,
+        { class: 'g-findit-tips' },
+        needMode ? h('div', { class: 'g-findit-tip g-findit-tip-mode' }, h('span', { class: 'g-findit-tip-ico', html: ICON[cfg.modes[spec.modeId].icon] || ICON.lens }), h('span', null, t(modeText))) : null,
         needHow ? [tip(ICON.hand, t('tipTap')), tip(ICON.pinch, t('tipZoom')), cfg.extraTip ? tip(ICON.map, t(cfg.extraTip)) : null, tip(ICON.lens, t('tipHint')), spec.zen ? null : tip(ICON.clock, t('tipMiss'))] : null,
       );
       return sheet(app, {
@@ -351,9 +351,9 @@ export async function createGame(root, ctx, cfg) {
     destroyed = true;
     if (screen) screen.destroy();
     screen = null;
-    for (const el of root.querySelectorAll('.g-hidden-sheet-wrap')) el.remove();
+    for (const el of root.querySelectorAll('.g-findit-sheet-wrap')) el.remove();
     trimGlyphs(false);
     trimGlyphs();
-    if (window.__hiddenDebug) delete window.__hiddenDebug;
+    if (window.__finditDebug) delete window.__finditDebug;
   };
 }

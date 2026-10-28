@@ -1,5 +1,9 @@
-// A full-size canvas with pan / pinch-zoom / tap handling and a cached static layer.
+// A full-size canvas with pan / pinch-zoom / tap handling. Static scenery is painted into
+// world-space chunks (offscreen canvases) that are rebuilt lazily, so a big painted world stays crisp.
 import { Camera } from './iso.js';
+
+const CH = 320; // chunk size in world units
+const STEPS = [0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3];
 
 export function createStage(host, opts) {
   const canvas = document.createElement('canvas');
@@ -7,12 +11,13 @@ export function createStage(host, opts) {
   host.append(canvas);
   const c = canvas.getContext('2d');
   const cam = new Camera();
-  const b = opts.bounds; // world bounds { x0, y0, x1, y1 }
-  const focus = opts.focus || b; // what the camera shows first
+  const b = opts.bounds; // world rect the camera may show { x0, y0, x1, y1 }
   const pts = new Map();
-  let W = 0, H = 0, dpr = 1, raf = 0, alive = true, fitted = false;
-  let drag = null, pinch = null, cache = null, cacheZ = 0, cacheDirty = true, lastCache = 0;
-  let minZ = 0.4, maxZ = 2.6;
+  const chunks = new Map(); // key -> { cv, s, gen }
+  let gen = 1;
+  let W = 0, H = 0, dpr = 1, raf = 0, alive = true, started = false;
+  let drag = null, pinch = null;
+  let minZ = 0.5, maxZ = opts.maxZ || 2.6;
   const t0 = performance.now();
 
   function resize() {
@@ -24,18 +29,15 @@ export function createStage(host, opts) {
     canvas.height = Math.round(H * dpr);
     canvas.style.width = W + 'px';
     canvas.style.height = H + 'px';
-    const bw = b.x1 - b.x0, bh = b.y1 - b.y0;
-    minZ = Math.min(W / bw, H / bh) * 0.85;
-    if (!fitted) fit(focus);
+    minZ = Math.max(W / (b.x1 - b.x0), H / (b.y1 - b.y0), opts.minZ || 0);
+    if (!started) {
+      cam.z = Math.max(minZ, Math.min(maxZ, opts.zoom || 1));
+      const f = opts.focus || [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2];
+      centerOn(f[0], f[1]);
+      started = true;
+    }
+    cam.z = Math.max(minZ, Math.min(maxZ, cam.z));
     clampCam();
-    cacheDirty = true;
-  }
-
-  function fit(bb = b) {
-    const bw = bb.x1 - bb.x0, bh = bb.y1 - bb.y0;
-    cam.z = Math.min(maxZ, Math.max(minZ, Math.min(W / bw, H / bh) * 0.95));
-    centerOn((bb.x0 + bb.x1) / 2, (bb.y0 + bb.y1) / 2);
-    fitted = true;
   }
 
   function centerOn(wx, wy) {
@@ -43,15 +45,17 @@ export function createStage(host, opts) {
     cam.oy = H / 2 - wy * cam.z;
   }
 
-  // Keep at least part of the world on screen.
+  // The camera always keeps the screen covered by the painted world (no empty background).
   function clampCam() {
-    const left = cam.ox + b.x0 * cam.z, right = cam.ox + b.x1 * cam.z;
-    const top = cam.oy + b.y0 * cam.z, bottom = cam.oy + b.y1 * cam.z;
-    const m = 40;
-    if (right < m) cam.ox += m - right;
-    if (left > W - m) cam.ox -= left - (W - m);
-    if (bottom < m) cam.oy += m - bottom;
-    if (top > H - m) cam.oy -= top - (H - m);
+    const z = cam.z;
+    const left = cam.ox + b.x0 * z, right = cam.ox + b.x1 * z;
+    const top = cam.oy + b.y0 * z, bottom = cam.oy + b.y1 * z;
+    if (right - left <= W) cam.ox = (W - (b.x1 + b.x0) * z) / 2;
+    else if (left > 0) cam.ox -= left;
+    else if (right < W) cam.ox += W - right;
+    if (bottom - top <= H) cam.oy = (H - (b.y1 + b.y0) * z) / 2;
+    else if (top > 0) cam.oy -= top;
+    else if (bottom < H) cam.oy += H - bottom;
   }
 
   function setZoom(nz, sx = W / 2, sy = H / 2) {
@@ -60,38 +64,66 @@ export function createStage(host, opts) {
     clampCam();
   }
 
-  function rebuildCache() {
-    const s = Math.min(cam.z * dpr, 3, 4096 / Math.max(b.x1 - b.x0, b.y1 - b.y0));
-    const cw = Math.ceil((b.x1 - b.x0) * s), ch = Math.ceil((b.y1 - b.y0) * s);
-    if (!cache) cache = document.createElement('canvas');
-    cache.width = cw;
-    cache.height = ch;
-    const cc = cache.getContext('2d');
-    cc.setTransform(s, 0, 0, s, -b.x0 * s, -b.y0 * s);
-    opts.drawStatic(cc, s);
-    cacheZ = cam.z;
-    cacheDirty = false;
-    lastCache = performance.now();
+  const wantScale = () => {
+    const s = cam.z * dpr;
+    let best = STEPS[0];
+    for (const q of STEPS) if (q <= s * 1.1) best = q;
+    return Math.min(best, 3);
+  };
+
+  function buildChunk(i, j, s) {
+    let ch = chunks.get(i + ',' + j);
+    const size = Math.ceil(CH * s) + 2;
+    if (!ch) { ch = { cv: document.createElement('canvas') }; chunks.set(i + ',' + j, ch); }
+    if (ch.cv.width !== size) { ch.cv.width = size; ch.cv.height = size; }
+    const cc = ch.cv.getContext('2d');
+    cc.setTransform(1, 0, 0, 1, 0, 0);
+    cc.clearRect(0, 0, size, size);
+    cc.setTransform(s, 0, 0, s, -i * CH * s, -j * CH * s);
+    cc.save();
+    cc.beginPath();
+    cc.rect(i * CH, j * CH, CH + 2 / s, CH + 2 / s);
+    cc.clip();
+    opts.drawStatic(cc, { x0: i * CH, y0: j * CH, x1: (i + 1) * CH, y1: (j + 1) * CH });
+    cc.restore();
+    ch.s = s;
+    ch.gen = gen;
   }
 
   function frame() {
     if (!alive) return;
     raf = requestAnimationFrame(frame);
     const t = (performance.now() - t0) / 1000;
-    const busy = pts.size > 0;
-    if (cacheDirty || (!busy && Math.abs(cacheZ - cam.z) > 0.02 * cam.z && performance.now() - lastCache > 300)) {
-      rebuildCache();
-    }
+    const s = wantScale();
+    // visible chunk range
+    const wx0 = -cam.ox / cam.z, wy0 = -cam.oy / cam.z;
+    const wx1 = (W - cam.ox) / cam.z, wy1 = (H - cam.oy) / cam.z;
+    const i0 = Math.floor(wx0 / CH), i1 = Math.floor(wx1 / CH);
+    const j0 = Math.floor(wy0 / CH), j1 = Math.floor(wy1 / CH);
+    let budget = pts.size ? 1 : 3;
     c.setTransform(1, 0, 0, 1, 0, 0);
-    c.clearRect(0, 0, canvas.width, canvas.height);
-    // static layer, scaled from the cache when the zoom differs
-    const sx = (cam.ox + b.x0 * cam.z) * dpr, sy = (cam.oy + b.y0 * cam.z) * dpr;
+    c.fillStyle = opts.bg || '#3f7a2c';
+    c.fillRect(0, 0, canvas.width, canvas.height);
     c.imageSmoothingEnabled = true;
-    c.drawImage(cache, sx, sy, (b.x1 - b.x0) * cam.z * dpr, (b.y1 - b.y0) * cam.z * dpr);
-    // dynamic layer in world units
+    for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) {
+      const ch = chunks.get(i + ',' + j);
+      const stale = !ch || ch.gen !== gen || ch.s !== s;
+      if (!ch || (stale && budget > 0)) { buildChunk(i, j, s); if (ch) budget--; }
+      const cur = chunks.get(i + ',' + j);
+      const x = (cam.ox + i * CH * cam.z) * dpr, y = (cam.oy + j * CH * cam.z) * dpr;
+      const sz = (CH + 2 / cur.s) * cam.z * dpr;
+      c.drawImage(cur.cv, 0, 0, cur.cv.width, cur.cv.height, x, y, sz, sz);
+    }
     c.setTransform(cam.z * dpr, 0, 0, cam.z * dpr, cam.ox * dpr, cam.oy * dpr);
     opts.drawDynamic(c, cam, t, W, H);
     c.setTransform(1, 0, 0, 1, 0, 0);
+    // drop far-away chunks to bound memory
+    if (chunks.size > 40) {
+      for (const k of chunks.keys()) {
+        const [i, j] = k.split(',').map(Number);
+        if (i < i0 - 2 || i > i1 + 2 || j < j0 - 2 || j > j1 + 2) chunks.delete(k);
+      }
+    }
   }
 
   // ----- input
@@ -107,7 +139,7 @@ export function createStage(host, opts) {
       drag = { x, y, ox: cam.ox, oy: cam.oy, t: performance.now(), moved: false };
     } else if (pts.size === 2) {
       const [a, bb] = [...pts.values()];
-      pinch = { d: Math.hypot(a.x - bb.x, a.y - bb.y), z: cam.z };
+      pinch = { d: Math.hypot(a.x - bb.x, a.y - bb.y) || 1, z: cam.z };
       drag = null;
     }
   }
@@ -138,8 +170,7 @@ export function createStage(host, opts) {
     if (pts.size < 2) pinch = null;
     if (drag && wasSingle) {
       const [x, y] = local(e);
-      const quick = performance.now() - drag.t < 450;
-      if (!drag.moved && quick) opts.onTap?.(x, y, e);
+      if (!drag.moved && performance.now() - drag.t < 450) opts.onTap?.(x, y, e);
       drag = null;
     }
   }
@@ -163,11 +194,9 @@ export function createStage(host, opts) {
     cam,
     get W() { return W; },
     get H() { return H; },
-    fit() { fit(focus); clampCam(); },
     zoomBy(f) { setZoom(cam.z * f); },
     center(wx, wy) { centerOn(wx, wy); clampCam(); },
-    invalidate() { cacheDirty = true; },
-    setLimits(lo, hi) { minZ = lo; maxZ = hi; },
+    invalidate() { gen++; },
     destroy() {
       alive = false;
       cancelAnimationFrame(raf);
@@ -177,6 +206,7 @@ export function createStage(host, opts) {
       canvas.removeEventListener('pointerup', up);
       canvas.removeEventListener('pointercancel', up);
       canvas.removeEventListener('wheel', wheel);
+      chunks.clear();
       canvas.remove();
     },
   };

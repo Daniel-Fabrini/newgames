@@ -1,15 +1,1027 @@
-/* "findit" look: the engine styles come from ../hidden/style.css; these only
-   tune the panoramic map cards and the brighter, sunnier chrome accents. */
+/* Hidden-object engine — shared by .g-hidden and .g-findit (all classes g-findit-*). */
 
-.g-findit .g-hidden-ch-art {
-  height: 128px;
+.g-findit-app {
+  --gf-bg: #0a0a0c;
+  --gf-bg2: #121215;
+  --gf-panel: #18181c;
+  --gf-gold1: #f7d774;
+  --gf-gold2: #c9971c;
+  --gf-gold: #e2b33c;
+  --gf-gold-grad: linear-gradient(180deg, #f7d774, #c9971c);
+  --gf-line: rgba(226, 179, 60, 0.32);
+  --gf-text2: #b8b2a0;
+  --gf-text3: #8a8478;
+  --gf-cream1: #fbf3df;
+  --gf-cream2: #f0ddb4;
+  --gf-ink: #2b1d0c;
+  background: radial-gradient(120% 70% at 50% 0%, #1b1813 0%, var(--gf-bg) 62%);
+  color: #fff;
 }
-.g-findit .g-hidden-ch-canvas {
-  object-position: center 58%;
+
+/* ---------------------------------------------------------------- play */
+.g-findit-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 10px calc(10px + var(--safe-bottom, 0px));
 }
-.g-findit .g-hidden-ch-art::after {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(6, 10, 18, 0.88));
+.g-findit-scene {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1.5px solid transparent;
+  background: linear-gradient(#0a0a0c, #0a0a0c) padding-box, linear-gradient(160deg, #f7d774, #7a5512 45%, #c9971c 75%, #f2d27a) border-box;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.7), 0 0 24px rgba(201, 151, 28, 0.2);
+  isolation: isolate;
 }
-.g-findit .g-hidden-scene {
-  background: linear-gradient(#0a0a0c, #0a0a0c) padding-box, linear-gradient(200deg, #f7d774, #7a5512 45%, #c9971c 75%, #fff0b0) border-box;
+.g-findit-scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.45);
+  z-index: 2;
+}
+.g-findit-canvas-host {
+  position: absolute;
+  inset: 0;
+}
+.g-findit-canvas {
+  display: block;
+  touch-action: none;
+  cursor: grab;
+  transition: filter 0.25s;
+}
+.g-findit-canvas:active {
+  cursor: grabbing;
+}
+.g-findit-locked .g-findit-canvas {
+  filter: grayscale(0.7) brightness(0.75);
+}
+.g-findit-shake {
+  animation: g-findit-shake 0.32s;
+}
+@keyframes g-findit-shake {
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-3px); }
+}
+
+.g-findit-round {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: #f2cc5c;
+  border: 2px solid transparent;
+  background: radial-gradient(circle at 50% 35%, #2c2820, #0e0d0b) padding-box, linear-gradient(160deg, #f7d774, #8a6418 55%, #f2c94c) border-box;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55), 0 0 14px rgba(247, 215, 116, 0.28);
+  padding: 0;
+}
+.g-findit-round:active {
+  transform: scale(0.93);
+}
+.g-findit-round svg {
+  width: 22px;
+  height: 22px;
+}
+.g-findit-pause {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 4;
+}
+
+.g-findit-banner {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  z-index: 3;
+  transform: translate(-50%, -14px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s, transform 0.35s;
+  background: rgba(10, 10, 12, 0.84);
+  border: 1px solid var(--gf-line);
+  border-radius: 16px;
+  padding: 6px 18px 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  max-width: calc(100% - 120px);
+  text-align: center;
+}
+.g-findit-banner.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.g-findit-banner b {
+  font-size: 15px;
+  font-weight: 1000;
+  background: var(--gf-gold-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-findit-banner span {
+  font-size: 12px;
+  font-weight: 800;
+  color: #e8e2d0;
+}
+
+.g-findit-coach {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  z-index: 3;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 28px);
+  background: rgba(10, 10, 12, 0.82);
+  border: 1px solid var(--gf-line);
+  border-radius: 16px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.3;
+  text-align: center;
+  color: #f2e6c4;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.g-findit-coach.show {
+  opacity: 1;
+  animation: g-findit-breathe 1.8s ease-in-out infinite;
+}
+.g-findit-coach.hide {
+  opacity: 0;
+  animation: none;
+}
+@keyframes g-findit-breathe {
+  50% { transform: translateX(-50%) scale(1.05); }
+}
+
+.g-findit-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: radial-gradient(80% 60% at 50% 45%, #1d1a14, #0a0a0c);
+  color: var(--gf-text2);
+  font-weight: 800;
+  transition: opacity 0.4s;
+}
+.g-findit-loader.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+.g-findit-loader-ring {
+  width: 64px;
+  height: 64px;
+  color: var(--gf-gold1);
+  animation: g-findit-search 1.4s ease-in-out infinite;
+}
+.g-findit-loader-ring svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 10px rgba(247, 215, 116, 0.5));
+}
+@keyframes g-findit-search {
+  0% { transform: translate(-10px, 0) rotate(-8deg); }
+  50% { transform: translate(10px, -6px) rotate(8deg); }
+  100% { transform: translate(-10px, 0) rotate(-8deg); }
+}
+
+/* ---------------------------------------------------------------- tray */
+.g-findit-tray {
+  flex: none;
+  border-radius: 18px;
+  padding: 10px 12px 12px;
+  background: linear-gradient(180deg, var(--gf-cream1), var(--gf-cream2));
+  border: 1.5px solid #d6b26a;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 18px rgba(201, 151, 28, 0.22), inset 0 1px 0 #fff;
+  color: var(--gf-ink);
+}
+.g-findit-tray-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 2px 8px;
+}
+.g-findit-tray-title {
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--gf-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-findit-tray-info {
+  font-weight: 900;
+  font-size: 12.5px;
+  color: #8a6420;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.g-findit-tiles {
+  display: flex;
+  gap: 8px;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 62px;
+}
+.g-findit-tile {
+  position: relative;
+  flex: 0 1 66px;
+  min-width: 52px;
+  height: 62px;
+  border-radius: 15px;
+  border: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #fffaf0, #f6e8c8);
+  box-shadow: 0 2px 0 #d9bf86, 0 4px 10px rgba(120, 80, 20, 0.18), inset 0 1px 0 #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: var(--gf-ink);
+  transition: transform 0.12s;
+}
+.g-findit-tile:active {
+  transform: scale(0.94);
+}
+.g-findit-tile-e {
+  font-size: 36px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 2px rgba(60, 30, 0, 0.25));
+  transition: opacity 0.3s, filter 0.3s;
+}
+.g-findit-tile.done .g-findit-tile-e {
+  opacity: 0.35;
+  filter: grayscale(0.7);
+}
+.g-findit-tile-in {
+  animation: g-findit-tile-in 0.4s cubic-bezier(0.3, 1.5, 0.6, 1);
+}
+@keyframes g-findit-tile-in {
+  from { transform: rotateY(90deg) scale(0.6); opacity: 0; }
+}
+.g-findit-bump {
+  animation: g-findit-bump 0.45s cubic-bezier(0.3, 1.6, 0.6, 1);
+}
+@keyframes g-findit-bump {
+  40% { transform: scale(1.18); }
+}
+.g-findit-check {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--gf-gold-grad);
+  color: #1a1205;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35), 0 0 0 2px #fffaf0;
+  animation: g-findit-pop 0.4s cubic-bezier(0.3, 1.6, 0.6, 1);
+}
+.g-findit-check svg {
+  width: 15px;
+  height: 15px;
+}
+.g-findit-badge {
+  position: absolute;
+  right: -6px;
+  top: -7px;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 12px;
+  background: var(--gf-panel);
+  color: var(--gf-gold1);
+  font-weight: 1000;
+  font-size: 13px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--gf-gold2);
+}
+.g-findit-nudge {
+  animation: g-findit-nudge 1.2s ease-in-out infinite;
+}
+@keyframes g-findit-nudge {
+  50% { box-shadow: 0 0 0 3px var(--gf-gold), 0 0 18px rgba(226, 179, 60, 0.8); transform: translateY(-3px); }
+}
+.g-findit-hand {
+  flex: 0 0 66px;
+  outline: 2px dashed rgba(138, 100, 32, 0.45);
+  outline-offset: -6px;
+}
+.g-findit-hand .g-findit-tile-e {
+  color: #b08a40;
+  font-weight: 1000;
+  font-size: 30px;
+}
+.g-findit-hand.active {
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--gf-gold), 0 0 16px rgba(226, 179, 60, 0.7);
+  animation: g-findit-bump 0.45s;
+}
+.g-findit-pips {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  align-content: center;
+}
+.g-findit-pip {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: rgba(120, 80, 20, 0.08);
+  border: 1.5px dashed rgba(138, 100, 32, 0.45);
+  display: grid;
+  place-items: center;
+  font-size: 19px;
+  line-height: 1;
+}
+.g-findit-pip.on {
+  background: #fffaf0;
+  border: 1.5px solid #d6b26a;
+  animation: g-findit-pop 0.4s cubic-bezier(0.3, 1.6, 0.6, 1);
+}
+@keyframes g-findit-pop {
+  from { transform: scale(0.3); opacity: 0; }
+}
+
+.g-findit-fly-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15;
+  overflow: hidden;
+}
+.g-findit-fly {
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 10px rgba(255, 220, 120, 0.6));
+  will-change: transform;
+}
+
+.g-findit-popover {
+  position: absolute;
+  z-index: 20;
+  background: var(--gf-panel);
+  border: 1.5px solid var(--gf-gold2);
+  color: #fff;
+  border-radius: 14px;
+  padding: 9px 10px 10px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55), 0 0 14px rgba(201, 151, 28, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  animation: g-findit-pop 0.22s ease-out;
+  max-width: 230px;
+}
+.g-findit-popover::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: var(--arrow, 50%);
+  width: 12px;
+  height: 12px;
+  background: var(--gf-panel);
+  border-right: 1.5px solid var(--gf-gold2);
+  border-bottom: 1.5px solid var(--gf-gold2);
+  transform: translateX(-50%) rotate(45deg);
+}
+.g-findit-pop-name {
+  font-weight: 900;
+  font-size: 15px;
+  text-align: center;
+}
+.g-findit-pop-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 10px;
+  padding: 7px 12px;
+  font-weight: 900;
+  font-size: 14px;
+  background: var(--gf-gold-grad);
+  color: #1a1205;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.g-findit-pop-hint svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+}
+
+/* ---------------------------------------------------------------- sheets */
+.g-findit-sheet-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(4, 4, 6, 0.64);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.g-findit-sheet-wrap.show {
+  opacity: 1;
+}
+.g-findit-sheet {
+  width: min(360px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  border-radius: 24px;
+  padding: 20px 18px 18px;
+  text-align: center;
+  color: #fff;
+  border: 1.5px solid transparent;
+  background: linear-gradient(180deg, #1d1c20, #111114) padding-box, linear-gradient(160deg, #f7d774, #7a5512 50%, #e2b33c) border-box;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 28px rgba(201, 151, 28, 0.25);
+  transform: scale(0.9) translateY(10px);
+  transition: transform 0.24s cubic-bezier(0.3, 1.4, 0.6, 1);
+}
+.g-findit-sheet-wrap.show .g-findit-sheet {
+  transform: none;
+}
+.g-findit-sheet-icon {
+  width: 62px;
+  height: 62px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #f2cc5c;
+  border: 2px solid transparent;
+  background: radial-gradient(circle at 50% 35%, #2c2820, #0e0d0b) padding-box, linear-gradient(160deg, #f7d774, #8a6418 55%, #f2c94c) border-box;
+  box-shadow: 0 0 20px rgba(247, 215, 116, 0.35);
+}
+.g-findit-sheet-icon svg {
+  width: 30px;
+  height: 30px;
+}
+.g-findit-win .g-findit-sheet-icon {
+  animation: g-findit-trophy 0.7s cubic-bezier(0.3, 1.6, 0.6, 1);
+}
+@keyframes g-findit-trophy {
+  from { transform: scale(0.2) rotate(-30deg); }
+}
+.g-findit-sheet-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 1000;
+  line-height: 1.1;
+  background: var(--gf-gold-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-findit-sheet-sub {
+  color: var(--gf-text2);
+  font-size: 13px;
+  font-weight: 800;
+  margin-top: 4px;
+}
+.g-findit-sheet-text {
+  color: #ddd6c2;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 10px 0 4px;
+}
+.g-findit-sheet-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+.g-findit-btn {
+  min-height: 50px;
+  border-radius: 15px;
+  font: inherit;
+  font-weight: 900;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  border: 0;
+  padding: 10px 16px;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.g-findit-btn.gold {
+  background: var(--gf-gold-grad);
+  color: #1a1205;
+  box-shadow: 0 4px 0 #8a6418, 0 0 18px rgba(247, 215, 116, 0.28);
+}
+.g-findit-btn.gold:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #8a6418;
+}
+.g-findit-btn.outline {
+  background: var(--gf-panel);
+  color: #f2cc5c;
+  border: 1.5px solid rgba(226, 179, 60, 0.55);
+}
+.g-findit-btn.outline:active {
+  transform: scale(0.98);
+}
+.g-findit-btn.big {
+  min-height: 62px;
+  font-size: 19px;
+  border-radius: 18px;
+}
+.g-findit-btn-ico {
+  display: inline-grid;
+}
+.g-findit-btn-ico svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.g-findit-btn small {
+  font-size: 12px;
+  font-weight: 800;
+}
+.g-findit-muted {
+  color: var(--gf-text3);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.g-findit-pause-stats {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 10px;
+  font-weight: 900;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+.g-findit-pause-stats div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.g-findit-pause-stats svg {
+  width: 18px;
+  height: 18px;
+  color: var(--gf-gold1);
+}
+
+.g-findit-stars {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+  margin: 8px 0 14px;
+}
+.g-findit-star svg {
+  width: 42px;
+  height: 42px;
+  color: #34302a;
+  display: block;
+}
+.g-findit-star.on svg {
+  color: #f7c948;
+  filter: drop-shadow(0 0 8px rgba(247, 201, 72, 0.65));
+}
+.g-findit-star.on {
+  animation: g-findit-star-pop 0.55s cubic-bezier(0.3, 1.8, 0.6, 1) both;
+}
+.g-findit-stars.big .g-findit-star:nth-child(2) svg {
+  width: 56px;
+  height: 56px;
+}
+@keyframes g-findit-star-pop {
+  from { transform: scale(0) rotate(-40deg); opacity: 0; }
+}
+.g-findit-statgrid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 8px;
+}
+.g-findit-statgrid > div {
+  background: #0e0e11;
+  border: 1px solid rgba(226, 179, 60, 0.22);
+  border-radius: 12px;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.g-findit-statgrid small {
+  color: var(--gf-text3);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.g-findit-statgrid b {
+  font-size: 18px;
+  font-weight: 1000;
+  font-variant-numeric: tabular-nums;
+}
+.g-findit-reward {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 14px;
+  font-weight: 1000;
+  font-size: 21px;
+  color: var(--gf-gold1);
+}
+.g-findit-reward span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: g-findit-pop 0.5s 0.8s both cubic-bezier(0.3, 1.6, 0.6, 1);
+}
+.g-findit-note {
+  margin-top: 12px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: rgba(247, 215, 116, 0.1);
+  border: 1px solid rgba(247, 215, 116, 0.3);
+  color: var(--gf-gold1);
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.g-findit-coin {
+  display: inline-block;
+  position: relative;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff6c2, #f2c230 45%, #a8760c 100%);
+  box-shadow: inset 0 0 0 0.09em rgba(140, 95, 10, 0.6), 0 1px 2px rgba(0, 0, 0, 0.3);
+  flex: none;
+}
+.g-findit-coin::after {
+  content: '';
+  position: absolute;
+  inset: 0.24em;
+  border-radius: 50%;
+  border: 0.07em solid rgba(140, 95, 10, 0.55);
+}
+
+.g-findit-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  text-align: left;
+  margin-top: 10px;
+}
+.g-findit-tip {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: #0e0e11;
+  border: 1px solid rgba(226, 179, 60, 0.2);
+  border-radius: 14px;
+  padding: 9px 11px;
+  font-size: 14px;
+  line-height: 1.3;
+  color: #e8e2d0;
+  font-weight: 700;
+}
+.g-findit-tip-mode {
+  border-color: var(--gf-gold);
+  background: rgba(247, 215, 116, 0.08);
+}
+.g-findit-tip-ico {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--gf-gold-grad);
+  color: #1a1205;
+  display: grid;
+  place-items: center;
+}
+.g-findit-tip-ico svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ---------------------------------------------------------------- map */
+.g-findit-map {
+  gap: 14px;
+  padding-top: 8px;
+}
+.g-findit-enter {
+  animation: g-findit-enter 0.38s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes g-findit-enter {
+  from { opacity: 0; transform: translateY(14px); }
+}
+.g-findit-map-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.g-findit-spacer {
+  flex: 1;
+}
+.g-findit-mode-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 1000;
+  font-size: 18px;
+  color: var(--gf-gold1);
+}
+.g-findit-mode-chip svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+.g-findit-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--gf-panel);
+  border: 1px solid rgba(226, 179, 60, 0.4);
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-weight: 900;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.g-findit-pill svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+  color: var(--gf-gold1);
+}
+.g-findit-continue {
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 10px 18px;
+  gap: 12px;
+}
+.g-findit-continue .g-findit-btn-ico svg {
+  width: 26px;
+  height: 26px;
+}
+.g-findit-continue-txt {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  min-width: 0;
+}
+.g-findit-continue-txt b {
+  font-size: 19px;
+}
+.g-findit-continue-txt small {
+  font-size: 13px;
+  opacity: 0.75;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-findit-section {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #c9a24a;
+  margin: 2px 2px -4px;
+}
+.g-findit-chapters {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.g-findit-ch {
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--gf-panel);
+  border: 1.5px solid rgba(226, 179, 60, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  flex: none;
+}
+.g-findit-ch.current {
+  border-color: var(--gf-gold);
+  box-shadow: 0 0 0 1px rgba(247, 215, 116, 0.25), 0 0 26px rgba(201, 151, 28, 0.32);
+}
+.g-findit-ch.locked {
+  opacity: 0.6;
+}
+.g-findit-ch.locked .g-findit-ch-canvas {
+  filter: grayscale(0.85) brightness(0.55);
+}
+.g-findit-ch-art {
+  position: relative;
+  height: 136px;
+  overflow: hidden;
+}
+.g-findit-ch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  animation: g-findit-fade 0.5s;
+}
+@keyframes g-findit-fade {
+  from { opacity: 0; }
+}
+.g-findit-ch-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(8, 8, 10, 0.88));
+}
+.g-findit-ch-label {
+  position: absolute;
+  left: 14px;
+  bottom: 10px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 65%;
+}
+.g-findit-ch-label small {
+  font-size: 11.5px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gf-gold1);
+}
+.g-findit-ch-label b {
+  font-size: 20px;
+  font-weight: 1000;
+  line-height: 1.1;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+.g-findit-ch-stars {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(10, 10, 12, 0.75);
+  border: 1px solid rgba(226, 179, 60, 0.45);
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-weight: 900;
+  font-size: 13px;
+}
+.g-findit-ch-stars svg {
+  width: 14px;
+  height: 14px;
+  color: var(--gf-gold1);
+  display: block;
+}
+.g-findit-ch-deco {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  z-index: 1;
+  display: flex;
+  gap: 2px;
+}
+.g-findit-ch-deco span {
+  font-size: 30px;
+  line-height: 1;
+  transform: rotate(calc((var(--i) - 1) * 12deg)) translateY(calc(var(--i) * 3px));
+  filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.55));
+}
+.g-findit-ch-levels {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  padding: 12px;
+}
+.g-findit-lv {
+  justify-self: center;
+  width: 100%;
+  max-width: 56px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-weight: 1000;
+  font-size: 17px;
+  line-height: 1;
+  background: #0e0e11;
+  color: var(--gf-text3);
+  border: 1.5px solid rgba(226, 179, 60, 0.22);
+  cursor: pointer;
+  padding: 0;
+}
+.g-findit-lv:active {
+  transform: scale(0.92);
+}
+.g-findit-lv.done {
+  background: var(--gf-gold-grad);
+  color: #1a1205;
+  border-color: transparent;
+  box-shadow: 0 3px 0 #8a6418;
+}
+.g-findit-lv-stars {
+  font-size: 9px;
+  margin-top: 2px;
+  letter-spacing: -0.5px;
+}
+.g-findit-lv.current {
+  background: var(--gf-panel);
+  color: var(--gf-gold1);
+  border: 2px solid var(--gf-gold1);
+  animation: g-findit-glow 1.6s ease-in-out infinite;
+}
+@keyframes g-findit-glow {
+  50% { box-shadow: 0 0 16px rgba(247, 215, 116, 0.65); }
+}
+.g-findit-lv.locked {
+  cursor: default;
+}
+.g-findit-lv-lock svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+  color: #5a564c;
+}
+.g-findit-ch-locked {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px;
+  color: var(--gf-text3);
+  font-weight: 800;
+  font-size: 14px;
+}
+.g-findit-ch-locked svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+.g-findit-endless {
+  text-align: center;
+  color: var(--gf-text3);
+  font-size: 13px;
+  font-weight: 700;
+  margin: 4px 0 0;
+}
+
+.g-findit-daily {
+  justify-content: center;
+}
+.g-findit-daily-card {
+  text-align: center;
+  border-radius: 24px;
+  padding: 22px 18px 18px;
+  border: 1.5px solid transparent;
+  background: linear-gradient(180deg, #1d1c20, #111114) padding-box, linear-gradient(160deg, #f7d774, #7a5512 50%, #e2b33c) border-box;
+  box-shadow: 0 0 28px rgba(201, 151, 28, 0.2);
+}
+.g-findit-daily-card .g-findit-statgrid {
+  margin: 8px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .g-findit-coach.show,
+  .g-findit-lv.current,
+  .g-findit-loader-ring {
+    animation: none;
+  }
 }

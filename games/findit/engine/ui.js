@@ -23,12 +23,12 @@ export const ICON = {
 };
 
 export function coinIcon(cls = '') {
-  return h('span', { class: `g-hidden-coin ${cls}`, 'aria-hidden': 'true' });
+  return h('span', { class: `g-findit-coin ${cls}`, 'aria-hidden': 'true' });
 }
 
 export function starRow(n, max = 3, cls = '') {
-  const row = h('div', { class: `g-hidden-stars ${cls}` });
-  for (let i = 0; i < max; i++) row.append(h('span', { class: `g-hidden-star ${i < n ? 'on' : ''}`, style: { animationDelay: `${0.25 + i * 0.22}s` }, html: ICON.star }));
+  const row = h('div', { class: `g-findit-stars ${cls}` });
+  for (let i = 0; i < max; i++) row.append(h('span', { class: `g-findit-star ${i < n ? 'on' : ''}`, style: { animationDelay: `${0.25 + i * 0.22}s` }, html: ICON.star }));
   return row;
 }
 
@@ -45,20 +45,20 @@ export function sheet(app, { kind = '', icon, title, subtitle, body, actions = [
   };
   const panel = h(
     'div',
-    { class: `g-hidden-sheet ${cls}`, role: 'dialog', 'aria-modal': 'true' },
-    icon ? h('div', { class: 'g-hidden-sheet-icon', html: icon }) : null,
-    title ? h('h2', { class: 'g-hidden-sheet-title' }, title) : null,
-    subtitle ? h('div', { class: 'g-hidden-sheet-sub' }, subtitle) : null,
+    { class: `g-findit-sheet ${cls}`, role: 'dialog', 'aria-modal': 'true' },
+    icon ? h('div', { class: 'g-findit-sheet-icon', html: icon }) : null,
+    title ? h('h2', { class: 'g-findit-sheet-title' }, title) : null,
+    subtitle ? h('div', { class: 'g-findit-sheet-sub' }, subtitle) : null,
     body || null,
     actions.length
       ? h(
           'div',
-          { class: 'g-hidden-sheet-actions' },
+          { class: 'g-findit-sheet-actions' },
           actions.map((a) =>
             h(
               'button',
               {
-                class: `g-hidden-btn ${a.primary ? 'gold' : 'outline'}`,
+                class: `g-findit-btn ${a.primary ? 'gold' : 'outline'}`,
                 onclick: () => {
                   if (closed) return;
                   app.ctx.sfx.play('tap');
@@ -72,7 +72,7 @@ export function sheet(app, { kind = '', icon, title, subtitle, body, actions = [
         )
       : null,
   );
-  const wrap = h('div', { class: 'g-hidden-sheet-wrap' }, panel);
+  const wrap = h('div', { class: 'g-findit-sheet-wrap' }, panel);
   if (dismissible) wrap.addEventListener('click', (e) => e.target === wrap && close());
   app.root.append(wrap);
   requestAnimationFrame(() => wrap.classList.add('show'));

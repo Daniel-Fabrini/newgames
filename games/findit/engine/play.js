@@ -95,18 +95,18 @@ export function playLevel(app, spec) {
   const stats = { misses: 0, hints: 0, recentMisses: [] };
 
   // ---- DOM
-  const canvasHost = h('div', { class: 'g-hidden-canvas-host' });
-  const loader = h('div', { class: 'g-hidden-loader' }, h('div', { class: 'g-hidden-loader-ring', html: ICON.lens }), h('div', null, t('preparing')));
-  const pauseBtn = h('button', { class: 'g-hidden-round g-hidden-pause', 'aria-label': t('paused'), html: ICON.pause, onclick: () => openPause() });
-  const banner = h('div', { class: 'g-hidden-banner' });
-  const coach = h('div', { class: 'g-hidden-coach' }, t('pinch'));
-  const sceneEl = h('div', { class: 'g-hidden-scene' }, canvasHost, banner, coach, pauseBtn, loader);
-  const trayTitle = h('span', { class: 'g-hidden-tray-title' }, kind === 'match' ? t('matchTitle') : kind === 'findall' ? t('findAllTitle') : t('findTitle'));
-  const trayInfo = h('span', { class: 'g-hidden-tray-info' });
-  const tiles = h('div', { class: 'g-hidden-tiles' });
-  const tray = h('div', { class: 'g-hidden-tray' }, h('div', { class: 'g-hidden-tray-head' }, trayTitle, trayInfo), tiles);
-  const flyLayer = h('div', { class: 'g-hidden-fly-layer' });
-  const el = h('div', { class: 'g-hidden-play g-hidden-enter' }, sceneEl, tray, flyLayer);
+  const canvasHost = h('div', { class: 'g-findit-canvas-host' });
+  const loader = h('div', { class: 'g-findit-loader' }, h('div', { class: 'g-findit-loader-ring', html: ICON.lens }), h('div', null, t('preparing')));
+  const pauseBtn = h('button', { class: 'g-findit-round g-findit-pause', 'aria-label': t('paused'), html: ICON.pause, onclick: () => openPause() });
+  const banner = h('div', { class: 'g-findit-banner' });
+  const coach = h('div', { class: 'g-findit-coach' }, t('pinch'));
+  const sceneEl = h('div', { class: 'g-findit-scene' }, canvasHost, banner, coach, pauseBtn, loader);
+  const trayTitle = h('span', { class: 'g-findit-tray-title' }, kind === 'match' ? t('matchTitle') : kind === 'findall' ? t('findAllTitle') : t('findTitle'));
+  const trayInfo = h('span', { class: 'g-findit-tray-info' });
+  const tiles = h('div', { class: 'g-findit-tiles' });
+  const tray = h('div', { class: 'g-findit-tray' }, h('div', { class: 'g-findit-tray-head' }, trayTitle, trayInfo), tiles);
+  const flyLayer = h('div', { class: 'g-findit-fly-layer' });
+  const el = h('div', { class: 'g-findit-play g-findit-enter' }, sceneEl, tray, flyLayer);
   app.mount(el);
 
   // ---- tray model
@@ -123,8 +123,8 @@ export function playLevel(app, spec) {
 
   function makeTile(key) {
     const gl = goals[key];
-    const b = h('button', { class: 'g-hidden-tile g-hidden-tile-in', 'aria-label': emojiName(gl.ch, ctx.lang) }, h('span', { class: 'g-hidden-tile-e' }, gl.ch));
-    if (gl.need > 1) b.append(h('span', { class: 'g-hidden-badge' }, String(gl.need - gl.shown)));
+    const b = h('button', { class: 'g-findit-tile g-findit-tile-in', 'aria-label': emojiName(gl.ch, ctx.lang) }, h('span', { class: 'g-findit-tile-e' }, gl.ch));
+    if (gl.need > 1) b.append(h('span', { class: 'g-findit-badge' }, String(gl.need - gl.shown)));
     b.addEventListener('click', () => tilePopover(b, key));
     return b;
   }
@@ -133,11 +133,11 @@ export function playLevel(app, spec) {
     tiles.innerHTML = '';
     slots = [];
     if (kind === 'match') {
-      matchSlot = h('button', { class: 'g-hidden-tile g-hidden-hand', 'aria-label': t('hint') }, h('span', { class: 'g-hidden-tile-e' }, '?'));
+      matchSlot = h('button', { class: 'g-findit-tile g-findit-hand', 'aria-label': t('hint') }, h('span', { class: 'g-findit-tile-e' }, '?'));
       matchSlot.addEventListener('click', () => tilePopover(matchSlot, selected ? selected.key : -1));
-      const pipBox = h('div', { class: 'g-hidden-pips' });
+      const pipBox = h('div', { class: 'g-findit-pips' });
       pips = goals.map(() => {
-        const p = h('span', { class: 'g-hidden-pip' });
+        const p = h('span', { class: 'g-findit-pip' });
         pipBox.append(p);
         return { el: p };
       });
@@ -174,20 +174,20 @@ export function playLevel(app, spec) {
         p.el.classList.add('on');
       }
       matchSlot.classList.remove('active');
-      matchSlot.querySelector('.g-hidden-tile-e').textContent = '?';
+      matchSlot.querySelector('.g-findit-tile-e').textContent = '?';
       updateInfo();
       return;
     }
     const s = slots.find((x) => x.key === key);
     if (!s) return updateInfo();
-    const badge = s.el.querySelector('.g-hidden-badge');
+    const badge = s.el.querySelector('.g-findit-badge');
     if (badge) badge.textContent = String(Math.max(0, gl.need - gl.shown));
-    s.el.classList.remove('g-hidden-bump');
+    s.el.classList.remove('g-findit-bump');
     void s.el.offsetWidth;
-    s.el.classList.add('g-hidden-bump');
+    s.el.classList.add('g-findit-bump');
     if (gl.shown >= gl.need) {
       s.el.classList.add('done');
-      if (!s.el.querySelector('.g-hidden-check')) s.el.append(h('span', { class: 'g-hidden-check', html: ICON.check }));
+      if (!s.el.querySelector('.g-findit-check')) s.el.append(h('span', { class: 'g-findit-check', html: ICON.check }));
       if (queue.length) {
         const next = queue.shift();
         later(() => {
@@ -219,9 +219,9 @@ export function playLevel(app, spec) {
     const hintLabel = spec.zen ? t('hintFree') : app.state.hints > 0 ? `${t('hint')} · ${app.state.hints}` : `${t('hint')} · ${HINT_PRICE}`;
     pop = h(
       'div',
-      { class: 'g-hidden-popover', 'data-key': String(key) },
-      gl ? h('div', { class: 'g-hidden-pop-name' }, emojiName(gl.ch, ctx.lang)) : null,
-      h('button', { class: 'g-hidden-pop-hint', onclick: (e) => {
+      { class: 'g-findit-popover', 'data-key': String(key) },
+      gl ? h('div', { class: 'g-findit-pop-name' }, emojiName(gl.ch, ctx.lang)) : null,
+      h('button', { class: 'g-findit-pop-hint', onclick: (e) => {
         e.stopPropagation();
         closePopover();
         useHint(key === -1 ? undefined : key);
@@ -442,7 +442,7 @@ export function playLevel(app, spec) {
     const x0 = cr.left - er.left + s.x, y0 = cr.top - er.top + s.y;
     const x1 = tr.left - er.left + tr.width / 2, y1 = tr.top - er.top + tr.height / 2;
     const size = clamp(p.s * view.z, 30, 84);
-    const f = h('span', { class: 'g-hidden-fly' }, p.ch);
+    const f = h('span', { class: 'g-findit-fly' }, p.ch);
     f.style.fontSize = size + 'px';
     flyLayer.append(f);
     const mx = (x0 + x1) / 2 + (x0 < x1 ? -40 : 40), my = Math.min(y0, y1) - 70;
@@ -515,7 +515,7 @@ export function playLevel(app, spec) {
     if (!selected) {
       selected = p;
       selectFx = selectionFx(p);
-      matchSlot.querySelector('.g-hidden-tile-e').textContent = p.ch;
+      matchSlot.querySelector('.g-findit-tile-e').textContent = p.ch;
       matchSlot.classList.add('active');
       sfx.play('select');
       sfx.vibrate(12);
@@ -569,7 +569,7 @@ export function playLevel(app, spec) {
     selected = null;
     if (!keepSlot && matchSlot) {
       matchSlot.classList.remove('active');
-      matchSlot.querySelector('.g-hidden-tile-e').textContent = '?';
+      matchSlot.querySelector('.g-findit-tile-e').textContent = '?';
     }
     view.request();
   }
@@ -590,20 +590,20 @@ export function playLevel(app, spec) {
     missFx(wx, wy, false, true);
     sfx.play('error');
     sfx.vibrate([30, 40, 30]);
-    sceneEl.classList.remove('g-hidden-shake');
+    sceneEl.classList.remove('g-findit-shake');
     void sceneEl.offsetWidth;
-    sceneEl.classList.add('g-hidden-shake');
+    sceneEl.classList.add('g-findit-shake');
     const tnow = performance.now();
     stats.recentMisses = stats.recentMisses.filter((x) => tnow - x < 2600);
     stats.recentMisses.push(tnow);
     if (stats.recentMisses.length >= 3) {
       stats.recentMisses = [];
       view.locked = true;
-      sceneEl.classList.add('g-hidden-locked');
+      sceneEl.classList.add('g-findit-locked');
       ctx.ui.toast(t('slowDown'));
       later(() => {
         view.locked = false;
-        sceneEl.classList.remove('g-hidden-locked');
+        sceneEl.classList.remove('g-findit-locked');
       }, 1600);
     }
     updateInfo();
@@ -664,7 +664,7 @@ export function playLevel(app, spec) {
       openSheet = sheet(app, {
         icon: ICON.lens,
         title: t('noHints'),
-        body: h('p', { class: 'g-hidden-sheet-text' }, t('buyHintText', { price: HINT_PRICE })),
+        body: h('p', { class: 'g-findit-sheet-text' }, t('buyHintText', { price: HINT_PRICE })),
         actions: [
           { label: [t('buy'), ' · ', String(HINT_PRICE), coinIcon()], primary: true, onclick: () => resolve(true) },
           { label: t('cancel'), onclick: () => resolve(false) },
@@ -694,14 +694,14 @@ export function playLevel(app, spec) {
     pauseClock();
     const body = h(
       'div',
-      { class: 'g-hidden-pause-stats' },
+      { class: 'g-findit-pause-stats' },
       timed ? h('div', null, h('span', { html: ICON.clock }), fmtTime(elapsed())) : null,
       h('div', null, h('span', { html: ICON.target }), trayInfo.textContent.split('·')[0].trim()),
     );
     const hintLabel = spec.zen ? t('hintFree') : app.state.hints > 0 ? `${t('hint')} · ${app.state.hints}` : `${t('hint')} · ${HINT_PRICE}`;
     const actions = [
       { label: t('resume'), primary: true, onclick: () => {} },
-      { label: [h('span', { class: 'g-hidden-btn-ico', html: ICON.lens }), hintLabel], onclick: () => later(() => useHint(), 260) },
+      { label: [h('span', { class: 'g-findit-btn-ico', html: ICON.lens }), hintLabel], onclick: () => later(() => useHint(), 260) },
       { label: t('restart'), onclick: () => app.restart(spec) },
       spec.map ? { label: t('toMap'), onclick: () => app.showMap(spec.modeId) } : { label: t('quit'), onclick: () => ctx.exit() },
     ];
@@ -747,15 +747,15 @@ export function playLevel(app, spec) {
       coach.textContent = t('idleHint');
       coach.classList.remove('hide');
       coach.classList.add('show');
-      const first = tiles.querySelector('.g-hidden-tile:not(.done)');
-      if (first) first.classList.add('g-hidden-nudge');
+      const first = tiles.querySelector('.g-findit-tile:not(.done)');
+      if (first) first.classList.add('g-findit-nudge');
       later(() => coach.classList.add('hide'), 6000);
     }
   }, 500);
   const progressed = () => {
     lastProgress = performance.now();
     nudged = false;
-    for (const n of tiles.querySelectorAll('.g-hidden-nudge')) n.classList.remove('g-hidden-nudge');
+    for (const n of tiles.querySelectorAll('.g-findit-nudge')) n.classList.remove('g-findit-nudge');
   };
 
   // ---- build the level

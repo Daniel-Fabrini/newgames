@@ -183,7 +183,7 @@ def study(L, S):
     floor = L.flat_level(0.0, R['x0'] + 0.2, -1.6, R['x1'] - 0.2, R['back'] - 0.05, tag='floor')
     C.fill([floor], [('wicker_basket_01', 1), ('potted_plant_02', 1), 
                      ('brass_vase_01', 1), ('antique_ceramic_vase_01', 1), ('wooden_candlestick', 0.5), ('horse_statue_01', 0.5),
-                     ('Lantern_01', 0.5), ('wine_bottles_01', 0.4), ('Ukulele_01', 0.4)], 12)
+                     ('Lantern_01', 0.5), ('wine_bottles_01/*', 0.4), ('Ukulele_01', 0.4)], 12)
     C.decorate_wall(WALL_ART, W, R['x0'] + 0.3, R['x1'] - 0.3, 1.3, 2.75, 7)
     L.world_hdri('comfy_cafe', strength=0.25)
     L.area_light('window', (-3.45, -0.8, 2.3), (0.5, 1.4, 0.9), size=2.0, size_y=1.5, power=750, temp=4800)

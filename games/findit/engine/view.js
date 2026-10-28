@@ -1,43 +1,13 @@
-// Canvas scene viewer: draws the painted background (with an optional
-// parallax back layer) and the emoji props, and handles pan / pinch-zoom /
-// wheel / double-tap with inertia. Renders on demand (no idle rAF loop).
-
-import { glyph } from './glyphs.js';
-
-const now = () => performance.now();
-const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-
-let haloSprite = null;
-function halo() {
-  if (haloSprite) return haloSprite;
-  const S = 160;
-  const c = document.createElement('canvas');
-  c.width = c.height = S;
-  const g = c.getContext('2d');
-  const gr = g.createRadialGradient(S / 2, S / 2, S * 0.1, S / 2, S / 2, S / 2);
-  gr.addColorStop(0, 'rgba(255,248,214,0.95)');
-  gr.addColorStop(0.45, 'rgba(255,226,140,0.7)');
-  gr.addColorStop(0.75, 'rgba(255,200,80,0.25)');
-  gr.addColorStop(1, 'rgba(255,200,80,0)');
-  g.fillStyle = gr;
-  g.fillRect(0, 0, S, S);
-  g.strokeStyle = 'rgba(201,151,28,0.95)';
-  g.lineWidth = 5;
-  g.setLineDash([10, 7]);
-  g.beginPath();
-  g.arc(S / 2, S / 2, S * 0.4, 0, Math.PI * 2);
-  g.stroke();
-  haloSprite = c;
-  return c;
-}
+// Canvas scene viewer: draws the rendered photo of the scene plus overlays
+// (found outlines, effects) and handles pan / pinch-zoom / wheel / double-tap
+// with inertia. Renders on demand (no idle rAF loop).
 
 export class SceneView {
   constructor(host, opts = {}) {
     this.host = host;
     this.opts = opts;
     this.canvas = document.createElement('canvas');
-    this.canvas.className = 'g-hidden-canvas';
+    this.canvas.className = 'g-findit-canvas';
     host.append(this.canvas);
     this.g = this.canvas.getContext('2d');
     this.dpr = Math.min(window.devicePixelRatio || 1, 3);
@@ -58,8 +28,6 @@ export class SceneView {
     this.pendingMiss = null;
     this.lastHit = null;
     this.locked = false;
-    this.hiQueue = new Set();
-    this.hiTimer = 0;
     this.destroyed = false;
 
     this._down = (e) => this.onDown(e);
@@ -82,7 +50,6 @@ export class SceneView {
   destroy() {
     this.destroyed = true;
     cancelAnimationFrame(this.raf);
-    clearTimeout(this.hiTimer);
     if (this.pendingMiss) clearTimeout(this.pendingMiss.timer);
     this.ro.disconnect();
     const c = this.canvas;
@@ -93,15 +60,11 @@ export class SceneView {
     c.removeEventListener('lostpointercapture', this._up);
     c.removeEventListener('wheel', this._wheel);
     c.width = c.height = 1;
-    if (this.scene) {
-      this.scene.front.width = this.scene.front.height = 0;
-      if (this.scene.back) this.scene.back.width = this.scene.back.height = 0;
-      this.scene = null;
-    }
+    this.scene = null;
     this.canvas.remove();
   }
 
-  // scene: { W, H, front, back?, backRect?, parallax?, props, variant, edge }
+  // scene: { W, H, img, edge, drawOver?(g, tnow), animating?() }
   setScene(scene) {
     this.scene = scene;
     this.computeLimits();
@@ -131,12 +94,11 @@ export class SceneView {
   }
 
   computeLimits() {
-    const { W, H, fit } = this.scene;
-    const contain = Math.min(this.w / W, this.h / H);
-    const cover = Math.max(this.w / W, this.h / H);
-    // 'cover' fills the panel (small pan on one axis); 'height' fits a panorama's height.
-    this.minZ = fit === 'height' ? cover : fit === 'cover' ? Math.min(cover, contain * 1.35) : contain;
-    this.maxZ = Math.max(this.minZ * 4, this.opts.maxZoom || 1.8);
+    const { W, H } = this.scene;
+    // fill the panel (the photo is wider than the phone: pan sideways)
+    this.minZ = Math.max(this.w / W, this.h / H);
+    // up to ~1.5 CSS px per photo pixel: still sharp on a phone
+    this.maxZ = Math.max(this.minZ * 3.2, this.opts.maxZoom || 1.5);
   }
 
   fit(animate = true) {
@@ -377,91 +339,21 @@ export class SceneView {
     }
     this.draw(t);
     if (this.effects.length) more = true;
-    if (this.scene && this.scene.props.some((p) => p.pop)) more = true;
-    if (this.scene && this.scene.animated) more = true;
+    if (this.scene && this.scene.animating && this.scene.animating(t)) more = true;
     if (more) this.request();
   }
 
   // Draws the world with a given camera (used for the main view and for the
   // magnifier lens).
-  drawWorld(g, z, tx, ty, tnow, clipW, clipH) {
+  drawWorld(g, z, tx, ty, tnow) {
     const sc = this.scene;
     const dpr = this.dpr;
-    const W = sc.W, H = sc.H;
-    if (sc.back) {
-      const f = sc.parallax || 0.82;
-      const cx = (clipW / 2 - tx) / z, cy = (clipH / 2 - ty) / z;
-      const ox = (cx - W / 2) * (1 - f);
-      const oy = (cy - H / 2) * (1 - f) * 0.5;
-      const br = sc.backRect;
-      g.save();
-      g.setTransform(1, 0, 0, 1, 0, 0);
-      g.beginPath();
-      g.rect(dpr * tx, dpr * ty, dpr * W * z, dpr * H * z);
-      g.clip();
-      g.setTransform(dpr * z, 0, 0, dpr * z, dpr * (tx + z * ox), dpr * (ty + z * oy));
-      g.drawImage(sc.back, br.x, br.y, br.w, br.h);
-      g.restore();
-    }
     g.setTransform(dpr * z, 0, 0, dpr * z, dpr * tx, dpr * ty);
-    g.drawImage(sc.front, 0, 0, W, H);
-    // props
-    const vx0 = -tx / z, vy0 = -ty / z, vx1 = (clipW - tx) / z, vy1 = (clipH - ty) / z;
-    const variant = sc.variant || 'shadow';
-    const props = sc.props;
-    const H0 = halo();
-    for (let i = 0; i < props.length; i++) {
-      const p = props[i];
-      if (!p.alive) continue;
-      const r = p.s * 0.8;
-      if (p.x + r < vx0 || p.x - r > vx1 || p.y + r < vy0 || p.y - r > vy1) continue;
-      let s = p.s;
-      if (p.pop) {
-        const k = clamp((tnow - p.pop) / 260, 0, 1);
-        s *= 1 + 0.45 * Math.sin(k * Math.PI);
-        if (k >= 1) {
-          p.pop = 0;
-          if (p.dieAfterPop) p.alive = false;
-        }
-      }
-      if (p.role === 'pair') {
-        const hs = s * 1.75;
-        g.setTransform(dpr * z, 0, 0, dpr * z, dpr * (p.x * z + tx), dpr * (p.y * z + ty));
-        g.drawImage(H0, -hs / 2, -hs / 2, hs, hs);
-      }
-      const dev = s * z * dpr;
-      const gl = glyph(p.ch);
-      let L = dev <= 72 ? 64 : dev <= 150 ? 128 : 256;
-      let sp;
-      if (L === 256 && !gl.sprites.has(variant + 256)) {
-        this.queueHi(p.ch, variant);
-        L = 128;
-      }
-      sp = gl.sprite(L, variant);
-      const k = (s / L) * z * dpr;
-      const cos = Math.cos(p.rot), sin = Math.sin(p.rot);
-      const fx = p.flip ? -1 : 1;
-      g.setTransform(cos * k * fx, sin * k * fx, -sin * k, cos * k, dpr * (p.x * z + tx), dpr * (p.y * z + ty));
-      g.drawImage(sp.c, -sp.ox, -sp.oy);
-    }
+    g.imageSmoothingEnabled = true;
+    g.imageSmoothingQuality = 'high';
+    g.drawImage(sc.img, 0, 0, sc.W, sc.H);
+    if (sc.drawOver) sc.drawOver(g, z, tx, ty, tnow);
     g.setTransform(1, 0, 0, 1, 0, 0);
-  }
-
-  queueHi(ch, variant) {
-    this.hiQueue.add(ch + '|' + variant);
-    if (this.hiTimer) return;
-    this.hiTimer = setTimeout(() => {
-      this.hiTimer = 0;
-      let n = 0;
-      for (const key of this.hiQueue) {
-        const [ch2, v] = key.split('|');
-        glyph(ch2).sprite(256, v);
-        this.hiQueue.delete(key);
-        if (++n >= 6) break;
-      }
-      if (this.hiQueue.size) this.queueHi([...this.hiQueue][0].split('|')[0], [...this.hiQueue][0].split('|')[1]);
-      this.request();
-    }, 30);
   }
 
   draw(t) {
@@ -471,7 +363,7 @@ export class SceneView {
     g.fillStyle = sc ? sc.edge || '#0a0a0c' : '#0a0a0c';
     g.fillRect(0, 0, this.canvas.width, this.canvas.height);
     if (!sc) return;
-    this.drawWorld(g, this.z, this.tx, this.ty, t, this.w, this.h);
+    this.drawWorld(g, this.z, this.tx, this.ty, t);
     // screen-space effects
     for (let i = this.effects.length - 1; i >= 0; i--) {
       const fx = this.effects[i];

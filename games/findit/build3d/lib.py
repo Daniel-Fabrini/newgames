@@ -700,7 +700,7 @@ class Composer:
                     # a short horizontal pile
                     z_off = 0.0
                     n = r.randint(2, 5)
-                    yaw = self.face_yaw(x, yf + 0.1) + r.uniform(-0.15, 0.15)
+                    yaw = r.uniform(-0.25, 0.25)
                     wmax = 0.0
                     for k in range(n):
                         spec = {'asset': a, 'parts': [r.choice(parts[a])], 'pre': 'lie_y'}
@@ -726,7 +726,7 @@ class Composer:
                     spec = a + '/' + name
                     p = proto(spec)
                     sc = r.uniform(0.86, 1.04)
-                    yaw = self.face_yaw(x, yf + 0.1) + r.uniform(-0.03, 0.03)
+                    yaw = r.uniform(-0.02, 0.02)
                     hx, hy = p.footprint(yaw, sc)
                     xc, yc = x + hx + 0.0005, yf + hy + r.uniform(0.008, 0.03)
                     if xc + hx > x1:

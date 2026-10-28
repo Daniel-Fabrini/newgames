@@ -48,22 +48,22 @@ export function showMap(app, modeId) {
   const totalStars = Object.values(tr.stars).reduce((a, b) => a + b, 0);
   const head = h(
     'div',
-    { class: 'g-hidden-map-head' },
-    h('div', { class: 'g-hidden-mode-chip' }, h('span', { html: ICON[mode.icon] || ICON.lens }), t(mode.label)),
-    h('div', { class: 'g-hidden-spacer' }),
-    h('div', { class: 'g-hidden-pill' }, h('span', { class: 'g-hidden-pill-star', html: ICON.star }), String(totalStars)),
-    h('div', { class: 'g-hidden-pill' }, h('span', { class: 'g-hidden-pill-ico', html: ICON.lens }), String(app.state.hints)),
-    h('div', { class: 'g-hidden-pill' }, coinIcon(), String(app.state.coins)),
+    { class: 'g-findit-map-head' },
+    h('div', { class: 'g-findit-mode-chip' }, h('span', { html: ICON[mode.icon] || ICON.lens }), t(mode.label)),
+    h('div', { class: 'g-findit-spacer' }),
+    h('div', { class: 'g-findit-pill' }, h('span', { class: 'g-findit-pill-star', html: ICON.star }), String(totalStars)),
+    h('div', { class: 'g-findit-pill' }, h('span', { class: 'g-findit-pill-ico', html: ICON.lens }), String(app.state.hints)),
+    h('div', { class: 'g-findit-pill' }, coinIcon(), String(app.state.coins)),
   );
   const curTheme = themeOf(curCh);
   const cont = h(
     'button',
-    { class: 'g-hidden-btn gold big g-hidden-continue', onclick: () => app.startLevel(modeId, cur) },
-    h('span', { class: 'g-hidden-btn-ico', html: ICON.play }),
-    h('span', { class: 'g-hidden-continue-txt' }, h('b', null, t('continueAt', { n: cur + 1 })), h('small', null, ctx.pick(curTheme.name))),
+    { class: 'g-findit-btn gold big g-findit-continue', onclick: () => app.startLevel(modeId, cur) },
+    h('span', { class: 'g-findit-btn-ico', html: ICON.play }),
+    h('span', { class: 'g-findit-continue-txt' }, h('b', null, t('continueAt', { n: cur + 1 })), h('small', null, ctx.pick(curTheme.name))),
   );
-  const list = h('div', { class: 'g-hidden-chapters' });
-  const scroller = h('div', { class: 'g-hidden-map screen g-hidden-enter' }, head, cont, h('div', { class: 'g-hidden-section' }, t('chapters')), list, h('p', { class: 'g-hidden-endless' }, t('endless')));
+  const list = h('div', { class: 'g-findit-chapters' });
+  const scroller = h('div', { class: 'g-findit-map screen g-findit-enter' }, head, cont, h('div', { class: 'g-findit-section' }, t('chapters')), list, h('p', { class: 'g-findit-endless' }, t('endless')));
   app.mount(scroller);
 
   const pending = [];
@@ -83,7 +83,7 @@ export function showMap(app, modeId) {
         c.width = src.width;
         c.height = src.height;
         c.getContext('2d').drawImage(src, 0, 0);
-        c.className = 'g-hidden-ch-canvas';
+        c.className = 'g-findit-ch-canvas';
         holder.prepend(c);
         holder.classList.add('ready');
       } catch (e) {
@@ -114,18 +114,18 @@ export function showMap(app, modeId) {
     const deco = emojiList(theme.items).slice(0, 3);
     const art = h(
       'div',
-      { class: 'g-hidden-ch-art', style: { background: `linear-gradient(135deg, ${theme.card[0]}, ${theme.card[1]})` } },
-      h('div', { class: 'g-hidden-ch-deco' }, deco.map((e, i) => h('span', { style: { '--i': i } }, e))),
+      { class: 'g-findit-ch-art', style: { background: `linear-gradient(135deg, ${theme.card[0]}, ${theme.card[1]})` } },
+      h('div', { class: 'g-findit-ch-deco' }, deco.map((e, i) => h('span', { style: { '--i': i } }, e))),
       h(
         'div',
-        { class: 'g-hidden-ch-label' },
+        { class: 'g-findit-ch-label' },
         h('small', null, t('chapter', { n: c + 1 })),
         h('b', null, ctx.pick(theme.name)),
       ),
-      h('div', { class: 'g-hidden-ch-stars' }, h('span', { html: ICON.star }), `${chStars}/${PER_CHAPTER * 3}`),
+      h('div', { class: 'g-findit-ch-stars' }, h('span', { html: ICON.star }), `${chStars}/${PER_CHAPTER * 3}`),
     );
     art.__theme = theme;
-    const levels = h('div', { class: 'g-hidden-ch-levels' });
+    const levels = h('div', { class: 'g-findit-ch-levels' });
     for (let i = 0; i < PER_CHAPTER; i++) {
       const n = c * PER_CHAPTER + i;
       const st = tr.stars[n] || 0;
@@ -134,7 +134,7 @@ export function showMap(app, modeId) {
         h(
           'button',
           {
-            class: `g-hidden-lv ${state}`,
+            class: `g-findit-lv ${state}`,
             disabled: state === 'locked',
             'aria-label': t('level', { n: n + 1 }),
             onclick: () => {
@@ -142,16 +142,16 @@ export function showMap(app, modeId) {
               app.startLevel(modeId, n);
             },
           },
-          state === 'locked' ? h('span', { class: 'g-hidden-lv-lock', html: ICON.lock }) : h('b', null, String(n + 1)),
-          state === 'done' ? h('span', { class: 'g-hidden-lv-stars' }, '★'.repeat(st) + '☆'.repeat(3 - st)) : null,
+          state === 'locked' ? h('span', { class: 'g-findit-lv-lock', html: ICON.lock }) : h('b', null, String(n + 1)),
+          state === 'done' ? h('span', { class: 'g-findit-lv-stars' }, '★'.repeat(st) + '☆'.repeat(3 - st)) : null,
         ),
       );
     }
     const card = h(
       'div',
-      { class: `g-hidden-ch ${c === curCh ? 'current' : ''} ${locked ? 'locked' : ''}` },
+      { class: `g-findit-ch ${c === curCh ? 'current' : ''} ${locked ? 'locked' : ''}` },
       art,
-      locked ? h('div', { class: 'g-hidden-ch-locked' }, h('span', { html: ICON.lock }), t('locked')) : levels,
+      locked ? h('div', { class: 'g-findit-ch-locked' }, h('span', { html: ICON.lock }), t('locked')) : levels,
     );
     list.append(card);
     io.observe(art);
