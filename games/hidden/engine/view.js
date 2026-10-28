@@ -286,7 +286,7 @@ export class SceneView {
     dy = clamp(dy, -120, 120);
     this.anim = null;
     this.inertia = null;
-    this.zoomAt(e.clientX - r.left, e.clientY - r.top, this.z * Math.exp(-dy * (e.ctrlKey ? 0.01 : 0.0022)));
+    this.zoomAt(e.clientX - r.left, e.clientY - r.top, this.z * Math.exp(-dy * (e.ctrlKey ? 0.01 : 0.0016)));
   }
 
   tap(sx, sy) {

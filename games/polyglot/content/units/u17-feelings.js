@@ -157,7 +157,7 @@ export default {
       pt: 'Que notícia boa! Estou muito feliz por você.|Que boa notícia! Estou muito feliz por você.|Que notícia boa! Fico muito feliz por você.|Que boa notícia! Fico muito feliz por você.',
       fr: 'Quelle bonne nouvelle ! Je suis très content pour toi.|Quelle bonne nouvelle ! Je suis très contente pour toi.|Quelle bonne nouvelle ! Je suis très heureux pour toi.|Quelle bonne nouvelle ! Je suis très heureuse pour toi.',
       it: 'Che bella notizia! Sono molto felice per te.|Che bella notizia! Sono molto contento per te.|Che bella notizia! Sono molto contenta per te.|Che bella notizia! Sono felicissimo per te.|Che bella notizia! Sono felicissima per te.',
-      de: 'Was für eine gute Nachricht! Ich freue mich sehr für dich.|Was für eine tolle Nachricht! Ich freue mich sehr für dich.|Was für eine schöne Nachricht! Ich freue mich so für dich.',
+      de: 'So eine gute Nachricht! Ich freue mich sehr für dich.|Was für eine gute Nachricht! Ich freue mich sehr für dich.|Was für eine tolle Nachricht! Ich freue mich sehr für dich.|Was für eine schöne Nachricht! Ich freue mich so für dich.',
     },
     {
       en: 'Today I am relaxed because I am on vacation.|I am relaxed today because I am on vacation.|Today I am calm because I am on vacation.',

@@ -561,8 +561,8 @@ export async function mount(root, ctx) {
       const acts = h('div', { class: 'g-squad-act' });
       const card = h(
         'div',
-        { class: `g-squad-hero ${isSel ? 'sel' : ''} ${st.own ? '' : 'locked'}`, 'data-id': hd.id, style: { '--c1': hd.c1, '--c2': hd.c2 } },
-        h('div', { class: 'g-squad-hero-art' }, icon(hd.id, 'hero'), st.own ? h('span', { class: 'g-squad-lvl' }, t('lv', { n: st.lvl })) : h('span', { class: 'g-squad-lockb' }, icon('lock'))),
+        { class: `g-squad-hero ${isSel ? 'sel' : ''} ${st.own ? '' : 'locked'}`, 'data-id': hd.id },
+        h('div', { class: 'g-squad-hero-art', style: { background: `radial-gradient(circle at 40% 30%, ${hd.c1}, ${hd.c2})` } }, icon(hd.id, 'hero'), st.own ? h('span', { class: 'g-squad-lvl' }, t('lv', { n: st.lvl })) : h('span', { class: 'g-squad-lockb' }, icon('lock'))),
         h(
           'div',
           { class: 'g-squad-col' },
@@ -1080,7 +1080,7 @@ export async function mount(root, ctx) {
       startCard,
       h('div', { class: 'g-squad-hand' }, h('i'), h('span', null, t('tapToStart'))),
     );
-    const el = h('div', { class: 'g-squad-run' }, cv, top, bossBar, buffs, hint, abBtn, startOv);
+    const el = h('div', { class: 'g-squad-run' }, cv, h('div', { class: 'g-squad-vign' }), top, bossBar, buffs, hint, abBtn, startOv);
     app.append(el);
 
     run = {
@@ -1119,8 +1119,6 @@ export async function mount(root, ctx) {
     if (w.state === 'ready') {
       w.start();
       sfx.play('whoosh');
-      run.startOv.classList.add('gone');
-      later(() => run && run.startOv.remove(), 400);
     }
     run.drag = { id: e.pointerId, x0: e.clientX, tx0: w.sq.tx };
     run.el.setPointerCapture?.(e.pointerId);
@@ -1218,6 +1216,13 @@ export async function mount(root, ctx) {
     const w = run.world;
     for (const e of events) {
       switch (e.t) {
+        case 'start':
+          if (run.startOv.isConnected && !run.startOv.classList.contains('gone')) {
+            run.startOv.classList.add('gone');
+            const ov = run.startOv;
+            later(() => ov.remove(), 400);
+          }
+          break;
         case 'shoot':
           if (rl('shoot', 150)) sfx.play('shoot');
           break;
@@ -1312,6 +1317,7 @@ export async function mount(root, ctx) {
     const b = w.boss;
     const showBoss = b && b.alive && (w.state === 'boss' || b.z - w.sq.z < 1300);
     run.bossBar.classList.toggle('on', !!showBoss);
+    run.el.classList.toggle('bossing', !!showBoss);
     if (showBoss) {
       run.bossI.style.width = `${(100 * b.hp) / b.max}%`;
       const nm = b.spec.mega ? t('megaBoss') : t('boss_' + b.spec.id);
@@ -1503,6 +1509,9 @@ export async function mount(root, ctx) {
     window.__squad = {
       get world() {
         return run && run.world;
+      },
+      get renderer() {
+        return run && run.renderer;
       },
       get save() {
         return save;

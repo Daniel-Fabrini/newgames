@@ -768,7 +768,7 @@ export async function mount(root, ctx) {
         map.clearStates();
         if (q.picture === 'map') {
           map.setState(q.target.code, 'gold');
-          map.pulse(q.target.code, 'reveal');
+          map.pulse(q.target.code, 'gold', true);
           map.focus(q.target.code, { minSize: 2000, pad: 24, dur: st.i === 0 ? 1100 : undefined });
         }
       }
@@ -1070,13 +1070,13 @@ export async function mount(root, ctx) {
       st.locked = true;
       st.combo = 0;
       P.recordAnswer(kind, c.code, 'miss');
-      map.setState(c.code, 'miss');
-      map.flash(c.code, 'reveal');
+      map.setState(c.code, 'gold');
+      map.pulse(c.code, 'gold', true);
       map.pin(c.code, nameOf(c), 'reveal', 0);
       if (!st.savedCam) st.savedCam = { ...map.cam };
       const g = geometry().shapes[c.code];
       const tooSmall = g.size * map.cam.s < 18;
-      if (!map.isInView(c.code, 40) || tooSmall) {
+      if (!map.isInView(c.code, 70) || tooSmall) {
         sfx.play('whoosh');
         map.focus(c.code, { minSize: 1800 });
       }
@@ -1094,6 +1094,7 @@ export async function mount(root, ctx) {
       sfx.play('tap');
       const c = qs[st.i];
       map.stopFlash(c.code);
+      map.setState(c.code, 'miss');
       map.clearPins();
       advance();
     }

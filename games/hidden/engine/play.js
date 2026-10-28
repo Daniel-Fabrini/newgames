@@ -38,7 +38,7 @@ function buildCanvases(spec) {
     return { front, zones: res.zones, horizon: res.horizon };
   }
   const margin = { x: Math.round(W * 0.12), y: 140 };
-  const horizon = Math.round(H * (theme.paint.horizon || 0.36));
+  const horizon = Math.round(H * (theme.paint.horizon || 0.28));
   const bh = horizon + 220 + margin.y;
   const bw = W + margin.x * 2;
   const bsb = bs * 0.62;
@@ -703,6 +703,7 @@ export function playLevel(app, spec) {
       spec.map ? { label: t('toMap'), onclick: () => app.showMap(spec.modeId) } : { label: t('quit'), onclick: () => ctx.exit() },
     ];
     openSheet = sheet(app, {
+      kind: 'pause',
       icon: ICON.pause,
       title: t('paused'),
       subtitle: spec.title,
@@ -803,10 +804,24 @@ export function playLevel(app, spec) {
         return true;
       }
       if (openSheet) {
-        openSheet.close();
-        return true;
+        if (openSheet.kind !== 'pause') {
+          openSheet.close();
+          return true;
+        }
+        // Back while paused leaves the level.
+        if (spec.map) {
+          app.showMap(spec.modeId);
+          return true;
+        }
+        return false;
       }
-      if (finished) return false;
+      if (finished) {
+        if (spec.map) {
+          app.showMap(spec.modeId);
+          return true;
+        }
+        return false;
+      }
       openPause();
       return true;
     },

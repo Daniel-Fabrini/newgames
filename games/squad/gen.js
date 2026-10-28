@@ -345,7 +345,7 @@ export class Gen {
       hp: E * this.pNom * Tb,
       power: Math.max(1, E * 0.11 * spec.stomp),
       spd: spec.spd,
-      r: spec.r * (mega ? 1.2 : 1),
+      r: spec.r * (mega ? 1.2 : 1) * 1.3,
       scale: mega ? 1.2 : 1,
       coin: Math.round((15 + 2 * vL) * (mega ? 2 : 1)),
       minion: spec.minion && {

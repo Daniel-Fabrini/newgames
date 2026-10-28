@@ -202,6 +202,8 @@ export class MapView {
     this.destroyed = true;
     cancelAnimationFrame(this.raf);
     clearTimeout(this.tapTimer);
+    this.clearPins();
+    this.clearPulses();
     this.ro.disconnect();
     this.el.remove();
   }
@@ -272,7 +274,7 @@ export class MapView {
   clearStates() {
     this.states.clear();
     this.flashes = [];
-    this.pulses = [];
+    this.clearPulses();
     this.clearPins();
     this.requestRender();
   }
@@ -282,23 +284,51 @@ export class MapView {
     this.requestRender();
   }
 
-  // kind: good | bad | sel | reveal. reveal loops until stopFlash(code).
+  // one-shot glow; kind: good | bad | sel
   flash(code, kind, dur = kind === 'bad' ? 900 : 1100) {
     this.flashes = this.flashes.filter((f) => f.code !== code);
-    this.flashes.push({ code, kind, t0: performance.now(), dur, loop: kind === 'reveal' });
-    if (kind === 'reveal' || kind === 'good' || kind === 'sel') this.pulse(code, kind);
+    this.flashes.push({ code, kind, t0: performance.now(), dur });
+    if (kind !== 'bad') this.pulse(code, kind);
     this.requestRender();
   }
 
   stopFlash(code) {
     this.flashes = this.flashes.filter((f) => f.code !== code);
-    this.pulses = this.pulses.filter((p) => p.code !== code);
+    this.pulses = this.pulses.filter((p) => {
+      if (p.code !== code) return true;
+      p.el.remove();
+      return false;
+    });
     this.requestRender();
   }
 
-  pulse(code, kind) {
-    this.pulses = this.pulses.filter((p) => p.code !== code);
-    this.pulses.push({ code, kind, t0: performance.now(), loop: kind === 'reveal' });
+  // expanding rings at a country (CSS animation, so the canvas can stay idle)
+  pulse(code, kind = 'gold', loop = false) {
+    if (!this.geo.shapes[code]) return;
+    this.pulses = this.pulses.filter((p) => {
+      if (p.code !== code) return true;
+      p.el.remove();
+      return false;
+    });
+    const el = document.createElement('div');
+    el.className = `g-mapquiz-pulse ${kind} ${loop ? 'loop' : ''}`;
+    this.pinsEl.prepend(el);
+    const p = { code, el };
+    this.pulses.push(p);
+    this.placeAt(el, code, 0);
+    if (!loop)
+      p.timer = setTimeout(() => {
+        el.remove();
+        this.pulses = this.pulses.filter((q) => q !== p);
+      }, 1400);
+  }
+
+  clearPulses() {
+    for (const p of this.pulses) {
+      clearTimeout(p.timer);
+      p.el.remove();
+    }
+    this.pulses = [];
   }
 
   // dashed circle around an area (hints); x, y, r in stored map units
@@ -323,23 +353,34 @@ export class MapView {
     el.className = `g-mapquiz-pin ${kind}`;
     el.textContent = text;
     this.pinsEl.append(el);
-    const p = { code, el, until: ms ? performance.now() + ms : Infinity };
+    const p = { code, el };
     this.pins.push(p);
     this.placePin(p);
-    this.requestRender();
+    if (ms)
+      p.timer = setTimeout(() => {
+        el.classList.add('out');
+        this.pins = this.pins.filter((q) => q !== p);
+        p.timer = setTimeout(() => el.remove(), 260);
+      }, ms);
     return p;
   }
 
   clearPins() {
-    for (const p of this.pins) p.el.remove();
+    for (const p of this.pins) {
+      clearTimeout(p.timer);
+      p.el.remove();
+    }
     this.pins = [];
   }
 
-  placePin(p) {
-    const g = this.geo.shapes[p.code];
+  placeAt(el, code, lift) {
+    const g = this.geo.shapes[code];
     const [x, y] = this.toScreen(g.p[0], g.p[1]);
-    const marker = this.markerVisible(g);
-    p.el.style.transform = `translate(${x.toFixed(1)}px, ${(y - (marker ? 12 : 4)).toFixed(1)}px) translate(-50%, -100%)`;
+    el.style.transform = `translate(${x.toFixed(1)}px, ${(y - lift).toFixed(1)}px)` + (lift ? ' translate(-50%, -100%)' : '');
+  }
+
+  placePin(p) {
+    this.placeAt(p.el, p.code, this.markerVisible(this.geo.shapes[p.code]) ? 12 : 4);
   }
 
   // ------------------------------------------------------------ camera
@@ -930,9 +971,9 @@ export class MapView {
         const g = shapes[f.code];
         if (!g || !g.hasGeo) continue;
         const t = (now - f.t0) / f.dur;
-        if (!f.loop && t >= 1) continue;
+        if (t >= 1) continue;
         animating = true;
-        const a = f.loop ? 0.55 + 0.45 * Math.sin((now - f.t0) / 180) : Math.sin(Math.min(1, t) * Math.PI) * (t < 0.5 ? 1 : 1 - (t - 0.5) * 0.4);
+        const a = Math.sin(Math.min(1, t) * Math.PI) * (t < 0.5 ? 1 : 1 - (t - 0.5) * 0.4);
         const color = COLORS[f.kind] || COLORS.sel;
         ctx.save();
         ctx.shadowColor = color;
@@ -948,9 +989,11 @@ export class MapView {
         ctx.restore();
       }
     }
-    this.flashes = this.flashes.filter((f) => f.loop || now - f.t0 < f.dur);
+    const flashEnded = this.flashes.length;
+    this.flashes = this.flashes.filter((f) => now - f.t0 < f.dur);
+    if (flashEnded !== this.flashes.length) animating = true; // one more frame to clear the glow
 
-    // markers for tiny countries + pulses (screen space)
+    // markers for tiny countries (screen space)
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     const rM = this.markerRadius();
     const flashing = new Map(this.flashes.map((f) => [f.code, f]));
@@ -963,7 +1006,7 @@ export class MapView {
       let r = rM;
       ctx.beginPath();
       if (f) {
-        const a = f.loop ? 0.5 + 0.5 * Math.sin((now - f.t0) / 180) : 1 - (now - f.t0) / f.dur;
+        const a = 1 - (now - f.t0) / f.dur;
         r = rM * (1.2 + 0.35 * a);
         ctx.save();
         ctx.shadowColor = COLORS[f.kind];
@@ -998,27 +1041,6 @@ export class MapView {
       ctx.strokeStyle = st && st !== 'seen' ? '#fff6d6' : '#e3b84a';
       ctx.stroke();
     }
-    for (const p of this.pulses) {
-      const g = shapes[p.code];
-      if (!g) continue;
-      const period = 1300;
-      const el = now - p.t0;
-      if (!p.loop && el > period) continue;
-      animating = true;
-      const [x, y] = this.toScreen(g.p[0], g.p[1]);
-      for (let i = 0; i < (p.loop ? 2 : 1); i++) {
-        const ph = ((el + i * period * 0.5) % period) / period;
-        if (!p.loop && el > period) continue;
-        ctx.beginPath();
-        ctx.arc(x, y, 8 + ph * 46, 0, Math.PI * 2);
-        ctx.strokeStyle = COLORS[p.kind] || COLORS.sel;
-        ctx.globalAlpha = (1 - ph) * 0.9;
-        ctx.lineWidth = 3 * (1 - ph) + 1;
-        ctx.stroke();
-        ctx.globalAlpha = 1;
-      }
-    }
-    this.pulses = this.pulses.filter((p) => p.loop || now - p.t0 < 1300);
 
     if (this.area) {
       const a = this.area;
@@ -1049,19 +1071,9 @@ export class MapView {
 
     if (this.labels && this.opts.labelFor) this.drawLabels();
 
-    // pins
-    if (this.pins.length) {
-      this.pins = this.pins.filter((p) => {
-        if (now > p.until) {
-          p.el.classList.add('out');
-          setTimeout(() => p.el.remove(), 250);
-          return false;
-        }
-        this.placePin(p);
-        return true;
-      });
-      if (this.pins.some((p) => p.until !== Infinity)) animating = true;
-    }
+    // HTML overlays follow the camera
+    for (const p of this.pins) this.placePin(p);
+    for (const p of this.pulses) this.placeAt(p.el, p.code, 0);
     return animating;
   }
 

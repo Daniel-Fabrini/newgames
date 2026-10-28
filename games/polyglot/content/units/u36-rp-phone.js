@@ -287,7 +287,7 @@ export default {
       },
       examples: [
         { en: "Could you repeat that more slowly, please?", es: "¿Podría repetirlo más despacio, por favor?", pt: "Poderia repetir mais devagar, por favor?", fr: "Pourriez-vous répéter plus lentement, s'il vous plaît ?", it: "Può ripetere più lentamente, per favore?", de: "Können Sie das bitte langsamer wiederholen?" },
-        { en: "I will call you back in five minutes.", es: "Le devuelvo la llamada en cinco minutos.", pt: "Eu retorno em cinco minutos.", fr: "Je vous rappelle dans cinq minutes.", it: "La richiamo tra cinque minuti.", de: "Ich rufe Sie in fünf Minuten zurück." },
+        { en: "I will call you back in five minutes.", es: "Le devuelvo la llamada en cinco minutos.", pt: "Eu retorno a ligação em cinco minutos.", fr: "Je vous rappelle dans cinq minutes.", it: "La richiamo tra cinque minuti.", de: "Ich rufe Sie in fünf Minuten zurück." },
       ],
     },
     {

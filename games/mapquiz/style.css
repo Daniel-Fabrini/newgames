@@ -862,6 +862,52 @@
 .g-mapquiz .g-mapquiz-pin.out {
   opacity: 0;
 }
+.g-mapquiz .g-mapquiz-pulse {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  color: #f5c542;
+}
+.g-mapquiz .g-mapquiz-pulse.good {
+  color: #34d17f;
+}
+.g-mapquiz .g-mapquiz-pulse::before,
+.g-mapquiz .g-mapquiz-pulse::after {
+  content: '';
+  position: absolute;
+  left: -32px;
+  top: -32px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid currentColor;
+  box-shadow: 0 0 12px currentColor;
+  opacity: 0;
+  animation: mq-ring 1.3s ease-out 1 both;
+}
+.g-mapquiz .g-mapquiz-pulse::after {
+  display: none;
+}
+.g-mapquiz .g-mapquiz-pulse.loop::before,
+.g-mapquiz .g-mapquiz-pulse.loop::after {
+  display: block;
+  animation-iteration-count: infinite;
+}
+.g-mapquiz .g-mapquiz-pulse.loop::after {
+  animation-delay: 0.65s;
+}
+@keyframes mq-ring {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
 @keyframes mq-pin-in {
   from {
     opacity: 0;
@@ -969,10 +1015,10 @@
 .g-mapquiz .mq-zoom {
   position: absolute;
   right: 12px;
-  bottom: calc(18px + var(--safe-bottom));
+  bottom: calc(14px + var(--safe-bottom));
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-direction: row;
+  gap: 8px;
   z-index: 2;
   transition: opacity 0.25s;
 }
@@ -1008,7 +1054,7 @@
 .g-mapquiz .mq-skip {
   position: absolute;
   left: 12px;
-  bottom: calc(18px + var(--safe-bottom));
+  bottom: calc(14px + var(--safe-bottom));
   z-index: 2;
   display: inline-flex;
   align-items: center;
@@ -1080,7 +1126,7 @@
 .g-mapquiz .mq-tip {
   position: absolute;
   left: 50%;
-  bottom: calc(84px + var(--safe-bottom));
+  bottom: calc(76px + var(--safe-bottom));
   transform: translateX(-50%);
   z-index: 2;
   padding: 8px 16px;

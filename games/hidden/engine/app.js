@@ -79,6 +79,7 @@ export async function createGame(root, ctx, cfg) {
         goals: () => goals.map((g) => ({ ...g })),
         targets: () => level.props.filter((p) => p.alive && (p.role === 'target' || p.role === 'pair')).map((p) => ({ ch: p.ch, key: p.key, x: p.x, y: p.y, s: p.s, role: p.role, client: toClient(p.x, p.y) })),
         props: () => level.props.length,
+        minVis: () => level.minVis,
         view: () => ({ z: view.z, minZ: view.minZ, maxZ: view.maxZ, w: view.w, h: view.h }),
         toClient,
         centerOn: (x, y, z) => {
@@ -101,15 +102,15 @@ export async function createGame(root, ctx, cfg) {
   }
 
   // ---------------------------------------------------------------- levels
-  function params(kind, d, n, m, daily) {
+  function params(kind, d, n, m, daily, theme) {
     const indoor = cfg.look === 'indoor';
     const p = {
       count: Math.round((indoor ? 175 : 235) + (indoor ? 150 : 170) * d),
-      sMin: indoor ? 36 : 34,
-      sMax: (indoor ? 74 : 70) - 8 * d,
-      tSize: [(indoor ? 46 : 42) - 10 * d, (indoor ? 56 : 52) - 12 * d],
+      sMin: indoor ? 36 : 44,
+      sMax: (indoor ? 74 : 88) - 8 * d,
+      tSize: [(indoor ? 46 : 52) - 10 * d, (indoor ? 56 : 62) - 12 * d],
       visible: 0.66,
-      skyDensity: indoor ? 0.05 : 0.07,
+      skyDensity: theme.paint.skyDensity || (indoor ? 0.05 : 0.07),
     };
     if (kind === 'match') p.pairs = 5 + Math.round(5 * d);
     else if (kind === 'findall') {
@@ -145,7 +146,7 @@ export async function createGame(root, ctx, cfg) {
       d,
       W,
       H,
-      p: params(m.kind, d, n, m, opts.daily),
+      p: params(m.kind, d, n, m, opts.daily, theme),
       look: cfg.look,
       zen: !!m.zen,
       daily: opts.daily || null,

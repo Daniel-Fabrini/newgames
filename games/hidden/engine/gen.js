@@ -118,7 +118,6 @@ export function generateLevel({ seed, theme, kind, zones, W, H, p }) {
 
   const props = [];
   const mk = (ch, pos, extra = {}) => {
-    const big = Math.abs(rnd()) < 0.1;
     let rot = (rnd() - 0.5) * 0.2;
     if (extra.z === 'sky') rot = (rnd() - 0.5) * 0.5;
     else if (!extra.special) {
@@ -132,7 +131,7 @@ export function generateLevel({ seed, theme, kind, zones, W, H, p }) {
       y: pos.y,
       s: pos.s,
       base: pos.base,
-      rot: extra.special ? (rnd() - 0.5) * 0.24 : rot + (big ? 0 : 0),
+      rot: extra.special ? (rnd() - 0.5) * 0.24 : rot,
       flip: rnd() < 0.4,
       role: extra.role || 'clutter',
       key: extra.key ?? -1,
@@ -278,5 +277,9 @@ export function generateLevel({ seed, theme, kind, zones, W, H, p }) {
   }
   for (let i = props.length - 1; i >= 0; i--) if (!props[i].alive) props.splice(i, 1);
   props.forEach((pr, i) => (pr.id = i));
-  return { props, goals, kind };
+  let minVis = 1;
+  props.forEach((pr, i) => {
+    if (pr.role !== 'clutter') minVis = Math.min(minVis, visible(pr, i));
+  });
+  return { props, goals, kind, minVis };
 }

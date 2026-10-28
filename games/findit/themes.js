@@ -170,6 +170,7 @@ export const THEMES = [
       far: 'rocks',
       mid: 'reef',
       horizon: 0.42,
+      skyDensity: 0.3,
       ground: { type: 'seabed', c1: '#d8c494', c2: '#bfa878' },
       features: ['boulder:3'],
       rock: '#6a8a9a',

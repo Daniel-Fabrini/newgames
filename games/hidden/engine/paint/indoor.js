@@ -952,7 +952,12 @@ export function paintIndoor(g, W, H, rnd, st) {
   if (furn.length) {
     const k = rnd() < 0.55 ? 2 : 1;
     const slots = k === 2 ? [W * R(rnd, 0.2, 0.3), W * R(rnd, 0.7, 0.8)] : [W * R(rnd, 0.3, 0.7)];
-    const pieces = slots.map((sx) => ({ sx, by: fy + (H - fy) * R(rnd, 0.32, 0.55), type: pickR(rnd, furn) }));
+    const pool = furn.slice();
+    const pieces = slots.map((sx) => {
+      const type = pickR(rnd, pool);
+      if (pool.length > 1) pool.splice(pool.indexOf(type), 1);
+      return { sx, by: fy + (H - fy) * R(rnd, 0.32, 0.55), type };
+    });
     pieces.sort((a, b) => a.by - b.by);
     for (const p of pieces) furniturePiece(p.type, g, p.sx, p.by, rnd, st, out);
   }

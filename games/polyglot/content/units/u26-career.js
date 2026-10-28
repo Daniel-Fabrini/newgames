@@ -98,7 +98,7 @@ export default {
       key: true,
       en: 'If I were you, I would apply for that job.|If I were you, I would apply for that position.',
       es: 'Yo en tu lugar, me postularía a ese puesto.|Yo en tu lugar, me postularía a ese trabajo.|En tu lugar, me postularía a ese puesto.|Yo que tú, me presentaría a ese puesto.|Yo en tu lugar, solicitaría ese puesto.',
-      pt: 'Se eu fosse você, me candidataria a essa vaga.|Se eu fosse você, eu me candidataria a essa vaga.|Se eu fosse você, me candidataria para essa vaga.|No seu lugar, eu me candidataria a essa vaga.',
+      pt: 'Se eu fosse você, eu me candidataria a essa vaga.|Se eu fosse você, me candidataria a essa vaga.|Se eu fosse você, me candidataria para essa vaga.|No seu lugar, eu me candidataria a essa vaga.',
       fr: "À ta place, je postulerais à ce poste.|À ta place, je postulerais pour ce poste.|Si j'étais toi, je postulerais à ce poste.|À votre place, je postulerais à ce poste.",
       it: 'Se fossi in te, mi candiderei per quel posto.|Se fossi in te, mi candiderei a quel posto.|Al posto tuo, mi candiderei per quel posto.|Se fossi in te, mi candiderei per quel lavoro.',
       de: 'An deiner Stelle würde ich mich auf diesen Job bewerben.|An deiner Stelle würde ich mich auf diese Stelle bewerben.|Wenn ich du wäre, würde ich mich auf diesen Job bewerben.|An Ihrer Stelle würde ich mich auf diesen Job bewerben.',
@@ -248,7 +248,7 @@ export default {
         es: 'En inglés, **would** + verbo forma el condicional. Para aconsejar, di **If I were you, I would…**; para preferencias, **I would rather…**.',
       },
       examples: [
-        { en: 'If I were you, I would apply for that job.', es: 'Yo en tu lugar, me postularía a ese puesto.', pt: 'Se eu fosse você, me candidataria a essa vaga.', fr: 'À ta place, je postulerais à ce poste.', it: 'Se fossi in te, mi candiderei per quel posto.', de: 'An deiner Stelle würde ich mich auf diesen Job bewerben.' },
+        { en: 'If I were you, I would apply for that job.', es: 'Yo en tu lugar, me postularía a ese puesto.', pt: 'Se eu fosse você, eu me candidataria a essa vaga.', fr: 'À ta place, je postulerais à ce poste.', it: 'Se fossi in te, mi candiderei per quel posto.', de: 'An deiner Stelle würde ich mich auf diesen Job bewerben.' },
         { en: 'Would you rather be a lawyer or a pilot?', es: '¿Preferirías ser abogado o piloto?', pt: 'Você preferiria ser advogado ou piloto?', fr: 'Tu préférerais être avocat ou pilote ?', it: "Preferiresti fare l'avvocato o il pilota?", de: 'Wärst du lieber Anwalt oder Pilot?' },
       ],
     },

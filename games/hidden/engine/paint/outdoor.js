@@ -105,19 +105,17 @@ function far(g, x0, x1, horizon, st, rnd) {
   switch (st.far) {
     case 'mountains':
     case 'snowpeaks': {
-      const base = st.far === 'snowpeaks' ? '#7a8fb8' : '#6a86a8';
+      const base = st.far === 'snowpeaks' ? '#7a8fb8' : '#5f7fa6';
       for (let layer = 0; layer < 2; layer++) {
         const pts = K.ridge(g, x0, x1, horizon - 20 + layer * 50, 260 - layer * 100, bottom, rnd, { step: 120 - layer * 30, jag: 0.15, smooth: false });
         g.fillStyle = lin(g, 0, horizon - 280, 0, bottom, [haze(shade(base, -0.1 * layer), 0.55 - layer * 0.25), haze(base, 0.7 - layer * 0.2)]);
         g.fill();
-        if (st.far === 'snowpeaks' || layer === 0) {
-          g.save();
-          K.ridge(g, x0, x1, horizon - 20 + layer * 50, 0, bottom, rnd);
-          for (const [px, py] of pts) {
-            if (py < horizon - 130 + layer * 50) poly(g, [px, py, px + 50, py + 46, px + 20, py + 38, px, py + 52, px - 22, py + 36, px - 50, py + 46], rgba('#ffffff', st.far === 'snowpeaks' ? 0.9 : 0.55));
-          }
-          g.restore();
-        }
+        g.save();
+        g.clip();
+        const snowLine = horizon - (st.far === 'snowpeaks' ? 120 : 175) + layer * 50;
+        g.fillStyle = lin(g, 0, horizon - 300, 0, snowLine, [rgba('#ffffff', st.far === 'snowpeaks' ? 0.95 : 0.8), rgba('#ffffff', 0.6), rgba('#ffffff', 0)]);
+        g.fillRect(x0, horizon - 320, x1 - x0, snowLine - horizon + 320);
+        g.restore();
       }
       break;
     }
@@ -358,16 +356,19 @@ function mid(g, W, H, horizon, st, rnd, out) {
       poly(g, [fx, fy, fx + 120, horizon + 60, fx + 100, horizon + 60], '#b8b0c8');
       circle(g, fx, fy, 16, '#ffbe0b');
       // roller coaster
-      const cx0 = W * 0.5, cx1 = W * 0.95;
-      g.strokeStyle = '#c0392b';
-      g.lineWidth = 7;
-      g.beginPath();
-      for (let x = cx0; x <= cx1; x += 10) {
-        const y = horizon - 60 - Math.abs(Math.sin((x - cx0) * 0.006)) * 220;
-        if (x === cx0) g.moveTo(x, y);
-        else g.lineTo(x, y);
-        if ((x - cx0) % 50 === 0) K.line(g, x, y, x, horizon + 60, rgba('#8a8a9a', 0.8), 3);
+      const cx0 = W * 0.52, cx1 = W * 0.97;
+      const ty = (x) => horizon - 30 - Math.abs(Math.sin((x - cx0) * 0.0055)) * 190;
+      for (let x = cx0; x <= cx1; x += 70) {
+        K.line(g, x, ty(x), x, horizon + 60, '#9a8a9a', 6);
+        if (x + 70 <= cx1) K.line(g, x, (ty(x) + horizon + 60) / 2, x + 70, (ty(x + 70) + horizon + 60) / 2, rgba('#9a8a9a', 0.7), 3);
       }
+      g.strokeStyle = '#c0392b';
+      g.lineWidth = 9;
+      g.beginPath();
+      for (let x = cx0; x <= cx1; x += 8) (x === cx0 ? g.moveTo(x, ty(x)) : g.lineTo(x, ty(x)));
+      g.stroke();
+      g.strokeStyle = '#ffd166';
+      g.lineWidth = 2;
       g.stroke();
       // tents
       for (let i = 0; i < 4; i++) {
@@ -703,17 +704,20 @@ function feature(type, g, x, by, k, rnd, st, out) {
     shadowE(r * 2);
     fillRR(g, x - r * 0.9, by - 14 * k, r * 1.8, 30 * k, 6, pickR(rnd, ['#ffd166', '#06d6a0', '#ef476f', '#118ab2']));
     K.line(g, x, by, x + 10 * k, by - h, '#f4f1e8', 7 * k);
-    const ty = by - h;
-    for (let i = 0; i < 8; i++) {
-      const a0 = Math.PI + (i / 8) * Math.PI, a1 = Math.PI + ((i + 1) / 8) * Math.PI;
-      g.beginPath();
-      g.moveTo(x + 10 * k, ty - r * 0.45);
-      g.lineTo(x + 10 * k + Math.cos(a0) * r, ty + Math.sin(a0) * r * 0.25 + r * 0.1);
-      g.lineTo(x + 10 * k + Math.cos(a1) * r, ty + Math.sin(a1) * r * 0.25 + r * 0.1);
-      g.closePath();
-      g.fillStyle = i % 2 ? '#ffffff' : c;
-      g.fill();
-    }
+    const ty = by - h, cx = x + 10 * k, ry = r * 0.42;
+    g.save();
+    g.beginPath();
+    g.ellipse(cx, ty, r, ry, 0, Math.PI, 0);
+    for (let i = 8; i > 0; i--) g.quadraticCurveTo(cx - r + (i - 0.5) * (r / 4), ty + 16 * k, cx - r + (i - 1) * (r / 4), ty);
+    g.closePath();
+    g.fillStyle = c;
+    g.fill();
+    g.clip();
+    for (let i = 1; i < 8; i += 2) poly(g, [cx, ty - ry, cx - r + i * (r / 4), ty + 20 * k, cx - r + (i + 1) * (r / 4), ty + 20 * k], '#ffffff');
+    g.fillStyle = K.rad(g, cx - r * 0.3, ty - ry, 4, r * 1.2, [rgba('#ffffff', 0.35), rgba('#000000', 0.25)]);
+    g.fillRect(cx - r, ty - ry, r * 2, ry + 20 * k);
+    g.restore();
+    circle(g, cx, ty - ry, 5 * k, '#f4f1e8');
     hole(x - r, x + r, ty, by - 20 * k);
   } else if (type === 'bench') {
     const w = 220 * k;
@@ -799,8 +803,15 @@ function feature(type, g, x, by, k, rnd, st, out) {
     const w = R(rnd, 120, 200) * k, h = w * 0.55;
     shadowE(w);
     K.blob(g, x, by - h / 2, w / 2, h / 2, rnd, 8, 0.15);
-    g.fillStyle = K.rad(g, x - w * 0.2, by - h * 0.8, 4, w * 0.7, [st.rock || '#9a9a9a', shade(st.rock || '#9a9a9a', -0.35)]);
+    g.fillStyle = K.rad(g, x - w * 0.2, by - h * 0.8, 4, w * 0.7, [shade(st.rock || '#9a9a9a', 0.25), st.rock || '#9a9a9a', shade(st.rock || '#9a9a9a', -0.4)]);
     g.fill();
+    g.strokeStyle = rgba('#000000', 0.18);
+    g.lineWidth = 3;
+    g.beginPath();
+    g.moveTo(x - w * 0.1, by - h * 0.9);
+    g.lineTo(x, by - h * 0.55);
+    g.lineTo(x + w * 0.12, by - h * 0.45);
+    g.stroke();
     out.zones.push({ t: 'shelf', x0: x - w * 0.3, x1: x + w * 0.3, y: by - h * 0.9, maxS: 56 * k, depth: 4 });
     hole(x - w / 2, x + w / 2, by - h, by);
   } else if (type === 'lamp') {
@@ -841,6 +852,7 @@ function feature(type, g, x, by, k, rnd, st, out) {
       g.stroke();
     }
     out.zones.push({ t: 'water', x0: x - w * 0.4, x1: x + w * 0.4, y0: by - 30 * k, y1: by + 30 * k, s0: k * 0.8, s1: k * 0.9 });
+    hole(x - w / 2 - 10, x + w / 2 + 10, by - 56 * k, by + 56 * k);
   } else if (type === 'carousel') {
     const w = 300 * k, h = 260 * k;
     shadowE(w);
@@ -859,7 +871,7 @@ function feature(type, g, x, by, k, rnd, st, out) {
 
 // ---------------------------------------------------------------- main
 export function paintOutdoorBack(g, W, H, rnd, st, margin) {
-  const horizon = Math.round(H * (st.horizon || 0.36));
+  const horizon = Math.round(H * (st.horizon || 0.28));
   const sun = sky(g, -margin.x, W + margin.x, -margin.y, horizon + 200, st, rnd, W, horizon);
   far(g, -margin.x, W + margin.x, horizon, st, rnd);
   return { horizon, sun };
@@ -925,7 +937,7 @@ export function paintOutdoorFront(g, W, H, rnd, st, back) {
   K.vignette(g, W, H, st.vignette ?? 0.4, '#0a0604', W / 2, H * 0.4);
   g.restore();
   const z = out.zones;
-  z.push({ t: 'area', x0: 24, x1: W - 24, y0: groundTop + 16, y1: H - 14, s0: 0.66, s1: 1.22, holes: out.holes });
+  z.push({ t: 'area', x0: 24, x1: W - 24, y0: groundTop + 16, y1: H - 14, s0: 0.78, s1: 1.2, holes: out.holes });
   z.push({ t: 'sky', x0: 60, x1: W - 60, y0: H * 0.06, y1: Math.max(H * 0.12, horizon - 90) });
   return { zones: z, horizon, groundTop };
 }

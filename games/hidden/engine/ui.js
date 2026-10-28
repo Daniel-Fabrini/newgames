@@ -18,7 +18,7 @@ export const ICON = {
   pairs: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="9" height="13" rx="2.2" fill="currentColor" transform="rotate(-8 7 11.5)"/><rect x="12.5" y="5" width="9" height="13" rx="2.2" fill="currentColor" transform="rotate(8 17 11.5)"/></svg>',
   grid: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="2" fill="currentColor"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2" fill="currentColor"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2" fill="currentColor"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2" fill="currentColor"/></svg>',
   hand: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 3.5a1.5 1.5 0 0 1 3 0V11h.5V5a1.5 1.5 0 0 1 3 0v6h.5V7a1.5 1.5 0 0 1 3 0v7.5c0 4-2.7 7-6.6 7-2.7 0-4.2-1.2-5.6-3.3l-2.6-4a1.5 1.5 0 0 1 2.4-1.8L9 14V3.5z"/></svg>',
-  pinch: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="7" r="2.6" fill="currentColor"/><circle cx="17" cy="17" r="2.6" fill="currentColor"/><path d="M9.5 9.5 11 11M14.5 14.5 13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 3l2 2M21 21l-2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".6"/></svg>',
+  pinch: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14 4.5 19.5M14 10l5.5-5.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M4 14.5v5.5h5.5M20 9.5V4h-5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/></svg>',
   map: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 6.2 8.5 4l7 2.5L21 4.3v13.5L15.5 20l-7-2.5L3 19.7V6.2Zm6.5-.2v11.6l5 1.8V7.8l-5-1.8Z"/></svg>',
 };
 
@@ -34,7 +34,7 @@ export function starRow(n, max = 3, cls = '') {
 
 // Gold-framed modal panel inside the game root.
 // actions: [{ label, primary, onclick }]; returns { close(silent) }.
-export function sheet(app, { icon, title, subtitle, body, actions = [], onClose, dismissible = true, cls = '' }) {
+export function sheet(app, { kind = '', icon, title, subtitle, body, actions = [], onClose, dismissible = true, cls = '' }) {
   let closed = false;
   const close = (silent) => {
     if (closed) return;
@@ -76,5 +76,5 @@ export function sheet(app, { icon, title, subtitle, body, actions = [], onClose,
   if (dismissible) wrap.addEventListener('click', (e) => e.target === wrap && close());
   app.root.append(wrap);
   requestAnimationFrame(() => wrap.classList.add('show'));
-  return { close, el: wrap };
+  return { close, el: wrap, kind };
 }

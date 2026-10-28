@@ -164,7 +164,7 @@ export class Renderer {
     if (this.pops.length > 14) this.pops.shift();
   }
   decal(x, z, r, col, a = 0.55) {
-    this.decals.push({ x, z, r, col, a, rot: Math.random() * TAU });
+    this.decals.push({ x, z, r, col, a, rot: (Math.random() - 0.5) * 0.3 });
     if (this.decals.length > 70) this.decals.shift();
   }
   boom(x, z, r, kind) {
@@ -177,7 +177,7 @@ export class Renderer {
       this.burst(x, z, 14, big ? 22 : 14, { col: toxic ? ['#d8ff5a', '#9be03a', '#f4ffb0'] : ['#ffd36b', '#ff8a1e', '#ff5a1e', '#fff1b0'], speed: r * 2.2, up: 380, life: 0.6, size: 5, add: true, g: 300, drag: 1.5 });
       this.burst(x, z, 16, big ? 12 : 8, { col: toxic ? ['rgba(120,160,60,.4)'] : ['rgba(70,64,60,.45)', 'rgba(110,100,95,.4)'], speed: r * 0.8, up: 120, life: 1.1, size: 9, grow: 16, g: -40, drag: 2, sh: 'c' });
       this.burst(x, z, 10, big ? 16 : 10, { col: ['#2b2420', '#4a3a30', '#5a5048'], speed: r * 2.6, up: 420, life: 1, size: 3.5, sh: 'r', g: 900 });
-      this.decal(x, z, r * 0.55, toxic ? [70, 110, 20] : [20, 16, 14], 0.6);
+      this.decal(x, z, r * 0.5, toxic ? [70, 110, 20] : [20, 16, 14], 0.38);
     } else {
       this.burst(x, z, 10, 26, { col: ['#bfe4ff', '#6fb8ff', '#ffffff'], speed: r * 3, up: 160, life: 0.5, size: 3, add: true, g: 200, drag: 2 });
     }
@@ -216,7 +216,7 @@ export class Renderer {
         case 'lost':
           this.popup('−' + e.n, (Math.random() - 0.5) * 40, 0, 46, '#ff5470', 26, 0.8, true);
           this.shake = Math.min(14, this.shake + 3);
-          this.hurtFlash = 0.25;
+          this.hurtFlash = Math.max(this.hurtFlash || 0, 0.22);
           break;
         case 'gate': {
           const col = e.good ? ['#7fc0ff', '#3d8bff', '#d6ecff'] : ['#ff8a8a', '#ff3b4f', '#ffd0d0'];
@@ -355,7 +355,7 @@ export class Renderer {
     const theme = THEMES[this.themeIdx];
 
     // camera
-    const wantPull = w.state === 'boss' || (w.boss && w.boss.alive && w.boss.z - sq.z < 900) ? 280 : 0;
+    const wantPull = w.state === 'boss' || (w.boss && w.boss.alive && w.boss.z - sq.z < 900) ? 170 : 0;
     this.pull += (wantPull - this.pull) * Math.min(1, dt * 1.6);
     this.camZ = sq.z - D0 - this.pull;
     this.camX += (sq.x * 0.28 - this.camX) * Math.min(1, dt * 3);
@@ -509,7 +509,7 @@ export class Renderer {
       const P = this.proj(dc.x, dc.z);
       ctx.fillStyle = css(dc.col, dc.a);
       ctx.beginPath();
-      ctx.ellipse(P.x, P.y, dc.r * P.s, dc.r * 0.42 * P.s, dc.rot * 0.1, 0, TAU);
+      ctx.ellipse(P.x, P.y, dc.r * P.s, dc.r * 0.42 * P.s, dc.rot, 0, TAU);
       ctx.fill();
     }
 
@@ -523,7 +523,11 @@ export class Renderer {
       ctx.drawImage(this.spr.shadow, P.x - ww / 2, P.y - ww * 0.19, ww, ww * 0.38);
     };
     for (const e of w.zombies) if (e.alive && e.z < zFar && e.z > zNear) shadow(e.x, e.z, e.r);
-    for (const s of w.sol) shadow(sq.x + s.ox, sq.z + s.oz, 7);
+    if (w.sol.length) {
+      const P = this.proj(sq.x, sq.z);
+      const ww = (w.R * 2 + 26) * P.s;
+      ctx.drawImage(this.spr.shadow, P.x - ww / 2, P.y - ww * 0.2, ww, ww * 0.4);
+    }
     if (w.boss) shadow(w.boss.x, w.boss.z, w.boss.r * 1.1);
 
     // boss danger ring
@@ -647,24 +651,24 @@ export class Renderer {
 
     // jets (airstrike flyover)
     for (const j of this.jets) {
-      const u = (this.time - j.t0) / 1.4;
+      const u = (this.time - j.t0) / 1.8;
       if (u > 1) continue;
-      const z = sq.z - 250 + u * 2700;
+      const z = sq.z - 420 + u * 2900;
       const S = this.proj(j.x, z);
       const ss = S.s;
       ctx.globalAlpha = 0.35;
       ctx.drawImage(this.spr.shadow, S.x - 40 * ss, S.y - 12 * ss, 80 * ss, 24 * ss);
       ctx.globalAlpha = 1;
-      const P = this.proj(j.x, z, 230);
+      const P = this.proj(j.x, z, 150);
       const sp = this.spr.jet();
-      drawSpr(ctx, sp, P.x, P.y, P.s * 1.6);
+      drawSpr(ctx, sp, P.x, P.y, P.s * 1.7);
       ctx.save();
       ctx.globalCompositeOperation = 'lighter';
       const g = this.spr.glow.fire;
       ctx.drawImage(g, P.x - 14 * P.s, P.y - 6 * P.s, 28 * P.s, 28 * P.s);
       ctx.restore();
     }
-    this.jets = this.jets.filter((j) => this.time - j.t0 < 1.4);
+    this.jets = this.jets.filter((j) => this.time - j.t0 < 1.8);
 
     // chained boss explosions
     if (this.chain.length) {
@@ -685,20 +689,21 @@ export class Renderer {
       g.addColorStop(1, css(pal.fog, 0));
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, W, Math.max(40, yEnd));
-      ctx.save();
-      ctx.globalCompositeOperation = 'lighter';
-      const gl = ctx.createRadialGradient(W / 2, -H * 0.05, 10, W / 2, -H * 0.05, H * 0.55);
-      gl.addColorStop(0, css(pal.glow, 0.32));
+      const gl = ctx.createRadialGradient(W / 2, -H * 0.06, 10, W / 2, -H * 0.06, H * 0.42);
+      gl.addColorStop(0, css(pal.glow, 0.38));
       gl.addColorStop(1, css(pal.glow, 0));
       ctx.fillStyle = gl;
-      ctx.fillRect(0, 0, W, H * 0.6);
-      ctx.restore();
+      ctx.fillRect(0, 0, W, H * 0.4);
     }
     this.drawAmbient(ctx, dt, theme.ambient);
-    ctx.drawImage(this.vign, 0, 0, W, H);
+    if (this.opts.preview) ctx.drawImage(this.vign, 0, 0, W, H);
     if (this.hurtFlash > 0) {
       this.hurtFlash -= dt;
-      ctx.fillStyle = `rgba(255,40,60,${Math.max(0, this.hurtFlash) * 0.6})`;
+      const a = Math.min(0.45, Math.max(0, this.hurtFlash) * 1.6);
+      const g = ctx.createRadialGradient(W / 2, H * 0.55, Math.min(W, H) * 0.35, W / 2, H * 0.55, Math.max(W, H) * 0.72);
+      g.addColorStop(0, 'rgba(255,30,50,0)');
+      g.addColorStop(1, `rgba(255,30,50,${a})`);
+      ctx.fillStyle = g;
       ctx.fillRect(0, 0, W, H);
     }
 
@@ -788,15 +793,17 @@ export class Renderer {
     } else {
       bob = Math.sin(e.ph * 2) * 0.6;
     }
-    const sp = this.spr.zombie(e.type, frame, e.v, e.flash > 0);
+    const sp = this.spr.zombie(e.type, frame, e.v, false);
     drawSpr(ctx, sp, P.x, P.y - bob * P.s, P.s);
+    if (e.flash > 0) drawSpr(ctx, this.spr.zombie(e.type, frame, e.v, true), P.x, P.y - bob * P.s, P.s, 0.55);
     if (T.bar && e.hp < e.max) e._bar = true;
   }
 
   drawObj(ctx, o) {
     const P = this.proj(o.x, o.z);
-    const sp = this.spr.obj(o.kind, o.reward, o.flash > 0);
+    const sp = this.spr.obj(o.kind, o.reward, false);
     drawSpr(ctx, sp, P.x, P.y, P.s);
+    if (o.flash > 0) drawSpr(ctx, this.spr.obj(o.kind, o.reward, true), P.x, P.y, P.s, 0.5);
     if (o.kind === 'wall' && o.hp < o.max) {
       const dmg = 1 - o.hp / o.max;
       ctx.strokeStyle = 'rgba(30,30,30,.7)';
@@ -824,7 +831,7 @@ export class Renderer {
 
   drawBoss(ctx, b) {
     const P = this.proj(b.x, b.z);
-    const sc = b.spec.scale || 1;
+    const sc = (b.spec.scale || 1) * 1.35;
     let y = P.y;
     let sx = 1;
     let sy = 1;
@@ -840,8 +847,16 @@ export class Renderer {
       const u = 1 - b.atk / 0.35;
       y -= Math.sin(u * Math.PI) * 18 * P.s;
     } else y -= Math.abs(Math.sin(b.ph * 3)) * 2 * P.s;
-    const sp = this.spr.boss(b.spec.id, frame, b.flash > 0);
-    ctx.drawImage(sp.c, P.x - sp.ax * P.s * sc * sx, y - sp.ay * P.s * sc * sy, sp.w * P.s * sc * sx, sp.h * P.s * sc * sy);
+    const sp = this.spr.boss(b.spec.id, frame, false);
+    const dx = P.x - sp.ax * P.s * sc * sx;
+    const dy = y - sp.ay * P.s * sc * sy;
+    const dw = sp.w * P.s * sc * sx;
+    const dh = sp.h * P.s * sc * sy;
+    ctx.drawImage(sp.c, dx, dy, dw, dh);
+    if (b.flash > 0 && b.alive) {
+      ctx.globalAlpha = 0.35;
+      ctx.drawImage(this.spr.boss(b.spec.id, frame, true).c, dx, dy, dw, dh);
+    }
     ctx.globalAlpha = 1;
   }
 
