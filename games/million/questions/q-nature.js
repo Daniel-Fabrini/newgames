@@ -1390,7 +1390,7 @@ export default [
     d: 4,
     q: { pt: 'Qual animal tem impressões digitais tão parecidas com as humanas que podem confundir peritos?', en: 'Which animal has fingerprints so like ours that they can fool experts?', es: '¿Qué animal tiene huellas dactilares tan parecidas a las humanas que pueden confundir a los peritos?' },
     a: [
-      { pt: 'Chimpanzé', en: 'Chimpanzee', es: 'Chimpancé' },
+      { pt: 'Canguru', en: 'Kangaroo', es: 'Canguro' },
       { pt: 'Guaxinim', en: 'Raccoon', es: 'Mapache' },
       { pt: 'Lontra', en: 'Otter', es: 'Nutria' },
       { pt: 'Coala', en: 'Koala', es: 'Koala' },
