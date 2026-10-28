@@ -10,8 +10,8 @@ iron = metal('#3a3f4a', 0.3); gold = metal('#ffc933', 0.2); win = glossy('#2a355
 objs = []
 # floating island
 objs.append(cylinder(2.9, 0.5, grass, (0, 0, 0.25), bevel=0.2))
-objs.append(cone(2.9, 1.1, 1.8, dirt, (0, 0, -0.9), rot=(0, 0, 0)))
-objs.append(cone(1.1, 0.2, 1.0, dirt, (0, 0, -2.2)))
+objs.append(cone(2.9, 0.9, 1.7, dirt, (0, 0, -0.85)))
+objs.append(cone(0.9, 0.2, 0.8, dirt, (0, 0, -2.0)))
 for x, y, s in [(-2.0, -1.4, 0.35), (2.1, -1.2, 0.3), (1.6, -2.0, 0.22)]:
     objs.append(sphere(s, grass, (x, y, 0.55 + s*0.5)))
     objs.append(cylinder(0.05, 0.3, wood, (x, y, 0.55)))
@@ -33,7 +33,7 @@ objs.append(box((0.8, 0.12, 1.0), wood, (0, -0.42, 0.95), bevel=0.04))
 objs.append(cylinder(0.4, 0.12, wood, (0, -0.42, 1.45), rot=(90, 0, 0), bevel=0.02))
 # flag
 objs.append(cylinder(0.03, 0.8, iron, (0, 1.0, 0.5 + 3.3 + 0.09 + 1.4 + 0.35)))
-objs.append(box((0.6, 0.04, 0.35), glossy('#ffd23a'), (0.3, 1.0, 0.5 + 3.3 + 0.09 + 1.4 + 0.6), bevel=0.01))
+objs.append(box((0.6, 0.04, 0.35), glossy('#ff9a1f'), (0.3, 1.0, 0.5 + 3.3 + 0.09 + 1.4 + 0.6), bevel=0.01))
 # cannon
 objs.append(cylinder(0.3, 1.1, iron, (-1.9, -1.75, 0.95), rot=(0, 75, 25), bevel=0.05))
 objs.append(sphere(0.34, iron, (-2.28, -1.9, 0.78)))
@@ -41,5 +41,5 @@ for dx in (-0.1, 0.5):
     objs.append(cylinder(0.3, 0.12, wood, (-1.95 + dx*0.2, -1.5 - 0.0, 0.8), rot=(90, 0, 25), bevel=0.02))
 objs.append(sphere(0.22, iron, (-0.6, -2.4, 0.75)))
 objs.append(sphere(0.22, iron, (-0.2, -2.55, 0.75)))
-g = parent(objs, loc=(0, 0, 1.3), rot=(0, 0, -12), scale=0.9)
+g = parent(objs, loc=(0, 0, 0.1), rot=(0, 0, -12), scale=0.62)
 render('towers')

@@ -1,19 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <radialGradient id="bg" cx="50%" cy="38%" r="70%">
-      <stop offset="0" stop-color="#2a2008"/>
-      <stop offset=".55" stop-color="#0d0b06"/>
-      <stop offset="1" stop-color="#050505"/>
+    <radialGradient id="bg" cx="50%" cy="34%" r="75%">
+      <stop offset="0" stop-color="#2b210a"/>
+      <stop offset=".5" stop-color="#0e0b06"/>
+      <stop offset="1" stop-color="#030303"/>
     </radialGradient>
     <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fff2b0"/>
-      <stop offset=".45" stop-color="#f6cf55"/>
-      <stop offset="1" stop-color="#c98a10"/>
+      <stop offset="0" stop-color="#fff4b8"/>
+      <stop offset=".42" stop-color="#f7d25a"/>
+      <stop offset="1" stop-color="#b97a0c"/>
+    </linearGradient>
+    <linearGradient id="gold2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff0a8"/>
+      <stop offset="1" stop-color="#d9a21e"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
-  <rect x="14" y="14" width="484" height="484" rx="100" fill="none" stroke="url(#gold)" stroke-width="8" opacity=".85"/>
-  <path d="M150 178l52 40 54-86 54 86 52-40-22 104H172z" fill="url(#gold)"/>
-  <rect x="172" y="292" width="168" height="16" rx="6" fill="url(#gold)"/>
-  <text x="256" y="430" text-anchor="middle" font-family="Nunito, Arial Black, sans-serif" font-weight="900" font-size="150" letter-spacing="4" fill="url(#gold)" stroke="#3a2600" stroke-width="6" paint-order="stroke">DA</text>
+  <rect width="512" height="512" rx="116" fill="url(#bg)"/>
+  <!-- crown -->
+  <g transform="translate(64 -6) scale(.75)">
+    <path d="M132 214 l46 34 78-112 78 112 46-34-24 112H156z" fill="url(#gold)" stroke="#6b4505" stroke-width="5" stroke-linejoin="round"/>
+    <rect x="156" y="334" width="200" height="22" rx="9" fill="url(#gold2)" stroke="#6b4505" stroke-width="5"/>
+    <circle cx="256" cy="150" r="13" fill="#fff6c8"/><circle cx="132" cy="214" r="11" fill="#fff6c8"/><circle cx="380" cy="214" r="11" fill="#fff6c8"/>
+  </g>
+  <text x="256" y="452" text-anchor="middle" font-family="Nunito, 'Arial Black', sans-serif" font-weight="900" font-size="228" letter-spacing="4" fill="url(#gold)" stroke="#4a3000" stroke-width="7" paint-order="stroke">DA</text>
 </svg>

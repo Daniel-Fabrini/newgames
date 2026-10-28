@@ -3,9 +3,6 @@ sys.path.insert(0, os.path.dirname(__file__))
 from props import *
 
 new_scene('#ffae3a', '#a8340a', samples=int(os.environ.get('S', 96)))
-shadow_catcher(0)
-# floor glow
-ground('#c8581a', 0.35)
 
 fur = glossy('#b8743a', 0.55, 0.15, name='fur')
 fur2 = glossy('#e7b27a', 0.55, 0.15, name='fur2')
@@ -53,5 +50,5 @@ torus(0.3, 0.1, kc, loc=(1.0, -2.2, 0.15), rot=(0, 0, 0))
 box((1.3, 0.2, 0.2), kc, loc=(1.9, -2.2, 0.15), bevel=0.05)
 box((0.2, 0.2, 0.4), kc, loc=(2.35, -2.2, 0.15), bevel=0.04)
 # magnifier in front
-magnifier(1.15, loc=(-0.2, -3.2, 2.6), rot=(0, 0, 0))
+magnifier(0.95, loc=(1.5, -2.3, 2.5), ang=-45)
 render('findit')

@@ -87,8 +87,16 @@ const ART = {
     <span class="art-emoji" style="--s:46;left:18%;top:16%">🏓</span><span class="art-ball"></span></div>`,
 };
 
+// 3D covers (assets/covers/<id>.webp, rendered by tools/covers). Games without one
+// fall back to the drawn illustrations above.
+const COVERS = new Set(['soccer', 'squad', 'mapquiz', 'flags', 'polyglot', 'busjam', 'waldo', 'findit', 'wordsearch', 'hero', 'million', 'towers', 'naval', 'farm', 'pingpong']);
+export const hasCover = (id) => COVERS.has(id);
+export const coverUrl = (id) => new URL(`../../assets/covers/${id}.webp`, import.meta.url).href;
+
 export function gameArt(id) {
-  return (ART[id] || ART.soccer)();
+  const legacy = (ART[id] || ART.soccer)();
+  if (!COVERS.has(id)) return legacy;
+  return `${legacy}<img class="cover" src="${coverUrl(id)}" alt="" decoding="async" draggable="false" onerror="this.remove()">`;
 }
 
 // Wide preview for the lobby. Soccer gets a drawn table-soccer pitch.
@@ -106,6 +114,7 @@ export function gamePreview(id) {
       <g transform="translate(160 95)"><circle r="10" fill="#fff"/><path d="M0-4l4 3-1.5 5h-5L-4-1z" fill="#222"/></g>
     </svg></div>`;
   }
+  if (COVERS.has(id)) return `<div class="lobby-cover">${gameArt(id)}</div>`;
   return `<div class="art-wide">${gameArt(id)}</div>`;
 }
 

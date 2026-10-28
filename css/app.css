@@ -2034,3 +2034,307 @@ img {
   user-select: text;
   -webkit-user-select: text;
 }
+
+/* ==========================================================================
+   Redesign v2: compact header, covers, 2-column game cards, new splash
+   ========================================================================== */
+:root {
+  --header-h: 58px;
+}
+.cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* compact brand header (home tabs) */
+.tb-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.tb-brand .tb-crown {
+  width: 30px;
+  height: 22px;
+  margin: 0;
+  flex: none;
+}
+.tb-brand-text {
+  min-width: 0;
+}
+.tb-brand .tb-name {
+  font-weight: 1000;
+  font-size: 19px;
+  line-height: 1;
+  letter-spacing: 0.4px;
+  background: var(--gold-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+}
+.tb-brand .tb-name span {
+  background: linear-gradient(180deg, #fff, #e8dcc0);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.tb-brand .tb-by {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--gold);
+  opacity: 0.85;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+.topbar .icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+}
+
+/* home greeting + continue card */
+.home-hello h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 1000;
+  line-height: 1.15;
+}
+.home-hello p {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: var(--muted, #b9b2a2);
+  font-weight: 700;
+}
+.home {
+  gap: 12px;
+}
+.home-head {
+  margin-top: 2px;
+}
+.continue-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px 10px 10px;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 20px;
+  border: 1.5px solid var(--line);
+  background: linear-gradient(135deg, rgba(243, 194, 74, 0.16), rgba(20, 20, 24, 0.95) 55%);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+}
+.continue-card:active {
+  transform: scale(0.985);
+}
+.cc-art {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  overflow: hidden;
+  flex: none;
+  border: 1px solid var(--line);
+}
+.cc-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.cc-body small {
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.cc-body b {
+  font-size: 17px;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cc-body em {
+  font-style: normal;
+  font-size: 12.5px;
+  color: #cfc7b4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cc-play {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--gold-grad);
+  color: var(--primary-ink, #1b1204);
+  box-shadow: 0 4px 0 #8a5c05, 0 0 18px rgba(243, 194, 74, 0.35);
+  flex: none;
+}
+.cc-play .ico {
+  width: 20px;
+  height: 20px;
+}
+
+/* game cards: two uniform columns, cover on top, name over the calm bottom area */
+.tile-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (min-width: 560px) {
+  .tile-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 900px) {
+  .tile-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.tile {
+  aspect-ratio: 0.8;
+  border-radius: 20px;
+  border: 1.5px solid rgba(243, 194, 74, 0.28);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.55);
+  text-align: left;
+  color: inherit;
+}
+.tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 -60px 50px -30px rgba(5, 6, 14, 0.92);
+}
+.tile-text {
+  z-index: 1;
+  align-items: flex-start;
+  text-align: left;
+  padding: 24px 12px 11px;
+  background: none;
+  gap: 1px;
+}
+.tile-cat {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.tile-name {
+  font-size: 17px;
+  line-height: 1.12;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.tile-sub {
+  display: none;
+}
+.tile-fav {
+  position: absolute;
+  z-index: 3;
+  top: 8px;
+  right: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: rgba(8, 8, 12, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.tile-fav .ico {
+  width: 18px;
+  height: 18px;
+}
+.tile-fav.on {
+  color: #ff5a6e;
+  border-color: rgba(255, 90, 110, 0.6);
+}
+.tile-prog {
+  top: auto;
+  bottom: 44px;
+  left: 12px;
+  right: 12px;
+  height: 14px;
+  z-index: 2;
+}
+.tile-prog > b {
+  line-height: 14px;
+  font-size: 9.5px;
+}
+
+/* lobby preview with a 3D cover */
+.lobby-preview:has(.lobby-cover) {
+  aspect-ratio: 16 / 12;
+  border: 1.5px solid var(--line);
+  border-radius: 22px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6), 0 0 28px rgba(243, 194, 74, 0.12);
+}
+.lobby-cover {
+  position: absolute;
+  inset: 0;
+}
+.lobby-cover .cover {
+  object-position: 50% 30%;
+}
+.lobby-cover .art {
+  display: none;
+}
+
+/* splash: fan of covers instead of the loose collage */
+.splash-fan {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sf-card {
+  position: absolute;
+  width: 34%;
+  max-width: 150px;
+  aspect-ratio: 0.8;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1.5px solid rgba(243, 194, 74, 0.55);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.65), 0 0 22px rgba(243, 194, 74, 0.18);
+  transform: translateX(calc(var(--k) * 62%)) translateY(calc(var(--d) * var(--d) * 7%)) rotate(calc(var(--k) * 9deg)) scale(calc(1 - var(--d) * 0.1));
+  z-index: calc(10 - var(--d) * 3);
+  animation: sf-in 0.7s cubic-bezier(0.3, 1.3, 0.5, 1) both, float 4.4s ease-in-out infinite;
+  animation-delay: calc(0.15s + var(--i) * 0.08s), calc(var(--i) * -0.9s);
+}
+@keyframes sf-in {
+  from {
+    opacity: 0;
+    transform: translateX(0) translateY(40%) rotate(0deg) scale(0.6);
+  }
+}
+.sf-card .art {
+  position: absolute;
+  inset: 0;
+}
+.splash-art {
+  max-height: 40vh;
+  min-height: 190px;
+}
+.profile-card + .section-head {
+  margin-top: 2px;
+}

@@ -15,8 +15,8 @@ export const GAMES = [
     id: 'soccer',
     cat: 'sport',
     progress: 100,
-    name: { pt: 'Super Craques', en: 'Super Strikers', es: 'Súper Cracks' },
-    sub: { pt: 'Futebol de Mesa', en: 'Table Soccer', es: 'Fútbol de Mesa' },
+    name: { pt: 'Futebol de Mesa', en: 'Table Soccer', es: 'Fútbol de Mesa' },
+    sub: { pt: 'Super Craques', en: 'Super Strikers', es: 'Súper Cracks' },
     about: {
       pt: 'Desafie sua habilidade num emocionante jogo de futebol de mesa. Faça gols, enfrente a IA ou jogue com amigos.',
       en: 'Test your skill in a thrilling table soccer game. Score goals, take on the AI or play with friends.',
@@ -34,7 +34,7 @@ export const GAMES = [
     id: 'squad',
     cat: 'strategy',
     progress: 100,
-    name: { pt: 'Zona de Guerra', en: 'War Zone', es: 'Zona de Guerra' },
+    name: { pt: 'Comando de Guerra', en: 'War Command', es: 'Comando de Guerra' },
     sub: { pt: 'Estratégia e Batalha', en: 'Strategy & Battle', es: 'Estrategia y Batalla' },
     about: {
       pt: 'Construa sua base, recrute heróis e lidere sua tropa contra hordas de zumbis. Escolha os portões certos e multiplique o exército.',
@@ -53,7 +53,7 @@ export const GAMES = [
     id: 'mapquiz',
     cat: 'knowledge',
     progress: 100,
-    name: { pt: 'Adivinhe o País', en: 'Guess the Country', es: 'Adivina el País' },
+    name: { pt: 'GeoDesafio', en: 'GeoChallenge', es: 'GeoDesafío' },
     sub: { pt: 'Mapa-Múndi', en: 'World Map', es: 'Mapamundi' },
     about: {
       pt: 'Você sabe onde fica cada país? Adivinhe países, capitais e bandeiras no mapa-múndi e vire um mestre da geografia.',
@@ -72,7 +72,7 @@ export const GAMES = [
     id: 'flags',
     cat: 'knowledge',
     progress: 100,
-    name: { pt: 'Bandeiras', en: 'Flags', es: 'Banderas' },
+    name: { pt: 'Mundo em Bandeiras', en: 'Flag World', es: 'Mundo de Banderas' },
     sub: { pt: 'Bandeiras do Mundo', en: 'World Flags', es: 'Banderas del Mundo' },
     about: {
       pt: 'Todas as bandeiras do mundo em vários modos: múltipla escolha, contra o relógio, capitais, soletrar e muito mais.',
@@ -93,7 +93,7 @@ export const GAMES = [
     progress: 100,
     lobby: false,
     music: false, // lessons speak and listen
-    name: { pt: 'Poliglota', en: 'Polyglot', es: 'Políglota' },
+    name: { pt: 'Mestre das Línguas', en: 'Language Master', es: 'Maestro de Idiomas' },
     sub: { pt: 'Vários Idiomas', en: 'Many Languages', es: 'Varios Idiomas' },
     about: {
       pt: 'Aprenda inglês, espanhol, francês, alemão e italiano do básico à conversação.',
@@ -126,7 +126,7 @@ export const GAMES = [
     id: 'waldo',
     cat: 'puzzle',
     progress: 100,
-    name: { pt: 'Cadê o Ruivinho?', en: 'Where is Red?', es: '¿Dónde está Rojito?' },
+    name: { pt: 'Detetive dos Personagens', en: 'Character Detective', es: 'Detective de Personajes' },
     sub: { pt: 'Ache o Personagem', en: 'Find the Character', es: 'Encuentra al Personaje' },
     about: {
       pt: 'Cenas lotadas de gente, cada uma com mil detalhes. Encontre o Ruivinho escondido na multidão antes que o tempo acabe!',
@@ -145,7 +145,7 @@ export const GAMES = [
     id: 'findit',
     cat: 'puzzle',
     progress: 100,
-    name: { pt: 'Caça-Objetos', en: 'Seek & Find', es: 'Busca y Encuentra' },
+    name: { pt: 'Tesouros Escondidos', en: 'Hidden Treasures', es: 'Tesoros Escondidos' },
     sub: { pt: 'Objetos Escondidos', en: 'Hidden Objects', es: 'Objetos Ocultos' },
     about: {
       pt: 'Viaje por mapas enormes — porto, praia, cidade e muito mais — e encontre todos os itens da lista.',
@@ -183,7 +183,7 @@ export const GAMES = [
     id: 'hero',
     cat: 'sport',
     progress: 100,
-    name: { pt: 'Herói da Bola', en: 'Ball Hero', es: 'Héroe del Balón' },
+    name: { pt: 'Craque do Futebol', en: 'Soccer Star', es: 'Crack del Fútbol' },
     sub: { pt: 'Carreira no Futebol', en: 'Soccer Career', es: 'Carrera de Fútbol' },
     about: {
       pt: 'Desenhe o passe perfeito, faça a bola fazer a curva e marque o gol decisivo. Viva a carreira de um craque, lance a lance.',
@@ -202,7 +202,7 @@ export const GAMES = [
     id: 'million',
     cat: 'knowledge',
     progress: 100,
-    name: { pt: 'Rumo ao Milhão', en: 'Road to a Million', es: 'Rumbo al Millón' },
+    name: { pt: 'Desafio Milionário', en: 'Millionaire Challenge', es: 'Desafío Millonario' },
     sub: { pt: 'Quiz de Perguntas', en: 'Trivia Quiz', es: 'Quiz de Preguntas' },
     about: {
       pt: 'Responda 16 perguntas e chegue ao prêmio de 1 milhão. Use as cartas, os universitários, as placas e os pulos com sabedoria.',
@@ -221,7 +221,7 @@ export const GAMES = [
     id: 'towers',
     cat: 'strategy',
     progress: 100,
-    name: { pt: 'Batalha de Torres', en: 'Tower Battles', es: 'Batalla de Torres' },
+    name: { pt: 'Guardião do Castelo', en: 'Castle Guardian', es: 'Guardián del Castillo' },
     sub: { pt: 'Defesa de Torres', en: 'Tower Defense', es: 'Defensa de Torres' },
     about: {
       pt: 'Monte suas torres, estoure as ondas de inimigos e mande ataques para o campo do adversário. Quem resistir mais vence!',
@@ -240,7 +240,7 @@ export const GAMES = [
     id: 'naval',
     cat: 'strategy',
     progress: 100,
-    name: { pt: 'Batalha Naval', en: 'Sea Battle', es: 'Batalla Naval' },
+    name: { pt: 'Frota de Combate', en: 'Combat Fleet', es: 'Flota de Combate' },
     sub: { pt: 'Guerra no Mar', en: 'Naval Warfare', es: 'Guerra en el Mar' },
     about: {
       pt: 'Posicione sua frota, dispare contra o inimigo e afunde todos os navios dele primeiro. Suba de Marinheiro a Almirante!',
@@ -278,7 +278,7 @@ export const GAMES = [
     id: 'pingpong',
     cat: 'sport',
     progress: 100,
-    name: { pt: 'Tênis de Mesa', en: 'Table Tennis', es: 'Tenis de Mesa' },
+    name: { pt: 'Ping-Pong Pro', en: 'Ping-Pong Pro', es: 'Ping-Pong Pro' },
     sub: { pt: 'Ping-Pong 3D', en: '3D Ping Pong', es: 'Ping-Pong 3D' },
     about: {
       pt: 'Deslize o dedo para rebater, dê efeito e solte a cortada. Vença rivais cada vez mais fortes numa volta ao mundo por arenas incríveis.',

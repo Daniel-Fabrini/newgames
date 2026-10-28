@@ -15,10 +15,10 @@ import { sfx } from './core/sfx.js';
 import { music } from './core/music.js';
 import { h, clear, toast, modal, confetti, loadCSS, norm } from './core/ui.js';
 import { icon } from './core/icons.js';
-import { gameArt, gamePreview, splashCollage } from './core/art.js';
+import { gameArt, gamePreview, coverUrl, hasCover } from './core/art.js';
 import { audioDiagnostics } from './core/diag.js';
 import STRINGS from './core/strings.js';
-import { addXP, levelInfo, totalXP, gameXP, streak, touchStreak, rankFor, setLastPlayed } from './core/progress.js';
+import { addXP, levelInfo, totalXP, gameXP, streak, touchStreak, rankFor, setLastPlayed, lastPlayed } from './core/progress.js';
 
 const t = makeT(STRINGS);
 const app = document.getElementById('app');
@@ -62,7 +62,7 @@ function setBottomNav(active) {
     { id: 'home', hash: '#', icon: 'home', label: t('navHome') },
     { id: 'favs', hash: '#favs', icon: 'heart', label: t('navFavs') },
     { id: 'trophies', hash: '#trophies', icon: 'trophy', label: t('navTrophies') },
-    { id: 'prefs', hash: '#prefs', icon: 'gear', label: t('navSettings') },
+    { id: 'prefs', hash: '#prefs', icon: 'user', label: t('navSettings') },
   ];
   for (const tab of tabs) {
     bottomNav.append(
@@ -211,41 +211,90 @@ function showSplash() {
         h('h1', { class: 'sl-title' }, h('span', { class: 'sl-1' }, first), rest.length ? h('span', { class: 'sl-2' }, rest.join(' ')) : null),
         h('div', { class: 'sl-ribbon' }, APP_BY),
       ),
-      h('div', { class: 'splash-art', html: splashCollage() }),
+      h('div', { class: 'splash-art', html: splashFan() }),
       h('button', { class: 'btn primary big splash-play', onclick: enter }, t('play'), h('span', { class: 'btn-ico', html: icon('play') })),
     ),
   );
 }
 
+function splashFan() {
+  const ids = ['pingpong', 'flags', 'soccer', 'polyglot', 'towers'].filter((id) => hasCover(id));
+  const pickIds = ids.length >= 3 ? ids : ['soccer', 'flags', 'polyglot'];
+  const n = pickIds.length;
+  return `<div class="splash-fan">${pickIds
+    .map((id, i) => {
+      const k = i - (n - 1) / 2;
+      return `<span class="sf-card" style="--k:${k};--d:${Math.abs(k)};--i:${i}">${gameArt(id)}</span>`;
+    })
+    .join('')}</div>`;
+}
+
 // ---------- home tabs ----------
 function homeHeader() {
+  const [first, ...rest] = APP_NAME.split(' ');
   setTopbar({
-    left: iconBtn('user', t('profile'), () => navigate('#trophies'), 'gold round'),
-    center: h(
+    left: h(
       'div',
-      { class: 'tb-center tb-logo' },
-      h('span', { class: 'tb-crown big', html: icon('crown') }),
-      h('div', { class: 'tb-name' }, APP_NAME),
-      h('div', { class: 'tb-by' }, APP_BY),
+      { class: 'tb-brand' },
+      h('span', { class: 'tb-crown', html: icon('crown') }),
+      h('div', { class: 'tb-brand-text' }, h('div', { class: 'tb-name' }, first, rest.length ? h('span', null, ` ${rest.join(' ')}`) : null), h('div', { class: 'tb-by' }, APP_BY)),
     ),
-    right: iconBtn('gear', t('settings'), () => navigate('#prefs'), 'gold'),
+    right: [iconBtn('user', t('profile'), () => navigate('#trophies'), 'gold round'), iconBtn('gear', t('settings'), () => navigate('#prefs'), 'gold')],
   });
 }
 
+const catLabel = (id) => {
+  const c = CATEGORIES.find((x) => x.id === id);
+  return c ? pick(c.label) : '';
+};
+
 function tile(g, i = 0) {
+  const heart = h('span', {
+    class: `tile-fav ${favorites().includes(g.id) ? 'on' : ''}`,
+    role: 'button',
+    'aria-label': t('favorite'),
+    html: icon(favorites().includes(g.id) ? 'heart' : 'heartOutline'),
+    onclick: (e) => {
+      e.stopPropagation();
+      const on = toggleFavorite(g.id);
+      sfx.play('select');
+      heart.classList.toggle('on', on);
+      heart.innerHTML = icon(on ? 'heart' : 'heartOutline');
+      if (location.hash === '#favs') showFavorites();
+    },
+  });
   return h(
     'button',
     {
       class: 'tile rise-in',
-      style: { animationDelay: `${i * 35}ms` },
+      style: { animationDelay: `${i * 30}ms` },
       onclick: () => {
         sfx.play('select');
         navigate(g.lobby === false ? playHash(g.id) : lobbyHash(g.id));
       },
     },
     h('span', { class: 'tile-art', html: gameArt(g.id) }),
-    h('span', { class: 'tile-text' }, h('span', { class: 'tile-name' }, pick(g.name)), h('span', { class: 'tile-sub' }, pick(g.sub))),
+    heart,
+    h('span', { class: 'tile-text' }, h('span', { class: 'tile-cat' }, catLabel(g.cat)), h('span', { class: 'tile-name' }, pick(g.name))),
     g.progress < 100 ? h('span', { class: 'tile-prog', title: `${g.progress}%` }, h('i', { style: { width: `${g.progress}%` } }), h('b', null, `${g.progress}%`)) : null,
+  );
+}
+
+function continueCard() {
+  const g = gameById(lastPlayed());
+  if (!g) return null;
+  return h(
+    'button',
+    {
+      class: 'continue-card rise-in',
+      onclick: () => {
+        sfx.play('select');
+        navigate(g.lobby === false ? playHash(g.id) : lobbyHash(g.id));
+      },
+    },
+    h('span', { class: 'cc-art', html: gameArt(g.id) }),
+    h('span', { class: 'cc-body' }, h('small', null, t('continuePlaying')), h('b', null, pick(g.name)), h('em', null, pick(g.sub))),
+    h('span', { class: 'cc-play', html: icon('play') }),
   );
 }
 
@@ -304,7 +353,17 @@ function showHome() {
   render();
 
   clear(stage).append(
-    h('div', { class: 'screen home' }, h('label', { class: 'search' }, h('span', { class: 'search-ico', html: icon('search') }), input), chips, grid, empty),
+    h(
+      'div',
+      { class: 'screen home' },
+      h('div', { class: 'home-hello' }, h('h2', null, t('hello')), h('p', null, t('helloSub'))),
+      h('label', { class: 'search' }, h('span', { class: 'search-ico', html: icon('search') }), input),
+      chips,
+      continueCard(),
+      h('div', { class: 'section-head home-head' }, h('b', null, t('allGames')), h('span', { class: 'muted' }, String(GAMES.length))),
+      grid,
+      empty,
+    ),
   );
 }
 
@@ -493,6 +552,8 @@ function showPrefs() {
       'div',
       { class: 'screen' },
       h('h2', { class: 'page-title' }, t('navSettings')),
+      profileCard(),
+      h('div', { class: 'section-head' }, h('b', null, t('settings'))),
       h('div', { class: 'panel' }, settingsRows(() => showPrefs())),
       h('div', { class: 'panel about' }, h('b', null, t('about')), h('p', null, t('aboutText'))),
       h('div', { class: 'footer-note' }, `${APP_NAME} · ${APP_BY}`),
