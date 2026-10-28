@@ -71,7 +71,6 @@ function setBottomNav(active) {
           'aria-current': tab.id === active ? 'page' : null,
           onclick: () => {
             if (tab.id === active) return;
-            sfx.play('tap');
             navigate(tab.hash);
           },
         },
@@ -285,7 +284,6 @@ function showHome() {
             role: 'tab',
             'aria-selected': String(homeState.cat === c.id),
             onclick: () => {
-              sfx.play('tap');
               homeState.cat = c.id;
               renderChips();
               render();
@@ -352,7 +350,6 @@ function trophyRow(g) {
 }
 
 async function showTrophyList(g) {
-  sfx.play('tap');
   const body = h(
     'div',
     { class: 'trophy-list' },
@@ -423,7 +420,6 @@ function langSwitch(onChange) {
           'aria-pressed': String(l.code === getLang()),
           title: l.label,
           onclick: () => {
-            sfx.play('tap');
             setLang(l.code);
             onChange && onChange();
           },
@@ -444,7 +440,6 @@ function settingsRows(rerender, { inGame = false } = {}) {
       'aria-checked': String(on),
       onclick: () => {
         fn();
-        sfx.play('tap');
         rerender();
       },
     });
@@ -498,7 +493,6 @@ function showPrefs() {
 }
 
 async function openGameSettings() {
-  sfx.play('tap');
   const langBefore = getLang();
   const body = h('div', { class: 'stack settings-modal' });
   const render = () => clear(body).append(...settingsRows(render, { inGame: true }));
@@ -521,7 +515,6 @@ function showLobby(id) {
   setBottomNav(null);
   setTopbar({
     left: iconBtn('back', t('back'), () => {
-      sfx.play('tap');
       goUp('#');
     }, 'gold round'),
     center: crownTitle(pick(g.name)),
@@ -613,7 +606,6 @@ async function openGame(id, mode = null, force = false) {
 
   const parent = lobbyHash(id);
   const backBtn = iconBtn('back', t('back'), () => {
-    sfx.play('tap');
     if (current && current.back) {
       let handled = false;
       try {
@@ -694,6 +686,17 @@ async function openGame(id, mode = null, force = false) {
 }
 
 // ---------- boot ----------
+// Every button makes a soft click when pressed (games add their own sounds on
+// top: success, error, coins…). Mark an element data-silent to opt out.
+document.addEventListener(
+  'pointerdown',
+  (e) => {
+    const el = e.target.closest && e.target.closest('button, [role="button"], .btn, .tile, label.search');
+    if (el && !el.disabled && !el.closest('[data-silent]')) sfx.play('tap');
+  },
+  true,
+);
+
 route();
 
 if ('serviceWorker' in navigator && location.protocol === 'https:' && !/^(localhost|127\.)/.test(location.hostname)) {

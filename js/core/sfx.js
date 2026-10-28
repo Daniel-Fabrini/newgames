@@ -65,7 +65,10 @@ function noise({ dur = 0.15, vol = 0.4, delay = 0, freq = 1200, q = 0.8 }) {
 }
 
 const PRESETS = {
-  tap: () => tone({ freq: 660, dur: 0.05, type: 'triangle', vol: 0.3 }),
+  tap: () => {
+    tone({ freq: 1250, to: 820, dur: 0.045, type: 'triangle', vol: 0.22 });
+    noise({ dur: 0.02, vol: 0.08, freq: 3200, q: 1.5 });
+  },
   select: () => tone({ freq: 520, to: 780, dur: 0.08, type: 'triangle', vol: 0.35 }),
   success: () => {
     tone({ freq: 660, dur: 0.1, type: 'triangle', vol: 0.4 });
@@ -101,6 +104,8 @@ const PRESETS = {
   levelup: () => [440, 554, 659, 880].forEach((f, i) => tone({ freq: f, dur: 0.12, type: 'square', vol: 0.15, delay: i * 0.07 })),
 };
 
+const lastPlayed = {};
+
 export const sfx = {
   get muted() {
     return prefs.get('muted', false);
@@ -116,6 +121,11 @@ export const sfx = {
   },
   play(name) {
     if (this.muted) return;
+    // The same sound twice within a few ms (e.g. the global click plus a game's
+    // own 'tap') plays once.
+    const now = performance.now();
+    if (lastPlayed[name] && now - lastPlayed[name] < 70) return;
+    lastPlayed[name] = now;
     const fn = PRESETS[name];
     try {
       if (fn) fn();
