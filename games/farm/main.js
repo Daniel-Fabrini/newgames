@@ -17,6 +17,7 @@ export async function mount(root, ctx) {
   M.tick();
   M.save();
   let dead = false;
+  window.__farmDbg = { M }; // DBG
 
   // ------------------------------------------------------------ layout
   const app = h('div', { class: 'g-farm-app' });
@@ -37,9 +38,9 @@ export async function mount(root, ctx) {
   ui.coinPill = h('div', { class: 'g-farm-pill', title: t('coins') }, h('span', { class: 'g-farm-coin' }, '🪙'), ui.coins);
   ui.gemPill = h('div', { class: 'g-farm-pill', title: t('gems') }, h('span', { class: 'g-farm-coin' }, '💎'), ui.gems);
   ui.energyPill = h('div', { class: 'g-farm-pill g-farm-energy', title: t('energy') },
-    h('span', { class: 'g-farm-coin' }, '⚡'), ui.energy, h('div', { class: 'g-farm-bar-mini' }, ui.energyBar));
+    h('span', { class: 'g-farm-coin' }, '⚡'), h('div', { class: 'g-farm-bar-mini' }, ui.energyBar), ui.energy);
   ui.lvlBox = h('div', { class: 'g-farm-lvlbox', title: t('xp', { a: 0, b: 0 }) }, ui.level, h('div', { class: 'g-farm-bar-mini xp' }, ui.xpBar));
-  hud.append(h('div', { class: 'g-farm-hudrow' }, ui.coinPill, ui.gemPill, ui.energyPill, ui.lvlBox));
+  hud.append(h('div', { class: 'g-farm-hudrow' }, ui.coinPill, ui.gemPill, ui.lvlBox), h('div', { class: 'g-farm-hudrow' }, ui.energyPill));
 
   const help = h('button', { class: 'icon-btn g-farm-help', title: t('help'), 'aria-label': t('help'), onclick: () => openHelp() }, '?');
   ctx.setHeaderRight(help);
@@ -181,6 +182,7 @@ export async function mount(root, ctx) {
     layer: viewHost,
   };
 
+  window.__farmDbg.env = env; // DBG
   let view = null, viewName = null;
   function go(name, arg) {
     if (dead) return;

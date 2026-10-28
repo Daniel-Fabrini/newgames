@@ -7,6 +7,12 @@ import { fmtTime } from './format.js';
 import { openWarehouse, openShop, openProd, openPen } from './panels.js';
 
 const BOUNDS = { x0: -GRID * TW / 2 - 14, y0: -70, x1: GRID * TW / 2 + 14, y1: GRID * TH + 40 };
+// The initial view shows the starting land (the 8x8 square) with a little border.
+const FOCUS = (() => {
+  const pts = [[4, 4], [12, 4], [12, 12], [4, 12]].map(([x, y]) => P(x, y));
+  const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
+  return { x0: Math.min(...xs) - 30, x1: Math.max(...xs) + 30, y0: Math.min(...ys) - 70, y1: Math.max(...ys) + 40 };
+})();
 const DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 
 export function mount(host, env) {
@@ -416,11 +422,13 @@ export function mount(host, env) {
   // ---------------------------------------------------------------- stage
   const stage = createStage(wrap, {
     bounds: BOUNDS,
+    focus: FOCUS,
     drawStatic: (cc) => drawStatic(cc),
     drawDynamic: (c, cam, time, W, H) => drawDyn(c, cam, time),
     onTap,
   });
   stage.invalidate();
+  window.__farmDbg && (window.__farmDbg.stage = stage); // DBG
   updateChips();
 
   return {

@@ -487,9 +487,9 @@
 }
 .g-naval-logrow {
   display: grid;
-  grid-template-columns: 8px auto auto 1fr;
+  grid-template-columns: 8px auto auto minmax(0, 1fr);
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   padding: 3px 0;
   font-size: 12px;
   font-weight: 800;
@@ -532,6 +532,8 @@
 }
 .g-naval-logrow.sunk .res {
   color: #ff7a88;
+  font-size: 11px;
+  overflow-wrap: anywhere;
 }
 .g-naval-logrow.new {
   animation: g-naval-logIn 0.5s ease-out;

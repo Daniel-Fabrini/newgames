@@ -226,11 +226,13 @@ export function mountRun(host, env) {
 
   const stage = createStage(wrap, {
     bounds: BOUNDS,
+    focus: { x0: BOUNDS.x0, y0: BOUNDS.y0, x1: BOUNDS.x1, y1: BOUNDS.y1 },
     drawStatic: (cc) => drawStatic(cc),
     drawDynamic: (c, cam, time) => drawDyn(c, time),
     onTap,
   });
   stage.invalidate();
+  window.__farmDbg && (window.__farmDbg.stage = stage); // DBG
   centerOnExplorer();
   updateChip();
 

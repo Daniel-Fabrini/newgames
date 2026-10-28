@@ -586,6 +586,55 @@ class Composer:
                             levels.append(nl)
         return placed
 
+    def pack(self, levels, pool, rows=(0.75, 0.3), gap=(0.004, 0.05), skip=0.12, face='cam', jitter=0.35, scale=(0.9, 1.08), fill_prob=0.92):
+        """Pack levels row by row (left to right), like a real shelf: a front row
+        and, where the board is deep enough, a back row of taller things."""
+        r = self.rnd
+        specs = [(e if isinstance(e, tuple) else (e, 1.0, {})) for e in pool]
+        specs = [(s[0], s[1] if len(s) > 1 else 1.0, s[2] if len(s) > 2 else {}) for s in specs]
+        placed = []
+        for lv in levels:
+            ys, xs = np.nonzero(lv.mask)
+            if not len(xs):
+                continue
+            x0 = lv.x0 + xs.min() * lv.cell
+            x1 = lv.x0 + (xs.max() + 1) * lv.cell
+            y0 = lv.y0 + ys.min() * lv.cell
+            y1 = lv.y0 + (ys.max() + 1) * lv.cell
+            depth = y1 - y0
+            row_list = [rows[0]] if depth < 0.28 else list(rows)
+            for rf in row_list:
+                x = x0 + r.uniform(0.0, 0.04)
+                while x < x1 - 0.02:
+                    if r.random() > fill_prob:
+                        x += r.uniform(0.04, skip)
+                        continue
+                    ok = None
+                    for _ in range(6):
+                        spec, w, opt = r.choices(specs, [s[1] for s in specs])[0]
+                        p = proto(spec)
+                        sc = r.uniform(*opt.get('scale', scale))
+                        base = self.face_yaw(x, (y0 + y1) / 2) if opt.get('face', face) == 'cam' else opt.get('face', face)
+                        yw = base + r.uniform(-1, 1) * opt.get('jitter', jitter) if opt.get('yaw') is None else opt['yaw']
+                        hx, hy = p.footprint(yw, sc)
+                        if 2 * hy > depth - 0.01:
+                            continue
+                        # front row hugs the front edge, back row the back
+                        yc = y0 + hy + 0.01 + (depth - 2 * hy - 0.02) * (1 - rf) + r.uniform(-0.01, 0.01)
+                        yc = min(max(yc, y0 + hy + 0.005), y1 - hy - 0.005)
+                        xc = x + hx
+                        it = self.try_on_level(lv, spec, sc, yaw=yw, tries=1, xy=(xc, yc), kind=opt.get('kind', 'prop'),
+                                               need_visible=opt.get('kind', 'prop') == 'prop')
+                        if it:
+                            ok = it
+                            break
+                    if ok:
+                        placed.append(ok)
+                        x = ok['max'].x + r.uniform(*gap)
+                    else:
+                        x += 0.03
+        return placed
+
     # --- walls
     def hang(self, spec, wall_y, x, z, scale=1.0, kind='prop', key=None, normal=-1, wall_x=None):
         """Hang something flat against the back wall (y = wall_y) or a side wall (x = wall_x)."""

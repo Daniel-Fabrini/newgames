@@ -468,7 +468,7 @@ export function flightZ(F, u) {
 
 function startRuns(w, F) {
   for (const a of w.att) {
-    if (a.i === F.from || a.i === F.receiver || !a.run) continue;
+    if (a.i === F.receiver || !a.run) continue;
     a.tgt = { x: a.run.x, y: a.run.y, spd: RUN_SPEED * 0.95 };
     a.run = null;
   }
@@ -646,10 +646,12 @@ function stepKeeper(w, F, dt) {
     k.kx += (dx / d) * m;
     k.kz += (dz / d) * m;
   }
-  // step toward a ball crossing in front of him
-  const py = clamp(b.y + vy * tc, 0.3, 4.5);
-  const my = py - k.y;
-  if (Math.abs(my) > 0.05) k.y += Math.sign(my) * Math.min(Math.abs(my), spd * 0.55 * dt);
+  // step toward a ball travelling across the face of goal
+  if (Math.abs(vx) > 1.2 * Math.abs(vy)) {
+    const py = clamp(b.y + vy * tc, 0.3, 4.5);
+    const my = py - k.y;
+    if (Math.abs(my) > 0.05) k.y += Math.sign(my) * Math.min(Math.abs(my), spd * 0.55 * dt);
+  }
   k.kx = clamp(k.kx, -GW - 0.3, GW + 0.3);
   const off = k.kx - k.x0;
   if (Math.abs(off) > 0.55 || k.kz < 0.55 || k.kz > 1.75) {
@@ -1067,7 +1069,10 @@ export function solve(L, opt = {}) {
         const c = cloneWorld(node.w);
         launch(c, sh);
         runToDecision(c);
-        if (wanted(c.result)) goals.push({ seq: [...node.seq, sh], r: c.result });
+        if (wanted(c.result)) {
+          goals.push({ seq: [...node.seq, sh], r: c.result });
+          if (!opt.exhaustive) return finish(goals);
+        }
       }
       if (depth < maxPasses || opt.air) {
         for (const pp of passPlans(node.w, curls)) {
@@ -1081,7 +1086,10 @@ export function solve(L, opt = {}) {
               const c2 = cloneWorld(node.w);
               launch(c2, { ...pp, next: hd });
               runToDecision(c2);
-              if (wanted(c2.result)) goals.push({ seq: [...node.seq, { ...pp, next: hd }], r: c2.result });
+              if (wanted(c2.result)) {
+                goals.push({ seq: [...node.seq, { ...pp, next: hd }], r: c2.result });
+                if (!opt.exhaustive) return finish(goals);
+              }
             }
           }
           if (depth < maxPasses) {
@@ -1095,16 +1103,66 @@ export function solve(L, opt = {}) {
     frontier = next;
     if (!frontier.length) break;
   }
+  return finish(goals);
+}
+
+const FACT_KEYS = ['curl', 'top', 'low', 'air', 'outside', 'hero', 'heroAssist'];
+const comboOf = (r) => FACT_KEYS.filter((k) => r[k]).join('+') + '@' + r.passes;
+
+function finish(goals) {
   if (!goals.length) return { ok: false };
   const minPasses = Math.min(...goals.map((g) => g.r.passes));
   const facts = { curl: false, top: false, low: false, air: false, outside: false, hero: false, heroAssist: false };
   const combos = new Set();
   for (const g of goals) {
     for (const k of Object.keys(facts)) if (g.r[k]) facts[k] = true;
-    combos.add(['curl', 'top', 'low', 'air', 'outside', 'hero', 'heroAssist'].filter((k) => g.r[k]).join('+') + '@' + g.r.passes);
+    combos.add(comboOf(g.r));
   }
   const best = goals.find((g) => g.r.passes === minPasses);
   return { ok: true, minPasses, seq: best.seq, facts, combos: [...combos], goals: goals.length };
+}
+
+// Given a winning sequence, tries alternative finishes from the same
+// position to learn which bonus objectives can be met (cheap).
+export function explore(L, seq, needHero) {
+  const pre = seq.slice(0, -1);
+  const last = seq[seq.length - 1];
+  const w = createWorld(L);
+  for (const p of pre) {
+    launch(w, p);
+    runToDecision(w);
+  }
+  const combos = new Set();
+  const rec = (c) => {
+    if (c.result && c.result.goal && (!needHero || c.result.hero)) combos.add(comboOf(c.result));
+  };
+  if (w.result) return [];
+  if (last.type === 'pass' && last.next) {
+    for (const hd of HEADERS) {
+      const c = cloneWorld(w);
+      launch(c, { ...last, next: hd });
+      runToDecision(c);
+      rec(c);
+    }
+    const c = cloneWorld(w);
+    launch(c, { ...last, next: null });
+    runToDecision(c);
+    if (!c.result) {
+      for (const sh of SHOTS_QUICK) {
+        const c2 = cloneWorld(c);
+        launch(c2, sh);
+        runToDecision(c2);
+        rec(c2);
+      }
+    }
+  }
+  for (const sh of SHOTS_QUICK) {
+    const c = cloneWorld(w);
+    launch(c, sh);
+    runToDecision(c);
+    rec(c);
+  }
+  return [...combos];
 }
 
 // Replays a sequence of plans; used by tests.

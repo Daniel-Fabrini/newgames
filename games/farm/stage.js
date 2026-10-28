@@ -8,6 +8,7 @@ export function createStage(host, opts) {
   const c = canvas.getContext('2d');
   const cam = new Camera();
   const b = opts.bounds; // world bounds { x0, y0, x1, y1 }
+  const focus = opts.focus || b; // what the camera shows first
   const pts = new Map();
   let W = 0, H = 0, dpr = 1, raf = 0, alive = true, fitted = false;
   let drag = null, pinch = null, cache = null, cacheZ = 0, cacheDirty = true, lastCache = 0;
@@ -25,15 +26,15 @@ export function createStage(host, opts) {
     canvas.style.height = H + 'px';
     const bw = b.x1 - b.x0, bh = b.y1 - b.y0;
     minZ = Math.min(W / bw, H / bh) * 0.85;
-    if (!fitted) fit();
+    if (!fitted) fit(focus);
     clampCam();
     cacheDirty = true;
   }
 
-  function fit() {
-    const bw = b.x1 - b.x0, bh = b.y1 - b.y0;
-    cam.z = Math.min(maxZ, Math.max(minZ, Math.min(W / bw, H / bh) * 0.92));
-    centerOn((b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2);
+  function fit(bb = b) {
+    const bw = bb.x1 - bb.x0, bh = bb.y1 - bb.y0;
+    cam.z = Math.min(maxZ, Math.max(minZ, Math.min(W / bw, H / bh) * 0.95));
+    centerOn((bb.x0 + bb.x1) / 2, (bb.y0 + bb.y1) / 2);
     fitted = true;
   }
 
@@ -162,7 +163,7 @@ export function createStage(host, opts) {
     cam,
     get W() { return W; },
     get H() { return H; },
-    fit() { fit(); clampCam(); },
+    fit() { fit(focus); clampCam(); },
     zoomBy(f) { setZoom(cam.z * f); },
     center(wx, wy) { centerOn(wx, wy); clampCam(); },
     invalidate() { cacheDirty = true; },

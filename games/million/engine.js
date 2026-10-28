@@ -40,14 +40,15 @@ export function money(n, lang, { upper = false } = {}) {
   n = Math.max(0, Math.round(n));
   if (lang === 'pt') {
     let s;
+    // Non-breaking spaces keep "R$ 5 mil" on one line.
     if (n >= 1e6) {
       const m = n / 1e6;
-      s = `R$ ${num(m, 'pt-BR', { maximumFractionDigits: 1 })} ${m < 2 ? 'milhão' : 'milhões'}`;
-    } else if (n >= 1000) s = `R$ ${num(n / 1000, 'pt-BR', { maximumFractionDigits: 1 })} mil`;
-    else s = `R$ ${n}`;
+      s = `R$\u00a0${num(m, 'pt-BR', { maximumFractionDigits: 1 })}\u00a0${m < 2 ? 'milhão' : 'milhões'}`;
+    } else if (n >= 1000) s = `R$\u00a0${num(n / 1000, 'pt-BR', { maximumFractionDigits: 1 })}\u00a0mil`;
+    else s = `R$\u00a0${n}`;
     return upper ? s.toUpperCase() : s;
   }
-  return '$ ' + num(n, lang === 'es' ? 'es-ES' : 'en-US');
+  return '$\u00a0' + num(n, lang === 'es' ? 'es-ES' : 'en-US');
 }
 
 export const fmtInt = (n, lang) => num(Math.round(n), lang === 'pt' ? 'pt-BR' : lang === 'es' ? 'es-ES' : 'en-US');

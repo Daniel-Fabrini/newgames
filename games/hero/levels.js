@@ -6,7 +6,7 @@
 // run (dy < 0 runs toward goal).
 
 import { rng } from '../../js/core/ui.js';
-import { solve, SHOTS_QUICK, BOX_Y } from './sim.js';
+import { solve, explore, SHOTS_QUICK, BOX_Y } from './sim.js';
 
 // Difficulty → AI parameters (d ≈ 0 for the first level, 1 at level 30).
 export function diffParams(d) {
@@ -33,7 +33,7 @@ export const HAND = [
   { min: 88, score: [0, 0], venue: 'A', goal: 'hero', bonus: [['passes', 1], ['low']], ball: 0, att: [{ x: -7, y: 30 }, { x: 5, y: 15, hero: 1 }], def: [{ x: -1, y: 22.5 }, { x: 10, y: 9 }], tut: { plan: { type: 'pass', to: 1, curl: 0 } } },
   { story: 'firstCross', min: 90, score: [1, 1], venue: 'H', goal: 'hero', bonus: [['air'], ['top']], ball: 0, att: [{ x: -23, y: 12 }, { x: -1, y: 8.5, hero: 1 }], def: [{ x: 2.8, y: 6.2 }, { x: -10, y: 10 }], tut: { plan: { type: 'pass', to: 1, curl: 0 }, first: { type: 'shot', tx: 2.8, tz: 0.5, curl: 0 } } },
   { min: 66, score: [0, 0], venue: 'A', type: 'freekick', goal: 'hero', bonus: [['curl'], ['top']], att: [{ x: -4, y: 21, hero: 1 }], wall: 4, def: [], tut: { plan: { type: 'shot', tx: 2.9, tz: 2.0, curl: 0.15 } } },
-  { min: 75, score: [1, 2], venue: 'A', goal: 'score', bonus: [['hero'], ['passes', 2]], ball: 0, att: [{ x: 0, y: 36, hero: 1 }, { x: -11, y: 28, run: [5, -14] }, { x: 11, y: 30 }], def: [{ x: -5, y: 24 }, { x: 6, y: 22 }, { x: -1, y: 15 }], tut: { plan: { type: 'pass', to: 1, curl: 0, through: true } } },
+  { min: 75, score: [1, 2], venue: 'A', goal: 'score', bonus: [['hero'], ['passes', 2]], ball: 0, att: [{ x: 0, y: 36, hero: 1, run: [2, -16] }, { x: -11, y: 28, run: [5, -14] }, { x: 11, y: 30 }], def: [{ x: -5, y: 24 }, { x: 6, y: 22 }, { x: -1, y: 15 }], tut: { plan: { type: 'pass', to: 1, curl: 0, through: true } } },
   { story: 'penalty', min: 89, score: [0, 0], venue: 'H', type: 'penalty', goal: 'hero', bonus: [['top'], ['curl']], att: [{ x: 0, y: 11.5, hero: 1 }], def: [] },
   { story: 'derby', min: 87, score: [1, 1], venue: 'A', goal: 'hero', bonus: [['passes', 2], ['curl']], att: [{ x: -6, y: 27, hero: 1 }, { x: 6, y: 24 }, { x: -14, y: 17 }], def: [{ x: -4.6, y: 24.6 }, { x: 3, y: 19 }, { x: -9.5, y: 13.5 }, { x: 7, y: 15 }] },
   { story: 'cupFinal1', comp: 'final', min: 92, score: [2, 2], venue: 'N', goal: 'hero', bonus: [['air'], ['passes', 2]], ball: 0, att: [{ x: -3, y: 33 }, { x: -16, y: 20 }, { x: 5, y: 20, hero: 1 }, { x: 14, y: 24 }], def: [{ x: -8, y: 26.5 }, { x: 2, y: 25 }, { x: -12, y: 14 }, { x: 6, y: 16.5 }, { x: 12, y: 18 }] },
@@ -45,7 +45,7 @@ export const HAND = [
   { min: 85, score: [1, 1], venue: 'A', type: 'freekick', goal: 'hero', bonus: [['top'], ['curl']], att: [{ x: 7, y: 25, hero: 1 }], wall: 5, def: [] },
   { min: 58, score: [0, 0], venue: 'H', goal: 'hero', bonus: [['passes', 3], ['air']], ball: 0, att: [{ x: -20, y: 26 }, { x: -6, y: 20, hero: 1 }, { x: 5, y: 12 }, { x: 16, y: 22 }], def: [{ x: -14, y: 22 }, { x: -4, y: 16 }, { x: 2, y: 9.5 }, { x: 8, y: 17 }, { x: 12, y: 12 }] },
   { story: 'longshot', min: 77, score: [0, 1], venue: 'A', goal: 'hero', bonus: [['outside'], ['curl']], att: [{ x: 1, y: 26, hero: 1 }, { x: -9, y: 20 }, { x: 10, y: 19 }], def: [{ x: -7, y: 16 }, { x: 8, y: 15 }, { x: -1, y: 12.5 }] },
-  { min: 70, score: [2, 2], venue: 'H', goal: 'score', bonus: [['hero'], ['passes', 2]], ball: 0, att: [{ x: 0, y: 44, hero: 1 }, { x: -13, y: 40, run: [6, -18] }, { x: 12, y: 40, run: [-4, -17] }], def: [{ x: -6, y: 30 }, { x: 5, y: 28 }] },
+  { min: 70, score: [2, 2], venue: 'H', goal: 'score', bonus: [['hero'], ['passes', 2]], ball: 0, att: [{ x: 0, y: 44, hero: 1, run: [1, -20] }, { x: -13, y: 40, run: [6, -18] }, { x: 12, y: 40, run: [-4, -17] }], def: [{ x: -6, y: 30 }, { x: 5, y: 28 }] },
   { story: 'cupSemi', min: 120, score: [1, 1], venue: 'N', type: 'penalty', goal: 'hero', bonus: [['low'], ['curl']], att: [{ x: 0, y: 11.5, hero: 1 }], def: [], p: { gkReact: 0.2, gkSpeed: 5.0 } },
   { min: 89, score: [0, 0], venue: 'A', goal: 'hero', bonus: [['curl'], ['passes', 1]], att: [{ x: 5, y: 21, hero: 1 }, { x: -5, y: 14 }, { x: 10, y: 12 }], def: [{ x: 4.3, y: 18.4 }, { x: -3, y: 11.5 }, { x: 8.5, y: 9.5 }, { x: 1, y: 9 }, { x: -1, y: 15 }] },
   { story: 'cupFinal2', comp: 'final', min: 90, score: [1, 1], venue: 'N', goal: 'hero', bonus: [['air'], ['passes', 3]], ball: 1, att: [{ x: -24, y: 20 }, { x: -6, y: 25 }, { x: 2, y: 14, hero: 1 }, { x: 12, y: 21 }], def: [{ x: -16, y: 18 }, { x: -4, y: 21 }, { x: 4, y: 11.5 }, { x: -3, y: 9 }, { x: 9, y: 16 }] },
@@ -56,9 +56,9 @@ export const HAND = [
   { min: 93, score: [0, 0], venue: 'H', type: 'freekick', goal: 'hero', bonus: [['top'], ['curl']], att: [{ x: 0.5, y: 19.5, hero: 1 }], wall: 5, def: [] },
   { story: 'callup', comp: 'intl', min: 76, score: [0, 0], venue: 'H', goal: 'hero', bonus: [['passes', 2], ['curl']], ball: 0, att: [{ x: -10, y: 28 }, { x: 4, y: 22, hero: 1 }, { x: 13, y: 17 }], def: [{ x: -5, y: 25 }, { x: 3, y: 19 }, { x: 9, y: 14 }, { x: -3, y: 14 }] },
   { comp: 'intl', min: 88, score: [1, 1], venue: 'A', type: 'corner', goal: 'hero', bonus: [['air'], ['top']], ball: 0, att: [{ x: 33.5, y: 0.6 }, { x: 2, y: 10.5, hero: 1 }, { x: -3, y: 8 }, { x: 6, y: 12 }], def: [{ x: 1, y: 9 }, { x: -2, y: 6.5 }, { x: 5, y: 10.5 }, { x: 3, y: 5 }] },
-  { story: 'backClub', min: 83, score: [0, 0], venue: 'A', goal: 'hero', bonus: [['passes', 2], ['low']], ball: 1, att: [{ x: -12, y: 22 }, { x: 0, y: 30, hero: 1 }, { x: 11, y: 21 }], def: [{ x: -1, y: 26.5 }, { x: -8, y: 18 }, { x: 8, y: 17.5 }, { x: 0, y: 17 }, { x: 3, y: 10 }, { x: -4, y: 10 }] },
+  { story: 'backClub', min: 83, score: [0, 0], venue: 'A', goal: 'hero', bonus: [['passes', 2], ['low']], ball: 1, att: [{ x: -13, y: 21 }, { x: -1, y: 29, hero: 1, run: [4, -13] }, { x: 12, y: 20 }], def: [{ x: -0.6, y: 26.4 }, { x: -9, y: 17 }, { x: 8.5, y: 16 }, { x: -2, y: 15 }, { x: 6, y: 9 }, { x: -4, y: 9 }] },
   { story: 'shootout', comp: 'cup', min: 120, score: [3, 3], venue: 'N', type: 'penalty', goal: 'hero', bonus: [['top'], ['curl']], att: [{ x: 0, y: 11.5, hero: 1 }], def: [], p: { gkReact: 0.18, gkSpeed: 5.4 } },
-  { min: 74, score: [1, 1], venue: 'H', goal: 'score', bonus: [['hero'], ['passes', 2]], ball: 0, att: [{ x: 2, y: 46, hero: 1 }, { x: -14, y: 42, run: [7, -20] }, { x: 14, y: 41, run: [-6, -19] }, { x: -2, y: 38 }], def: [{ x: -7, y: 31 }, { x: 6, y: 30 }, { x: 0, y: 24 }] },
+  { min: 74, score: [1, 1], venue: 'H', goal: 'score', bonus: [['hero'], ['passes', 3]], ball: 0, att: [{ x: 2, y: 46, hero: 1, run: [-1, -27] }, { x: -14, y: 42, run: [7, -20] }, { x: 14, y: 41, run: [-6, -19] }, { x: -2, y: 38 }], def: [{ x: -7, y: 31 }, { x: 6, y: 30 }, { x: 0, y: 24 }] },
   { story: 'bigDerby', min: 90, score: [2, 2], venue: 'A', goal: 'hero', bonus: [['curl'], ['passes', 3]], ball: 0, att: [{ x: -14, y: 30 }, { x: -2, y: 26 }, { x: 7, y: 21, hero: 1 }, { x: -9, y: 15 }], def: [{ x: -10, y: 27 }, { x: -1, y: 22.5 }, { x: 5, y: 17.5 }, { x: -6, y: 12 }, { x: 2, y: 10 }, { x: 10, y: 14 }] },
   { story: 'titleDecider', comp: 'final', min: 94, score: [1, 1], venue: 'H', goal: 'hero', bonus: [['air'], ['passes', 3]], ball: 0, att: [{ x: 4, y: 34 }, { x: 18, y: 22 }, { x: -6, y: 16, hero: 1 }, { x: -16, y: 24 }], def: [{ x: 8, y: 29 }, { x: 13, y: 18 }, { x: -3, y: 13 }, { x: -9, y: 20 }, { x: 2, y: 20 }, { x: 4, y: 10 }] },
 ];
@@ -209,23 +209,30 @@ export function genLevel(seed, d, forceType) {
   const R = rng(seed * 2654435761 + 97);
   const p = diffParams(d);
   let out = null;
-  for (let attempt = 0; attempt < 14 && !out; attempt++) {
-    const type = forceType || pickType(R);
-    const L = build(type, R, d);
-    if (tooClose(L)) continue;
-    L.p = p;
-    const needHero = L.goal === 'hero';
-    const maxPasses = type === 'penalty' || type === 'freekick' ? 0 : type === 'corner' || type === 'wing' ? 1 : 2;
-    const sol = solve(L, { maxPasses, needHero, shots: SHOTS_QUICK, curls: [-0.2, 0, 0.2], budget: 2600, air: true, exhaustive: true });
-    if (!sol.ok) continue;
-    // too easy? a direct shot by the carrier shouldn't win open-play moments
-    if (d > 0.35 && (type === 'open' || type === 'oneTwo' || type === 'wing') && sol.minPasses === 0 && attempt < 10) continue;
-    L.bonus = chooseBonus(sol, L, R);
-    L.minPasses = sol.minPasses;
-    out = L;
+  const first = forceType || pickType(R);
+  for (const type of [first, first, 'freekick']) {
+    for (let attempt = 0; attempt < 10 && !out; attempt++) {
+      const L = build(type, R, d);
+      if (tooClose(L)) continue;
+      L.p = p;
+      const needHero = L.goal === 'hero';
+      const maxPasses = type === 'penalty' || type === 'freekick' ? 0 : type === 'corner' || type === 'wing' ? 1 : 2;
+      const sol = solve(L, { maxPasses, needHero, shots: SHOTS_QUICK, curls: [-0.2, 0, 0.2], budget: 900, air: true });
+      if (!sol.ok) continue;
+      // too easy? a direct shot by the carrier shouldn't win open-play moments
+      if (d > 0.35 && (type === 'open' || type === 'oneTwo' || type === 'wing') && sol.minPasses === 0) continue;
+      sol.combos = explore(L, sol.seq, needHero);
+      if (!sol.combos.length) continue;
+      if (type === 'freekick') sol.combos = sol.combos.map((c) => c.replace(/\+?outside/, ''));
+      L.bonus = chooseBonus(sol, L, R);
+      L.minPasses = sol.minPasses;
+      L.kind = type;
+      out = L;
+    }
+    if (out) break;
   }
   if (!out) {
-    out = { type: 'open', att: [{ x: 3, y: 15, hero: 1 }], def: [{ x: -6, y: 12 }], goal: 'hero', bonus: [['low'], ['curl']], p };
+    out = { type: 'penalty', kind: 'penalty', att: [{ x: 0, y: 11.5, hero: 1 }], def: [], goal: 'hero', bonus: [['low'], ['curl']], p };
   }
   out.seed = seed;
   out.type = out.type || 'open';
