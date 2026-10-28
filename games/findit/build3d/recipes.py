@@ -231,6 +231,10 @@ def compose(L, S, cfg):
     if tops:
         C.pack(tops, cfg.get('top_pool', pool), rows=(0.85, 0.45, 0.1), gap=(0.01, 0.07), fill_prob=0.85)
         C.fill(tops, cfg.get('top_pool', pool), cfg.get('top_extra', 25))
+    bf = cfg.get('backfill')
+    if bf:
+        C.build_occluder()
+        C.fill([L.flat_level(0.0, *bf['region'], tag='back')], bf['pool'], bf['count'], jitter=3.0)
     fl = cfg.get('floor')
     if fl:
         C.build_occluder()
@@ -417,7 +421,7 @@ WEAPONS = [('kite_shield', 1.0, {'scale': (0.7, 0.85)}), ('antique_estoc', 0.8),
            ('wooden_axe', 0.6), ('wooden_axe_02', 0.6), ('wooden_handle_saber', 0.6), ('antique_katana_01', 0.5),
            ('lion_head', 0.6), ('bull_head', 0.6), ('horse_head', 0.5), ('fancy_picture_frame_02', 0.5, {'scale': (0.6, 0.8)}),
            ('ornate_mirror_01', 0.4, {'scale': (0.6, 0.7)})]
-GARDEN = [('garden_gnome', 1.0, {'scale': (0.6, 0.8)}), ('watering_can_metal_01', 1.0), ('garden_gloves_01', 0.8), ('trowel_01', 0.8),
+GARDEN = [('watering_can_metal_01', 1.0), ('garden_gloves_01', 0.8), ('trowel_01', 0.8),
           ('garden_sprinkler_01', 0.6), ('seeding_tray_01', 0.6), ('planter_pot_clay', 1.0), ('potted_plant_04', 0.8),
           ('potted_plant_02', 0.5, {'scale': (0.5, 0.7)}), ('wooden_bucket_02', 0.4, {'scale': (0.6, 0.7)}), ('wicker_basket_01', 0.5),
           ('wicker_basket_02', 0.5), ('rubber_duck_toy', 0.4, {'scale': (0.6, 0.8)}), ('dirty_football', 0.5), ('baseball_01', 0.4),
@@ -799,7 +803,7 @@ def backyard(L, S):
 # 13. smugglers' harbor
 def _harbor_set(L, R):
     water(L, R['back'] + 0.0)
-    m = L.tex_material('pier_beam', 'wood_floor_deck', rough_mul=0.9, tint=(0.35, 0.3, 0.26))
+    m = L.flat_material('pier_beam', (0.09, 0.065, 0.045), 0.8)
     for k in range(9):
         x = -6.4 + k * 1.6
         L.box(f'post{k}', x - 0.09, R['back'] - 0.18, -1.6, x + 0.09, R['back'], 0.9, m, L.collection('set'), uv_scale=0.6)
@@ -837,7 +841,7 @@ CAMP_BIG = [('tree_stump_01', 0.8, {'scale': (0.45, 0.6)}), ('tree_stump_02', 0.
 
 
 @scene('campsite', seed=141,
-       models=_req(CAMP, CAMP_BIG) | {'stone_fire_pit', 'dead_tree_trunk', 'dead_tree_trunk_02', 'boulder_01', 'fir_sapling', 'rock_moss_set_02',
+       models=_req(CAMP, CAMP_BIG) | {'shrub_04', 'stone_fire_pit', 'dead_tree_trunk', 'dead_tree_trunk_02', 'boulder_01', 'fir_sapling', 'rock_moss_set_02',
                                       'pine_roots', 'tree_stump_01'},
        textures={'forest_leaves_02'}, hdris={'phalzer_forest_01'})
 def campsite(L, S):
@@ -850,6 +854,10 @@ def campsite(L, S):
                  ('rocks', 'rock_moss_set_02', (1.0, 7.5), 0.0, {'scale': 0.6}), ('fir', 'fir_sapling', (-2.8, 5.5), 0.3, {'scale': 1.3}),
                  ('fir2', 'fir_sapling', (4.6, 6.2), 1.3, {'scale': 1.1}), ('roots', 'pine_roots', (-3.4, 1.2), 0.8, {'scale': 0.7}),
                  ('stump', 'tree_stump_01', (2.3, 0.9), 0.4, {'scale': 0.55})],
+        'backfill': {'region': (-8.0, 4.0, 8.0, 9.0), 'count': 40,
+                     'pool': [('boulder_01', 0.6, {'scale': (0.6, 1.0)}), ('fir_sapling', 1.0, {'scale': (0.9, 1.4)}), ('fern_02', 1.0, {'scale': (0.6, 0.9)}),
+                              ('rock_moss_set_02', 0.4, {'scale': (0.4, 0.6)}), ('dead_tree_trunk_02', 0.4, {'scale': (0.6, 0.8)}),
+                              ('shrub_04', 0.8, {'scale': (1.2, 1.8)}), ('tree_stump_02', 0.5, {'scale': (0.6, 0.8)}), ('moss_01', 0.6, {'scale': (0.8, 1.2)})]},
         'tops': ['log', 'stump', 'pit', 'boulder', 'log2'], 'pool': CAMP, 'top_extra': 20,
         'floor': {'region': (-5.5, -1.2, 5.5, 4.2), 'count': 30, 'pool': CAMP_BIG, 'small': CAMP, 'small_count': 46},
         'light': daylight('phalzer_forest_01', strength=1.2, rot=0.4, sun=(0.3, 0.6, -0.75), sun_strength=2.6, sun_temp=5200),
@@ -911,7 +919,7 @@ def scrapyard(L, S):
 
 # 17. flowery courtyard
 @scene('courtyard', seed=171,
-       models=_req(COURT, COURT_SMALL) | {'large_castle_door', 'painted_wooden_bench', 'outdoor_table_chair_set_01', 'round_wooden_table_02',
+       models=_req(COURT, COURT_SMALL) | {'large_castle_door', 'rollershutter_window_03', 'painted_wooden_bench', 'outdoor_table_chair_set_01', 'round_wooden_table_02',
                                           'gothic_statue', 'street_lamp_01', 'street_lamp_02', 'side_table_tall_01', 'marble_bust_01',
                                           'planter_box_03', 'chinese_stool', 'bar_chair_round_01'},
        textures={'patterned_cobblestone', 'white_stucco'}, hdris={'courtyard'})
@@ -920,7 +928,8 @@ def courtyard(L, S):
         'room': outdoor_room(('patterned_cobblestone', 2.0), ('white_stucco', 2.5), h=5.0, wall_tint=(0.96, 0.9, 0.8)),
         'cam': OUT_CAM,
         'back': [('door', 'large_castle_door', 0.4, {'scale': 0.95}), ('bench', 'painted_wooden_bench', -2.4),
-                 ('raised', 'planter_box_03', 2.6), ('raised2', 'planter_box_03', -4.3)],
+                 ('raised', 'planter_box_03', 2.6), ('raised2', 'planter_box_03', -4.3),
+                 ('win1', 'rollershutter_window_03', -2.6, {'z': 2.4, 'scale': 0.75}), ('win2', 'rollershutter_window_03', 3.2, {'z': 2.4, 'scale': 0.75})],
         'free': [('statue', 'gothic_statue', (-4.6, 0.6), 0.5, {'scale': 0.9}), ('lamp', 'street_lamp_01', (4.4, 0.9), 0.0),
                  ('set', 'outdoor_table_chair_set_01', (-1.2, -0.9), 1.45), ('rtable', 'round_wooden_table_02', (1.5, -0.6), 0.0),
                  ('stool', 'bar_chair_round_01', (2.4, -1.0), 0.3), ('ped', 'side_table_tall_01', (-3.3, -0.5), 0.0),

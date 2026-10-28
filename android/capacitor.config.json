@@ -1,0 +1,10 @@
+{
+  "appId": "com.daaleixo.dagames",
+  "appName": "DA Games",
+  "webDir": "www",
+  "backgroundColor": "#060607",
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#060607"
+  }
+}

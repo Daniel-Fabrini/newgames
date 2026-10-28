@@ -1,0 +1,17 @@
+{
+  "name": "da-games-android",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Android wrapper (Capacitor) for DA Games. See README.md in this folder.",
+  "scripts": {
+    "web": "node ../tools/build-android-web.mjs",
+    "sync": "npm run web && cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/core": "^7.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.0.0"
+  }
+}
