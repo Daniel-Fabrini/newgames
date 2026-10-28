@@ -839,7 +839,7 @@ CAMP_BIG = [('tree_stump_01', 0.8, {'scale': (0.45, 0.6)}), ('tree_stump_02', 0.
             ('stone_01', 0.6, {'scale': (1.5, 3.0)}), ('fern_02', 1.0, {'scale': (0.3, 0.45)}), ('dry_branches_medium_01', 0.6, {'scale': (0.6, 0.9)}),
             ('folding_wooden_stool', 0.5), ('wooden_stool_01', 0.4), ('wicker_basket_01', 0.5), ('wooden_bucket_01', 0.4),
             ('plastic_jerrycan', 0.4), ('wooden_crate_01', 0.5, {'stack': True}), ('treasure_chest', 0.2, {'scale': (0.5, 0.6), 'stack': True}),
-            ('moss_01', 0.4, {'scale': (0.5, 0.8)})]
+            ('dry_branches_medium_01', 0.3, {'scale': (0.5, 0.7)})]
 
 
 @scene('campsite', seed=141,
@@ -848,7 +848,7 @@ CAMP_BIG = [('tree_stump_01', 0.8, {'scale': (0.45, 0.6)}), ('tree_stump_02', 0.
        textures={'forest_leaves_02'}, hdris={'phalzer_forest_01'})
 def campsite(L, S):
     return compose(L, S, {
-        'room': dict(x0=-9, x1=9, back=6.0, front=-8, h=0.0, floor=('forest_leaves_02', 2.5), wall=('forest_leaves_02', 2.5), side=False,
+        'room': dict(x0=-40, x1=40, back=45.0, front=-8, h=0.0, floor=('forest_leaves_02', 2.5), wall=('forest_leaves_02', 2.5), side=False,
                      ceiling=None, baseboard=False),
         'cam': ((0.0, -3.2, 2.3), (0.0, 3.2, 0.1), 26),
         'free': [('pit', 'stone_fire_pit', (0.2, 0.4), 0.3), ('log', 'dead_tree_trunk', (-0.6, 2.4), 0.12, {'scale': 0.75}),
@@ -859,7 +859,7 @@ def campsite(L, S):
         'backfill': {'region': (-8.0, 4.0, 8.0, 9.0), 'count': 40,
                      'pool': [('boulder_01', 0.6, {'scale': (0.6, 1.0)}), ('fir_sapling', 1.0, {'scale': (0.9, 1.4)}), ('fern_02', 1.0, {'scale': (0.6, 0.9)}),
                               ('rock_moss_set_02', 0.4, {'scale': (0.4, 0.6)}), ('dead_tree_trunk_02', 0.4, {'scale': (0.6, 0.8)}),
-                              ('shrub_04', 0.8, {'scale': (1.2, 1.8)}), ('tree_stump_02', 0.5, {'scale': (0.6, 0.8)}), ('moss_01', 0.6, {'scale': (0.8, 1.2)})]},
+                              ('shrub_04', 0.8, {'scale': (1.2, 1.8)}), ('tree_stump_02', 0.5, {'scale': (0.6, 0.8)})]},
         'tops': ['log', 'stump', 'pit', 'boulder', 'log2'], 'pool': CAMP, 'top_extra': 20,
         'floor': {'region': (-5.5, -1.2, 5.5, 4.2), 'count': 30, 'pool': CAMP_BIG, 'small': CAMP, 'small_count': 46},
         'light': daylight('phalzer_forest_01', strength=1.2, rot=0.4, sun=(0.3, 0.6, -0.75), sun_strength=2.6, sun_temp=5200),
