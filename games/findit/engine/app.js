@@ -7,6 +7,7 @@
 import { playLevel } from './play.js';
 import { showMap, PER_CHAPTER } from './map.js';
 import { sheet, ICON, coinIcon, starRow } from './ui.js';
+import { loadScene } from './scene.js';
 
 const hash = (str) => {
   let x = 2166136261;
@@ -214,6 +215,8 @@ export async function createGame(root, ctx, cfg) {
     }
     if (coins) app.addCoins(coins);
     if (xp) ctx.addXP?.(xp);
+    // warm up the next photo while the result is on screen
+    if (!spec.daily) loadScene(app.sceneOf(spec.modeId, Math.floor((spec.n + 1) / PER_CHAPTER))).catch(() => {});
     ctx.sfx.play('win');
     ctx.sfx.vibrate([30, 60, 30, 60, 60]);
     ctx.ui.confetti(90);

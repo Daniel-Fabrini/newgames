@@ -382,7 +382,7 @@ RETRO = [('boombox', 0.8), ('cassette_player', 0.8), ('portable_cassette_player'
 ATTIC = CURIOS + TOYS + RETRO + [('throw_pillows_01/*', 0.5), ('wicker_basket_01', 0.4), ('wooden_lantern_01', 0.5),
                                  ('decorative_book_set_01/*', 0.8, {'kind': 'set'})]
 LAB = [('chemistry_set', 1.0), ('bunsen_burner', 1.0), ('vintage_microscope', 1.0), ('industrial_microscope', 0.6),
-       ('magnifying_glass_01', 1.0), ('brass_vase_01', 0.6), ('brass_vase_03', 0.8), ('brass_vase_04', 0.8), ('brass_pot_01', 0.6),
+       ('magnifying_glass_01', 0.4), ('brass_vase_01', 0.6), ('brass_vase_03', 0.8), ('brass_vase_04', 0.8), ('brass_pot_01', 0.6),
        ('brass_goblets/*', 1.0), ('brass_candleholders/brass_candleholder_01', 0.8), ('brass_diya_lantern', 0.8),
        ('wooden_candlestick', 1.0), ('Lantern_01', 0.8), ('vintage_oil_lamp', 0.8), ('wine_bottles_01/*', 1.2), ('jug_01', 0.6),
        ('metal_jug', 0.6), ('ceramic_vase_04', 0.6), ('antique_ceramic_vase_01', 0.5), ('pot_enamel_01', 0.5), ('wooden_bowl_02', 0.8),
@@ -408,7 +408,7 @@ ORIENT = [('ceramic_vase_01', 1.0), ('ceramic_vase_02', 1.0), ('ceramic_vase_04'
           ('wooden_bowl_02', 0.6), ('potted_plant_04', 0.8), ('chess_set', 0.4), ('brass_candleholders/brass_candleholder_01', 0.6),
           ('Lantern_01', 0.6), ('bronze_whale_statue', 0.3), ('carved_wooden_elephant', 1.0), ('horse_statue_01', 0.6),
           ('concrete_cat_statue', 0.5), ('lambis_shell', 0.8), ('jug_01', 0.4), ('pot_enamel_01', 0.4), ('food_lychee_01', 0.6),
-          ('food_pomegranate_01', 0.6), ('food_kiwi_01', 0.4), ('food_lime_01', 0.4), ('magnifying_glass_01', 0.5),
+          ('food_pomegranate_01', 0.6), ('food_kiwi_01', 0.4), ('food_lime_01', 0.4), ('magnifying_glass_01', 0.15),
           ('pocket_watch', 0.5), ('round_spectacles', 0.4), ('decorative_book_set_01/*', 0.5, {'kind': 'set'})]
 ARMS = [('brass_goblets/*', 1.2), ('brass_candleholders/brass_candleholder_01', 0.8), ('brass_candleholders/brass_candleholder_02', 0.5),
         ('jug_01', 0.6), ('metal_jug', 0.8), ('brass_pot_01', 0.6), ('brass_pan_01', 0.5), ('wooden_bowl_01', 0.6), ('wooden_bowl_02', 0.6),
@@ -619,21 +619,22 @@ def keeper(L, S):
 
 # ---------------------------------------------------------------- 7. oriental tea room
 @scene('teahouse', seed=71,
-       models=_req(ORIENT, BOOKROW) | {'chinese_cabinet', 'chinese_screen_panels', 'chinese_console_table', 'chinese_tea_table',
+       models=_req(ORIENT, BOOKROW) | {'painted_wooden_shelves', 'fancy_picture_frame_02', 'vintage_telephone_wall_clock', 'chinese_cabinet', 'chinese_screen_panels', 'chinese_console_table', 'chinese_tea_table',
                                        'chinese_armchair', 'chinese_stool', 'chinese_chandelier', 'antique_katana_01', 'katana_stand_01'},
-       textures={'red_plaster_weathered', 'dark_wooden_planks', 'wooden_panels'}, hdris={'comfy_cafe'})
+       textures={'plastered_wall_04', 'dark_wooden_planks', 'wooden_panels'}, hdris={'comfy_cafe'})
 def teahouse(L, S):
     return compose(L, S, {
-        'room': dict(floor=('dark_wooden_planks', 2.0), wall=('red_plaster_weathered', 2.0), wall_tint=(0.62, 0.4, 0.32),
+        'room': dict(floor=('dark_wooden_planks', 2.0), wall=('plastered_wall_04', 2.4), wall_tint=(0.86, 0.74, 0.58),
                      wainscot=('wooden_panels', 1.4), wainscot_h=0.9, h=3.2),
         'rug': (-1.6, -1.0, 1.8, 0.9),
         'cam': ((0.0, -3.0, 1.5), (0.0, 2.0, 1.15), 25),
         'back': [('cab', 'chinese_cabinet', -2.9, {'scale': 0.82}), ('screen', 'chinese_screen_panels', -1.55),
                  ('console', 'chinese_console_table', 0.25), ('cab2', 'chinese_cabinet', 1.85, {'scale': 0.82}),
-                 ('console2', 'chinese_console_table', 3.2, {'scale': 0.6})],
+                 ('console2', 'chinese_console_table', 3.2, {'scale': 0.6}),
+                 ('ws1', 'painted_wooden_shelves', -0.25, {'z': 1.05}), ('ws2', 'painted_wooden_shelves', 0.75, {'z': 1.05})],
         'free': [('tea', 'chinese_tea_table', (0.1, -0.4), 0.05), ('arm', 'chinese_armchair', (-1.45, -0.6), 0.45),
                  ('stool', 'chinese_stool', (1.35, -0.75), -0.2), ('lamp', 'chinese_chandelier', (0.1, 0.4), 0.0, {'z': 2.4, 'scale': 0.8})],
-        'shelves': ['cab', 'cab2'], 'books': 0.25, 'shelf_pool': ORIENT,
+        'shelves': ['cab', 'cab2', 'ws1', 'ws2'], 'books': 0.25, 'shelf_pool': ORIENT,
         'tops': ['console', 'console2', 'tea', 'stool', 'arm'], 'pool': ORIENT, 'top_extra': 30,
         'floor': {'region': (-3.4, -1.8, 3.4, 1.9), 'count': 10,
                   'pool': [('antique_ceramic_vase_01', 1.0), ('ceramic_vase_03', 0.6), ('brass_vase_01', 0.6), ('potted_plant_02', 0.5, {'scale': (0.6, 0.8)}),
@@ -641,8 +642,9 @@ def teahouse(L, S):
                   'small': ORIENT, 'small_count': 14},
         'wall_art': {'pool': [('fancy_picture_frame_01', 0.6, {'scale': (0.6, 0.8)}), ('hanging_picture_frame_03', 0.6, {'scale': (0.6, 0.8)}),
                               ('antique_katana_01', 0.6, {'pre': 'lie_y'}), ('wall_clock', 0.4), ('ornate_mirror_01', 0.4, {'scale': (0.6, 0.7)}),
-                              ('carved_wooden_plate', 0.6, {'pre': 'lie_x'}), ('hanging_picture_frame_02', 0.5, {'scale': (0.5, 0.6)})],
-                     'z0': 1.4, 'z1': 2.7, 'count': 6},
+                              ('carved_wooden_plate', 0.6, {'pre': 'lie_x'}), ('hanging_picture_frame_02', 0.5, {'scale': (0.5, 0.6)}),
+                              ('fancy_picture_frame_02', 0.5, {'scale': (0.5, 0.7)}), ('vintage_telephone_wall_clock', 0.3)],
+                     'z0': 1.2, 'z1': 2.8, 'count': 10},
         'light': warm_interior(key=700, key_temp=4600, fill=90, practical=160),
     })
 

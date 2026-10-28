@@ -1087,7 +1087,14 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   max-width: 100%;
-  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+.g-findit-tile-name.long {
+  font-size: 9.2px;
+  letter-spacing: -0.02em;
+}
+.g-findit-tile-name.xlong {
+  font-size: 8.2px;
 }
 .g-findit-tile.done .g-findit-tile-img {
   opacity: 0.35;

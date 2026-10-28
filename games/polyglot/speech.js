@@ -1,4 +1,6 @@
-// Text-to-speech (speechSynthesis) and speech recognition wrappers.
+// Text-to-speech and speech recognition wrappers.
+// In the browser it uses speechSynthesis. Inside the Android app (Capacitor) the
+// WebView has no usable voices, so it uses the native TextToSpeech plugin instead.
 
 import { TTS } from './corpus.js';
 
@@ -6,6 +8,9 @@ export function createSpeech() {
   const synth = typeof window !== 'undefined' && window.speechSynthesis ? window.speechSynthesis : null;
   const Utter = typeof window !== 'undefined' ? window.SpeechSynthesisUtterance : null;
   const Recognition = typeof window !== 'undefined' ? window.SpeechRecognition || window.webkitSpeechRecognition : null;
+  const cap = typeof window !== 'undefined' ? window.Capacitor : null;
+  const nativeTTS = cap && cap.isNativePlatform && cap.isNativePlatform() && cap.registerPlugin ? cap.registerPlugin('TextToSpeech') : null;
+  let nativeLangs = null; // null = unknown yet (assume available)
   let voices = [];
   const listeners = new Set();
   const chosen = new Map();
@@ -24,7 +29,20 @@ export function createSpeech() {
     chosen.clear();
     listeners.forEach((fn) => fn());
   }
-  if (synth) {
+  if (nativeTTS) {
+    const norm = (l) => String(l).replace(/_/g, '-').toLowerCase();
+    nativeTTS
+      .getSupportedLanguages()
+      .then((r) => {
+        nativeLangs = (r && r.languages ? r.languages : []).map(norm);
+        listeners.forEach((fn) => fn());
+      })
+      .catch(() => {
+        nativeLangs = null;
+      });
+  }
+  const nativeHas = (lang) => !!nativeTTS && (nativeLangs === null || nativeLangs.some((t) => t === lang || t.startsWith(lang + '-')));
+  if (synth && !nativeTTS) {
     load();
     if (synth.addEventListener) synth.addEventListener('voiceschanged', load);
     else synth.onvoiceschanged = load;
@@ -59,6 +77,13 @@ export function createSpeech() {
   }
 
   function stop() {
+    if (nativeTTS) {
+      try {
+        nativeTTS.stop();
+      } catch {
+        /* ignore */
+      }
+    }
     clearTimeout(pendingTimer);
     pendingTimer = null;
     if (current && current.onEnd) {
@@ -75,7 +100,26 @@ export function createSpeech() {
   }
 
   // Speaks `text` in course language `lang`. opts: { slow, onStart, onEnd }
+  function speakNative(text, lang, opts) {
+    if (disposed || !nativeHas(lang)) return false;
+    const entry = { onEnd: opts.onEnd };
+    stop();
+    current = entry;
+    const finish = () => {
+      if (current === entry) {
+        current = null;
+        opts.onEnd && opts.onEnd();
+      }
+    };
+    opts.onStart && opts.onStart();
+    nativeTTS
+      .speak({ text: String(text), lang: TTS[lang], rate: opts.slow ? 0.55 : 0.92, pitch: 1.0, volume: 1.0, category: 'ambient', queueStrategy: 0 })
+      .then(finish, finish);
+    return true;
+  }
+
   function speak(text, lang, opts = {}) {
+    if (nativeTTS) return speakNative(text, lang, opts);
     if (!synth || !Utter || disposed) return false;
     const voice = voiceFor(lang);
     if (!voice) return false;
@@ -177,11 +221,11 @@ export function createSpeech() {
 
   return {
     get supported() {
-      return !!(synth && Utter);
+      return !!nativeTTS || !!(synth && Utter);
     },
     canRecognize: !!Recognition,
-    has: (lang) => !!(synth && Utter && voiceFor(lang)),
-    voiceName: (lang) => (voiceFor(lang) || {}).name || '',
+    has: (lang) => (nativeTTS ? nativeHas(lang) : !!(synth && Utter && voiceFor(lang))),
+    voiceName: (lang) => (nativeTTS ? 'Android' : (voiceFor(lang) || {}).name || ''),
     speak,
     stop,
     listen,

@@ -49,7 +49,7 @@ export function showMap(app, modeId) {
       h(
         'div',
         { class: 'g-findit-ch-label' },
-        h('small', null, t('chapter', { n: c + 1 })),
+        h('small', null, `${t('chapter', { n: c + 1 })} · ${t(theme.kind)}`),
         h('b', null, ctx.pick(theme.name)),
       ),
       h('div', { class: 'g-findit-ch-stars' }, h('span', { html: ICON.star }), `${chStars}/${PER_CHAPTER * 3}`),

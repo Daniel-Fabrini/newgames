@@ -109,7 +109,9 @@ export function playLevel(app, spec) {
       return w;
     }
     const img = h('img', { class: 'g-findit-tile-img', src: gl.thumb, alt: '', draggable: 'false' });
-    const b = h('button', { class: 'g-findit-tile g-findit-tile-in', 'aria-label': gl.name }, img, h('span', { class: 'g-findit-tile-name' }, gl.name));
+    const longest = Math.max(...gl.name.split(/\s+/).map((w) => w.length));
+    const label = h('span', { class: `g-findit-tile-name${longest > 9 ? ' long' : ''}${longest > 12 ? ' xlong' : ''}` }, gl.name);
+    const b = h('button', { class: 'g-findit-tile g-findit-tile-in', 'aria-label': gl.name }, img, label);
     if (gl.need > 1) b.append(h('span', { class: 'g-findit-badge' }, String(gl.need - gl.shown)));
     if (gl.shown >= gl.need) {
       b.classList.add('done');
@@ -487,7 +489,14 @@ export function playLevel(app, spec) {
     closePopover();
     if (finished || paused || !scene) return true;
     const hit = hitTest(wx, wy);
-    if (!hit) return false;
+    if (!hit) {
+      // tapping something already found is harmless
+      if (marks.some((m) => insideAny(m.it, wx, wy))) {
+        sfx.play('tap');
+        return true;
+      }
+      return false;
+    }
     found(hit.it, goals.indexOf(hit.gl));
     return true;
   }

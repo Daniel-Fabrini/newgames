@@ -156,7 +156,7 @@ export function pickGoals(data, { count, need = 1, d = 0, rnd, avoid = new Set()
       need,
       found: 0,
       shown: 0,
-      items: need > 1 ? g.items.filter((it) => it.n >= 160) : g.items,
+      items: g.items,
       main: shown,
       thumb: thumbUrl(shown.a),
     };
