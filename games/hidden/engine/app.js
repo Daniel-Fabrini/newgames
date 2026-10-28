@@ -98,6 +98,7 @@ export async function createGame(root, ctx, cfg) {
   function show(make) {
     if (screen) screen.destroy();
     screen = null;
+    for (const el of root.querySelectorAll('.g-hidden-sheet-wrap')) el.remove();
     screen = make();
   }
 

@@ -44,7 +44,7 @@ const FOREIGN = {
   de: /[ñãõçœ¿¡èìòù]/,
 };
 
-// Checks one "a|b|c" field. kind: 'word' | 'sentence' | 'example' | 'line'
+// Checks one "a|b|c" field. kind: 'word' | 'sentence' | 'example' | 'line' | 'title'
 function checkField(where, lang, v, kind) {
   if (typeof v !== 'string' || !v.trim()) {
     err(where, `missing/empty "${lang}"`);
@@ -65,8 +65,8 @@ function checkField(where, lang, v, kind) {
     if (kind === 'example') continue;
     const toks = tokenize(a);
     if (!toks.length) err(where, `"${lang}" has no words: ${short(a)}`);
-    if (kind === 'word') {
-      if (/[.!?]$/.test(a)) warn(where, `word "${lang}" should not end with punctuation: ${a}`);
+    if (kind === 'word' || kind === 'title') {
+      if (kind === 'word' && /[.!?]$/.test(a)) warn(where, `word "${lang}" should not end with punctuation: ${a}`);
       continue;
     }
     if (!/[.!?…]$/.test(a)) warn(where, `"${lang}" sentence should end with . ! or ?: ${short(a)}`);
@@ -239,7 +239,7 @@ async function checkUnit(entry) {
   ST.forEach((st, si) => {
     const where = `${entry.id} stories[${si}]`;
     if (!isObj(st)) return err(where, 'must be an object');
-    check6(`${where} title`, st.title, 'line');
+    check6(`${where} title`, st.title, 'title');
     if (!isObj(st.cast) || !Object.keys(st.cast).length) err(where, 'cast must map speaker keys to { name, emoji }');
     else for (const [k, c] of Object.entries(st.cast)) if (!isObj(c) || !c.name || !c.emoji) err(`${where} cast.${k}`, 'needs name and emoji');
     const lines = Array.isArray(st.lines) ? st.lines : [];
