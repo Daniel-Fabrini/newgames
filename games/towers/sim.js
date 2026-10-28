@@ -619,7 +619,7 @@ export class Match {
     const side = this.sides[sideIdx];
     const type = TOWERS[typeId];
     if (!type || !this.unlocked.has(typeId)) return 'locked';
-    if (col < 0 || row < 0 || col >= COLS || row >= ROWS) return 'blocked';
+    if (!Number.isInteger(col) || !Number.isInteger(row) || col < 0 || row < 0 || col >= COLS || row >= ROWS) return 'blocked';
     const v = side.grid[row * COLS + col];
     if (v === 1) return 'blocked';
     if (v === 2) return 'occupied';

@@ -21,6 +21,7 @@ export class PlacementView {
     if (this.ships.some((s) => s.r != null && !canPlace(this.ships, s, this.touch))) this.ships.forEach((s) => (s.r = s.c = null));
     this.canvas = document.createElement('canvas');
     this.canvas.className = 'g-naval-canvas';
+    this.canvas.__view = this; // handy for automated tests
     host.append(this.canvas);
     this.g = this.canvas.getContext('2d');
     this.drag = null;

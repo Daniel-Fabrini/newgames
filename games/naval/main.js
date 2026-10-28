@@ -170,12 +170,12 @@ export async function mount(root, ctx) {
       if (!W) return;
       const tt = (now - t0) / 1000;
       g.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const cs = Math.min(H * 0.3, W * 0.13);
+      const cs = Math.min(H * 0.26, W * 0.12);
       paintWater(g, 0, 0, W, H, cs * 0.9, settings.theme, -tt * 2.2, 0);
       const drift = Math.sin(tt * 0.4) * 6;
-      paintShip(g, ships[2], W * 0.58 + drift * 0.5, H * 0.08, cs * 0.6, settings.skin, { t: tt, wake: true });
-      paintShip(g, ships[1], W * 0.68 - drift, H * 0.5, cs * 0.75, settings.skin, { t: tt, wake: true });
-      paintShip(g, ships[0], W * 0.06 + drift, H * 0.22, cs, settings.skin, { t: tt, wake: true });
+      paintShip(g, ships[2], W * 0.64 - drift * 0.4, H * 0.34, cs * 0.55, settings.skin, { t: tt, wake: true });
+      paintShip(g, ships[1], W * 0.7 + drift * 0.6, H * 0.07, cs * 0.72, settings.skin, { t: tt + 1, wake: true });
+      paintShip(g, ships[0], W * 0.07 + drift, H * 0.1, cs, settings.skin, { t: tt, wake: true });
       const vg = g.createLinearGradient(0, 0, 0, H);
       vg.addColorStop(0, 'rgba(0,0,0,0)');
       vg.addColorStop(0.45, 'rgba(0,0,0,0.05)');
@@ -274,7 +274,7 @@ export async function mount(root, ctx) {
           h('div', { class: 'g-naval-hero-kicker' }, t('yourRank')),
           h('div', { class: 'g-naval-hero-rank' }, rankLabel(ri)),
           h('div', { class: 'progress g-naval-xpbar' }, h('i', { style: { width: Math.round(ri.pct * 100) + '%' } })),
-          h('div', { class: 'g-naval-hero-xp' }, `${fmt(career.xp - ri.from)} / ${fmt(ri.to - ri.from)} XP`, h('span', null, ri.idx < TOP_RANK ? t('nextRank', { rank: rankName(ri.idx + 1) }) : t('nextStar'))),
+          h('div', { class: 'g-naval-hero-xp' }, h('b', null, `${fmt(career.xp - ri.from)} / ${fmt(ri.to - ri.from)} XP`), h('span', null, ri.idx < TOP_RANK ? t('nextRank', { rank: rankName(ri.idx + 1) }) : t('nextStar'))),
         ),
       ),
     );
@@ -685,12 +685,12 @@ export async function mount(root, ctx) {
       view.interactive = false;
       view.alert = true;
       updateBanner();
-      await view.wait(450);
+      await view.wait(320);
       if (!isAlive()) return;
       await view.setMode('defend');
       snd.alarm();
       while (isAlive() && !m.over && m.turn === 1) {
-        await view.wait(420 + Math.random() * 420);
+        await view.wait(320 + Math.random() * 380);
         if (!isAlive()) return;
         const i = aiShot(m.cfg.ai, R.knowledge(m.boards[0]), Math.random, habits);
         const res = i >= 0 ? R.matchFire(m, i) : null;
@@ -708,7 +708,7 @@ export async function mount(root, ctx) {
         }
         if (res.turnEnds) break;
       }
-      await view.wait(650);
+      await view.wait(560);
       if (!isAlive()) return;
       R.endTurn(m);
       busy = false;

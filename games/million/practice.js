@@ -246,7 +246,7 @@ export function practicePlay(app, { theme, diff, root }) {
     },
     {
       cls: 'g-million-play practice',
-      title: t('practiceTitle'),
+      title: t(`set_${theme}`),
       back: () => {
         if (app.sheets.count) return true;
         finishFn && finishFn();

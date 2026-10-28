@@ -1,0 +1,138 @@
+#!/usr/bin/env python3
+"""Turn a rendered scene into game data.
+
+    python post.py <render_dir> <scene_id> <game_scenes_dir> [--quality 80]
+
+Reads beauty.png, passes.exr (object-index pass) and manifest.json written by
+build_scene.py and writes:
+  <scene_id>.webp       the photo (WebP)
+  <scene_id>_s.webp     a small preview for the chapter cards
+  <scene_id>.json       every visible prop: name key, bbox, visible area,
+                        visibility ratio, pickable flag and outline polygons
+
+Needs numpy, opencv-python-headless, pillow and OpenEXR (pip).
+"""
+import json
+import math
+import os
+import sys
+
+import cv2
+import numpy as np
+import OpenEXR
+from PIL import Image, ImageEnhance, ImageFilter
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from names import group_of  # noqa: E402
+
+MIN_HIT = 60  # px (at full res): smaller visible bits are not tappable at all
+MIN_PICK = 420  # px: smallest visible area for a target
+MIN_VIS = 0.2  # fraction of the object that must be visible to be a target
+
+
+def load_index(path):
+    f = OpenEXR.File(path)
+    for p in f.parts:
+        for name, ch in p.channels.items():
+            if name.endswith('Object Index.X') or name.endswith('IndexOB.X'):
+                return np.rint(ch.pixels).astype(np.int32)
+    raise RuntimeError('no object index pass in ' + path)
+
+
+def polygons(mask, total):
+    m = mask.astype(np.uint8)
+    m = cv2.morphologyEx(m, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
+    cs, _ = cv2.findContours(m, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    out = []
+    for c in sorted(cs, key=cv2.contourArea, reverse=True):
+        a = cv2.contourArea(c)
+        if a < max(25, 0.06 * total):
+            continue
+        per = cv2.arcLength(c, True)
+        eps = max(1.2, per * 0.006)
+        ap = cv2.approxPolyDP(c, eps, True)
+        while len(ap) > 48:
+            eps *= 1.4
+            ap = cv2.approxPolyDP(c, eps, True)
+        if len(ap) < 3:
+            continue
+        out.append([int(v) for pt in ap.reshape(-1, 2) for v in pt])
+        if len(out) >= 4:
+            break
+    return out
+
+
+def grade(img):
+    """Gentle photographic finish: a touch of contrast, clarity and a vignette."""
+    img = ImageEnhance.Contrast(img).enhance(1.04)
+    img = ImageEnhance.Color(img).enhance(1.05)
+    w, h = img.size
+    sharp = img.filter(ImageFilter.UnsharpMask(radius=1.2, percent=35, threshold=2))
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    r = np.sqrt(((xx - w / 2) / (w / 2)) ** 2 + ((yy - h / 2) / (h / 2)) ** 2)
+    v = 1 - 0.22 * np.clip((r - 0.55) / 0.85, 0, 1) ** 1.6
+    a = np.asarray(sharp).astype(np.float32) * v[..., None]
+    return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
+
+
+def main(argv):
+    src, sid, dst = argv[0], argv[1], argv[2]
+    q = int(argv[argv.index('--quality') + 1]) if '--quality' in argv else 80
+    os.makedirs(dst, exist_ok=True)
+    man = json.load(open(os.path.join(src, 'manifest.json')))
+    idx = load_index(os.path.join(src, 'passes.exr'))
+    H, W = idx.shape
+    img = Image.open(os.path.join(src, 'beauty.png')).convert('RGB')
+    assert img.size == (W, H), (img.size, W, H)
+    img = grade(img)
+    img.save(os.path.join(dst, sid + '.webp'), 'WEBP', quality=q, method=6)
+    sw = 480
+    img.resize((sw, round(H * sw / W)), Image.LANCZOS).save(os.path.join(dst, sid + '_s.webp'), 'WEBP', quality=72, method=6)
+
+    counts = np.bincount(idx.ravel(), minlength=max(i['index'] for i in man['items']) + 1)
+    items = []
+    missing = set()
+    for it in man['items']:
+        if it['kind'] != 'prop':
+            continue
+        n = int(counts[it['index']]) if it['index'] < len(counts) else 0
+        if n < MIN_HIT:
+            continue
+        g = group_of(it['asset'], it['key'])
+        if not g:
+            missing.add(it['key'])
+            continue
+        mask = idx == it['index']
+        ys, xs = np.nonzero(mask)
+        x0, y0, x1, y1 = int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1
+        bb = it.get('bbox')
+        if bb:
+            exp = max(1.0, (bb[2] - bb[0]) * (bb[3] - bb[1]) * 0.55)
+            vis = min(1.0, n / exp)
+        else:
+            vis = 1.0
+        polys = polygons(mask[y0:y1, x0:x1], n)
+        polys = [[v + (x0 if k % 2 == 0 else y0) for k, v in enumerate(p)] for p in polys]
+        if not polys:
+            continue
+        pick = n >= MIN_PICK and vis >= MIN_VIS
+        items.append({'k': g, 'a': it['asset'], 'b': [x0, y0, x1 - x0, y1 - y0], 'n': n, 'v': round(vis, 2), 't': 1 if pick else 0,
+                      'p': polys})
+    data = {'id': sid, 'w': W, 'h': H, 'img': sid + '.webp', 'prev': sid + '_s.webp', 'items': items}
+    with open(os.path.join(dst, sid + '.json'), 'w') as f:
+        json.dump(data, f, separators=(',', ':'))
+    groups = {}
+    for i in items:
+        if i['t']:
+            groups.setdefault(i['k'], 0)
+            groups[i['k']] += 1
+    size = os.path.getsize(os.path.join(dst, sid + '.webp'))
+    print(f'{sid}: {W}x{H} webp {size // 1024} KB, {len(items)} hit items, {sum(i["t"] for i in items)} pickable, '
+          f'{len(groups)} pickable names, dup names {sum(1 for v in groups.values() if v > 1)}')
+    if missing:
+        print('  no name for:', ' '.join(sorted(missing)))
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))

@@ -35,8 +35,8 @@ export class Brain {
     if (rnd() < (1 - this.skill) * 0.25) return;
 
     const opp = match.sides[1 - side.index];
-    this.buildStep(match, side, opp);
     this.upgradeStep(match, side);
+    this.buildStep(match, side, opp);
     if (match.sending) this.sendStep(match, side, opp);
   }
 
@@ -47,6 +47,9 @@ export class Brain {
     for (const t of side.towers) counts[t.type] = (counts[t.type] || 0) + 1;
     const n = side.towers.length;
     const enemyMix = this.mix(side);
+    // Build up to a target count first; beyond it only build from a surplus.
+    const target = 5 + side.round;
+    const floor = n < target ? 0 : 120 + side.round * 4;
     let best = null, bestScore = -Infinity;
     for (const id of TOWER_ORDER) {
       if (!match.unlocked.has(id)) continue;
@@ -59,19 +62,18 @@ export class Brain {
         case 'frost': s = 0.75 - 0.25 * c + (c === 0 && n >= 2 ? 0.45 : 0); break;
         case 'bolt': s = 0.85 - 0.12 * c + (enemyMix.groups > 6 ? 0.3 : 0); break;
         case 'glue': s = 0.6 - 0.2 * c + (enemyMix.armored ? 0.45 : 0); break;
-        case 'sniper': s = 0.35 - 0.1 * c + (enemyMix.camo || enemyMix.boss ? 0.6 : 0) + (side.round >= 12 ? 0.2 : 0); break;
-        case 'lantern': s = (c === 0 && n >= 5 ? 0.75 : 0.25 - 0.1 * c); break;
+        case 'sniper': s = 0.35 - 0.1 * c + (enemyMix.camo ? 1.1 : 0) + (enemyMix.boss ? 0.6 : 0) + (side.round >= 12 ? 0.2 : 0); break;
+        case 'lantern': s = (c < 2 && n >= 4 ? 0.7 : 0.1) + (enemyMix.camo ? 0.9 : 0); break;
         default: s = 0;
       }
       if (s <= 0) continue;
-      if (type.cost > side.coins) continue;
+      if (type.cost + floor > side.coins) continue;
       if (s > bestScore) { bestScore = s; best = id; }
     }
     if (!best) return;
     // Save up for the best tower when it is still too expensive for the mid game.
     const cell = this.bestCell(match, side, best);
     if (!cell) return;
-    if (side.coins < TOWERS[best].cost) return;
     match.build(side.index, best, cell.col, cell.row);
   }
 
@@ -97,7 +99,7 @@ export class Brain {
     const cov = { track: match.track, cells: [] };
     for (let r = 0; r < ROWS; r++) {
       for (let c = 0; c < COLS; c++) {
-        cov.cells.push({ x: (c + 0.5) * CELL, y: (r + 0.5) * CELL, c, r, samples });
+        cov.cells.push({ x: (c + 0.5) * CELL, y: (r + 0.5) * CELL, col: c, row: r, c, r, samples });
       }
     }
     this.covCache = cov;
@@ -132,7 +134,8 @@ export class Brain {
   // ----------------------------------------------------------- upgrading
 
   upgradeStep(match, side) {
-    const reserve = (30 + side.round * 2) * this.reserveMul;
+    if (side.towers.length < 3 && side.round < 4) return;
+    const reserve = (4 + side.round * 0.5) * this.reserveMul;
     const towers = side.towers.slice().sort((a, b) => b.st.dmg * (1 + b.buff) / b.st.cd - a.st.dmg * (1 + a.buff) / a.st.cd);
     for (const t of towers) {
       const plan = PLAN[t.type] || 'AB';
@@ -140,7 +143,7 @@ export class Brain {
         if (match.upgradeReason(side.index, t.id, path)) continue;
         const tier = path === 'A' ? t.a : t.b;
         const cost = TOWERS[t.type][path][tier].cost;
-        if (side.coins < cost + reserve) return;
+        if (side.coins < cost + reserve) continue;
         match.upgrade(side.index, t.id, path);
         return;
       }
@@ -152,14 +155,14 @@ export class Brain {
   sendStep(match, side, opp) {
     if (side.round < 2) return;
     if (match.time - side.lastSend < 3.5) return;
-    const reserve = (50 + side.round * 5) * this.reserveMul;
+    const reserve = (20 + side.round * 3) * this.reserveMul;
     const oppTowers = opp.towers.length;
     const oppLives = opp.lives;
     let best = -1, bestScore = -Infinity;
     for (let i = 0; i < SENDS.length; i++) {
       const o = SENDS[i];
       if (o.unlock > side.round) continue;
-      if (side.coins < o.cost + reserve) continue;
+      if (side.coins < o.cost + reserve * 0.5) continue;
       const unit = HP_UNIT[o.tier] * (o.flags & FAST ? 1.2 : 1) * o.count;
       let score = (o.inc * 8 + unit) / o.cost;
       // Aggressive when the opponent is low on lives or thin on towers.

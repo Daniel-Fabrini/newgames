@@ -1021,22 +1021,29 @@ export function sweepSprite(themeId) {
 }
 
 // Persistent miss marker (white buoy ring).
+let missPeg = null;
 export function paintMiss(g, cx, cy, cs, t, seed, fresh = 0) {
+  if (!missPeg) {
+    missPeg = mk(48, 48);
+    const pg = missPeg.getContext('2d');
+    const gr = pg.createRadialGradient(18, 18, 0, 24, 24, 24);
+    gr.addColorStop(0, '#ffffff');
+    gr.addColorStop(0.75, '#a9c7dc');
+    gr.addColorStop(1, '#7f9fb6');
+    pg.fillStyle = gr;
+    pg.beginPath();
+    pg.arc(24, 24, 23, 0, Math.PI * 2);
+    pg.fill();
+  }
   const r = cs * 0.13;
-  g.save();
-  g.strokeStyle = `rgba(220,240,255,${0.28 + 0.12 * Math.sin(t * 2 + seed)})`;
+  const w = Math.sin(t * 2 + seed);
+  g.strokeStyle = `rgba(220,240,255,${0.28 + 0.12 * w})`;
   g.lineWidth = Math.max(1, cs * 0.035);
   g.beginPath();
-  g.arc(cx, cy, r * (1.9 + 0.25 * Math.sin(t * 2 + seed)), 0, Math.PI * 2);
+  g.arc(cx, cy, r * (1.9 + 0.25 * w), 0, Math.PI * 2);
   g.stroke();
-  const gr = g.createRadialGradient(cx - r * 0.3, cy - r * 0.3, 0, cx, cy, r);
-  gr.addColorStop(0, '#ffffff');
-  gr.addColorStop(1, '#a9c7dc');
-  g.fillStyle = gr;
-  g.beginPath();
-  g.arc(cx, cy, r * (1 + fresh * 0.6), 0, Math.PI * 2);
-  g.fill();
-  g.restore();
+  const pr = r * (1 + fresh * 0.6);
+  g.drawImage(missPeg, cx - pr, cy - pr, pr * 2, pr * 2);
 }
 
 // Burning hit: crater + flickering flames (additive).

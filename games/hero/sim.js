@@ -259,11 +259,21 @@ export function gkHome(w, bx, by) {
   if (L.type === 'penalty') return { x: 0, y: 0.35 };
   const d = hyp(bx, by) || 1;
   const out = clamp(0.35 + d * 0.045, 0.5, 1.6);
-  let x = (bx / d) * out + clamp(bx * 0.035, -0.55, 0.55);
-  const y = Math.max(0.45, (by / d) * out);
+  // stand on the bisector of the shooting angle
+  const l1 = hyp(-GW - bx, by) || 1;
+  const l2 = hyp(GW - bx, by) || 1;
+  let ux = (-GW - bx) / l1 + (GW - bx) / l2;
+  let uy = -by / l1 - by / l2;
+  const ul = hyp(ux, uy) || 1;
+  ux /= ul;
+  uy /= ul;
+  const near = Math.sign(bx) * (GW - 0.35);
+  let x = uy < -0.2 && by > out ? bx + ux * ((out - by) / uy) : near;
+  const tight = clamp((Math.abs(bx) - by * 1.2 - 3) / 8, 0, 1);
+  x = x * (1 - tight) + near * tight;
   if (L.type === 'freekick' && w.wallSide && by > 14) x = -w.wallSide * 0.75;
-  x = clamp(x, -GW + 0.7, GW - 0.7);
-  return { x, y };
+  x = clamp(x, -GW + 0.35, GW - 0.35);
+  return { x, y: Math.max(0.45, out * (1 - tight) + 0.5 * tight) };
 }
 
 export function cloneWorld(w) {
@@ -346,7 +356,10 @@ function buildFlight(w, plan, from, o) {
     origin: { x: o.x, y: o.y },
   };
   if (plan.type === 'shot') {
-    const c = clamp(plan.curl || 0, -0.25, 0.25);
+    // a ball can only swing so far: cap the sideways bend at ~2.8 m
+    const chord = hyp(plan.tx - o.x, o.y) || 1;
+    const cmax = Math.min(0.25, 2.8 / chord);
+    const c = clamp(plan.curl || 0, -cmax, cmax);
     F.tx = plan.tx;
     F.tz = clamp(plan.tz, BR, 4.5);
     F.curve = buildCurve(o, { x: plan.tx, y: 0 }, c);
@@ -355,7 +368,7 @@ function buildFlight(w, plan, from, o) {
     F.header = o.z >= 1.2;
     const L = F.curve.chord;
     F.v0 = F.header ? 15.5 : F.air ? 23.5 : 27 - 16 * Math.abs(c);
-    F.v1 = F.v0 * 0.94;
+    F.v1 = F.v0 * clamp(1 - 0.006 * L, 0.8, 0.96);
     F.z1 = F.tz;
     F.h = F.header ? 0 : clamp((F.z1 - 0.3) / 2.1, 0, 1) * clamp((L - 9) / 16, 0, 1) * 2.0;
     F.outside = o.y > BOX_Y + 0.01 || Math.abs(o.x) > BOX_X;
@@ -397,7 +410,8 @@ function buildFlight(w, plan, from, o) {
     }
   }
   F.receiver = R;
-  const c = clamp(plan.curl || 0, -0.3, 0.3);
+  const pc = Math.min(0.3, 6 / (hyp(target.x - o.x, target.y - o.y) || 1));
+  const c = clamp(plan.curl || 0, -pc, pc);
   F.curve = buildCurve(o, target, c);
   F.curl = c;
   const L = F.curve.chord;
@@ -495,7 +509,7 @@ function computeIntercepts(w, F) {
         if (!shot && F.receiver >= 0 && s > len - 1.0) {
           // duel at the receiver's feet: defenders mostly track their man
           tb += end ? F.wait : 0;
-          ok = dist <= 0.3 + reachIn(tb - react, vmax) * 0.3;
+          ok = dist <= 0.3 + Math.min(0.85, reachIn(tb - react, vmax) * 0.3);
         } else {
           if (end) tb += F.wait;
           ok = dist <= 0 || dist <= reachIn(tb - react, vmax);
@@ -591,11 +605,7 @@ function stepFlight(w, dt) {
   }
   if (F.type === 'shot') {
     stepKeeper(w, F, dt);
-    const k = w.gk;
-    if (k && !F.gkChecked && b.y <= k.y) {
-      F.gkChecked = true;
-      if (keeperSaves(w, F)) return;
-    }
+    if (w.gk && F.time > 0.05 && keeperSaves(w, F)) return;
     if (F.s >= len) goalLine(w, F);
   } else if (F.s >= len && F.waited >= F.wait - 1e-9) arrive(w, F);
 }
@@ -604,21 +614,29 @@ function stepKeeper(w, F, dt) {
   const k = w.gk;
   if (!k) return;
   if (F.time < w.P.gkReact) return;
-  if (F.vy >= -0.5) return;
   const b = w.ball;
-  const tau = Math.max(0, (b.y - k.y) / -F.vy);
-  let px = b.x + F.vx * tau;
-  let pz = b.z + F.vz * tau;
-  if (Math.abs(px) > GW + 0.3) {
-    // reads it going wide: holds his ground
-    px = k.kx;
-    pz = k.kz;
+  const vx = F.vx;
+  const vy = F.vy;
+  const vz = F.vz;
+  const v2 = vx * vx + vy * vy;
+  if (v2 < 1) return;
+  // where does the ball (straight-line guess) pass closest to him?
+  let tc = ((k.kx - b.x) * vx + (k.y - b.y) * vy) / v2;
+  if (tc < 0) tc = 0;
+  let px = b.x + vx * tc;
+  let pz = b.z + vz * tc;
+  let spd = w.P.gkSpeed;
+  const xg = vy < -0.5 ? b.x + vx * (b.y / -vy) : px;
+  if (Math.abs(xg) > GW + 0.6) {
+    // reads it going wide: only covers his post
+    px = clamp(px, -GW + 0.6, GW - 0.6);
+    spd *= 0.65;
   }
   pz = clamp(pz, 0.2, 2.35);
   const dx = px - k.kx;
   const dz = pz - k.kz;
   const d = hyp(dx, dz);
-  const m = Math.min(d, w.P.gkSpeed * dt);
+  const m = Math.min(d, spd * dt);
   if (d > 1e-6) {
     k.kx += (dx / d) * m;
     k.kz += (dz / d) * m;
@@ -640,8 +658,11 @@ function keeperSaves(w, F) {
   const b = w.ball;
   const R = w.P.gkReach;
   const dx = (b.x - k.kx) / (R * 1.05);
+  const dy = (b.y - k.y) / 0.6;
   const dz = (b.z - k.kz) / (R * 1.3);
-  const n = dx * dx + dz * dz;
+  let n = dx * dx + dy * dy + dz * dz;
+  // standing keeper: the body blocks too
+  if (n > 1 && Math.abs(b.x - k.x) < 0.42 && Math.abs(b.y - k.y) < 0.45 && b.z < 1.95) n = 0.9;
   if (n > 1) return false;
   const speed = hyp(F.vx, F.vy, F.vz);
   w.flight = null;
@@ -687,7 +708,7 @@ function goalLine(w, F) {
       hero: !!shooter.hero,
       assist,
       heroAssist: assist >= 0 && !!w.att[assist].hero,
-      curl: Math.abs(F.curl) >= 0.07,
+      curl: Math.abs(F.curl) * F.curve.chord >= 1.0,
       air: F.air,
       header: F.header,
       outside: F.outside,

@@ -796,9 +796,7 @@ def render(out_dir):
     st = sc.render.image_settings
     if 'media_type' in st.bl_rna.properties:
         st.media_type = 'MULTI_LAYER_IMAGE'
-        st.file_format = 'OPEN_EXR'
-    else:
-        st.file_format = 'OPEN_EXR_MULTILAYER'
+    st.file_format = 'OPEN_EXR_MULTILAYER'
     st.color_depth = '32'
     st.exr_codec = 'ZIP'
     img.save_render(os.path.join(out_dir, 'passes.exr'), scene=sc)

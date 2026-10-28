@@ -32,7 +32,7 @@ export const FLAG_NAMES = { [FAST]: 'flag_fast', [CAMO]: 'flag_camo', [REGEN]: '
 // Hp multiplier that grows forever with the round number.
 export function hpScale(round) {
   const x = Math.max(0, round - 1);
-  return 1 + 0.09 * x + 0.0045 * x * x;
+  return 1 + 0.1 * x + 0.011 * x * x;
 }
 
 export function roundInterval(round) {
@@ -40,7 +40,7 @@ export function roundInterval(round) {
 }
 
 export function roundIncome(round) {
-  return 40 + round * 2;
+  return 60 + round * 3;
 }
 
 // Towers. base = stats at tier 0, A/B = upgrade paths (3 tiers each).
@@ -150,7 +150,7 @@ export const TOWER_ORDER = ['archer', 'cannon', 'frost', 'bolt', 'glue', 'sniper
 
 // Stats for a tower with a tiers on path A and b tiers on path B.
 export function towerStats(type, a, b) {
-  const s = { ...type.base };
+  const s = { kind: type.kind, ...type.base };
   for (let i = 0; i < a; i++) Object.assign(s, type.A[i].set);
   for (let i = 0; i < b; i++) Object.assign(s, type.B[i].set);
   return s;
@@ -194,7 +194,7 @@ export const TRACKS = [
     wp: [[-1, 2], [8, 2], [8, 5], [1, 5], [1, 8], [8, 8], [8, 11], [1, 11], [1, 14]],
     map: [
       '#........#', '....#.....', '..........', '...~~.....', '...~~.....',
-      '#.........', '..........', '..........', '........#.', '..#.......',
+      '#.........', '..........', '..........', '.........#', '..#.......',
       '~~........', '..........', '#.....~~..', '........#.',
     ],
   },
@@ -223,8 +223,8 @@ export const TRACKS = [
     bg: ['#58c4ff', '#d8f4ff'], path: '#fff3cf', edge: '#ffcf6e', grass: '#8fe08a',
     wp: [[-1, 4], [2, 4], [2, 1], [7, 1], [7, 8], [3, 8], [3, 12], [10, 12]],
     map: [
-      '..~~~~~~~~', '..........', '..~~~.~~~~', '..~~~~~~~.', '...~~~~~~~',
-      '~~.~~~~~~~', '~~~~~~~~~~', '~~~~~~~.~~', '~~~.....~~', '~~~.~~~~~~',
+      '..~~~~~~~~', '..........', '...~~~~.~~', '...~~~~.~~', '...~~~~.~~',
+      '~~.~~~~.~~', '~~~~~~~.~~', '~~~~~~~.~~', '~~~.....~~', '~~~.~~~~~~',
       '~~~.~~~~~~', '~~~.~~~~~~', '~~~.......', '....~~~~~~',
     ],
   },
@@ -233,7 +233,7 @@ export const TRACKS = [
     bg: ['#4f7d45', '#1d3b2a'], path: '#8a7040', edge: '#4f4024', grass: '#3b5e35',
     wp: [[4, -1], [4, 2], [1, 2], [1, 6], [8, 6], [8, 9], [2, 9], [2, 14]],
     map: [
-      '.....~~~~.', '.....~~~~~', '.....~....', '~~........', '~.........',
+      '.....~~~~.', '.....~~~~~', '.....~....', '~.........', '~.........',
       '..........', '..........', '.~~.......', '#.........', '.........~',
       '~~........', '~~........', '#.....~~..', '....~~~~..',
     ],

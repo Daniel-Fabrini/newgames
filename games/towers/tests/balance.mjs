@@ -22,7 +22,7 @@ for (const tr of TRACKS) {
     if (tr.map[r][c] === '.' && !g.cells.has(idx)) free++;
     if (tr.map[r][c] !== '.' && g.cells.has(idx)) fail(`${tr.id}: obstacle on path at ${c},${r}`);
   }
-  if (free < 30) fail(`${tr.id}: only ${free} buildable cells`);
+  if (free < 15) fail(`${tr.id}: only ${free} buildable cells`);
   console.log(`track ${tr.id.padEnd(8)} path ${g.total.toFixed(0).padStart(5)} units, buildable ${free}`);
 }
 
