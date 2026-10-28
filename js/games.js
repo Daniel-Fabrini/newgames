@@ -144,7 +144,7 @@ export const GAMES = [
   {
     id: 'findit',
     cat: 'puzzle',
-    progress: 40,
+    progress: 100,
     name: { pt: 'Caça-Objetos', en: 'Seek & Find', es: 'Busca y Encuentra' },
     sub: { pt: 'Objetos Escondidos', en: 'Hidden Objects', es: 'Objetos Ocultos' },
     about: {

@@ -72,6 +72,8 @@ GROUPS = {
     'lion_head': ('cabeça de leão', 'lion head', 'cabeza de león', ['lion_head']),
     'bull_head': ('cabeça de touro', 'bull head', 'cabeza de toro', ['bull_head']),
     'ukulele': ('cavaquinho', 'ukulele', 'ukelele', ['Ukulele_01']),
+    'ceramic_pot': ('panela de cerâmica', 'ceramic pot', 'olla de cerámica', ['ceramic_pot']),
+    'bar_stool': ('banco de bar', 'bar stool', 'taburete de bar', ['metal_stool_01', 'metal_stool_02', 'metal_stool_03', 'bar_chair_round_01']),
     'wine': ('garrafa de vinho', 'wine bottle', 'botella de vino', ['wine_bottles_01/wine_bottles_01', 'wine_bottles_01']),
     'treasure_chest': ('baú do tesouro', 'treasure chest', 'cofre del tesoro', ['treasure_chest']),
     'suitcase': ('mala antiga', 'old suitcase', 'maleta antigua', ['vintage_suitcase']),
