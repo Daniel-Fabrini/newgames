@@ -1076,6 +1076,7 @@ export async function mount(root, ctx) {
     const el = h(
       'div',
       { class: 'g-wordsearch-center' },
+      h('div', { class: 'g-wordsearch-cornercoins' }, coinPill),
       h(
         'div',
         { class: 'g-wordsearch-card static g-wordsearch-dailycard' },
@@ -1112,6 +1113,7 @@ export async function mount(root, ctx) {
     const el = h(
       'div',
       { class: 'g-wordsearch-center' },
+      h('div', { class: 'g-wordsearch-cornercoins' }, coinPill),
       h(
         'div',
         { class: 'g-wordsearch-card static g-wordsearch-timedcard' },
