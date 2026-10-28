@@ -14,6 +14,26 @@ export const sceneUrl = (file) => new URL(`../scenes/${file}`, import.meta.url).
 export const thumbUrl = (asset) => sceneUrl(`thumbs/${asset.replace('/', '__')}.webp`);
 export const nameOf = (k, lang) => (NAMES[k] && (NAMES[k][lang] || NAMES[k].en)) || k;
 
+// a point well inside the visible outline (for hints, effects and tests):
+// the grid sample that is farthest from the outline
+function interiorPoint(it) {
+  const [x0, y0, w, h] = it.b;
+  let best = { x: x0 + w / 2, y: y0 + h / 2 }, bestD = -1;
+  const N = 14;
+  for (let i = 0; i < N; i++) {
+    for (let j = 0; j < N; j++) {
+      const x = x0 + ((i + 0.5) / N) * w, y = y0 + ((j + 0.5) / N) * h;
+      if (!insideAny(it, x, y)) continue;
+      const d = edgeDist(it, x, y);
+      if (d > bestD) {
+        bestD = d;
+        best = { x, y };
+      }
+    }
+  }
+  return best;
+}
+
 function prepare(data) {
   for (const it of data.items) {
     it.polys = it.p.map((p) => Float32Array.from(p));
@@ -33,12 +53,7 @@ function prepare(data) {
         best = a ? { x: cx / (3 * a), y: cy / (3 * a) } : { x: p[0], y: p[1] };
       }
     }
-    it.c = best && insideAny(it, best.x, best.y) ? best : { x: it.b[0] + it.b[2] / 2, y: it.b[1] + it.b[3] / 2 };
-    if (!insideAny(it, it.c.x, it.c.y)) {
-      // concave outline: use a vertex pulled slightly inwards
-      const p = it.polys[0];
-      it.c = { x: (p[0] * 3 + it.b[0] + it.b[2] / 2) / 4, y: (p[1] * 3 + it.b[1] + it.b[3] / 2) / 4 };
-    }
+    it.c = best && insideAny(it, best.x, best.y) ? best : interiorPoint(it);
     it.s = Math.max(it.b[2], it.b[3]);
     it.ease = clamp((Math.log(it.n) - Math.log(400)) / (Math.log(24000) - Math.log(400)), 0, 1) * 0.75 + clamp(it.v, 0, 1) * 0.25;
   }
@@ -86,11 +101,14 @@ function insidePoly(p, x, y) {
   return ins;
 }
 
+// even-odd over all rings: outer outlines minus the holes where something
+// in front covers the object
 export function insideAny(it, x, y) {
   const b = it.b;
   if (x < b[0] - 1 || y < b[1] - 1 || x > b[0] + b[2] + 1 || y > b[1] + b[3] + 1) return false;
-  for (const p of it.polys) if (insidePoly(p, x, y)) return true;
-  return false;
+  let n = 0;
+  for (const p of it.polys) if (insidePoly(p, x, y)) n++;
+  return n % 2 === 1;
 }
 
 function segDist(px, py, ax, ay, bx, by) {
@@ -101,16 +119,20 @@ function segDist(px, py, ax, ay, bx, by) {
   return Math.hypot(px - (ax + t * dx), py - (ay + t * dy));
 }
 
-export function distTo(it, x, y) {
-  if (insideAny(it, x, y)) return 0;
-  const b = it.b;
-  const out = Math.max(b[0] - x, 0, x - b[0] - b[2]) + Math.max(b[1] - y, 0, y - b[1] - b[3]);
-  if (out > 400) return out;
+function edgeDist(it, x, y) {
   let d = Infinity;
   for (const p of it.polys) {
     for (let i = 0, j = p.length - 2; i < p.length; j = i, i += 2) d = Math.min(d, segDist(x, y, p[j], p[j + 1], p[i], p[i + 1]));
   }
   return d;
+}
+
+export function distTo(it, x, y) {
+  if (insideAny(it, x, y)) return 0;
+  const b = it.b;
+  const out = Math.max(b[0] - x, 0, x - b[0] - b[2]) + Math.max(b[1] - y, 0, y - b[1] - b[3]);
+  if (out > 400) return out;
+  return edgeDist(it, x, y);
 }
 
 export function tracePath(g, it) {

@@ -3,13 +3,14 @@
 // Used by Settings → "Test sound and voice".
 
 import { audio } from './sfx.js';
+import { APP_BUILD } from '../config.js';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export async function audioDiagnostics(log, lang = 'it-IT', sample = 'Ciao, come stai?') {
   const cap = typeof window !== 'undefined' ? window.Capacitor : null;
   const native = !!(cap && cap.isNativePlatform && cap.isNativePlatform());
-  log(`1) App: ${native ? 'Android (nativo)' : 'navegador'}`);
+  log(`1) App: ${native ? 'Android (nativo)' : 'navegador'} · código ${APP_BUILD}`);
 
   // Beep through WebAudio (same path as the app's sound effects).
   try {
@@ -91,6 +92,7 @@ export async function audioDiagnostics(log, lang = 'it-IT', sample = 'Ciao, come
       });
     }
   }
+  log(`6b) Voz do Poliglota: ${window.__speechVersion || 'ainda não iniciada (abra o Poliglota)'}`);
   const evs = (typeof window !== 'undefined' && window.__speechLog) || [];
   log('7) Falas recentes do jogo:' + (evs.length ? '' : ' (nenhuma ainda: abra o Poliglota e toque numa palavra)'));
   evs.slice(-10).forEach((e) => log('   ' + e));

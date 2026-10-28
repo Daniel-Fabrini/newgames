@@ -39,26 +39,46 @@ def load_index(path):
     raise RuntimeError('no object index pass in ' + path)
 
 
+def _simplify(c):
+    per = cv2.arcLength(c, True)
+    eps = max(1.2, per * 0.006)
+    ap = cv2.approxPolyDP(c, eps, True)
+    while len(ap) > 48:
+        eps *= 1.4
+        ap = cv2.approxPolyDP(c, eps, True)
+    return ap
+
+
 def polygons(mask, total):
+    """Outline rings of the visible region: outer contours plus the holes
+    where something in front covers the object (even-odd rule)."""
     m = mask.astype(np.uint8)
     m = cv2.morphologyEx(m, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
-    cs, _ = cv2.findContours(m, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    cs, hier = cv2.findContours(m, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
+    if hier is None:
+        return []
+    hier = hier[0]
+    outers = sorted([i for i in range(len(cs)) if hier[i][3] < 0], key=lambda i: cv2.contourArea(cs[i]), reverse=True)
     out = []
-    for c in sorted(cs, key=cv2.contourArea, reverse=True):
-        a = cv2.contourArea(c)
-        if a < max(25, 0.06 * total):
+    for i in outers[:4]:
+        if cv2.contourArea(cs[i]) < max(25, 0.06 * total):
             continue
-        per = cv2.arcLength(c, True)
-        eps = max(1.2, per * 0.006)
-        ap = cv2.approxPolyDP(c, eps, True)
-        while len(ap) > 48:
-            eps *= 1.4
-            ap = cv2.approxPolyDP(c, eps, True)
+        ap = _simplify(cs[i])
         if len(ap) < 3:
             continue
         out.append([int(v) for pt in ap.reshape(-1, 2) for v in pt])
-        if len(out) >= 4:
-            break
+        # holes of this outer ring (children), biggest first
+        holes = []
+        j = hier[i][2]
+        while j >= 0:
+            holes.append(j)
+            j = hier[j][0]
+        for j in sorted(holes, key=lambda k: cv2.contourArea(cs[k]), reverse=True)[:3]:
+            if cv2.contourArea(cs[j]) < max(60, 0.04 * total):
+                continue
+            hp = _simplify(cs[j])
+            if len(hp) >= 3:
+                out.append([int(v) for pt in hp.reshape(-1, 2) for v in pt])
     return out
 
 

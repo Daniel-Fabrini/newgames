@@ -237,7 +237,7 @@ export function playLevel(app, spec) {
       if (k < 1) {
         // the "found!" flash: gold fill fading, thick glowing outline
         g.fillStyle = `rgba(255, 222, 120, ${0.42 * (1 - k)})`;
-        g.fill();
+        g.fill('evenodd');
         g.shadowColor = 'rgba(255, 200, 60, 0.95)';
         g.shadowBlur = (10 + 18 * (1 - k)) * dpr;
         g.strokeStyle = '#ffe08a';
@@ -729,6 +729,11 @@ export function playLevel(app, spec) {
         view.request();
       },
       hint: (k) => useHint(k),
+      hitAt: (x, y) => {
+        const r = hitTest(x, y);
+        const inside = scene.data.items.filter((o) => insideAny(o, x, y)).map((o) => [o.k, o.n]);
+        return { hit: r && r.gl.k, inside };
+      },
       elapsed,
       state: () => ({ ...app.state }),
     };

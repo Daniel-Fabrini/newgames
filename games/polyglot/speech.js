@@ -15,7 +15,14 @@ function logEv(msg) {
   }
 }
 
+export const SPEECH_VERSION = 'speech-v5';
+
 export function createSpeech(onProblem) {
+  try {
+    window.__speechVersion = SPEECH_VERSION;
+  } catch {
+    /* ignore */
+  }
   const synth = typeof window !== 'undefined' && window.speechSynthesis ? window.speechSynthesis : null;
   const Utter = typeof window !== 'undefined' ? window.SpeechSynthesisUtterance : null;
   const Recognition = typeof window !== 'undefined' ? window.SpeechRecognition || window.webkitSpeechRecognition : null;
