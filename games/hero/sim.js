@@ -598,6 +598,11 @@ function stepFlight(w, dt) {
     F.vy = (b.y - py) / dt;
     F.vz = (b.z - pz) / dt;
   }
+  // left the field before reaching its target (over the goal line or touchline)
+  if (F.s < len - 0.05 && (b.y < -BR * 2 || Math.abs(b.x) > PITCH_X + 0.3 || b.y > HALF_Y * 2)) {
+    outOfPlay(w, F);
+    return;
+  }
   // interception / block
   if (F.icpt && F.time >= F.icpt.tb) {
     intercept(w, F);
@@ -746,6 +751,19 @@ function goalLine(w, F) {
   }
   w.result = { ok: false, reason: z > GH ? 'over' : 'wide', goal: false };
   w.events.push({ type: 'miss' });
+}
+
+function outOfPlay(w, F) {
+  const b = w.ball;
+  w.flight = null;
+  w.phase = 'post';
+  w.postT = 0;
+  b.free = true;
+  b.vx = F.vx;
+  b.vy = F.vy;
+  b.vz = F.vz;
+  w.result = { ok: false, reason: F.type === 'shot' ? 'wide' : 'out', goal: false };
+  w.events.push({ type: F.type === 'shot' ? 'miss' : 'lost' });
 }
 
 function intercept(w, F) {
