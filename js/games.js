@@ -258,7 +258,7 @@ export const GAMES = [
   {
     id: 'farm',
     cat: 'strategy',
-    progress: 100,
+    progress: 70,
     name: { pt: 'Fazenda Aventura', en: 'Farm Adventure', es: 'Granja Aventura' },
     sub: { pt: 'Fazenda e Expedições', en: 'Farm & Expeditions', es: 'Granja y Expediciones' },
     about: {
@@ -277,7 +277,7 @@ export const GAMES = [
   {
     id: 'pingpong',
     cat: 'sport',
-    progress: 100,
+    progress: 70,
     name: { pt: 'Tênis de Mesa', en: 'Table Tennis', es: 'Tenis de Mesa' },
     sub: { pt: 'Ping-Pong 3D', en: '3D Ping Pong', es: 'Ping-Pong 3D' },
     about: {

@@ -599,23 +599,28 @@ class Composer:
             return self.place_fixed(spec, (x, y, z), yw, scale, kind=kind, key=key)
         return None
 
-    def fill(self, levels, pool, count, face='cam', jitter=0.6, scale=(0.9, 1.1), stack_kinds=(), tries=10, size_bias=0.0):
+    def fill(self, levels, pool, count, face='cam', jitter=0.6, scale=(0.9, 1.1), stack_kinds=(), tries=10, size_bias=0.0, maxn=3):
         """Scatter `count` props from `pool` ([(spec, weight, opts)]) over levels."""
         r = self.rnd
         total = sum(l.area for l in levels) or 1
         placed = []
         specs = expand(pool)
         weights = [s[1] for s in specs]
+        counts = {}
         for _ in range(count * 3):
             if len(placed) >= count:
                 break
             lv = r.choices(levels, [l.area for l in levels])[0] if len(levels) > 1 else levels[0]
             spec, w, opt = r.choices(specs, weights)[0]
+            k = json.dumps(spec, sort_keys=True, default=str)
+            if counts.get(k, 0) >= opt.get('maxn', maxn):
+                continue
             sc = r.uniform(*opt.get('scale', scale))
             it = self.try_on_level(lv, spec, sc, yaw=opt.get('yaw'), tries=tries, face=opt.get('face', face),
                                    jitter=opt.get('jitter', jitter), kind=opt.get('kind', 'prop'))
             if it:
                 placed.append(it)
+                counts[k] = counts.get(k, 0) + 1
                 if opt.get('stack') or it['asset'] in stack_kinds:
                     for nl in scan_levels(it['objs'], cell=0.02, max_clear=lv_clear_above(lv, it), tag='stack'):
                         if nl.z > it['min'].z + 0.02:
@@ -671,6 +676,76 @@ class Composer:
                         x += 0.03
         return placed
 
+    def book_rows(self, levels, assets=('decorative_book_set_01', 'book_encyclopedia_set_01'), run=(4, 16), gap=(0.06, 0.3),
+                  stack_prob=0.18, density=1.0):
+        """Rows of real books standing spine-out, with gaps for curios and the
+        odd horizontal pile, like a lived-in bookcase."""
+        r = self.rnd
+        parts = {a: [n for n in part_names(a)] for a in assets}
+        placed = []
+        for lv in levels:
+            ys, xs = np.nonzero(lv.mask)
+            if not len(xs):
+                continue
+            x0 = lv.x0 + xs.min() * lv.cell
+            x1 = lv.x0 + (xs.max() + 1) * lv.cell
+            yf = lv.y0 + ys.min() * lv.cell  # front edge (camera side)
+            x = x0 + r.uniform(0.0, 0.05)
+            while x < x1 - 0.05:
+                if r.random() > density:
+                    x += r.uniform(*gap)
+                    continue
+                a = r.choice(assets)
+                if r.random() < stack_prob:
+                    # a short horizontal pile
+                    z_off = 0.0
+                    n = r.randint(2, 5)
+                    yaw = self.face_yaw(x, yf + 0.1) + r.uniform(-0.15, 0.15)
+                    wmax = 0.0
+                    for k in range(n):
+                        spec = {'asset': a, 'parts': [r.choice(parts[a])], 'pre': 'lie_y'}
+                        spec['key'] = a + '/' + spec['parts'][0]
+                        p = proto(spec)
+                        hx, hy = p.footprint(yaw, 1.0)
+                        xc, yc = x + hx, yf + hy + 0.015
+                        if not lv.fits(xc, yc, hx, hy, z_off + p.size.z + 0.01):
+                            break
+                        mn = Vector((xc - hx, yc - hy, lv.z + z_off + 0.001))
+                        mx = Vector((xc + hx, yc + hy, lv.z + z_off + p.size.z))
+                        if self.collides(mn, mx, 0.0, getattr(lv, 'ignore', ())):
+                            break
+                        it = self.place_fixed(spec, (xc + r.uniform(-0.01, 0.01), yc, lv.z + z_off + 0.0008), yaw, 1.0, kind='set')
+                        placed.append(it)
+                        z_off += p.size.z + 0.0005
+                        wmax = max(wmax, 2 * hx)
+                    x += wmax + r.uniform(*gap) * 0.5
+                    continue
+                n = r.randint(*run)
+                for k in range(n):
+                    name = r.choice(parts[a])
+                    spec = a + '/' + name
+                    p = proto(spec)
+                    sc = r.uniform(0.86, 1.04)
+                    yaw = self.face_yaw(x, yf + 0.1) + r.uniform(-0.03, 0.03)
+                    hx, hy = p.footprint(yaw, sc)
+                    xc, yc = x + hx + 0.0005, yf + hy + r.uniform(0.008, 0.03)
+                    if xc + hx > x1:
+                        break
+                    if not lv.fits(xc, yc, hx, hy, p.size.z * sc + 0.006):
+                        sc *= 0.85
+                        hx, hy = p.footprint(yaw, sc)
+                        if not lv.fits(xc, yc, hx, hy, p.size.z * sc + 0.006):
+                            break
+                    mn = Vector((xc - hx, yc - hy, lv.z + 0.001))
+                    mx = Vector((xc + hx, yc + hy, lv.z + p.size.z * sc))
+                    if self.collides(mn, mx, 0.0, getattr(lv, 'ignore', ())):
+                        break
+                    it = self.place_fixed(spec, (xc, yc, lv.z + 0.0008), yaw, sc, kind='set')
+                    placed.append(it)
+                    x = xc + hx + r.uniform(0.0, 0.002)
+                x += r.uniform(*gap)
+        return placed
+
     # --- walls
     def hang(self, spec, wall_y, x, z, scale=1.0, kind='prop', key=None, normal=-1, wall_x=None):
         """Hang something flat against the back wall (y = wall_y) or a side wall (x = wall_x)."""
@@ -710,7 +785,7 @@ class Composer:
             if len(done) >= count:
                 break
             spec, w, opt = r.choices(specs, [s[1] for s in specs])[0]
-            if any(d['key'] == proto(spec).key for d in done) and r.random() < 0.8:
+            if any(d['key'] == proto(spec).key for d in done) and r.random() < 0.97:
                 continue
             sc = r.uniform(*opt.get('scale', scale))
             it = self.hang(spec, wall_y, r.uniform(x0, x1), r.uniform(z0, z1), sc, kind=opt.get('kind', 'prop'))

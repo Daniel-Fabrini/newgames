@@ -140,7 +140,7 @@ def shelves_mixed(C, levels, books=0.55, curios=CURIOS):
     curios go into every gap that is left."""
     r = C.rnd
     bl = [l for l in levels if r.random() < books]
-    C.pack(bl, BOOKROW, rows=(0.9,), gap=(0.0, 0.003), fill_prob=0.9, skip=0.16, jitter=0.03)
+    C.book_rows(bl)
     C.build_occluder()
     C.pack(levels, curios, rows=(0.8, 0.25), gap=(0.005, 0.05), fill_prob=0.85)
 
