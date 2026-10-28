@@ -2,6 +2,9 @@
 
 export default {
   pt: {
+    diagBtn: 'Testar som e voz',
+    diagTitle: 'Teste de som e voz',
+    diagHelp: 'Aumente o volume de mídia. Vai tocar um bipe e depois uma frase em italiano. Me mande uma captura desta tela.',
     play: 'JOGAR',
     playNow: 'JOGAR AGORA',
     navHome: 'Início',
@@ -46,6 +49,9 @@ export default {
     aboutText: 'Jogos originais inspirados em gêneros populares. Bandeiras: flag-icons (MIT). Mapa: Natural Earth (domínio público). Dados de países: world-countries (ODbL), Wikidata (CC0), Unicode CLDR.',
   },
   en: {
+    diagBtn: 'Test sound and voice',
+    diagTitle: 'Sound and voice test',
+    diagHelp: 'Turn the media volume up. A beep and then an Italian sentence will play. Send me a screenshot of this screen.',
     play: 'PLAY',
     playNow: 'PLAY NOW',
     navHome: 'Home',
@@ -90,6 +96,9 @@ export default {
     aboutText: 'Original games inspired by popular genres. Flags: flag-icons (MIT). Map: Natural Earth (public domain). Country data: world-countries (ODbL), Wikidata (CC0), Unicode CLDR.',
   },
   es: {
+    diagBtn: 'Probar sonido y voz',
+    diagTitle: 'Prueba de sonido y voz',
+    diagHelp: 'Sube el volumen multimedia. Sonará un pitido y luego una frase en italiano. Envíame una captura de esta pantalla.',
     play: 'JUGAR',
     playNow: 'JUGAR AHORA',
     navHome: 'Inicio',

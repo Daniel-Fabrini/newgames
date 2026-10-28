@@ -2018,3 +2018,19 @@ img {
   color: #fff;
   text-shadow: 0 1px 2px #000;
 }
+
+.diag-log {
+  margin: 10px 0 0;
+  padding: 10px;
+  text-align: left;
+  font: 12px/1.45 ui-monospace, Menlo, Consolas, monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: #0b0b0e;
+  border: 1px solid var(--line-soft);
+  border-radius: 12px;
+  max-height: 46vh;
+  overflow-y: auto;
+  user-select: text;
+  -webkit-user-select: text;
+}

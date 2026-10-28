@@ -16,6 +16,7 @@ import { music } from './core/music.js';
 import { h, clear, toast, modal, confetti, loadCSS, norm } from './core/ui.js';
 import { icon } from './core/icons.js';
 import { gameArt, gamePreview, splashCollage } from './core/art.js';
+import { audioDiagnostics } from './core/diag.js';
 import STRINGS from './core/strings.js';
 import { addXP, levelInfo, totalXP, gameXP, streak, touchStreak, rankFor, setLastPlayed } from './core/progress.js';
 
@@ -453,6 +454,7 @@ function settingsRows(rerender, { inGame = false } = {}) {
     h('div', { class: 'settings-row' }, h('span', null, t('sound')), sw(!sfx.muted, () => (sfx.muted = !sfx.muted))),
     h('div', { class: 'settings-row' }, h('span', null, t('music')), sw(music.enabled, () => (music.enabled = !music.enabled))),
     h('div', { class: 'settings-row' }, h('span', null, t('vibration')), sw(sfx.vibration, () => (sfx.vibration = !sfx.vibration))),
+    h('button', { class: 'btn block', onclick: openDiag }, t('diagBtn')),
     inGame
       ? null
       : h(
@@ -496,6 +498,17 @@ function showPrefs() {
       h('div', { class: 'footer-note' }, `${APP_NAME} · ${APP_BY}`),
     ),
   );
+}
+
+async function openDiag() {
+  const pre = h('pre', { class: 'diag-log' }, '');
+  const log = (line) => {
+    pre.textContent += line + '\n';
+    pre.scrollTop = pre.scrollHeight;
+  };
+  const shown = modal({ title: t('diagTitle'), body: h('div', null, h('p', { class: 'muted small' }, t('diagHelp')), pre), actions: [{ label: t('close'), value: true, primary: true }], dismissible: true });
+  audioDiagnostics(log).catch((e) => log('ERRO: ' + (e && e.message)));
+  await shown;
 }
 
 async function openGameSettings() {
