@@ -31,6 +31,6 @@ slab = box((N * pitch + 0.35, 0.5, N * pitch + 0.35), glossy('#3a45d6', 0.3, 0.6
 objs.append(slab)
 parent(objs, loc=(0, 0, 1.9), rot=(-6, 14, -8))
 podium('#2a31b8', 3.0, 0.5, z=-0.35)
-magnifier(0.85, loc=(0.7, -2.3, 1.2), ang=-62)
+magnifier(0.95, loc=(0.8, -2.3, 1.5), ang=-50)
 fit(0.82, 0.05)
 render('wordsearch')

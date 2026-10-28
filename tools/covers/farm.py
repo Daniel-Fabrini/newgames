@@ -2,7 +2,7 @@ import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from rig import *
 S = int(os.environ.get('SAMPLES', 128))
-new_scene('#fff7b0', '#6fdc4a', samples=S)
+new_scene('#ffe14a', '#3ccf3a', samples=S)
 grass = glossy('#58d23c', 0.45, 0.4); dirt = glossy('#8a5a35', 0.5, 0.2)
 red = glossy('#e0302c', 0.2, 0.7); white = glossy('#fbf8f0', 0.3, 0.5); black = glossy('#23252b', 0.45, 0.3)
 yel = glossy('#ffc81e', 0.25, 0.6); glass = glossy('#8fd3ff', 0.05, 0.9); pink = glossy('#ffa9b8', 0.35, 0.4)
@@ -25,7 +25,7 @@ b.append(box((0.95, 0.06, 0.08), white, (0, -0.93, 0.5), rot=(0, 35, 0), bevel=0
 b.append(box((0.95, 0.06, 0.08), white, (0, -0.93, 0.5), rot=(0, -35, 0), bevel=0.01))
 b.append(cylinder(0.2, 0.06, white, (0, -0.9, 1.3), rot=(90, 0, 0), bevel=0.02))
 silo = [cylinder(0.5, 2.0, grey, (1.7, 0.4, 1.0)), sphere(0.5, grey, (1.7, 0.4, 2.0), scale=(1, 1, 0.8))]
-objs.append(parent(b, loc=(-0.6, 1.4, 0), rot=(0, 0, 0)))
+objs.append(parent(b, loc=(-1.0, 1.6, 0), rot=(0, 0, 0)))
 objs.append(parent(silo))
 # tractor
 t = []
@@ -39,7 +39,7 @@ for sy in (-1, 1):
     t.append(cylinder(0.32, 0.32, yel, (-0.45, sy*0.55, 0.62), rot=(90, 0, 0), bevel=0.04))
     t.append(cylinder(0.38, 0.24, black, (0.85, sy*0.45, 0.38), rot=(90, 0, 0), bevel=0.06))
     t.append(cylinder(0.2, 0.26, yel, (0.85, sy*0.45, 0.38), rot=(90, 0, 0), bevel=0.03))
-objs.append(parent(t, loc=(-0.5, -1.5, 0.0), rot=(0, 0, -25), scale=1.2))
+objs.append(parent(t, loc=(0.0, -1.6, 0.0), rot=(0, 0, -25), scale=1.2))
 # cow
 c = []
 c.append(box((1.1, 0.65, 0.65), white, (0, 0, 0.85), bevel=0.2))
@@ -58,7 +58,7 @@ c.append(sphere(0.2, black, (-0.2, 0.3, 1.0), scale=(1.3, 0.5, 1)))
 c.append(sphere(0.18, black, (0.2, -0.3, 1.1), scale=(1.2, 0.5, 1)))
 c.append(sphere(0.16, black, (-0.3, -0.3, 1.1), scale=(1.0, 0.5, 1)))
 c.append(cylinder(0.025, 0.5, black, (-0.62, 0, 0.9), rot=(0, 30, 0)))
-objs.append(parent(c, loc=(1.9, -1.4, 0), rot=(0, 0, -150), scale=1.1))
+objs.append(parent(c, loc=(2.2, -1.0, 0), rot=(0, 0, -150), scale=1.1))
 # sunflowers
 def sunflower(x, y, h):
     f = [cylinder(0.05, h, stem, (0, 0, h/2), bevel=0.0, seg=16)]
