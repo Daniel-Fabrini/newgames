@@ -36,7 +36,7 @@ export class Renderer {
     this.ctx = canvas.getContext('2d');
     this.opts = opts;
     this.t = opts.t;
-    this.spr = new Sprites();
+    this.spr = opts.sprites || new Sprites();
     this.helmet = RANK_COLORS[(opts.rank || 0) % RANK_COLORS.length];
     this.pal = palOf(THEMES[opts.themeIndex || 0]);
     this.themeIdx = opts.themeIndex || 0;
@@ -783,7 +783,6 @@ export class Renderer {
 
   drawZombie(ctx, e, anim) {
     const P = this.proj(e.x, e.z);
-    const T = ZTYPES[e.type];
     let frame = 0;
     let bob = 0;
     if (e.active && anim) {
@@ -796,7 +795,6 @@ export class Renderer {
     const sp = this.spr.zombie(e.type, frame, e.v, false);
     drawSpr(ctx, sp, P.x, P.y - bob * P.s, P.s);
     if (e.flash > 0) drawSpr(ctx, this.spr.zombie(e.type, frame, e.v, true), P.x, P.y - bob * P.s, P.s, 0.55);
-    if (T.bar && e.hp < e.max) e._bar = true;
   }
 
   drawObj(ctx, o) {

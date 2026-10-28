@@ -44,6 +44,8 @@ export async function mount(root, ctx) {
   let raf = 0;
   let lastT = 0;
   let mapObserver = null;
+  const sharedSprites = new Sprites();
+  const intervals = new Set();
 
   // =========================================================== helpers
   const now = () => Date.now();
@@ -637,7 +639,7 @@ export async function mount(root, ctx) {
     try {
       const nom = D.nominalStats(level);
       const world = new World({ mode: 'campaign', level, seed: level * 7919 + 13, lo: { ...D.playerStats(save) }, hero: null, pNom: nom.dmg * nom.rate, E0: nom.startN });
-      const r = new Renderer(cv, { mode: 'campaign', level, themeIndex: D.themeIndex(level), rank: D.rankOf(save.train), t, preview: true });
+      const r = new Renderer(cv, { mode: 'campaign', level, themeIndex: D.themeIndex(level), rank: D.rankOf(save.train), t, preview: true, sprites: sharedSprites });
       r.resize(w, hh, dpr());
       for (let i = 0; i < 3; i++) world.update(0.016);
       r.frame(world, 0.016);
@@ -651,7 +653,7 @@ export async function mount(root, ctx) {
     const th = D.themeFor(L);
     const boss = D.bossFor(L);
     const fresh = D.newEnemyAt(L);
-    const w = Math.min(560, (root.clientWidth || 360) - 32);
+    const w = Math.min(600, (sheet && sheet.body.clientWidth ? sheet.body.clientWidth - 24 : (root.clientWidth || 360) - 40));
     const camp = h(
       'div',
       { class: 'g-squad-campaign' },
@@ -741,7 +743,7 @@ export async function mount(root, ctx) {
   }
 
   // ----------------------------------------------------------- map
-  const mapSprites = new Sprites();
+  const mapSprites = sharedSprites;
   const regionProps = {
     city: ['tree', 'building', 'car', 'lamp'],
     desert: ['cactus', 'rock', 'wreck', 'skull'],
@@ -952,8 +954,10 @@ export async function mount(root, ctx) {
       tick++;
       if (alive) render();
     }, 1000);
+    intervals.add(iv);
     await ctx.ui.modal({ title: t('supplyTitle'), body: bodyEl, actions: [{ label: t('close'), value: true, primary: true }], dismissible: true });
     clearInterval(iv);
+    intervals.delete(iv);
     if (alive) refreshRes();
   }
 
@@ -1012,7 +1016,7 @@ export async function mount(root, ctx) {
     }
     const world = new World({ mode, level: mode === 'campaign' ? level : 1, seed, lo, hero, pNom, E0, killCoin: D.killCoin(mode === 'campaign' ? level : save.level) });
     const cv = h('canvas', { class: 'g-squad-runcv' });
-    const renderer = new Renderer(cv, { mode, level, themeIndex: mode === 'campaign' ? D.themeIndex(level) : 0, rank: lo.rank, t });
+    const renderer = new Renderer(cv, { mode, level, themeIndex: mode === 'campaign' ? D.themeIndex(level) : 0, rank: lo.rank, t, sprites: sharedSprites });
 
     // HUD
     const pauseBtn = h('button', { class: 'g-squad-round', 'aria-label': t('pause'), onclick: () => pauseRun() }, icon('pause'));
@@ -1097,6 +1101,13 @@ export async function mount(root, ctx) {
     el.addEventListener('pointercancel', onRunUp);
   }
 
+  function hideStart() {
+    if (!run || !run.startOv.isConnected || run.startOv.classList.contains('gone')) return;
+    const ov = run.startOv;
+    ov.classList.add('gone');
+    later(() => ov.remove(), 400);
+  }
+
   function teardownRun() {
     if (!run) return;
     const el = run.el;
@@ -1120,6 +1131,7 @@ export async function mount(root, ctx) {
     if (w.state === 'ready') {
       w.start();
       sfx.play('whoosh');
+      hideStart();
     }
     run.drag = { id: e.pointerId, x0: e.clientX, tx0: w.sq.tx };
     run.el.setPointerCapture?.(e.pointerId);
@@ -1218,11 +1230,7 @@ export async function mount(root, ctx) {
     for (const e of events) {
       switch (e.t) {
         case 'start':
-          if (run.startOv.isConnected && !run.startOv.classList.contains('gone')) {
-            run.startOv.classList.add('gone');
-            const ov = run.startOv;
-            later(() => ov.remove(), 400);
-          }
+          hideStart();
           break;
         case 'shoot':
           if (rl('shoot', 150)) sfx.play('shoot');
@@ -1525,6 +1533,9 @@ export async function mount(root, ctx) {
       get renderer() {
         return run && run.renderer;
       },
+      get baseView() {
+        return base && base.view;
+      },
       get save() {
         return save;
       },
@@ -1543,6 +1554,8 @@ export async function mount(root, ctx) {
     cancelAnimationFrame(raf);
     for (const id of timeouts) clearTimeout(id);
     timeouts.clear();
+    for (const id of intervals) clearInterval(id);
+    intervals.clear();
     window.removeEventListener('resize', onResize);
     window.removeEventListener('keydown', onKey);
     window.removeEventListener('keyup', onKey);
