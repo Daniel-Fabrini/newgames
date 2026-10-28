@@ -1,0 +1,610 @@
+/* "Cadê o Ruivinho?" — black & gold chrome. Every class is prefixed g-waldo-. */
+
+.g-waldo-ico {
+  width: 20px;
+  height: 20px;
+  display: block;
+  color: var(--gold);
+  flex: none;
+}
+
+/* ---------- menu ---------- */
+.g-waldo-menu {
+  background: radial-gradient(90% 38% at 50% -4%, rgba(243, 194, 74, 0.13), transparent 70%);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.g-waldo-menu.in {
+  opacity: 1;
+  transform: none;
+}
+
+.g-waldo-hero {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: radial-gradient(120% 90% at 0% 0%, rgba(243, 194, 74, 0.22), transparent 60%), linear-gradient(180deg, #17171b, #0d0d10);
+  box-shadow: var(--glow), 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+.g-waldo-hero-art {
+  flex: none;
+}
+.g-waldo-hero-text {
+  min-width: 0;
+}
+.g-waldo-hero-text h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  line-height: 1.12;
+  font-weight: 900;
+  background: var(--gold-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-waldo-hero-text p {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.g-waldo-portrait {
+  display: block;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5), inset 0 0 22px rgba(243, 194, 74, 0.12);
+}
+
+.g-waldo-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.g-waldo-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 6px;
+  border-radius: 16px;
+  border: 1px solid var(--line-soft);
+  background: linear-gradient(180deg, #1a1a1f, #0f0f12);
+  color: #fff;
+  font: inherit;
+  min-width: 0;
+}
+.g-waldo-stat b {
+  font-size: 18px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.g-waldo-stat small {
+  color: var(--text-3);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.g-waldo-stat-btn {
+  cursor: pointer;
+  border-color: var(--line);
+}
+.g-waldo-stat-ico {
+  display: block;
+  line-height: 0;
+}
+
+.g-waldo-chapter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: -6px;
+}
+.g-waldo-chapter .progress {
+  height: 8px;
+}
+.g-waldo-chapter small {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.g-waldo-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.g-waldo-mode {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, #18181c, #101013);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.08s;
+}
+.g-waldo-mode:active {
+  transform: scale(0.985);
+}
+.g-waldo-mode-ico {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold-grad);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5), 0 6px 14px rgba(243, 180, 40, 0.25);
+}
+.g-waldo-mode-ico .g-waldo-ico {
+  width: 26px;
+  height: 26px;
+  color: #1a1102;
+}
+.g-waldo-mode-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
+}
+.g-waldo-mode-body b {
+  font-size: 17px;
+  font-weight: 900;
+}
+.g-waldo-mode-body small {
+  color: var(--text-2);
+  font-size: 13px;
+  line-height: 1.3;
+}
+.g-waldo-mode-right {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.g-waldo-mode-chev {
+  flex: none;
+  color: var(--gold);
+  line-height: 0;
+}
+.g-waldo-mode-chev .g-waldo-ico {
+  transform: rotate(180deg);
+}
+.g-waldo-done .g-waldo-ico,
+.g-waldo-streak .g-waldo-ico {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+.g-waldo-streak {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.g-waldo-cta .g-waldo-ico {
+  width: 22px;
+  height: 22px;
+  color: #1a1102;
+}
+.g-waldo-how {
+  margin-top: 2px;
+}
+.g-waldo-how .btn-ico .g-waldo-ico {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- play ---------- */
+.g-waldo-play {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #050507;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.g-waldo-view {
+  position: absolute;
+  inset: 0;
+  touch-action: none;
+}
+.g-waldo-canvas {
+  display: block;
+  touch-action: none;
+  cursor: grab;
+}
+.g-waldo-canvas:active {
+  cursor: grabbing;
+}
+
+.g-waldo-hud {
+  position: absolute;
+  top: calc(10px + env(safe-area-inset-top, 0px));
+  left: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  pointer-events: none;
+  z-index: 3;
+}
+.g-waldo-hud-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+.g-waldo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(28, 28, 33, 0.92), rgba(12, 12, 15, 0.92));
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+}
+.g-waldo-hud-left {
+  max-width: 58%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-waldo-hud-time {
+  color: var(--gold);
+}
+.g-waldo-hintbtn {
+  position: relative;
+  flex: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #ffe9a0;
+  background: var(--gold-grad);
+  box-shadow: 0 5px 0 #8a5c05, 0 10px 22px rgba(243, 180, 40, 0.35), inset 0 2px 0 rgba(255, 255, 255, 0.55);
+  color: #1a1102;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+.g-waldo-hintbtn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #8a5c05, 0 6px 14px rgba(243, 180, 40, 0.3);
+}
+.g-waldo-hint-ico .g-waldo-ico {
+  width: 26px;
+  height: 26px;
+  color: #1a1102;
+}
+.g-waldo-hint-count {
+  position: absolute;
+  right: -4px;
+  top: -4px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #0b0b0e;
+  border: 1px solid var(--line);
+  color: var(--gold);
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.g-waldo-cap {
+  position: absolute;
+  top: 74px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 40px);
+  padding: 8px 16px;
+  border-radius: 18px;
+  background: rgba(8, 8, 10, 0.8);
+  border: 1px solid var(--line);
+  color: #fff3c4;
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 800;
+  text-align: center;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 4;
+}
+.g-waldo-cap.show {
+  animation: g-waldo-cap 2.4s ease both;
+}
+@keyframes g-waldo-cap {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -8px) scale(0.85);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.04);
+  }
+  16% {
+    transform: translate(-50%, 0) scale(1);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -10px) scale(1);
+  }
+}
+
+.g-waldo-tray {
+  position: absolute;
+  left: 50%;
+  bottom: calc(12px + var(--safe-bottom));
+  transform: translateX(-50%);
+  width: min(calc(100% - 24px), 420px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px 10px 10px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(24, 24, 29, 0.95), rgba(9, 9, 12, 0.97));
+  border: 1px solid var(--line);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.6), var(--glow);
+  pointer-events: none;
+  z-index: 3;
+}
+.g-waldo-tray-art {
+  flex: none;
+}
+.g-waldo-tray-art .g-waldo-portrait {
+  border-radius: 18px;
+}
+.g-waldo-tray-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.g-waldo-tray-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.g-waldo-tray-sub {
+  color: var(--text-2);
+  font-size: 13.5px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+.g-waldo-tray-sub.tip {
+  color: #ffd95a;
+  font-style: italic;
+}
+.g-waldo-tray-sub.found {
+  color: var(--gold);
+  font-weight: 900;
+}
+.g-waldo-tray-side {
+  flex: none;
+}
+
+.g-waldo-loading {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(5, 5, 7, 0.82);
+  z-index: 5;
+  font-weight: 800;
+}
+.g-waldo-loading.show {
+  display: flex;
+}
+
+.g-waldo-result {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(3, 3, 5, 0.6);
+  z-index: 6;
+}
+.g-waldo-result.show {
+  display: flex;
+  animation: g-waldo-fade 0.25s ease both;
+}
+@keyframes g-waldo-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.g-waldo-card {
+  width: 100%;
+  max-width: 360px;
+  padding: 22px 20px 20px;
+  border-radius: 26px;
+  text-align: center;
+  background: radial-gradient(120% 70% at 50% 0%, rgba(243, 194, 74, 0.18), transparent 60%), linear-gradient(180deg, #1b1b20, #0d0d10);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), var(--glow);
+  animation: g-waldo-pop 0.42s cubic-bezier(0.2, 1.2, 0.4, 1) both;
+}
+@keyframes g-waldo-pop {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.g-waldo-card-title {
+  margin: 0 0 4px;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1.1;
+  background: var(--gold-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-waldo-stars {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin: 8px 0 4px;
+  font-size: 44px;
+  line-height: 1.1;
+  color: #3a3322;
+}
+.g-waldo-stars span {
+  display: inline-block;
+  transform: scale(0.4);
+  opacity: 0.4;
+}
+.g-waldo-stars span.on {
+  color: #ffd768;
+  text-shadow: 0 0 14px rgba(255, 215, 104, 0.6), 0 3px 0 #8a5c05;
+  animation: g-waldo-star 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+}
+@keyframes g-waldo-star {
+  from {
+    transform: scale(0.2) rotate(-30deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+.g-waldo-card-line {
+  margin: 6px 0;
+  color: var(--text-2);
+  font-size: 15px;
+  font-weight: 700;
+}
+.g-waldo-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+.g-waldo-card-actions .btn {
+  font-size: 17px;
+}
+
+.g-waldo-float {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(8, 8, 10, 0.8);
+  font-size: 15px;
+  font-weight: 900;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 4;
+  animation: g-waldo-rise 0.9s ease-out both;
+}
+.g-waldo-float.bad {
+  color: #ff8a95;
+  border: 1px solid rgba(255, 74, 92, 0.6);
+}
+.g-waldo-float.good {
+  color: #ffd95a;
+  border: 1px solid var(--line);
+}
+@keyframes g-waldo-rise {
+  0% {
+    opacity: 0;
+    margin-top: 6px;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    margin-top: -26px;
+  }
+}
+
+.g-waldo-coinpill {
+  min-height: 34px;
+  padding: 4px 10px;
+  font-size: 15px;
+}
+.g-waldo-coinpill .g-waldo-ico {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 380px) {
+  .g-waldo-hero {
+    gap: 10px;
+    padding: 10px;
+  }
+  .g-waldo-hero-art .g-waldo-portrait {
+    width: 118px;
+    height: 118px;
+  }
+  .g-waldo-hero-text h2 {
+    font-size: 19px;
+  }
+  .g-waldo-hero-text p {
+    font-size: 13px;
+  }
+  .g-waldo-stat b {
+    font-size: 16px;
+  }
+  .g-waldo-tray-title {
+    font-size: 16px;
+  }
+  .g-waldo-tray-sub {
+    font-size: 12.5px;
+  }
+}

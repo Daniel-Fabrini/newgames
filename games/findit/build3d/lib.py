@@ -478,6 +478,12 @@ class Composer:
         return False
 
     # --- camera helpers
+    def face_yaw(self, x, y):
+        if not self.cam:
+            return 0.0
+        c = self.cam.matrix_world.translation
+        return math.atan2(c.x - x, -(c.y - y))
+
     def in_view(self, p, margin=0.0):
         if not self.cam:
             return True
@@ -516,13 +522,15 @@ class Composer:
 
     def try_on_level(self, level, spec, scale=1.0, yaw=None, tries=12, face=0.0, jitter=0.6, pad=0.002, key=None,
                      need_visible=True, xy=None, kind='prop', min_vis=1):
+        """Try to put one prop on a support level (face: yaw or 'cam')."""
         p = proto(spec)
         r = self.rnd
         for _ in range(tries):
-            yw = (face + r.uniform(-jitter, jitter)) if yaw is None else yaw
+            x, y = xy if xy else level.random_point(r)
+            base = self.face_yaw(x, y) if face == 'cam' else face
+            yw = (base + r.uniform(-jitter, jitter)) if yaw is None else yaw
             hx, hy = p.footprint(yw, scale)
             h = p.size.z * scale
-            x, y = xy if xy else level.random_point(r)
             if not level.fits(x, y, hx, hy, h + 0.004):
                 if xy:
                     return None
@@ -544,7 +552,7 @@ class Composer:
             return self.place_fixed(spec, (x, y, z), yw, scale, kind=kind, key=key)
         return None
 
-    def fill(self, levels, pool, count, face=0.0, jitter=0.6, scale=(0.9, 1.1), stack_kinds=(), tries=10, size_bias=0.0):
+    def fill(self, levels, pool, count, face='cam', jitter=0.6, scale=(0.9, 1.1), stack_kinds=(), tries=10, size_bias=0.0):
         """Scatter `count` props from `pool` ([(spec, weight, opts)]) over levels."""
         r = self.rnd
         total = sum(l.area for l in levels) or 1
@@ -758,26 +766,24 @@ def setup_render(w, h, samples=160, out_dir='.', look='AgX - Medium High Contras
     sc.render.filepath = os.path.join(out_dir, 'beauty.png')
     vl = sc.view_layers[0]
     vl.use_pass_object_index = True
-    # compositor: write the object index pass as a float EXR
-    sc.use_nodes = True
-    nt = sc.node_tree
-    nt.nodes.clear()
-    rl = nt.nodes.new('CompositorNodeRLayers')
-    comp = nt.nodes.new('CompositorNodeComposite')
-    nt.links.new(rl.outputs['Image'], comp.inputs['Image'])
-    fo = nt.nodes.new('CompositorNodeOutputFile')
-    fo.base_path = out_dir
-    fo.format.file_format = 'OPEN_EXR'
-    fo.format.color_depth = '32'
-    fo.format.exr_codec = 'ZIP'
-    fo.file_slots[0].path = 'index_'
-    nt.links.new(rl.outputs['IndexOB'], fo.inputs[0])
-    sc.render.use_compositing = True
+    sc.render.use_compositing = False
+    sc.render.use_sequencer = False
     return sc
 
 
 def render(out_dir):
+    """Render the color-managed photo (PNG) and save every pass, including the
+    object index, as a multilayer EXR (no compositor needed)."""
+    sc = bpy.context.scene
     bpy.ops.render.render(write_still=True)
+    img = bpy.data.images['Render Result']
+    st = sc.render.image_settings
+    st.file_format = 'OPEN_EXR_MULTILAYER'
+    st.color_depth = '32'
+    st.exr_codec = 'ZIP'
+    img.save_render(os.path.join(out_dir, 'passes.exr'), scene=sc)
+    st.file_format = 'PNG'
+    st.color_depth = '8'
     return os.path.join(out_dir, 'beauty.png')
 
 
