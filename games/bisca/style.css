@@ -136,6 +136,7 @@
 /* stock + face-up trunfo (sideways, under the stock) */
 .g-bisca-stock { position: absolute; left: 16px; top: 30%; width: calc(var(--cw) * 2.25); height: calc(var(--cw) * 1.5); z-index: 2; }
 .g-bisca-table.n4 .g-bisca-stock { top: 22%; }
+.g-bisca-table.n2 .g-bisca-stock { top: 44%; }
 .g-bisca-tr { position: absolute; left: calc(var(--cw) * 0.82); top: calc(var(--cw) * 0.45); width: calc(var(--cw) * 1.4); height: var(--cw); }
 .g-bisca-tr .dc { position: absolute; left: calc(var(--cw) * 0.2); top: calc(var(--cw) * -0.2); transform: rotate(90deg); }
 .g-bisca-sstk { position: absolute; left: 0; top: 0; width: var(--cw); height: calc(var(--cw) * 1.4); }
@@ -164,7 +165,7 @@
 .g-bisca-pile { position: absolute; bottom: 12px; display: flex; align-items: center; gap: 8px; z-index: 3; }
 .g-bisca-pile.t0 { left: 14px; }
 .g-bisca-pile.t1 { right: 14px; flex-direction: row-reverse; text-align: right; }
-.g-bisca-table.n2 .g-bisca-pile.t1 { right: auto; left: 14px; top: 14px; bottom: auto; flex-direction: row; text-align: left; }
+.g-bisca-table.n2 .g-bisca-pile.t1 { right: auto; left: 14px; top: 112px; bottom: auto; flex-direction: row; text-align: left; }
 .g-bisca-pstack { position: relative; width: var(--cw); height: calc(var(--cw) * 1.4); }
 .g-bisca-pempty { width: 100%; height: 100%; border-radius: 6px; border: 1px dashed color-mix(in srgb, var(--tc) 55%, transparent); }
 .g-bisca-pstack .dc { box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5); outline: 1px solid color-mix(in srgb, var(--tc) 60%, transparent); }
