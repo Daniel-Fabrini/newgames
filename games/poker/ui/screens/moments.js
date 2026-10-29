@@ -54,7 +54,7 @@ function build(app, m) {
       const ev = m.event;
       const r = app.RIVAL_BY_ID[ev.rivals[0]];
       const text = m.intro ? ev.story.intro : m.won ? ev.story.win : ev.story.lose;
-      return { node: box(kick(m.intro ? tr('moment.duelIntro') : m.won ? tr('moment.duelWin') : tr('moment.duelLose')), h('div', { class: 'pk-in', style: { margin: '14px 0' } }, avatarEl(r.avatar, { size: 112, frame: 'gold' })), h('h2', { class: 'pk-in' }, r.name), h('p', { class: 'pk-in pk-quote' }, '“' + app.tx(text) + '”')), cta: m.intro ? tr('moment.letsPlay') : null, fx: !m.intro && m.won, sfx: m.intro ? 'turn' : m.won ? 'win' : 'lose' };
+      return { node: box(kick(m.intro ? tr('moment.duelIntro') : m.won ? tr('moment.duelWin') : tr('moment.duelLose')), h('div', { class: 'pk-in', style: { margin: '14px 0' } }, avatarEl(r.avatar, { size: 112, frame: 'gold' })), h('h2', { class: 'pk-in' }, r.name), h('p', { class: 'pk-in pk-quote' }, app.tx(text))), cta: m.intro ? tr('moment.letsPlay') : null, fx: !m.intro && m.won, sfx: m.intro ? 'turn' : m.won ? 'win' : 'lose' };
     }
     case 'champion': {
       const c = app.career;

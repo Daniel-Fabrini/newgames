@@ -21,9 +21,11 @@
 /* felt themes (ids match career/rewards.js) */
 .g-poker[data-theme='midnight'] { --pk-felt1: #1f4f93; --pk-felt2: #12305c; --pk-felt3: #091a35; --pk-rail1: #2a2f3a; --pk-rail2: #12151c; }
 .g-poker[data-theme='burgundy'] { --pk-felt1: #8a2437; --pk-felt2: #561423; --pk-felt3: #2e0a13; --pk-rail1: #3a2a1b; --pk-rail2: #1c130b; }
-.g-poker[data-theme='slate'] { --pk-felt1: #4a5568; --pk-felt2: #2b3340; --pk-felt3: #151a22; --pk-rail1: #6b5a2b; --pk-rail2: #2e260f; }
-.g-poker[data-theme='gold_room'] { --pk-felt1: #6d2f8f; --pk-felt2: #3f1a5c; --pk-felt3: #1e0a33; --pk-rail1: #e0b04a; --pk-rail2: #7a5412; }
+.g-poker[data-theme='onyx'] { --pk-felt1: #4a5568; --pk-felt2: #2b3340; --pk-felt3: #151a22; --pk-rail1: #6b5a2b; --pk-rail2: #2e260f; }
+.g-poker[data-theme='royal'] { --pk-felt1: #6d2f8f; --pk-felt2: #3f1a5c; --pk-felt3: #1e0a33; --pk-rail1: #e0b04a; --pk-rail2: #7a5412; }
 .g-poker[data-theme='teal'] { --pk-felt1: #11766f; --pk-felt2: #0a4642; --pk-felt3: #052725; --pk-rail1: #35302a; --pk-rail2: #181512; }
+.g-poker[data-theme='sand'] { --pk-felt1: #9a7b3e; --pk-felt2: #66501f; --pk-felt3: #382a0e; --pk-rail1: #2e2013; --pk-rail2: #150e07; }
+.g-poker[data-table='legends_lounge'] .pk-felt { background: linear-gradient(180deg, #f3d37a, #8a5f12); }
 [data-deck='fourcolor'] .pk-card.s-d { --ink: var(--pk-blu); }
 [data-deck='fourcolor'] .pk-card.s-c { --ink: var(--pk-grn); }
 
@@ -73,11 +75,12 @@
 }
 .pk-card.back .pk-back-in { position: absolute; inset: 7%; border-radius: calc(var(--cw) * 0.07); border: 1px solid color-mix(in srgb, var(--bk3, #e8c76a) 70%, transparent); }
 /* card backs (ids match career/rewards.js) */
-[data-back='midnight'] { --bk1: #232a4d; --bk2: #0b0f26; --bk3: #9db4ff; }
-[data-back='crimson'] { --bk1: #8d1d2e; --bk2: #4a0b16; }
+[data-back='ruby'] { --bk1: #8d1d2e; --bk2: #4a0b16; }
 [data-back='emerald'] { --bk1: #1b6a47; --bk2: #0a3524; }
-[data-back='royal'] { --bk1: #5a3a9a; --bk2: #261548; --bk3: #ffe9a3; }
-[data-back='gold'] { --bk1: #c9971c; --bk2: #6b4f1d; --bk3: #fff6cf; }
+[data-back='onyx'] { --bk1: #35363d; --bk2: #131418; --bk3: #c9c9d1; }
+[data-back='sand'] { --bk1: #b08a45; --bk2: #6b4f1d; --bk3: #fff1c0; }
+[data-back='violet'] { --bk1: #5a3a9a; --bk2: #261548; }
+[data-back='royal'] { --bk1: #232a4d; --bk2: #0b0f26; --bk3: #ffe9a3; }
 .pk-card.mini { --cw: 24px; }
 .pk-card.mini .pk-back-in { inset: 9%; }
 .pk-card.board { --cw: 56px; }
@@ -151,8 +154,9 @@
 .pk-av { --av: 44px; width: var(--av); height: var(--av); border-radius: 50%; display: inline-block; overflow: hidden; background: #111; box-shadow: 0 0 0 2px #0008, 0 3px 8px #0009; flex: none; }
 .pk-av-svg { width: 100%; height: 100%; display: block; }
 .pk-av.fr-gold { box-shadow: 0 0 0 2px var(--pk-gold), 0 0 10px rgba(243, 194, 74, 0.5); }
-.pk-av.fr-bronze { box-shadow: 0 0 0 2px #cf8a4a, 0 0 8px rgba(207, 138, 74, 0.45); }
-.pk-av.fr-silver { box-shadow: 0 0 0 2px #d8dbe6, 0 0 8px rgba(216, 219, 230, 0.4); }
+.pk-av.fr-emerald { box-shadow: 0 0 0 2px #36d98c, 0 0 10px rgba(54, 217, 140, 0.45); }
+.pk-av.fr-ruby { box-shadow: 0 0 0 2px #ff5470, 0 0 10px rgba(255, 84, 112, 0.45); }
+.pk-av.fr-royal { box-shadow: 0 0 0 2px #9d7bff, 0 0 10px rgba(157, 123, 255, 0.5); }
 .pk-av.fr-champion { box-shadow: 0 0 0 2px #fff1b8, 0 0 0 4px #c9971c, 0 0 14px rgba(243, 194, 74, 0.7); }
 .pk-seat-info { margin-top: -9px; padding: 11px 8px 3px; min-width: 62px; border-radius: 10px; background: linear-gradient(180deg, rgba(14, 14, 18, 0.88), rgba(6, 6, 8, 0.92)); border: 1px solid rgba(255, 255, 255, 0.1); text-align: center; line-height: 1.1; }
 .pk-nm { display: block; font-size: 10.5px; font-weight: 800; color: var(--text-2); max-width: 70px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0 auto; }
@@ -202,7 +206,7 @@
 .pk-hud { display: flex; align-items: stretch; gap: 6px; padding: 7px 10px 0; flex: none; }
 .pk-hud-cell { flex: 1; min-width: 0; padding: 5px 7px; border-radius: 11px; background: rgba(255, 255, 255, 0.045); border: 1px solid rgba(255, 255, 255, 0.07); line-height: 1.15; }
 .pk-hud-cell small { display: block; font-size: 9px; font-weight: 800; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.07em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.pk-hud-cell b { display: block; font-size: 13.5px; font-weight: 900; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pk-hud-cell b { display: block; font-size: 13px; font-weight: 900; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .pk-hud-cell.gold b { color: var(--pk-gold); }
 .pk-hud-btn { flex: none; width: 36px; border-radius: 11px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.05); color: var(--text-2); display: grid; place-items: center; cursor: pointer; }
 .pk-hud-btn:active { transform: scale(0.94); }

@@ -6,7 +6,7 @@ import { faceEl, backEl } from '../cards.js';
 import { trophySVG } from '../art.js';
 import { ICON } from '../icons.js';
 
-const THEME_SW = { green: ['#17724b', '#05261a'], midnight: ['#1f4f93', '#091a35'], burgundy: ['#8a2437', '#2e0a13'], slate: ['#4a5568', '#151a22'], gold_room: ['#6d2f8f', '#1e0a33'] };
+const THEME_SW = { emerald: ['#17724b', '#05261a'], midnight: ['#1f4f93', '#091a35'], burgundy: ['#8a2437', '#2e0a13'], onyx: ['#4a5568', '#151a22'], royal: ['#6d2f8f', '#1e0a33'], teal: ['#11766f', '#052725'], sand: ['#9a7b3e', '#382a0e'] };
 const ACH_ICON = { cards: ICON.cards, book: ICON.book, coin: ICON.coin, table: ICON.users, trophy: ICON.trophy, duel: ICON.swords, map: ICON.map, globe: ICON.map, crown: ICON.crown, target: ICON.target, chips: ICON.chips, mask: ICON.skull, bolt: ICON.bolt, star: ICON.star };
 
 export default function profileScreen(app) {
@@ -59,7 +59,7 @@ export default function profileScreen(app) {
     sc.append(section(t('prof.custom')));
     sc.append(slotRow('avatar', t('cs.avatar'), (it) => avatarEl(it.id, { size: 44 })));
     sc.append(slotRow('frame', t('cs.frame'), (it) => avatarEl(app.heroAvatar(), { size: 40, frame: it.id === 'none' ? '' : it.id })));
-    sc.append(slotRow('theme', t('cs.theme'), (it) => h('span', { class: 'pk-sw-prev', style: { background: `radial-gradient(circle at 40% 35%, ${(THEME_SW[it.id] || THEME_SW.green)[0]}, ${(THEME_SW[it.id] || THEME_SW.green)[1]})` } })));
+    sc.append(slotRow('theme', t('cs.theme'), (it) => h('span', { class: 'pk-sw-prev', style: { background: `radial-gradient(circle at 40% 35%, ${(THEME_SW[it.id] || THEME_SW.emerald)[0]}, ${(THEME_SW[it.id] || THEME_SW.emerald)[1]})` } })));
     sc.append(slotRow('back', t('cs.back'), (it) => h('span', { class: 'pk-bk', 'data-back': it.id }, backEl('prev'))));
     sc.append(slotRow('deck', t('cs.deck'), (it) => h('span', { class: 'pk-deckprev', 'data-deck': it.id }, faceEl('Ah', { small: true, cls: 'prev' }), faceEl('Kd', { small: true, cls: 'prev' }), faceEl('Qc', { small: true, cls: 'prev' }))));
     sc.append(slotRow('winAnim', t('cs.win'), () => h('span', { class: 'pk-win-prev' }, ICON.star)));

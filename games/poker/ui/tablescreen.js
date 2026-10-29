@@ -30,7 +30,7 @@ export function createTableScreen(root, deps) {
   const wait = (ms) =>
     new Promise((res) => {
       if (disposed || instant) return res();
-      const k = skipHand ? 0.12 : prefs.get('fast') ? 0.45 : 1;
+      const k = prefs.get('__turbo') ? 0.02 : skipHand ? 0.12 : prefs.get('fast') ? 0.45 : 1;
       const id = setTimeout(() => {
         timers.delete(id);
         res();
@@ -350,12 +350,13 @@ export function createTableScreen(root, deps) {
         const action = act.type === 'raise' || act.type === 'bet' ? { type: act.type, to: act.amount } : act.type === 'allin' ? { type: 'allin' } : { type: act.type };
         bar.wait('');
         events = session.act(action);
+        if (opts.onSave) opts.onSave(session);
       } else {
         // think time
         const showSkip = info.heroFolded || heroIdx < 0;
         if (showSkip) showSkipButton();
         else bar.wait(t('waiting', { name: nameOf(a.idx) }));
-        const think = 380 + Math.random() * 700;
+        const think = 380 + Math.random() * 600;
         await wait(think);
         if (disposed) return null;
         events = session.aiAct().events;

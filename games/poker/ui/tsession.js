@@ -62,8 +62,8 @@ export function createTournamentSession(tour, { heroFrame = '', rivalNames = {},
       return [
         { label: L.blinds || 'Blinds', value: `${fmt(s.blinds.sb)}/${fmt(s.blinds.bb)}`, gold: true },
         { label: L.level || 'Level', value: s.level },
-        { label: L.players || 'Players', value: `${s.remaining}/${s.entrants}` },
-        { label: L.rank || 'Rank', value: s.chipRank ? `${s.chipRank}/${s.remaining}` : '-' },
+        { label: L.players || 'Players', value: String(s.remaining) },
+        { label: L.rank || 'Rank', value: s.chipRank ? String(s.chipRank) : '-' },
       ];
     },
     standing: () => T.standing(t),

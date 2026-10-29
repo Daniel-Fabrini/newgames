@@ -177,4 +177,4 @@ export function avatarEl(id, { size = 44, frame = '', expr, cls = '' } = {}) {
   return d;
 }
 
-export const FRAMES = ['none', 'bronze', 'silver', 'gold', 'champion'];
+export const FRAMES = ['none', 'gold', 'emerald', 'ruby', 'royal', 'champion'];

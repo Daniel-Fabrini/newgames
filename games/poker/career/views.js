@@ -34,7 +34,7 @@ export function seasonView(c) {
   const mine = c.results.filter((r) => r.season === c.season.n);
   const goals = [
     { id: 'play', text: L(`Jogue ${C.SEASON_LENGTH} torneios`, `Play ${C.SEASON_LENGTH} tournaments`, `Juega ${C.SEASON_LENGTH} torneos`), progress: mine.length, target: C.SEASON_LENGTH },
-    { id: 'cash', text: L('Fique nos prémios 3 vezes', 'Cash 3 times', 'Entra en premios 3 veces'), progress: Math.min(3, mine.filter((r) => r.cashed).length), target: 3 },
+    { id: 'cash', text: L('Fique nos prêmios 3 vezes', 'Cash 3 times', 'Entra en premios 3 veces'), progress: Math.min(3, mine.filter((r) => r.cashed).length), target: 3 },
     { id: 'win', text: L('Vença um torneio', 'Win a tournament', 'Gana un torneo'), progress: Math.min(1, c.season.wins), target: 1 },
   ].map((g) => ({ ...g, done: g.progress >= g.target }));
   return { n: c.season.n, eventsPlayed: c.season.events, eventsTotal: C.SEASON_LENGTH, goals, history: c.seasonHistory };

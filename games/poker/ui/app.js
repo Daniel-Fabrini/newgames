@@ -99,9 +99,9 @@ export function createApp(root, ctx, STRINGS) {
 
   app.applyCosmetics = () => {
     const sel = app.career ? app.career.cosmetics.selected : {};
-    const theme = sel.theme && sel.theme !== 'green' ? sel.theme : 'green';
+    const theme = sel.theme || 'emerald';
     root.dataset.theme = theme;
-    root.dataset.back = sel.back || 'classic';
+    root.dataset.back = sel.back || 'royal';
     root.dataset.deck = sel.deck || 'classic';
     root.dataset.table = sel.table || 'oval';
   };
@@ -251,7 +251,7 @@ export function createApp(root, ctx, STRINGS) {
     let guard = 0;
     while (tour.phase !== 'finished' && !app.disposed) {
       const t0 = performance.now();
-      while (tour.phase !== 'finished' && performance.now() - t0 < 24) {
+      while (tour.phase !== 'finished' && performance.now() - t0 < 10) {
         T.startNextHand(tour, { interactive: false });
         if (++guard > 6000) break;
       }

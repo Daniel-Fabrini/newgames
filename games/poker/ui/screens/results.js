@@ -90,7 +90,8 @@ function handRecap(app, tour) {
     const row = h('div', { class: 'pk-recap-r' + (winners.has(r.p) ? ' win' : '') });
     const cards = h('div', { class: 'pk-hcards' });
     for (const c of r.hole) cards.append(faceEl(cardStr(c), { cls: 'ex', small: true }));
-    row.append(h('div', { class: 'pk-grow' }, h('b', {}, name(pl.id)), h('small', {}, t('hand.' + r.hand))), cards, winners.has(r.p) ? h('span', { class: 'pk-w' }, ICON.trophy) : null);
+    row.append(h('div', { class: 'pk-grow' }, h('b', {}, name(pl.id)), h('small', {}, t('hand.' + r.hand))), cards);
+    if (winners.has(r.p)) row.append(h('span', { class: 'pk-w' }, ICON.trophy));
     wrap.append(row);
   }
   if (!(lh.reveals || []).some((r) => r.hole)) wrap.append(h('div', { class: 'pk-sub' }, t('res.noShow')));

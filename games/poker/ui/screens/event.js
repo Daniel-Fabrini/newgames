@@ -51,7 +51,7 @@ export default function eventScreen(app, props) {
   // story for special events
   if (ev.story) {
     const r = app.RIVAL_BY_ID[ev.rivals[0]];
-    if (r) sc.append(h('div', { class: 'pk-panel pk-story' }, avatarEl(r.avatar, { size: 52, frame: 'gold' }), h('div', { class: 'pk-grow' }, h('div', { class: 'pk-kicker' }, r.name), h('div', { class: 'pk-sub pk-quote' }, '“' + app.tx(ev.story.intro) + '”'))));
+    if (r) sc.append(h('div', { class: 'pk-panel pk-story' }, avatarEl(r.avatar, { size: 52, frame: 'gold' }), h('div', { class: 'pk-grow' }, h('div', { class: 'pk-kicker' }, r.name), h('div', { class: 'pk-sub pk-quote' }, app.tx(ev.story.intro)))));
   }
 
   // field

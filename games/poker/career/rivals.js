@@ -17,7 +17,7 @@ export const RIVALS = [
     id: 'bartholomew', name: 'Bartholomew Finch', nick: L('O Paciente', 'The Patient One', 'El Paciente'), avatar: 'bartholomew', origin: L('Inglaterra', 'England', 'Inglaterra'),
     style: L('Jogador paciente, calcula tudo', 'Patient grinder, calculates everything', 'Jugador paciente, lo calcula todo'), archetype: 'grinder', profile: P('grinder', { skill: 5 }), circuits: ['local', 'regional'], events: ['local_friday', 'local_final', 'reg_open', 'reg_night'],
     blurb: L('Ganha fichas aos poucos e raramente comete erros grandes.', 'Grinds out chips and rarely makes big mistakes.', 'Gana fichas poco a poco y rara vez comete grandes errores.'),
-    bio: L('Ex-contabilista, joga torneios locais há trinta anos com a mesma garrafa de chá ao lado.', 'A retired accountant who has played local tournaments for thirty years with the same flask of tea beside him.', 'Contable jubilado, juega torneos locales desde hace treinta años con el mismo termo de té a su lado.'),
+    bio: L('Ex-contador, joga torneios locais há trinta anos com a mesma garrafa de chá ao lado.', 'A retired accountant who has played local tournaments for thirty years with the same flask of tea beside him.', 'Contable jubilado, juega torneos locales desde hace treinta años con el mismo termo de té a su lado.'),
     quotes: [L('Paciência vence a pressa.', 'Patience beats haste.', 'La paciencia vence a la prisa.'), L('As fichas sabem esperar.', 'Chips know how to wait.', 'Las fichas saben esperar.')],
   },
   {
@@ -59,13 +59,13 @@ export const RIVALS = [
     id: 'celeste', name: 'Céleste Moreau', nick: L('A Finalizadora', 'The Closer', 'La Cerradora'), avatar: 'celeste', origin: L('França', 'France', 'Francia'),
     style: L('Domina as mesas finais', 'Dominates final tables', 'Domina las mesas finales'), archetype: 'closer', profile: P('closer', { skill: 8 }), circuits: ['intl', 'world'], events: ['intl_duel', 'intl_final', 'intl_prestige', 'world_main'],
     blurb: L('Paciente no início, letal quando restam poucos jogadores.', 'Patient early, lethal when few players remain.', 'Paciente al inicio, letal cuando quedan pocos jugadores.'),
-    bio: L('Três mesas finais consecutivas em Monte Carlo. Diz que a pressão é o seu oxigénio.', 'Three consecutive final tables in Monte Carlo. Says pressure is her oxygen.', 'Tres mesas finales consecutivas en Montecarlo. Dice que la presión es su oxígeno.'),
+    bio: L('Três mesas finais consecutivas em Monte Carlo. Diz que a pressão é o seu oxigênio.', 'Three consecutive final tables in Monte Carlo. Says pressure is her oxygen.', 'Tres mesas finales consecutivas en Montecarlo. Dice que la presión es su oxígeno.'),
     quotes: [L('É agora que o jogo começa.', 'This is where the game begins.', 'Ahora es cuando empieza el juego.'), L('Cheguei aqui para terminar.', 'I came here to finish it.', 'Vine hasta aquí para terminar.')],
   },
   {
     id: 'jun', name: 'Jun Park', nick: L('O Prodígio', 'The Prodigy', 'El Prodigio'), avatar: 'jun', origin: L('Coreia do Sul', 'South Korea', 'Corea del Sur'),
     style: L('Equilibrado e preciso', 'Balanced and precise', 'Equilibrado y preciso'), archetype: 'balanced', profile: P('balanced', { skill: 8, aggr: 0.6, position: 0.9, adapt: 0.8 }), circuits: ['intl', 'world'], events: ['intl_open', 'intl_ko', 'intl_prestige', 'world_main'],
-    blurb: L('Cresceu a jogar milhares de mãos por dia. Quase não tem fugas.', 'Grew up playing thousands of hands a day. Almost no leaks.', 'Creció jugando miles de manos al día. Casi sin fugas.'),
+    blurb: L('Cresceu jogando milhares de mãos por dia. Quase não tem fugas.', 'Grew up playing thousands of hands a day. Almost no leaks.', 'Creció jugando miles de manos al día. Casi sin fugas.'),
     bio: L('Aos 19 anos já era o mais jovem finalista da história do circuito internacional.', 'At 19 he was already the youngest finalist in the international circuit\'s history.', 'A los 19 años ya era el finalista más joven de la historia del circuito internacional.'),
     quotes: [L('Já vi esta situação mil vezes.', 'I have seen this spot a thousand times.', 'He visto esta situación mil veces.'), L('Nada pessoal, só probabilidades.', 'Nothing personal, just odds.', 'Nada personal, solo probabilidades.')],
   },
@@ -79,7 +79,7 @@ export const RIVALS = [
   {
     id: 'mirella', name: 'Mirella Duarte', nick: L('A Veterana', 'The Veteran', 'La Veterana'), avatar: 'mirella', origin: L('Argentina', 'Argentina', 'Argentina'),
     style: L('Sólida e experiente', 'Solid and experienced', 'Sólida y experimentada'), archetype: 'grinder', profile: P('grinder', { skill: 7, tight: 0.55, aggr: 0.55 }), circuits: ['regional', 'intl'], events: ['reg_final', 'reg_night', 'intl_open', 'intl_ko'],
-    blurb: L('Jogadora de mesa de café que chegou ao circuito internacional a ler os rivais.', 'A coffee-house player who reached the international circuit by reading opponents.', 'Jugadora de café que llegó al circuito internacional leyendo a los rivales.'),
+    blurb: L('Jogadora de mesa de café que chegou ao circuito internacional lendo os rivais.', 'A coffee-house player who reached the international circuit by reading opponents.', 'Jugadora de café que llegó al circuito internacional leyendo a los rivales.'),
     bio: L('Aprendeu em Buenos Aires com apostas de rua, e hoje é quem os novatos mais temem encontrar.', 'Learned in Buenos Aires street games and is now the one rookies fear most to meet.', 'Aprendió en Buenos Aires con partidas callejeras y hoy es la que más temen los novatos.'),
     quotes: [L('Já vi esse olhar antes.', 'I have seen that look before.', 'Ya vi esa mirada antes.')],
   },
