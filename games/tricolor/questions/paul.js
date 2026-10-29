@@ -917,28 +917,6 @@ export default [
   },
   {
     "id": "paul-040",
-    "q": "Quem marcou o gol da vitória por 1 a 0 sobre o Palmeiras que deu o título paulista de 1971 ao São Paulo?",
-    "a": [
-      "Pedro Rocha",
-      "Gérson",
-      "Toninho Guerreiro",
-      "Pablo Forlán"
-    ],
-    "c": 2,
-    "cat": "paul",
-    "d": 4,
-    "exp": "O gol saiu logo aos 5 minutos do primeiro tempo, no Morumbi.",
-    "src": [
-      {
-        "n": "Wikipédia (pt) — Campeonato Paulista de 1971",
-        "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1971"
-      }
-    ],
-    "when": "1971",
-    "ok": true
-  },
-  {
-    "id": "paul-041",
     "q": "Quem treinava o São Paulo no bicampeonato paulista de 1971?",
     "a": [
       "Zezé Moreira",
@@ -960,15 +938,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-042",
+    "id": "paul-041",
     "q": "Em 1972, quem foi campeão paulista invicto, deixando o São Paulo, também invicto, em segundo lugar?",
     "a": [
       "Corinthians",
-      "Palmeiras",
       "Santos",
+      "Palmeiras",
       "Portuguesa"
     ],
-    "c": 1,
+    "c": 2,
     "cat": "paul",
     "d": 3,
     "exp": "O empate sem gols no Pacaembu, em 3 de setembro de 1972, deu o título ao Palmeiras; o São Paulo, de Toninho Guerreiro (17 gols), foi vice.",
@@ -982,15 +960,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-043",
+    "id": "paul-042",
     "q": "Em 1973, quantos campeões paulistas a FPF declarou após a decisão realizada no Morumbi?",
     "a": [
       "Apenas um (o Santos)",
+      "Dois (Santos e Portuguesa)",
       "Apenas um (a Portuguesa)",
-      "Três",
-      "Dois (Santos e Portuguesa)"
+      "Três"
     ],
-    "c": 3,
+    "c": 1,
     "cat": "paul",
     "d": 3,
     "exp": "A final de 26 de agosto de 1973 acabou 0 a 0 e a disputa de pênaltis foi encerrada antes do fim; a FPF proclamou Santos e Portuguesa campeões.",
@@ -1004,15 +982,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-044",
+    "id": "paul-043",
     "q": "Contra qual time o São Paulo decidiu o Paulista de 1975, vencendo nos pênaltis?",
     "a": [
-      "Portuguesa",
       "Palmeiras",
       "Corinthians",
-      "Santos"
+      "Santos",
+      "Portuguesa"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "paul",
     "d": 2,
     "exp": "O São Paulo ganhou a ida por 1 a 0 (Pedro Rocha), perdeu a volta pelo mesmo placar e venceu a disputa de pênaltis por 3 a 0.",
@@ -1026,15 +1004,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-045",
+    "id": "paul-044",
     "q": "Qual foi o placar da disputa de pênaltis que deu o título paulista de 1975 ao São Paulo sobre a Portuguesa?",
     "a": [
+      "3 a 0",
       "4 a 3",
       "5 a 4",
-      "3 a 0",
       "3 a 2"
     ],
-    "c": 2,
+    "c": 0,
     "cat": "paul",
     "d": 4,
     "exp": "Depois de 1 a 0 para cada lado, o goleiro Waldir Peres foi destaque na decisão por pênaltis.",
@@ -1048,15 +1026,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-046",
+    "id": "paul-045",
     "q": "Quem foi o artilheiro do Campeonato Paulista de 1975, com 22 gols, pelo São Paulo?",
     "a": [
       "Pedro Rocha",
-      "Serginho Chulapa",
       "Terto",
+      "Serginho Chulapa",
       "Muricy Ramalho"
     ],
-    "c": 1,
+    "c": 2,
     "cat": "paul",
     "d": 4,
     "exp": "Serginho Chulapa terminou como goleador do campeonato do 11º título paulista.",
@@ -1070,15 +1048,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-047",
+    "id": "paul-046",
     "q": "Quem treinava o São Paulo no título paulista de 1975?",
     "a": [
-      "José Poy",
       "Osvaldo Brandão",
+      "José Poy",
       "Zezé Moreira",
       "Carlos Alberto Silva"
     ],
-    "c": 0,
+    "c": 1,
     "cat": "paul",
     "d": 4,
     "exp": "José Poy comandou o Tricolor naquele título, sobre a Portuguesa.",
@@ -1092,15 +1070,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-048",
+    "id": "paul-047",
     "q": "Qual clube foi vice-campeão paulista em 1980, derrotado pelo São Paulo na final?",
     "a": [
+      "Santos",
       "Corinthians",
       "Palmeiras",
-      "Ponte Preta",
-      "Santos"
+      "Ponte Preta"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "paul",
     "d": 2,
     "exp": "O São Paulo venceu os dois jogos por 1 a 0, no Morumbi, e conquistou o 12º título estadual.",
@@ -1114,15 +1092,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-049",
+    "id": "paul-048",
     "q": "Qual foi o resultado agregado do São Paulo sobre o Santos na decisão do Paulista de 1980?",
     "a": [
-      "2 a 0",
       "3 a 1",
       "1 a 0",
-      "2 a 1"
+      "2 a 1",
+      "2 a 0"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "paul",
     "d": 4,
     "exp": "Os dois jogos, em 16 e 19 de novembro de 1980, terminaram 1 a 0 para o São Paulo.",
@@ -1136,15 +1114,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-050",
+    "id": "paul-049",
     "q": "Quem era o técnico do São Paulo na decisão do Paulista de 1980?",
     "a": [
+      "Carlos Alberto Silva",
       "Formiga",
       "Cilinho",
-      "Carlos Alberto Silva",
       "Telê Santana"
     ],
-    "c": 2,
+    "c": 0,
     "cat": "paul",
     "d": 4,
     "exp": "Carlos Alberto Silva comandou o Tricolor no título sobre o Santos de Pepe.",
@@ -1158,15 +1136,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-051",
+    "id": "paul-050",
     "q": "Qual clube o São Paulo derrotou na final do Campeonato Paulista de 1981?",
     "a": [
       "Corinthians",
-      "Ponte Preta",
       "Guarani",
+      "Ponte Preta",
       "Santos"
     ],
-    "c": 1,
+    "c": 2,
     "cat": "paul",
     "d": 2,
     "exp": "Depois do 1 a 1 na ida, o São Paulo venceu por 2 a 0 no Morumbi, com gols de Renato e Serginho Chulapa.",
@@ -1180,15 +1158,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-052",
+    "id": "paul-051",
     "q": "Quem treinava o São Paulo no título paulista de 1981?",
     "a": [
       "Carlos Alberto Silva",
+      "Formiga",
       "Cilinho",
-      "Rubens Minelli",
-      "Formiga"
+      "Rubens Minelli"
     ],
-    "c": 3,
+    "c": 1,
     "cat": "paul",
     "d": 4,
     "exp": "Formiga comandou o Tricolor no 13º título estadual.",
@@ -1202,15 +1180,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-053",
+    "id": "paul-052",
     "q": "Qual clube derrotou o São Paulo na final do Campeonato Paulista de 1982?",
     "a": [
-      "Corinthians",
       "Palmeiras",
       "Santos",
-      "Ponte Preta"
+      "Ponte Preta",
+      "Corinthians"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "paul",
     "d": 2,
     "exp": "O Corinthians venceu por 1 a 0 e 3 a 1, em 8 e 12 de dezembro de 1982.",
@@ -1224,15 +1202,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-054",
+    "id": "paul-053",
     "q": "Qual apelido ganhou o time do São Paulo campeão paulista de 1985?",
     "a": [
+      "Menudos do Morumbi",
       "Rolo Compressor",
       "Esquadrão de Aço",
-      "Expressinho",
-      "Menudos do Morumbi"
+      "Expressinho"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "paul",
     "d": 1,
     "exp": "O time jovem de Cilinho, com Careca, Müller e Silas, foi comparado à banda Menudo.",
@@ -1246,15 +1224,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-055",
+    "id": "paul-054",
     "q": "Contra qual clube o São Paulo decidiu o Paulista de 1985, vencendo por 3 a 1 e 2 a 1?",
     "a": [
       "Corinthians",
-      "Portuguesa",
       "Palmeiras",
-      "Santos"
+      "Santos",
+      "Portuguesa"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "paul",
     "d": 2,
     "exp": "O 14º título estadual saiu em 22 de dezembro de 1985, depois de 3 a 1 na ida, no Morumbi.",
@@ -1268,15 +1246,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-056",
+    "id": "paul-055",
     "q": "Quem foi o artilheiro do Campeonato Paulista de 1985, com 23 gols, pelo São Paulo?",
     "a": [
       "Müller",
-      "Silas",
       "Careca",
+      "Silas",
       "Pita"
     ],
-    "c": 2,
+    "c": 1,
     "cat": "paul",
     "d": 3,
     "exp": "Careca foi o goleador do campeonato do 14º título paulista do Tricolor.",
@@ -1290,15 +1268,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-057",
+    "id": "paul-056",
     "q": "Quem foi o técnico do São Paulo no título paulista de 1985?",
     "a": [
-      "Cilinho",
       "Carlos Alberto Silva",
       "Formiga",
+      "Cilinho",
       "Telê Santana"
     ],
-    "c": 0,
+    "c": 2,
     "cat": "paul",
     "d": 3,
     "exp": "Cilinho comandou os \"Menudos do Morumbi\" na conquista de 1985.",
@@ -1312,15 +1290,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-058",
+    "id": "paul-057",
     "q": "Qual clube foi campeão paulista de 1986, ano em que o São Paulo ficou fora das semifinais?",
     "a": [
+      "Internacional de Limeira",
       "Palmeiras",
       "Corinthians",
-      "Guarani",
-      "Internacional de Limeira"
+      "Guarani"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "paul",
     "d": 3,
     "exp": "A Inter de Limeira foi o primeiro time do interior campeão paulista; o São Paulo ficou em 6º, com 42 pontos, apesar de ser campeão brasileiro no fim do ano.",
@@ -1338,15 +1316,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-059",
+    "id": "paul-058",
     "q": "Qual rival o São Paulo derrotou na final do Paulista de 1987?",
     "a": [
       "Palmeiras",
-      "Corinthians",
       "Santos",
-      "Guarani"
+      "Guarani",
+      "Corinthians"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "paul",
     "d": 1,
     "exp": "Depois de 2 a 1 na ida, o 0 a 0 da volta deu o 15º título ao Tricolor de Cilinho.",
@@ -1360,15 +1338,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-060",
+    "id": "paul-059",
     "q": "Qual clube do interior foi vice-campeão paulista de 1989, derrotado pelo São Paulo?",
     "a": [
       "Bragantino",
-      "Inter de Limeira",
       "São José",
+      "Inter de Limeira",
       "Ituano"
     ],
-    "c": 2,
+    "c": 1,
     "cat": "paul",
     "d": 3,
     "exp": "O São Paulo venceu por 1 a 0 (gol contra) e empatou em 0 a 0; o campeonato recebeu o nome de Copa Centenário da República.",
@@ -1382,7 +1360,7 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-061",
+    "id": "paul-060",
     "q": "Como o primeiro jogo da final do Paulista de 1989, entre São Paulo e São José, foi decidido?",
     "a": [
       "Gol de pênalti aos 90 minutos",
@@ -1404,15 +1382,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-062",
+    "id": "paul-061",
     "q": "Qual era o nome oficial do Campeonato Paulista de 1989?",
     "a": [
       "Taça Brasil",
-      "Copa Centenário da República",
       "Copa Bandeirantes",
+      "Copa Centenário da República",
       "Taça Cidade de São Paulo"
     ],
-    "c": 1,
+    "c": 2,
     "cat": "paul",
     "d": 4,
     "exp": "A edição de 1989 foi batizada de Copa Centenário da República, em alusão aos cem anos da República.",
@@ -1426,15 +1404,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-063",
+    "id": "paul-062",
     "q": "Quem treinava o São Paulo no título paulista de 1989?",
     "a": [
       "Telê Santana",
+      "Carlos Alberto Silva",
       "Cilinho",
-      "Formiga",
-      "Carlos Alberto Silva"
+      "Formiga"
     ],
-    "c": 3,
+    "c": 1,
     "cat": "paul",
     "d": 4,
     "exp": "Carlos Alberto Silva comandou o time de Raí, Ricardo Rocha e Bobô no 16º título estadual.",
@@ -1448,15 +1426,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-064",
+    "id": "paul-063",
     "q": "Quem marcou os três gols da vitória do São Paulo por 3 a 0 sobre o Corinthians na final do Paulista de 1991?",
     "a": [
-      "Raí",
       "Müller",
       "Macedo",
-      "Elivélton"
+      "Elivélton",
+      "Raí"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "paul",
     "d": 1,
     "exp": "Em 8 de dezembro de 1991, no Morumbi, Raí fez os três; o 0 a 0 da volta deu o 17º título.",
@@ -1470,15 +1448,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-065",
+    "id": "paul-064",
     "q": "Quantos gols Raí marcou na campanha em que foi artilheiro do Paulista de 1991?",
     "a": [
-      "15",
       "20",
+      "15",
       "18",
       "25"
     ],
-    "c": 1,
+    "c": 0,
     "cat": "paul",
     "d": 3,
     "exp": "Raí terminou a competição de 1991 como artilheiro, com 20 gols.",
@@ -1492,15 +1470,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-066",
+    "id": "paul-065",
     "q": "Qual lendário técnico comandou o São Paulo nos títulos paulistas de 1991 e 1992?",
     "a": [
       "Muricy Ramalho",
-      "Carlos Alberto Silva",
       "Telê Santana",
+      "Carlos Alberto Silva",
       "Cilinho"
     ],
-    "c": 2,
+    "c": 1,
     "cat": "paul",
     "d": 1,
     "exp": "Telê Santana ganhou o bicampeonato estadual (1991 e 1992) à frente do Tricolor.",
@@ -1518,15 +1496,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-067",
+    "id": "paul-066",
     "q": "Qual rival o São Paulo derrotou na final do Paulista de 1992?",
     "a": [
-      "Palmeiras",
       "Corinthians",
       "Santos",
+      "Palmeiras",
       "Mogi Mirim"
     ],
-    "c": 0,
+    "c": 2,
     "cat": "paul",
     "d": 1,
     "exp": "O São Paulo venceu por 4 a 2 na ida e por 2 a 1 na volta, em 20 de dezembro de 1992.",
@@ -1540,15 +1518,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-068",
+    "id": "paul-067",
     "q": "Qual foi o placar agregado do São Paulo sobre o Palmeiras na final do Paulista de 1992?",
     "a": [
+      "6 a 3",
       "5 a 3",
       "6 a 2",
-      "5 a 4",
-      "6 a 3"
+      "5 a 4"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "paul",
     "d": 4,
     "exp": "Foram 4 a 2 na primeira partida e 2 a 1 na segunda.",
@@ -1562,15 +1540,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-069",
+    "id": "paul-068",
     "q": "Qual foi o placar do jogo de volta da final do Paulista de 1998, vencido pelo São Paulo sobre o Corinthians?",
     "a": [
       "2 a 0",
-      "3 a 1",
       "1 a 0",
-      "2 a 1"
+      "2 a 1",
+      "3 a 1"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "paul",
     "d": 4,
     "exp": "Depois de perder a ida por 2 a 1, o São Paulo venceu por 3 a 1 em 10 de maio de 1998 e conquistou o 19º título.",
@@ -1588,15 +1566,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-070",
+    "id": "paul-069",
     "q": "Quem treinava o São Paulo no título paulista de 1998?",
     "a": [
       "Muricy Ramalho",
-      "Telê Santana",
       "Nelsinho Baptista",
+      "Telê Santana",
       "Vanderlei Luxemburgo"
     ],
-    "c": 2,
+    "c": 1,
     "cat": "paul",
     "d": 4,
     "exp": "Nelsinho Baptista comandou o Tricolor na final contra o Corinthians.",
@@ -1610,15 +1588,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-071",
+    "id": "paul-070",
     "q": "Qual clube foi vice-campeão paulista de 2000, derrotado pelo São Paulo na final?",
     "a": [
-      "Santos",
       "Corinthians",
       "Palmeiras",
+      "Santos",
       "Ituano"
     ],
-    "c": 0,
+    "c": 2,
     "cat": "paul",
     "d": 2,
     "exp": "O São Paulo venceu por 1 a 0 na ida e empatou por 2 a 2 na volta (3 a 2 no agregado), conquistando o 20º título.",
@@ -1632,15 +1610,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-072",
+    "id": "paul-071",
     "q": "Quem foi o artilheiro do Campeonato Paulista de 2000, com 18 gols, pelo São Paulo?",
     "a": [
+      "França",
       "Raí",
       "Luís Fabiano",
-      "Kaká",
-      "França"
+      "Kaká"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "paul",
     "d": 3,
     "exp": "França foi o goleador do campeonato que deu o 20º título estadual ao Tricolor.",
@@ -1654,15 +1632,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-073",
+    "id": "paul-072",
     "q": "Qual ídolo conquistou seu último título pelo São Paulo no Paulista de 2000?",
     "a": [
       "Rogério Ceni",
-      "Raí",
       "França",
-      "Müller"
+      "Müller",
+      "Raí"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "paul",
     "d": 4,
     "exp": "O título de 2000 foi o último de Raí no clube, segundo a história do São Paulo.",
@@ -1676,15 +1654,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-074",
+    "id": "paul-073",
     "q": "Em 2002, por causa do Torneio Rio-São Paulo, a FPF criou qual torneio vencido pelo São Paulo?",
     "a": [
       "Copa dos Campeões Paulista",
-      "Torneio Início",
       "Supercampeonato Paulista",
+      "Torneio Início",
       "Taça Paulista"
     ],
-    "c": 2,
+    "c": 1,
     "cat": "paul",
     "d": 2,
     "exp": "O Supercampeonato foi disputado em maio de 2002 por quatro clubes; o São Paulo bateu o Ituano por 2 a 2 e 4 a 1 na final.",
@@ -1702,15 +1680,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-075",
+    "id": "paul-074",
     "q": "Quem foi o vice-campeão do Supercampeonato Paulista de 2002, vencido pelo São Paulo?",
     "a": [
-      "Ituano",
       "Corinthians",
       "Palmeiras",
+      "Ituano",
       "Santos"
     ],
-    "c": 0,
+    "c": 2,
     "cat": "paul",
     "d": 3,
     "exp": "O Ituano chegou à final e perdeu por 6 a 3 no agregado. Palmeiras e Corinthians foram eliminados nas semifinais.",
@@ -1724,15 +1702,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-076",
+    "id": "paul-075",
     "q": "Qual destes clubes NÃO participou do Supercampeonato Paulista de 2002?",
     "a": [
+      "Santos",
       "Ituano",
       "Corinthians",
-      "Palmeiras",
-      "Santos"
+      "Palmeiras"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "paul",
     "d": 3,
     "exp": "O torneio teve só quatro participantes: Ituano, Corinthians, São Paulo e Palmeiras.",
@@ -1746,15 +1724,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-077",
+    "id": "paul-076",
     "q": "Qual era o formato do Campeonato Paulista de 2005, vencido pelo São Paulo?",
     "a": [
       "Mata-mata em jogo único",
       "Quatro grupos com final em dois jogos",
-      "Pontos corridos, turno único com 20 clubes",
-      "Dois turnos com final entre os campeões"
+      "Dois turnos com final entre os campeões",
+      "Pontos corridos, turno único com 20 clubes"
     ],
-    "c": 2,
+    "c": 3,
     "cat": "paul",
     "d": 2,
     "exp": "O 21º título foi decidido em liga de pontos corridos; o São Paulo somou 45 pontos em 19 jogos.",
@@ -1768,15 +1746,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-078",
+    "id": "paul-077",
     "q": "Em que cidade o São Paulo empatou em 0 a 0 com o Santos e confirmou o título paulista de 2005?",
     "a": [
-      "Mogi Mirim",
       "Santos",
       "Campinas",
+      "Mogi Mirim",
       "Ribeirão Preto"
     ],
-    "c": 0,
+    "c": 2,
     "cat": "paul",
     "d": 3,
     "exp": "O jogo foi no Estádio Wilson Fernandes de Barros, em Mogi Mirim, e o título veio duas rodadas antes do fim.",
@@ -1790,15 +1768,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-079",
+    "id": "paul-078",
     "q": "Qual rival venceu o São Paulo na final do Campeonato Paulista de 2019?",
     "a": [
+      "Corinthians",
       "Palmeiras",
       "Santos",
-      "Ituano",
-      "Corinthians"
+      "Ituano"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "paul",
     "d": 1,
     "exp": "O São Paulo foi vice-campeão em 2019, perdendo a final para o Corinthians, em abril daquele ano.",
@@ -1816,15 +1794,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-080",
+    "id": "paul-079",
     "q": "Qual rival foi campeão paulista de 2022, batendo o São Paulo na final por 7 a 1 no agregado?",
     "a": [
       "Corinthians",
-      "Palmeiras",
       "Santos",
-      "Água Santa"
+      "Água Santa",
+      "Palmeiras"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "paul",
     "d": 1,
     "exp": "O Palmeiras ganhou por 3 a 1 no Morumbi e por 4 a 0 no Allianz Parque.",
@@ -1838,7 +1816,7 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-081",
+    "id": "paul-080",
     "q": "Qual time eliminou o São Paulo nas quartas de final do Paulista de 2023, nos pênaltis (6 a 5)?",
     "a": [
       "Palmeiras",
@@ -1860,15 +1838,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-082",
+    "id": "paul-081",
     "q": "Qual time eliminou o São Paulo nas quartas de final do Paulista de 2024, nos pênaltis (5 a 4)?",
     "a": [
-      "Novorizontino",
       "Água Santa",
+      "Novorizontino",
       "Palmeiras",
       "Santos"
     ],
-    "c": 0,
+    "c": 1,
     "cat": "paul",
     "d": 3,
     "exp": "O São Paulo, que liderou o Grupo D, empatou por 1 a 1 e perdeu nos pênaltis.",
@@ -1882,15 +1860,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-083",
+    "id": "paul-082",
     "q": "Qual apelido nasceu do jogo extra de 1957, entre São Paulo e Santos, que decidiu o Paulista de 1956?",
     "a": [
+      "San-São",
       "Majestoso",
       "Choque-Rei",
-      "Clássico da Fé",
-      "San-São"
+      "Clássico da Fé"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "paul",
     "d": 3,
     "exp": "O Santos venceu o jogo-desempate por 4 a 2, em 3 de janeiro de 1957, e o jornalista Thomaz Mazzoni batizou a rivalidade de San-São.",
@@ -1908,15 +1886,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-084",
+    "id": "paul-083",
     "q": "Qual craque fez 58 gols no Paulista de 1958, em que o São Paulo foi vice-campeão?",
     "a": [
       "Pepe",
       "Coutinho",
-      "Pelé",
-      "Zizinho"
+      "Zizinho",
+      "Pelé"
     ],
-    "c": 2,
+    "c": 3,
     "cat": "paul",
     "d": 1,
     "exp": "Pelé, do Santos, marcou 58 gols; o São Paulo ficou em 2º, com 60 pontos e a melhor defesa.",
@@ -1930,15 +1908,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-085",
+    "id": "paul-084",
     "q": "Como ficou conhecido o empate por 1 a 1 entre Palmeiras e São Paulo que deu o título paulista de 1950 ao Palmeiras?",
     "a": [
       "Jogo do Barro",
       "Jogo da Chuva",
-      "Jogo da Poeira",
-      "Jogo da Lama"
+      "Jogo da Lama",
+      "Jogo da Poeira"
     ],
-    "c": 3,
+    "c": 2,
     "cat": "paul",
     "d": 3,
     "exp": "No Pacaembu, a chuva transformou o campo em lamaçal; o empate bastou ao Palmeiras e o São Paulo foi vice.",
@@ -1952,15 +1930,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-086",
+    "id": "paul-085",
     "q": "Qual clube foi campeão paulista de 1994, deixando o São Paulo em segundo lugar?",
     "a": [
       "Corinthians",
       "Santos",
-      "Palmeiras",
-      "Portuguesa"
+      "Portuguesa",
+      "Palmeiras"
     ],
-    "c": 2,
+    "c": 3,
     "cat": "paul",
     "d": 2,
     "exp": "O Palmeiras, de Evair (23 gols), levou o 20º título; o São Paulo terminou com 41 pontos em 30 jogos.",
@@ -1974,15 +1952,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-087",
+    "id": "paul-086",
     "q": "Qual clube foi campeão paulista de 1990, seu primeiro título estadual?",
     "a": [
       "Novorizontino",
-      "Bragantino",
       "Inter de Limeira",
+      "Bragantino",
       "Guarani"
     ],
-    "c": 1,
+    "c": 2,
     "cat": "paul",
     "d": 2,
     "exp": "Em 1990, o Bragantino bateu o Novorizontino numa \"final caipira\"; o São Paulo ficou em 15º.",
@@ -1996,15 +1974,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-088",
+    "id": "paul-087",
     "q": "Segundo a FPF, qual clube é o maior campeão paulista?",
     "a": [
-      "Corinthians",
       "Palmeiras",
+      "Corinthians",
       "São Paulo",
       "Santos"
     ],
-    "c": 0,
+    "c": 1,
     "cat": "paul",
     "d": 1,
     "exp": "O Corinthians tem 31 títulos, o Palmeiras 27, e São Paulo e Santos 22 cada.",
@@ -2021,15 +1999,15 @@ export default [
     "ok": true
   },
   {
-    "id": "paul-089",
+    "id": "paul-088",
     "q": "Com qual rival o São Paulo divide os 22 títulos paulistas na contagem da FPF?",
     "a": [
+      "Santos",
       "Palmeiras",
       "Corinthians",
-      "Santos",
       "Portuguesa"
     ],
-    "c": 2,
+    "c": 0,
     "cat": "paul",
     "d": 2,
     "exp": "São Paulo e Santos aparecem empatados com 22 títulos estaduais cada.",
