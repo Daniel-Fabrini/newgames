@@ -49,9 +49,9 @@ export function createSim(diffId = 'normal', saved = null) {
     const la = a.userData ? a.userData.layer : -1;
     const lb = b.userData ? b.userData.layer : -1;
     let k;
-    if (la < 0 || lb < 0) k = Math.max(1, (topIdx + 1) / 3) * 0.9;
-    else if (la === lb) k = 0.3;
-    else k = Math.max(0.5, (topIdx - Math.min(la, lb) + 0.6) / 7.2);
+    if (la < 0 || lb < 0) k = 2;
+    else if (la === lb) k = 0.1;
+    else k = Math.max(0.15, (topIdx - Math.min(la, lb) + 0.6) / 28.8);
     return k * world.dt;
   };
 
