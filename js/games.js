@@ -10,6 +10,9 @@
 //   progress  % of the game built (0–100); below 100 the hub shows a progress bar
 //   music   false → background music is silenced while the game is open
 
+import minesEntry from '../games/mines/entry.js';
+import lightsEntry from '../games/lights/entry.js';
+
 export const GAMES = [
   {
     id: 'soccer',
@@ -463,7 +466,29 @@ export const GAMES = [
     trophies: ['🏆', '📝', '💡', '⭐', '🎯'],
     load: () => import('../games/pv/crossword.js'),
   },
+  {
+    id: 'dice',
+    cat: 'classic',
+    progress: 100,
+    name: { pt: 'Cinco Dados', en: 'Five Dice', es: 'Cinco Dados' },
+    sub: { pt: 'Poker de Dados', en: 'Dice Poker', es: 'Póker de Dados' },
+    about: {
+      pt: 'Um jogo original de poker de dados: role cinco dados até três vezes, segure os melhores e preencha as 13 categorias. Jogue sozinho, contra o computador ou com amigos no mesmo aparelho.',
+      en: 'An original dice-poker game: roll five dice up to three times, hold the best ones and fill all 13 categories. Play solo, against the computer or with friends on the same device.',
+      es: 'Un juego original de póker de dados: tira cinco dados hasta tres veces, guarda los mejores y completa las 13 categorías. Juega solo, contra el ordenador o con amigos en el mismo dispositivo.',
+    },
+    modes: [
+      { id: 'classic', icon: 'user', label: { pt: 'Clássico', en: 'Classic', es: 'Clásico' } },
+      { id: 'ai', icon: 'question', label: { pt: 'Contra o PC', en: 'Vs Computer', es: 'Contra la IA' } },
+      { id: 'local', icon: 'users', label: { pt: 'Local', en: 'Local', es: 'Local' } },
+    ],
+    trophies: ['🏆', '🎲', '🃏', '⭐', '🎯'],
+    load: () => import('../games/dice/main.js'),
+  },
 ];
+
+// Games that ship their own entry.js
+GAMES.push(minesEntry, lightsEntry);
 
 export const CATEGORIES = [
   { id: 'all', label: { pt: 'Todos', en: 'All', es: 'Todos' } },

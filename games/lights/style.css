@@ -1,0 +1,353 @@
+/* Light Echo — black & gold with glowing pads. Every class is prefixed with g-lights-. */
+.g-lights {
+  --gl-gold: var(--gold, #f3c24a);
+  --gl-line: var(--line, rgba(233, 189, 82, 0.42));
+  --gl-grad: var(--gold-grad, linear-gradient(180deg, #fff0a8 0%, #f6cf55 38%, #e3a723 72%, #c98a10 100%));
+  --gl-ink: var(--primary-ink, #1a1102);
+  background: radial-gradient(110% 60% at 50% 38%, #181420 0%, #0a0a0c 65%);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.g-lights-view {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.g-lights-hud {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 12px 4px;
+  width: 100%;
+}
+.g-lights-pill {
+  flex: 1;
+  max-width: 124px;
+  text-align: center;
+  padding: 6px 8px 7px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #1a1a1f, #0f0f12);
+  border: 1px solid var(--gl-line);
+}
+.g-lights-pill small {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--text-3, #8d8d96);
+}
+.g-lights-pill b {
+  font: 900 21px/1.15 'Nunito', system-ui, sans-serif;
+  color: #ffd768;
+  font-variant-numeric: tabular-nums;
+}
+.g-lights-pill b.pop {
+  animation: g-lights-pop 0.4s ease-out;
+}
+.g-lights-lives {
+  min-height: 22px;
+  margin-top: 6px;
+  font-size: 18px;
+  letter-spacing: 3px;
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+.g-lights-lives span {
+  transition: transform 0.2s, opacity 0.3s, filter 0.3s;
+}
+.g-lights-lives span.lost {
+  opacity: 0.25;
+  filter: grayscale(1);
+  transform: scale(0.8);
+}
+.g-lights-stagewrap {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 6px 10px;
+}
+.g-lights-board {
+  position: relative;
+  width: min(100%, var(--gl-size, 380px));
+  aspect-ratio: 1;
+  max-height: 100%;
+  border-radius: 50%;
+  touch-action: none;
+}
+.g-lights-board::before {
+  content: '';
+  position: absolute;
+  inset: -3%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #1d1a12 55%, #0d0c0a 70%);
+  border: 2px solid var(--gl-line);
+  box-shadow: 0 0 40px rgba(243, 194, 74, 0.12), 0 18px 40px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(0, 0, 0, 0.8);
+}
+.g-lights-board svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.g-lights-pad {
+  fill: var(--d);
+  stroke: var(--d);
+  stroke-width: 10;
+  stroke-linejoin: round;
+  cursor: pointer;
+  outline: none;
+  transform-origin: 200px 200px;
+  transition: fill 0.12s ease-out, stroke 0.12s ease-out, filter 0.12s ease-out, transform 0.12s ease-out;
+}
+.g-lights-pad.lit {
+  fill: var(--c);
+  stroke: var(--c);
+  filter: drop-shadow(0 0 16px var(--c)) drop-shadow(0 0 34px var(--c)) brightness(1.12);
+  transform: scale(1.025);
+  transition-duration: 0.04s;
+}
+.g-lights-pad:focus-visible {
+  stroke: #ffe9a0;
+}
+.g-lights-gloss {
+  pointer-events: none;
+  fill: url(#g-lights-gloss);
+}
+.g-lights-board.locked .g-lights-pad {
+  cursor: default;
+}
+.g-lights-board.dead .g-lights-pad {
+  animation: g-lights-dead 0.9s ease-out;
+}
+.g-lights-board.shake {
+  animation: g-lights-shake 0.4s;
+}
+.g-lights-hub {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 36%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 28%, #2a2a31, #0b0b0e 75%);
+  border: 2px solid var(--gl-line);
+  box-shadow: 0 0 22px rgba(243, 194, 74, 0.2), inset 0 2px 10px rgba(255, 255, 255, 0.07), 0 6px 18px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  text-align: center;
+}
+.g-lights-hub small {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gl-gold);
+}
+.g-lights-hub b {
+  font: 900 clamp(30px, 11vw, 46px)/1 'Nunito', system-ui, sans-serif;
+  background: var(--gold-text, linear-gradient(180deg, #fff6cf, #ffd768 45%, #e4a21c));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-lights-hub b.pop {
+  animation: g-lights-pop 0.45s ease-out;
+}
+.g-lights-status {
+  min-height: 30px;
+  font-weight: 900;
+  font-size: 19px;
+  color: #fff;
+  text-align: center;
+  padding: 2px 12px;
+}
+.g-lights-status.bad {
+  color: #ff7a85;
+}
+.g-lights-status.good {
+  color: #ffd768;
+}
+.g-lights-foot {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-3, #8d8d96);
+  padding: 2px 12px calc(14px + var(--safe-bottom, 0px));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.g-lights-foot .icon-btn {
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+}
+.g-lights-ov {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(6, 6, 8, 0.72);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 5;
+  animation: g-lights-fade 0.3s ease-out;
+}
+.g-lights-card {
+  width: min(100%, 380px);
+  padding: 18px 16px 16px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #1b1b20, #0e0e11);
+  border: 1.5px solid var(--gl-line);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 34px rgba(243, 194, 74, 0.16);
+  text-align: center;
+  animation: g-lights-rise 0.4s cubic-bezier(0.2, 0.9, 0.25, 1.1) backwards;
+}
+.g-lights-card h3 {
+  margin: 0 0 4px;
+  font-size: 26px;
+  font-weight: 900;
+  background: var(--gold-text, linear-gradient(180deg, #fff6cf, #ffd768 45%, #e4a21c));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-lights-card p {
+  margin: 2px 0 8px;
+  color: var(--text-2, #c9c9d2);
+  font-weight: 700;
+  font-size: 14px;
+}
+.g-lights-card .rec {
+  color: var(--gl-gold);
+  font-weight: 900;
+}
+.g-lights-card .lbl {
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--text-3, #8d8d96);
+  margin: 12px 2px 6px;
+}
+.g-lights-opts {
+  display: grid;
+  gap: 8px;
+}
+.g-lights-opts.c3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.g-lights-opts.c2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.g-lights-opt {
+  padding: 9px 4px;
+  border-radius: 14px;
+  border: 1.5px solid var(--gl-line);
+  background: linear-gradient(180deg, #1c1c21, #101013);
+  color: #fff;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.g-lights-opt b {
+  display: block;
+  font-size: 15px;
+  font-weight: 900;
+}
+.g-lights-opt span {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.7;
+  margin-top: 1px;
+}
+.g-lights-opt:active {
+  transform: scale(0.96);
+}
+.g-lights-opt.on {
+  background: var(--gl-grad);
+  color: var(--gl-ink);
+  border-color: #ffe9a0;
+  box-shadow: 0 0 16px rgba(243, 180, 40, 0.4);
+}
+.g-lights-card .btn {
+  margin-top: 14px;
+}
+.g-lights-card .btn.ghost {
+  margin-top: 8px;
+}
+@keyframes g-lights-pop {
+  40% {
+    transform: scale(1.3);
+  }
+}
+@keyframes g-lights-shake {
+  20% {
+    transform: translateX(-9px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+@keyframes g-lights-dead {
+  0%,
+  30% {
+    fill: #ff3b4e;
+    stroke: #ff3b4e;
+    filter: drop-shadow(0 0 22px #ff3b4e);
+  }
+  50% {
+    fill: var(--d);
+    stroke: var(--d);
+    filter: none;
+  }
+  70% {
+    fill: #ff3b4e;
+    stroke: #ff3b4e;
+    filter: drop-shadow(0 0 22px #ff3b4e);
+  }
+}
+@keyframes g-lights-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes g-lights-rise {
+  from {
+    transform: translateY(30px) scale(0.96);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .g-lights-pad.lit {
+    transform: none;
+  }
+  .g-lights-board.shake,
+  .g-lights-board.dead .g-lights-pad,
+  .g-lights-card,
+  .g-lights-hub b.pop,
+  .g-lights-pill b.pop {
+    animation: none;
+  }
+}

@@ -1,0 +1,307 @@
+/* Minesweeper — black & gold. Every class is prefixed with g-mines-. */
+.g-mines {
+  --gm-gold: var(--gold, #f3c24a);
+  --gm-line: var(--line, rgba(233, 189, 82, 0.42));
+  --gm-grad: var(--gold-grad, linear-gradient(180deg, #fff0a8 0%, #f6cf55 38%, #e3a723 72%, #c98a10 100%));
+  --gm-ink: var(--primary-ink, #1a1102);
+  background: radial-gradient(120% 70% at 50% 0%, #1b1710 0%, #0a0a0c 60%);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.g-mines-view {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+.g-mines-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px 8px;
+}
+.g-mines-lcd {
+  min-width: 84px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #050506, #101013);
+  border: 1px solid var(--gm-line);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8), 0 0 14px rgba(243, 194, 74, 0.1);
+  font: 900 24px/1 'Nunito', system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+  color: #ffd768;
+  text-shadow: 0 0 10px rgba(255, 190, 40, 0.55);
+}
+.g-mines-lcd small {
+  font-size: 15px;
+  text-shadow: none;
+}
+.g-mines-face {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 2px solid #ffe9a0;
+  background: var(--gm-grad);
+  color: var(--gm-ink);
+  font-size: 28px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(243, 180, 40, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: transform 0.1s;
+}
+.g-mines-face:active {
+  transform: scale(0.9) rotate(-8deg);
+}
+.g-mines-sub {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-3, #8d8d96);
+  min-height: 16px;
+  padding: 0 14px 6px;
+}
+.g-mines-sub b {
+  color: var(--gm-gold);
+}
+.g-mines-vp {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 0 8px;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--gm-line);
+  background: #070708;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.9), 0 0 24px rgba(243, 194, 74, 0.08);
+  touch-action: none;
+  outline: none;
+}
+.g-mines-vp:focus-visible {
+  box-shadow: 0 0 0 2px var(--gm-gold), inset 0 0 30px rgba(0, 0, 0, 0.9);
+}
+.g-mines-stage {
+  display: flex;
+  min-width: 100%;
+  min-height: 100%;
+  width: max-content;
+  box-sizing: border-box;
+  padding: 6px;
+}
+.g-mines-stage canvas {
+  margin: auto;
+  display: block;
+  border-radius: 10px;
+}
+.g-mines-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 12px calc(10px + var(--safe-bottom, 0px));
+}
+.g-mines-flagbtn {
+  flex: 1;
+  height: 48px;
+  border-radius: 14px;
+  border: 1.5px solid var(--gm-line);
+  background: linear-gradient(180deg, #1c1c21, #101013);
+  color: #fff;
+  font: 900 15px 'Nunito', system-ui, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.15s;
+}
+.g-mines-flagbtn:active {
+  transform: scale(0.96);
+}
+.g-mines-flagbtn.on {
+  background: var(--gm-grad);
+  color: var(--gm-ink);
+  border-color: #ffe9a0;
+  box-shadow: 0 0 18px rgba(243, 180, 40, 0.45);
+}
+.g-mines-sq {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  border: 1.5px solid var(--gm-line);
+  background: linear-gradient(180deg, #1c1c21, #101013);
+  color: var(--gm-gold);
+  font: 900 24px/1 'Nunito', system-ui, sans-serif;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.g-mines-sq:active {
+  transform: scale(0.92);
+}
+.g-mines-sq:disabled {
+  opacity: 0.35;
+}
+.g-mines-sheet {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + var(--safe-bottom, 0px));
+  padding: 16px 16px 14px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #1b1b20, #0e0e11);
+  border: 1.5px solid var(--gm-line);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(243, 194, 74, 0.18);
+  text-align: center;
+  animation: g-mines-up 0.35s cubic-bezier(0.2, 0.9, 0.25, 1.1) backwards;
+  z-index: 5;
+}
+.g-mines-sheet.win {
+  border-color: #ffe9a0;
+}
+.g-mines-sheet h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 900;
+  background: var(--gold-text, linear-gradient(180deg, #fff6cf, #ffd768 45%, #e4a21c));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-mines-sheet.lose h3 {
+  background: linear-gradient(180deg, #ff9aa5, #e8404f);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.g-mines-sheet p {
+  margin: 4px 0 10px;
+  color: var(--text-2, #c9c9d2);
+  font-weight: 700;
+  font-size: 14px;
+}
+.g-mines-sheet .g-mines-rec {
+  color: var(--gm-gold);
+  font-weight: 900;
+}
+.g-mines-sheet .row {
+  justify-content: center;
+}
+.g-mines-menu {
+  overflow-y: auto;
+  padding: 16px 16px calc(24px + var(--safe-bottom, 0px));
+}
+.g-mines-menu > * {
+  max-width: 520px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.g-mines-menu h2 {
+  margin: 4px 0 2px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 900;
+  background: var(--gold-text, linear-gradient(180deg, #fff6cf, #ffd768 45%, #e4a21c));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-mines-menu .muted.c {
+  text-align: center;
+  margin: 0 0 14px;
+}
+.g-mines-opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1.5px solid var(--gm-line);
+  background: linear-gradient(180deg, #1a1a1f, #101013);
+  color: #fff;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.g-mines-opt:active {
+  transform: scale(0.98);
+}
+.g-mines-opt .ic {
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 14px;
+  background: var(--gm-grad);
+  color: var(--gm-ink);
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+}
+.g-mines-opt .tt {
+  font-weight: 900;
+  font-size: 17px;
+}
+.g-mines-opt .ss {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-3, #8d8d96);
+  margin-top: 2px;
+}
+.g-mines-opt .bt {
+  margin-left: auto;
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--gm-gold);
+  text-align: right;
+  white-space: nowrap;
+}
+.g-mines-custom {
+  padding: 14px;
+  border-radius: 16px;
+  border: 1.5px solid var(--gm-line);
+  background: linear-gradient(180deg, #1a1a1f, #101013);
+}
+.g-mines-custom label {
+  display: grid;
+  grid-template-columns: 90px 1fr 38px;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0;
+  font-weight: 800;
+  font-size: 14px;
+}
+.g-mines-custom input[type='range'] {
+  width: 100%;
+  accent-color: #f3c24a;
+}
+.g-mines-custom output {
+  text-align: right;
+  color: var(--gm-gold);
+  font-weight: 900;
+}
+.g-mines-custom .btn {
+  margin-top: 8px;
+}
+@keyframes g-mines-up {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .g-mines-sheet {
+    animation: none;
+  }
+  .g-mines-face:active {
+    transform: scale(0.95);
+  }
+}
