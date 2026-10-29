@@ -54,7 +54,7 @@ export function validateCareer(raw) {
     c.achievements = {}; if (isObj(raw.achievements)) for (const [k, v] of Object.entries(raw.achievements)) c.achievements[k] = { at: num(v?.at, 0) };
     c.cosmetics = { unlocked: [], selected: { ...DEFAULT_SELECTED, ...(isObj(raw.cosmetics?.selected) ? raw.cosmetics.selected : {}) } };
     c.story = { seen: (Array.isArray(raw.story?.seen) ? raw.story.seen : []).filter((s) => typeof s === 'string') };
-    c.flags = { tutorialDone: !!raw.flags?.tutorialDone };
+    c.flags = { tutorialDone: !!raw.flags?.tutorialDone, coachSeen: (Array.isArray(raw.flags?.coachSeen) ? raw.flags.coachSeen : []).filter((x) => typeof x === 'string').slice(0, 50) };
     c.profile = { name: String(raw.profile?.name || 'Player').slice(0, 18), avatar: String(raw.profile?.avatar || 'p1') };
     refreshUnlocks(c);
     // never lose a selection the player does not own

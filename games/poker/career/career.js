@@ -1,6 +1,6 @@
 // Career model: profile, progression, rankings/seasons, achievements, rewards. Pure logic over a JSON career object `c`.
 // Progression comes ONLY from recorded tournament results (recordResult / finishEvent). Everything is deterministic given seeds.
-import { CIRCUITS, CIRCUIT_BY_ID, EVENTS, EVENT_BY_ID, QUAL_WORLD, buildDef } from './circuits.js';
+import { CIRCUITS, CIRCUIT_BY_ID, EVENTS, EVENT_BY_ID, QUAL_WORLD, COACH_STEPS, buildDef } from './circuits.js';
 import { RIVALS, RIVAL_BY_ID } from './rivals.js';
 import { evalReq, circuitPlayed, circuitRank } from './req.js';
 import { evaluateAchievements, listAchievements } from './achievements.js';
@@ -35,6 +35,7 @@ export function newCareer({ name = 'Player', avatar = 'p1', seed = randomSeed(),
 }
 
 // ---------- levels, reputation ----------
+export const createCareer = newCareer;
 export const xpForLevel = (L_) => 50 * L_ * (L_ - 1);
 export const levelFromXp = (xp) => Math.min(60, Math.max(1, Math.floor((1 + Math.sqrt(1 + xp / 12.5)) / 2)));
 export function levelInfo(c) {
@@ -70,6 +71,8 @@ export function circuitInfo(c, id) {
   const ci = CIRCUIT_BY_ID[id]; const evs = listEvents(c, id);
   return { ...ci, unlocked: circuitUnlocked(c, id), unlockReq: ci.unlock ? evalReq(c, ci.unlock) : null, events: evs, played: circuitPlayed(c, id), points: c.pts[id]?.you || 0, rank: circuitRank(c, id), titlesWon: evs.filter((e) => e.completed && e.event.title).length };
 }
+export function nextCoach(c, trigger) { const seen = c.flags.coachSeen || []; return COACH_STEPS.find((s) => s.trigger === trigger && !seen.includes(s.id)) || null; }
+export function markCoach(c, id) { (c.flags.coachSeen ||= []); if (!c.flags.coachSeen.includes(id)) c.flags.coachSeen.push(id); return c; }
 export function markTutorialDone(c) { c.flags.tutorialDone = true; evaluateAchievements(c, 0); refreshUnlocks(c); return c; }
 export function currentCircuit(c) { return CIRCUIT_IDS.filter((k) => c.unlocked.includes(k)).pop(); }
 /** The map for the UI: four nodes with state. */
@@ -107,7 +110,8 @@ export function nextObjective(c) {
 }
 
 // ---------- starting / finishing events ----------
-export function startEvent(c, eventId, { seed, player } = {}) {
+export function startEvent(c, eventId, opts = {}) {
+  const { seed, player } = typeof opts === 'number' ? { seed: opts } : (opts || {});
   const st = eventStatus(c, eventId);
   if (!st.unlocked) throw new Error('event locked: ' + eventId);
   if (c.tournament) throw new Error('a tournament is already in progress');
@@ -118,7 +122,8 @@ export function startEvent(c, eventId, { seed, player } = {}) {
   return t;
 }
 /** Record the finished (or player-eliminated) career tournament. Simulates the rest if needed. Returns the report. */
-export function finishEvent(c, { now = 0 } = {}) {
+export function finishEvent(c, a, b) {
+  const { now = 0 } = (a && typeof a === 'object' ? a : b && typeof b === 'object' ? b : {});
   const t = c.tournament;
   if (!t) throw new Error('no tournament');
   if (!human(t).out) throw new Error('player still in the tournament');
@@ -129,7 +134,8 @@ export function finishEvent(c, { now = 0 } = {}) {
   return report;
 }
 /** Leaving a running tournament = forfeit: counts as eliminated in the current position (no free retries by quitting). */
-export function forfeitEvent(c, { now = 0 } = {}) {
+export function forfeitEvent(c, o = {}) {
+  const { now = 0 } = o || {};
   const t = c.tournament; if (!t) throw new Error('no tournament');
   const me = human(t);
   if (!me.out) {
@@ -173,7 +179,7 @@ export function recordResult(c, eventId, result, { now = 0 } = {}) {
   else if (won && e.title) report.titleWon = { event: eventId, name: e.title, repeat: true };
   // xp / rep
   const xpGain = Math.round(e.xp * (0.25 + 0.75 * Math.pow(pct, 1.5)) * (won ? 1.6 : 1)) + result.ko * 5;
-  c.xp += xpGain; c.level = levelFromXp(c.xp); report.xpGain = xpGain; report.levelUp = c.level > prev.level; report.level = c.level;
+  c.xp += xpGain; c.level = levelFromXp(c.xp); report.xpGain = xpGain; report.levelUp = c.level > prev.level ? { from: prev.level, to: c.level } : null; report.level = c.level;
   const repGain = Math.round(e.rep * (pct * pct * 0.6 + (result.cashed ? 0.15 : 0) + (won ? 0.5 : 0) + (result.finalTable ? 0.2 : 0)));
   c.rep += repGain; report.repGain = repGain;
   // points: you + rivals (real finishes for rivals in the field, simulated for others of this circuit)
@@ -220,6 +226,10 @@ export function recordResult(c, eventId, result, { now = 0 } = {}) {
   for (const b of STORY_BEATS) if (!c.story.seen.includes(b.id) && b.when(c, { event: e, result, newCircuits: report.newCircuits, qualifiedNow: report.qualifiedNow, championNow: report.championNow })) { c.story.seen.push(b.id); report.storyBeats.push(b.id); }
   report.newAchievements = evaluateAchievements(c, now);
   report.newCosmetics = refreshUnlocks(c);
+  // extra moments / aliases used by the UI
+  for (const r of result.rivals) if (r.playerBeat && c.rivals[r.id]?.beaten === 1) report.moments.push('rival_beaten:' + r.id);
+  if (e.championship && result.finalTable) report.moments.push('championship_final');
+  Object.assign(report, { xp: xpGain, rep: repGain, prize: result.prize, place, entrants, unlockedCircuits: report.newCircuits, achievements: report.newAchievements, rewards: report.newCosmetics.map((x) => ({ type: x.slot, id: x.id })), rivalsDelta: result.rivals.map((r) => ({ id: r.id, beaten: r.playerBeat, lostTo: r.beatPlayer, knockedOutByYou: r.knockedOutByPlayer, knockedOutYou: r.knockedOutPlayer })) });
   return report;
 }
 

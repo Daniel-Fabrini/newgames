@@ -58,5 +58,7 @@ export function placePoints({ place, entrants, tableSize = 9, paid = 1, ko = 0, 
   if (place <= Math.min(tableSize, entrants)) pts += 12;
   if (place <= paid) pts += 8;
   pts += ko * 3;
-  return Math.round(pts * mult);
+  // small fields (duels, sit&gos) are worth proportionally less than big multi-table events
+  const size = Math.max(0.3, Math.min(1, 0.25 + entrants / 50));
+  return Math.round(pts * mult * size);
 }

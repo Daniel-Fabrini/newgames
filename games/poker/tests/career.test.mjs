@@ -12,19 +12,7 @@ import { ARCHETYPES } from '../ai/profiles.js';
 import { tx } from '../career/text.js';
 import { assertCareerSound, snapshot } from './career_invariants.mjs';
 
-/** A fabricated but internally consistent result (used only to test progression logic deterministically). */
-export function fake(eventId, place, o = {}) {
-  const e = EVENT_BY_ID[eventId]; const n = e.entrants;
-  const paid = payoutLadder(n, e.payoutKind || 'auto').length;
-  const ko = o.ko || 0;
-  const rivals = e.rivals.map((id, k) => {
-    const rp = o.rivalPlaces?.[id] ?? (place === 1 ? Math.min(n, 2 + k) : Math.min(n, place + 1 + k));
-    return { id, place: rp, beatPlayer: rp < place, playerBeat: rp > place, knockedOutPlayer: !!o.koBy?.includes(id), knockedOutByPlayer: !!o.koOf?.includes(id) };
-  });
-  const ft = n > e.tableSize && place <= e.tableSize;
-  const prize = place <= paid ? Math.round((e.buyIn * n) / Math.max(1, paid)) : 0;
-  return { defId: eventId, place, entrants: n, paid, prize, points: placePoints({ place, entrants: n, tableSize: e.tableSize, paid, ko, mult: e.mult }), ko, finalTable: ft, won: place === 1, cashed: place <= paid, rounds: 50, rivals, feats: o.feats || { handsPlayed: 20, handsWon: 5, biggestPot: 500, bluffWins: 0, allInWins: 0, comeback: false }, finished: true, playerOut: true };
-}
+import { fakeResult as fake } from '../career/testing.js';
 const rec = (c, id, place, o) => { const prev = snapshot(c); const r = C.recordResult(c, id, fake(id, place, o)); assertCareerSound(c, prev); return r; };
 
 test('static data: events/circuits/rivals/achievements are well-formed and trilingual', () => {
@@ -75,7 +63,7 @@ test('first win unlocks Regional (title, moment, story beat, cosmetics, achievem
   assert.equal(r.titleWon.event, 'local_cafe');
   assert.ok(r.storyBeats.includes('regional_open'));
   assert.ok(c.achievements.first_win && c.achievements.qualify_regional && c.achievements.win_local_title);
-  assert.ok(r.newCosmetics.some((x) => x.slot === 'theme' && x.id === 'burgundy') && r.newCosmetics.some((x) => x.slot === 'back' && x.id === 'crimson'));
+  assert.ok(r.newCosmetics.some((x) => x.slot === 'theme' && x.id === 'burgundy') && r.newCosmetics.some((x) => x.slot === 'back' && x.id === 'ruby'));
   assert.ok(r.xpGain > 0 && c.xp > 0 && c.rep > 0);
   // repeating a title does not duplicate it
   const r2 = rec(c, 'local_cafe', 1);
@@ -151,7 +139,7 @@ test('winning the World Championship: champion, trophy title, story, legends mod
   assert.ok(c.achievements.champion && c.achievements.win_intl_title && c.achievements.rival_hunter);
   assert.ok(c.titles.includes('world_main'));
   assert.ok(C.eventStatus(c, 'world_legend_duel').unlocked && C.eventStatus(c, 'world_legends_cup').unlocked);
-  assert.ok(win.newCosmetics.some((x) => x.id === 'gold_room' || x.id === 'gold'));
+  assert.ok(win.newCosmetics.some((x) => x.slot === 'back' && x.id === 'violet') && win.newCosmetics.some((x) => x.slot === 'frame' && x.id === 'champion'));
   const win2 = rec(c, 'world_main', 1); assert.equal(c.champion, 2); assert.equal(win2.championNow, false);
   assert.ok(C.nextObjective(c).id === 'legends');
 });
@@ -209,8 +197,8 @@ test('achievements: progress is real and never granted early', () => {
 });
 test('profile/cosmetics: only owned items can be selected; titles from titles earned', () => {
   const c = C.newCareer({ name: 'Zé', seed: 14 });
-  assert.equal(C.selectCosmetic(c, 'theme', 'gold_room'), false);
-  assert.equal(C.selectCosmetic(c, 'theme', 'green'), true);
+  assert.equal(C.selectCosmetic(c, 'theme', 'royal'), false);
+  assert.equal(C.selectCosmetic(c, 'theme', 'emerald'), true);
   C.setProfile(c, { name: '  Maria  ', avatar: 'p12', title: 'local_cafe' });
   assert.equal(c.profile.name, 'Maria'); assert.equal(c.profile.avatar, 'p1'); assert.equal(c.cosmetics.selected.title, null);
   rec(c, 'local_cafe', 1);
@@ -277,11 +265,11 @@ test('persistence: corrupt / foreign / tampered data is handled safely', () => {
   // tampering: huge/negative/NaN numbers and fake unlocks are sanitised
   const c = C.newCareer({ seed: 19 });
   const raw = JSON.parse(JSON.stringify(c));
-  raw.xp = -50; raw.level = 999; raw.rep = 'many'; raw.unlocked = ['local', 'bogus', 'world']; raw.stats.wins = -3; raw.cosmetics.selected.theme = 'gold_room'; raw.titles = ['nope', 'local_cafe']; raw.qualifiedWorld = false;
+  raw.xp = -50; raw.level = 999; raw.rep = 'many'; raw.unlocked = ['local', 'bogus', 'world']; raw.stats.wins = -3; raw.cosmetics.selected.theme = 'royal'; raw.titles = ['nope', 'local_cafe']; raw.qualifiedWorld = false;
   raw.tournament = { v: 1, defId: 'local_cafe', entrants: [], tables: [], def: {} }; raw.tournamentEvent = 'local_cafe';
   const v = validateCareer(raw);
   assert.ok(v); assert.equal(v.xp, 0); assert.ok(v.rep === 0); assert.equal(v.stats.wins, 0);
-  assert.ok(!v.unlocked.includes('bogus')); assert.equal(v.cosmetics.selected.theme, 'green');
+  assert.ok(!v.unlocked.includes('bogus')); assert.equal(v.cosmetics.selected.theme, 'emerald');
   assert.deepEqual(v.titles.filter((t) => t === 'nope'), []);
   assert.equal(v.tournament, null, 'invalid tournament dropped, career kept');
   assert.equal(validateCareer({ v: 2 }), null);
@@ -308,3 +296,21 @@ test('requirement DSL: any/all/progress objects', () => {
   const q = evalReq(c, QUAL_WORLD); assert.equal(q.met, false); assert.equal(q.children.length, 3); assert.ok(q.children.every((x) => x.label.pt && x.label.es));
 });
 void act; void createTournament; void buildDef;
+test('UI read-model views are consistent with the career', async () => {
+  const V = await import('../career/views.js'); const { debugJump } = await import('../career/testing.js');
+  const c = C.createCareer({ name: 'View', seed: 30 });
+  let ev = V.eventView(c, 'local_cafe'); assert.equal(ev.state, 'available'); assert.ok(ev.recommended);
+  ev = V.eventView(c, 'reg_open'); assert.equal(ev.state, 'locked'); assert.ok(ev.lockReason.missing.length >= 1);
+  rec(c, 'local_cafe', 2);
+  assert.equal(V.eventView(c, 'local_cafe').state, 'cashed'); assert.equal(V.eventView(c, 'local_cafe').best.place, 2);
+  const pv = V.profileView(c); assert.equal(pv.played, 1); assert.ok(pv.xpForNext > 0);
+  assert.equal(V.circuitView(c, 'local').events.length, 6); assert.equal(V.circuitView(c, 'regional').unlocked, false);
+  assert.equal(V.seasonView(c).goals.length, 3); assert.ok(V.rankInfo(c, 'local').rank >= 1);
+  assert.ok(V.achievementsView(c).find((a) => a.id === 'first_tournament').done);
+  assert.ok(V.rivalsView(c).length >= 8); assert.ok(V.cosmeticsView(c).cardBacks.some((b) => b.unlocked));
+  assert.equal(V.equip(c, 'tableTheme', 'royal'), false); assert.equal(V.equip(c, 'cardBack', 'royal'), true);
+  assert.equal(C.nextCoach(c, 'first_flop').id, 'flop'); C.markCoach(c, 'flop'); assert.equal(C.nextCoach(c, 'first_flop'), null);
+  const st = memStore(); saveCareer(st, c); assert.deepEqual(loadCareer(st).flags.coachSeen, ['flop']);
+  debugJump(c, 'champion'); assertCareerSound(c); assert.equal(c.champion, 1);
+  const rep = rec(c, 'local_cafe', 1); assert.ok(rep.unlockedCircuits && Array.isArray(rep.rewards) && rep.xp > 0);
+});
