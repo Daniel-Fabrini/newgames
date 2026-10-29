@@ -1,28 +1,6 @@
 // Tricolor do Milhão — banco de perguntas (verificadas contra as fontes citadas)
 export default [
  {
-  "id": "paul-1001",
-  "q": "Quantos títulos do Campeonato Paulista o São Paulo tem, segundo a Wikipédia (o último em 2021)?",
-  "a": [
-   "19",
-   "20",
-   "22",
-   "25"
-  ],
-  "c": 2,
-  "cat": "paul",
-  "d": 2,
-  "exp": "A Wikipédia lista 22 estaduais para o Tricolor, o mais recente em 2021.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1931–2021",
-  "ok": true
- },
- {
   "id": "paul-1002",
   "q": "Em que anos Telê Santana foi campeão paulista pelo São Paulo?",
   "a": [
@@ -41,12 +19,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Tel%C3%AA_Santana"
    },
    {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+    "n": "Wikipedia (en) — Telê Santana",
+    "u": "https://en.wikipedia.org/wiki/Tel%C3%AA_Santana"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1991–1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "paul-1003",
@@ -65,10 +48,15 @@ export default [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1980–1981",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-1004",
@@ -87,10 +75,15 @@ export default [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1977–1991",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "idolos-1005",
@@ -109,10 +102,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Rogério Ceni",
     "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+   },
+   {
+    "n": "Lance! (Lancepédia) — A história de Rogério Ceni no São Paulo",
+    "u": "https://www.lance.com.br/lancepedia/a-historia-de-rogerio-ceni-no-sao-paulo.html"
    }
   ],
   "when": "1998–2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1006",
@@ -126,59 +124,24 @@ export default [
   "c": 2,
   "cat": "copas",
   "d": 4,
-  "exp": "O São Paulo acumulou Libertadores e Supercopa de 1993, e a Conmebol convidou o campeão da Copa Conmebol.",
+  "exp": "Como o São Paulo acumulou Libertadores e Supercopa de 1993, a Conmebol chamou o Botafogo, campeão da Copa Conmebol de 1993; o Tricolor venceu por 3 a 1 em Kobe, no Japão.",
   "src": [
    {
     "n": "Wikipedia (en) — 1994 Recopa Sudamericana",
     "u": "https://en.wikipedia.org/wiki/1994_Recopa_Sudamericana"
+   },
+   {
+    "n": "1Soberano — O jogo em que o São Paulo ganhou a Recopa Sul-Americana de 1994",
+    "u": "https://www.1soberano.com.br/historia-sao-paulo/partidas-historicas/jogo-ganhou-recopa-1994"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1994",
-  "ok": true
- },
- {
-  "id": "copas-1007",
-  "q": "Qual foi o placar do São Paulo sobre o Botafogo na semifinal da Copa Master de 1996?",
-  "a": [
-   "7 a 3",
-   "3 a 1",
-   "4 a 2",
-   "5 a 0"
-  ],
-  "c": 0,
-  "cat": "copas",
-  "d": 4,
-  "exp": "Em 8 de fevereiro de 1996, o Tricolor goleou o Botafogo por 7 a 3 e decidiu contra o Atlético Mineiro.",
-  "src": [
-   {
-    "n": "Wikipedia (en) — Copa Master de CONMEBOL",
-    "u": "https://en.wikipedia.org/wiki/Copa_Master_de_CONMEBOL"
-   }
-  ],
-  "when": "1996",
-  "ok": true
- },
- {
-  "id": "jogos-1008",
-  "q": "Como o São Paulo eliminou o Fluminense na semifinal do Torneio Rio-São Paulo de 2001?",
-  "a": [
-   "Por 3 a 1 no agregado",
-   "Nos pênaltis, após 2 a 2 no agregado",
-   "Por gol fora de casa",
-   "Com 1 a 0 no jogo de volta"
-  ],
-  "c": 1,
-  "cat": "jogos",
-  "d": 4,
-  "exp": "O Tricolor venceu 1 a 0 no Morumbi, perdeu por 2 a 1 no Maracanã e passou nos pênaltis.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Torneio Rio-São Paulo de 2001",
-    "u": "https://pt.wikipedia.org/wiki/Torneio_Rio-S%C3%A3o_Paulo_de_2001"
-   }
-  ],
-  "when": "2001",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1009",
@@ -197,10 +160,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Torneio Rio-São Paulo de 2001",
     "u": "https://pt.wikipedia.org/wiki/Torneio_Rio-S%C3%A3o_Paulo_de_2001"
+   },
+   {
+    "n": "Bola na Área — Torneio Rio-São Paulo 2001",
+    "u": "https://www.bolanaarea.com/reg_rio-sp_2001.htm"
    }
   ],
   "when": "2001",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1010",
@@ -219,10 +187,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Supercampeonato Paulista de Futebol de 2002",
     "u": "https://pt.wikipedia.org/wiki/Supercampeonato_Paulista_de_Futebol_de_2002"
+   },
+   {
+    "n": "Site oficial do São Paulo — Rivais no mata-mata, Tricolor e Ituano decidiram o Supercampeonato Paulista de 2002",
+    "u": "https://www.saopaulofc.net/rivais-no-mata-mata-tricolor-e-ituano-decidiram-o-supercampeonato-paulista-de-2002/"
    }
   ],
   "when": "2002",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "rivais-1011",
@@ -236,15 +209,20 @@ export default [
   "c": 2,
   "cat": "rivais",
   "d": 3,
-  "exp": "O São Paulo venceu o Palmeiras por 4 a 2 no agregado e foi à final contra o Ituano.",
+  "exp": "O São Paulo venceu o Palmeiras por 2 a 0 e empatou por 2 a 2, no Canindé, e foi à final contra o Ituano.",
   "src": [
    {
     "n": "Wikipédia (pt) — Supercampeonato Paulista de Futebol de 2002",
     "u": "https://pt.wikipedia.org/wiki/Supercampeonato_Paulista_de_Futebol_de_2002"
+   },
+   {
+    "n": "Site oficial do São Paulo — Rivais no mata-mata, Tricolor e Ituano decidiram o Supercampeonato Paulista de 2002",
+    "u": "https://www.saopaulofc.net/rivais-no-mata-mata-tricolor-e-ituano-decidiram-o-supercampeonato-paulista-de-2002/"
    }
   ],
   "when": "2002",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1012",
@@ -263,32 +241,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
     "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "Campeões do Futebol — Copa São Paulo de Futebol Júnior",
+    "u": "https://www.campeoesdofutebol.com.br/copasp_futjr.html"
    }
   ],
   "when": "1993–2025",
-  "ok": true
- },
- {
-  "id": "rivais-1013",
-  "q": "Quem o São Paulo derrotou na final da Copa São Paulo de Futebol Júnior de 1993?",
-  "a": [
-   "Santos",
-   "Corinthians",
-   "Palmeiras",
-   "Guarani"
-  ],
-  "c": 1,
-  "cat": "rivais",
-  "d": 3,
-  "exp": "O São Paulo foi campeão da Copinha de 1993, tendo o Corinthians como vice.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
-    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
-   }
-  ],
-  "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1014",
@@ -307,10 +272,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
     "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   },
+   {
+    "n": "Campeões do Futebol — Copa São Paulo de Futebol Júnior",
+    "u": "https://www.campeoesdofutebol.com.br/copasp_futjr.html"
    }
   ],
   "when": "2000",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1015",
@@ -329,10 +299,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
     "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   },
+   {
+    "n": "Campeões do Futebol — Copa São Paulo de Futebol Júnior",
+    "u": "https://www.campeoesdofutebol.com.br/copasp_futjr.html"
+   },
+   {
+    "n": "Gazeta Esportiva — Veja onde estão os jogadores do São Paulo campeão da Copinha de 2010",
+    "u": "https://www.gazetaesportiva.com/times/sao-paulo/veja-onde-estao-os-jogadores-do-sao-paulo-campeao-da-copinha-de-2010/"
    }
   ],
   "when": "2010",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1016",
@@ -351,10 +330,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
     "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   },
+   {
+    "n": "Campeões do Futebol — Copa São Paulo de Futebol Júnior",
+    "u": "https://www.campeoesdofutebol.com.br/copasp_futjr.html"
    }
   ],
   "when": "2019",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1017",
@@ -373,10 +357,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
     "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   },
+   {
+    "n": "Campeões do Futebol — Copa São Paulo de Futebol Júnior",
+    "u": "https://www.campeoesdofutebol.com.br/copasp_futjr.html"
    }
   ],
   "when": "2026",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "rivais-1018",
@@ -395,10 +384,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
     "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   },
+   {
+    "n": "Campeões do Futebol — Copa São Paulo de Futebol Júnior",
+    "u": "https://www.campeoesdofutebol.com.br/copasp_futjr.html"
    }
   ],
   "when": "2025",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1019",
@@ -417,10 +411,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
     "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   },
+   {
+    "n": "Campeões do Futebol — Copa São Paulo de Futebol Júnior",
+    "u": "https://www.campeoesdofutebol.com.br/copasp_futjr.html"
    }
   ],
   "when": "1981",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1020",
@@ -443,32 +442,15 @@ export default [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Mídia NINJA — Copa São Paulo de Futebol Júnior: conheça a história e as curiosidades",
+    "u": "https://midianinja.org/copa-sao-paulo-de-futebol-junior-conheca-a-historia-e-as-curiosidades-do-campeonato/"
    }
   ],
   "when": "1969–2026",
-  "ok": true
- },
- {
-  "id": "fund-1021",
-  "q": "Qual era o nome informal do local onde o São Paulo jogou entre 1930 e 1935, reconhecido recentemente pelo clube?",
-  "a": [
-   "Chácara da Floresta",
-   "Chácara do Bosque",
-   "Fazenda do Morumbi",
-   "Campo da Luz"
-  ],
-  "c": 0,
-  "cat": "fund",
-  "d": 4,
-  "exp": "O período inicial do clube é associado à Chácara da Floresta.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1930–1935",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "fund-1022",
@@ -482,59 +464,20 @@ export default [
   "c": 1,
   "cat": "fund",
   "d": 4,
-  "exp": "O Clube Atlético São Paulo foi o passo que levou à refundação do São Paulo Futebol Clube em 16 de dezembro de 1935.",
+  "exp": "Reaberto em 4 de junho de 1935 por sócios contrários à fusão com o Tietê, o Clube Atlético São Paulo manteve cores e escudo e participou da reorganização do São Paulo Futebol Clube em 16 de dezembro de 1935.",
   "src": [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Site oficial do São Paulo — Enciclopédia: a genealogia do São Paulo",
+    "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
    }
   ],
   "when": "1935",
-  "ok": true
- },
- {
-  "id": "fund-1023",
-  "q": "Em que ano uma lei estadual instituiu o Dia Tricolor, em 16 de dezembro?",
-  "a": [
-   "1995",
-   "2000",
-   "2006",
-   "2010"
-  ],
-  "c": 2,
-  "cat": "fund",
-  "d": 4,
-  "exp": "A Lei 14.229 foi sancionada em 25 de outubro de 2006.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "2006",
-  "ok": true
- },
- {
-  "id": "hist-1024",
-  "q": "Que título paulista encerrou o longo período sem conquistas oficiais iniciado em 1957, quando as verbas foram para o estádio?",
-  "a": [
-   "O Paulista de 1965",
-   "O Paulista de 1968",
-   "O Campeonato Brasileiro de 1971",
-   "O Paulista de 1970"
-  ],
-  "c": 3,
-  "cat": "hist",
-  "d": 3,
-  "exp": "O Tricolor ficou sem títulos de 1957 a 1970, período de construção do Morumbi.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1957–1970",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "idolos-1025",
@@ -548,15 +491,20 @@ export default [
   "c": 3,
   "cat": "idolos",
   "d": 4,
-  "exp": "Segundo a Wikipédia, sua estreia no Pacaembu teve mais de 70 mil torcedores.",
+  "exp": "Em 24 de maio de 1942, no 3 a 3 com o Corinthians, o Pacaembu recebeu mais de 70 mil torcedores (71.281 pagantes, segundo a súmula citada pela Gazeta Esportiva).",
   "src": [
    {
     "n": "Wikipédia (pt) — Leônidas da Silva",
     "u": "https://pt.wikipedia.org/wiki/Le%C3%B4nidas_da_Silva"
+   },
+   {
+    "n": "Gazeta Esportiva — Há 78 anos, estreia de Leônidas em Majestoso levou mais de 70 mil ao Pacaembu",
+    "u": "https://www.gazetaesportiva.com/futebol/ha-78-anos-estreia-de-leonidas-em-majestoso-levou-mais-de-70-mil-ao-pacaembu/"
    }
   ],
   "when": "1942",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "idolos-1026",
@@ -570,15 +518,20 @@ export default [
   "c": 0,
   "cat": "idolos",
   "d": 4,
-  "exp": "Leônidas morreu aos 90 anos em Cotia (SP), vítima de complicações do mal de Alzheimer.",
+  "exp": "Leônidas morreu aos 90 anos em Cotia (SP), em 24 de janeiro de 2004; sofria de mal de Alzheimer e pneumonia, entre outros males.",
   "src": [
    {
     "n": "Wikipédia (pt) — Leônidas da Silva",
     "u": "https://pt.wikipedia.org/wiki/Le%C3%B4nidas_da_Silva"
+   },
+   {
+    "n": "Site oficial do São Paulo — 10 anos do falecimento de Leônidas da Silva",
+    "u": "https://www.saopaulofc.net/10-anos-do-falecimento-de-leonidas-da-silva/"
    }
   ],
   "when": "2004",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "idolos-1027",
@@ -597,14 +550,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Rogério Ceni",
     "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+   },
+   {
+    "n": "Última Divisão — Todos têm goleiros; só o Sinop teve Rogério",
+    "u": "https://www.ultimadivisao.com.br/todos-tem-goleiros-so-o-sinop-teve-rogerio/"
    }
   ],
   "when": "1990",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "elencos-1028",
-  "q": "Em quantas partidas Rogério Ceni foi capitão do São Paulo, recorde para um jogador em um único clube?",
+  "q": "Segundo a Wikipédia e o Lancepédia, em quantas partidas Rogério Ceni foi capitão do São Paulo, recorde para um jogador em um único clube?",
   "a": [
    "700",
    "850",
@@ -614,41 +572,25 @@ export default [
   "c": 2,
   "cat": "elencos",
   "d": 4,
-  "exp": "A Wikipédia aponta que ele foi capitão em 982 partidas pelo Tricolor.",
+  "exp": "Wikipédia e Lancepédia citam 982 partidas como capitão; outra reportagem do Lance! (2016) fala em 978. Em qualquer contagem, é recorde reconhecido pelo Guinness.",
   "src": [
+   {
+    "n": "Lance! (Lancepédia) — A história de Rogério Ceni no São Paulo",
+    "u": "https://www.lance.com.br/lancepedia/a-historia-de-rogerio-ceni-no-sao-paulo.html"
+   },
    {
     "n": "Wikipédia (pt) — Rogério Ceni",
     "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+   },
+   {
+    "n": "Lance! — O Mito em números: os feitos e recordes de Rogério Ceni (2016)",
+    "u": "https://www.lance.com.br/sao-paulo/mito-numeros-feitos-recordes-obstinado-rogerio-ceni-1.html"
    }
   ],
   "when": "1993–2015",
-  "ok": true
- },
- {
-  "id": "tecnicos-1029",
-  "q": "Em que ano Telê Santana assumiu o São Paulo em sua segunda passagem, que renderia os títulos mundiais?",
-  "a": [
-   "1988",
-   "1992",
-   "1994",
-   "1990"
-  ],
-  "c": 3,
-  "cat": "tecnicos",
-  "d": 3,
-  "exp": "Telê foi contratado em 12 de outubro de 1990 e ficou até 1996, quando uma isquemia o afastou.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Telê Santana",
-    "u": "https://pt.wikipedia.org/wiki/Tel%C3%AA_Santana"
-   },
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1990",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "conflict": true
  },
  {
   "id": "tecnicos-1030",
@@ -667,32 +609,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Telê Santana",
     "u": "https://pt.wikipedia.org/wiki/Tel%C3%AA_Santana"
+   },
+   {
+    "n": "Wikipedia (en) — Telê Santana",
+    "u": "https://en.wikipedia.org/wiki/Tel%C3%AA_Santana"
    }
   ],
   "when": "1973",
-  "ok": true
- },
- {
-  "id": "tecnicos-1031",
-  "q": "Que problema de saúde afastou Telê Santana do São Paulo em janeiro de 1996?",
-  "a": [
-   "Infarto",
-   "Isquemia cerebral",
-   "Fratura na perna",
-   "Pneumonia"
-  ],
-  "c": 1,
-  "cat": "tecnicos",
-  "d": 3,
-  "exp": "Telê sofreu uma isquemia cerebral em janeiro de 1996 e deixou o comando do Tricolor.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Telê Santana",
-    "u": "https://pt.wikipedia.org/wiki/Tel%C3%AA_Santana"
-   }
-  ],
-  "when": "1996",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "tecnicos-1032",
@@ -711,10 +636,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Telê Santana",
     "u": "https://pt.wikipedia.org/wiki/Tel%C3%AA_Santana"
+   },
+   {
+    "n": "Wikipedia (en) — Telê Santana",
+    "u": "https://en.wikipedia.org/wiki/Tel%C3%AA_Santana"
    }
   ],
   "when": "2006",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "tecnicos-1033",
@@ -733,10 +663,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Rogério Ceni",
     "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+   },
+   {
+    "n": "Meon — Goleiro de Rogério Ceni, Sidão salva estreia e leva São Paulo à final nos EUA",
+    "u": "https://www.meon.com.br/noticias/meon/esporte/brasil-mundo/goleiro-de-rogerio-ceni-sidao-salva-estreia-e-leva-sao-paulo-a-final-nos-eua"
+   },
+   {
+    "n": "7Segundos / Globo Esporte — São Paulo demite Rogério Ceni (03/07/2017)",
+    "u": "https://www.7segundos.com.br/arapiraca/esportes/2017/07/03/9797-sao-paulo-demite-rogerio-ceni"
    }
   ],
   "when": "2017",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "tecnicos-1034",
@@ -755,32 +694,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Rogério Ceni",
     "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+   },
+   {
+    "n": "Wikipedia (en) — Rogério Ceni",
+    "u": "https://en.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
    }
   ],
   "when": "2021",
-  "ok": true
- },
- {
-  "id": "morumbi-1035",
-  "q": "Em que ano o Morumbi recebeu o primeiro grande show, do grupo Queen?",
-  "a": [
-   "1976",
-   "1985",
-   "1981",
-   "1991"
-  ],
-  "c": 2,
-  "cat": "morumbi",
-  "d": 3,
-  "exp": "O Queen tocou nos dias 20 e 21 de março de 1981.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Estádio do Morumbi",
-    "u": "https://pt.wikipedia.org/wiki/Est%C3%A1dio_do_Morumbi"
-   }
-  ],
-  "when": "1981",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "morumbi-1036",
@@ -799,10 +721,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Estádio do Morumbi",
     "u": "https://pt.wikipedia.org/wiki/Est%C3%A1dio_do_Morumbi"
+   },
+   {
+    "n": "Wikipedia (en) — Estádio do Morumbi",
+    "u": "https://en.wikipedia.org/wiki/Est%C3%A1dio_do_Morumbi"
    }
   ],
   "when": "2023",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "morumbi-1037",
@@ -824,99 +751,36 @@ export default [
    }
   ],
   "when": "1999",
-  "ok": true
- },
- {
-  "id": "morumbi-1038",
-  "q": "Quem era o presidente do São Paulo quando o Morumbi começou a ser construído e que dá nome ao estádio?",
-  "a": [
-   "Cícero Pompeu de Toledo",
-   "Laudo Natel",
-   "Henri Couri Aidar",
-   "Manoel Raimundo Paes de Almeida"
-  ],
-  "c": 0,
-  "cat": "morumbi",
-  "d": 3,
-  "exp": "Cícero Pompeu de Toledo presidiu o clube de 1947 a 1957 e o estádio leva seu nome.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   },
-   {
-    "n": "Wikipédia (pt) — Estádio do Morumbi",
-    "u": "https://pt.wikipedia.org/wiki/Est%C3%A1dio_do_Morumbi"
-   }
-  ],
-  "when": "1947–1957",
-  "ok": true
- },
- {
-  "id": "morumbi-1039",
-  "q": "Em que data foi aberto o Caminho dos Ídolos, que homenageia 99 campeões do clube?",
-  "a": [
-   "25 de janeiro de 2019",
-   "16 de dezembro de 2017",
-   "7 de agosto de 2018",
-   "2 de outubro de 2016"
-  ],
-  "c": 2,
-  "cat": "morumbi",
-  "d": 4,
-  "exp": "O espaço no Morumbi homenageia jogadores e técnicos campeões.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "2018",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "morumbi-1040",
-  "q": "Qual é a área aproximada do CFA Cotia, centro de formação de atletas do São Paulo?",
+  "q": "Segundo o site oficial do São Paulo, qual é a área do CFA de Cotia, centro de formação de atletas do clube?",
   "a": [
    "85 mil m²",
    "100 mil m²",
    "500 mil m²",
-   "220 mil m²"
+   "231 mil m²"
   ],
   "c": 3,
   "cat": "morumbi",
   "d": 4,
-  "exp": "O CFA Cotia tem cinco campos oficiais e alojamento para até 95 jovens.",
+  "exp": "O site oficial informa 231 mil m², com oito campos oficiais; a Wikipédia fala em cerca de 220 mil m². O CFA foi inaugurado em 16 de julho de 2005.",
   "src": [
+   {
+    "n": "Site oficial do São Paulo — CFA Cotia",
+    "u": "https://www.saopaulofc.net/o-clube/cfa-cotia/"
+   },
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
    }
   ],
   "when": "2005",
-  "ok": true
- },
- {
-  "id": "elencos-1041",
-  "q": "Quem comandou os \"Menudos do Morumbi\", time formado em boa parte na base, em 1984?",
-  "a": [
-   "Telê Santana",
-   "Pepe",
-   "Cilinho",
-   "Carlos Alberto Silva"
-  ],
-  "c": 2,
-  "cat": "elencos",
-  "d": 3,
-  "exp": "O técnico Cilinho promoveu à equipe principal vários jovens, entre eles Müller.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1984",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "conflict": true
  },
  {
   "id": "cultura-1042",
@@ -930,37 +794,20 @@ export default [
   "c": 3,
   "cat": "cultura",
   "d": 3,
-  "exp": "Composto em 1935, o hino foi oficializado em 1942.",
+  "exp": "Segundo o site oficial, o hino de Porphyrio da Paz foi criado em 1936 (a Wikipédia diz 1935) e oficializado pelo clube em 22 de abril de 1942.",
   "src": [
+   {
+    "n": "Site oficial do São Paulo — Símbolos",
+    "u": "https://www.saopaulofc.net/o-clube/simbolos/"
+   },
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
    }
   ],
   "when": "1942",
-  "ok": true
- },
- {
-  "id": "cultura-1043",
-  "q": "Em que data foi apresentada a versão final da letra do hino do São Paulo, com Porfírio da Paz doando os direitos ao clube?",
-  "a": [
-   "25 de janeiro de 1942",
-   "29 de abril de 1966",
-   "16 de dezembro de 1950",
-   "2 de outubro de 1960"
-  ],
-  "c": 1,
-  "cat": "cultura",
-  "d": 4,
-  "exp": "A letra foi revista em 1942 e novamente até a versão final de 1966.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1966",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "cultura-1044",
@@ -982,7 +829,8 @@ export default [
    }
   ],
   "when": "1977",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "cultura-1045",
@@ -1001,31 +849,19 @@ export default [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Site oficial do São Paulo — Símbolos",
+    "u": "https://www.saopaulofc.net/o-clube/simbolos/"
+   },
+   {
+    "n": "Site oficial do São Paulo — Enciclopédia: a genealogia do São Paulo",
+    "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
    }
   ],
   "when": "1930",
-  "ok": true
- },
- {
-  "id": "cultura-1046",
-  "q": "Segundo o estatuto, que tipo de título NÃO rende estrela ao escudo do São Paulo?",
-  "a": [
-   "Títulos mundiais",
-   "Recordes olímpicos",
-   "Títulos estaduais, nacionais e continentais",
-   "Títulos intercontinentais"
-  ],
-  "c": 2,
-  "cat": "cultura",
-  "d": 4,
-  "exp": "O estatuto não permite estrelas por títulos continentais, nacionais, estaduais ou amistosos; as estrelas atuais lembram feitos olímpicos e mundiais.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "cultura-1047",
@@ -1046,29 +882,8 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
    }
   ],
-  "ok": true
- },
- {
-  "id": "cultura-1048",
-  "q": "Quem foi o primeiro patrocinador de camisa do São Paulo, na final do Paulista de 1982?",
-  "a": [
-   "Cofap",
-   "TAM",
-   "LG",
-   "Semp Toshiba"
-  ],
-  "c": 0,
-  "cat": "cultura",
-  "d": 4,
-  "exp": "A venda de espaço na camisa foi liberada no Brasil em 1982.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1982",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "cultura-1049",
@@ -1091,32 +906,15 @@ export default [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Wikipedia (es) — São Paulo Futebol Clube",
+    "u": "https://es.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
    }
   ],
   "when": "2010",
-  "ok": true
- },
- {
-  "id": "cultura-1050",
-  "q": "Que companhia aérea patrocinou o uniforme do São Paulo por cerca de quatro anos na década de 1990?",
-  "a": [
-   "Varig",
-   "TAM",
-   "Vasp",
-   "Transbrasil"
-  ],
-  "c": 1,
-  "cat": "cultura",
-  "d": 4,
-  "exp": "A TAM estampou a camisa de 1993 a 1996, segundo a Wikipédia.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1993–1996",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "cultura-1051",
@@ -1139,10 +937,15 @@ export default [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Wikipedia (en) — São Paulo FC",
+    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC"
    }
   ],
   "when": "2006–2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "cultura-1052",
@@ -1161,14 +964,19 @@ export default [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Wikipedia (en) — São Paulo FC",
+    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC"
    }
   ],
   "when": "2015",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "cultura-1053",
-  "q": "Qual foi a primeira empresa cuja marca apareceu na camisa do São Paulo, entre 1981 e 1984?",
+  "q": "Qual foi a primeira empresa cuja marca apareceu na camisa do São Paulo, no início dos anos 1980?",
   "a": [
    "Adidas",
    "Le Coq Sportif",
@@ -1178,7 +986,7 @@ export default [
   "c": 1,
   "cat": "cultura",
   "d": 4,
-  "exp": "A Le Coq Sportif foi a primeira marca a estampar logo no uniforme tricolor.",
+  "exp": "A Le Coq Sportif foi a primeira marca a estampar logo no uniforme tricolor (1981–1984 segundo a Wikipédia em português; 1980–1984 na versão em espanhol).",
   "src": [
    {
     "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
@@ -1187,10 +995,15 @@ export default [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Wikipedia (es) — São Paulo Futebol Clube",
+    "u": "https://es.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
    }
   ],
   "when": "1981",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "cultura-1054",
@@ -1213,10 +1026,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Wikipedia (en) — São Paulo FC",
+    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC"
    }
   ],
   "when": "2024",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "cultura-1055",
@@ -1238,7 +1056,8 @@ export default [
    }
   ],
   "when": "2025",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "cultura-1056",
@@ -1260,29 +1079,8 @@ export default [
    }
   ],
   "when": "2015",
-  "ok": true
- },
- {
-  "id": "cultura-1057",
-  "q": "Em 1964, por que o São Paulo vestiu um uniforme lilás da Fiorentina em um torneio na Itália?",
-  "a": [
-   "Foi um trato de patrocínio",
-   "Era um uniforme alternativo oficial",
-   "Foi uma homenagem a um ex-jogador",
-   "Esqueceu o próprio uniforme"
-  ],
-  "c": 3,
-  "cat": "cultura",
-  "d": 4,
-  "exp": "Segundo a Wikipédia, o time usou o lilás da Fiorentina em Florença após esquecer suas camisas.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1964",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "cultura-1058",
@@ -1304,7 +1102,8 @@ export default [
    }
   ],
   "when": "1978",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "cultura-1059",
@@ -1318,15 +1117,20 @@ export default [
   "c": 1,
   "cat": "cultura",
   "d": 4,
-  "exp": "Usados em 1996 e 1997, os calções vermelhos voltaram em 2011.",
+  "exp": "Em 1996, com regras mais rígidas da Fifa sobre peças da mesma cor, vieram calção e meias vermelhos; segundo o site oficial, duraram pouco e deram lugar a um conjunto preto.",
   "src": [
    {
     "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Site oficial do São Paulo — Símbolos",
+    "u": "https://www.saopaulofc.net/o-clube/simbolos/"
    }
   ],
   "when": "1996",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "idolos-1060",
@@ -1345,36 +1149,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Kaká",
     "u": "https://pt.wikipedia.org/wiki/Kak%C3%A1"
+   },
+   {
+    "n": "Wikipedia (en) — Kaká",
+    "u": "https://en.wikipedia.org/wiki/Kak%C3%A1"
    }
   ],
   "when": "2003",
-  "ok": true
- },
- {
-  "id": "jogos-1061",
-  "q": "Quem marcou os dois gols, em dois minutos, na virada do São Paulo sobre o Botafogo na decisão do Rio-São Paulo de 2001, em 7 de março?",
-  "a": [
-   "França",
-   "Luís Fabiano",
-   "Reinaldo",
-   "Kaká"
-  ],
-  "c": 3,
-  "cat": "jogos",
-  "d": 3,
-  "exp": "Com o Tricolor perdendo por 1 a 0 no segundo tempo, Kaká marcou aos 35 e aos 37 minutos; o São Paulo ganhou por 2 a 1 e foi campeão.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Kaká",
-    "u": "https://pt.wikipedia.org/wiki/Kak%C3%A1"
-   },
-   {
-    "n": "Wikipédia (pt) — Torneio Rio-São Paulo de 2001",
-    "u": "https://pt.wikipedia.org/wiki/Torneio_Rio-S%C3%A3o_Paulo_de_2001"
-   }
-  ],
-  "when": "2001",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "idolos-1062",
@@ -1396,29 +1179,8 @@ export default [
    }
   ],
   "when": "2014",
-  "ok": true
- },
- {
-  "id": "elencos-1063",
-  "q": "Por quanto, segundo a imprensa, o PSG anunciou a contratação de Lucas Moura, em agosto de 2012?",
-  "a": [
-   "25 milhões de euros",
-   "32 milhões de euros",
-   "43 milhões de euros",
-   "55 milhões de euros"
-  ],
-  "c": 2,
-  "cat": "elencos",
-  "d": 3,
-  "exp": "A venda foi anunciada em 8 de agosto de 2012 e equivale a cerca de R$ 108 milhões.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Lucas Moura",
-    "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
-   }
-  ],
-  "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "idolos-1064",
@@ -1440,7 +1202,8 @@ export default [
    }
   ],
   "when": "2010",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "idolos-1065",
@@ -1459,14 +1222,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Lucas Moura",
     "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
+   },
+   {
+    "n": "Wikipedia (en) — Lucas Moura",
+    "u": "https://en.wikipedia.org/wiki/Lucas_Moura"
    }
   ],
   "when": "2023",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "elencos-1066",
-  "q": "Por quanto o São Paulo vendeu Hernanes à Lazio, em agosto de 2010?",
+  "q": "Segundo a Wikipédia em português, por quanto o São Paulo vendeu Hernanes à Lazio, em agosto de 2010?",
   "a": [
    "8 milhões de euros",
    "20 milhões de euros",
@@ -1476,37 +1244,21 @@ export default [
   "c": 3,
   "cat": "elencos",
   "d": 3,
-  "exp": "Hernanes, vencedor do Brasileiro de 2007 e 2008 pelo São Paulo, foi para a Lazio em 2010.",
+  "exp": "A Wikipédia em português registra 13,5 milhões de euros; a versão em inglês cita 11,1 milhões, pagos ao São Paulo e ao grupo Traffic, coproprietário dos direitos.",
   "src": [
    {
     "n": "Wikipédia (pt) — Hernanes",
     "u": "https://pt.wikipedia.org/wiki/Hernanes"
+   },
+   {
+    "n": "Wikipedia (en) — Hernanes",
+    "u": "https://en.wikipedia.org/wiki/Hernanes"
    }
   ],
   "when": "2010",
-  "ok": true
- },
- {
-  "id": "idolos-1067",
-  "q": "Que prêmio Hernanes recebeu como melhor jogador do Brasileirão de 2008, campeonato vencido pelo São Paulo?",
-  "a": [
-   "Bola de Ouro da Fifa",
-   "Chuteira de Ouro",
-   "Craque do Brasileirão",
-   "Prêmio Puskás"
-  ],
-  "c": 2,
-  "cat": "idolos",
-  "d": 3,
-  "exp": "Ele foi eleito o melhor jogador do torneio e levou também a Bola de Prata.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Hernanes",
-    "u": "https://pt.wikipedia.org/wiki/Hernanes"
-   }
-  ],
-  "when": "2008",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "conflict": true
  },
  {
   "id": "idolos-1068",
@@ -1525,10 +1277,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Hernanes",
     "u": "https://pt.wikipedia.org/wiki/Hernanes"
+   },
+   {
+    "n": "Wikipedia (en) — Hernanes",
+    "u": "https://en.wikipedia.org/wiki/Hernanes"
    }
   ],
   "when": "2017",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "idolos-1069",
@@ -1550,7 +1307,8 @@ export default [
    }
   ],
   "when": "2010",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "idolos-1070",
@@ -1569,10 +1327,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Casemiro",
     "u": "https://pt.wikipedia.org/wiki/Casemiro"
+   },
+   {
+    "n": "Wikipedia (en) — Casemiro",
+    "u": "https://en.wikipedia.org/wiki/Casemiro"
    }
   ],
   "when": "2010",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "recordes-1071",
@@ -1591,10 +1354,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Casemiro",
     "u": "https://pt.wikipedia.org/wiki/Casemiro"
+   },
+   {
+    "n": "Wikipedia (en) — Casemiro",
+    "u": "https://en.wikipedia.org/wiki/Casemiro"
    }
   ],
   "when": "2010–2013",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "elencos-1072",
@@ -1613,10 +1381,15 @@ export default [
    {
     "n": "Wikipedia (en) — 2012 São Paulo FC season",
     "u": "https://en.wikipedia.org/wiki/2012_S%25C3%25A3o_Paulo_FC_season"
+   },
+   {
+    "n": "Wikipedia (en) — Paulo Henrique Ganso",
+    "u": "https://en.wikipedia.org/wiki/Paulo_Henrique_Ganso"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "elencos-1073",
@@ -1635,14 +1408,19 @@ export default [
    {
     "n": "Wikipedia (en) — 2012 São Paulo FC season",
     "u": "https://en.wikipedia.org/wiki/2012_S%25C3%25A3o_Paulo_FC_season"
+   },
+   {
+    "n": "Wikipedia (en) — Jádson",
+    "u": "https://en.wikipedia.org/wiki/J%C3%A1dson"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "elencos-1074",
-  "q": "Qual clube alemão contratou o zagueiro Breno, revelado pelo São Paulo, em 2008?",
+  "q": "Qual clube alemão contratou o zagueiro Breno, revelado pelo São Paulo, em acerto fechado em dezembro de 2007?",
   "a": [
    "Borussia Dortmund",
    "Werder Bremen",
@@ -1652,7 +1430,7 @@ export default [
   "c": 3,
   "cat": "elencos",
   "d": 2,
-  "exp": "Breno saiu para o Bayern na temporada em que o Tricolor foi campeão brasileiro pela sexta vez.",
+  "exp": "Breno assinou com o Bayern em dezembro de 2007 e se transferiu em 2008, temporada em que o Tricolor foi campeão brasileiro pela sexta vez.",
   "src": [
    {
     "n": "Wikipedia (en) — 2008 São Paulo FC season",
@@ -1661,10 +1439,16 @@ export default [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Wikipedia (en) — Breno (footballer, born 1989)",
+    "u": "https://en.wikipedia.org/wiki/Breno_(footballer,_born_1989)"
    }
   ],
   "when": "2008",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "fixed": true
  },
  {
   "id": "recordes-1075",
@@ -1683,10 +1467,15 @@ export default [
    {
     "n": "Wikipedia (en) — 2005 São Paulo FC season",
     "u": "https://en.wikipedia.org/wiki/2005_S%25C3%25A3o_Paulo_FC_season"
+   },
+   {
+    "n": "Lance! (Lancepédia) — A história de Rogério Ceni no São Paulo",
+    "u": "https://www.lance.com.br/lancepedia/a-historia-de-rogerio-ceni-no-sao-paulo.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "tecnicos-1076",
@@ -1700,37 +1489,20 @@ export default [
   "c": 0,
   "cat": "tecnicos",
   "d": 1,
-  "exp": "Autuori assumiu em 8 de maio de 2005 e ficou até dezembro, com Libertadores e Mundial.",
+  "exp": "Autuori assumiu entre o fim de abril e o início de maio de 2005, substituindo Émerson Leão, e ficou até dezembro, conquistando a Libertadores e o Mundial.",
   "src": [
    {
     "n": "Wikipedia (en) — 2005 São Paulo FC season",
     "u": "https://en.wikipedia.org/wiki/2005_S%25C3%25A3o_Paulo_FC_season"
-   }
-  ],
-  "when": "2005",
-  "ok": true
- },
- {
-  "id": "tecnicos-1077",
-  "q": "Que técnico deixou o São Paulo em abril de 2005, antes da chegada de Paulo Autuori?",
-  "a": [
-   "Muricy Ramalho",
-   "Emerson Leão",
-   "Ricardo Gomes",
-   "Levir Culpi"
-  ],
-  "c": 1,
-  "cat": "tecnicos",
-  "d": 3,
-  "exp": "Leão saiu em 17 de abril, após 23 jogos no ano; Milton Cruz foi interino.",
-  "src": [
+   },
    {
-    "n": "Wikipedia (en) — 2005 São Paulo FC season",
-    "u": "https://en.wikipedia.org/wiki/2005_S%25C3%25A3o_Paulo_FC_season"
+    "n": "Wikipedia (en) — Paulo Autuori",
+    "u": "https://en.wikipedia.org/wiki/Paulo_Autuori"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "recordes-1078",
@@ -1752,7 +1524,8 @@ export default [
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "bras-1079",
@@ -1761,20 +1534,26 @@ export default [
    "Gama (DF)",
    "Goiânia",
    "São Paulo",
-   "Brasília"
+   "Anápolis"
   ],
   "c": 0,
   "cat": "bras",
   "d": 3,
-  "exp": "O título foi garantido em Gama, com gol de Borges aos 22 minutos do primeiro tempo.",
+  "exp": "O título foi garantido em 7 de dezembro de 2008 no estádio Bezerrão, em Gama (DF), com gol de Borges aos 22 minutos do primeiro tempo.",
   "src": [
    {
     "n": "Wikipedia (en) — 2008 São Paulo FC season",
     "u": "https://en.wikipedia.org/wiki/2008_S%25C3%25A3o_Paulo_FC_season"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2008",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "fixed": true
  },
  {
   "id": "paul-1080",
@@ -1788,15 +1567,20 @@ export default [
   "c": 3,
   "cat": "paul",
   "d": 3,
-  "exp": "O São Paulo terminou o estadual em 3º lugar, eliminado pelo Palmeiras nas semifinais.",
+  "exp": "O Palmeiras eliminou o São Paulo nas semifinais (2 a 1 para o Tricolor e 2 a 0 para o rival).",
   "src": [
    {
     "n": "Wikipedia (en) — 2008 São Paulo FC season",
     "u": "https://en.wikipedia.org/wiki/2008_S%25C3%25A3o_Paulo_FC_season"
+   },
+   {
+    "n": "RSSSF Brasil — Campeonato Paulista 2008",
+    "u": "https://www.rsssfbrasil.com/tablessz/sp2008.htm"
    }
   ],
   "when": "2008",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "elencos-1081",
@@ -1810,41 +1594,24 @@ export default [
   "c": 3,
   "cat": "elencos",
   "d": 2,
-  "exp": "Adriano fez 17 gols na temporada de 2008 pelo Tricolor.",
+  "exp": "Emprestado pela Inter de Milão no primeiro semestre de 2008, Adriano fez 17 gols em 29 jogos pelo Tricolor.",
   "src": [
    {
     "n": "Wikipedia (en) — 2008 São Paulo FC season",
     "u": "https://en.wikipedia.org/wiki/2008_S%25C3%25A3o_Paulo_FC_season"
+   },
+   {
+    "n": "Wikipedia (en) — Adriano (footballer, born February 1982)",
+    "u": "https://en.wikipedia.org/wiki/Adriano_(footballer,_born_February_1982)"
    }
   ],
   "when": "2008",
-  "ok": true
- },
- {
-  "id": "tecnicos-1082",
-  "q": "Que técnico substituiu Emerson Leão no São Paulo em 2012, após o interino Milton Cruz, e levou o time ao título da Sul-Americana?",
-  "a": [
-   "Muricy Ramalho",
-   "Ney Franco",
-   "Ricardo Gomes",
-   "Paulo Autuori"
-  ],
-  "c": 1,
-  "cat": "tecnicos",
-  "d": 3,
-  "exp": "Leão saiu em 26 de junho de 2012, e Ney Franco comandou o time no título de dezembro.",
-  "src": [
-   {
-    "n": "Wikipedia (en) — 2012 São Paulo FC season",
-    "u": "https://en.wikipedia.org/wiki/2012_S%25C3%25A3o_Paulo_FC_season"
-   }
-  ],
-  "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "jogos-1083",
-  "q": "Qual foi o público do São Paulo contra o Tigre na Sul-Americana de 2012, o maior da temporada no Morumbi?",
+  "q": "Qual foi o público do jogo de volta da final da Sul-Americana de 2012, São Paulo x Tigre, no Morumbi?",
   "a": [
    "67.042",
    "45.800",
@@ -1854,15 +1621,21 @@ export default [
   "c": 0,
   "cat": "jogos",
   "d": 4,
-  "exp": "A final de 2012 foi encerrada com o Tigre se recusando a voltar para o segundo tempo, com o São Paulo ganhando por 2 a 0.",
+  "exp": "Diante de 67.042 pessoas, a final de 12 de dezembro de 2012 foi encerrada no intervalo, com o São Paulo ganhando por 2 a 0, porque o Tigre se recusou a voltar para o segundo tempo.",
   "src": [
    {
     "n": "Wikipedia (en) — 2012 São Paulo FC season",
     "u": "https://en.wikipedia.org/wiki/2012_S%25C3%25A3o_Paulo_FC_season"
+   },
+   {
+    "n": "Wikipedia (en) — 2012 Copa Sudamericana finals",
+    "u": "https://en.wikipedia.org/wiki/2012_Copa_Sudamericana_finals"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "fixed": true
  },
  {
   "id": "jogos-1084",
@@ -1881,10 +1654,15 @@ export default [
    {
     "n": "Wikipedia (en) — 2012 São Paulo FC season",
     "u": "https://en.wikipedia.org/wiki/2012_S%25C3%25A3o_Paulo_FC_season"
+   },
+   {
+    "n": "RSSSF — Brazil 2012",
+    "u": "https://www.rsssf.org/tablesb/braz2012.html"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "paul-1085",
@@ -1903,10 +1681,15 @@ export default [
    {
     "n": "Wikipedia (en) — 2012 São Paulo FC season",
     "u": "https://en.wikipedia.org/wiki/2012_S%25C3%25A3o_Paulo_FC_season"
+   },
+   {
+    "n": "RSSSF Brasil — Campeonato Paulista 2012",
+    "u": "https://www.rsssfbrasil.com/tablessz/sp2012.htm"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-1086",
@@ -1925,10 +1708,15 @@ export default [
    {
     "n": "Wikipedia (en) — 2012 São Paulo FC season",
     "u": "https://en.wikipedia.org/wiki/2012_S%25C3%25A3o_Paulo_FC_season"
+   },
+   {
+    "n": "RSSSF — Brazil 2012",
+    "u": "https://www.rsssf.org/tablesb/braz2012.html"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1087",
@@ -1947,10 +1735,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
     "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   },
+   {
+    "n": "Campeões do Futebol — Copa São Paulo de Futebol Júnior",
+    "u": "https://www.campeoesdofutebol.com.br/copasp_futjr.html"
+   },
+   {
+    "n": "Mídia NINJA — Copa São Paulo de Futebol Júnior: conheça a história e as curiosidades",
+    "u": "https://midianinja.org/copa-sao-paulo-de-futebol-junior-conheca-a-historia-e-as-curiosidades-do-campeonato/"
    }
   ],
   "when": "1969",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1088",
@@ -1975,12 +1772,13 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
    },
    {
-    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
-    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+    "n": "Gazeta Esportiva — Veja onde estão os jogadores do São Paulo campeão da Copinha de 2010",
+    "u": "https://www.gazetaesportiva.com/times/sao-paulo/veja-onde-estao-os-jogadores-do-sao-paulo-campeao-da-copinha-de-2010/"
    }
   ],
   "when": "2010",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1089",
@@ -1999,10 +1797,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
     "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   },
+   {
+    "n": "Campeões do Futebol — Copa São Paulo de Futebol Júnior",
+    "u": "https://www.campeoesdofutebol.com.br/copasp_futjr.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2018",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1090",
@@ -2021,10 +1828,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
     "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   },
+   {
+    "n": "Campeões do Futebol — Copa São Paulo de Futebol Júnior",
+    "u": "https://www.campeoesdofutebol.com.br/copasp_futjr.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2004",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "copas-1091",
@@ -2043,14 +1859,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Torneio Rio-São Paulo de 2001",
     "u": "https://pt.wikipedia.org/wiki/Torneio_Rio-S%C3%A3o_Paulo_de_2001"
+   },
+   {
+    "n": "RSSSF — Torneio Rio-São Paulo 2001",
+    "u": "https://rsssf.org/tablesr/riospl01.html"
    }
   ],
   "when": "2001",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "idolos-1092",
-  "q": "Que apelido a imprensa uruguaia deu a Leônidas da Silva por sua elasticidade?",
+  "q": "Além de Diamante Negro, que apelido Leônidas da Silva recebeu por causa de sua elasticidade?",
   "a": [
    "Pé de Ouro",
    "Homem-Borracha",
@@ -2068,11 +1889,12 @@ export default [
    }
   ],
   "when": "1930",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "tecnicos-1093",
-  "q": "Quantos jogos Rogério Ceni comandou na primeira passagem como técnico do São Paulo, em 2017?",
+  "q": "Segundo o Globo Esporte, quantos jogos Rogério Ceni comandou na primeira passagem como técnico do São Paulo, em 2017?",
   "a": [
    "37",
    "21",
@@ -2082,19 +1904,29 @@ export default [
   "c": 0,
   "cat": "tecnicos",
   "d": 4,
-  "exp": "Foram 14 vitórias, 13 empates e 10 derrotas; ele foi demitido em 3 de julho de 2017.",
+  "exp": "Na demissão, em 3 de julho de 2017, o Globo Esporte contou 37 jogos (14 vitórias, 13 empates e 10 derrotas); outros veículos, contando só jogos oficiais, falam em 34 ou 35.",
   "src": [
+   {
+    "n": "7Segundos / Globo Esporte — São Paulo demite Rogério Ceni (03/07/2017)",
+    "u": "https://www.7segundos.com.br/arapiraca/esportes/2017/07/03/9797-sao-paulo-demite-rogerio-ceni"
+   },
    {
     "n": "Wikipédia (pt) — Rogério Ceni",
     "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+   },
+   {
+    "n": "Wikipedia (en) — Rogério Ceni",
+    "u": "https://en.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
    }
   ],
   "when": "2017",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "conflict": true
  },
  {
   "id": "tecnicos-1094",
-  "q": "Em que data Rogério Ceni foi nomeado técnico do São Paulo pela primeira vez?",
+  "q": "Em que data o São Paulo anunciou Rogério Ceni como seu técnico pela primeira vez?",
   "a": [
    "13 de outubro de 2021",
    "19 de janeiro de 2017",
@@ -2104,59 +1936,20 @@ export default [
   "c": 2,
   "cat": "tecnicos",
   "d": 4,
-  "exp": "Seu primeiro jogo foi em 19 de janeiro de 2017, pela Florida Cup, contra o River Plate.",
+  "exp": "O clube confirmou a contratação em 24 de novembro de 2016; a apresentação foi em dezembro e o primeiro jogo, em 19 de janeiro de 2017, contra o River Plate, pela Florida Cup.",
   "src": [
    {
     "n": "Wikipédia (pt) — Rogério Ceni",
     "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+   },
+   {
+    "n": "Jornal do Comércio — São Paulo confirma Rogério Ceni como técnico com contrato de dois anos (24/11/2016)",
+    "u": "https://www.jornaldocomercio.com/_conteudo/2016/11/esportes/533177-sao-paulo-confirma-rogerio-ceni-como-tecnico-com-contrato-de-dois-anos.html"
    }
   ],
   "when": "2016",
-  "ok": true
- },
- {
-  "id": "tecnicos-1095",
-  "q": "Que título Rogério Ceni conquistou como técnico do São Paulo, em janeiro de 2017?",
-  "a": [
-   "Campeonato Paulista",
-   "Florida Cup",
-   "Copa Sul-Americana",
-   "Recopa"
-  ],
-  "c": 1,
-  "cat": "tecnicos",
-  "d": 3,
-  "exp": "O São Paulo de Ceni ganhou a Florida Cup de 2017, torneio de pré-temporada disputado nos EUA.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Rogério Ceni",
-    "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
-   }
-  ],
-  "when": "2017",
-  "ok": true
- },
- {
-  "id": "cultura-1096",
-  "q": "Em que data o segundo uniforme do São Paulo foi usado pela primeira vez, na vitória por 4 a 0 sobre o Santos?",
-  "a": [
-   "25 de janeiro de 1930",
-   "9 de julho de 1933",
-   "16 de dezembro de 1935",
-   "29 de maio de 1932"
-  ],
-  "c": 3,
-  "cat": "cultura",
-  "d": 4,
-  "exp": "O escudo foi acrescentado ao uniforme em 9 de julho de 1933.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1932",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "cultura-1097",
@@ -2175,10 +1968,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Site oficial do São Paulo — Símbolos",
+    "u": "https://www.saopaulofc.net/o-clube/simbolos/"
    }
   ],
   "when": "1933",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "cultura-1098",
@@ -2200,33 +1998,8 @@ export default [
    }
   ],
   "when": "1983",
-  "ok": true
- },
- {
-  "id": "cultura-1099",
-  "q": "Em 1966, o São Paulo usou em dez jogos do Paulista um uniforme com que característica?",
-  "a": [
-   "Camisa lilás",
-   "Três listras largas (preta, branca e vermelha)",
-   "Camisa totalmente preta",
-   "Camisa amarela"
-  ],
-  "c": 1,
-  "cat": "cultura",
-  "d": 4,
-  "exp": "O modelo de listras largas foi um dos uniformes alternativos de vida curta.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
-   },
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1966",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "cultura-1100",
@@ -2245,10 +2018,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Wikipedia (en) — São Paulo FC",
+    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC"
    }
   ],
   "when": "1960–1967",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "cultura-1101",
@@ -2267,10 +2045,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Wikipedia (es) — São Paulo Futebol Clube",
+    "u": "https://es.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
    }
   ],
   "when": "2003–2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "cultura-1102",
@@ -2289,10 +2072,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Wikipedia (es) — São Paulo Futebol Clube",
+    "u": "https://es.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
    }
   ],
   "when": "2012–2014",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "cultura-1103",
@@ -2315,10 +2103,15 @@ export default [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Wikipedia (es) — São Paulo Futebol Clube",
+    "u": "https://es.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
    }
   ],
   "when": "2021",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "hist-1104",
@@ -2340,7 +2133,8 @@ export default [
    }
   ],
   "when": "2004",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "cultura-1105",
@@ -2359,9 +2153,14 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
     "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   },
+   {
+    "n": "Mídia NINJA — Copa São Paulo de Futebol Júnior: conheça a história e as curiosidades",
+    "u": "https://midianinja.org/copa-sao-paulo-de-futebol-junior-conheca-a-historia-e-as-curiosidades-do-campeonato/"
    }
   ],
   "when": "1969–2026",
-  "ok": true
+  "ok": true,
+  "v2": true
  }
 ];
