@@ -266,6 +266,7 @@
 @keyframes tc-floatup { from { opacity: 0; transform: translate(-50%, 20px); } 30% { opacity: 1; } to { opacity: 0; transform: translate(-50%, -40px); } }
 .tc-q.tc-suspense::before { content: ''; position: fixed; inset: 0; z-index: 3; background: radial-gradient(circle at 50% 45%, transparent 18%, rgba(0, 0, 0, 0.82) 80%); animation: tc-dim 0.8s ease both; pointer-events: none; }
 .tc-q.tc-suspense .tc-qpanel, .tc-q.tc-suspense .tc-answers { position: relative; z-index: 4; }
+.tc-q.tc-suspense .tc-qchip { z-index: 5; }
 @keyframes tc-dim { from { opacity: 0; } }
 
 /* crowd */
@@ -350,11 +351,11 @@
 .tc-congbtns { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 340px; margin-top: 6px; }
 .tc-links { display: flex; justify-content: center; gap: 18px; }
 .tc-links button { color: #ffd76b; font-weight: 800; font-size: 13px; text-decoration: underline; padding: 6px; }
-.tc-newach { display: flex; flex-direction: column; gap: 6px; width: 100%; max-width: 340px; }
-.tc-newach .na { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 12px; background: rgba(255, 215, 107, 0.14); box-shadow: 0 0 0 1.5px #ffd76b inset; text-align: left; animation: tc-in 0.5s both; }
-.tc-newach .na span { font-size: 26px; }
-.tc-newach .na small { display: block; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #ffd76b; }
-.tc-newach .na b { font-size: 14px; }
+.tc-newach { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; width: 100%; max-width: 360px; }
+.tc-newach .na { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: rgba(255, 215, 107, 0.14); box-shadow: 0 0 0 1.5px #ffd76b inset; text-align: left; animation: tc-in 0.5s both; }
+.tc-newach .na span { font-size: 18px; }
+.tc-newach .na small { display: none; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #ffd76b; }
+.tc-newach .na b { font-size: 12px; }
 .tc-newrec { color: #ffd76b; font-weight: 900; font-size: 13px; animation: tc-throb 0.7s infinite alternate; }
 .tc-resgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 100%; max-width: 380px; }
 .tc-resgrid > div { background: rgba(0, 0, 0, 0.65); border-radius: 12px; padding: 8px 2px; display: flex; flex-direction: column; box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.18) inset; }

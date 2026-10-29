@@ -485,7 +485,7 @@ function ladderResult(app, st, out) {
           right
             ? h('div', { class: 'tc-hex' }, money(LADDER[out.step - 1], app.lang))
             : h('div', { class: 'tc-hex dark' }, h('small', null, t('youTake')), h('b', null, money(out.prize ?? st.prize, app.lang))),
-          safe ? h('div', { class: 'tc-safe' }, ico('lock'), t('safeReached')) : null,
+          safe ? h('div', { class: 'tc-safe', html: ico('lock') + ' ' }, h('span', null, t('safeReached'))) : null,
           box,
           h('button', { class: 'tc-btn red big', onclick: () => resolve() }, lastWin ? t('seeResult') : right ? t('nextQ') : t('seeResult')),
           h('div', { class: 'tc-crowdsil', html: crowdSil(right ? 3 : 9) }),

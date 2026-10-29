@@ -214,7 +214,7 @@ export default [
     ],
     "c": 3,
     "cat": "rivais",
-    "d": 2,
+    "d": 1,
     "exp": "O 3 a 1 sobre o Corinthians, em 10 de maio de 1998, no Morumbi, deu o título com Raí, que voltara da França.",
     "src": [
       {
@@ -314,7 +314,7 @@ export default [
     ],
     "c": 0,
     "cat": "rivais",
-    "d": 3,
+    "d": 2,
     "exp": "A final da Florida Cup, em janeiro de 2017, terminou 0 a 0 e o São Paulo levou nos pênaltis.",
     "src": [
       {
@@ -445,7 +445,7 @@ export default [
     ],
     "c": 2,
     "cat": "rivais",
-    "d": 2,
+    "d": 1,
     "exp": "O Corinthians é o adversário mais frequente: 367 jogos até maio de 2026, contra 356 com o Palmeiras e cerca de 329 com o Santos.",
     "src": [
       {
@@ -459,10 +459,6 @@ export default [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
-      },
-      {
-        "n": "Wikipédia (pt) — San-São",
-        "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
       }
     ],
     "ok": true
@@ -591,7 +587,7 @@ export default [
   },
   {
     "id": "rivais-025",
-    "q": "Contra qual adversário o São Paulo jogou a final do Paulista de 1980, com 122.209 pagantes no Morumbi, o maior público pagante do clube?",
+    "q": "Contra qual adversário o São Paulo jogou a final do Paulista de 1980, com 122.209 pagantes no Morumbi?",
     "a": [
       "Santos",
       "Corinthians",
@@ -652,7 +648,7 @@ export default [
     ],
     "c": 3,
     "cat": "rivais",
-    "d": 2,
+    "d": 1,
     "exp": "O São Paulo bateu o Santos nas finais; o gol de falta de Ceni foi descrito como o primeiro de goleiro em finais de campeonatos brasileiros.",
     "src": [
       {
@@ -918,7 +914,7 @@ export default [
     ],
     "c": 0,
     "cat": "rivais",
-    "d": 3,
+    "d": 2,
     "exp": "Toninho Guerreiro fez o gol aos 6 minutos, na decisão da última rodada, em 27 de junho de 1971, no Morumbi.",
     "src": [
       {
@@ -1074,7 +1070,7 @@ export default [
     ],
     "c": 2,
     "cat": "rivais",
-    "d": 3,
+    "d": 2,
     "exp": "Segundo o site oficial, o Palmeiras foi eliminado (derrota por 1 a 0 fora e vitória por 2 a 0 em casa).",
     "src": [
       {
@@ -1096,7 +1092,7 @@ export default [
     ],
     "c": 3,
     "cat": "rivais",
-    "d": 3,
+    "d": 2,
     "exp": "O time de aspirantes comandado por Muricy Ramalho passou por Grêmio, Sporting Cristal e Corinthians antes de golear o Peñarol por 6 a 1 na ida.",
     "src": [
       {
@@ -1122,7 +1118,7 @@ export default [
     ],
     "c": 1,
     "cat": "rivais",
-    "d": 3,
+    "d": 2,
     "exp": "Segundo a Wikipédia, o São Paulo venceu por 5 a 1 em 8 de maio de 2005, uma das maiores goleadas do Majestoso.",
     "src": [
       {
@@ -1359,40 +1355,14 @@ export default [
   },
   {
     "id": "rivais-057",
-    "q": "Qual rival paulista o São Paulo eliminou nas quartas de final da Copa do Brasil de 2023 (1 a 0 em casa e 2 a 1 fora)?",
-    "a": [
-      "Corinthians",
-      "Santos",
-      "Red Bull Bragantino",
-      "Palmeiras"
-    ],
-    "c": 3,
-    "cat": "rivais",
-    "d": 3,
-    "exp": "O São Paulo eliminou o Palmeiras em 5 e 13 de julho de 2023 e seguiu rumo ao título contra o Flamengo.",
-    "src": [
-      {
-        "n": "Wikipédia (pt) — Choque-Rei",
-        "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
-      },
-      {
-        "n": "Wikipédia (pt) — Clássico Majestoso",
-        "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
-      }
-    ],
-    "when": "2023",
-    "ok": true
-  },
-  {
-    "id": "rivais-058",
     "q": "Quantos mata-matas o São Paulo ganhou do Palmeiras, contra sete do rival, segundo a contagem da Wikipédia (até 2026)?",
     "a": [
       "12",
-      "17",
       "20",
-      "9"
+      "9",
+      "17"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "rivais",
     "d": 3,
     "exp": "A Wikipédia contabiliza 17 eliminações palmeirenses pelo São Paulo e 7 do São Paulo pelo Palmeiras.",
@@ -1406,7 +1376,7 @@ export default [
     "ok": true
   },
   {
-    "id": "rivais-059",
+    "id": "rivais-058",
     "q": "Qual foi o placar da vitória do São Paulo sobre o Palmeiras em 10 de novembro de 1956, no Pacaembu?",
     "a": [
       "4 x 0",
@@ -1428,15 +1398,15 @@ export default [
     "ok": true
   },
   {
-    "id": "rivais-060",
+    "id": "rivais-059",
     "q": "Qual placar o São Paulo aplicou no Palmeiras em 4 de outubro de 1981, pelo Paulista, no Morumbi?",
     "a": [
       "5 x 0",
-      "4 x 1",
       "6 x 2",
+      "4 x 1",
       "3 x 0"
     ],
-    "c": 2,
+    "c": 1,
     "cat": "rivais",
     "d": 3,
     "exp": "A Wikipédia lista o 6 a 2 de 1981 entre as maiores goleadas do clássico; o site oficial cita 6 a 2 na semifinal do Paulista de 1981.",
@@ -1454,15 +1424,15 @@ export default [
     "ok": true
   },
   {
-    "id": "rivais-061",
+    "id": "rivais-060",
     "q": "Qual rival eliminou o São Paulo na semifinal da Copa do Brasil de 2015?",
     "a": [
-      "Santos",
       "Corinthians",
       "Palmeiras",
+      "Santos",
       "Grêmio"
     ],
-    "c": 0,
+    "c": 2,
     "cat": "rivais",
     "d": 2,
     "exp": "Segundo a Wikipédia, o Santos eliminou o São Paulo nas semifinais da Copa do Brasil de 2015.",
@@ -1476,7 +1446,7 @@ export default [
     "ok": true
   },
   {
-    "id": "rivais-062",
+    "id": "rivais-061",
     "q": "Em 24 de janeiro de 1954, o São Paulo confirmou o Paulista de 1953, apelidado \"do IV Centenário\", vencendo qual rival por 3 a 1?",
     "a": [
       "Santos",
@@ -1506,15 +1476,15 @@ export default [
     "ok": true
   },
   {
-    "id": "rivais-063",
+    "id": "rivais-062",
     "q": "Qual atacante foi campeão paulista pelo Santos (1967–1969) e pelo São Paulo (1970–1971)?",
     "a": [
+      "Toninho Guerreiro",
       "Pedro Rocha",
       "Gérson",
-      "Terto",
-      "Toninho Guerreiro"
+      "Terto"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "rivais",
     "d": 3,
     "exp": "A Wikipédia cita Toninho Guerreiro entre os ídolos dos dois clubes, campeão pelo Santos e pelo São Paulo.",
@@ -1528,15 +1498,15 @@ export default [
     "ok": true
   },
   {
-    "id": "rivais-064",
+    "id": "rivais-063",
     "q": "Quem fez o gol da vitória por 1 a 0 do São Paulo sobre o Santos na final de ida do Paulista de 2000, em 10 de junho?",
     "a": [
       "Rogério Ceni",
-      "França",
       "Kaká",
-      "Marcelinho Paraíba"
+      "Marcelinho Paraíba",
+      "França"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "rivais",
     "d": 4,
     "exp": "A Wikipédia registra gol de França na ida; na volta, 2 a 2 em 18 de junho de 2000, com título são-paulino no agregado.",
@@ -1554,15 +1524,15 @@ export default [
     "ok": true
   },
   {
-    "id": "rivais-065",
+    "id": "rivais-064",
     "q": "Serginho Chulapa fez o gol do título são-paulino sobre o Santos em 1980. Por qual clube marcou gol de título paulista em 1984?",
     "a": [
-      "Santos",
       "Corinthians",
+      "Santos",
       "Palmeiras",
       "Guarani"
     ],
-    "c": 0,
+    "c": 1,
     "cat": "rivais",
     "d": 2,
     "exp": "A Wikipédia lembra que Chulapa fez o gol do título do Santos em 1984, depois de ser o carrasco santista de 1980.",
@@ -1576,15 +1546,15 @@ export default [
     "ok": true
   },
   {
-    "id": "rivais-066",
+    "id": "rivais-065",
     "q": "Como é chamado o clássico entre São Paulo e Corinthians?",
     "a": [
+      "Majestoso",
       "Choque-Rei",
       "San-São",
-      "Clássico dos Gigantes",
-      "Majestoso"
+      "Clássico dos Gigantes"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "rivais",
     "d": 1,
     "exp": "O clássico contra o Corinthians é o Majestoso, nome criado pelo jornalista Tomás Mazzoni.",
@@ -1601,15 +1571,15 @@ export default [
     "ok": true
   },
   {
-    "id": "rivais-067",
+    "id": "rivais-066",
     "q": "Como é chamado o clássico entre São Paulo e Palmeiras?",
     "a": [
       "Majestoso",
       "San-São",
-      "Choque-Rei",
-      "Clássico da Paz"
+      "Clássico da Paz",
+      "Choque-Rei"
     ],
-    "c": 2,
+    "c": 3,
     "cat": "rivais",
     "d": 1,
     "exp": "O confronto com o Palmeiras é o Choque-Rei; o primeiro jogo foi em 30 de março de 1930.",
@@ -1626,7 +1596,7 @@ export default [
     "ok": true
   },
   {
-    "id": "rivais-068",
+    "id": "rivais-067",
     "q": "Como é chamado o clássico entre São Paulo e Santos?",
     "a": [
       "Majestoso",
@@ -1648,6 +1618,220 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
       }
     ],
+    "ok": true
+  },
+  {
+    "id": "rivais-068",
+    "q": "Qual imperador assistiu à decisão do Paulista de 1997 entre Corinthians e São Paulo, vencida pelos corintianos?",
+    "a": [
+      "Hirohito, do Japão",
+      "Pedro II, do Brasil",
+      "Akihito, do Japão",
+      "Haile Selassie, da Etiópia"
+    ],
+    "c": 2,
+    "cat": "rivais",
+    "d": 4,
+    "exp": "Segundo a Wikipédia, o imperador Akihito estava no estádio na final do quadrangular de 1997, que terminou 1 a 1 e deu o título ao Corinthians.",
+    "src": [
+      {
+        "n": "Wikipédia (pt) — Clássico Majestoso",
+        "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      }
+    ],
+    "when": "1997",
+    "ok": true
+  },
+  {
+    "id": "rivais-069",
+    "q": "Qual rival o São Paulo derrotou por 2 a 0 na final do Torneio Início de 1940?",
+    "a": [
+      "Palmeiras",
+      "Santos",
+      "Portuguesa",
+      "Corinthians"
+    ],
+    "c": 3,
+    "cat": "rivais",
+    "d": 3,
+    "exp": "A Wikipédia registra o São Paulo campeão do Torneio Início de 1940, com 2 a 0 sobre o Corinthians, em 14 de maio.",
+    "src": [
+      {
+        "n": "Wikipédia (pt) — Clássico Majestoso",
+        "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      }
+    ],
+    "when": "1940",
+    "ok": true
+  },
+  {
+    "id": "rivais-070",
+    "q": "Qual goleiro do São Paulo defendeu dois pênaltis na decisão por penalidades da Florida Cup de 2017, contra o Corinthians?",
+    "a": [
+      "Denis",
+      "Sidão",
+      "Renan Ribeiro",
+      "Rogério Ceni"
+    ],
+    "c": 1,
+    "cat": "rivais",
+    "d": 4,
+    "exp": "Segundo a Wikipédia, Sidão defendeu duas cobranças na final da Florida Cup, em janeiro de 2017.",
+    "src": [
+      {
+        "n": "Wikipédia (pt) — Clássico Majestoso",
+        "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      }
+    ],
+    "when": "2017",
+    "ok": true
+  },
+  {
+    "id": "rivais-071",
+    "q": "Em 1973, um 0 a 0 com o São Paulo na última rodada do quadrangular final deu ao Palmeiras qual título?",
+    "a": [
+      "O Campeonato Paulista",
+      "O Campeonato Brasileiro",
+      "A Copa Libertadores",
+      "O Torneio Rio-São Paulo"
+    ],
+    "c": 1,
+    "cat": "rivais",
+    "d": 3,
+    "exp": "A Wikipédia lista o 0 a 0 de 1973 entre as decisões do Choque-Rei: o Palmeiras foi campeão brasileiro e o São Paulo, vice.",
+    "src": [
+      {
+        "n": "Wikipédia (pt) — Choque-Rei",
+        "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo FC",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      }
+    ],
+    "when": "1973",
+    "ok": true
+  },
+  {
+    "id": "rivais-072",
+    "q": "Em que edição da Copa Libertadores São Paulo e Palmeiras se enfrentaram pela primeira vez?",
+    "a": [
+      "1994",
+      "1972",
+      "1974",
+      "2005"
+    ],
+    "c": 2,
+    "cat": "rivais",
+    "d": 4,
+    "exp": "Na fase de grupos de 1974, o São Paulo venceu por 2 a 0 e por 2 a 1; o clube seria vice-campeão daquela edição.",
+    "src": [
+      {
+        "n": "Wikipédia (pt) — Choque-Rei",
+        "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — História — Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
+      }
+    ],
+    "when": "1974",
+    "ok": true
+  },
+  {
+    "id": "rivais-073",
+    "q": "Em 2000, em qual competição o São Paulo eliminou o Palmeiras nas quartas de final, com vitórias por 2 a 1 e 3 a 2?",
+    "a": [
+      "Copa do Brasil",
+      "Campeonato Paulista",
+      "Copa Libertadores",
+      "Copa João Havelange"
+    ],
+    "c": 0,
+    "cat": "rivais",
+    "d": 3,
+    "exp": "Segundo a Wikipédia, o São Paulo passou pelo Palmeiras na Copa do Brasil de 2000, em 24 e 27 de junho.",
+    "src": [
+      {
+        "n": "Wikipédia (pt) — Choque-Rei",
+        "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      }
+    ],
+    "when": "2000",
+    "ok": true
+  },
+  {
+    "id": "rivais-074",
+    "q": "Quantos jogos o Santos ficou sem vencer o São Paulo, até a vitória por 2 a 1 na Vila Belmiro em 3 de outubro de 1948?",
+    "a": [
+      "23",
+      "13",
+      "10",
+      "31"
+    ],
+    "c": 0,
+    "cat": "rivais",
+    "d": 4,
+    "exp": "Segundo a Wikipédia, foram 23 jogos sem vitória santista, encerrados em 3 de outubro de 1948.",
+    "src": [
+      {
+        "n": "Wikipédia (pt) — San-São",
+        "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
+      }
+    ],
+    "when": "1948",
+    "ok": true
+  },
+  {
+    "id": "rivais-075",
+    "q": "Em agosto de 1970, uma vitória por 3 a 2 do São Paulo sobre o Santos encerrou uma série de quantos jogos sem derrota santista no clássico?",
+    "a": [
+      "7",
+      "10",
+      "20",
+      "13"
+    ],
+    "c": 3,
+    "cat": "rivais",
+    "d": 4,
+    "exp": "A Wikipédia registra 13 jogos de invencibilidade do Santos, iniciada em 30 de outubro de 1966 e encerrada em 12 de agosto de 1970.",
+    "src": [
+      {
+        "n": "Wikipédia (pt) — San-São",
+        "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
+      }
+    ],
+    "when": "1970",
+    "ok": true
+  },
+  {
+    "id": "rivais-076",
+    "q": "Em agosto de 1980, o São Paulo goleou Palmeiras e Corinthians com o mesmo placar. Qual?",
+    "a": [
+      "3 x 0",
+      "4 x 0",
+      "5 x 1",
+      "2 x 0"
+    ],
+    "c": 1,
+    "cat": "rivais",
+    "d": 3,
+    "exp": "O site oficial cita os 4 a 0 sobre Palmeiras e Corinthians em 5 e 10 de agosto de 1980; a Wikipédia confirma os dois placares.",
+    "src": [
+      {
+        "n": "São Paulo FC (site oficial) — História — Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
+      },
+      {
+        "n": "Wikipédia (pt) — Clássico Majestoso",
+        "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "Wikipédia (pt) — Choque-Rei",
+        "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      }
+    ],
+    "when": "1980",
     "ok": true
   }
 ];

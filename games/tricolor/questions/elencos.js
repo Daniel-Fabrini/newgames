@@ -111,7 +111,7 @@ export default [
     ],
     "c": 2,
     "cat": "elencos",
-    "d": 3,
+    "d": 2,
     "exp": "Leônidas foi campeão paulista cinco vezes pelo São Paulo: 1943, 1945, 1946, 1948 e 1949.",
     "src": [
       {
@@ -150,7 +150,7 @@ export default [
   },
   {
     "id": "elencos-007",
-    "q": "Em qual ano o São Paulo foi campeão paulista de forma invicta, com a vitória por 1 a 0 sobre o Palmeiras decidida por Renganeschi?",
+    "q": "Em qual ano o São Paulo foi campeão paulista de forma invicta, com a vitória por 1 a 0 sobre o Palmeiras, no Pacaembu?",
     "a": [
       "1946",
       "1943",
@@ -159,7 +159,7 @@ export default [
     ],
     "c": 0,
     "cat": "elencos",
-    "d": 3,
+    "d": 2,
     "exp": "O Paulista de 1946 foi conquistado sem derrotas; o gol decisivo contra o Palmeiras foi de Renganeschi, em jogo no Pacaembu.",
     "src": [
       {
@@ -402,7 +402,7 @@ export default [
     ],
     "c": 2,
     "cat": "elencos",
-    "d": 2,
+    "d": 1,
     "exp": "Chulapa saiu após 1982 e foi para o Santos em 1983; Careca foi contratado justamente para substituí-lo.",
     "src": [
       {
@@ -760,7 +760,7 @@ export default [
     ],
     "c": 0,
     "cat": "elencos",
-    "d": 3,
+    "d": 2,
     "exp": "O último jogo oficial foi a derrota por 3 a 1 para o Santos, na Vila Belmiro; a despedida no Morumbi foi em 11/12/2015.",
     "src": [
       {
@@ -851,7 +851,7 @@ export default [
     ],
     "c": 3,
     "cat": "elencos",
-    "d": 3,
+    "d": 2,
     "exp": "Segundo a Wikipédia, Ceni recebeu a faixa de capitão em 1999.",
     "src": [
       {
@@ -1025,7 +1025,7 @@ export default [
     ],
     "c": 0,
     "cat": "elencos",
-    "d": 4,
+    "d": 3,
     "exp": "Hernanes foi o craque do Brasileirão de 2008, campeão pelo São Paulo.",
     "src": [
       {
@@ -1095,7 +1095,7 @@ export default [
     ],
     "c": 1,
     "cat": "elencos",
-    "d": 3,
+    "d": 2,
     "exp": "O Grêmio terminou com 72 pontos, três a menos que o São Paulo.",
     "src": [
       {
@@ -1213,7 +1213,7 @@ export default [
     ],
     "c": 3,
     "cat": "elencos",
-    "d": 4,
+    "d": 3,
     "exp": "Amoroso abriu o placar aos 16 minutos; Fabão, Luizão e Tardelli completaram a goleada.",
     "src": [
       {
@@ -1279,7 +1279,7 @@ export default [
     ],
     "c": 2,
     "cat": "elencos",
-    "d": 3,
+    "d": 2,
     "exp": "Zetti comprou seu próprio passe do Palmeiras e o alugou ao São Paulo em 1990; estreou em amistoso em 15 de julho.",
     "src": [
       {
@@ -1301,7 +1301,7 @@ export default [
     ],
     "c": 0,
     "cat": "elencos",
-    "d": 3,
+    "d": 2,
     "exp": "Zetti atuou em 432 partidas entre 1990 e 1996.",
     "src": [
       {
@@ -1463,7 +1463,7 @@ export default [
     ],
     "c": 2,
     "cat": "elencos",
-    "d": 4,
+    "d": 3,
     "exp": "Mário Tilico fez o único gol da final de ida, em 5 de junho de 1991, diante de 67.759 pessoas, segundo a Wikipédia.",
     "src": [
       {
@@ -1528,7 +1528,7 @@ export default [
   },
   {
     "id": "elencos-064",
-    "q": "Revelado pelo São Paulo, qual jogador capitaneou a Seleção Brasileira na conquista da Copa do Mundo de 2002?",
+    "q": "Qual jogador, que atuou no São Paulo de 1989 a 1994, capitaneou a Seleção Brasileira na conquista da Copa do Mundo de 2002?",
     "a": [
       "Raí",
       "Cafu",
@@ -1559,7 +1559,7 @@ export default [
     ],
     "c": 2,
     "cat": "elencos",
-    "d": 3,
+    "d": 2,
     "exp": "Cafu foi para o Real Zaragoza e depois voltou ao Brasil, para Juventude e Palmeiras.",
     "src": [
       {
@@ -1581,7 +1581,7 @@ export default [
     ],
     "c": 0,
     "cat": "elencos",
-    "d": 4,
+    "d": 3,
     "exp": "A venda foi anunciada em 8 de agosto de 2012 e rendeu 43 milhões de euros.",
     "src": [
       {
@@ -1603,7 +1603,7 @@ export default [
     ],
     "c": 0,
     "cat": "elencos",
-    "d": 4,
+    "d": 3,
     "exp": "Ney Franco comandou o time que venceu o Tigre por 2 a 0, com gols de Lucas e Osvaldo, em 12/12/2012.",
     "src": [
       {
@@ -1904,7 +1904,7 @@ export default [
     ],
     "c": 3,
     "cat": "elencos",
-    "d": 4,
+    "d": 3,
     "exp": "Gilmar defendeu o clube de 1985 a 1990 (253 jogos), e defendeu um pênalti na final de 1986.",
     "src": [
       {
@@ -1991,6 +1991,54 @@ export default [
       }
     ],
     "when": "1953–1962",
+    "ok": true
+  },
+  {
+    "id": "elencos-084",
+    "q": "Quais dois jogadores se despediram do São Paulo na final do Mundial de 1993, na vitória por 3 a 2 sobre o Milan?",
+    "a": [
+      "Raí e Palhinha",
+      "Zetti e Cafu",
+      "Ronaldão e Dinho",
+      "Müller e Leonardo"
+    ],
+    "c": 2,
+    "cat": "elencos",
+    "d": 4,
+    "exp": "O Calendário Tricolor do site oficial lista as despedidas de Ronaldão e Dinho em 12 de dezembro de 1993.",
+    "src": [
+      {
+        "n": "São Paulo FC (site oficial) — Calendário Tricolor",
+        "u": "https://www.saopaulofc.net/o-clube/calendario-tricolor/"
+      }
+    ],
+    "when": "1993",
+    "ok": true
+  },
+  {
+    "id": "elencos-085",
+    "q": "Em qual partida Aloísio estreou pelo São Paulo, em 14 de dezembro de 2005?",
+    "a": [
+      "Final da Libertadores contra o Atlético Paranaense",
+      "Final do Mundial contra o Liverpool",
+      "Semifinal do Mundial de Clubes, 3 a 2 sobre o Al-Ittihad",
+      "Jogo do Brasileirão contra o Palmeiras"
+    ],
+    "c": 2,
+    "cat": "elencos",
+    "d": 4,
+    "exp": "Segundo o Calendário Tricolor, Aloísio estreou na semifinal do Mundial, em Tóquio; quatro dias depois deu assistência no gol do título.",
+    "src": [
+      {
+        "n": "São Paulo FC (site oficial) — Calendário Tricolor",
+        "u": "https://www.saopaulofc.net/o-clube/calendario-tricolor/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — História — Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      }
+    ],
+    "when": "2005",
     "ok": true
   }
 ];
