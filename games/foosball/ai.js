@@ -1,0 +1,111 @@
+// Foosball AI. Reads only the (delayed) ball state, drives rods through the same API as a human
+// (target x + kick) so slide speed / rod limits are enforced by the simulation itself.
+import { T, clamp, mulberry, manX, footY, setRodTarget, kickRod, goalX0, goalX1 } from './physics.js';
+
+export const DIFFS = { easy: 0.12, normal: 0.5, hard: 0.92 };
+
+export function aiParams(skill) {
+  const k = clamp(skill, 0, 1);
+  return {
+    delay: 0.34 - 0.28 * k, // perception delay (s)
+    noise: 5.2 - 4.4 * k, // prediction error sd (units)
+    vmax: 62 + 64 * k, // max slide speed
+    cd: 0.85 - 0.55 * k, // min time between kicks of one rod
+    react: 0.22 - 0.16 * k, // time ball must sit in the strike zone before kicking
+    aimSkill: 0.15 + 0.8 * k,
+  };
+}
+
+const gauss = (r) => {
+  let a = 0;
+  for (let i = 0; i < 4; i++) a += r();
+  return (a - 2) * 1.7;
+};
+
+function foldX(x) {
+  const lo = T.R, hi = T.W - T.R, w = hi - lo;
+  let u = (x - lo) % (2 * w);
+  if (u < 0) u += 2 * w;
+  return lo + (u > w ? 2 * w - u : u);
+}
+
+export function createAI(team, skill, seed = 7) {
+  const P = aiParams(skill);
+  const rnd = mulberry(seed * 977 + team * 31 + 5);
+  const hist = [];
+  const noise = {};
+  const st = {};
+  let nextNoise = 0;
+  const ai = {
+    team, skill, params: P,
+    update(s, dt) {
+      const now = s.time;
+      const b0 = s.ball;
+      hist.push({ t: now, x: b0.x, y: b0.y, vx: b0.vx, vy: b0.vy });
+      while (hist.length > 2 && hist[1].t <= now - P.delay) hist.shift();
+      const b = hist[0];
+      if (now >= nextNoise) {
+        nextNoise = now + 0.25;
+        for (const r of s.rods) if (r.team === team) noise[r.i] = gauss(rnd) * P.noise;
+      }
+      for (const r of s.rods) {
+        if (r.team !== team) continue;
+        r.vmax = P.vmax;
+        const q = st[r.i] || (st[r.i] = { cd: 0, zone: 0 });
+        q.cd -= dt;
+        // where will the ball cross this rod?
+        let px = b.x;
+        if (Math.abs(b.vy) > 6) {
+          const tt = (r.y - b.y) / b.vy;
+          if (tt > 0 && tt < 1.2) px = foldX(b.x + b.vx * tt);
+        }
+        px = clamp(px + (noise[r.i] || 0), 2, T.W - 2);
+        const rel = (b.y - r.y) * r.s; // > 0: ball is ahead of the rod (towards the opponent)
+        let target;
+        if (rel > -4 && rel < 16) {
+          // engage: put the nearest man on the ball
+          let best = 0, bd = 1e9;
+          for (let k = 0; k < r.n; k++) {
+            const d = Math.abs(manX({ ...r, x: 0 }, k) - px);
+            if (d < bd) { bd = d; best = k; }
+          }
+          target = px - manX({ ...r, x: 0 }, best);
+          // strike?
+          const man = manX(r, best);
+          const fy = footY(r);
+          const dx = Math.abs(man - b.x);
+          const ahead = (b.y - fy) * r.s;
+          const inZone = dx < 2.7 && ahead > 0.4 && ahead < 5.8;
+          q.zone = inZone ? q.zone + dt : 0;
+          if (inZone && q.zone >= P.react && q.cd <= 0 && s.phase === 'play' && r.ph !== 2) {
+            const bsp = Math.hypot(b.vx, b.vy);
+            let power = r.kind === 'att' ? 0.95 : r.kind === 'mid' ? 0.62 : r.kind === 'def' ? 0.8 : 0.7;
+            if (bsp > 120) power = Math.min(power, 0.55);
+            power = clamp(power + (rnd() - 0.5) * 0.2 * (1 - P.aimSkill), 0.2, 1);
+            if (kickRod(s, r.i, power)) {
+              q.cd = P.cd;
+              q.zone = 0;
+              // shoot at the side away from the keeper by sliding while striking
+              if (r.kind === 'att' || r.kind === 'mid') {
+                const gx = (goalX0 + goalX1) / 2;
+                const dir = b.x > gx ? -1 : 1;
+                target += dir * 7 * (rnd() < P.aimSkill ? 1 : -1);
+              }
+            }
+          }
+        } else if (r.kind === 'gk') {
+          target = (T.W / 2 + (px - T.W / 2) * 0.62) - T.W / 2;
+        } else {
+          let best = 0, bd = 1e9;
+          for (let k = 0; k < r.n; k++) {
+            const d = Math.abs(manX({ ...r, x: 0 }, k) - px);
+            if (d < bd) { bd = d; best = k; }
+          }
+          target = px - manX({ ...r, x: 0 }, best);
+        }
+        setRodTarget(s, r.i, target);
+      }
+    },
+  };
+  return ai;
+}
