@@ -9,7 +9,7 @@ test('real bank: every record is well-formed (no rejected records)', () => {
   const res = validateAll();
   report(res, (l) => process.stdout.write(l + '\n'));
   assert.equal(res.errors.length, 0, res.errors.map((e) => `${e.file}#${e.index} ${e.id}: ${e.msgs.join('; ')}`).join('\n'));
-  assert.ok(NAMES.length === 17);
+  assert.ok(NAMES.length === 18);
 });
 
 test('validator accepts a good record and flags each malformation', () => {
