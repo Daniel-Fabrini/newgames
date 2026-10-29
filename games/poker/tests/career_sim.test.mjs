@@ -84,5 +84,5 @@ test('career simulator: bot plays Local -> Regional -> International -> World Ch
   assert.ok(c.story.seen.includes('regional_open') && c.story.seen.includes('intl_welcome') && c.story.seen.includes('worlds_invite') && c.story.seen.includes('champion_crowned'));
   console.log(`career sim: ${tick} tournaments in ${((Date.now() - t0) / 1000).toFixed(1)}s, unlocks at tournament #: ${JSON.stringify(firstAt)}, world attempts: ${worldAttempts}${forced ? ' (+1 recorded champion result)' : ' (real win)'}`);
   console.log(`final: level ${c.level}, rep ${c.rep}, wins ${c.stats.wins}, finals ${c.stats.finalTables}, cashes ${c.stats.cashes}, winnings ${c.stats.winnings}, achievements ${Object.keys(c.achievements).length}/${C.listAchievements(c).length}, seasons ${c.seasonHistory.length}`);
-  console.log(log.slice(-16).join('\n'));
+  console.log(log.join('\n'));
 });
