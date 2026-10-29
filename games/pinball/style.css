@@ -1,0 +1,525 @@
+/* Pinball Pro — black & gold chrome around a neon table. */
+.g-pinball {
+  background: radial-gradient(120% 70% at 50% 0%, #1a1408 0%, #0a0a0c 55%, #060607 100%);
+}
+.g-pinball-app {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
+}
+.g-pinball-app.in-menu > .g-pinball-hud,
+.g-pinball-app.in-menu > .g-pinball-dmdwrap,
+.g-pinball-app.in-menu > .g-pinball-stage {
+  visibility: hidden;
+}
+.g-pinball-hud {
+  width: 100%;
+  max-width: 440px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  padding: 6px 10px 4px;
+  flex: none;
+}
+.g-pinball-scorebox {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3px 12px 4px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(30, 27, 20, 0.95), rgba(12, 11, 9, 0.95));
+  border: 1px solid rgba(243, 194, 74, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), inset 0 0 12px rgba(243, 194, 74, 0.06);
+  line-height: 1;
+}
+.g-pinball-scorebox small {
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-3, #9a9aa5);
+}
+.g-pinball-score {
+  font-size: 24px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.5px;
+  background: linear-gradient(180deg, #fff4c4, #f3c24a 55%, #c9971c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+}
+.g-pinball-pill {
+  min-width: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 8px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(28, 26, 20, 0.92), rgba(12, 11, 9, 0.92));
+  border: 1px solid rgba(243, 194, 74, 0.32);
+  line-height: 1.1;
+}
+.g-pinball-pill small {
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  color: var(--text-3, #9a9aa5);
+}
+.g-pinball-pill b {
+  font-size: 15px;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+.g-pinball-mult b {
+  color: #f7d774;
+}
+.g-pinball-ibtn,
+.g-pinball-snd {
+  width: 44px;
+  min-height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(243, 194, 74, 0.4);
+  background: linear-gradient(180deg, rgba(40, 36, 26, 0.95), rgba(16, 14, 10, 0.95));
+  color: #f3c24a;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+}
+.g-pinball-ibtn svg,
+.g-pinball-snd svg {
+  width: 22px;
+  height: 22px;
+}
+.g-pinball-snd {
+  width: 38px;
+  min-height: 38px;
+  border-radius: 12px;
+}
+.g-pinball-ibtn:focus-visible,
+.g-pinball-snd:focus-visible,
+.g-pinball-plunger:focus-visible,
+.g-pinball-nudge:focus-visible {
+  outline: 2px solid #f7d774;
+  outline-offset: 2px;
+}
+.g-pinball-dmdwrap {
+  flex: none;
+  margin: 2px 0 4px;
+  border-radius: 10px;
+  padding: 3px;
+  box-sizing: content-box;
+  background: linear-gradient(180deg, #2b2519, #0c0a07);
+  border: 1px solid rgba(243, 194, 74, 0.45);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), inset 0 0 8px #000;
+}
+.g-pinball-dmd {
+  display: block;
+  border-radius: 6px;
+}
+.g-pinball-stage {
+  position: relative;
+  width: 100%;
+  flex: none;
+  touch-action: none;
+}
+.g-pinball-canvas {
+  display: block;
+  touch-action: none;
+}
+.g-pinball-fw {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+.g-pinball-padhint {
+  position: absolute;
+  bottom: 14px;
+  font-size: 30px;
+  color: rgba(247, 215, 116, 0.45);
+  pointer-events: none;
+  transition: opacity 0.6s;
+  text-shadow: 0 0 12px rgba(247, 215, 116, 0.5);
+}
+.g-pinball-padhint.left {
+  left: 14px;
+}
+.g-pinball-padhint.right {
+  right: 14px;
+}
+.g-pinball-app:not(.first) .g-pinball-padhint {
+  opacity: 0;
+}
+.g-pinball-plunger {
+  position: absolute;
+  right: 8px;
+  bottom: 74px;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  border: 2px solid rgba(243, 194, 74, 0.8);
+  background: radial-gradient(circle at 35% 30%, #4a3f1f, #14110a 70%);
+  color: #fff3c0;
+  font: 900 13px var(--font, system-ui);
+  letter-spacing: 0.5px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), 0 0 18px rgba(243, 194, 74, 0.25);
+  cursor: pointer;
+  touch-action: none;
+}
+.g-pinball-plunger i {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: conic-gradient(#f7d774 calc(var(--p, 0) * 360deg), transparent 0);
+  -webkit-mask: radial-gradient(circle, transparent 33px, #000 34px);
+  mask: radial-gradient(circle, transparent 33px, #000 34px);
+  pointer-events: none;
+}
+.g-pinball-plunger.down {
+  transform: scale(0.94);
+  background: radial-gradient(circle at 35% 30%, #6a5a26, #1b160b 70%);
+}
+.g-pinball-plunger.hide,
+.g-pinball-nudge.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+.g-pinball-nudge {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 6px;
+  min-width: 96px;
+  height: 40px;
+  border-radius: 14px;
+  border: 1px solid rgba(243, 194, 74, 0.55);
+  background: linear-gradient(180deg, rgba(40, 36, 26, 0.9), rgba(12, 10, 7, 0.9));
+  color: #f7d774;
+  font: 900 12px var(--font, system-ui);
+  letter-spacing: 1px;
+  cursor: pointer;
+  touch-action: none;
+}
+.g-pinball-nudge.warn {
+  border-color: #ff4a3d;
+  color: #ff8a7d;
+}
+/* ------------------------------------------------------------------ menu */
+.g-pinball-menu,
+.g-pinball-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+.g-pinball-menu[hidden],
+.g-pinball-overlay[hidden] {
+  display: none;
+}
+.g-pinball-overlay {
+  background: rgba(5, 5, 8, 0.78);
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  padding: 12px;
+  box-sizing: border-box;
+  touch-action: pan-y;
+}
+.g-pinball-menuscroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  padding: 10px 14px calc(18px + var(--safe-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  touch-action: pan-y;
+}
+.g-pinball-logo {
+  text-align: center;
+  padding-top: 4px;
+}
+.g-pinball-logo h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  background: linear-gradient(180deg, #fff4c4, #f3c24a 55%, #c9971c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-pinball-logo p {
+  margin: 2px 0 0;
+  color: var(--text-2, #c4c4cc);
+  font-size: 13px;
+}
+.g-pinball-tables {
+  display: grid;
+  gap: 10px;
+}
+.g-pinball-tcard {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+  padding: 10px;
+  border-radius: 16px;
+  border: 1px solid rgba(243, 194, 74, 0.28);
+  background: linear-gradient(180deg, rgba(30, 27, 20, 0.95), rgba(12, 11, 9, 0.95));
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+}
+.g-pinball-tcard.sel {
+  border-color: #f3c24a;
+  box-shadow: 0 0 0 1px #f3c24a, 0 0 22px rgba(243, 194, 74, 0.25);
+}
+.g-pinball-tcard.locked {
+  opacity: 0.78;
+}
+.g-pinball-thumb {
+  flex: none;
+  width: 92px;
+  height: 184px;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+.g-pinball-thumb.locked {
+  filter: grayscale(0.85) brightness(0.55);
+}
+.g-pinball-tinfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+.g-pinball-tinfo b {
+  font-size: 18px;
+  color: #f7d774;
+}
+.g-pinball-tinfo span {
+  font-size: 13px;
+  color: var(--text-2, #c4c4cc);
+}
+.g-pinball-tinfo em {
+  font-style: normal;
+  font-size: 12px;
+  color: #f3c24a;
+}
+.g-pinball-tinfo em.lock {
+  color: #ff9a8a;
+}
+.g-pinball-lockicon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  color: #f3c24a;
+}
+.g-pinball-lockicon svg {
+  width: 100%;
+  height: 100%;
+}
+.g-pinball-mbtn {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  align-items: center;
+}
+.g-pinball-mbtn small {
+  font-size: 11px;
+  opacity: 0.75;
+  font-weight: 600;
+}
+.g-pinball-card {
+  border-radius: 16px;
+  border: 1px solid rgba(243, 194, 74, 0.22);
+  background: rgba(18, 17, 14, 0.9);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.g-pinball-sec {
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #f3c24a;
+  font-weight: 800;
+}
+.g-pinball-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+}
+.g-pinball-row span {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.g-pinball-row small {
+  font-size: 11px;
+  color: var(--text-3, #9a9aa5);
+}
+.g-pinball-statsline {
+  font-size: 12px;
+  color: var(--text-2, #c4c4cc);
+  gap: 4px;
+}
+.g-pinball-how summary {
+  cursor: pointer;
+  font-weight: 800;
+  color: #f7d774;
+}
+.g-pinball-how p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-2, #c4c4cc);
+}
+/* ------------------------------------------------------------------ panels */
+.g-pinball-panel {
+  width: min(100%, 360px);
+  box-sizing: border-box;
+  border-radius: 20px;
+  border: 1px solid rgba(243, 194, 74, 0.5);
+  background: linear-gradient(180deg, rgba(30, 27, 20, 0.97), rgba(10, 9, 7, 0.97));
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(243, 194, 74, 0.12);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  animation: g-pinball-pop 0.25s ease-out;
+}
+.g-pinball-panel h3 {
+  margin: 0;
+  font-size: 22px;
+  color: #f7d774;
+}
+.g-pinball-actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 4px;
+}
+.g-pinball-mlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  text-align: left;
+}
+.g-pinball-mlist li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-3, #9a9aa5);
+}
+.g-pinball-mlist li.cur {
+  color: #fff;
+  background: rgba(243, 194, 74, 0.14);
+  border: 1px solid rgba(243, 194, 74, 0.4);
+}
+.g-pinball-mlist li.done {
+  color: #7dffb0;
+}
+.g-pinball-bigscore {
+  font-size: 40px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(180deg, #fff4c4, #f3c24a 55%, #c9971c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.1;
+}
+.g-pinball-badge {
+  align-self: center;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #f7d774, #c9971c);
+  color: #1a1305;
+  font-weight: 900;
+  letter-spacing: 1px;
+  animation: g-pinball-pulse 0.9s ease-in-out infinite alternate;
+}
+.g-pinball-rank {
+  font-size: 14px;
+  color: var(--text-2, #c4c4cc);
+}
+.g-pinball-rank b {
+  color: #f7d774;
+}
+.g-pinball-lines {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+}
+.g-pinball-lines div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+}
+.g-pinball-lines span {
+  color: var(--text-2, #c4c4cc);
+}
+.g-pinball-unlock {
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid #7dffb0;
+  color: #7dffb0;
+  font-weight: 800;
+  font-size: 13px;
+}
+.g-pinball-xp {
+  font-size: 12px;
+  color: #f3c24a;
+  font-weight: 800;
+}
+@keyframes g-pinball-pop {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes g-pinball-pulse {
+  to {
+    transform: scale(1.08);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .g-pinball-panel,
+  .g-pinball-badge {
+    animation: none;
+  }
+}

@@ -123,7 +123,7 @@ export async function mount(root, ctx) {
     ctx.setTitle();
     const r = S.rec;
     const item = (icon, title, sub, fn) => h('button', { class: 'list-item', type: 'button', onclick: () => { snd.play('select'); fn(); } },
-      h('span', { class: 'li-icon' }, icon), h('span', { class: 'li-body' }, h('span', { class: 'li-title' }, title), h('span', { class: 'li-sub' }, sub)), h('span', { class: 'li-right' }, '›'));
+      h('span', { class: 'li-icon' }, icon), h('div', { class: 'li-body' }, h('div', { class: 'li-title' }, title), h('div', { class: 'li-sub' }, sub)), h('span', { class: 'li-right' }, '›'));
     const node = h('div', { class: 'screen g-fb-menu' },
       h('div', { class: 'g-fb-hero' }, h('div', { class: 'g-fb-hero-ball' }), h('div', {}, h('div', { class: 'title-l' }, t('menuTitle')), h('div', { class: 'muted small' }, t('menuSub')))),
       h('div', { class: 'list' },
@@ -163,10 +163,9 @@ export async function mount(root, ctx) {
     const node = h('div', { class: 'screen g-fb-setup' },
       h('div', { class: 'title-l' }, title),
       h('div', { class: 'card' }, body),
-      helpCard(),
-      h('div', { class: 'spacer' }),
       h('button', { class: 'btn primary big block', type: 'button', onclick: () => startFromSetup(mode) }, t('start')),
-      h('button', { class: 'btn ghost block', type: 'button', onclick: showMenu }, t('back')));
+      h('button', { class: 'btn ghost block', type: 'button', onclick: showMenu }, t('back')),
+      helpCard());
     screen(node);
   }
 
@@ -231,9 +230,10 @@ export async function mount(root, ctx) {
     draw();
     screen(h('div', { class: 'screen g-fb-setup' },
       h('div', { class: 'title-l' }, t('mTour')),
-      h('div', { class: 'card' }, body), helpCard(), h('div', { class: 'spacer' }),
+      h('div', { class: 'card' }, body),
       h('button', { class: 'btn primary big block', type: 'button', onclick: () => { newTournament(cfg.diff); showTour(); } }, t('start')),
-      h('button', { class: 'btn ghost block', type: 'button', onclick: showMenu }, t('back'))));
+      h('button', { class: 'btn ghost block', type: 'button', onclick: showMenu }, t('back')),
+      helpCard()));
   }
   function startTourMatch() {
     const tr = S.tour;
@@ -321,7 +321,7 @@ export async function mount(root, ctx) {
         kick);
     };
 
-    const wrap = h('div', { class: 'g-fb-match' });
+    const wrap = h('div', { class: 'g-fb-match' + (twoP ? ' two' : '') });
     if (twoP) wrap.append(mkPad(humans[1], true));
     wrap.append(hud, poss, stage);
     wrap.append(mkPad(humans[0], false));

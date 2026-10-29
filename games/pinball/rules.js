@@ -3,8 +3,8 @@ import { Sim } from './sim.js';
 import { makeTable } from './tables.js';
 
 export const SCORE = {
-  bumper: 100, sling: 25, standup: 500, drop: 1000, bank: 10000, spin: 100, lane: 500, lanes: 5000,
-  inlane: 250, outlane: 100, ramp: 5000, kickback: 1000, jackpot: 25000, mission: 25000, skill: 10000,
+  bumper: 100, sling: 25, standup: 500, drop: 1000, bank: 5000, spin: 50, lane: 500, lanes: 5000,
+  inlane: 250, outlane: 100, ramp: 3000, kickback: 1000, jackpot: 15000, mission: 10000, skill: 10000,
   combo: 250, allClear: 100000,
 };
 export const SAVER_TIME = 12;
@@ -175,8 +175,8 @@ export class Game {
     this.comboT = COMBO_WINDOW;
     this.combo++;
     if (this.combo > this.stats.maxCombo) this.stats.maxCombo = this.combo;
-    if (this.combo >= 3) {
-      this.score += SCORE.combo * this.combo;
+    if (this.combo >= 3 && (this.combo === 3 || this.combo % 5 === 0)) {
+      this.score += SCORE.combo * Math.min(this.combo, 10);
       this.say('combo', { n: this.combo }, 1.0);
       this.emit({ t: 'combo', n: this.combo });
     }
@@ -242,10 +242,13 @@ export class Game {
     this.emit(e);
     switch (e.t) {
       case 'launch':
+        if (this.phase === 'ready') {
+          // first launch of this ball (a saved ball's auto-launch keeps the running timer)
+          this.saver = SAVER_TIME;
+          this.skillT = 5;
+          this.skillOpen = true;
+        }
         this.phase = 'play';
-        this.saver = SAVER_TIME;
-        this.skillT = 5;
-        this.skillOpen = true;
         this.emit({ t: 'launched' });
         break;
       case 'bumper':
@@ -274,7 +277,7 @@ export class Game {
           this.stats.banks++;
           this.bankCount++;
           this.addScore(SCORE.bank);
-          this.bonus += 3000;
+          this.bonus += 1500;
           this.dropReset = 1.3;
           this.say('bank', {}, 1.5);
           this.emit({ t: 'bank' });

@@ -2,8 +2,7 @@
 // World units: y grows downwards. A goo ball is a circle node; a strand is a compliant distance constraint.
 
 export const DT = 1 / 60;
-export const SUB = 6;
-export const ITER = 2;
+export const P = { SUB: 6, ITER: 2, KC: 6 };
 export const G = 900;
 export const STRAND_K = 15000; // force per unit strain
 export const BREAK_STRAIN = 0.62;
@@ -424,12 +423,12 @@ export class Sim {
       this._checkGoal();
       return;
     }
-    const h = DT / SUB;
+    const h = DT / P.SUB;
     const T0 = (this.time - 1) * DT;
     const live = [];
     for (const n of this.nodes) if (n.alive) live.push(n);
-    for (let s = 0; s < SUB; s++) {
-      const Tt = T0 + ((s + 1) / SUB) * DT;
+    for (let s = 0; s < P.SUB; s++) {
+      const Tt = T0 + ((s + 1) / P.SUB) * DT;
       if (this.movers.length) this._updateMovers(Tt);
       this._substep(live, h, Tt);
     }
@@ -507,7 +506,7 @@ export class Sim {
     for (const s of this.strands) s.lam = 0;
     this._buildGrid(live);
     const strands = this.strands;
-    for (let it = 0; it < ITER; it++) {
+    for (let it = 0; it < P.ITER; it++) {
       this._solveStrands(strands, h);
       this._collideNodes(live);
       this._collideWorld(live, Tt);
@@ -568,7 +567,7 @@ export class Sim {
       const d = hyp(dx, dy);
       if (d < 1e-6) continue;
       const C = d - s.L;
-      const at = s.alpha * ih2;
+      const at = (C < 0 ? s.alpha / P.KC : s.alpha) * ih2;
       const dl = (-C - at * s.lam) / (w + at);
       s.lam += dl;
       const nx = dx / d, ny = dy / d;

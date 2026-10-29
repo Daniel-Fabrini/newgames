@@ -132,7 +132,7 @@ export function kickRod(s, i, power = 0.5) {
   r.ph = 2;
   return true;
 }
-export const strikeOmega = (p) => 6 + 14 * p;
+export const strikeOmega = (p) => 5 + 11 * p;
 
 function updateRods(s, h) {
   for (const r of s.rods) {

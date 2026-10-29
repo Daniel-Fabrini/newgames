@@ -734,27 +734,28 @@ export function createRenderer(canvas) {
     const need = lv.need || 0;
     if (!need || lv.sandbox) return;
     const sim = f.sim;
-    const a0 = (lv.anchors && lv.anchors[0]) || [60, 600];
-    const gx = lv.bounds[0] + 22;
-    // ground height at that x = anchor y + 8
-    const gy = a0[1] + 8 - 15;
     const pipe = lv.pipe;
+    const a0 = (lv.anchors && lv.anchors[0]) || [60, 600];
+    // saved goos wait next to the pipe (or beside the first anchor for height goals) and hop in on a win
+    const baseX = pipe ? pipe.x + pipe.r + 22 : a0[0] - 46;
+    const dir = pipe ? 1 : -1;
+    const gy = (pipe ? pipe.y + 20 : a0[1] + 8) - 15;
     const wonT = sim.status === 'won' ? f.time - f.winTime : -1;
     for (let i = 0; i < need; i++) {
-      let x = gx + i * 4, y = gy;
+      let x = baseX + dir * i * 32, y = gy;
+      let look = pipe ? -0.8 : 0.8;
       if (wonT >= 0 && pipe) {
-        const k = clamp((wonT - i * 0.28) / 1.3, 0, 1);
+        const k = clamp((wonT - 0.15 - i * 0.3) / 0.9, 0, 1);
         if (k >= 1) continue;
-        const px = pipe.x, py = pipe.y;
-        x = mix(gx, px, k);
-        y = mix(gy, py, k) - Math.sin(k * Math.PI) * 140 - Math.abs(Math.sin(k * 14)) * 22;
+        x = mix(x, pipe.x, k);
+        y = mix(gy, pipe.y - 4, k) - Math.sin(k * Math.PI) * 70;
+        look = 0;
       } else if (wonT >= 0) {
         y = gy - Math.abs(Math.sin(wonT * 8 + i)) * 26;
       } else {
-        x += i * 0;
         y = gy - Math.max(0, Math.sin(f.time * 2.4 + i * 1.7)) * 6;
       }
-      if (!pipe || wonT >= 0 || i === 0 || true) drawGoo(c, x - (wonT < 0 ? 0 : 0), y, 15, 'goo', { t: f.time, lookx: 0.8, looky: -0.1, blink: (f.time * 0.9 + i * 2.1) % 4 < 0.13 });
+      drawGoo(c, x, y, 15, 'goo', { t: f.time, lookx: look, looky: -0.1, blink: (f.time * 0.9 + i * 2.1) % 4 < 0.13 });
     }
   }
 
@@ -799,7 +800,7 @@ export function createRenderer(canvas) {
       c.lineTo(px - r, py + r);
       c.stroke();
     }
-    if (valid && T.reach) {
+    if (valid && T.reach && !g.bare) {
       c.strokeStyle = 'rgba(247,215,116,0.35)';
       c.lineWidth = 2;
       c.setLineDash([3, 8]);

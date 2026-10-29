@@ -319,7 +319,7 @@ export class Sim {
     let e = s.e;
     if (imp < 70) e = 0;
     let out = -vn * e;
-    if (s.kind === 'sling' && this.live && imp > 40) {
+    if (s.kind === 'sling' && this.live && imp > 100) {
       // kick away from the triangle
       const sx = (s.x1 + s.x2) / 2 - s.cen[0], sy = (s.y1 + s.y2) / 2 - s.cen[1];
       if (nx * sx + ny * sy > 0) {
@@ -456,8 +456,8 @@ export class Sim {
       const was = !!ins.sp;
       ins.sp = on;
       if (on && !was) {
-        const v = Math.min(60, Math.hypot(b.vx, b.vy) * 0.09);
-        this.spinner.w = (b.vy < 0 ? -1 : 1) * Math.max(10, v);
+        const v = Math.min(32, Math.hypot(b.vx, b.vy) * 0.05);
+        this.spinner.w = (b.vy < 0 ? -1 : 1) * Math.max(8, v);
         this.events.push({ t: 'spinHit', v: Math.abs(this.spinner.w) });
       }
     }

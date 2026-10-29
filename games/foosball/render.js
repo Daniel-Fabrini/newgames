@@ -1,7 +1,7 @@
 // Foosball — canvas renderer (table layer is cached; rods, men, ball, trail and confetti are drawn live).
 import { T, manX, footY, footActive, goalX0, goalX1 } from './physics.js';
 
-export const VIEW = { mx: 12, my: 14 }; // margin (units) around the playfield: frame + handles / goal pockets
+export const VIEW = { mx: 13.5, my: 14 }; // margin (units) around the playfield: frame + handles / goal pockets
 
 const shade = (hex, k) => {
   const n = parseInt(hex.slice(1), 16);
@@ -219,15 +219,16 @@ export function createRenderer(canvas, { reduced = false } = {}) {
       g.stroke();
       g.globalAlpha = 1;
       // torso + head on the rod (top view)
-      const tg = g.createLinearGradient(mx - 2.4, r.y - 1.8, mx + 2.4, r.y + 1.8);
+      const ty = r.y - r.s * 1.1;
+      const tg = g.createLinearGradient(mx - 2.4, ty - 1.8, mx + 2.4, ty + 1.8);
       tg.addColorStop(0, shade(kit, 1.25)); tg.addColorStop(1, shade(kit, 0.72));
       g.fillStyle = tg;
-      rr(g, mx - 2.4, r.y - 1.7, 4.8, 3.4, 1.5);
+      rr(g, mx - 2.5, ty - 1.5, 5, 3, 1.5);
       g.fill();
       g.fillStyle = '#f0c9a2';
-      g.beginPath(); g.arc(mx, r.y, 1.35, 0, 7); g.fill();
+      g.beginPath(); g.arc(mx, ty, 1.3, 0, 7); g.fill();
       g.fillStyle = 'rgba(255,255,255,.55)';
-      g.beginPath(); g.arc(mx - 0.4, r.y - 0.45, 0.45, 0, 7); g.fill();
+      g.beginPath(); g.arc(mx - 0.4, ty - 0.45, 0.42, 0, 7); g.fill();
     }
     // handle (rubber grip) outside the rail, on the side of the owner
     const right = r.team === 0;
