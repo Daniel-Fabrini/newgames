@@ -1767,15 +1767,19 @@ export default [
     "c": 0,
     "cat": "jogos",
     "d": 2,
-    "exp": "A final terminou 2 a 2 nos dois jogos e o São Paulo venceu por 5 a 4 nos pênaltis.",
+    "exp": "A final terminou 2 a 2 nos dois jogos e o São Paulo venceu nos pênaltis: 5 a 4 segundo a RSSSF e a Wikipédia (en), 5 a 3 segundo a Wikipédia (pt).",
     "src": [
       {
         "n": "RSSSF — Supercopa Libertadores 1993",
-        "u": "https://rsssf.org/sacups/supcopa93.html"
+        "u": "https://www.rsssf.org/sacups/supcopa93.html"
       },
       {
         "n": "Wikipedia (en) — 1993 Supercopa Libertadores finals",
         "u": "https://en.wikipedia.org/wiki/1993_Supercopa_Libertadores_finals"
+      },
+      {
+        "n": "Wikipédia (pt) — Supercopa Libertadores de 1993",
+        "u": "https://pt.wikipedia.org/wiki/Supercopa_Libertadores_de_1993"
       }
     ],
     "when": "1993",
@@ -1784,9 +1788,9 @@ export default [
   },
   {
     "id": "jogos-065",
-    "q": "Qual foi o placar da disputa de pênaltis da final da Supercopa Libertadores de 1993 entre São Paulo e Flamengo?",
+    "q": "Segundo a RSSSF, qual foi o placar da disputa de pênaltis da final da Supercopa Libertadores de 1993 entre São Paulo e Flamengo?",
     "a": [
-      "5 a 3",
+      "6 a 5",
       "5 a 4",
       "4 a 3",
       "4 a 2"
@@ -1794,20 +1798,25 @@ export default [
     "c": 1,
     "cat": "jogos",
     "d": 3,
-    "exp": "Segundo a RSSSF, o São Paulo venceu por 5 a 4 após empatar duas vezes por 2 a 2.",
+    "exp": "A RSSSF (e a Wikipédia em inglês) registra vitória do São Paulo por 5 a 4 nos pênaltis, depois de dois empates por 2 a 2. A Wikipédia (pt) traz 5 a 3, com quatro cobranças do Flamengo.",
     "src": [
       {
         "n": "RSSSF — Supercopa Libertadores 1993",
-        "u": "https://rsssf.org/sacups/supcopa93.html"
+        "u": "https://www.rsssf.org/sacups/supcopa93.html"
       },
       {
         "n": "Wikipedia (en) — 1993 Supercopa Libertadores finals",
         "u": "https://en.wikipedia.org/wiki/1993_Supercopa_Libertadores_finals"
+      },
+      {
+        "n": "Wikipédia (pt) — Supercopa Libertadores de 1993",
+        "u": "https://pt.wikipedia.org/wiki/Supercopa_Libertadores_de_1993"
       }
     ],
     "when": "1993",
     "ok": true,
-    "v2": true
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "jogos-066",

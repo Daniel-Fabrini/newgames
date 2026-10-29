@@ -17,10 +17,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Leônidas da Silva",
         "u": "https://pt.wikipedia.org/wiki/Leônidas_da_Silva"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Lance! — Leônidas da Silva, o Diamante Negro",
+        "u": "https://www.lance.com.br/tim4g/tim-leonidas-silva-diamante-negro.html"
       }
     ],
     "when": "1913–2004",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-002",
@@ -34,14 +43,23 @@ export default [
     "c": 0,
     "cat": "idolos",
     "d": 1,
-    "exp": "Leônidas não a inventou, mas popularizou a bicicleta; marcou de bicicleta cinco vezes pelo São Paulo.",
+    "exp": "Leônidas é amplamente creditado por popularizar a bicicleta no Brasil (o site oficial do clube chega a creditar-lhe a invenção, o que é discutido).",
     "src": [
       {
         "n": "Wikipédia (pt) — Leônidas da Silva",
         "u": "https://pt.wikipedia.org/wiki/Leônidas_da_Silva"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Lance! — Leônidas da Silva, o Diamante Negro",
+        "u": "https://www.lance.com.br/tim4g/tim-leonidas-silva-diamante-negro.html"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-003",
@@ -62,16 +80,21 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Leônidas_da_Silva"
       },
       {
-        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-        "u": "https://pt.wikipedia.org/wiki/São_Paulo_Futebol_Clube"
+        "n": "Lance! — Leônidas da Silva, o Diamante Negro",
+        "u": "https://www.lance.com.br/tim4g/tim-leonidas-silva-diamante-negro.html"
+      },
+      {
+        "n": "Terra — Há 72 anos, Leônidas da Silva se despedia do futebol",
+        "u": "https://www.terra.com.br/esportes/sao-paulo/ha-72-anos-leonidas-da-silva-se-despedia-do-futebol-relembre-trajetoria-do-diamante-negro-pelo-sao-paulo,6ecfaf92710888c78ee9faaa16e03214566y1d2l.html"
       }
     ],
     "when": "1942",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-004",
-    "q": "Quantos gols Leônidas da Silva marcou na Copa do Mundo de 1938, quando foi artilheiro do torneio?",
+    "q": "Segundo o site oficial do São Paulo, quantos gols Leônidas da Silva marcou na Copa do Mundo de 1938, da qual foi artilheiro?",
     "a": [
       "5",
       "7",
@@ -81,19 +104,25 @@ export default [
     "c": 1,
     "cat": "idolos",
     "d": 3,
-    "exp": "Leônidas fez 7 gols em 4 jogos em 1938, e o Brasil terminou em terceiro lugar.",
+    "exp": "O site oficial do clube registra 7 gols de Leônidas em 1938 (número também adotado pela Wikipédia); algumas fontes, como uma matéria do Lance!, falam em 8. O Brasil terminou em terceiro lugar.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
       {
         "n": "Wikipédia (pt) — Leônidas da Silva",
         "u": "https://pt.wikipedia.org/wiki/Leônidas_da_Silva"
       }
     ],
     "when": "1938",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "idolos-005",
-    "q": "Que clube carioca Leônidas defendeu entre 1936 e 1942, antes de ir para o São Paulo?",
+    "q": "Que clube carioca Leônidas defendeu a partir de 1936, antes de se transferir para o São Paulo em 1942?",
     "a": [
       "Vasco",
       "Flamengo",
@@ -103,15 +132,20 @@ export default [
     "c": 1,
     "cat": "idolos",
     "d": 3,
-    "exp": "Leônidas jogou no Flamengo de 1936 até a transferência ao São Paulo, em 1942.",
+    "exp": "Leônidas jogou no Flamengo de 1936 a 1941 e foi contratado pelo São Paulo em 1942, na transação mais cara do futebol sul-americano até então.",
     "src": [
       {
         "n": "Wikipédia (pt) — Leônidas da Silva",
         "u": "https://pt.wikipedia.org/wiki/Leônidas_da_Silva"
+      },
+      {
+        "n": "Lance! — Leônidas da Silva, o Diamante Negro",
+        "u": "https://www.lance.com.br/tim4g/tim-leonidas-silva-diamante-negro.html"
       }
     ],
     "when": "1936–1942",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-006",
@@ -125,15 +159,20 @@ export default [
     "c": 3,
     "cat": "idolos",
     "d": 4,
-    "exp": "O gol de bicicleta no 8 a 0 sobre o Juventus-SP é citado como o mais famoso dele pelo São Paulo.",
+    "exp": "A goleada sobre o Juventus no Pacaembu, em novembro de 1948, é citada como a última vez em que se registrou uma bicicleta de Leônidas.",
     "src": [
       {
         "n": "Wikipédia (pt) — Leônidas da Silva",
         "u": "https://pt.wikipedia.org/wiki/Leônidas_da_Silva"
+      },
+      {
+        "n": "Tardes de Pacaembu — Leônidas da Silva, o diamante de borracha",
+        "u": "https://tardesdepacaembu.wordpress.com/2013/04/23/leonidas-da-silva-o-diamante-de-borracha/"
       }
     ],
     "when": "1948",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-007",
@@ -147,15 +186,24 @@ export default [
     "c": 0,
     "cat": "idolos",
     "d": 2,
-    "exp": "Leônidas morreu em 24 de janeiro de 2004, em Cotia (SP), de complicações do Alzheimer.",
+    "exp": "Leônidas morreu em janeiro de 2004, aos 90 anos, em consequência do Alzheimer (as fontes divergem sobre o dia e a cidade: Cotia ou São Paulo).",
     "src": [
       {
         "n": "Wikipédia (pt) — Leônidas da Silva",
         "u": "https://pt.wikipedia.org/wiki/Leônidas_da_Silva"
+      },
+      {
+        "n": "Lance! — Leônidas da Silva, o Diamante Negro",
+        "u": "https://www.lance.com.br/tim4g/tim-leonidas-silva-diamante-negro.html"
+      },
+      {
+        "n": "Tardes de Pacaembu — Leônidas da Silva, o diamante de borracha",
+        "u": "https://tardesdepacaembu.wordpress.com/2013/04/23/leonidas-da-silva-o-diamante-de-borracha/"
       }
     ],
     "when": "2004",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-008",
@@ -174,9 +222,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Arthur Friedenreich",
         "u": "https://pt.wikipedia.org/wiki/Arthur_Friedenreich"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-009",
@@ -195,10 +248,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Arthur Friedenreich",
         "u": "https://pt.wikipedia.org/wiki/Arthur_Friedenreich"
+      },
+      {
+        "n": "História do Futebol — Sul-Americano de 1919: Brasil conquista seu 1º título",
+        "u": "https://historiadofutebol.com/blog/?p=132128"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1919",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-010",
@@ -212,19 +274,24 @@ export default [
     "c": 0,
     "cat": "idolos",
     "d": 3,
-    "exp": "Segundo a Wikipédia, ele jogou pelo São Paulo entre 1930 e 1932 e em 1934.",
+    "exp": "Com a extinção do futebol do Paulistano, Friedenreich passou ao São Paulo em 1930 e ajudou na conquista do Paulista de 1931.",
     "src": [
       {
         "n": "Wikipédia (pt) — Arthur Friedenreich",
         "u": "https://pt.wikipedia.org/wiki/Arthur_Friedenreich"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1930–1934",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-011",
-    "q": "Qual era a nacionalidade de Pedro Rocha quando chegou ao São Paulo, em 1970?",
+    "q": "Qual era a nacionalidade de Pedro Rocha quando chegou ao São Paulo, vindo do Peñarol?",
     "a": [
       "Argentina",
       "Paraguaia",
@@ -234,15 +301,24 @@ export default [
     "c": 3,
     "cat": "idolos",
     "d": 2,
-    "exp": "Pedro Rocha nasceu em Salto (Uruguai) e se naturalizou brasileiro só em 1977.",
+    "exp": "Pedro Rocha nasceu em Salto, no Uruguai. (O ano de chegada diverge entre as fontes: 1970 ou 1971.)",
     "src": [
       {
         "n": "Wikipédia (pt) — Pedro Rocha",
         "u": "https://pt.wikipedia.org/wiki/Pedro_Rocha"
+      },
+      {
+        "n": "Imortais do Futebol — Craque Imortal: Pedro Rocha",
+        "u": "https://imortaisdofutebol.com/craque-imortal-pedro-rocha/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1970",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-012",
@@ -261,10 +337,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Pedro Rocha",
         "u": "https://pt.wikipedia.org/wiki/Pedro_Rocha"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Imortais do Futebol — Craque Imortal: Pedro Rocha",
+        "u": "https://imortaisdofutebol.com/craque-imortal-pedro-rocha/"
       }
     ],
     "when": "1959–1970",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-013",
@@ -283,9 +368,18 @@ export default [
       {
         "n": "Wikipédia (pt) — Pedro Rocha",
         "u": "https://pt.wikipedia.org/wiki/Pedro_Rocha"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Imortais do Futebol — Craque Imortal: Pedro Rocha",
+        "u": "https://imortaisdofutebol.com/craque-imortal-pedro-rocha/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-014",
@@ -304,10 +398,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Pedro Rocha",
         "u": "https://pt.wikipedia.org/wiki/Pedro_Rocha"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Imortais do Futebol — Craque Imortal: Pedro Rocha",
+        "u": "https://imortaisdofutebol.com/craque-imortal-pedro-rocha/"
       }
     ],
     "when": "1962–1974",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-015",
@@ -321,15 +424,20 @@ export default [
     "c": 0,
     "cat": "idolos",
     "d": 4,
-    "exp": "Pedro Rocha foi o goleador do Campeonato Brasileiro de 1972 com 17 gols.",
+    "exp": "Pedro Rocha foi o goleador do Campeonato Brasileiro de 1972, com 17 gols, dividindo a artilharia com Dadá Maravilha.",
     "src": [
       {
         "n": "Wikipédia (pt) — Pedro Rocha",
         "u": "https://pt.wikipedia.org/wiki/Pedro_Rocha"
+      },
+      {
+        "n": "Imortais do Futebol — Craque Imortal: Pedro Rocha",
+        "u": "https://imortaisdofutebol.com/craque-imortal-pedro-rocha/"
       }
     ],
     "when": "1972",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-016",
@@ -348,10 +456,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Pedro Rocha",
         "u": "https://pt.wikipedia.org/wiki/Pedro_Rocha"
+      },
+      {
+        "n": "Imortais do Futebol — Craque Imortal: Pedro Rocha",
+        "u": "https://imortaisdofutebol.com/craque-imortal-pedro-rocha/"
       }
     ],
     "when": "1971–1975",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-017",
@@ -370,10 +483,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Pedro Rocha",
         "u": "https://pt.wikipedia.org/wiki/Pedro_Rocha"
+      },
+      {
+        "n": "Imortais do Futebol — Craque Imortal: Pedro Rocha",
+        "u": "https://imortaisdofutebol.com/craque-imortal-pedro-rocha/"
       }
     ],
     "when": "1960–1966",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-018",
@@ -392,9 +510,18 @@ export default [
       {
         "n": "Wikipédia (pt) — Gérson",
         "u": "https://pt.wikipedia.org/wiki/Gérson_de_Oliveira_Nunes"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Gazeta Esportiva — 10 grandes momentos de Gérson, o Canhotinha de Ouro",
+        "u": "https://www.gazetaesportiva.com/futebol/relembre-10-momentos-de-gerson-o-canhotinha-de-ouro/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-019",
@@ -413,10 +540,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Gérson",
         "u": "https://pt.wikipedia.org/wiki/Gérson_de_Oliveira_Nunes"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Gazeta Esportiva — 10 grandes momentos de Gérson, o Canhotinha de Ouro",
+        "u": "https://www.gazetaesportiva.com/futebol/relembre-10-momentos-de-gerson-o-canhotinha-de-ouro/"
       }
     ],
     "when": "1970",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-020",
@@ -430,15 +566,20 @@ export default [
     "c": 1,
     "cat": "idolos",
     "d": 2,
-    "exp": "Gérson jogou no Botafogo de 1963 a 1969 e foi ao São Paulo em julho de 1969.",
+    "exp": "Gérson trocou o Botafogo pelo São Paulo em 1969.",
     "src": [
       {
         "n": "Wikipédia (pt) — Gérson",
         "u": "https://pt.wikipedia.org/wiki/Gérson_de_Oliveira_Nunes"
+      },
+      {
+        "n": "Gazeta Esportiva — 10 grandes momentos de Gérson, o Canhotinha de Ouro",
+        "u": "https://www.gazetaesportiva.com/futebol/relembre-10-momentos-de-gerson-o-canhotinha-de-ouro/"
       }
     ],
     "when": "1969",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-021",
@@ -457,10 +598,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Gérson",
         "u": "https://pt.wikipedia.org/wiki/Gérson_de_Oliveira_Nunes"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Gazeta Esportiva — 10 grandes momentos de Gérson, o Canhotinha de Ouro",
+        "u": "https://www.gazetaesportiva.com/futebol/relembre-10-momentos-de-gerson-o-canhotinha-de-ouro/"
       }
     ],
     "when": "1970–1971",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-022",
@@ -479,9 +629,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Raí",
         "u": "https://pt.wikipedia.org/wiki/Raí"
+      },
+      {
+        "n": "Imortais do Futebol — Raí: o ídolo do São Paulo e do PSG",
+        "u": "https://imortaisdofutebol.com/craque-imortal-rai/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-023",
@@ -500,10 +655,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Raí",
         "u": "https://pt.wikipedia.org/wiki/Raí"
+      },
+      {
+        "n": "Imortais do Futebol — Raí: o ídolo do São Paulo e do PSG",
+        "u": "https://imortaisdofutebol.com/craque-imortal-rai/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-024",
@@ -522,10 +682,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Raí",
         "u": "https://pt.wikipedia.org/wiki/Raí"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — História: o São Paulo no mundo",
+        "u": "https://www.saopaulofc.net/o-clube/historia/mundo/"
+      },
+      {
+        "n": "Imortais do Futebol — Raí: o ídolo do São Paulo e do PSG",
+        "u": "https://imortaisdofutebol.com/craque-imortal-rai/"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-025",
@@ -544,10 +713,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Raí",
         "u": "https://pt.wikipedia.org/wiki/Raí"
+      },
+      {
+        "n": "Imortais do Futebol — Raí: o ídolo do São Paulo e do PSG",
+        "u": "https://imortaisdofutebol.com/craque-imortal-rai/"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-026",
@@ -566,10 +740,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Raí",
         "u": "https://pt.wikipedia.org/wiki/Raí"
+      },
+      {
+        "n": "Imortais do Futebol — Raí: o ídolo do São Paulo e do PSG",
+        "u": "https://imortaisdofutebol.com/craque-imortal-rai/"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-027",
@@ -588,10 +767,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Raí",
         "u": "https://pt.wikipedia.org/wiki/Raí"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Imortais do Futebol — Raí: o ídolo do São Paulo e do PSG",
+        "u": "https://imortaisdofutebol.com/craque-imortal-rai/"
       }
     ],
     "when": "1998",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-028",
@@ -610,10 +798,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Raí",
         "u": "https://pt.wikipedia.org/wiki/Raí"
+      },
+      {
+        "n": "Imortais do Futebol — Raí: o ídolo do São Paulo e do PSG",
+        "u": "https://imortaisdofutebol.com/craque-imortal-rai/"
       }
     ],
     "when": "2000",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-029",
@@ -632,31 +825,46 @@ export default [
       {
         "n": "Wikipédia (pt) — Cafu",
         "u": "https://pt.wikipedia.org/wiki/Cafu"
+      },
+      {
+        "n": "Imortais do Futebol — Cafu: toda a trajetória do capitão do Penta",
+        "u": "https://imortaisdofutebol.com/craque-imortal-cafu/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-030",
-    "q": "Em qual cidade paulista nasceu Cafu?",
+    "q": "Que bairro paulistano Cafu homenageou escrevendo \"100% ...\" na camisa ao levantar a taça da Copa de 2002?",
     "a": [
-      "Campinas",
-      "Santos",
-      "Ribeirão Preto",
-      "Itaquaquecetuba"
+      "Jardim Irene",
+      "Capão Redondo",
+      "Jardim Ângela",
+      "Grajaú"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "idolos",
     "d": 2,
-    "exp": "Marcos Evangelista de Morais nasceu em Itaquaquecetuba em 7 de junho de 1970.",
+    "exp": "Cafu escreveu \"100% Jardim Irene\" na camisa, em homenagem ao bairro da Zona Sul de São Paulo onde cresceu. (A cidade de nascimento diverge entre as fontes: Itaquaquecetuba ou São Paulo.)",
     "src": [
       {
         "n": "Wikipédia (pt) — Cafu",
         "u": "https://pt.wikipedia.org/wiki/Cafu"
+      },
+      {
+        "n": "Trivela — 30 de junho de 2002: a conquista do penta",
+        "u": "https://trivela.com.br/copa-do-mundo/hoje-nas-copas/30-de-junho-em-copas-em-2002-o-mundo-ouviu-regina-eu-te-amo-na-conquista-do-penta-do-brasil"
+      },
+      {
+        "n": "Terra — Cafu, capitão do Penta, transforma o bairro onde nasceu",
+        "u": "https://www.terra.com.br/esportes/cafu-capitao-do-penta-transforma-o-bairro-onde-nasceu,317cb06a3e627410VgnVCM20000099cceb0aRCRD.html"
       }
     ],
     "when": "1970",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "idolos-031",
@@ -675,10 +883,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Cafu",
         "u": "https://pt.wikipedia.org/wiki/Cafu"
+      },
+      {
+        "n": "Trivela — 30 de junho de 2002: a conquista do penta",
+        "u": "https://trivela.com.br/copa-do-mundo/hoje-nas-copas/30-de-junho-em-copas-em-2002-o-mundo-ouviu-regina-eu-te-amo-na-conquista-do-penta-do-brasil"
+      },
+      {
+        "n": "Imortais do Futebol — Cafu: toda a trajetória do capitão do Penta",
+        "u": "https://imortaisdofutebol.com/craque-imortal-cafu/"
       }
     ],
     "when": "2002",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-032",
@@ -697,10 +914,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Cafu",
         "u": "https://pt.wikipedia.org/wiki/Cafu"
+      },
+      {
+        "n": "Imortais do Futebol — Cafu: toda a trajetória do capitão do Penta",
+        "u": "https://imortaisdofutebol.com/craque-imortal-cafu/"
       }
     ],
     "when": "1997–2003",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-033",
@@ -719,10 +941,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Cafu",
         "u": "https://pt.wikipedia.org/wiki/Cafu"
+      },
+      {
+        "n": "Imortais do Futebol — Cafu: toda a trajetória do capitão do Penta",
+        "u": "https://imortaisdofutebol.com/craque-imortal-cafu/"
       }
     ],
     "when": "1994–2002",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-034",
@@ -741,10 +968,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Cafu",
         "u": "https://pt.wikipedia.org/wiki/Cafu"
+      },
+      {
+        "n": "Imortais do Futebol — Cafu: toda a trajetória do capitão do Penta",
+        "u": "https://imortaisdofutebol.com/craque-imortal-cafu/"
       }
     ],
     "when": "1997–1999",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-035",
@@ -763,10 +995,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Cafu",
         "u": "https://pt.wikipedia.org/wiki/Cafu"
+      },
+      {
+        "n": "Imortais do Futebol — Cafu: toda a trajetória do capitão do Penta",
+        "u": "https://imortaisdofutebol.com/craque-imortal-cafu/"
       }
     ],
     "when": "2007",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-036",
@@ -780,15 +1017,20 @@ export default [
     "c": 1,
     "cat": "idolos",
     "d": 1,
-    "exp": "Zetti defendeu o pênalti de Gamboa, do Newell's Old Boys, e garantiu o título de 1992.",
+    "exp": "Na disputa por pênaltis da final de 1992, no Morumbi, Zetti defendeu a última cobrança, de Gamboa, do Newell's Old Boys, e o São Paulo venceu por 3 a 2.",
     "src": [
       {
         "n": "Wikipédia (pt) — Zetti",
         "u": "https://pt.wikipedia.org/wiki/Zetti"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Campeão da Libertadores de 1992",
+        "u": "https://www.saopaulofc.net/campeao-da-conmebol-libertadores-de-1992/"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-037",
@@ -802,15 +1044,20 @@ export default [
     "c": 1,
     "cat": "idolos",
     "d": 2,
-    "exp": "Zetti estava no gol na vitória sobre o Milan, que completou a \"Tríplice Coroa\" de 1993.",
+    "exp": "Em 12 de dezembro de 1993, em Tóquio, o São Paulo venceu o Milan por 3 a 2 (gol decisivo de Müller), com Zetti no gol, e ficou com o bicampeonato mundial.",
     "src": [
       {
         "n": "Wikipédia (pt) — Zetti",
         "u": "https://pt.wikipedia.org/wiki/Zetti"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — História: o São Paulo no mundo",
+        "u": "https://www.saopaulofc.net/o-clube/historia/mundo/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-038",
@@ -829,10 +1076,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Zetti",
         "u": "https://pt.wikipedia.org/wiki/Zetti"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Lance! — Por onde anda Zetti",
+        "u": "https://www.lance.com.br/lancepedia/por-onde-anda-zetti.html"
       }
     ],
     "when": "1990",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-039",
@@ -851,10 +1107,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Zetti",
         "u": "https://pt.wikipedia.org/wiki/Zetti"
+      },
+      {
+        "n": "Site oficial de Zetti — Minha trajetória",
+        "u": "https://zetti1.com.br/trajetoria/"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-040",
@@ -873,14 +1134,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Zetti",
         "u": "https://pt.wikipedia.org/wiki/Zetti"
+      },
+      {
+        "n": "Site oficial de Zetti — Minha trajetória",
+        "u": "https://zetti1.com.br/trajetoria/"
       }
     ],
     "when": "1997",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-041",
-    "q": "Quantos jogos Zetti disputou pelo São Paulo, segundo a Wikipédia?",
+    "q": "Quantos jogos Zetti disputou pelo São Paulo?",
     "a": [
       "389",
       "512",
@@ -890,41 +1156,24 @@ export default [
     "c": 2,
     "cat": "idolos",
     "d": 4,
-    "exp": "Zetti foi titular por cerca de seis anos e meio e atuou em 432 partidas.",
+    "exp": "Zetti atuou em 432 partidas pelo São Paulo, de 1990 a 1996/97.",
     "src": [
       {
         "n": "Wikipédia (pt) — Zetti",
         "u": "https://pt.wikipedia.org/wiki/Zetti"
+      },
+      {
+        "n": "Bola Parada — Relembre a carreira de Zetti no São Paulo",
+        "u": "https://bolaparada.com.br/relembre-a-carreira-de-zetti-no-sao-paulo/"
       }
     ],
     "when": "1990–1997",
-    "ok": true
-  },
-  {
-    "id": "idolos-042",
-    "q": "Quantos gols Rogério Ceni marcou pelo São Paulo, segundo a Wikipédia?",
-    "a": [
-      "131",
-      "100",
-      "111",
-      "150"
-    ],
-    "c": 0,
-    "cat": "idolos",
-    "d": 2,
-    "exp": "Ceni marcou 131 gols em 1.237 jogos pelo São Paulo.",
-    "src": [
-      {
-        "n": "Wikipédia (pt) — Rogério Ceni",
-        "u": "https://pt.wikipedia.org/wiki/Rogério_Ceni"
-      }
-    ],
-    "when": "1990–2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-043",
-    "q": "Quantos jogos Rogério Ceni disputou pelo São Paulo, segundo a Wikipédia?",
+    "q": "Quantos jogos Rogério Ceni disputou pelo São Paulo?",
     "a": [
       "1.001",
       "1.129",
@@ -934,15 +1183,24 @@ export default [
     "c": 3,
     "cat": "idolos",
     "d": 3,
-    "exp": "A Wikipédia contabiliza 1.237 partidas e 131 gols de Ceni pelo São Paulo.",
+    "exp": "Rogério Ceni disputou 1.237 partidas e marcou 131 gols pelo São Paulo.",
     "src": [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rogério_Ceni"
+      },
+      {
+        "n": "Lance! — A história de Rogério Ceni no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-rogerio-ceni-no-sao-paulo.html"
+      },
+      {
+        "n": "Terra — Detalhes da carreira de Rogério Ceni que pouca gente conhece",
+        "u": "https://www.terra.com.br/esportes/futebol/detalhes-da-carreira-de-rogerio-ceni-que-pouca-gente-conhece,5276e386596d6cac0f771d3fbc3ddf1dbv1b0oap.html"
       }
     ],
     "when": "1990–2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-044",
@@ -961,10 +1219,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rogério_Ceni"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — A estreia de Rogério Ceni pelo São Paulo",
+        "u": "https://www.saopaulofc.net/a-estreia-de-rogerio-ceni-pelo-sao-paulo-3/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-045",
@@ -983,10 +1246,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rogério_Ceni"
+      },
+      {
+        "n": "Lance! — A história de Rogério Ceni no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-rogerio-ceni-no-sao-paulo.html"
       }
     ],
     "when": "2011",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-046",
@@ -1000,15 +1268,20 @@ export default [
     "c": 3,
     "cat": "idolos",
     "d": 4,
-    "exp": "Foi a derrota por 3 a 1 para o Santos, na Vila Belmiro, pela Copa do Brasil de 2015.",
+    "exp": "Foi a derrota por 3 a 1 para o Santos, pela semifinal da Copa do Brasil de 2015, jogo em que sofreu uma lesão no pé direito.",
     "src": [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rogério_Ceni"
+      },
+      {
+        "n": "Terra — Rogério Ceni segue com dores e não se despedirá do Morumbi",
+        "u": "https://www.terra.com.br/esportes/sao-paulo/rogerio-ceni-segue-com-dores-e-nao-se-despedira-do-morumbi-neste-sabado,d1b35848f0478349efdc8043698fc31f20k536a8.html"
       }
     ],
     "when": "2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-047",
@@ -1027,10 +1300,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rogério_Ceni"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-048",
@@ -1049,10 +1327,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rogério_Ceni"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "2002",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-049",
@@ -1071,10 +1354,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rogério_Ceni"
+      },
+      {
+        "n": "Terra — Detalhes da carreira de Rogério Ceni que pouca gente conhece",
+        "u": "https://www.terra.com.br/esportes/futebol/detalhes-da-carreira-de-rogerio-ceni-que-pouca-gente-conhece,5276e386596d6cac0f771d3fbc3ddf1dbv1b0oap.html"
       }
     ],
     "when": "1990",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-050",
@@ -1093,10 +1381,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rogério_Ceni"
+      },
+      {
+        "n": "Terra — Detalhes da carreira de Rogério Ceni que pouca gente conhece",
+        "u": "https://www.terra.com.br/esportes/futebol/detalhes-da-carreira-de-rogerio-ceni-que-pouca-gente-conhece,5276e386596d6cac0f771d3fbc3ddf1dbv1b0oap.html"
       }
     ],
     "when": "1973",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-051",
@@ -1115,10 +1408,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Kaká",
         "u": "https://pt.wikipedia.org/wiki/Kaká"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — São-paulino Kaká é eleito melhor do mundo (17/12/2007)",
+        "u": "https://www.saopaulofc.net/sao-paulino-kaka-e-eleito-melhor-do-mundo/"
+      },
+      {
+        "n": "Gazeta Esportiva — São Paulo é o único time paulista que revelou um vencedor da Bola de Ouro",
+        "u": "https://www.gazetaesportiva.com/times/sao-paulo/voce-sabia-sao-paulo-e-o-unico-time-paulista-que-revelou-um-vencedor-da-bola-de-ouro/"
       }
     ],
     "when": "2007",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-052",
@@ -1137,10 +1439,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Kaká",
         "u": "https://pt.wikipedia.org/wiki/Kaká"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — São-paulino Kaká é eleito melhor do mundo (17/12/2007)",
+        "u": "https://www.saopaulofc.net/sao-paulino-kaka-e-eleito-melhor-do-mundo/"
       }
     ],
     "when": "2003",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-053",
@@ -1154,15 +1461,20 @@ export default [
     "c": 1,
     "cat": "idolos",
     "d": 4,
-    "exp": "A estreia foi como reserva no empate por 1 a 1 com o Botafogo, no Morumbi.",
+    "exp": "A estreia foi no empate por 1 a 1 com o Botafogo, pelo Torneio Rio-São Paulo de 2001.",
     "src": [
       {
         "n": "Wikipédia (pt) — Kaká",
         "u": "https://pt.wikipedia.org/wiki/Kaká"
+      },
+      {
+        "n": "Lance! — Há 21 anos, Kaká estreava nos profissionais do São Paulo",
+        "u": "https://www.lance.com.br/sao-paulo/ha-21-anos-kaka-estreava-nos-profissionais-do-sao-paulo.html"
       }
     ],
     "when": "2001",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-054",
@@ -1176,15 +1488,20 @@ export default [
     "c": 3,
     "cat": "idolos",
     "d": 4,
-    "exp": "Segundo a Wikipédia, foram 48 gols em 131 partidas profissionais no primeiro período.",
+    "exp": "Segundo o site oficial do clube, Kaká marcou 48 gols em 131 jogos no primeiro período (2001–2003); há fontes que citam 47 gols em 130 jogos.",
     "src": [
       {
         "n": "Wikipédia (pt) — Kaká",
         "u": "https://pt.wikipedia.org/wiki/Kaká"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — São-paulino Kaká é eleito melhor do mundo (17/12/2007)",
+        "u": "https://www.saopaulofc.net/sao-paulino-kaka-e-eleito-melhor-do-mundo/"
       }
     ],
     "when": "2001–2003",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-055",
@@ -1203,10 +1520,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Kaká",
         "u": "https://pt.wikipedia.org/wiki/Kaká"
+      },
+      {
+        "n": "Lance! — Há 21 anos, Kaká estreava nos profissionais do São Paulo",
+        "u": "https://www.lance.com.br/sao-paulo/ha-21-anos-kaka-estreava-nos-profissionais-do-sao-paulo.html"
       }
     ],
     "when": "2014",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-056",
@@ -1225,14 +1547,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Kaká",
         "u": "https://pt.wikipedia.org/wiki/Kaká"
+      },
+      {
+        "n": "Terra — Brasil x Argentina: final da Copa das Confederações de 2005",
+        "u": "https://www.terra.com.br/esportes/futebol/copa-das-confederacoes/brasil-x-argentina-escalacao-e-horario-da-final-da-copa-das-confederacoes-de-2005,37e2634bce873c94074279bb179d7d7fpc40oztb.html"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-057",
-    "q": "Qual clube francês comprou Lucas Moura do São Paulo em 2012, por 43 milhões de euros?",
+    "q": "Para qual clube francês o São Paulo vendeu Lucas Moura, que se apresentou ao novo time em janeiro de 2013?",
     "a": [
       "Monaco",
       "Olympique de Marseille",
@@ -1242,15 +1569,21 @@ export default [
     "c": 2,
     "cat": "idolos",
     "d": 1,
-    "exp": "A venda ao PSG foi anunciada em agosto de 2012; Lucas se apresentou em janeiro de 2013.",
+    "exp": "A venda ao PSG foi acertada em 2012 e Lucas se apresentou em janeiro de 2013. (O valor da transferência varia entre as fontes, entre 40 e 45 milhões de euros.)",
     "src": [
       {
         "n": "Wikipédia (pt) — Lucas Moura",
         "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
+      },
+      {
+        "n": "Lance! — Por onde anda Lucas Moura",
+        "u": "https://www.lance.com.br/lancepedia/por-onde-anda-lucas-moura.html"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "idolos-058",
@@ -1269,10 +1602,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Lucas Moura",
         "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
+      },
+      {
+        "n": "Lance! — Por onde anda Lucas Moura",
+        "u": "https://www.lance.com.br/lancepedia/por-onde-anda-lucas-moura.html"
       }
     ],
     "when": "2019",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-059",
@@ -1291,10 +1629,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Lucas Moura",
         "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
+      },
+      {
+        "n": "SPFC 24 Horas — Copa das Confederações de 2013 contou com oito atletas que atuaram no São Paulo",
+        "u": "https://spfc24horas.com.br/copa-das-confederacoes-de-2013-contou-com-oito-atletas-que-atuaram-no-sao-paulo/"
       }
     ],
     "when": "2013",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-060",
@@ -1313,10 +1656,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Lucas Moura",
         "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
+      },
+      {
+        "n": "Lance! — Por onde anda Lucas Moura",
+        "u": "https://www.lance.com.br/lancepedia/por-onde-anda-lucas-moura.html"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-061",
@@ -1330,14 +1678,19 @@ export default [
     "c": 1,
     "cat": "idolos",
     "d": 2,
-    "exp": "A Wikipédia o apresenta como \"O Fabuloso\".",
+    "exp": "Luís Fabiano ganhou o apelido de \"O Fabuloso\" na Espanha, quando defendia o Sevilla.",
     "src": [
       {
         "n": "Wikipédia (pt) — Luís Fabiano",
         "u": "https://pt.wikipedia.org/wiki/Luís_Fabiano"
+      },
+      {
+        "n": "Guia do Boleiro — Luís Fabiano: relembre a trajetória do craque",
+        "u": "https://guiadoboleiro.com.br/2021/12/14/luis-fabiano/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-062",
@@ -1356,10 +1709,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Luís Fabiano",
         "u": "https://pt.wikipedia.org/wiki/Luís_Fabiano"
+      },
+      {
+        "n": "Guia do Boleiro — Luís Fabiano: relembre a trajetória do craque",
+        "u": "https://guiadoboleiro.com.br/2021/12/14/luis-fabiano/"
       }
     ],
     "when": "2002",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-063",
@@ -1378,10 +1736,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Luís Fabiano",
         "u": "https://pt.wikipedia.org/wiki/Luís_Fabiano"
+      },
+      {
+        "n": "Guia do Boleiro — Luís Fabiano: relembre a trajetória do craque",
+        "u": "https://guiadoboleiro.com.br/2021/12/14/luis-fabiano/"
       }
     ],
     "when": "2004",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-064",
@@ -1400,10 +1763,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Luís Fabiano",
         "u": "https://pt.wikipedia.org/wiki/Luís_Fabiano"
+      },
+      {
+        "n": "Guia do Boleiro — Luís Fabiano: relembre a trajetória do craque",
+        "u": "https://guiadoboleiro.com.br/2021/12/14/luis-fabiano/"
       }
     ],
     "when": "2006–2007",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-065",
@@ -1422,14 +1790,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Luís Fabiano",
         "u": "https://pt.wikipedia.org/wiki/Luís_Fabiano"
+      },
+      {
+        "n": "Guia do Boleiro — Luís Fabiano: relembre a trajetória do craque",
+        "u": "https://guiadoboleiro.com.br/2021/12/14/luis-fabiano/"
       }
     ],
     "when": "2009",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-066",
-    "q": "Quantos gols Luís Fabiano tinha pelo São Paulo ao deixar o clube, segundo a Wikipédia?",
+    "q": "Quantos gols Luís Fabiano marcou pelo São Paulo, segundo o site oficial do clube?",
     "a": [
       "212",
       "180",
@@ -1439,15 +1812,24 @@ export default [
     "c": 0,
     "cat": "idolos",
     "d": 4,
-    "exp": "Ele saiu com 212 gols, o terceiro maior artilheiro da história do clube segundo o artigo.",
+    "exp": "O site oficial o aponta como o 3º maior artilheiro da história do São Paulo, com 212 gols.",
     "src": [
       {
         "n": "Wikipédia (pt) — Luís Fabiano",
         "u": "https://pt.wikipedia.org/wiki/Luís_Fabiano"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Guia do Boleiro — Luís Fabiano: relembre a trajetória do craque",
+        "u": "https://guiadoboleiro.com.br/2021/12/14/luis-fabiano/"
       }
     ],
     "when": "2001–2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-067",
@@ -1461,15 +1843,24 @@ export default [
     "c": 3,
     "cat": "idolos",
     "d": 3,
-    "exp": "A Wikipédia lista Rio-São Paulo (2001) e Copa Sul-Americana (2012) como seus títulos pelo clube.",
+    "exp": "Luís Fabiano marcou duas vezes no primeiro jogo da final do Rio-São Paulo de 2001 e estava no time titular na final da Sul-Americana de 2012.",
     "src": [
       {
         "n": "Wikipédia (pt) — Luís Fabiano",
         "u": "https://pt.wikipedia.org/wiki/Luís_Fabiano"
+      },
+      {
+        "n": "RSSSF — Torneio Rio-São Paulo 2001",
+        "u": "https://rsssf.org/tablesr/riospl01.html"
+      },
+      {
+        "n": "RSSSF — Copa Sudamericana 2012",
+        "u": "https://rsssf.org/sacups/sudamcup2012.html"
       }
     ],
     "when": "2001–2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-068",
@@ -1488,9 +1879,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Diego Lugano",
         "u": "https://pt.wikipedia.org/wiki/Diego_Lugano"
+      },
+      {
+        "n": "National Football Teams — Diego Lugano",
+        "u": "https://www.national-football-teams.com/player/9773/Diego_Lugano.html"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-069",
@@ -1509,10 +1905,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Diego Lugano",
         "u": "https://pt.wikipedia.org/wiki/Diego_Lugano"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-070",
@@ -1531,14 +1932,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Diego Lugano",
         "u": "https://pt.wikipedia.org/wiki/Diego_Lugano"
+      },
+      {
+        "n": "National Football Teams — Diego Lugano",
+        "u": "https://www.national-football-teams.com/player/9773/Diego_Lugano.html"
       }
     ],
     "when": "2006",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-071",
-    "q": "Quantos jogos Diego Lugano disputou pela seleção do Uruguai, segundo a Wikipédia?",
+    "q": "Quantos jogos Diego Lugano disputou pela seleção do Uruguai?",
     "a": [
       "95",
       "78",
@@ -1548,15 +1954,20 @@ export default [
     "c": 0,
     "cat": "idolos",
     "d": 4,
-    "exp": "Lugano atuou 95 vezes e fez 10 gols pelo Uruguai, entre 2003 e 2014.",
+    "exp": "Lugano atuou 95 vezes pelo Uruguai e foi o capitão no 4º lugar da Copa de 2010 e no título da Copa América de 2011.",
     "src": [
       {
         "n": "Wikipédia (pt) — Diego Lugano",
         "u": "https://pt.wikipedia.org/wiki/Diego_Lugano"
+      },
+      {
+        "n": "National Football Teams — Diego Lugano",
+        "u": "https://www.national-football-teams.com/player/9773/Diego_Lugano.html"
       }
     ],
     "when": "2003–2014",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-072",
@@ -1575,9 +1986,18 @@ export default [
       {
         "n": "Wikipédia (pt) — Hernanes",
         "u": "https://pt.wikipedia.org/wiki/Hernanes"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Hernanes, o maior vencedor do Prêmio Brasileirão",
+        "u": "https://www.saopaulofc.net/hernanes-o-maior-vencedor-do-premio-brasileirao/"
+      },
+      {
+        "n": "Bolavip — Adeus do Profeta: a trajetória de Hernanes",
+        "u": "https://br.bolavip.com/sao-paulo/Adeus-do-Profeta-A-trajetoria-e-os-grandes-momentos-de-Hernanes-no-futebol-20220503-0031.html"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-073",
@@ -1596,10 +2016,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Hernanes",
         "u": "https://pt.wikipedia.org/wiki/Hernanes"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Bolavip — Adeus do Profeta: a trajetória de Hernanes",
+        "u": "https://br.bolavip.com/sao-paulo/Adeus-do-Profeta-A-trajetoria-e-os-grandes-momentos-de-Hernanes-no-futebol-20220503-0031.html"
       }
     ],
     "when": "2010",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-074",
@@ -1618,10 +2047,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Hernanes",
         "u": "https://pt.wikipedia.org/wiki/Hernanes"
+      },
+      {
+        "n": "Bolavip — Adeus do Profeta: a trajetória de Hernanes",
+        "u": "https://br.bolavip.com/sao-paulo/Adeus-do-Profeta-A-trajetoria-e-os-grandes-momentos-de-Hernanes-no-futebol-20220503-0031.html"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "2007–2008",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-075",
@@ -1640,10 +2078,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Hernanes",
         "u": "https://pt.wikipedia.org/wiki/Hernanes"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Hernanes, o maior vencedor do Prêmio Brasileirão",
+        "u": "https://www.saopaulofc.net/hernanes-o-maior-vencedor-do-premio-brasileirao/"
+      },
+      {
+        "n": "Bolavip — Adeus do Profeta: a trajetória de Hernanes",
+        "u": "https://br.bolavip.com/sao-paulo/Adeus-do-Profeta-A-trajetoria-e-os-grandes-momentos-de-Hernanes-no-futebol-20220503-0031.html"
       }
     ],
     "when": "2008",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-076",
@@ -1657,15 +2104,20 @@ export default [
     "c": 1,
     "cat": "idolos",
     "d": 2,
-    "exp": "Müller jogou no Torino de 1988 a 1990.",
+    "exp": "Müller jogou no Torino de 1988 até a temporada 1990–91.",
     "src": [
       {
         "n": "Wikipédia (pt) — Müller (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Müller_(futebolista)"
+      },
+      {
+        "n": "Calciopédia — Müller: em Turim, a vida entre gols e problemas extracampo",
+        "u": "https://calciopedia.com.br/2015/04/brasileiros-no-calcio-muller.html"
       }
     ],
     "when": "1988",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-077",
@@ -1684,10 +2136,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Müller (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Müller_(futebolista)"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1986–1991",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-078",
@@ -1701,15 +2158,20 @@ export default [
     "c": 3,
     "cat": "idolos",
     "d": 3,
-    "exp": "Ele jogou em 1986 (México) e 1990 (Itália) e foi reserva em 1994.",
+    "exp": "Segundo o site oficial do clube, Müller disputou três Copas (1986, 1990 e 1994), as duas primeiras como titular.",
     "src": [
       {
         "n": "Wikipédia (pt) — Müller (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Müller_(futebolista)"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1986–1990",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-079",
@@ -1728,10 +2190,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Müller (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Müller_(futebolista)"
+      },
+      {
+        "n": "Calciopédia — Müller: em Turim, a vida entre gols e problemas extracampo",
+        "u": "https://calciopedia.com.br/2015/04/brasileiros-no-calcio-muller.html"
       }
     ],
     "when": "1966",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-080",
@@ -1750,10 +2217,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Careca (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Careca_(futebolista)"
+      },
+      {
+        "n": "Imortais do Futebol — Careca",
+        "u": "https://imortaisdofutebol.com/craque-imortal-careca/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1987–1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-081",
@@ -1772,10 +2248,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Careca (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Careca_(futebolista)"
+      },
+      {
+        "n": "Imortais do Futebol — Careca",
+        "u": "https://imortaisdofutebol.com/craque-imortal-careca/"
       }
     ],
     "when": "1986",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-082",
@@ -1794,10 +2275,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Careca (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Careca_(futebolista)"
+      },
+      {
+        "n": "Lance! — A história de Careca no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-careca-no-sao-paulo.html"
+      },
+      {
+        "n": "Imortais do Futebol — Careca",
+        "u": "https://imortaisdofutebol.com/craque-imortal-careca/"
       }
     ],
     "when": "1986",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-083",
@@ -1816,14 +2306,23 @@ export default [
       {
         "n": "Wikipédia (pt) — Careca (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Careca_(futebolista)"
+      },
+      {
+        "n": "Imortais do Futebol — Careca",
+        "u": "https://imortaisdofutebol.com/craque-imortal-careca/"
+      },
+      {
+        "n": "Lance! — A história de Careca no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-careca-no-sao-paulo.html"
       }
     ],
     "when": "1978–1983",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-084",
-    "q": "Quem é considerado o maior artilheiro da história do São Paulo?",
+    "q": "Quem é o maior artilheiro da história do São Paulo, segundo o site oficial do clube?",
     "a": [
       "Leônidas",
       "Serginho Chulapa",
@@ -1833,15 +2332,24 @@ export default [
     "c": 1,
     "cat": "idolos",
     "d": 1,
-    "exp": "Segundo a Wikipédia, Serginho marcou 250 gols em 330 jogos entre 1973 e 1982.",
+    "exp": "Serginho Chulapa passou Gino Orlando em 1982 e tornou-se o maior goleador do clube (o site oficial registra 242 gols em 399 jogos; outras contagens diferem).",
     "src": [
       {
         "n": "Wikipédia (pt) — Serginho Chulapa",
         "u": "https://pt.wikipedia.org/wiki/Serginho_Chulapa"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — A estreia e a história de Serginho Chulapa no Tricolor",
+        "u": "https://www.saopaulofc.net/a-estreia-e-a-historia-de-serginho-chulapa-no-tricolor/"
       }
     ],
     "when": "1973–1982",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-085",
@@ -1855,14 +2363,19 @@ export default [
     "c": 1,
     "cat": "idolos",
     "d": 4,
-    "exp": "Silvio Luiz o chamou assim por causa do pé 44; Osmar Santos criou o \"Tamanduá-bandeira\".",
+    "exp": "Segundo a versão mais citada, o narrador Silvio Luiz o chamou assim por causa do pé 44 (há versões alternativas sobre a origem do apelido).",
     "src": [
       {
         "n": "Wikipédia (pt) — Serginho Chulapa",
         "u": "https://pt.wikipedia.org/wiki/Serginho_Chulapa"
+      },
+      {
+        "n": "Trivela — Nos seus 65 anos, Serginho Chulapa",
+        "u": "https://trivela.com.br/brasil/nos-seus-65-anos-serginho-tem-um-grande-presente-enfim-e-visto-como-gente-boa/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-086",
@@ -1881,10 +2394,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Serginho Chulapa",
         "u": "https://pt.wikipedia.org/wiki/Serginho_Chulapa"
+      },
+      {
+        "n": "Trivela — Nos seus 65 anos, Serginho Chulapa",
+        "u": "https://trivela.com.br/brasil/nos-seus-65-anos-serginho-tem-um-grande-presente-enfim-e-visto-como-gente-boa/"
       }
     ],
     "when": "1982",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-087",
@@ -1903,10 +2421,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Serginho Chulapa",
         "u": "https://pt.wikipedia.org/wiki/Serginho_Chulapa"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — A estreia e a história de Serginho Chulapa no Tricolor",
+        "u": "https://www.saopaulofc.net/a-estreia-e-a-historia-de-serginho-chulapa-no-tricolor/"
       }
     ],
     "when": "1975–1981",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-088",
@@ -1925,10 +2448,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Waldir Peres",
         "u": "https://pt.wikipedia.org/wiki/Waldir_Peres"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Goleiro de uma dinastia: o ídolo Waldir Peres",
+        "u": "https://www.saopaulofc.net/goleiro-de-uma-dinastia-o-idolo-waldir-peres/"
       }
     ],
     "when": "1982",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-089",
@@ -1947,10 +2479,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Waldir Peres",
         "u": "https://pt.wikipedia.org/wiki/Waldir_Peres"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Goleiro de uma dinastia: o ídolo Waldir Peres",
+        "u": "https://www.saopaulofc.net/goleiro-de-uma-dinastia-o-idolo-waldir-peres/"
       }
     ],
     "when": "1975",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-090",
@@ -1969,10 +2506,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Dino Sani",
         "u": "https://pt.wikipedia.org/wiki/Dino_Sani"
+      },
+      {
+        "n": "AC Milan (site oficial) — 1962/63 Champions League",
+        "u": "https://www.acmilan.com/en/club/palmares/1962-63-champions-league"
       }
     ],
     "when": "1962–1963",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-091",
@@ -1991,14 +2533,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Dino Sani",
         "u": "https://pt.wikipedia.org/wiki/Dino_Sani"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1958",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-092",
-    "q": "Zizinho, que defendeu o São Paulo de 1957 a 1959, foi eleito o melhor jogador de qual Copa do Mundo?",
+    "q": "Zizinho, comandante do título paulista do São Paulo em 1957, foi eleito o melhor jogador de qual Copa do Mundo?",
     "a": [
       "1938",
       "1950",
@@ -2013,10 +2560,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Zizinho",
         "u": "https://pt.wikipedia.org/wiki/Zizinho"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1950",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-093",
@@ -2035,10 +2587,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Zizinho",
         "u": "https://pt.wikipedia.org/wiki/Zizinho"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1957",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-094",
@@ -2057,10 +2614,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Bauer (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Bauer_(futebolista)"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Joga Eterno — José Carlos Bauer: o monstro do Maracanã",
+        "u": "https://www.jogaterno.com/almanaque/jose-carlos-bauer"
       }
     ],
     "when": "1950",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-095",
@@ -2079,10 +2645,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Bauer (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Bauer_(futebolista)"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Joga Eterno — José Carlos Bauer: o monstro do Maracanã",
+        "u": "https://www.jogaterno.com/almanaque/jose-carlos-bauer"
       }
     ],
     "when": "1954",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-096",
@@ -2101,10 +2676,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Bauer (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Bauer_(futebolista)"
+      },
+      {
+        "n": "Joga Eterno — José Carlos Bauer: o monstro do Maracanã",
+        "u": "https://www.jogaterno.com/almanaque/jose-carlos-bauer"
       }
     ],
     "when": "1945–1953",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-097",
@@ -2123,13 +2703,22 @@ export default [
       {
         "n": "Wikipédia (pt) — José Poy",
         "u": "https://pt.wikipedia.org/wiki/José_Poy"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "SPFC 24 Horas — Quem foi José Poy?",
+        "u": "https://spfc24horas.com.br/quem-foi-jose-poy-o-argentino-que-fez-historia-no-tricolor-paulista/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-098",
-    "q": "Quantos jogos José Poy disputou como goleiro do São Paulo, segundo a Wikipédia?",
+    "q": "Quantos jogos José Poy disputou como goleiro do São Paulo?",
     "a": [
       "525",
       "412",
@@ -2139,14 +2728,19 @@ export default [
     "c": 0,
     "cat": "idolos",
     "d": 4,
-    "exp": "Poy fez 525 partidas pelo São Paulo e sofreu 670 gols.",
+    "exp": "Poy fez 525 partidas pelo São Paulo como goleiro (298 vitórias, 108 empates e 119 derrotas) e depois dirigiu o time em várias passagens.",
     "src": [
       {
         "n": "Wikipédia (pt) — José Poy",
         "u": "https://pt.wikipedia.org/wiki/José_Poy"
+      },
+      {
+        "n": "SPFC 24 Horas — Quem foi José Poy?",
+        "u": "https://spfc24horas.com.br/quem-foi-jose-poy-o-argentino-que-fez-historia-no-tricolor-paulista/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-099",
@@ -2160,15 +2754,20 @@ export default [
     "c": 3,
     "cat": "idolos",
     "d": 3,
-    "exp": "Pereyra nasceu em Montevidéu e disputou a Copa de 1986 pelo Uruguai.",
+    "exp": "Darío Pereyra, uruguaio, foi bicampeão brasileiro pelo São Paulo (1977 e 1986).",
     "src": [
       {
         "n": "Wikipédia (pt) — Darío Pereyra",
         "u": "https://pt.wikipedia.org/wiki/Darío_Pereyra"
+      },
+      {
+        "n": "Gazeta Esportiva — Darío Pereyra completa 66 anos e São Paulo parabeniza o ídolo uruguaio",
+        "u": "https://www.gazetaesportiva.com/times/sao-paulo/dario-pereyra-completa-66-anos-e-sao-paulo-parabeniza-o-idolo-uruguaio/"
       }
     ],
     "when": "1977–1988",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-100",
@@ -2187,10 +2786,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Leonardo (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Leonardo_(futebolista)"
+      },
+      {
+        "n": "Lance! — Por onde anda Tab Ramos, que levou cotovelada de Leonardo?",
+        "u": "https://www.lance.com.br/lancepedia/por-onde-anda-tab-ramos.html"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-101",
@@ -2209,10 +2813,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Leonardo (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Leonardo_(futebolista)"
+      },
+      {
+        "n": "Calciopédia — Jogador sem fronteiras, Leonardo fincou raízes em Milão",
+        "u": "https://calciopedia.com.br/2009/08/brasileiros-no-calcio-leonardo.html"
       }
     ],
     "when": "1994–1996",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-102",
@@ -2231,10 +2840,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Leonardo (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Leonardo_(futebolista)"
+      },
+      {
+        "n": "Calciopédia — Jogador sem fronteiras, Leonardo fincou raízes em Milão",
+        "u": "https://calciopedia.com.br/2009/08/brasileiros-no-calcio-leonardo.html"
       }
     ],
     "when": "2011",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-103",
@@ -2253,10 +2867,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Toninho Cerezo",
         "u": "https://pt.wikipedia.org/wiki/Toninho_Cerezo"
+      },
+      {
+        "n": "Goal (Itália) — Toninho Cerezo, il tira e molla del centrocampo",
+        "u": "https://www.goal.com/it/notizie/toninho-cerezo-il-tira-e-molla-del-centrocampo-brasile-roma/1ckeoxk01kgc21f1yueqhyswn5"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1990–1991",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-104",
@@ -2270,15 +2893,24 @@ export default [
     "c": 2,
     "cat": "idolos",
     "d": 4,
-    "exp": "Cerezo foi campeão japonês em 2000 e 2001 no Kashima.",
+    "exp": "No Kashima, Cerezo conquistou o Campeonato Japonês, duas Copas da Liga e a Copa do Imperador; voltou ao clube em 2013.",
     "src": [
       {
         "n": "Wikipédia (pt) — Toninho Cerezo",
         "u": "https://pt.wikipedia.org/wiki/Toninho_Cerezo"
+      },
+      {
+        "n": "Goal (Itália) — Toninho Cerezo, il tira e molla del centrocampo",
+        "u": "https://www.goal.com/it/notizie/toninho-cerezo-il-tira-e-molla-del-centrocampo-brasile-roma/1ckeoxk01kgc21f1yueqhyswn5"
+      },
+      {
+        "n": "Corriere dello Sport — Toninho Cerezo, la forza del cuore",
+        "u": "https://www.corrieredellosport.it/news/calcio/ilcuoio/2019/04/21-56068990/toninho_cerezo_la_forza_del_cuore/"
       }
     ],
     "when": "2000–2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "idolos-105",
@@ -2297,9 +2929,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Jonathan Calleri",
         "u": "https://pt.wikipedia.org/wiki/Jonathan_Calleri"
+      },
+      {
+        "n": "Tricolor na Web — Da Floresta ao Morumbi: a origem de Calleri",
+        "u": "https://tricolornaweb.com.br/noticia/da-floresta-ao-morumbi-a-origem-de-calleri-que-une-forcas-a-favor-do-sp/"
       }
     ],
     "when": "2013",
-    "ok": true
+    "ok": true,
+    "v2": true
   }
 ];

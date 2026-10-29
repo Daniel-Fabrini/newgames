@@ -21,9 +21,14 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-002",
@@ -42,10 +47,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1977",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1977"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — III Copa Brasil 1977",
+    "u": "https://www.rsssf.org/tablesb/braz77.html"
    }
   ],
   "when": "1977",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-003",
@@ -64,10 +78,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1977",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1977"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "Placar — São Paulo frustrou Atlético-MG em BH (1977)",
+    "u": "https://placar.com.br/coluna/tbt-placar/sao-paulo-frustrou-atletico-mg-em-bh-em-seu-primeiro-titulo-nacional"
    }
   ],
   "when": "1977",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-004",
@@ -86,10 +109,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1977",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1977"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — III Copa Brasil 1977",
+    "u": "https://www.rsssf.org/tablesb/braz77.html"
    }
   ],
   "when": "1977",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-005",
@@ -103,15 +135,24 @@ export default [
   "c": 0,
   "cat": "bras",
   "d": 1,
-  "exp": "A final terminou 0 a 0 após prorrogação e o São Paulo venceu por 3 a 2 nos pênaltis; foi a primeira decisão nacional resolvida assim.",
+  "exp": "A final terminou 0 a 0 no tempo normal e na prorrogação, e o São Paulo venceu por 3 a 2 nos pênaltis.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1977",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1977"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — III Copa Brasil 1977",
+    "u": "https://www.rsssf.org/tablesb/braz77.html"
    }
   ],
   "when": "1977",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-006",
@@ -125,15 +166,24 @@ export default [
   "c": 1,
   "cat": "bras",
   "d": 2,
-  "exp": "A decisão foi no Mineirão, em Belo Horizonte, com público de 102.974 pessoas segundo a Wikipédia.",
+  "exp": "A decisão foi no Mineirão, em Belo Horizonte, em 5 de março de 1978, com 102.974 pagantes segundo o site oficial do clube.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1977",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1977"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "Placar — São Paulo frustrou Atlético-MG em BH (1977)",
+    "u": "https://placar.com.br/coluna/tbt-placar/sao-paulo-frustrou-atletico-mg-em-bh-em-seu-primeiro-titulo-nacional"
    }
   ],
   "when": "1978",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-007",
@@ -152,10 +202,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1977",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1977"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — III Copa Brasil 1977",
+    "u": "https://www.rsssf.org/tablesb/braz77.html"
    }
   ],
   "when": "1977",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-008",
@@ -174,10 +233,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1977",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1977"
+   },
+   {
+    "n": "RSSSF — III Copa Brasil 1977",
+    "u": "https://www.rsssf.org/tablesb/braz77.html"
+   },
+   {
+    "n": "Wikipédia (en) — 1977 São Paulo FC season",
+    "u": "https://en.wikipedia.org/wiki/1977_S%C3%A3o_Paulo_FC_season"
    }
   ],
   "when": "1977",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-009",
@@ -196,10 +264,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1977",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1977"
+   },
+   {
+    "n": "RSSSF — III Copa Brasil 1977",
+    "u": "https://www.rsssf.org/tablesb/braz77.html"
    }
   ],
   "when": "1977",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-010",
@@ -213,15 +286,24 @@ export default [
   "c": 1,
   "cat": "bras",
   "d": 3,
-  "exp": "A súmula da final de 5 de março de 1978 registra Arnaldo Cezar Coelho como árbitro.",
+  "exp": "A ficha da final de 5 de março de 1978 no site oficial do clube registra Arnaldo Cezar Coelho como árbitro.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1977",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1977"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "Wikipédia (en) — 1977 São Paulo FC season",
+    "u": "https://en.wikipedia.org/wiki/1977_S%C3%A3o_Paulo_FC_season"
    }
   ],
   "when": "1978",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-011",
@@ -240,10 +322,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1977",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1977"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "Placar — São Paulo frustrou Atlético-MG em BH (1977)",
+    "u": "https://placar.com.br/coluna/tbt-placar/sao-paulo-frustrou-atletico-mg-em-bh-em-seu-primeiro-titulo-nacional"
    }
   ],
   "when": "1977",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-012",
@@ -268,12 +359,13 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007_-_S%C3%A9rie_A"
    },
    {
-    "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008 — Série A",
-    "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008_-_S%C3%A9rie_A"
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2006–2008",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-013",
@@ -294,16 +386,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2006_-_S%C3%A9rie_A"
    },
    {
-    "n": "Wikipédia (pt) — Campeonato Brasileiro de 2007 — Série A",
-    "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007_-_S%C3%A9rie_A"
+    "n": "Gazeta Esportiva — Em 2008, São Paulo derrotou Goiás e sagrou-se hexacampeão",
+    "u": "https://www.gazetaesportiva.com/?p=2727830"
    },
    {
-    "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008 — Série A",
-    "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008_-_S%C3%A9rie_A"
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2006–2008",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-014",
@@ -322,10 +415,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2006 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2006_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Brazil 2006",
+    "u": "https://www.rsssf.org/tablesb/braz06.html"
    }
   ],
   "when": "2006",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-015",
@@ -344,10 +446,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2006 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2006_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "RSSSF — Brazil 2006",
+    "u": "https://www.rsssf.org/tablesb/braz06.html"
    }
   ],
   "when": "2006",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-016",
@@ -366,10 +473,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2006 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2006_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "RSSSF — Brazil 2006",
+    "u": "https://www.rsssf.org/tablesb/braz06.html"
    }
   ],
   "when": "2006",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-017",
@@ -388,10 +500,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2006 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2006_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "RSSSF — Brazil 2006",
+    "u": "https://www.rsssf.org/tablesb/braz06.html"
    }
   ],
   "when": "2006",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-018",
@@ -410,10 +527,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2006 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2006_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "RSSSF — Brazil 2006",
+    "u": "https://www.rsssf.org/tablesb/braz06.html"
    }
   ],
   "when": "2006",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-019",
@@ -432,10 +554,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2007 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "RSSSF — Brazil 2007",
+    "u": "https://www.rsssf.org/tablesb/braz07.html"
    }
   ],
   "when": "2007",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-020",
@@ -454,10 +581,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2007 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "RSSSF — Brazil 2007",
+    "u": "https://www.rsssf.org/tablesb/braz07.html"
    }
   ],
   "when": "2007",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-021",
@@ -476,10 +608,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2007 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Brazil 2007",
+    "u": "https://www.rsssf.org/tablesb/braz07.html"
    }
   ],
   "when": "2007",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-022",
@@ -498,10 +639,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2007 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "RSSSF — Brazil 2007",
+    "u": "https://www.rsssf.org/tablesb/braz07.html"
    }
   ],
   "when": "2007",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-023",
@@ -520,10 +666,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "RSSSF — Brazil 2008",
+    "u": "https://www.rsssf.org/tablesb/braz08.html"
    }
   ],
   "when": "2008",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-024",
@@ -542,10 +693,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "RSSSF — Brazil 2008",
+    "u": "https://www.rsssf.org/tablesb/braz08.html"
    }
   ],
   "when": "2008",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-025",
@@ -564,10 +720,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Brazil 2008",
+    "u": "https://www.rsssf.org/tablesb/braz08.html"
    }
   ],
   "when": "2008",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-026",
@@ -581,15 +746,20 @@ export default [
   "c": 0,
   "cat": "bras",
   "d": 3,
-  "exp": "Borges marcou 16 gols pelo São Paulo; o artilheiro do campeonato foi Keirrison (Coritiba), com 21.",
+  "exp": "Borges marcou 16 gols no Brasileiro de 2008 e foi o quarto maior goleador da competição, além de fazer o gol do título contra o Goiás.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "Gazeta Esportiva — A um gol do centésimo, Borges…",
+    "u": "https://www.gazetaesportiva.com/?p=2090753"
    }
   ],
   "when": "2008",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-027",
@@ -603,15 +773,24 @@ export default [
   "c": 2,
   "cat": "bras",
   "d": 4,
-  "exp": "O jogo decisivo contra o Goiás foi levado ao Bezerrão, em razão de punição ao mandante.",
+  "exp": "O Goiás foi punido pelo STJD e não pôde mandar o jogo no Serra Dourada; a partida foi no Bezerrão, no Gama (DF), e o São Paulo venceu por 1 a 0.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "Gazeta Esportiva — Em 2008, São Paulo derrotou Goiás e sagrou-se hexacampeão",
+    "u": "https://www.gazetaesportiva.com/?p=2727830"
    }
   ],
   "when": "2008",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-028",
@@ -632,12 +811,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1986"
    },
    {
-    "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+    "n": "RSSSF — Brazil 1986",
+    "u": "https://www.rsssf.org/tablesb/braz86.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1986",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-029",
@@ -656,10 +840,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1986",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1986"
+   },
+   {
+    "n": "Trivela — São Paulo no Brinco de Ouro, Brasileirão 1986",
+    "u": "https://trivela.com.br/brasil/sao-paulo-brinco-de-ouro-brasileirao-1986/"
    }
   ],
   "when": "1986",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-030",
@@ -678,14 +867,23 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1986",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1986"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Brazil 1986",
+    "u": "https://www.rsssf.org/tablesb/braz86.html"
    }
   ],
   "when": "1986",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-031",
-  "q": "Que atacante do Guarani marcou nos dois jogos da final do Brasileiro de 1986 contra o São Paulo?",
+  "q": "Que atacante do Guarani marcou o gol do time campineiro no 1 a 1 do primeiro jogo da final do Brasileiro de 1986, no Morumbi?",
   "a": [
    "Careca",
    "Bebeto",
@@ -695,15 +893,25 @@ export default [
   "c": 2,
   "cat": "bras",
   "d": 2,
-  "exp": "Evair marcou para o Guarani no 1 a 1 do Morumbi e também no segundo jogo, no Brinco de Ouro.",
+  "exp": "Evair marcou para o Guarani no 1 a 1 do Morumbi (Careca fez o do São Paulo); no jogo de volta, os gols do Guarani foram de Nelsinho (contra), Boiadeiro e João Paulo.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1986",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1986"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Brazil 1986",
+    "u": "https://www.rsssf.org/tablesb/braz86.html"
    }
   ],
   "when": "1986",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "fixed": true
  },
  {
   "id": "bras-032",
@@ -722,10 +930,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1986",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1986"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "Trivela — São Paulo no Brinco de Ouro, Brasileirão 1986",
+    "u": "https://trivela.com.br/brasil/sao-paulo-brinco-de-ouro-brasileirao-1986/"
    }
   ],
   "when": "1987",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-033",
@@ -744,10 +961,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1986",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1986"
+   },
+   {
+    "n": "RSSSF — Brazil 1986",
+    "u": "https://www.rsssf.org/tablesb/braz86.html"
+   },
+   {
+    "n": "Wikipédia (en) — 1986 Campeonato Brasileiro Série A",
+    "u": "https://en.wikipedia.org/wiki/1986_Campeonato_Brasileiro_S%C3%A9rie_A"
    }
   ],
   "when": "1986",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-034",
@@ -766,10 +992,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1986",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1986"
+   },
+   {
+    "n": "RSSSF — Brazil 1986",
+    "u": "https://www.rsssf.org/tablesb/braz86.html"
+   },
+   {
+    "n": "Wikipédia (en) — 1986 Campeonato Brasileiro Série A",
+    "u": "https://en.wikipedia.org/wiki/1986_Campeonato_Brasileiro_S%C3%A9rie_A"
    }
   ],
   "when": "1986",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-035",
@@ -788,32 +1023,51 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1986",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1986"
+   },
+   {
+    "n": "RSSSF — Brazil 1986",
+    "u": "https://www.rsssf.org/tablesb/braz86.html"
+   },
+   {
+    "n": "Wikipédia (en) — 1986 Campeonato Brasileiro Série A",
+    "u": "https://en.wikipedia.org/wiki/1986_Campeonato_Brasileiro_S%C3%A9rie_A"
    }
   ],
   "when": "1986",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-036",
-  "q": "Qual foi o adversário do São Paulo nas oitavas de final do Brasileiro de 1986, vencido no saldo de gols?",
+  "q": "Que clube o São Paulo eliminou nas oitavas de final do Brasileiro de 1986, perdendo por 2 a 1 fora e vencendo por 3 a 0 em casa?",
   "a": [
    "Corinthians",
-   "Bahia",
+   "Internacional de Limeira",
    "Sport",
-   "Internacional"
+   "Bahia"
   ],
   "c": 1,
   "cat": "bras",
   "d": 4,
-  "exp": "O São Paulo perdeu fora e venceu em casa contra o Bahia, avançando pelo saldo de gols.",
+  "exp": "Na terceira fase (oitavas), o São Paulo perdeu por 2 a 1 para a Inter de Limeira e venceu a volta por 3 a 0. O Bahia, citado antes por engano, foi eliminado pelo Guarani nas quartas.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1986",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1986"
+   },
+   {
+    "n": "RSSSF — Brazil 1986",
+    "u": "https://www.rsssf.org/tablesb/braz86.html"
+   },
+   {
+    "n": "Wikipédia (en) — 1986 Campeonato Brasileiro Série A",
+    "u": "https://en.wikipedia.org/wiki/1986_Campeonato_Brasileiro_S%C3%A9rie_A"
    }
   ],
   "when": "1986",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "fixed": true
  },
  {
   "id": "bras-037",
@@ -832,10 +1086,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1991",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Brazil 1991",
+    "u": "https://www.rsssf.org/tablesb/braz91.html"
    }
   ],
   "when": "1991",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-038",
@@ -854,10 +1117,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1991",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Brazil 1991",
+    "u": "https://www.rsssf.org/tablesb/braz91.html"
    }
   ],
   "when": "1991",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-039",
@@ -871,15 +1143,20 @@ export default [
   "c": 1,
   "cat": "bras",
   "d": 2,
-  "exp": "Mário Tilico fez o gol aos 49 minutos no Morumbi; o segundo jogo, em Bragança Paulista, terminou 0 a 0.",
+  "exp": "Mário Tilico fez o gol da vitória por 1 a 0 no Morumbi; o segundo jogo, em Bragança Paulista, terminou 0 a 0.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1991",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+   },
+   {
+    "n": "RSSSF — Brazil 1991",
+    "u": "https://www.rsssf.org/tablesb/braz91.html"
    }
   ],
   "when": "1991",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-040",
@@ -898,10 +1175,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1991",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Brazil 1991",
+    "u": "https://www.rsssf.org/tablesb/braz91.html"
    }
   ],
   "when": "1991",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-041",
@@ -920,10 +1206,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1991",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+   },
+   {
+    "n": "RSSSF — Brazil 1991",
+    "u": "https://www.rsssf.org/tablesb/braz91.html"
    }
   ],
   "when": "1991",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-042",
@@ -942,10 +1233,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1991",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+   },
+   {
+    "n": "RSSSF — Brazil 1991",
+    "u": "https://www.rsssf.org/tablesb/braz91.html"
    }
   ],
   "when": "1991",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-043",
@@ -964,10 +1260,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1991",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+   },
+   {
+    "n": "Wikipédia (en) — Paulinho McLaren",
+    "u": "https://en.wikipedia.org/wiki/Paulinho_McLaren"
    }
   ],
   "when": "1991",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-044",
@@ -986,10 +1287,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1991",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+   },
+   {
+    "n": "RSSSF — Brazil 1991",
+    "u": "https://www.rsssf.org/tablesb/braz91.html"
    }
   ],
   "when": "1991",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-045",
@@ -1008,10 +1314,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1991",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Brazil 1991",
+    "u": "https://www.rsssf.org/tablesb/braz91.html"
    }
   ],
   "when": "1991",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-046",
@@ -1030,10 +1345,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1971",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1971"
+   },
+   {
+    "n": "RSSSF — Brazil 1971",
+    "u": "https://www.rsssf.org/tablesb/braz71.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1971",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-047",
@@ -1056,10 +1380,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1973",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1973"
+   },
+   {
+    "n": "ABCdoABC — São Paulo presta homenagem a Poy",
+    "u": "https://abcdoabc.com.br/sao-paulo-presta-homenagem-a-poy/"
    }
   ],
   "when": "1971",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-048",
@@ -1073,15 +1402,20 @@ export default [
   "c": 1,
   "cat": "bras",
   "d": 4,
-  "exp": "Toninho Guerreiro foi o goleador tricolor da edição, empatado em gols com Rivelino (Corinthians).",
+  "exp": "Toninho Guerreiro foi o goleador tricolor do Campeonato Nacional de 1971, com 10 gols; Terto, com 7, foi o segundo.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1971",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1971"
+   },
+   {
+    "n": "Wikipédia (en) — 1971 São Paulo FC season",
+    "u": "https://en.wikipedia.org/wiki/1971_S%C3%A3o_Paulo_FC_season"
    }
   ],
   "when": "1971",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-049",
@@ -1095,15 +1429,20 @@ export default [
   "c": 0,
   "cat": "bras",
   "d": 4,
-  "exp": "O São Paulo perdeu por 1 a 0 para o Atlético no Mineirão e bateu o Botafogo por 4 a 1 no Morumbi.",
+  "exp": "Na fase final, o São Paulo perdeu por 1 a 0 para o Atlético Mineiro e bateu o Botafogo por 4 a 1; o Galo venceu os dois jogos e foi campeão.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1971",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1971"
+   },
+   {
+    "n": "RSSSF — Brazil 1971",
+    "u": "https://www.rsssf.org/tablesb/braz71.html"
    }
   ],
   "when": "1971",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-050",
@@ -1122,10 +1461,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1973",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1973"
+   },
+   {
+    "n": "RSSSF — Brazil 1973",
+    "u": "https://www.rsssf.org/tablesb/braz73.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1973",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-051",
@@ -1139,15 +1487,20 @@ export default [
   "c": 1,
   "cat": "bras",
   "d": 4,
-  "exp": "Mirandinha fez aos 19 e aos 80; Pedro Rocha e Piau completaram o placar.",
+  "exp": "Mirandinha marcou duas vezes; Pedro Rocha e Piau completaram o placar, em 13 de fevereiro de 1974.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1973",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1973"
+   },
+   {
+    "n": "RSSSF — Brazil 1973",
+    "u": "https://www.rsssf.org/tablesb/braz73.html"
    }
   ],
   "when": "1974",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-052",
@@ -1166,10 +1519,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1989",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1989"
+   },
+   {
+    "n": "RSSSF — Brazil 1989",
+    "u": "https://www.rsssf.org/tablesb/braz89.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1989",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-053",
@@ -1183,19 +1545,24 @@ export default [
   "c": 3,
   "cat": "bras",
   "d": 3,
-  "exp": "Carlos Alberto Silva dirigiu o time vice-campeão em 1989; em 1990 o técnico era Telê Santana.",
+  "exp": "Carlos Alberto Silva dirigiu o time vice-campeão em 1989, segundo a ficha da final; em 1990 o técnico já era Telê Santana.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1989",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1989"
    },
    {
-    "n": "Wikipédia (pt) — Campeonato Brasileiro de 1990",
-    "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1990"
+    "n": "RSSSF — Brazil 1989",
+    "u": "https://www.rsssf.org/tablesb/braz89.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1989",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-054",
@@ -1214,10 +1581,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1989",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1989"
+   },
+   {
+    "n": "RSSSF — Brazil 1989",
+    "u": "https://www.rsssf.org/tablesb/braz89.html"
    }
   ],
   "when": "1989",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-055",
@@ -1236,10 +1608,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1990",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1990"
+   },
+   {
+    "n": "RSSSF — Brazil 1990",
+    "u": "https://www.rsssf.org/tablesb/braz90.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1990",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-056",
@@ -1264,12 +1645,13 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1990"
    },
    {
-    "n": "Wikipédia (pt) — Campeonato Brasileiro de 1991",
-    "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1989–1991",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-057",
@@ -1288,10 +1670,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1981",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1981"
+   },
+   {
+    "n": "RSSSF — Brazil 1981",
+    "u": "https://www.rsssf.org/tablesb/braz81.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1981",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-058",
@@ -1310,10 +1701,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2014 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2014_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "RSSSF — Brazil 2014",
+    "u": "https://www.rsssf.org/tablesb/braz2014.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2014",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-059",
@@ -1332,10 +1732,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2014 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2014_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "RSSSF — Brazil 2014",
+    "u": "https://www.rsssf.org/tablesb/braz2014.html"
    }
   ],
   "when": "2014",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-060",
@@ -1354,32 +1759,43 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2009 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2009_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "RSSSF — Brazil 2009",
+    "u": "https://www.rsssf.org/tablesb/braz09.html"
    }
   ],
   "when": "2009",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-061",
-  "q": "Quem assumiu o São Paulo em 2009 depois da demissão de Muricy Ramalho, em junho?",
+  "q": "Quem foi contratado como novo técnico do São Paulo em 2009, depois da demissão de Muricy Ramalho, em junho?",
   "a": [
    "Paulo Autuori",
    "Ricardo Gomes",
    "Leão",
-   "Milton Cruz"
+   "Adilson Batista"
   ],
   "c": 1,
   "cat": "bras",
   "d": 4,
-  "exp": "Muricy saiu em 19 de junho após derrota de 2 a 0 para o Cruzeiro, com o time em 12º lugar; Ricardo Gomes assumiu.",
+  "exp": "Muricy saiu em junho de 2009; Milton Cruz dirigiu o time interinamente em um jogo e Ricardo Gomes assumiu como técnico efetivo no fim do mês.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2009 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2009_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "Wikipédia (en) — 2009 São Paulo FC season",
+    "u": "https://en.wikipedia.org/wiki/2009_S%C3%A3o_Paulo_FC_season"
    }
   ],
   "when": "2009",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "fixed": true
  },
  {
   "id": "bras-062",
@@ -1398,10 +1814,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 2009 — Série A",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2009_-_S%C3%A9rie_A"
+   },
+   {
+    "n": "Wikipédia (en) — 2009 São Paulo FC season",
+    "u": "https://en.wikipedia.org/wiki/2009_S%C3%A3o_Paulo_FC_season"
    }
   ],
   "when": "2009",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-063",
@@ -1415,15 +1836,20 @@ export default [
   "c": 2,
   "cat": "bras",
   "d": 4,
-  "exp": "O clube caiu na segunda fase e, no ranking geral, ficou em quinto; já era campeão da Libertadores de 1992.",
+  "exp": "O clube somou 21 pontos na primeira fase e 6 na segunda, caindo antes da final; no ranking geral ficou em quinto. Já era campeão da Libertadores de 1992.",
   "src": [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1992",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1992"
+   },
+   {
+    "n": "RSSSF — Brazil 1992",
+    "u": "https://www.rsssf.org/tablesb/braz92.html"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-064",
@@ -1446,10 +1872,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Brasileiro de 1991",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1991–2006",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-065",
@@ -1470,16 +1901,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2006_-_S%C3%A9rie_A"
    },
    {
-    "n": "Wikipédia (pt) — Campeonato Brasileiro de 2007 — Série A",
-    "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007_-_S%C3%A9rie_A"
+    "n": "RSSSF — Brazil 2007",
+    "u": "https://www.rsssf.org/tablesb/braz07.html"
    },
    {
-    "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008 — Série A",
-    "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008_-_S%C3%A9rie_A"
+    "n": "RSSSF — Brazil 2006",
+    "u": "https://www.rsssf.org/tablesb/braz06.html"
    }
   ],
   "when": "2006–2008",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "bras-066",
@@ -1502,9 +1934,14 @@ export default [
    {
     "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1991",
-  "ok": true
+  "ok": true,
+  "v2": true
  }
 ];

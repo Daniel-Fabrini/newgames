@@ -19,12 +19,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Intercontinental_de_1992"
    },
    {
-    "n": "Wikipédia (en) — 1992 Intercontinental Cup",
-    "u": "https://en.wikipedia.org/wiki/1992_Intercontinental_Cup"
+    "n": "RSSSF — Intercontinental Club Cup 1992",
+    "u": "https://www.rsssf.org/tablest/toyota92.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-002",
@@ -45,12 +50,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Intercontinental_de_1992"
    },
    {
-    "n": "Wikipédia (en) — 1992 Intercontinental Cup",
-    "u": "https://en.wikipedia.org/wiki/1992_Intercontinental_Cup"
+    "n": "RSSSF — Intercontinental Club Cup 1992",
+    "u": "https://www.rsssf.org/tablest/toyota92.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-003",
@@ -71,12 +81,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Intercontinental_de_1992"
    },
    {
-    "n": "Wikipédia (en) — 1992 Intercontinental Cup",
-    "u": "https://en.wikipedia.org/wiki/1992_Intercontinental_Cup"
+    "n": "RSSSF — Intercontinental Club Cup 1992",
+    "u": "https://www.rsssf.org/tablest/toyota92.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-004",
@@ -99,10 +114,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Europeia/Sul-Americana de 1993",
     "u": "https://pt.wikipedia.org/wiki/Copa_Europeia/Sul-Americana_de_1993"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992–1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-005",
@@ -121,10 +141,19 @@ export default [
    {
     "n": "Wikipédia (en) — 1992 Intercontinental Cup",
     "u": "https://en.wikipedia.org/wiki/1992_Intercontinental_Cup"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Intercontinental Club Cup 1992",
+    "u": "https://www.rsssf.org/tablest/toyota92.html"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-006",
@@ -147,10 +176,15 @@ export default [
    {
     "n": "Wikipédia (en) — 1992 Intercontinental Cup",
     "u": "https://en.wikipedia.org/wiki/1992_Intercontinental_Cup"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-007",
@@ -169,10 +203,15 @@ export default [
    {
     "n": "Wikipédia (en) — 1992 Intercontinental Cup",
     "u": "https://en.wikipedia.org/wiki/1992_Intercontinental_Cup"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-008",
@@ -191,10 +230,15 @@ export default [
    {
     "n": "Wikipédia (en) — 1992 Intercontinental Cup",
     "u": "https://en.wikipedia.org/wiki/1992_Intercontinental_Cup"
+   },
+   {
+    "n": "RSSSF — Toyota Cup MVP",
+    "u": "https://www.rsssf.org/tablest/toyotamvp.html"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-009",
@@ -213,10 +257,19 @@ export default [
    {
     "n": "Wikipédia (en) — 1992 Intercontinental Cup",
     "u": "https://en.wikipedia.org/wiki/1992_Intercontinental_Cup"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Intercontinental Club Cup 1992",
+    "u": "https://www.rsssf.org/tablest/toyota92.html"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-010",
@@ -237,12 +290,17 @@ export default [
     "u": "https://en.wikipedia.org/wiki/1992_Intercontinental_Cup"
    },
    {
-    "n": "Wikipédia (pt) — Copa Europeia/Sul-Americana de 1992",
-    "u": "https://pt.wikipedia.org/wiki/Copa_Intercontinental_de_1992"
+    "n": "RSSSF — Intercontinental Club Cup 1992",
+    "u": "https://www.rsssf.org/tablest/toyota92.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-011",
@@ -261,10 +319,15 @@ export default [
    {
     "n": "Wikipédia (en) — 1992 Intercontinental Cup",
     "u": "https://en.wikipedia.org/wiki/1992_Intercontinental_Cup"
+   },
+   {
+    "n": "RSSSF — Intercontinental Club Cup (Toyota Cup)",
+    "u": "https://www.rsssf.org/tablest/toyota.html"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-012",
@@ -285,12 +348,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Europeia/Sul-Americana_de_1993"
    },
    {
-    "n": "Wikipédia (en) — 1993 Intercontinental Cup",
-    "u": "https://en.wikipedia.org/wiki/1993_Intercontinental_Cup"
+    "n": "RSSSF — Intercontinental Club Cup 1993",
+    "u": "https://www.rsssf.org/tablest/toyota93.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-013",
@@ -311,12 +379,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Europeia/Sul-Americana_de_1993"
    },
    {
-    "n": "Wikipédia (en) — 1993 Intercontinental Cup",
-    "u": "https://en.wikipedia.org/wiki/1993_Intercontinental_Cup"
+    "n": "RSSSF — Intercontinental Club Cup 1993",
+    "u": "https://www.rsssf.org/tablest/toyota93.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-014",
@@ -330,15 +403,24 @@ export default [
   "c": 0,
   "cat": "mundial",
   "d": 1,
-  "exp": "Müller marcou o terceiro gol, já nos minutos finais (88 minutos, segundo a Wikipédia pt).",
+  "exp": "Müller marcou o terceiro gol aos 41 minutos do segundo tempo (86 minutos), segundo o site oficial e a RSSSF.",
   "src": [
    {
     "n": "Wikipédia (pt) — Copa Europeia/Sul-Americana de 1993",
     "u": "https://pt.wikipedia.org/wiki/Copa_Europeia/Sul-Americana_de_1993"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Intercontinental Club Cup 1993",
+    "u": "https://www.rsssf.org/tablest/toyota93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-015",
@@ -359,12 +441,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Europeia/Sul-Americana_de_1993"
    },
    {
-    "n": "Wikipédia (en) — 1993 Intercontinental Cup",
-    "u": "https://en.wikipedia.org/wiki/1993_Intercontinental_Cup"
+    "n": "RSSSF — Intercontinental Club Cup 1993",
+    "u": "https://www.rsssf.org/tablest/toyota93.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-016",
@@ -387,10 +474,15 @@ export default [
    {
     "n": "Wikipédia (en) — 1993 Intercontinental Cup",
     "u": "https://en.wikipedia.org/wiki/1993_Intercontinental_Cup"
+   },
+   {
+    "n": "RSSSF — Toyota Cup MVP",
+    "u": "https://www.rsssf.org/tablest/toyotamvp.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-017",
@@ -413,10 +505,15 @@ export default [
    {
     "n": "Wikipédia (en) — 1993 Intercontinental Cup",
     "u": "https://en.wikipedia.org/wiki/1993_Intercontinental_Cup"
+   },
+   {
+    "n": "RSSSF — Intercontinental Club Cup 1993",
+    "u": "https://www.rsssf.org/tablest/toyota93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-018",
@@ -439,10 +536,15 @@ export default [
    {
     "n": "Wikipédia (en) — 1993 Intercontinental Cup",
     "u": "https://en.wikipedia.org/wiki/1993_Intercontinental_Cup"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-019",
@@ -461,10 +563,15 @@ export default [
    {
     "n": "Wikipédia (en) — 1993 Intercontinental Cup",
     "u": "https://en.wikipedia.org/wiki/1993_Intercontinental_Cup"
+   },
+   {
+    "n": "RSSSF — Intercontinental Club Cup 1993",
+    "u": "https://www.rsssf.org/tablest/toyota93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-020",
@@ -478,19 +585,24 @@ export default [
   "c": 0,
   "cat": "mundial",
   "d": 4,
-  "exp": "A decisão no Estádio Nacional de Tóquio teve 52.275 pagantes segundo a Wikipédia.",
+  "exp": "A decisão no Estádio Nacional de Tóquio teve 52.275 pagantes, segundo o site oficial e a RSSSF.",
   "src": [
    {
     "n": "Wikipédia (pt) — Copa Europeia/Sul-Americana de 1993",
     "u": "https://pt.wikipedia.org/wiki/Copa_Europeia/Sul-Americana_de_1993"
    },
    {
-    "n": "Wikipédia (en) — 1993 Intercontinental Cup",
-    "u": "https://en.wikipedia.org/wiki/1993_Intercontinental_Cup"
+    "n": "RSSSF — Intercontinental Club Cup 1993",
+    "u": "https://www.rsssf.org/tablest/toyota93.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-021",
@@ -511,12 +623,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Europeia/Sul-Americana_de_1993"
    },
    {
-    "n": "Wikipédia (en) — 1993 Intercontinental Cup",
-    "u": "https://en.wikipedia.org/wiki/1993_Intercontinental_Cup"
+    "n": "RSSSF — Intercontinental Club Cup 1993",
+    "u": "https://www.rsssf.org/tablest/toyota93.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-022",
@@ -537,12 +654,17 @@ export default [
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship"
    },
    {
-    "n": "Wikipédia (en) — 2005 FIFA Club World Championship final",
-    "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship_final"
+    "n": "RSSSF — FIFA Club World Championship 2005",
+    "u": "https://www.rsssf.org/tablesf/fifa-wcc05.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-023",
@@ -556,19 +678,24 @@ export default [
   "c": 3,
   "cat": "mundial",
   "d": 1,
-  "exp": "Mineiro marcou aos 27 minutos do primeiro tempo.",
+  "exp": "Mineiro marcou o gol no primeiro tempo (aos 26 minutos segundo o site oficial; 27 segundo outras fontes).",
   "src": [
    {
     "n": "Wikipédia (en) — 2005 FIFA Club World Championship",
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship"
    },
    {
-    "n": "Wikipédia (en) — 2005 FIFA Club World Championship final",
-    "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship_final"
+    "n": "RSSSF — FIFA Club World Championship 2005",
+    "u": "https://www.rsssf.org/tablesf/fifa-wcc05.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-024",
@@ -582,19 +709,24 @@ export default [
   "c": 2,
   "cat": "mundial",
   "d": 1,
-  "exp": "Mineiro fez o gol aos 27 minutos, após passe de Aloísio.",
+  "exp": "Mineiro fez o gol no primeiro tempo, após passe de Aloísio.",
   "src": [
    {
     "n": "Wikipédia (en) — 2005 FIFA Club World Championship",
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship"
    },
    {
-    "n": "Wikipédia (en) — 2005 FIFA Club World Championship final",
-    "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship_final"
+    "n": "Gazeta Esportiva — Há 15 anos, São Paulo conquistava seu terceiro título Mundial",
+    "u": "https://www.gazetaesportiva.com/?p=2395975"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-025",
@@ -619,12 +751,13 @@ export default [
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship_final"
    },
    {
-    "n": "Wikipédia (pt) — Campeonato Mundial de Clubes da FIFA de 2005",
-    "u": "https://pt.wikipedia.org/wiki/Campeonato_Mundial_de_Clubes_da_FIFA_de_2005"
+    "n": "Goal — Derrota contra o São Paulo foi a mais dolorida do Liverpool",
+    "u": "https://www.goal.com/br/not%C3%ADcias/derrota-contra-o-sao-paulo-foi-a-mais-dolorida-do-liverpool/a2j8atoo8crv1t992tq5pr7zc"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-026",
@@ -643,10 +776,15 @@ export default [
    {
     "n": "Wikipédia (en) — 2005 FIFA Club World Championship final",
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship_final"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-027",
@@ -667,12 +805,17 @@ export default [
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship_final"
    },
    {
-    "n": "Wikipédia (pt) — Campeonato Mundial de Clubes da FIFA de 2005",
-    "u": "https://pt.wikipedia.org/wiki/Campeonato_Mundial_de_Clubes_da_FIFA_de_2005"
+    "n": "RSSSF — FIFA Club World Championship 2005",
+    "u": "https://www.rsssf.org/tablesf/fifa-wcc05.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-028",
@@ -693,12 +836,17 @@ export default [
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship"
    },
    {
-    "n": "Wikipédia (pt) — Campeonato Mundial de Clubes da FIFA de 2005",
-    "u": "https://pt.wikipedia.org/wiki/Campeonato_Mundial_de_Clubes_da_FIFA_de_2005"
+    "n": "Gazeta Esportiva — Há 15 anos, São Paulo conquistava seu terceiro título Mundial",
+    "u": "https://www.gazetaesportiva.com/?p=2395975"
+   },
+   {
+    "n": "RSSSF — FIFA Club World Championship 2005",
+    "u": "https://www.rsssf.org/tablesf/fifa-wcc05.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-029",
@@ -721,10 +869,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Mundial de Clubes da FIFA de 2005",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Mundial_de_Clubes_da_FIFA_de_2005"
+   },
+   {
+    "n": "Gazeta Esportiva — Há 15 anos, São Paulo conquistava seu terceiro título Mundial",
+    "u": "https://www.gazetaesportiva.com/?p=2395975"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-030",
@@ -747,10 +900,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Mundial de Clubes da FIFA de 2005",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Mundial_de_Clubes_da_FIFA_de_2005"
+   },
+   {
+    "n": "Gazeta Esportiva — Há 15 anos, São Paulo conquistava seu terceiro título Mundial",
+    "u": "https://www.gazetaesportiva.com/?p=2395975"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-031",
@@ -769,10 +927,15 @@ export default [
    {
     "n": "Wikipédia (en) — 2005 FIFA Club World Championship final",
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship_final"
+   },
+   {
+    "n": "Goal — Derrota contra o São Paulo foi a mais dolorida do Liverpool",
+    "u": "https://www.goal.com/br/not%C3%ADcias/derrota-contra-o-sao-paulo-foi-a-mais-dolorida-do-liverpool/a2j8atoo8crv1t992tq5pr7zc"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-032",
@@ -791,10 +954,15 @@ export default [
    {
     "n": "Wikipédia (en) — 2005 FIFA Club World Championship final",
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship_final"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-033",
@@ -815,12 +983,17 @@ export default [
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship"
    },
    {
-    "n": "Wikipédia (en) — 2005 FIFA Club World Championship final",
-    "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship_final"
+    "n": "Gazeta Esportiva — Há 15 anos, São Paulo conquistava seu terceiro título Mundial",
+    "u": "https://www.gazetaesportiva.com/?p=2395975"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-034",
@@ -834,19 +1007,24 @@ export default [
   "c": 3,
   "cat": "mundial",
   "d": 4,
-  "exp": "A Wikipédia registra 66.821 presentes.",
+  "exp": "O site oficial do clube registra 66.821 pagantes na final.",
   "src": [
    {
     "n": "Wikipédia (en) — 2005 FIFA Club World Championship",
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship"
    },
    {
-    "n": "Wikipédia (en) — 2005 FIFA Club World Championship final",
-    "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship_final"
+    "n": "Gazeta Esportiva — Há 15 anos, São Paulo conquistava seu terceiro título Mundial",
+    "u": "https://www.gazetaesportiva.com/?p=2395975"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-035",
@@ -868,7 +1046,8 @@ export default [
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "mundial-036",
@@ -887,10 +1066,15 @@ export default [
    {
     "n": "Wikipédia (en) — 2005 FIFA Club World Championship final",
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship_final"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-037",
@@ -913,10 +1097,15 @@ export default [
    {
     "n": "Wikipédia (en) — 2005 FIFA Club World Championship",
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship"
+   },
+   {
+    "n": "Goal — Derrota contra o São Paulo foi a mais dolorida do Liverpool",
+    "u": "https://www.goal.com/br/not%C3%ADcias/derrota-contra-o-sao-paulo-foi-a-mais-dolorida-do-liverpool/a2j8atoo8crv1t992tq5pr7zc"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-038",
@@ -939,10 +1128,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Campeonato Mundial de Clubes da FIFA de 2005",
     "u": "https://pt.wikipedia.org/wiki/Campeonato_Mundial_de_Clubes_da_FIFA_de_2005"
+   },
+   {
+    "n": "RSSSF — FIFA Club World Championship 2005",
+    "u": "https://www.rsssf.org/tablesf/fifa-wcc05.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-039",
@@ -961,10 +1155,15 @@ export default [
    {
     "n": "Wikipédia (en) — 2005 FIFA Club World Championship",
     "u": "https://en.wikipedia.org/wiki/2005_FIFA_Club_World_Championship"
+   },
+   {
+    "n": "RSSSF — FIFA Club World Championship 2005",
+    "u": "https://www.rsssf.org/tablesf/fifa-wcc05.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-040",
@@ -987,10 +1186,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992–2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-041",
@@ -1009,14 +1213,19 @@ export default [
    {
     "n": "theScore — FIFA recognises all winners of Intercontinental Cup as club world champions",
     "u": "https://www.thescore.com/news/1408193-fifa-recognises-all-winners-of-intercontinental-cup-as-club-world-champions"
+   },
+   {
+    "n": "Gazeta Esportiva — Fifa reconhece títulos mundiais (2017)",
+    "u": "https://www.gazetaesportiva.com/futebol/fifa-reconhece-titulos-mundiais-de-santos-flamengo-gremio-e-sao-paulo/"
    }
   ],
   "when": "2017",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-042",
-  "q": "Em que ano foram acrescentadas ao escudo do São Paulo as três estrelas vermelhas pelos títulos mundiais?",
+  "q": "Segundo o site oficial do São Paulo, em que ano a terceira estrela vermelha, do título mundial de 2005, foi acrescentada à bandeira e ao uniforme?",
   "a": [
    "2005",
    "2007",
@@ -1026,15 +1235,21 @@ export default [
   "c": 2,
   "cat": "mundial",
   "d": 3,
-  "exp": "Segundo a Wikipédia, as estrelas pelos títulos de 1992, 1993 e 2005 foram incluídas por completo em 2006.",
+  "exp": "As estrelas vermelhas (títulos mundiais) foram instituídas em 2000, quando entraram as de 1992 e 1993; a do tri foi acrescentada em janeiro de 2006. Elas são insígnias sobrepostas, não parte do emblema.",
   "src": [
+   {
+    "n": "Site oficial do São Paulo — Símbolos",
+    "u": "https://www.saopaulofc.net/o-clube/simbolos/"
+   },
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
    }
   ],
   "when": "2006",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "fixed": true
  },
  {
   "id": "mundial-043",
@@ -1055,16 +1270,21 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Supercopa_Libertadores_de_1993"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "RSSSF — Supercopa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/supcopa93.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-044",
-  "q": "Como foi decidida a final da Supercopa Libertadores de 1993 entre São Paulo e Flamengo?",
+  "q": "Segundo o site oficial do São Paulo, como foi decidida a final da Supercopa Libertadores de 1993 entre São Paulo e Flamengo?",
   "a": [
    "Com vitória por 3 a 0 na volta",
    "Nos pênaltis, por 5 a 3, após dois empates por 2 a 2",
@@ -1074,19 +1294,25 @@ export default [
   "c": 1,
   "cat": "mundial",
   "d": 3,
-  "exp": "Foi 2 a 2 no Maracanã e 2 a 2 no Morumbi; nos pênaltis, o São Paulo venceu por 5 a 3.",
+  "exp": "Foi 2 a 2 no Maracanã e 2 a 2 no Morumbi; nos pênaltis, o São Paulo venceu por 5 a 3 segundo o site oficial e a Gazeta Esportiva (a RSSSF registra 5 a 4).",
   "src": [
    {
-    "n": "Wikipédia (pt) — Supercopa Libertadores de 1993",
-    "u": "https://pt.wikipedia.org/wiki/Supercopa_Libertadores_de_1993"
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "RSSSF — Supercopa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/supcopa93.html"
+   },
+   {
+    "n": "Gazeta Esportiva — São Paulo e Flamengo: finais",
+    "u": "https://www.gazetaesportiva.com/?p=3403504"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "conflict": true
  },
  {
   "id": "mundial-045",
@@ -1105,10 +1331,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Supercopa Libertadores de 1993",
     "u": "https://pt.wikipedia.org/wiki/Supercopa_Libertadores_de_1993"
+   },
+   {
+    "n": "Gazeta Esportiva — São Paulo e Flamengo: finais",
+    "u": "https://www.gazetaesportiva.com/?p=3403504"
+   },
+   {
+    "n": "RSSSF — Supercopa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/supcopa93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-046",
@@ -1127,10 +1362,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Supercopa Libertadores de 1993",
     "u": "https://pt.wikipedia.org/wiki/Supercopa_Libertadores_de_1993"
+   },
+   {
+    "n": "RSSSF — Supercopa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/supcopa93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-047",
@@ -1153,10 +1393,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Supercopa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/supcopa93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-048",
@@ -1170,15 +1415,20 @@ export default [
   "c": 0,
   "cat": "mundial",
   "d": 3,
-  "exp": "Foram 2 a 2 no Pacaembu e 1 a 0 no Beira-Rio, gol de Toninho Cerezo.",
+  "exp": "Foram 2 a 2 no primeiro jogo e 1 a 0 para o São Paulo no segundo, gol de Toninho Cerezo.",
   "src": [
    {
     "n": "Wikipédia (pt) — Supercopa Libertadores de 1993",
     "u": "https://pt.wikipedia.org/wiki/Supercopa_Libertadores_de_1993"
+   },
+   {
+    "n": "RSSSF — Supercopa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/supcopa93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-049",
@@ -1197,10 +1447,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Supercopa Libertadores de 1993",
     "u": "https://pt.wikipedia.org/wiki/Supercopa_Libertadores_de_1993"
+   },
+   {
+    "n": "RSSSF — Supercopa Libertadores (visão geral)",
+    "u": "https://www.rsssf.org/sacups/sasup.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-050",
@@ -1219,10 +1474,19 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Supercopa Libertadores 1997",
+    "u": "https://www.rsssf.org/sacups/supcopa97.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1997",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-051",
@@ -1241,10 +1505,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Supercopa Libertadores 1992",
+    "u": "https://www.rsssf.org/sacups/supcopa92.html"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-052",
@@ -1265,12 +1534,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Recopa_Sul-Americana_de_1993"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "RSSSF — Recopa Sudamericana",
+    "u": "https://www.rsssf.org/sacups/recopa.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-053",
@@ -1291,12 +1565,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Recopa_Sul-Americana_de_1993"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "RSSSF — Recopa Sudamericana",
+    "u": "https://www.rsssf.org/sacups/recopa.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-054",
@@ -1317,12 +1596,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Recopa_Sul-Americana_de_1994"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "RSSSF — Recopa Sudamericana",
+    "u": "https://www.rsssf.org/sacups/recopa.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-055",
@@ -1341,10 +1625,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Recopa Sul-Americana de 1994",
     "u": "https://pt.wikipedia.org/wiki/Recopa_Sul-Americana_de_1994"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Recopa Sudamericana",
+    "u": "https://www.rsssf.org/sacups/recopa.html"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-056",
@@ -1363,10 +1656,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Recopa Sul-Americana de 1994",
     "u": "https://pt.wikipedia.org/wiki/Recopa_Sul-Americana_de_1994"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-057",
@@ -1389,10 +1687,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1993–1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-058",
@@ -1411,10 +1714,19 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Recopa Sudamericana",
+    "u": "https://www.rsssf.org/sacups/recopa.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2006",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-059",
@@ -1433,10 +1745,19 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Recopa Sudamericana",
+    "u": "https://www.rsssf.org/sacups/recopa.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2013",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-060",
@@ -1457,12 +1778,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Conmebol_de_1994"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "RSSSF — Copa Conmebol 1994",
+    "u": "https://www.rsssf.org/sacups/conmebol94.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-061",
@@ -1483,12 +1809,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Conmebol_de_1994"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "RSSSF — Copa Conmebol 1994",
+    "u": "https://www.rsssf.org/sacups/conmebol94.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-062",
@@ -1507,14 +1838,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Conmebol de 1994",
     "u": "https://pt.wikipedia.org/wiki/Copa_Conmebol_de_1994"
+   },
+   {
+    "n": "Trivela — Expressinho do São Paulo e a Copa Conmebol de 1994",
+    "u": "https://trivela.com.br/america-do-sul/com-ceni-e-muricy-ramalho-expressinho-do-sao-paulo-foi-ate-o-fim-e-conquistou-a-copa-conmebol-de-1994/"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-063",
-  "q": "Qual foi o primeiro título como treinador de Muricy Ramalho, conquistado no São Paulo?",
+  "q": "Qual destes títulos foi o primeiro conquistado por Muricy Ramalho como técnico do São Paulo?",
   "a": [
    "A Copa Conmebol de 1994",
    "A Recopa de 1993",
@@ -1524,15 +1860,20 @@ export default [
   "c": 0,
   "cat": "mundial",
   "d": 4,
-  "exp": "A Wikipédia afirma que a Copa Conmebol de 1994 foi o primeiro título de Muricy como técnico.",
+  "exp": "Muricy comandou o time na Copa Conmebol de 1994; na Recopa e na Supercopa de 1993 o técnico era Telê Santana, e o Brasileiro de 2006 veio depois.",
   "src": [
    {
     "n": "Wikipédia (pt) — Copa Conmebol de 1994",
     "u": "https://pt.wikipedia.org/wiki/Copa_Conmebol_de_1994"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-064",
@@ -1546,19 +1887,24 @@ export default [
   "c": 1,
   "cat": "mundial",
   "d": 3,
-  "exp": "O São Paulo venceu por 4 a 3 no Pacaembu e, após derrota no Morumbi, avançou nos pênaltis.",
+  "exp": "O São Paulo venceu por 4 a 3 no Pacaembu, perdeu por 3 a 2 na volta e avançou nos pênaltis (5 a 4).",
   "src": [
    {
     "n": "Wikipédia (pt) — Copa Conmebol de 1994",
     "u": "https://pt.wikipedia.org/wiki/Copa_Conmebol_de_1994"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "Trivela — Expressinho do São Paulo e a Copa Conmebol de 1994",
+    "u": "https://trivela.com.br/america-do-sul/com-ceni-e-muricy-ramalho-expressinho-do-sao-paulo-foi-ate-o-fim-e-conquistou-a-copa-conmebol-de-1994/"
+   },
+   {
+    "n": "RSSSF — Copa Conmebol 1994",
+    "u": "https://www.rsssf.org/sacups/conmebol94.html"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-065",
@@ -1579,12 +1925,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Conmebol_de_1994"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "Trivela — Expressinho do São Paulo e a Copa Conmebol de 1994",
+    "u": "https://trivela.com.br/america-do-sul/com-ceni-e-muricy-ramalho-expressinho-do-sao-paulo-foi-ate-o-fim-e-conquistou-a-copa-conmebol-de-1994/"
+   },
+   {
+    "n": "RSSSF — Copa Conmebol 1994",
+    "u": "https://www.rsssf.org/sacups/conmebol94.html"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-066",
@@ -1605,12 +1956,17 @@ export default [
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
    },
    {
-    "n": "Wikipédia (pt) — Copa Conmebol de 1994",
-    "u": "https://pt.wikipedia.org/wiki/Copa_Conmebol_de_1994"
+    "n": "Trivela — Expressinho do São Paulo e a Copa Conmebol de 1994",
+    "u": "https://trivela.com.br/america-do-sul/com-ceni-e-muricy-ramalho-expressinho-do-sao-paulo-foi-ate-o-fim-e-conquistou-a-copa-conmebol-de-1994/"
+   },
+   {
+    "n": "RSSSF — Copa Conmebol 1994",
+    "u": "https://www.rsssf.org/sacups/conmebol94.html"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-067",
@@ -1629,10 +1985,19 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Master Conmebol 1996",
+    "u": "https://www.rsssf.org/sacups/mastconmebol96.html"
    }
   ],
   "when": "1996",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-068",
@@ -1651,10 +2016,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Master Conmebol 1996",
+    "u": "https://www.rsssf.org/sacups/mastconmebol96.html"
    }
   ],
   "when": "1996",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-069",
@@ -1673,10 +2043,19 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa de Oro 1996",
+    "u": "https://www.rsssf.org/sacups/oro96.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1996",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-070",
@@ -1697,12 +2076,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "RSSSF — Copa Sudamericana 2012",
+    "u": "https://www.rsssf.org/sacups/sudamcup2012.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-071",
@@ -1721,10 +2105,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
     "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Sudamericana 2012",
+    "u": "https://www.rsssf.org/sacups/sudamcup2012.html"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-072",
@@ -1743,10 +2136,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
     "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Sudamericana 2012",
+    "u": "https://www.rsssf.org/sacups/sudamcup2012.html"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-073",
@@ -1765,10 +2167,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
     "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+   },
+   {
+    "n": "RSSSF — Copa Sudamericana 2012",
+    "u": "https://www.rsssf.org/sacups/sudamcup2012.html"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-074",
@@ -1787,10 +2194,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
     "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Sudamericana 2012",
+    "u": "https://www.rsssf.org/sacups/sudamcup2012.html"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-075",
@@ -1804,15 +2220,24 @@ export default [
   "c": 3,
   "cat": "mundial",
   "d": 3,
-  "exp": "Lucas marcou aos 22 e Osvaldo aos 28 minutos do primeiro tempo.",
+  "exp": "Lucas marcou aos 22 e Osvaldo aos 27/28 minutos do primeiro tempo (o site oficial registra 27).",
   "src": [
    {
     "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
     "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Sudamericana 2012",
+    "u": "https://www.rsssf.org/sacups/sudamcup2012.html"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-076",
@@ -1831,10 +2256,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
     "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+   },
+   {
+    "n": "RSSSF — Copa Sudamericana 2012",
+    "u": "https://www.rsssf.org/sacups/sudamcup2012.html"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-077",
@@ -1853,10 +2283,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
     "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+   },
+   {
+    "n": "RSSSF — Copa Sudamericana 2012",
+    "u": "https://www.rsssf.org/sacups/sudamcup2012.html"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-078",
@@ -1875,10 +2310,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
     "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+   },
+   {
+    "n": "RSSSF — Copa Sudamericana 2012",
+    "u": "https://www.rsssf.org/sacups/sudamcup2012.html"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-079",
@@ -1901,10 +2341,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Sudamericana 2012",
+    "u": "https://www.rsssf.org/sacups/sudamcup2012.html"
    }
   ],
   "when": "2012",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-080",
@@ -1925,12 +2370,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Sudamericana 2022",
+    "u": "https://www.rsssf.org/sacups/sudamcup2022.html"
    }
   ],
   "when": "2022",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-081",
@@ -1944,15 +2394,21 @@ export default [
   "c": 2,
   "cat": "mundial",
   "d": 4,
-  "exp": "O São Paulo foi superado após perder por 2 a 0 na volta.",
+  "exp": "O São Paulo perdeu por 3 a 1 em Buenos Aires, venceu por 2 a 0 em casa e foi eliminado nos pênaltis (4 a 2).",
   "src": [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Sudamericana 2003",
+    "u": "https://www.rsssf.org/sacups/sudamcup03.html"
    }
   ],
   "when": "2003",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "fixed": true
  },
  {
   "id": "mundial-082",
@@ -1971,10 +2427,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Sudamericana 2022",
+    "u": "https://www.rsssf.org/sacups/sudamcup2022.html"
    }
   ],
   "when": "2022",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "mundial-083",
@@ -1993,9 +2454,14 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Sudamericana 2022",
+    "u": "https://www.rsssf.org/sacups/sudamcup2022.html"
    }
   ],
   "when": "2022",
-  "ok": true
+  "ok": true,
+  "v2": true
  }
 ];

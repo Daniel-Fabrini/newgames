@@ -410,3 +410,10 @@
   user-select: none;
   -webkit-user-drag: none;
 }
+
+/* million celebration: champion photo with the trophy beside it */
+.tc-champphoto { position: relative; display: flex; align-items: flex-end; justify-content: center; gap: 0; }
+.tc-champphoto img { height: clamp(170px, 32vh, 270px); width: auto; border-radius: 18px; border: 2px solid #ffd76b; box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.5), 0 0 34px rgba(255, 200, 80, 0.45); object-fit: cover; animation: tc-pop 0.7s cubic-bezier(0.3, 1.4, 0.5, 1) both; }
+.tc-champphoto .tc-cup.small { position: absolute; right: -18%; bottom: -8px; height: clamp(110px, 20vh, 170px); }
+@keyframes tc-pop { from { transform: scale(0.7); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .tc-champphoto img { animation: none; } }

@@ -21,9 +21,14 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-002",
@@ -44,12 +49,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "RSSSF — Copa Libertadores 1992",
+    "u": "https://www.rsssf.org/sacups/copa92.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-003",
@@ -68,10 +78,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1992",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-004",
@@ -90,10 +105,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1992",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1992",
+    "u": "https://www.rsssf.org/sacups/copa92.html"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-005",
@@ -112,10 +136,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1992",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1992",
+    "u": "https://www.rsssf.org/sacups/copa92.html"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-006",
@@ -134,10 +167,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1992",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1992",
+    "u": "https://www.rsssf.org/sacups/copa92.html"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-007",
@@ -151,15 +193,24 @@ export default [
   "c": 3,
   "cat": "lib",
   "d": 1,
-  "exp": "Raí, capitão do time, converteu o pênalti aos 65 minutos da partida de volta.",
+  "exp": "Raí, capitão do time, converteu o pênalti aos 22 minutos do segundo tempo da partida de volta, segundo a ficha do site oficial.",
   "src": [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1992",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1992",
+    "u": "https://www.rsssf.org/sacups/copa92.html"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-008",
@@ -178,14 +229,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1992",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-009",
-  "q": "Qual era o goleiro do São Paulo nas duas partidas da final da Libertadores de 1992?",
+  "q": "Qual era o goleiro do São Paulo no jogo de volta da final da Libertadores de 1992, no Morumbi?",
   "a": [
    "Gilmar",
    "Rogério Ceni",
@@ -195,15 +251,20 @@ export default [
   "c": 2,
   "cat": "lib",
   "d": 1,
-  "exp": "Zetti iniciou os dois jogos da decisão contra o Newell's.",
+  "exp": "Zetti foi o goleiro na decisão contra o Newell's e defendeu cobrança na disputa de pênaltis.",
   "src": [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1992",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-010",
@@ -222,10 +283,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1992",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+   },
+   {
+    "n": "Lance! — São Paulo, time com mais artilheiros na Libertadores",
+    "u": "https://www.lance.com.br/sao-paulo/com-calleri-vira-time-com-mais-artilheiros-libertadores.html"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-011",
@@ -244,10 +310,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1992",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1992",
+    "u": "https://www.rsssf.org/sacups/copa92.html"
+   },
+   {
+    "n": "Itatiaia — A campanha do São Paulo na Libertadores de 1992",
+    "u": "https://www.itatiaia.com.br/esportes/futebol/futebol-nacional/futebol-paulista/sao-paulo-fc/a-campanha-do-sao-paulo-na-copa-libertadores-de-1992/"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-012",
@@ -266,10 +341,19 @@ export default [
    {
     "n": "RSSSF — Copa Libertadores 1992",
     "u": "https://rsssf.org/sacups/copa92.html"
+   },
+   {
+    "n": "Wikipédia (pt) — Libertadores 1992",
+    "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+   },
+   {
+    "n": "Itatiaia — A campanha do São Paulo na Libertadores de 1992",
+    "u": "https://www.itatiaia.com.br/esportes/futebol/futebol-nacional/futebol-paulista/sao-paulo-fc/a-campanha-do-sao-paulo-na-copa-libertadores-de-1992/"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-013",
@@ -290,12 +374,17 @@ export default [
     "u": "https://rsssf.org/sacups/copa92.html"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "Itatiaia — A campanha do São Paulo na Libertadores de 1992",
+    "u": "https://www.itatiaia.com.br/esportes/futebol/futebol-nacional/futebol-paulista/sao-paulo-fc/a-campanha-do-sao-paulo-na-copa-libertadores-de-1992/"
+   },
+   {
+    "n": "Wikipédia (pt) — Libertadores 1992",
+    "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-014",
@@ -309,15 +398,20 @@ export default [
   "c": 3,
   "cat": "lib",
   "d": 2,
-  "exp": "O São Paulo venceu por 1 a 0 em casa e empatou por 1 a 1 em Criciúma.",
+  "exp": "O São Paulo venceu por 1 a 0 e empatou por 1 a 1, somando 2 a 1 no agregado.",
   "src": [
    {
     "n": "RSSSF — Copa Libertadores 1992",
     "u": "https://rsssf.org/sacups/copa92.html"
+   },
+   {
+    "n": "Wikipédia (pt) — Libertadores 1992",
+    "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-015",
@@ -343,7 +437,8 @@ export default [
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-016",
@@ -362,10 +457,15 @@ export default [
    {
     "n": "RSSSF — Copa Libertadores 1992",
     "u": "https://rsssf.org/sacups/copa92.html"
+   },
+   {
+    "n": "Wikipédia (pt) — Libertadores 1992",
+    "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-017",
@@ -387,7 +487,8 @@ export default [
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "lib-018",
@@ -406,10 +507,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1992",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-019",
@@ -428,10 +534,15 @@ export default [
    {
     "n": "RSSSF — Copa Libertadores 1992",
     "u": "https://rsssf.org/sacups/copa92.html"
+   },
+   {
+    "n": "Wikipédia (pt) — Libertadores 1992",
+    "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
    }
   ],
   "when": "1992",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-020",
@@ -452,12 +563,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1993"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "RSSSF — Copa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/copa93.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-021",
@@ -476,10 +592,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1993",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1993"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/copa93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-022",
@@ -498,10 +623,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1993",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1993"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/copa93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-023",
@@ -520,10 +650,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1993",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1993"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/copa93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-024",
@@ -542,10 +677,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1993",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1993"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/copa93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-025",
@@ -564,10 +704,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1993",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1993"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/copa93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-026",
@@ -586,10 +731,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1993",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1993"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/copa93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-027",
@@ -608,10 +758,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1993",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1993"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1993",
+    "u": "https://www.rsssf.org/sacups/copa93.html"
    }
   ],
   "when": "1993",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-028",
@@ -632,12 +787,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2005"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "RSSSF — Copa Libertadores 2005",
+    "u": "https://www.rsssf.org/sacups/copa05.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-029",
@@ -656,10 +816,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 2005",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2005"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2005",
+    "u": "https://www.rsssf.org/sacups/copa05.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-030",
@@ -678,10 +847,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 2005",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2005"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores (lista de finais)",
+    "u": "https://www.rsssf.org/sacups/copalib.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-031",
@@ -700,10 +874,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 2005",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2005"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2005",
+    "u": "https://www.rsssf.org/sacups/copa05.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-032",
@@ -722,10 +905,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 2005",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2005"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2005",
+    "u": "https://www.rsssf.org/sacups/copa05.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-033",
@@ -739,15 +927,24 @@ export default [
   "c": 0,
   "cat": "lib",
   "d": 2,
-  "exp": "Amoroso marcou aos 16; Fabão fez aos 52, Luizão aos 71 e Tardelli aos 89.",
+  "exp": "Segundo a ficha do site oficial, Amoroso marcou aos 16 do 1º tempo; Fabão, Luizão e Diego Tardelli completaram no segundo tempo.",
   "src": [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 2005",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2005"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2005",
+    "u": "https://www.rsssf.org/sacups/copa05.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-034",
@@ -770,10 +967,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2005",
+    "u": "https://www.rsssf.org/sacups/copa05.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-035",
@@ -796,10 +998,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2005",
+    "u": "https://www.rsssf.org/sacups/copa05.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-036",
@@ -822,10 +1029,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2005",
+    "u": "https://www.rsssf.org/sacups/copa05.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-037",
@@ -844,10 +1056,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 2005",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2005"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2005",
+    "u": "https://www.rsssf.org/sacups/copa05.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-038",
@@ -866,10 +1083,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 2005",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2005"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2005",
+    "u": "https://www.rsssf.org/sacups/copa05.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-039",
@@ -888,10 +1110,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2005",
+    "u": "https://www.rsssf.org/sacups/copa05.html"
    }
   ],
   "when": "2005",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-040",
@@ -912,12 +1139,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2006"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "RSSSF — Copa Libertadores 2006",
+    "u": "https://www.rsssf.org/sacups/copa06.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "2006",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-041",
@@ -940,10 +1172,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2006",
+    "u": "https://www.rsssf.org/sacups/copa06.html"
    }
   ],
   "when": "2006",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-042",
@@ -966,10 +1203,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2006",
+    "u": "https://www.rsssf.org/sacups/copa06.html"
    }
   ],
   "when": "2006",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-043",
@@ -983,15 +1225,20 @@ export default [
   "c": 0,
   "cat": "lib",
   "d": 3,
-  "exp": "Após 1 a 0 em casa e 0 a 1 fora, o Tricolor ganhou por 4 a 3 nas cobranças.",
+  "exp": "Após derrota por 1 a 0 em La Plata e vitória por 1 a 0 em casa, o Tricolor ganhou por 4 a 3 nas cobranças.",
   "src": [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2006",
+    "u": "https://www.rsssf.org/sacups/copa06.html"
    }
   ],
   "when": "2006",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-044",
@@ -1010,10 +1257,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2004",
+    "u": "https://www.rsssf.org/sacups/copa04.html"
    }
   ],
   "when": "2004",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-045",
@@ -1032,10 +1284,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2004",
+    "u": "https://www.rsssf.org/sacups/copa04.html"
    }
   ],
   "when": "2004",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-046",
@@ -1054,10 +1311,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2004",
+    "u": "https://www.rsssf.org/sacups/copa04.html"
    }
   ],
   "when": "2004",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-047",
@@ -1076,10 +1338,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2010",
+    "u": "https://www.rsssf.org/sacups/copa2010.html"
    }
   ],
   "when": "2010",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-048",
@@ -1098,10 +1365,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2010",
+    "u": "https://www.rsssf.org/sacups/copa2010.html"
    }
   ],
   "when": "2010",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-049",
@@ -1120,10 +1392,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2010",
+    "u": "https://www.rsssf.org/sacups/copa2010.html"
    }
   ],
   "when": "2010",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-050",
@@ -1142,10 +1419,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2008",
+    "u": "https://www.rsssf.org/sacups/copa08.html"
    }
   ],
   "when": "2008",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-051",
@@ -1159,15 +1441,21 @@ export default [
   "c": 1,
   "cat": "lib",
   "d": 2,
-  "exp": "Foram 1 a 1 e 2 a 0 para o Grêmio.",
+  "exp": "O São Paulo venceu o primeiro jogo por 1 a 0, mas perdeu o segundo por 2 a 0 e foi eliminado.",
   "src": [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2007",
+    "u": "https://www.rsssf.org/sacups/copa07.html"
    }
   ],
   "when": "2007",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "fixed": true
  },
  {
   "id": "lib-052",
@@ -1186,10 +1474,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2013",
+    "u": "https://www.rsssf.org/sacups/copa2013.html"
    }
   ],
   "when": "2013",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-053",
@@ -1208,10 +1501,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2015",
+    "u": "https://www.rsssf.org/sacups/copa2015.html"
    }
   ],
   "when": "2015",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-054",
@@ -1230,10 +1528,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2016",
+    "u": "https://www.rsssf.org/sacups/copa2016.html"
    }
   ],
   "when": "2016",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-055",
@@ -1252,10 +1555,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2016",
+    "u": "https://www.rsssf.org/sacups/copa2016.html"
    }
   ],
   "when": "2016",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-056",
@@ -1274,10 +1582,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2016",
+    "u": "https://www.rsssf.org/sacups/copa2016.html"
    }
   ],
   "when": "2016",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-057",
@@ -1296,10 +1609,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2021",
+    "u": "https://www.rsssf.org/sacups/copa2021.html"
    }
   ],
   "when": "2021",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-058",
@@ -1313,15 +1631,20 @@ export default [
   "c": 0,
   "cat": "lib",
   "d": 3,
-  "exp": "Após 1 a 1 e 0 a 0, o Botafogo passou por 5 a 4 nos pênaltis.",
+  "exp": "Após 0 a 0 e 1 a 1, o Botafogo passou por 5 a 4 nos pênaltis.",
   "src": [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2024",
+    "u": "https://www.rsssf.org/sacups/copa2024.html"
    }
   ],
   "when": "2024",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-059",
@@ -1340,10 +1663,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "O Antagonista — São Paulo vence o Atlético Nacional nos pênaltis (2025)",
+    "u": "https://oantagonista.com.br/ladooa/esportes/no-sufoco-sao-paulo-vence-o-atletico-nacional-e-se-garante-nas-quartas-da-libertadores/"
    }
   ],
   "when": "2025",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-060",
@@ -1362,10 +1690,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "Gazeta Esportiva — São Paulo é eliminado em casa pela LDU (2025)",
+    "u": "https://www.gazetaesportiva.com/?p=3712872"
    }
   ],
   "when": "2025",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-061",
@@ -1384,10 +1717,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2019",
+    "u": "https://www.rsssf.org/sacups/copa2019.html"
    }
   ],
   "when": "2019",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-062",
@@ -1406,10 +1744,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2021",
+    "u": "https://www.rsssf.org/sacups/copa2021.html"
    }
   ],
   "when": "2021",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-063",
@@ -1428,10 +1771,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2020",
+    "u": "https://www.rsssf.org/sacups/copa2020.html"
    }
   ],
   "when": "2020",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-064",
@@ -1450,10 +1798,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 2024",
+    "u": "https://www.rsssf.org/sacups/copa2024.html"
    }
   ],
   "when": "2024",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-065",
@@ -1472,10 +1825,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1974",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1974"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1974",
+    "u": "https://www.rsssf.org/sacups/copa74.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1974",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-066",
@@ -1494,10 +1856,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1974",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1974"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1974",
+    "u": "https://www.rsssf.org/sacups/copa74.html"
    }
   ],
   "when": "1974",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-067",
@@ -1516,10 +1883,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1974",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1974"
+   },
+   {
+    "n": "ABCdoABC — São Paulo presta homenagem a Poy",
+    "u": "https://abcdoabc.com.br/sao-paulo-presta-homenagem-a-poy/"
    }
   ],
   "when": "1974",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-068",
@@ -1538,10 +1910,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1974",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1974"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1974",
+    "u": "https://www.rsssf.org/sacups/copa74.html"
    }
   ],
   "when": "1974",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-069",
@@ -1560,10 +1937,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1974",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1974"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1974",
+    "u": "https://www.rsssf.org/sacups/copa74.html"
    }
   ],
   "when": "1974",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-070",
@@ -1584,12 +1966,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1994"
    },
    {
-    "n": "Wikipédia (en) — São Paulo FC in international football",
-    "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1994",
+    "u": "https://www.rsssf.org/sacups/copa94.html"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-071",
@@ -1608,10 +1995,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1994",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1994"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1994",
+    "u": "https://www.rsssf.org/sacups/copa94.html"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-072",
@@ -1630,10 +2022,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1994",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1994"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1994",
+    "u": "https://www.rsssf.org/sacups/copa94.html"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-073",
@@ -1656,10 +2053,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1994",
+    "u": "https://www.rsssf.org/sacups/copa94.html"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-074",
@@ -1682,10 +2084,15 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1994",
+    "u": "https://www.rsssf.org/sacups/copa94.html"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-075",
@@ -1704,10 +2111,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Copa Libertadores de 1994",
     "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1994"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1994",
+    "u": "https://www.rsssf.org/sacups/copa94.html"
    }
   ],
   "when": "1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-076",
@@ -1728,12 +2140,17 @@ export default [
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
    },
    {
-    "n": "Wikipédia (pt) — Copa Libertadores de 1994",
-    "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1994"
+    "n": "RSSSF — Copa Libertadores 1994",
+    "u": "https://www.rsssf.org/sacups/copa94.html"
+   },
+   {
+    "n": "Site oficial do São Paulo — Conquistas",
+    "u": "https://www.saopaulofc.net/o-clube/conquistas/"
    }
   ],
   "when": "1992–1994",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "lib-077",
@@ -1752,9 +2169,14 @@ export default [
    {
     "n": "Wikipédia (en) — São Paulo FC in international football",
     "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC_in_international_football"
+   },
+   {
+    "n": "RSSSF — Copa Libertadores 1972",
+    "u": "https://www.rsssf.org/sacups/copa72.html"
    }
   ],
   "when": "1972",
-  "ok": true
+  "ok": true,
+  "v2": true
  }
 ];
