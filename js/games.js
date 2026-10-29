@@ -497,6 +497,7 @@ export const CATEGORIES = [
   { id: 'sport', label: { pt: 'Esportes', en: 'Sports', es: 'Deportes' } },
   { id: 'strategy', label: { pt: 'Estratégia', en: 'Strategy', es: 'Estrategia' } },
   { id: 'knowledge', label: { pt: 'Conhecimento', en: 'Knowledge', es: 'Conocimiento' } },
+  { id: 'cards', label: { pt: 'Cartas', en: 'Cards', es: 'Cartas' } },
   { id: 'puzzle', label: { pt: 'Puzzles', en: 'Puzzles', es: 'Puzles' } },
   { id: 'classic', label: { pt: 'Clássicos', en: 'Classics', es: 'Clásicos' } },
 ];
