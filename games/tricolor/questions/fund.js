@@ -175,7 +175,7 @@ export default [
   },
   {
     "id": "fund-007",
-    "q": "Como o São Paulo ficou conhecido informalmente entre 1930 e 1935, em referência a seu estádio?",
+    "q": "Que nome é usado hoje para designar o São Paulo de 1930 a 1935, em referência ao seu primeiro estádio?",
     "a": [
       "São Paulo do Canindé",
       "São Paulo da Luz",
@@ -185,7 +185,7 @@ export default [
     "c": 3,
     "cat": "fund",
     "d": 2,
-    "exp": "O nome vem da Chácara da Floresta, emprestada pela AA das Palmeiras.",
+    "exp": "O nome, popularizado décadas depois, vem da Chácara da Floresta, herdada da AA das Palmeiras.",
     "src": [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
@@ -194,6 +194,10 @@ export default [
       {
         "n": "Lance! — O São Paulo Futebol Clube teve outro nome?",
         "u": "https://www.lance.com.br/lancepedia/o-sao-paulo-futebol-clube-teve-outro-nome.html"
+      },
+      {
+        "n": "SPFC (site oficial) — 1930 e 1935: conheça e entenda a história do Tricolor",
+        "u": "https://www.saopaulofc.net/1930-e-1935-conheca-e-entenda-a-historia-do-tricolor/"
       }
     ],
     "when": "1930–1935",
@@ -437,7 +441,7 @@ export default [
   },
   {
     "id": "fund-018",
-    "q": "Que apelido teve o time do São Paulo campeão paulista de 1931?",
+    "q": "Que apelido ficou associado ao time de 1930 a 1935, de estrelas como Friedenreich?",
     "a": [
       "Rolo Compressor",
       "Esquadrão de Aço",
@@ -447,18 +451,22 @@ export default [
     "c": 1,
     "cat": "fund",
     "d": 3,
-    "exp": "O time de Friedenreich, Armandinho e Luizinho ficou conhecido como Esquadrão de Aço.",
+    "exp": "O Esquadrão de Aço, campeão paulista de 1931, é o apelido do time da primeira fase do clube.",
     "src": [
+      {
+        "n": "SPFC (site oficial) — 1930 e 1935: conheça e entenda a história do Tricolor",
+        "u": "https://www.saopaulofc.net/1930-e-1935-conheca-e-entenda-a-historia-do-tricolor/"
+      },
+      {
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
+      },
       {
         "n": "Wikipédia (pt) — Arthur Friedenreich",
         "u": "https://pt.wikipedia.org/wiki/Arthur_Friedenreich"
-      },
-      {
-        "n": "Wikipedia (en) — 1931 São Paulo FC season",
-        "u": "https://en.wikipedia.org/wiki/1931_S%C3%A3o_Paulo_FC_season"
       }
     ],
-    "when": "1931",
+    "when": "1930–1935",
     "ok": true
   },
   {
@@ -1577,6 +1585,350 @@ export default [
       }
     ],
     "when": "1942",
+    "ok": true
+  },
+  {
+    "id": "fund-064",
+    "q": "Segundo o site oficial, que data consta na ata de fundação do clube, já que a reunião passou da meia-noite?",
+    "a": [
+      "25 de janeiro de 1930",
+      "26 de janeiro de 1930",
+      "27 de janeiro de 1930",
+      "30 de janeiro de 1930"
+    ],
+    "c": 1,
+    "cat": "fund",
+    "d": 4,
+    "exp": "A assembleia começou às 14h do dia 25, mas a ata foi assinada na madrugada de 26 de janeiro de 1930.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — 1930 e 1935: conheça e entenda a história do Tricolor",
+        "u": "https://www.saopaulofc.net/1930-e-1935-conheca-e-entenda-a-historia-do-tricolor/"
+      },
+      {
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
+      }
+    ],
+    "when": "1930",
+    "ok": true
+  },
+  {
+    "id": "fund-065",
+    "q": "Quem presidiu o primeiro Conselho Deliberativo do São Paulo, em 1930?",
+    "a": [
+      "Edgard de Souza Aranha",
+      "Júlio de Mesquita Filho",
+      "Cícero Pompeu de Toledo",
+      "Roberto Gomes Pedrosa"
+    ],
+    "c": 1,
+    "cat": "fund",
+    "d": 4,
+    "exp": "O site oficial registra Júlio de Mesquita Filho como o primeiro presidente do Conselho Deliberativo.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
+      }
+    ],
+    "when": "1930",
+    "ok": true
+  },
+  {
+    "id": "fund-066",
+    "q": "Em que ano o Conselho Deliberativo aprovou formalmente 25 de janeiro de 1930 como data de fundação?",
+    "a": [
+      "1990",
+      "2000",
+      "2013",
+      "2010"
+    ],
+    "c": 2,
+    "cat": "fund",
+    "d": 3,
+    "exp": "Em 2013 o clube fixou 1930 como fundação e 1935 como refundação.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — 1930 e 1935: conheça e entenda a história do Tricolor",
+        "u": "https://www.saopaulofc.net/1930-e-1935-conheca-e-entenda-a-historia-do-tricolor/"
+      },
+      {
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
+      }
+    ],
+    "when": "2013",
+    "ok": true
+  },
+  {
+    "id": "fund-067",
+    "q": "Em qual rua de São Paulo foi realizada a assembleia de refundação, em 16 de dezembro de 1935?",
+    "a": [
+      "Rua 11 de Agosto",
+      "Rua São Bento",
+      "Rua Direita",
+      "Rua Padre Vieira"
+    ],
+    "c": 0,
+    "cat": "fund",
+    "d": 4,
+    "exp": "A reunião foi às 20h, no prédio nº 9-A da Rua 11 de Agosto, e acabou perto da meia-noite.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — 16 de dezembro: a refundação do São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/16-de-dezembro-a-refundacao-do-sao-paulo-futebol-clube/"
+      },
+      {
+        "n": "SPFC (site oficial) — O dia em que o Tricolor renasceu para o futebol",
+        "u": "https://www.saopaulofc.net/o-dia-em-que-o-tricolor-renasceu-para-o-futebol/"
+      }
+    ],
+    "when": "1935",
+    "ok": true
+  },
+  {
+    "id": "fund-068",
+    "q": "Em qual jornal foi publicada a convocação para a assembleia de refundação de 16 de dezembro de 1935?",
+    "a": [
+      "A Gazeta Esportiva",
+      "Folha da Manhã",
+      "O Estado de S. Paulo",
+      "Correio de São Paulo"
+    ],
+    "c": 3,
+    "cat": "fund",
+    "d": 4,
+    "exp": "O aviso da diretoria do Grêmio Tricolor saiu no Correio de São Paulo no próprio dia 16.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — 16 de dezembro: a refundação do São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/16-de-dezembro-a-refundacao-do-sao-paulo-futebol-clube/"
+      },
+      {
+        "n": "SPFC (site oficial) — O dia em que o Tricolor renasceu para o futebol",
+        "u": "https://www.saopaulofc.net/o-dia-em-que-o-tricolor-renasceu-para-o-futebol/"
+      }
+    ],
+    "when": "1935",
+    "ok": true
+  },
+  {
+    "id": "fund-069",
+    "q": "Quem abriu e foi escolhido para presidir a assembleia de refundação do São Paulo, em 1935?",
+    "a": [
+      "Manoel Carmo Meca",
+      "Edgard de Toledo",
+      "José Carlos da Silva Freire",
+      "Tenente José Porphyrio da Paz"
+    ],
+    "c": 3,
+    "cat": "fund",
+    "d": 3,
+    "exp": "Porphyrio da Paz abriu a reunião e presidiu a sessão; Meca foi eleito presidente do clube.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — 16 de dezembro: a refundação do São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/16-de-dezembro-a-refundacao-do-sao-paulo-futebol-clube/"
+      },
+      {
+        "n": "SPFC (site oficial) — O dia em que o Tricolor renasceu para o futebol",
+        "u": "https://www.saopaulofc.net/o-dia-em-que-o-tricolor-renasceu-para-o-futebol/"
+      }
+    ],
+    "when": "1935",
+    "ok": true
+  },
+  {
+    "id": "fund-070",
+    "q": "Em que mês de 1935 foi fundado o Grêmio Tricolor, que ajudou a reorganizar o clube?",
+    "a": [
+      "Janeiro",
+      "Maio",
+      "Fevereiro",
+      "Dezembro"
+    ],
+    "c": 2,
+    "cat": "fund",
+    "d": 4,
+    "exp": "O Grêmio Tricolor foi fundado em 9 de fevereiro de 1935 e depois se tornou o Grêmio São-Paulino.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: A genealogia do São Paulo",
+        "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
+      },
+      {
+        "n": "SPFC (site oficial) — O dia em que o Tricolor renasceu para o futebol",
+        "u": "https://www.saopaulofc.net/o-dia-em-que-o-tricolor-renasceu-para-o-futebol/"
+      }
+    ],
+    "when": "1935",
+    "ok": true
+  },
+  {
+    "id": "fund-071",
+    "q": "Que clube foi reaberto em 4 de junho de 1935 por sócios excluídos da assembleia da fusão com o Tietê?",
+    "a": [
+      "Clube Atlético São Paulo",
+      "Independente Esporte Clube",
+      "Grêmio Tricolor",
+      "Clube de Regatas São Paulo"
+    ],
+    "c": 0,
+    "cat": "fund",
+    "d": 4,
+    "exp": "O clube existiu até 16 de dezembro de 1935, quando os sócios voltaram ao São Paulo Futebol Clube.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: A genealogia do São Paulo",
+        "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
+      },
+      {
+        "n": "SPFC (site oficial) — O dia em que o Tricolor renasceu para o futebol",
+        "u": "https://www.saopaulofc.net/o-dia-em-que-o-tricolor-renasceu-para-o-futebol/"
+      }
+    ],
+    "when": "1935",
+    "ok": true
+  },
+  {
+    "id": "fund-072",
+    "q": "Qual clube foi formado em março de 1935 por jogadores que se rebelaram contra a fusão com o Tietê?",
+    "a": [
+      "Clube Atlético São Paulo",
+      "Independente Esporte Clube",
+      "Grêmio Tricolor",
+      "Estudante Paulista"
+    ],
+    "c": 1,
+    "cat": "fund",
+    "d": 4,
+    "exp": "Os atletas rebeldes encerraram o Independente em 16 de dezembro de 1935, com a volta ao São Paulo.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: A genealogia do São Paulo",
+        "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
+      }
+    ],
+    "when": "1935",
+    "ok": true
+  },
+  {
+    "id": "fund-073",
+    "q": "Em 1942, o São Paulo incorporou qual associação, o que levou o clube ao Canindé?",
+    "a": [
+      "Clube Ginástico Paulista",
+      "Sociedade Harmonia de Tênis",
+      "Clube Atlético Ypiranga",
+      "Associação Alemã de Esportes (Deutscher SC)"
+    ],
+    "c": 3,
+    "cat": "fund",
+    "d": 4,
+    "exp": "A incorporação, em 20 de março de 1942, abriu a fase do Canindé.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: A genealogia do São Paulo",
+        "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
+      }
+    ],
+    "when": "1942",
+    "ok": true
+  },
+  {
+    "id": "fund-074",
+    "q": "Quantos títulos paulistas somavam os dois clubes de origem, Paulistano e AA das Palmeiras?",
+    "a": [
+      "10",
+      "14",
+      "12",
+      "16"
+    ],
+    "c": 1,
+    "cat": "fund",
+    "d": 4,
+    "exp": "O Paulistano tem 11 títulos e a AA das Palmeiras, 3.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
+      },
+      {
+        "n": "Wikipédia (pt) — Lista de campeões do Campeonato Paulista",
+        "u": "https://pt.wikipedia.org/wiki/Lista_de_campe%C3%B5es_do_Campeonato_Paulista_de_Futebol"
+      }
+    ],
+    "when": "1930",
+    "ok": true
+  },
+  {
+    "id": "fund-075",
+    "q": "Quantos títulos paulistas seguidos o Paulistano conquistou entre 1916 e 1919?",
+    "a": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "c": 2,
+    "cat": "fund",
+    "d": 4,
+    "exp": "O Paulistano ganhou quatro paulistas em sequência e somou 11 no total.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
+      }
+    ],
+    "when": "1916–1919",
+    "ok": true
+  },
+  {
+    "id": "fund-076",
+    "q": "Em que ano a AA das Palmeiras se mudou para a Chácara da Floresta?",
+    "a": [
+      "1904",
+      "1902",
+      "1908",
+      "1915"
+    ],
+    "c": 0,
+    "cat": "fund",
+    "d": 3,
+    "exp": "A AA das Palmeiras foi fundada em 1902, mudou-se para a Chácara em 1904 e entrou na Liga Paulista no mesmo ano.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
+      }
+    ],
+    "when": "1904",
+    "ok": true
+  },
+  {
+    "id": "fund-077",
+    "q": "Qual foi a data de fundação do Paulistano, segundo o site oficial do São Paulo?",
+    "a": [
+      "29 de dezembro de 1900",
+      "30 de novembro de 1900",
+      "29 de dezembro de 1902",
+      "9 de novembro de 1902"
+    ],
+    "c": 0,
+    "cat": "fund",
+    "d": 3,
+    "exp": "O site oficial registra a fundação do Paulistano em 29 de dezembro de 1900.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: A genealogia do São Paulo",
+        "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
+      },
+      {
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
+      }
+    ],
+    "when": "1900",
     "ok": true
   }
 ];

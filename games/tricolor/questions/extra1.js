@@ -72,36 +72,14 @@ export default [
  },
  {
   "id": "bras-1004",
-  "q": "Quantos títulos do Campeonato Brasileiro o São Paulo tem?",
-  "a": [
-   "6",
-   "4",
-   "5",
-   "7"
-  ],
-  "c": 0,
-  "cat": "bras",
-  "d": 1,
-  "exp": "O Tricolor foi campeão em 1977, 1986, 1991, 2006, 2007 e 2008.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1977–2008",
-  "ok": true
- },
- {
-  "id": "bras-1005",
   "q": "Em que anos o São Paulo foi campeão brasileiro antes do tricampeonato de 2006 a 2008?",
   "a": [
+   "1977, 1986 e 1991",
    "1977, 1981 e 1991",
    "1971, 1986 e 1991",
-   "1977, 1986 e 1993",
-   "1977, 1986 e 1991"
+   "1977, 1986 e 1993"
   ],
-  "c": 3,
+  "c": 0,
   "cat": "bras",
   "d": 2,
   "exp": "O São Paulo ganhou o Brasileiro em 1977, 1986 e 1991.",
@@ -115,81 +93,15 @@ export default [
   "ok": true
  },
  {
-  "id": "lib-1006",
-  "q": "Em que anos o São Paulo foi campeão da Copa Libertadores?",
-  "a": [
-   "1974, 1992 e 2005",
-   "1992, 1994 e 2006",
-   "1992, 1993 e 2005",
-   "1993, 2005 e 2006"
-  ],
-  "c": 2,
-  "cat": "lib",
-  "d": 1,
-  "exp": "O Tricolor tem três títulos da Libertadores: 1992, 1993 e 2005.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1992–2005",
-  "ok": true
- },
- {
-  "id": "mundial-1007",
-  "q": "Em que anos o São Paulo foi campeão da Copa Intercontinental?",
-  "a": [
-   "1992 e 1993",
-   "1992 e 1994",
-   "1993 e 2005",
-   "1991 e 1992"
-  ],
-  "c": 0,
-  "cat": "mundial",
-  "d": 1,
-  "exp": "O Tricolor ganhou a Copa Intercontinental duas vezes seguidas, em 1992 e 1993.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1992–1993",
-  "ok": true
- },
- {
-  "id": "mundial-1008",
-  "q": "Em que ano o São Paulo conquistou o Mundial de Clubes da Fifa?",
-  "a": [
-   "2000",
-   "2005",
-   "2006",
-   "2012"
-  ],
-  "c": 1,
-  "cat": "mundial",
-  "d": 1,
-  "exp": "O título do Mundial de Clubes veio em 2005; junto com as Intercontinentais rendeu as três estrelas vermelhas.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "2005",
-  "ok": true
- },
- {
-  "id": "idolos-1009",
+  "id": "idolos-1005",
   "q": "Em quais anos Rogério Ceni foi campeão paulista pelo São Paulo?",
   "a": [
-   "1998, 2000 e 2005",
    "1992, 1998 e 2005",
    "1998, 2000 e 2001",
-   "2000, 2005 e 2021"
+   "2000, 2005 e 2021",
+   "1998, 2000 e 2005"
   ],
-  "c": 0,
+  "c": 3,
   "cat": "idolos",
   "d": 3,
   "exp": "Ceni ganhou três Paulistas, em 1998, 2000 e 2005.",
@@ -203,15 +115,15 @@ export default [
   "ok": true
  },
  {
-  "id": "copas-1010",
+  "id": "copas-1006",
   "q": "Por que o Botafogo foi o adversário do São Paulo na Recopa Sul-Americana de 1994?",
   "a": [
    "Era o vice da Libertadores de 1993",
    "Era o campeão da Supercopa Sul-Americana",
-   "Era o campeão brasileiro de 1993",
-   "Era o campeão da Copa Conmebol de 1993"
+   "Era o campeão da Copa Conmebol de 1993",
+   "Era o campeão brasileiro de 1993"
   ],
-  "c": 3,
+  "c": 2,
   "cat": "copas",
   "d": 4,
   "exp": "O São Paulo acumulou Libertadores e Supercopa de 1993, e a Conmebol convidou o campeão da Copa Conmebol.",
@@ -225,15 +137,15 @@ export default [
   "ok": true
  },
  {
-  "id": "copas-1011",
+  "id": "copas-1007",
   "q": "Qual foi o placar do São Paulo sobre o Botafogo na semifinal da Copa Master de 1996?",
   "a": [
+   "7 a 3",
    "3 a 1",
    "4 a 2",
-   "7 a 3",
    "5 a 0"
   ],
-  "c": 2,
+  "c": 0,
   "cat": "copas",
   "d": 4,
   "exp": "Em 8 de fevereiro de 1996, o Tricolor goleou o Botafogo por 7 a 3 e decidiu contra o Atlético Mineiro.",
@@ -247,7 +159,7 @@ export default [
   "ok": true
  },
  {
-  "id": "jogos-1012",
+  "id": "jogos-1008",
   "q": "Como o São Paulo eliminou o Fluminense na semifinal do Torneio Rio-São Paulo de 2001?",
   "a": [
    "Por 3 a 1 no agregado",
@@ -269,15 +181,15 @@ export default [
   "ok": true
  },
  {
-  "id": "copas-1013",
+  "id": "copas-1009",
   "q": "Quem foi o artilheiro do Torneio Rio-São Paulo de 2001, com 6 gols, jogando pelo São Paulo?",
   "a": [
-   "Luís Fabiano",
    "França",
+   "Luís Fabiano",
    "Kaká",
    "Reinaldo"
   ],
-  "c": 1,
+  "c": 0,
   "cat": "copas",
   "d": 3,
   "exp": "França, do São Paulo, terminou como artilheiro do torneio.",
@@ -291,7 +203,7 @@ export default [
   "ok": true
  },
  {
-  "id": "copas-1014",
+  "id": "copas-1010",
   "q": "Qual foi o agregado da final do Supercampeonato Paulista de 2002 entre São Paulo e Ituano?",
   "a": [
    "São Paulo 4 a 2",
@@ -313,15 +225,15 @@ export default [
   "ok": true
  },
  {
-  "id": "rivais-1015",
+  "id": "rivais-1011",
   "q": "Quem o São Paulo eliminou na semifinal do Supercampeonato Paulista de 2002, com 2 a 0 e 2 a 2?",
   "a": [
-   "Palmeiras",
    "Corinthians",
    "Santos",
+   "Palmeiras",
    "Portuguesa"
   ],
-  "c": 0,
+  "c": 2,
   "cat": "rivais",
   "d": 3,
   "exp": "O São Paulo venceu o Palmeiras por 4 a 2 no agregado e foi à final contra o Ituano.",
@@ -335,15 +247,15 @@ export default [
   "ok": true
  },
  {
-  "id": "copas-1016",
+  "id": "copas-1012",
   "q": "Quantas vezes o São Paulo foi campeão da Copa São Paulo de Futebol Júnior até a edição de 2026?",
   "a": [
    "3",
-   "4",
    "5",
+   "4",
    "6"
   ],
-  "c": 2,
+  "c": 1,
   "cat": "copas",
   "d": 3,
   "exp": "O Tricolor ganhou a Copinha em 1993, 2000, 2010, 2019 e 2025.",
@@ -357,15 +269,15 @@ export default [
   "ok": true
  },
  {
-  "id": "rivais-1017",
+  "id": "rivais-1013",
   "q": "Quem o São Paulo derrotou na final da Copa São Paulo de Futebol Júnior de 1993?",
   "a": [
-   "Corinthians",
    "Santos",
+   "Corinthians",
    "Palmeiras",
    "Guarani"
   ],
-  "c": 0,
+  "c": 1,
   "cat": "rivais",
   "d": 3,
   "exp": "O São Paulo foi campeão da Copinha de 1993, tendo o Corinthians como vice.",
@@ -379,15 +291,15 @@ export default [
   "ok": true
  },
  {
-  "id": "copas-1018",
+  "id": "copas-1014",
   "q": "Quem foi o adversário do São Paulo na final da Copa São Paulo de Futebol Júnior de 2000, vencida pelo Tricolor?",
   "a": [
    "Corinthians",
-   "Juventus-SP",
    "Santos",
-   "Ponte Preta"
+   "Ponte Preta",
+   "Juventus-SP"
   ],
-  "c": 1,
+  "c": 3,
   "cat": "copas",
   "d": 4,
   "exp": "O Tricolor foi campeão em 2000, com o Juventus da Mooca como vice.",
@@ -401,15 +313,15 @@ export default [
   "ok": true
  },
  {
-  "id": "copas-1019",
+  "id": "copas-1015",
   "q": "Quem o São Paulo venceu na final da Copa São Paulo de Futebol Júnior de 2010?",
   "a": [
+   "Santos",
    "Corinthians",
    "Palmeiras",
-   "Flamengo",
-   "Santos"
+   "Flamengo"
   ],
-  "c": 3,
+  "c": 0,
   "cat": "copas",
   "d": 3,
   "exp": "O Tricolor ganhou a Copinha de 2010; o Santos foi o vice-campeão.",
@@ -423,7 +335,7 @@ export default [
   "ok": true
  },
  {
-  "id": "copas-1020",
+  "id": "copas-1016",
   "q": "Que clube foi vice-campeão da Copa São Paulo de Futebol Júnior de 2019, derrotado pelo São Paulo?",
   "a": [
    "Corinthians",
@@ -445,7 +357,7 @@ export default [
   "ok": true
  },
  {
-  "id": "copas-1021",
+  "id": "copas-1017",
   "q": "Quem derrotou o São Paulo na final da Copa São Paulo de Futebol Júnior de 2026?",
   "a": [
    "Cruzeiro",
@@ -467,7 +379,7 @@ export default [
   "ok": true
  },
  {
-  "id": "rivais-1022",
+  "id": "rivais-1018",
   "q": "Quem o São Paulo derrotou na final da Copa São Paulo de Futebol Júnior de 2025?",
   "a": [
    "Palmeiras",
@@ -489,15 +401,15 @@ export default [
   "ok": true
  },
  {
-  "id": "copas-1023",
+  "id": "copas-1019",
   "q": "Que clube venceu o São Paulo na final da Copa São Paulo de Futebol Júnior de 1981?",
   "a": [
    "Corinthians",
    "Guarani",
-   "Ponte Preta",
-   "Santos"
+   "Santos",
+   "Ponte Preta"
   ],
-  "c": 2,
+  "c": 3,
   "cat": "copas",
   "d": 4,
   "exp": "A Ponte Preta foi campeã da Copinha em 1981 e 1982; o São Paulo foi o vice em 1981.",
@@ -511,15 +423,15 @@ export default [
   "ok": true
  },
  {
-  "id": "copas-1024",
+  "id": "copas-1020",
   "q": "Em que data costuma ser disputada a final da Copa São Paulo de Futebol Júnior, aniversário da cidade de São Paulo?",
   "a": [
    "1º de janeiro",
    "9 de julho",
-   "7 de setembro",
-   "25 de janeiro"
+   "25 de janeiro",
+   "7 de setembro"
   ],
-  "c": 3,
+  "c": 2,
   "cat": "copas",
   "d": 2,
   "exp": "Tradicionalmente a final é no Pacaembu em 25 de janeiro; a data também é a da fundação do São Paulo FC (1930).",
@@ -537,15 +449,15 @@ export default [
   "ok": true
  },
  {
-  "id": "fund-1025",
+  "id": "fund-1021",
   "q": "Qual era o nome informal do local onde o São Paulo jogou entre 1930 e 1935, reconhecido recentemente pelo clube?",
   "a": [
+   "Chácara da Floresta",
    "Chácara do Bosque",
    "Fazenda do Morumbi",
-   "Campo da Luz",
-   "Chácara da Floresta"
+   "Campo da Luz"
   ],
-  "c": 3,
+  "c": 0,
   "cat": "fund",
   "d": 4,
   "exp": "O período inicial do clube é associado à Chácara da Floresta.",
@@ -559,15 +471,15 @@ export default [
   "ok": true
  },
  {
-  "id": "fund-1026",
+  "id": "fund-1022",
   "q": "Que nome teve o clube criado em 4 de junho de 1935 por ex-sócios para restaurar o futebol do São Paulo?",
   "a": [
-   "Clube Atlético São Paulo",
    "Tietê-São Paulo",
+   "Clube Atlético São Paulo",
    "São Paulo Athletic Club",
    "Clube Atlético Paulistano"
   ],
-  "c": 0,
+  "c": 1,
   "cat": "fund",
   "d": 4,
   "exp": "O Clube Atlético São Paulo foi o passo que levou à refundação do São Paulo Futebol Clube em 16 de dezembro de 1935.",
@@ -581,15 +493,15 @@ export default [
   "ok": true
  },
  {
-  "id": "fund-1027",
+  "id": "fund-1023",
   "q": "Em que ano uma lei estadual instituiu o Dia Tricolor, em 16 de dezembro?",
   "a": [
    "1995",
-   "2006",
    "2000",
+   "2006",
    "2010"
   ],
-  "c": 1,
+  "c": 2,
   "cat": "fund",
   "d": 4,
   "exp": "A Lei 14.229 foi sancionada em 25 de outubro de 2006.",
@@ -603,15 +515,15 @@ export default [
   "ok": true
  },
  {
-  "id": "hist-1028",
+  "id": "hist-1024",
   "q": "Que título paulista encerrou o longo período sem conquistas oficiais iniciado em 1957, quando as verbas foram para o estádio?",
   "a": [
    "O Paulista de 1965",
    "O Paulista de 1968",
-   "O Paulista de 1970",
-   "O Campeonato Brasileiro de 1971"
+   "O Campeonato Brasileiro de 1971",
+   "O Paulista de 1970"
   ],
-  "c": 2,
+  "c": 3,
   "cat": "hist",
   "d": 3,
   "exp": "O Tricolor ficou sem títulos de 1957 a 1970, período de construção do Morumbi.",
@@ -625,7 +537,7 @@ export default [
   "ok": true
  },
  {
-  "id": "idolos-1029",
+  "id": "idolos-1025",
   "q": "Em que local e com que feito se deu a estreia de Leônidas pelo São Paulo, em 1942?",
   "a": [
    "No Morumbi, com 20 mil pessoas",
@@ -647,7 +559,7 @@ export default [
   "ok": true
  },
  {
-  "id": "idolos-1030",
+  "id": "idolos-1026",
   "q": "Em que cidade morreu Leônidas da Silva, em 24 de janeiro de 2004?",
   "a": [
    "Cotia",
@@ -669,7 +581,7 @@ export default [
   "ok": true
  },
  {
-  "id": "idolos-1031",
+  "id": "idolos-1027",
   "q": "De que clube veio Rogério Ceni, contratado pelo São Paulo em 1990 como quarto goleiro?",
   "a": [
    "Londrina",
@@ -691,7 +603,7 @@ export default [
   "ok": true
  },
  {
-  "id": "elencos-1032",
+  "id": "elencos-1028",
   "q": "Em quantas partidas Rogério Ceni foi capitão do São Paulo, recorde para um jogador em um único clube?",
   "a": [
    "700",
@@ -713,7 +625,7 @@ export default [
   "ok": true
  },
  {
-  "id": "tecnicos-1033",
+  "id": "tecnicos-1029",
   "q": "Em que ano Telê Santana assumiu o São Paulo em sua segunda passagem, que renderia os títulos mundiais?",
   "a": [
    "1988",
@@ -739,15 +651,15 @@ export default [
   "ok": true
  },
  {
-  "id": "tecnicos-1034",
+  "id": "tecnicos-1030",
   "q": "Em que ano Telê Santana teve sua primeira passagem pelo São Paulo, que durou de janeiro a julho?",
   "a": [
-   "1966",
    "1973",
+   "1966",
    "1970",
    "1979"
   ],
-  "c": 1,
+  "c": 0,
   "cat": "tecnicos",
   "d": 4,
   "exp": "Na primeira passagem, em 1973, ele saiu após conflitos com jogadores.",
@@ -761,15 +673,15 @@ export default [
   "ok": true
  },
  {
-  "id": "tecnicos-1035",
+  "id": "tecnicos-1031",
   "q": "Que problema de saúde afastou Telê Santana do São Paulo em janeiro de 1996?",
   "a": [
    "Infarto",
-   "Fratura na perna",
    "Isquemia cerebral",
+   "Fratura na perna",
    "Pneumonia"
   ],
-  "c": 2,
+  "c": 1,
   "cat": "tecnicos",
   "d": 3,
   "exp": "Telê sofreu uma isquemia cerebral em janeiro de 1996 e deixou o comando do Tricolor.",
@@ -783,15 +695,15 @@ export default [
   "ok": true
  },
  {
-  "id": "tecnicos-1036",
+  "id": "tecnicos-1032",
   "q": "Em que ano morreu Telê Santana, técnico bicampeão da Libertadores e do Mundial pelo São Paulo?",
   "a": [
-   "2006",
    "2001",
    "2004",
+   "2006",
    "2009"
   ],
-  "c": 0,
+  "c": 2,
   "cat": "tecnicos",
   "d": 3,
   "exp": "Ele morreu em 21 de abril de 2006, em Belo Horizonte, aos 74 anos.",
@@ -805,15 +717,15 @@ export default [
   "ok": true
  },
  {
-  "id": "tecnicos-1037",
+  "id": "tecnicos-1033",
   "q": "Qual foi a primeira partida de Rogério Ceni como técnico do São Paulo, em 19 de janeiro de 2017, que acabou na conquista de um título?",
   "a": [
    "Copa Sul-Americana, contra o Tigre",
-   "Florida Cup 2017, contra o River Plate",
    "Campeonato Paulista, contra o Santos",
-   "Copa do Brasil, contra o Cruzeiro"
+   "Copa do Brasil, contra o Cruzeiro",
+   "Florida Cup 2017, contra o River Plate"
   ],
-  "c": 1,
+  "c": 3,
   "cat": "tecnicos",
   "d": 4,
   "exp": "Ceni estreou na Florida Cup contra o River Plate e levantou o troféu; foi demitido em 3 de julho de 2017.",
@@ -827,15 +739,15 @@ export default [
   "ok": true
  },
  {
-  "id": "tecnicos-1038",
+  "id": "tecnicos-1034",
   "q": "Em que data Rogério Ceni foi anunciado técnico do São Paulo pela segunda vez, em 2021?",
   "a": [
-   "13 de outubro",
    "2 de março",
+   "13 de outubro",
    "24 de novembro",
    "12 de julho"
   ],
-  "c": 0,
+  "c": 1,
   "cat": "tecnicos",
   "d": 4,
   "exp": "Ele voltou em 13 de outubro de 2021 e ficou até 2023; a primeira passagem como técnico começou em 24 de novembro de 2016.",
@@ -849,7 +761,7 @@ export default [
   "ok": true
  },
  {
-  "id": "morumbi-1039",
+  "id": "morumbi-1035",
   "q": "Em que ano o Morumbi recebeu o primeiro grande show, do grupo Queen?",
   "a": [
    "1976",
@@ -871,15 +783,15 @@ export default [
   "ok": true
  },
  {
-  "id": "morumbi-1040",
+  "id": "morumbi-1036",
   "q": "Qual foi o valor do contrato de naming rights do Morumbi com a Mondelēz, em 2023?",
   "a": [
+   "R$ 75 milhões",
    "R$ 30 milhões",
    "R$ 50 milhões",
-   "R$ 120 milhões",
-   "R$ 75 milhões"
+   "R$ 120 milhões"
   ],
-  "c": 3,
+  "c": 0,
   "cat": "morumbi",
   "d": 4,
   "exp": "O contrato dá ao estádio o nome MorumBIS por três anos.",
@@ -893,15 +805,15 @@ export default [
   "ok": true
  },
  {
-  "id": "morumbi-1041",
+  "id": "morumbi-1037",
   "q": "Em que ano o Morumbi ganhou um novo sistema de iluminação, com refletores horizontais nas laterais?",
   "a": [
    "1994",
-   "2003",
    "1999",
+   "2003",
    "2008"
   ],
-  "c": 2,
+  "c": 1,
   "cat": "morumbi",
   "d": 4,
   "exp": "Desde abril de 1999 o estádio tem o sistema de luz que substituiu os antigos painéis concentrados.",
@@ -915,15 +827,15 @@ export default [
   "ok": true
  },
  {
-  "id": "morumbi-1042",
+  "id": "morumbi-1038",
   "q": "Quem era o presidente do São Paulo quando o Morumbi começou a ser construído e que dá nome ao estádio?",
   "a": [
+   "Cícero Pompeu de Toledo",
    "Laudo Natel",
    "Henri Couri Aidar",
-   "Manoel Raimundo Paes de Almeida",
-   "Cícero Pompeu de Toledo"
+   "Manoel Raimundo Paes de Almeida"
   ],
-  "c": 3,
+  "c": 0,
   "cat": "morumbi",
   "d": 3,
   "exp": "Cícero Pompeu de Toledo presidiu o clube de 1947 a 1957 e o estádio leva seu nome.",
@@ -941,15 +853,15 @@ export default [
   "ok": true
  },
  {
-  "id": "morumbi-1043",
+  "id": "morumbi-1039",
   "q": "Em que data foi aberto o Caminho dos Ídolos, que homenageia 99 campeões do clube?",
   "a": [
    "25 de janeiro de 2019",
-   "7 de agosto de 2018",
    "16 de dezembro de 2017",
+   "7 de agosto de 2018",
    "2 de outubro de 2016"
   ],
-  "c": 1,
+  "c": 2,
   "cat": "morumbi",
   "d": 4,
   "exp": "O espaço no Morumbi homenageia jogadores e técnicos campeões.",
@@ -963,15 +875,15 @@ export default [
   "ok": true
  },
  {
-  "id": "morumbi-1044",
+  "id": "morumbi-1040",
   "q": "Qual é a área aproximada do CFA Cotia, centro de formação de atletas do São Paulo?",
   "a": [
-   "220 mil m²",
    "85 mil m²",
    "100 mil m²",
-   "500 mil m²"
+   "500 mil m²",
+   "220 mil m²"
   ],
-  "c": 0,
+  "c": 3,
   "cat": "morumbi",
   "d": 4,
   "exp": "O CFA Cotia tem cinco campos oficiais e alojamento para até 95 jovens.",
@@ -985,15 +897,15 @@ export default [
   "ok": true
  },
  {
-  "id": "elencos-1045",
+  "id": "elencos-1041",
   "q": "Quem comandou os \"Menudos do Morumbi\", time formado em boa parte na base, em 1984?",
   "a": [
    "Telê Santana",
    "Pepe",
-   "Carlos Alberto Silva",
-   "Cilinho"
+   "Cilinho",
+   "Carlos Alberto Silva"
   ],
-  "c": 3,
+  "c": 2,
   "cat": "elencos",
   "d": 3,
   "exp": "O técnico Cilinho promoveu à equipe principal vários jovens, entre eles Müller.",
@@ -1007,15 +919,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1046",
+  "id": "cultura-1042",
   "q": "Em que ano o hino do São Paulo foi oficializado?",
   "a": [
    "1935",
    "1955",
-   "1942",
-   "1966"
+   "1966",
+   "1942"
   ],
-  "c": 2,
+  "c": 3,
   "cat": "cultura",
   "d": 3,
   "exp": "Composto em 1935, o hino foi oficializado em 1942.",
@@ -1029,7 +941,7 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1047",
+  "id": "cultura-1043",
   "q": "Em que data foi apresentada a versão final da letra do hino do São Paulo, com Porfírio da Paz doando os direitos ao clube?",
   "a": [
    "25 de janeiro de 1942",
@@ -1051,7 +963,7 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1048",
+  "id": "cultura-1044",
   "q": "Que orquestra e coro gravaram, em 1977, a versão do hino mais usada em transmissões desde os anos 1990?",
   "a": [
    "Orquestra e Coro CID",
@@ -1073,15 +985,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1049",
+  "id": "cultura-1045",
   "q": "De qual clube de origem veio a cor vermelha do São Paulo?",
   "a": [
    "Associação Atlética das Palmeiras",
    "Tietê",
-   "Paulistano",
-   "Corinthians"
+   "Corinthians",
+   "Paulistano"
   ],
-  "c": 2,
+  "c": 3,
   "cat": "cultura",
   "d": 2,
   "exp": "O vermelho veio do Paulistano e o preto, da AA das Palmeiras; o branco era comum aos dois.",
@@ -1095,15 +1007,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1050",
+  "id": "cultura-1046",
   "q": "Segundo o estatuto, que tipo de título NÃO rende estrela ao escudo do São Paulo?",
   "a": [
    "Títulos mundiais",
-   "Títulos estaduais, nacionais e continentais",
    "Recordes olímpicos",
+   "Títulos estaduais, nacionais e continentais",
    "Títulos intercontinentais"
   ],
-  "c": 1,
+  "c": 2,
   "cat": "cultura",
   "d": 4,
   "exp": "O estatuto não permite estrelas por títulos continentais, nacionais, estaduais ou amistosos; as estrelas atuais lembram feitos olímpicos e mundiais.",
@@ -1116,15 +1028,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1051",
+  "id": "cultura-1047",
   "q": "Qual é a área aproximada do Complexo Social Manoel Raimundo Paes de Almeida, espaço de lazer dos sócios do São Paulo?",
   "a": [
-   "85 mil m²",
    "30 mil m²",
+   "85 mil m²",
    "150 mil m²",
    "300 mil m²"
   ],
-  "c": 0,
+  "c": 1,
   "cat": "cultura",
   "d": 4,
   "exp": "O complexo social, usado também por modalidades amadoras, ocupa cerca de 85 mil m².",
@@ -1137,15 +1049,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1052",
+  "id": "cultura-1048",
   "q": "Quem foi o primeiro patrocinador de camisa do São Paulo, na final do Paulista de 1982?",
   "a": [
+   "Cofap",
    "TAM",
    "LG",
-   "Semp Toshiba",
-   "Cofap"
+   "Semp Toshiba"
   ],
-  "c": 3,
+  "c": 0,
   "cat": "cultura",
   "d": 4,
   "exp": "A venda de espaço na camisa foi liberada no Brasil em 1982.",
@@ -1159,15 +1071,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1053",
+  "id": "cultura-1049",
   "q": "Qual empresa foi patrocinadora máster do São Paulo até 15 de janeiro de 2010, por cerca de nove anos?",
   "a": [
    "TAM",
-   "LG Electronics",
    "Semp Toshiba",
+   "LG Electronics",
    "Sportsbet.io"
   ],
-  "c": 1,
+  "c": 2,
   "cat": "cultura",
   "d": 3,
   "exp": "A LG foi a principal patrocinadora do Tricolor por cerca de nove anos, até janeiro de 2010.",
@@ -1185,15 +1097,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1054",
+  "id": "cultura-1050",
   "q": "Que companhia aérea patrocinou o uniforme do São Paulo por cerca de quatro anos na década de 1990?",
   "a": [
    "Varig",
+   "TAM",
    "Vasp",
-   "Transbrasil",
-   "TAM"
+   "Transbrasil"
   ],
-  "c": 3,
+  "c": 1,
   "cat": "cultura",
   "d": 4,
   "exp": "A TAM estampou a camisa de 1993 a 1996, segundo a Wikipédia.",
@@ -1207,15 +1119,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1055",
+  "id": "cultura-1051",
   "q": "Que empresa foi fornecedora de material esportivo do São Paulo de 2006 a 2012?",
   "a": [
+   "Reebok",
    "Topper",
    "Penalty",
-   "Reebok",
    "Under Armour"
   ],
-  "c": 2,
+  "c": 0,
   "cat": "cultura",
   "d": 3,
   "exp": "A Reebok assinou o primeiro contrato em 2006; antes, a Topper vestia o time (2003–2005).",
@@ -1233,15 +1145,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1056",
+  "id": "cultura-1052",
   "q": "Qual marca vestiu o São Paulo a partir de maio de 2015, substituindo a Penalty?",
   "a": [
-   "Under Armour",
    "Adidas",
    "Topper",
-   "New Balance"
+   "New Balance",
+   "Under Armour"
   ],
-  "c": 0,
+  "c": 3,
   "cat": "cultura",
   "d": 3,
   "exp": "A Under Armour assumiu em 1º de maio de 2015; a Adidas voltou em 2018 e a New Balance em 2024.",
@@ -1255,15 +1167,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1057",
+  "id": "cultura-1053",
   "q": "Qual foi a primeira empresa cuja marca apareceu na camisa do São Paulo, entre 1981 e 1984?",
   "a": [
    "Adidas",
+   "Le Coq Sportif",
    "Athleta",
-   "Penalty",
-   "Le Coq Sportif"
+   "Penalty"
   ],
-  "c": 3,
+  "c": 1,
   "cat": "cultura",
   "d": 4,
   "exp": "A Le Coq Sportif foi a primeira marca a estampar logo no uniforme tricolor.",
@@ -1281,15 +1193,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1058",
+  "id": "cultura-1054",
   "q": "Qual marca fornece o material esportivo do São Paulo desde 2024?",
   "a": [
-   "New Balance",
    "Adidas",
    "Nike",
-   "Puma"
+   "Puma",
+   "New Balance"
   ],
-  "c": 0,
+  "c": 3,
   "cat": "cultura",
   "d": 2,
   "exp": "A New Balance assumiu em 2024, com contrato até 2032.",
@@ -1307,15 +1219,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1059",
+  "id": "cultura-1055",
   "q": "O que motivou o terceiro uniforme da New Balance, lançado em 2025?",
   "a": [
    "Os 95 anos do clube",
-   "20 anos da camisa preta de Ceni no Mundial de 2005",
    "Os 30 anos do Mundial de 1992",
+   "20 anos da camisa preta de Ceni no Mundial de 2005",
    "Os 20 anos do Morumbi"
   ],
-  "c": 1,
+  "c": 2,
   "cat": "cultura",
   "d": 4,
   "exp": "O modelo homenageou a camisa preta usada por Ceni na final do Mundial de Clubes de 2005.",
@@ -1329,15 +1241,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1060",
+  "id": "cultura-1056",
   "q": "Em que mês e ano o conselho aprovou a camisa terceira permanente do São Paulo, cuja primeira versão era grená?",
   "a": [
+   "Julho de 2015",
    "Janeiro de 2013",
    "Abril de 2018",
-   "Julho de 2015",
    "Outubro de 2010"
   ],
-  "c": 2,
+  "c": 0,
   "cat": "cultura",
   "d": 4,
   "exp": "O primeiro modelo grená foi lançado em 16 de outubro de 2015.",
@@ -1351,7 +1263,7 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1061",
+  "id": "cultura-1057",
   "q": "Em 1964, por que o São Paulo vestiu um uniforme lilás da Fiorentina em um torneio na Itália?",
   "a": [
    "Foi um trato de patrocínio",
@@ -1373,15 +1285,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1062",
+  "id": "cultura-1058",
   "q": "Em 1978, que camisa o São Paulo usou em um jogo da Libertadores no Chile?",
   "a": [
-   "A do Colo-Colo",
    "A da Unión Española",
+   "A do Colo-Colo",
    "A da Universidad Católica",
    "A do Santiago Wanderers"
   ],
-  "c": 1,
+  "c": 0,
   "cat": "cultura",
   "d": 4,
   "exp": "Em partida da Libertadores no Chile, o São Paulo atuou com o uniforme do adversário, a Unión Española.",
@@ -1395,15 +1307,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1063",
+  "id": "cultura-1059",
   "q": "Em que ano o São Paulo passou a usar calção e meias vermelhos no segundo uniforme, em linha com regras da Fifa?",
   "a": [
    "1985",
-   "1990",
    "1996",
+   "1990",
    "2003"
   ],
-  "c": 2,
+  "c": 1,
   "cat": "cultura",
   "d": 4,
   "exp": "Usados em 1996 e 1997, os calções vermelhos voltaram em 2011.",
@@ -1417,15 +1329,15 @@ export default [
   "ok": true
  },
  {
-  "id": "idolos-1064",
+  "id": "idolos-1060",
   "q": "Por quanto o São Paulo vendeu Kaká ao Milan, em 2003?",
   "a": [
-   "8,5 milhões de euros",
    "5 milhões de euros",
    "12 milhões de euros",
+   "8,5 milhões de euros",
    "20 milhões de euros"
   ],
-  "c": 0,
+  "c": 2,
   "cat": "idolos",
   "d": 3,
   "exp": "Depois de 48 gols em 131 jogos pelo Tricolor, Kaká foi para o Milan por 8,5 milhões de euros.",
@@ -1439,15 +1351,15 @@ export default [
   "ok": true
  },
  {
-  "id": "jogos-1065",
+  "id": "jogos-1061",
   "q": "Quem marcou os dois gols, em dois minutos, na virada do São Paulo sobre o Botafogo na decisão do Rio-São Paulo de 2001, em 7 de março?",
   "a": [
    "França",
-   "Kaká",
    "Luís Fabiano",
-   "Reinaldo"
+   "Reinaldo",
+   "Kaká"
   ],
-  "c": 1,
+  "c": 3,
   "cat": "jogos",
   "d": 3,
   "exp": "Com o Tricolor perdendo por 1 a 0 no segundo tempo, Kaká marcou aos 35 e aos 37 minutos; o São Paulo ganhou por 2 a 1 e foi campeão.",
@@ -1465,15 +1377,15 @@ export default [
   "ok": true
  },
  {
-  "id": "idolos-1066",
+  "id": "idolos-1062",
   "q": "Quantos jogos e gols fez Kaká na sua passagem por empréstimo pelo São Paulo em 2014?",
   "a": [
    "10 jogos e 1 gol",
+   "24 jogos e 3 gols",
    "31 jogos e 8 gols",
-   "40 jogos e 12 gols",
-   "24 jogos e 3 gols"
+   "40 jogos e 12 gols"
   ],
-  "c": 3,
+  "c": 1,
   "cat": "idolos",
   "d": 4,
   "exp": "Seu último jogo foi o 1 a 1 com o Figueirense, em 30 de novembro de 2014.",
@@ -1487,7 +1399,7 @@ export default [
   "ok": true
  },
  {
-  "id": "elencos-1067",
+  "id": "elencos-1063",
   "q": "Por quanto, segundo a imprensa, o PSG anunciou a contratação de Lucas Moura, em agosto de 2012?",
   "a": [
    "25 milhões de euros",
@@ -1509,7 +1421,7 @@ export default [
   "ok": true
  },
  {
-  "id": "idolos-1068",
+  "id": "idolos-1064",
   "q": "Contra que time Lucas Moura estreou como profissional pelo São Paulo, em 8 de agosto de 2010?",
   "a": [
    "Atlético Paranaense",
@@ -1531,15 +1443,15 @@ export default [
   "ok": true
  },
  {
-  "id": "idolos-1069",
+  "id": "idolos-1065",
   "q": "Que gol decisivo Lucas Moura marcou em 2023, na sua volta ao São Paulo?",
   "a": [
    "O da final da Libertadores",
-   "O da final do Paulista",
    "O da semifinal da Copa do Brasil, contra o Corinthians",
+   "O da final do Paulista",
    "O da estreia da Supercopa"
   ],
-  "c": 2,
+  "c": 1,
   "cat": "idolos",
   "d": 3,
   "exp": "Contratado em agosto de 2023, ele marcou no 2 a 0 sobre o Corinthians no Morumbi; o Tricolor foi campeão contra o Flamengo.",
@@ -1553,15 +1465,15 @@ export default [
   "ok": true
  },
  {
-  "id": "elencos-1070",
+  "id": "elencos-1066",
   "q": "Por quanto o São Paulo vendeu Hernanes à Lazio, em agosto de 2010?",
   "a": [
    "8 milhões de euros",
-   "13,5 milhões de euros",
    "20 milhões de euros",
-   "25 milhões de euros"
+   "25 milhões de euros",
+   "13,5 milhões de euros"
   ],
-  "c": 1,
+  "c": 3,
   "cat": "elencos",
   "d": 3,
   "exp": "Hernanes, vencedor do Brasileiro de 2007 e 2008 pelo São Paulo, foi para a Lazio em 2010.",
@@ -1575,15 +1487,15 @@ export default [
   "ok": true
  },
  {
-  "id": "idolos-1071",
+  "id": "idolos-1067",
   "q": "Que prêmio Hernanes recebeu como melhor jogador do Brasileirão de 2008, campeonato vencido pelo São Paulo?",
   "a": [
-   "Craque do Brasileirão",
    "Bola de Ouro da Fifa",
    "Chuteira de Ouro",
+   "Craque do Brasileirão",
    "Prêmio Puskás"
   ],
-  "c": 0,
+  "c": 2,
   "cat": "idolos",
   "d": 3,
   "exp": "Ele foi eleito o melhor jogador do torneio e levou também a Bola de Prata.",
@@ -1597,15 +1509,15 @@ export default [
   "ok": true
  },
  {
-  "id": "idolos-1072",
+  "id": "idolos-1068",
   "q": "Em que data Hernanes foi anunciado como reforço do São Paulo em caráter de empréstimo, em 2017?",
   "a": [
+   "19 de julho de 2017",
    "10 de janeiro de 2017",
    "29 de dezembro de 2018",
-   "2 de março de 2016",
-   "19 de julho de 2017"
+   "2 de março de 2016"
   ],
-  "c": 3,
+  "c": 0,
   "cat": "idolos",
   "d": 4,
   "exp": "Ele reapareceu em 29 de julho de 2017, na vitória por 4 a 3 sobre o Botafogo; em 2018 foi comprado do Hebei por 3 milhões de euros.",
@@ -1619,7 +1531,7 @@ export default [
   "ok": true
  },
  {
-  "id": "idolos-1073",
+  "id": "idolos-1069",
   "q": "Contra que time o São Paulo teve o 200º jogo de Hernanes, em 28 de abril de 2010, pela Libertadores?",
   "a": [
    "Colo-Colo",
@@ -1641,15 +1553,15 @@ export default [
   "ok": true
  },
  {
-  "id": "idolos-1074",
+  "id": "idolos-1070",
   "q": "Em que data Casemiro marcou seu primeiro gol como profissional pelo São Paulo, no 2 a 2 com o Cruzeiro?",
   "a": [
    "25 de julho de 2010",
+   "15 de agosto de 2010",
    "3 de outubro de 2011",
-   "12 de dezembro de 2012",
-   "15 de agosto de 2010"
+   "12 de dezembro de 2012"
   ],
-  "c": 3,
+  "c": 1,
   "cat": "idolos",
   "d": 4,
   "exp": "Casemiro estreou em 25 de julho de 2010 contra o Santos e fez o primeiro gol no Brasileirão, 14ª rodada.",
@@ -1663,15 +1575,15 @@ export default [
   "ok": true
  },
  {
-  "id": "recordes-1075",
+  "id": "recordes-1071",
   "q": "Quantos jogos oficiais Casemiro disputou pelo São Paulo entre 2010 e 2013?",
   "a": [
-   "64",
    "111",
+   "64",
    "150",
    "210"
   ],
-  "c": 1,
+  "c": 0,
   "cat": "recordes",
   "d": 3,
   "exp": "Foram 111 partidas e 11 gols; ele foi campeão da Sul-Americana de 2012.",
@@ -1685,15 +1597,15 @@ export default [
   "ok": true
  },
  {
-  "id": "elencos-1076",
+  "id": "elencos-1072",
   "q": "De que clube veio o meia Paulo Henrique Ganso para o São Paulo em 2012?",
   "a": [
-   "Santos",
    "Corinthians",
    "Palmeiras",
-   "Flamengo"
+   "Flamengo",
+   "Santos"
   ],
-  "c": 0,
+  "c": 3,
   "cat": "elencos",
   "d": 2,
   "exp": "Ganso foi uma das principais contratações de 2012, ano do título da Sul-Americana.",
@@ -1707,15 +1619,15 @@ export default [
   "ok": true
  },
  {
-  "id": "elencos-1077",
+  "id": "elencos-1073",
   "q": "De que clube ucraniano o São Paulo contratou Jádson em 2012?",
   "a": [
    "Dínamo de Kiev",
-   "Shakhtar Donetsk",
    "Metalist Kharkiv",
+   "Shakhtar Donetsk",
    "Dnipro"
   ],
-  "c": 1,
+  "c": 2,
   "cat": "elencos",
   "d": 3,
   "exp": "Jádson foi o líder de assistências do time em 2012, com 19.",
@@ -1729,15 +1641,15 @@ export default [
   "ok": true
  },
  {
-  "id": "elencos-1078",
+  "id": "elencos-1074",
   "q": "Qual clube alemão contratou o zagueiro Breno, revelado pelo São Paulo, em 2008?",
   "a": [
    "Borussia Dortmund",
    "Werder Bremen",
-   "Bayern de Munique",
-   "Bayer Leverkusen"
+   "Bayer Leverkusen",
+   "Bayern de Munique"
   ],
-  "c": 2,
+  "c": 3,
   "cat": "elencos",
   "d": 2,
   "exp": "Breno saiu para o Bayern na temporada em que o Tricolor foi campeão brasileiro pela sexta vez.",
@@ -1755,15 +1667,15 @@ export default [
   "ok": true
  },
  {
-  "id": "recordes-1079",
+  "id": "recordes-1075",
   "q": "Qual goleiro foi o maior artilheiro do São Paulo em 2005, com 21 gols em todas as competições?",
   "a": [
-   "Rogério Ceni",
    "Zetti",
+   "Rogério Ceni",
    "Diego Alves",
    "Bosco"
   ],
-  "c": 0,
+  "c": 1,
   "cat": "recordes",
   "d": 3,
   "exp": "Ceni marcou 21 gols em 2005, à frente de Amoroso e Tardelli (16 cada).",
@@ -1777,15 +1689,15 @@ export default [
   "ok": true
  },
  {
-  "id": "tecnicos-1080",
+  "id": "tecnicos-1076",
   "q": "Quem comandou o São Paulo da vitória sobre o Atlético Paranaense na final da Libertadores de 2005 até o fim do ano?",
   "a": [
+   "Paulo Autuori",
    "Emerson Leão",
    "Muricy Ramalho",
-   "Telê Santana",
-   "Paulo Autuori"
+   "Telê Santana"
   ],
-  "c": 3,
+  "c": 0,
   "cat": "tecnicos",
   "d": 1,
   "exp": "Autuori assumiu em 8 de maio de 2005 e ficou até dezembro, com Libertadores e Mundial.",
@@ -1799,15 +1711,15 @@ export default [
   "ok": true
  },
  {
-  "id": "tecnicos-1081",
+  "id": "tecnicos-1077",
   "q": "Que técnico deixou o São Paulo em abril de 2005, antes da chegada de Paulo Autuori?",
   "a": [
    "Muricy Ramalho",
+   "Emerson Leão",
    "Ricardo Gomes",
-   "Levir Culpi",
-   "Emerson Leão"
+   "Levir Culpi"
   ],
-  "c": 3,
+  "c": 1,
   "cat": "tecnicos",
   "d": 3,
   "exp": "Leão saiu em 17 de abril, após 23 jogos no ano; Milton Cruz foi interino.",
@@ -1821,15 +1733,15 @@ export default [
   "ok": true
  },
  {
-  "id": "recordes-1082",
+  "id": "recordes-1078",
   "q": "Quantos gols Raí marcou pelo São Paulo em 1992, ano do título da Libertadores?",
   "a": [
    "18",
-   "31",
    "24",
+   "31",
    "40"
   ],
-  "c": 1,
+  "c": 2,
   "cat": "recordes",
   "d": 3,
   "exp": "Raí foi o artilheiro da temporada com 31 gols, seguido de Palhinha (25) e Müller (24).",
@@ -1843,7 +1755,7 @@ export default [
   "ok": true
  },
  {
-  "id": "bras-1083",
+  "id": "bras-1079",
   "q": "Em que cidade foi decidido o Brasileiro de 2008, com vitória por 1 a 0 sobre o Goiás e gol de Borges?",
   "a": [
    "Gama (DF)",
@@ -1865,15 +1777,15 @@ export default [
   "ok": true
  },
  {
-  "id": "paul-1084",
+  "id": "paul-1080",
   "q": "Que rival eliminou o São Paulo na semifinal do Paulista de 2008?",
   "a": [
    "Santos",
    "Corinthians",
-   "Palmeiras",
-   "Ituano"
+   "Ituano",
+   "Palmeiras"
   ],
-  "c": 2,
+  "c": 3,
   "cat": "paul",
   "d": 3,
   "exp": "O São Paulo terminou o estadual em 3º lugar, eliminado pelo Palmeiras nas semifinais.",
@@ -1887,15 +1799,15 @@ export default [
   "ok": true
  },
  {
-  "id": "elencos-1085",
+  "id": "elencos-1081",
   "q": "Qual atacante, ex-Inter de Milão, jogou por empréstimo no São Paulo em 2008?",
   "a": [
-   "Adriano",
    "Ronaldo",
    "Obina",
-   "Vágner Love"
+   "Vágner Love",
+   "Adriano"
   ],
-  "c": 0,
+  "c": 3,
   "cat": "elencos",
   "d": 2,
   "exp": "Adriano fez 17 gols na temporada de 2008 pelo Tricolor.",
@@ -1909,15 +1821,15 @@ export default [
   "ok": true
  },
  {
-  "id": "tecnicos-1086",
+  "id": "tecnicos-1082",
   "q": "Que técnico substituiu Emerson Leão no São Paulo em 2012, após o interino Milton Cruz, e levou o time ao título da Sul-Americana?",
   "a": [
    "Muricy Ramalho",
-   "Ricardo Gomes",
    "Ney Franco",
+   "Ricardo Gomes",
    "Paulo Autuori"
   ],
-  "c": 2,
+  "c": 1,
   "cat": "tecnicos",
   "d": 3,
   "exp": "Leão saiu em 26 de junho de 2012, e Ney Franco comandou o time no título de dezembro.",
@@ -1931,15 +1843,15 @@ export default [
   "ok": true
  },
  {
-  "id": "jogos-1087",
+  "id": "jogos-1083",
   "q": "Qual foi o público do São Paulo contra o Tigre na Sul-Americana de 2012, o maior da temporada no Morumbi?",
   "a": [
-   "45.800",
    "67.042",
+   "45.800",
    "58.120",
    "72.300"
   ],
-  "c": 1,
+  "c": 0,
   "cat": "jogos",
   "d": 4,
   "exp": "A final de 2012 foi encerrada com o Tigre se recusando a voltar para o segundo tempo, com o São Paulo ganhando por 2 a 0.",
@@ -1953,15 +1865,15 @@ export default [
   "ok": true
  },
  {
-  "id": "jogos-1088",
+  "id": "jogos-1084",
   "q": "Que time eliminou o São Paulo na semifinal da Copa do Brasil de 2012?",
   "a": [
    "Palmeiras",
    "Sport",
-   "Grêmio",
-   "Coritiba"
+   "Coritiba",
+   "Grêmio"
   ],
-  "c": 3,
+  "c": 2,
   "cat": "jogos",
   "d": 3,
   "exp": "O Coritiba venceu por 2 a 0 no jogo de volta e passou por 2 a 1 no agregado.",
@@ -1975,15 +1887,15 @@ export default [
   "ok": true
  },
  {
-  "id": "paul-1089",
+  "id": "paul-1085",
   "q": "Que rival eliminou o São Paulo na semifinal do Paulista de 2012, no Morumbi?",
   "a": [
+   "Santos",
    "Corinthians",
    "Palmeiras",
-   "Ponte Preta",
-   "Santos"
+   "Ponte Preta"
   ],
-  "c": 3,
+  "c": 0,
   "cat": "paul",
   "d": 3,
   "exp": "O Santos, tricampeão estadual anterior, eliminou o Tricolor em seu próprio estádio.",
@@ -1997,7 +1909,7 @@ export default [
   "ok": true
  },
  {
-  "id": "bras-1090",
+  "id": "bras-1086",
   "q": "Em que posição o São Paulo terminou o Campeonato Brasileiro de 2012?",
   "a": [
    "2º",
@@ -2016,6 +1928,528 @@ export default [
    }
   ],
   "when": "2012",
+  "ok": true
+ },
+ {
+  "id": "copas-1087",
+  "q": "Que clube venceu a primeira edição da Copa São Paulo de Futebol Júnior, em 1969, então chamada Taça São Paulo de Juvenis?",
+  "a": [
+   "São Paulo",
+   "Corinthians",
+   "Santos",
+   "Palmeiras"
+  ],
+  "c": 1,
+  "cat": "copas",
+  "d": 2,
+  "exp": "O Corinthians foi o campeão de 1969 e é o maior vencedor da Copinha, com 11 títulos segundo a Wikipédia.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
+    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   }
+  ],
+  "when": "1969",
+  "ok": true
+ },
+ {
+  "id": "copas-1088",
+  "q": "Que dois futuros ídolos do São Paulo estavam no elenco campeão da Copa São Paulo de Futebol Júnior de 2010?",
+  "a": [
+   "Kaká e Hernanes",
+   "Oscar e Rodrigo Caio",
+   "Breno e Jean",
+   "Casemiro e Lucas Moura"
+  ],
+  "c": 3,
+  "cat": "copas",
+  "d": 3,
+  "exp": "Os dois volantes e meias, ambos revelados na base, venceram a Copinha de 2010 e logo chegaram ao time principal.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Casemiro",
+    "u": "https://pt.wikipedia.org/wiki/Casemiro"
+   },
+   {
+    "n": "Wikipédia (pt) — Lucas Moura",
+    "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
+   },
+   {
+    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
+    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   }
+  ],
+  "when": "2010",
+  "ok": true
+ },
+ {
+  "id": "copas-1089",
+  "q": "Que clube venceu o São Paulo na final da Copa São Paulo de Futebol Júnior de 2018?",
+  "a": [
+   "Corinthians",
+   "Cruzeiro",
+   "Santos",
+   "Flamengo"
+  ],
+  "c": 3,
+  "cat": "copas",
+  "d": 3,
+  "exp": "Em 2018 o Tricolor foi vice-campeão; o título foi do Flamengo.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
+    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   }
+  ],
+  "when": "2018",
+  "ok": true
+ },
+ {
+  "id": "copas-1090",
+  "q": "Que clube venceu o São Paulo na final da Copa São Paulo de Futebol Júnior de 2007?",
+  "a": [
+   "Corinthians",
+   "Atlético Mineiro",
+   "Cruzeiro",
+   "Palmeiras"
+  ],
+  "c": 2,
+  "cat": "copas",
+  "d": 4,
+  "exp": "O Cruzeiro foi campeão em 2007; o São Paulo ficou com o vice.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
+    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   }
+  ],
+  "when": "2007",
+  "ok": true
+ },
+ {
+  "id": "copas-1091",
+  "q": "Que clube venceu o São Paulo na final da Copa São Paulo de Futebol Júnior de 2004?",
+  "a": [
+   "Corinthians",
+   "Santos",
+   "Palmeiras",
+   "Nacional-SP"
+  ],
+  "c": 0,
+  "cat": "copas",
+  "d": 3,
+  "exp": "O Corinthians foi campeão de 2004; o Tricolor perdeu a decisão.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
+    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   }
+  ],
+  "when": "2004",
+  "ok": true
+ },
+ {
+  "id": "copas-1092",
+  "q": "Que clube venceu o São Paulo na final da Copa São Paulo de Futebol Júnior de 1992?",
+  "a": [
+   "Corinthians",
+   "Vasco da Gama",
+   "Guarani",
+   "Ponte Preta"
+  ],
+  "c": 1,
+  "cat": "copas",
+  "d": 4,
+  "exp": "O Vasco foi campeão em 1992; o São Paulo seria campeão no ano seguinte, em 1993.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
+    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   }
+  ],
+  "when": "1992",
+  "ok": true
+ },
+ {
+  "id": "copas-1093",
+  "q": "Que clube venceu o São Paulo na final da Copa São Paulo de Futebol Júnior de 2001?",
+  "a": [
+   "Roma Barueri",
+   "Juventus-SP",
+   "Portuguesa",
+   "Santo André"
+  ],
+  "c": 0,
+  "cat": "copas",
+  "d": 4,
+  "exp": "Em 2001 o Tricolor foi vice; o campeão foi o Roma, de Barueri.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
+    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   }
+  ],
+  "when": "2001",
+  "ok": true
+ },
+ {
+  "id": "copas-1094",
+  "q": "Que clube venceu o São Paulo na final da Copa São Paulo de Futebol Júnior de 1994?",
+  "a": [
+   "Corinthians",
+   "Ponte Preta",
+   "Guarani",
+   "Internacional"
+  ],
+  "c": 2,
+  "cat": "copas",
+  "d": 4,
+  "exp": "O Guarani foi campeão de 1994, ano em que o São Paulo foi vice.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
+    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   }
+  ],
+  "when": "1994",
+  "ok": true
+ },
+ {
+  "id": "copas-1095",
+  "q": "Com que clubes o São Paulo dividiu o Grupo B do Torneio Rio-São Paulo de 2001?",
+  "a": [
+   "Flamengo, Vasco e Botafogo",
+   "Santos, Corinthians e Palmeiras",
+   "Santos, Fluminense e Palmeiras",
+   "Corinthians, Botafogo e Vasco"
+  ],
+  "c": 1,
+  "cat": "copas",
+  "d": 4,
+  "exp": "O São Paulo foi o 2º do grupo, com 7 pontos; o Santos foi o 1º, com 10.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Torneio Rio-São Paulo de 2001",
+    "u": "https://pt.wikipedia.org/wiki/Torneio_Rio-S%C3%A3o_Paulo_de_2001"
+   }
+  ],
+  "when": "2001",
+  "ok": true
+ },
+ {
+  "id": "idolos-1096",
+  "q": "Que apelido a imprensa uruguaia deu a Leônidas da Silva por sua elasticidade?",
+  "a": [
+   "Pé de Ouro",
+   "Rei da Bicicleta",
+   "Camisa 9",
+   "Homem-Borracha"
+  ],
+  "c": 3,
+  "cat": "idolos",
+  "d": 3,
+  "exp": "Leônidas, o Diamante Negro, também era chamado de Homem-Borracha.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Leônidas da Silva",
+    "u": "https://pt.wikipedia.org/wiki/Le%C3%B4nidas_da_Silva"
+   }
+  ],
+  "when": "1930",
+  "ok": true
+ },
+ {
+  "id": "tecnicos-1097",
+  "q": "Quantos jogos Rogério Ceni comandou na primeira passagem como técnico do São Paulo, em 2017?",
+  "a": [
+   "21",
+   "52",
+   "37",
+   "68"
+  ],
+  "c": 2,
+  "cat": "tecnicos",
+  "d": 4,
+  "exp": "Foram 14 vitórias, 13 empates e 10 derrotas; ele foi demitido em 3 de julho de 2017.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Rogério Ceni",
+    "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+   }
+  ],
+  "when": "2017",
+  "ok": true
+ },
+ {
+  "id": "tecnicos-1098",
+  "q": "Em que data Rogério Ceni foi nomeado técnico do São Paulo pela primeira vez?",
+  "a": [
+   "13 de outubro de 2021",
+   "19 de janeiro de 2017",
+   "11 de dezembro de 2015",
+   "24 de novembro de 2016"
+  ],
+  "c": 3,
+  "cat": "tecnicos",
+  "d": 4,
+  "exp": "Seu primeiro jogo foi em 19 de janeiro de 2017, pela Florida Cup, contra o River Plate.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Rogério Ceni",
+    "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+   }
+  ],
+  "when": "2016",
+  "ok": true
+ },
+ {
+  "id": "tecnicos-1099",
+  "q": "Que título Rogério Ceni conquistou como técnico do São Paulo, em janeiro de 2017?",
+  "a": [
+   "Campeonato Paulista",
+   "Florida Cup",
+   "Copa Sul-Americana",
+   "Recopa"
+  ],
+  "c": 1,
+  "cat": "tecnicos",
+  "d": 3,
+  "exp": "O São Paulo de Ceni ganhou a Florida Cup de 2017, torneio de pré-temporada disputado nos EUA.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Rogério Ceni",
+    "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+   }
+  ],
+  "when": "2017",
+  "ok": true
+ },
+ {
+  "id": "cultura-1100",
+  "q": "Em que data o segundo uniforme do São Paulo foi usado pela primeira vez, na vitória por 4 a 0 sobre o Santos?",
+  "a": [
+   "29 de maio de 1932",
+   "25 de janeiro de 1930",
+   "9 de julho de 1933",
+   "16 de dezembro de 1935"
+  ],
+  "c": 0,
+  "cat": "cultura",
+  "d": 4,
+  "exp": "O escudo foi acrescentado ao uniforme em 9 de julho de 1933.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
+    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   }
+  ],
+  "when": "1932",
+  "ok": true
+ },
+ {
+  "id": "cultura-1101",
+  "q": "Em que data o escudo foi acrescentado ao uniforme do São Paulo?",
+  "a": [
+   "9 de julho de 1933",
+   "29 de maio de 1932",
+   "25 de janeiro de 1931",
+   "4 de junho de 1935"
+  ],
+  "c": 0,
+  "cat": "cultura",
+  "d": 4,
+  "exp": "O segundo uniforme havia estreado em 29 de maio de 1932.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
+    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   }
+  ],
+  "when": "1933",
+  "ok": true
+ },
+ {
+  "id": "cultura-1102",
+  "q": "Em que ano a faixa branca central da camisa titular do São Paulo foi estreitada?",
+  "a": [
+   "1975",
+   "1991",
+   "2005",
+   "1983"
+  ],
+  "c": 3,
+  "cat": "cultura",
+  "d": 4,
+  "exp": "A mudança de proporção das faixas ocorreu em 1983.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
+    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   }
+  ],
+  "when": "1983",
+  "ok": true
+ },
+ {
+  "id": "cultura-1103",
+  "q": "Em 1966, o São Paulo usou em dez jogos do Paulista um uniforme com que característica?",
+  "a": [
+   "Camisa lilás",
+   "Três listras largas (preta, branca e vermelha)",
+   "Camisa totalmente preta",
+   "Camisa amarela"
+  ],
+  "c": 1,
+  "cat": "cultura",
+  "d": 4,
+  "exp": "O modelo de listras largas foi um dos uniformes alternativos de vida curta.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
+    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   }
+  ],
+  "when": "1966",
+  "ok": true
+ },
+ {
+  "id": "cultura-1104",
+  "q": "Que marca vestiu o São Paulo de 1960 a 1967?",
+  "a": [
+   "Penalty",
+   "Topper",
+   "Athleta",
+   "Dell'erba"
+  ],
+  "c": 2,
+  "cat": "cultura",
+  "d": 4,
+  "exp": "Até 1960 o uniforme era fornecido pelo próprio clube; depois vieram Athleta, HerinGol, Scratch e Penalty.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
+    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   }
+  ],
+  "when": "1960–1967",
+  "ok": true
+ },
+ {
+  "id": "cultura-1105",
+  "q": "Que marca vestiu o São Paulo de 2003 a 2005, antes da Reebok?",
+  "a": [
+   "Penalty",
+   "Adidas",
+   "Topper",
+   "Umbro"
+  ],
+  "c": 2,
+  "cat": "cultura",
+  "d": 4,
+  "exp": "A Topper fez o uniforme do título da Libertadores e do Mundial de 2005.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
+    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   }
+  ],
+  "when": "2003–2005",
+  "ok": true
+ },
+ {
+  "id": "cultura-1106",
+  "q": "Que empresa foi patrocinadora máster do São Paulo de 2012 a 2014?",
+  "a": [
+   "LG",
+   "TAM",
+   "Cofap",
+   "Semp Toshiba"
+  ],
+  "c": 3,
+  "cat": "cultura",
+  "d": 3,
+  "exp": "A Semp Toshiba sucedeu a LG, que saiu em janeiro de 2010.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
+    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   }
+  ],
+  "when": "2012–2014",
+  "ok": true
+ },
+ {
+  "id": "cultura-1107",
+  "q": "Que casa de apostas foi patrocinadora máster do São Paulo a partir de junho de 2021?",
+  "a": [
+   "Sportsbet.io",
+   "Superbet",
+   "Betano",
+   "Bet365"
+  ],
+  "c": 0,
+  "cat": "cultura",
+  "d": 3,
+  "exp": "A Sportsbet.io foi a master de 2021 a 2023; a Superbet assumiu em 2024.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
+    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   }
+  ],
+  "when": "2021",
+  "ok": true
+ },
+ {
+  "id": "hist-1108",
+  "q": "Que centro de reabilitação, criado em 2004, funciona ao lado do CT da Barra Funda?",
+  "a": [
+   "CEPRAF",
+   "REFFIS",
+   "Cotia Saúde",
+   "CReFiSP"
+  ],
+  "c": 1,
+  "cat": "hist",
+  "d": 4,
+  "exp": "O REFFIS é a unidade de reabilitação física e fisiologia esportiva do clube.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   }
+  ],
+  "when": "2004",
+  "ok": true
+ },
+ {
+  "id": "cultura-1109",
+  "q": "Em que estádio costuma ser disputada a final da Copa São Paulo de Futebol Júnior?",
+  "a": [
+   "Morumbi",
+   "Canindé",
+   "Parque São Jorge",
+   "Pacaembu"
+  ],
+  "c": 3,
+  "cat": "cultura",
+  "d": 2,
+  "exp": "A final é tradicionalmente no Pacaembu, embora tenha passado por outros estádios, como o Allianz Parque.",
+  "src": [
+   {
+    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
+    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
+   }
+  ],
+  "when": "1969–2026",
   "ok": true
  }
 ];
