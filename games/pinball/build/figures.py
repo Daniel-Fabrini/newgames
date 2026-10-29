@@ -9,6 +9,7 @@ from rig import srgb, _mat, glossy, matte, emit, sphere, cylinder, cone, torus, 
 OUT = os.environ.get('COVER_TMP', '/tmp')
 SAMPLES = int(os.environ.get('S', 48))
 RES = 512
+CAMD = {'snorlax': 1.9, 'ditto': 1.1}
 
 
 def reset():
@@ -44,7 +45,7 @@ def reset():
     cam = bpy.data.objects.new('cam', cd)
     sc.collection.objects.link(cam)
     sc.camera = cam
-    cam.location = (0, -10.5, 4.6)
+    cam.location = Vector((0, -10.5, 4.6)) * CAMD.get(os.environ.get('CURFIG'), 1.0)
     tgt = Vector((0, 0, 1.6))
     cam.rotation_euler = (tgt - cam.location).to_track_quat('-Z', 'Y').to_euler()
     return sc
@@ -103,8 +104,8 @@ def charmander():
     smile(0, -1.1, 2.1, 0.15)
     # tail + flame
     ell(0.22, (0.7, 0.9, 0.6), (0.7, 0.7, 2.0), O, rot=(0, 25, 0))
-    ell(0.35, (1.15, 0.9, 1.5), (0.9, 0.7, 2.0), emit('#ff4a00', 9.0, name='fl'), rot=(0, 15, 0))
-    ell(0.2, (1.15, 0.85, 1.4), (0.9, 0.7, 1.6), emit('#ffd000', 12.0, name='fl2'), rot=(0, 15, 0))
+    ell(0.35, (1.15, 0.9, 1.5), (0.9, 0.7, 2.0), glossy('#ff6a10', 0.3, 0.6, 'fl'), rot=(0, 15, 0))
+    ell(0.2, (1.15, 0.85, 1.4), (0.9, 0.7, 1.6), glossy('#ffd23a', 0.3, 0.6, 'fl2'), rot=(0, 15, 0))
 
 
 def squirtle():
@@ -127,7 +128,7 @@ def bulbasaur():
     ell(0.48, (0, -1.25, 1.2), (1.1, 0.8, 0.7), T)
     for s in (-1, 1):
         ell(0.3, (s * 0.55, -0.95, 2.2), (0.8, 0.5, 1.2), T, rot=(0, s * 20, 0))
-        ell(0.34, (s * 0.7, -0.9, 0.1), (1, 1.4, 0.6), T)
+        ell(0.34, (s * 0.7, -0.75, 0.3), (1, 1.4, 0.6), T)
         ell(0.34, (s * 0.7, 0.8, 0.1), (1, 1.4, 0.6), T)
         ell(0.12, (s * 0.75, -0.2, 1.7), (1, 1, 1), Dk)
         ell(0.18, (s * 0.46, -1.24, 1.6), (1, 0.5, 1.2), Rd)
@@ -175,23 +176,23 @@ def meowth():
 def snorlax():
     Dk, C, K = glossy('#2f5c6e', 0.45, 0.3, 'dk'), glossy('#f6e8c8', 0.5, 0.3, 'c'), glossy('#16161c', 0.3, 0.6, 'k')
     ell(1.8, (0, 0.1, 1.5), (1.15, 1.0, 1.0), Dk)
-    ell(1.3, (0, -0.8, 1.35), (1.15, 0.6, 1.0), C)
+    ell(1.3, (0, -1.25, 1.35), (1.15, 0.6, 1.0), C)
     ell(1.1, (0, -0.4, 3.2), (1.3, 1.0, 0.95), Dk)
-    ell(0.8, (0, -0.95, 3.0), (1.3, 0.5, 0.8), C)
+    ell(0.8, (0, -1.35, 3.0), (1.3, 0.5, 0.8), C)
     for s in (-1, 1):
         cone(0.28, 0.0, 0.6, Dk, loc=(s * 0.9, -0.3, 4.2), rot=(0, s * 18, 0))
-        torus(0.2, 0.03, K, loc=(s * 0.5, -1.05, 3.35), rot=(90, 0, 0)).scale = (1, 1, 0.4)
+        torus(0.2, 0.03, K, loc=(s * 0.5, -1.6, 3.4), rot=(90, 0, 0)).scale = (1, 1, 0.4)
         ell(0.6, (s * 1.9, -0.2, 1.4), (0.7, 0.8, 1.0), Dk)
         ell(0.55, (s * 0.8, -1.4, 0.2), (1, 1.2, 0.5), C)
-    smile(0, -1.35, 2.9, 0.2)
+    smile(0, -1.62, 2.85, 0.2)
 
 
 def ditto():
     P = glossy('#c79af2', 0.25, 0.7, 'p')
     ell(1.2, (0, 0, 0.8), (1.5, 1.1, 0.7), P)
     ell(0.7, (-1.0, -0.1, 0.5), (1.2, 1.0, 0.5), P)
-    eyes(0.4, -0.85, 1.15, 0.09)
-    smile(0, -0.9, 0.95, 0.18)
+    eyes(0.45, -1.13, 1.2, 0.1)
+    smile(0, -1.22, 0.98, 0.2)
 
 
 def mewtwo():
@@ -214,6 +215,7 @@ if __name__ == '__main__':
     for name in FIGS:
         if only and name not in only.split(','):
             continue
+        os.environ['CURFIG'] = name
         sc = reset()
         globals()[name]()
         sc.render.image_settings.file_format = 'PNG'

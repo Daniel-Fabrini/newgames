@@ -4,7 +4,7 @@ import STRINGS from './strings.js';
 import { T, createMatch, stepMatch, setRodTarget, chargeRod, kickRod, possession, timeLeft, clamp } from './physics.js';
 import { createAI, DIFFS } from './ai.js';
 import * as TR from './tournament.js';
-import { createRenderer } from './render.js';
+import { createRenderer, loadAssets, crestUrl } from './render.js';
 
 const ICON = {
   sndOn: '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M3 9.5v5h4l5 4v-13l-5 4H3z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
@@ -43,6 +43,8 @@ export async function mount(root, ctx) {
   const { h, clear } = ctx.ui;
   const reduced = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   const safe = (fn, d) => { try { return fn(); } catch { return d; } };
+  const assets = await Promise.race([loadAssets(), new Promise((r) => setTimeout(() => r(null), 9000))]);
+  const CREST = crestUrl();
 
   // ------------------------------------------------------------------ save
   const S = (() => {
@@ -125,7 +127,7 @@ export async function mount(root, ctx) {
     const item = (icon, title, sub, fn) => h('button', { class: 'list-item', type: 'button', onclick: () => { snd.play('select'); fn(); } },
       h('span', { class: 'li-icon' }, icon), h('div', { class: 'li-body' }, h('div', { class: 'li-title' }, title), h('div', { class: 'li-sub' }, sub)), h('span', { class: 'li-right' }, '›'));
     const node = h('div', { class: 'screen g-fb-menu' },
-      h('div', { class: 'g-fb-hero' }, h('div', { class: 'g-fb-hero-ball' }), h('div', {}, h('div', { class: 'title-l' }, t('menuTitle')), h('div', { class: 'muted small' }, t('menuSub')))),
+      h('div', { class: 'g-fb-hero' }, h('img', { class: 'g-fb-hero-crest', src: CREST, alt: '', draggable: 'false' }), h('div', {}, h('div', { class: 'title-l' }, t('menuTitle')), h('div', { class: 'muted small' }, t('menuSub')))),
       h('div', { class: 'list' },
         item('⚽', t('mQuick'), t('mQuickSub'), () => showSetup('quick')),
         item('👥', t('mDuo'), t('mDuoSub'), () => showSetup('duo')),
@@ -278,9 +280,9 @@ export async function mount(root, ctx) {
     stage.append(msg);
     const el = {};
     const hud = h('div', { class: 'g-fb-hud' },
-      h('div', { class: 'g-fb-team t0' }, el.d0 = h('i', { style: `background:${RED}` }), h('span', {}, names[0]), el.s0 = h('b', {}, '0')),
+      h('div', { class: 'g-fb-team t0' }, el.d0 = h('img', { class: 'g-fb-crest', src: CREST, alt: '', draggable: 'false' }), h('span', {}, names[0]), el.s0 = h('b', {}, '0')),
       h('div', { class: 'g-fb-mid' }, el.clock = h('b', {}, '0:00'), el.lim = h('small', {}, '')),
-      h('div', { class: 'g-fb-team t1' }, el.s1 = h('b', {}, '0'), h('span', {}, names[1]), el.d1 = h('i', { style: `background:${oppKit}` })),
+      h('div', { class: 'g-fb-team t1' }, el.s1 = h('b', {}, '0'), h('span', {}, names[1]), el.d1 = h('i', { class: 'g-fb-kit', style: `background:${oppKit}` })),
       h('button', { class: 'g-fb-pausebtn', type: 'button', 'aria-label': t('pause'), html: ICON.pause, onclick: () => ctrl.pause() }));
     const poss = h('div', { class: 'g-fb-poss' }, el.p0 = h('i', { style: `background:${RED}` }), el.pbar = h('div', { class: 'g-fb-pbar' }, el.pfill = h('i', {})), el.p1 = h('i', { style: `background:${oppKit}` }));
     el.pfill.style.background = RED;
@@ -330,7 +332,9 @@ export async function mount(root, ctx) {
     screen(wrapAll);
 
     const renderer = createRenderer(canvas, { reduced });
+    renderer.setAssets(assets);
     renderer.setKits(RED, oppKit);
+    renderer.setOpponentKit(oppKit);
     let sizeOk = false;
     const fit = () => { sizeOk = renderer.resize(); };
     const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(fit) : null;
@@ -466,7 +470,8 @@ export async function mount(root, ctx) {
           const k = clamp(e.speed / 220, 0, 1);
           snd.tone({ freq: 520 + e.speed * 2.4, to: 240, dur: 0.05, type: 'square', vol: 0.05 + 0.1 * k });
           snd.noise({ dur: 0.035, vol: 0.04 + 0.08 * k, freq: 2600, q: 1.2 });
-          if (e.speed > 110) renderer.sparks(e.x, e.y, 4 + ((e.speed / 40) | 0));
+          if (e.speed > 110) renderer.sparks(e.x, e.y, 4 + ((e.speed / 40) | 0)); else if (e.speed > 40) renderer.dust(e.x, e.y);
+          if (e.speed > 150) renderer.shake(0.3 + (e.speed - 150) / 200);
           if (e.speed > 90 && humans.some((p) => p.team === e.team)) snd.vib(e.speed > 150 ? 18 : 8);
         } else if (e.type === 'wall') {
           snd.tone({ freq: 190, to: 130, dur: 0.06, type: 'triangle', vol: 0.05 + 0.06 * clamp(e.speed / 200, 0, 1) });
@@ -557,9 +562,12 @@ export async function mount(root, ctx) {
         hudUpdate();
       }
       if (sizeOk) {
-        const hi = [];
-        for (const p of humans) hi.push(p.own[p.sel]);
-        renderer.draw(s, { hi }, ctrl.paused ? 0 : dt);
+        const hi = [], charge = {};
+        for (const p of humans) {
+          hi.push(p.own[p.sel]);
+          if (p.charge) charge[p.charge.rod] = 0.25 + 0.75 * clamp((nowMs() - p.charge.t0) / 1000 / 0.55, 0, 1);
+        }
+        renderer.draw(s, { hi, charge }, ctrl.paused ? 0 : dt);
       }
     }
 
@@ -663,7 +671,7 @@ export async function mount(root, ctx) {
     const node = h('div', { class: 'screen center g-fb-results' },
       h('div', { class: 'g-fb-res-head ' + (draw ? 'draw' : win0 || twoP ? 'win' : 'lose') }, head),
       h('div', { class: 'g-fb-res-score' },
-        h('div', {}, h('i', { style: `background:${RED}` }), h('small', {}, names[0])),
+        h('div', {}, h('img', { class: 'g-fb-crest big', src: CREST, alt: '' }), h('small', {}, names[0])),
         h('b', {}, `${a} – ${b}`),
         h('div', {}, h('i', { style: `background:${oppKit}` }), h('small', {}, names[1]))),
       reasonTxt ? h('div', { class: 'muted small' }, reasonTxt) : null,

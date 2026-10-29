@@ -7,17 +7,23 @@ import { W, L, GX0, GX1, CAP_R, BALL_R, MAX_SPEED, cloneWorld, copyInto, flick, 
 
 // Skill is open-ended (0 = beginner); every step makes the CPU more precise,
 // search more shots and care more about defence.
-export function aiParams(skill) {
+// `style` (optional, from formations.makeAiStyle) gives each match its own temperament:
+// attacking vs cautious, a slightly different aim error and sideways aim bias. All of
+// it stays within narrow bounds, so the CPU never gets better than its skill allows.
+export function aiParams(skill, style) {
   const s = Math.max(0, skill);
+  const st = style || { aggr: 0, jit: 1, aimShift: 0, kBonus: 0 };
+  const sh = (x) => Math.max(GX0 + 3, Math.min(GX1 - 3, x + st.aimShift));
   return {
-    noise: ((8.5 * Math.pow(0.7, s) + 0.18) * Math.PI) / 180,
+    atk: 1 + 0.15 * st.aggr,
+    noise: (((8.5 * Math.pow(0.7, s) + 0.18) * st.jit) * Math.PI) / 180,
     pnoise: 0.12 * Math.pow(0.72, s) + 0.008,
     rand: Math.round(Math.min(44, 8 + 5 * s)),
-    topK: Math.max(1, Math.round(6 * Math.pow(0.58, s))),
-    defense: Math.min(1.25, 0.2 + 0.17 * s),
+    topK: Math.max(1, Math.round(6 * Math.pow(0.58, s)) + (s < 5 ? st.kBonus : 0)),
+    defense: Math.min(1.25, (0.2 + 0.17 * s) * (1 - 0.22 * st.aggr)),
     offsets: s >= 3 ? [-0.07, -0.035, 0, 0.035, 0.07] : s >= 1 ? [-0.05, 0, 0.05] : [0],
     powers: s >= 4 ? [0.38, 0.52, 0.66, 0.8, 0.92, 1] : s >= 2 ? [0.45, 0.65, 0.85, 1] : [0.55, 0.8, 1],
-    aims: s >= 2 ? [GX0 + 4.5, (GX0 + W / 2) / 2 + 2, W / 2, (GX1 + W / 2) / 2 - 2, GX1 - 4.5] : [GX0 + 6, W / 2, GX1 - 6],
+    aims: (s >= 2 ? [GX0 + 4.5, (GX0 + W / 2) / 2 + 2, W / 2, (GX1 + W / 2) / 2 - 2, GX1 - 4.5] : [GX0 + 6, W / 2, GX1 - 6]).map(sh),
     keeper: s >= 1.5,
   };
 }
@@ -84,7 +90,7 @@ function evaluate(sim, team, P, start) {
   const ownY = team === 0 ? L : 0;
   const dAtk = Math.hypot(b.x - W / 2, b.y - atkY);
   const dOwn = Math.hypot(b.x - W / 2, b.y - ownY);
-  let s = (dOwn - dAtk) * 0.9;
+  let s = (dOwn - dAtk) * 0.9 * P.atk;
   // being near the opponent goal mouth is worth extra
   if (dAtk < 45) s += (45 - dAtk) * 1.2;
   // danger in front of our own goal
@@ -127,8 +133,8 @@ function addAimed(list, world, team, idx, P, tx, ty, powers, offsets) {
   for (const o of offsets) for (const p of powers) list.push({ idx, a: a + o * (8 / Math.max(8, dl)), p });
 }
 
-export function* think(world, team, skill, rnd = Math.random) {
-  const P = aiParams(skill);
+export function* think(world, team, skill, rnd = Math.random, style = null) {
+  const P = aiParams(skill, style);
   const bs = world.bodies;
   const b = bs[0];
   const atkY = team === 0 ? -3 : L + 3;
@@ -168,8 +174,8 @@ export function* think(world, team, skill, rnd = Math.random) {
 }
 
 // Runs the whole search synchronously (used by tests).
-export function thinkNow(world, team, skill, rnd) {
-  const g = think(world, team, skill, rnd);
+export function thinkNow(world, team, skill, rnd, style) {
+  const g = think(world, team, skill, rnd, style);
   let r = g.next();
   while (!r.done) r = g.next();
   return r.value;

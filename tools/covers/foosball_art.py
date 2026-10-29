@@ -45,6 +45,28 @@ def setup(w, h, ortho, sun_energy=3.2, world=0.5):
     return sc
 
 
+def table_camera(sc, h=105.0, zp=1.3):
+    cam = sc.camera
+    cam.data.type = 'PERSP'
+    cam.data.sensor_fit = 'VERTICAL'; cam.data.sensor_height = 24
+    half = 74.0
+    cam.data.lens = 12.0 / (half / (h - zp))
+    cam.location = (0, 0, h)
+    # softbox gradient so glossy bevels pick up reflections
+    wd = sc.world; nt = wd.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputWorld'); bg = nt.nodes.new('ShaderNodeBackground')
+    tc = nt.nodes.new('ShaderNodeTexCoord'); gr = nt.nodes.new('ShaderNodeTexGradient')
+    mp = nt.nodes.new('ShaderNodeMapping'); mp.inputs['Rotation'].default_value = (0, math.radians(35), math.radians(25))
+    ramp = nt.nodes.new('ShaderNodeValToRGB')
+    ramp.color_ramp.elements[0].position = 0.35; ramp.color_ramp.elements[0].color = (0.04, 0.05, 0.06, 1)
+    ramp.color_ramp.elements[1].position = 0.7; ramp.color_ramp.elements[1].color = (1, 0.97, 0.92, 1)
+    nt.links.new(tc.outputs['Generated'], mp.inputs['Vector']); nt.links.new(mp.outputs['Vector'], gr.inputs['Vector'])
+    nt.links.new(gr.outputs['Fac'], ramp.inputs['Fac']); nt.links.new(ramp.outputs['Color'], bg.inputs['Color'])
+    bg.inputs['Strength'].default_value = 2.2
+    nt.links.new(bg.outputs[0], out.inputs['Surface'])
+    sc.view_settings.look = 'AgX - High Contrast'
+
+
 def render(name, sc):
     sc.render.filepath = os.path.join(OUT, name + '.png')
     bpy.ops.render.render(write_still=True)
@@ -103,7 +125,7 @@ def pline(pts, w, z, mat):
     return strip(pts, w, z, mat)
 
 
-def wood_mat(name='wood', base1='#6a3a17', base2='#9a6430', rough=0.32):
+def wood_mat(name='wood', base1='#2f1608', base2='#6a3813', rough=0.16):
     m = bpy.data.materials.new(name); m.use_nodes = True
     nt = m.node_tree; b = nt.nodes['Principled BSDF']
     tc = nt.nodes.new('ShaderNodeTexCoord'); mp = nt.nodes.new('ShaderNodeMapping')
@@ -116,7 +138,7 @@ def wood_mat(name='wood', base1='#6a3a17', base2='#9a6430', rough=0.32):
     nt.links.new(wv.outputs['Fac'], ramp.inputs['Fac']); nt.links.new(ramp.outputs['Color'], b.inputs['Base Color'])
     b.inputs['Roughness'].default_value = rough
     for k in ('Coat Weight', 'Clearcoat'):
-        if k in b.inputs: b.inputs[k].default_value = 0.7; break
+        if k in b.inputs: b.inputs[k].default_value = 1.0; break
     return m
 
 
@@ -131,7 +153,7 @@ def grass_mat():
     fl = nt.nodes.new('ShaderNodeMath'); fl.operation = 'FLOOR'; nt.links.new(m1.outputs[0], fl.inputs[0])
     md = nt.nodes.new('ShaderNodeMath'); md.operation = 'MODULO'; md.inputs[1].default_value = 2.0; nt.links.new(fl.outputs[0], md.inputs[0])
     mix = nt.nodes.new('ShaderNodeMix'); mix.data_type = 'RGBA'
-    mix.inputs[6].default_value = (*srgb('#1f7a3a'), 1); mix.inputs[7].default_value = (*srgb('#2b9a4a'), 1)
+    mix.inputs[6].default_value = (*srgb('#14602c'), 1); mix.inputs[7].default_value = (*srgb('#2a9448'), 1)
     nt.links.new(md.outputs[0], mix.inputs[0])
     nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 90; nz.inputs['Detail'].default_value = 6
     nz2 = nt.nodes.new('ShaderNodeTexNoise'); nz2.inputs['Scale'].default_value = 3.0; nz2.inputs['Detail'].default_value = 2
@@ -172,14 +194,17 @@ def build_table(only_rails=False):
     objs['rails'] = []
     # rails (hold rod holes in reality)
     for x0, x1 in ((-6.5, 0), (68, 74.5)):
-        objs['rails'].append(rect(x0, -14, x1, 134, 0, 2.7, woodm, bevel=0.55))
+        objs['rails'].append(rect(x0, -14, x1, 134, 0, 2.7, woodm, bevel=0.9))
+    gold0 = metal('#e0b650', 0.16, name='gold')
+    for x in (-3.25, 71.25):
+        objs['rails'].append(rect(x - 0.3, -11.5, x + 0.3, 131.5, 2.5, 2.95, gold0, bevel=0.15))
     if only_rails:
         return objs
     rect(-6.5, -14, 74.5, 134, -0.4, 1.0, woodd, bevel=0.2)
     for y0, y1, s0, s1 in ((-14, 0, -14, -9), (120, 134, 129, 134)):
-        rect(0, y0, 22, y1, 0, 2.7, woodm, bevel=0.45)
-        rect(46, y0, 68, y1, 0, 2.7, woodm, bevel=0.45)
-        rect(22, s0, 46, s1, 0, 2.7, woodm, bevel=0.45)
+        rect(0, y0, 22, y1, 0, 2.7, woodm, bevel=0.8)
+        rect(46, y0, 68, y1, 0, 2.7, woodm, bevel=0.8)
+        rect(22, s0, 46, s1, 0, 2.7, woodm, bevel=0.8)
     # pocket floor + nets
     for y0, y1, top in ((-9, 0, True), (120, 129, False)):
         rect(22, y0, 46, y1, 0.9, 1.15, dark, bevel=0.0)
@@ -204,7 +229,7 @@ def build_table(only_rails=False):
     poly_prism(field, 0.9, 1.3, grass_mat())
     # corner bevels (wood wedges)
     for tri in (((0, 0), (b, 0), (0, b)), ((68, 0), (68 - b, 0), (68, b)), ((0, 120), (b, 120), (0, 120 - b)), ((68, 120), (68 - b, 120), (68, 120 - b))):
-        poly_prism(list(tri), 0.9, 2.5, woodm, bevel=0.3)
+        poly_prism(list(tri), 0.9, 2.7, woodm, bevel=0.3)
     # markings
     wm = _mat('line', '#f5fbf5', 0.55)
     Z = 1.34; w = 0.5
@@ -249,16 +274,17 @@ def build_table(only_rails=False):
 if MODE == 'backdrop':
     W_, H_ = int(1045 * Q), int(1628 * Q)
     sc = setup(W_, H_, 95.0 * 148 / 148, sun_energy=3.0, world=0.55)
-    cam = sc.camera; cam.data.ortho_scale = 148.0  # height-limited (portrait)
+    table_camera(sc)
     build_table()
-    sp = bpy.data.lights.new('vig', 'AREA'); sp.energy = 3500; sp.size = 70; sp.shape = 'SQUARE'
+    sp = bpy.data.lights.new('vig', 'AREA'); sp.energy = 6500; sp.size = 40; sp.shape = 'SQUARE'
     vo = bpy.data.objects.new('vig', sp); sc.collection.objects.link(vo); vo.location = (0, 0, 60)
     render('backdrop', sc)
 elif MODE == 'rails':
     W_, H_ = int(1045 * Q), int(1628 * Q)
     sc = setup(W_, H_, 148.0, sun_energy=3.0, world=0.55)
+    table_camera(sc)
     build_table(only_rails=True)
-    sp = bpy.data.lights.new('vig', 'AREA'); sp.energy = 3500; sp.size = 70; sp.shape = 'SQUARE'
+    sp = bpy.data.lights.new('vig', 'AREA'); sp.energy = 6500; sp.size = 40; sp.shape = 'SQUARE'
     vo = bpy.data.objects.new('vig', sp); sc.collection.objects.link(vo); vo.location = (0, 0, 60)
     render('rails', sc)
 elif MODE == 'men':
@@ -288,14 +314,14 @@ elif MODE == 'men':
             box((3.8, 3.4, 1.3), shoe, loc=(0, 0, -8.8), bevel=0.55),
             box((3.9, 3.5, 0.3), sole, loc=(0, 0, -9.35), bevel=0.1),
         ]
-        figs[team] = parent(parts)
+        figs[team] = (parent(parts), parts)
     NA = 16
     th_list = [-1.0 + (2.1 * i / (NA - 1)) for i in range(NA)]
     for team in (0, 1):
         for i, th in enumerate(th_list):
-            for t2, f in figs.items():
-                f.hide_render = (t2 != team)
-            f = figs[team]
+            for t2, (e2, ps) in figs.items():
+                for pp in ps: pp.hide_render = (t2 != team)
+            f = figs[team][0]
             f.rotation_euler = (th, 0, math.pi if team == 1 else 0)
             render(f'man_{team}_{i:02d}', sc)
     print('TH', th_list)

@@ -1,9 +1,13 @@
+import { CLUBS } from './teams.js';
+
 // Static game data: teams, cosmetics, career tiers and reward formulas.
 
 // Teams use the flags from js/data/countries.js. `p` is the price in coins
 // (0 = unlocked from the start), `r` a hidden rating used only to simulate
 // CPU-vs-CPU league results and to pick stronger rivals in higher tiers.
+// Clubs come first (all unlocked; São Paulo FC is the default); then the national teams.
 export const TEAMS = [
+  ...CLUBS.map((c) => ({ code: c.code, p: 0, r: c.r, club: true })),
   { code: 'BR', p: 0, r: 0.95 },
   { code: 'AR', p: 0, r: 0.95 },
   { code: 'PT', p: 0, r: 0.85 },

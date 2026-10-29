@@ -2,7 +2,9 @@
 
 import * as P from './physics.js';
 import { think } from './ai.js';
-import { layout, drawStatic, drawGoals, capSprite, loadFlag, flagSrc, ballPattern, rollBall, drawBall, BALL_SKINS, FRAME } from './render.js';
+import { layout, drawStatic, drawGoals, capSprite, loadFlag, loadCrest, flagSrc, ballPattern, rollBall, drawBall, BALL_SKINS, FRAME } from './render.js';
+import { layoutFormation, makeAiStyle, rng } from './formations.js';
+import { isClub, kitOf, clubOf } from './teams.js';
 
 const { W, L, GX0, GX1, CAP_R, BALL_R } = P;
 const TURN_TIME = 15;
@@ -12,7 +14,13 @@ const MIN_POWER = 0.07;
 export function createMatch(host, ctx, t, o) {
   const { h } = ctx.ui;
   const sfx = ctx.sfx;
-  const world = P.createWorld();
+  // formations (ids) and seeded randomness: the same seed always gives the same match setup
+  const seed = (o.seed ?? Math.floor(Math.random() * 4294967296)) >>> 0;
+  const rnd = rng(seed);
+  const formIds = o.forms || ['2-2', '2-2'];
+  const aiStyle = makeAiStyle(rnd);
+  const newForms = (jitter) => formIds.map((id) => layoutFormation(id, jitter ? rnd : null));
+  const world = P.createWorld(newForms(true));
   const B = world.bodies;
   const prev = B.map((b) => ({ x: b.x, y: b.y }));
   const score = [0, 0];
@@ -50,6 +58,8 @@ export function createMatch(host, ctx, t, o) {
   const pts = ballPattern();
   let ballDraw = { x: B[0].x, y: B[0].y };
   let flags = [null, null];
+  let mark = null; // club crest watermark for the centre circle
+  let kicks = 0;
   let sprites = [null, null];
   let lay = null;
   let dpr = 1;
@@ -62,7 +72,7 @@ export function createMatch(host, ctx, t, o) {
   const scoreEls = [h('b', null, '0'), h('b', null, '0')];
   const sub = h('small', { class: 'g-soccer-sub' });
   const av = [0, 1].map((i) =>
-    h('div', { class: `g-soccer-av side${i}`, title: o.names[i] }, h('img', { src: flagSrc(o.teams[i]), alt: o.names[i], draggable: 'false' })),
+    h('div', { class: `g-soccer-av side${i} ${isClub(o.teams[i]) ? 'club' : ''}`, title: o.names[i] }, h('img', { src: flagSrc(o.teams[i]), alt: o.names[i], draggable: 'false' })),
   );
   const board = h(
     'div',
@@ -89,6 +99,9 @@ export function createMatch(host, ctx, t, o) {
     get layout() {
       return lay;
     },
+    forms: formIds,
+    seed,
+    aiStyle,
   };
 
   function updateBoard() {
@@ -129,12 +142,12 @@ export function createMatch(host, ctx, t, o) {
     stat.height = canvas.height;
     const sg = stat.getContext('2d');
     sg.setTransform(dpr, 0, 0, dpr, 0, 0);
-    drawStatic(sg, lay, o.pitch);
+    drawStatic(sg, lay, o.pitch, mark);
     makeSprites();
   }
   function makeSprites() {
     if (!lay) return;
-    sprites = [0, 1].map((i) => capSprite(flags[i], i, i === 0 ? o.rim : 'team', CAP_R * lay.s, dpr));
+    sprites = [0, 1].map((i) => capSprite(flags[i], i, i === 0 ? o.rim : 'team', CAP_R * lay.s, dpr, kitOf(o.teams[i])));
   }
   const ro = new ResizeObserver(() => resize());
   ro.observe(el);
@@ -206,7 +219,8 @@ export function createMatch(host, ctx, t, o) {
   }
   function confetti(team) {
     const gy = team === 0 ? 0 : L;
-    const cols = ['#f7d774', '#c9971c', '#ffffff', team === 0 ? '#e5261c' : '#1f5fe0', team === 0 ? '#f6c21a' : '#e4e8ee'];
+    const cl = clubOf(o.teams[team]);
+    const cols = cl && cl.conf ? ['#f7d774', ...cl.conf] : ['#f7d774', '#c9971c', '#ffffff', team === 0 ? '#e5261c' : '#1f5fe0', team === 0 ? '#f6c21a' : '#e4e8ee'];
     for (let i = 0; i < 90; i++) {
       const a = (team === 0 ? Math.PI / 2 : -Math.PI / 2) + (Math.random() - 0.5) * 2.6;
       const sp = 30 + Math.random() * 70;
@@ -222,7 +236,8 @@ export function createMatch(host, ctx, t, o) {
   }
 
   function kickoff() {
-    P.resetPositions(world);
+    // same formations all match long; the first kick-off is the seeded layout, later ones get a fresh small jitter
+    P.resetPositions(world, kicks++ ? newForms(true) : undefined);
     savePrev();
     trail = [];
     acc = 0;
@@ -243,7 +258,7 @@ export function createMatch(host, ctx, t, o) {
     drag = null;
     setState('aim');
     if (isCpu(team)) {
-      ai = { gen: think(P.cloneWorld(world), team, o.skill), res: null, aimT: 0 };
+      ai = { gen: think(P.cloneWorld(world), team, o.skill, o.aiRnd || undefined, aiStyle), res: null, aimT: 0 };
     } else {
       ai = null;
       if (shots > 0 || !o.hint) showBanner(turnLabel(team), '', 900);
@@ -677,7 +692,8 @@ export function createMatch(host, ctx, t, o) {
   }
 
   function drawHint(time) {
-    const idx = 4; // a forward of team 0
+    let idx = 1; // the most advanced disc of team 0
+    for (let i = 2; i <= 5; i++) if (B[i].y < B[idx].y) idx = i;
     const c = B[idx];
     const k = (time % 1.8) / 1.8;
     const pull = Math.min(1, k / 0.7);
@@ -860,9 +876,11 @@ export function createMatch(host, ctx, t, o) {
   }
 
   // ---------- start ----------
-  Promise.all([loadFlag(o.teams[0]), loadFlag(o.teams[1])]).then((imgs) => {
+  const markCode = o.teams.includes('SPFC') ? 'SPFC' : o.teams.find(isClub);
+  Promise.all([loadFlag(o.teams[0]), loadFlag(o.teams[1]), markCode ? loadCrest(markCode) : null]).then((imgs) => {
     if (destroyed) return;
-    flags = imgs;
+    flags = imgs.slice(0, 2);
+    mark = imgs[2] || null;
     resize();
     updateBoard();
     kickoff();

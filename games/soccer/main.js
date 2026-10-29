@@ -2,11 +2,12 @@
 // The match itself lives in match.js; physics.js / ai.js / render.js do the rest.
 
 import STRINGS from './strings.js';
-import { byCode } from '../../js/data/countries.js';
 import { TEAMS, PITCHES, BALLS, RIMS, levelFromXP, tierStyle, roman, CHAMPIONS_TIER, QUICK_SKILL, LEAGUE_SIZE } from './data.js';
 import * as C from './career.js';
 import { createMatch } from './match.js';
 import { capPreview, ballPreview, pitchPreview, flagSrc } from './render.js';
+import { teamName, isClub, kitOf } from './teams.js';
+import { FORMATIONS, FORMATION_IDS, layoutFormation, pickFormations, hashSeed, rng } from './formations.js';
 
 const svg = (body, vb = '0 0 24 24') => `<svg viewBox="${vb}" fill="currentColor" aria-hidden="true">${body}</svg>`;
 const ICON = {
@@ -31,7 +32,12 @@ const icon = (h, name, cls = '') => h('span', { class: `g-soccer-ic ${cls}`, htm
 
 const DEFAULTS = () => ({
   coins: 0,
-  team: 'BR',
+  v: 2,
+  team: 'SPFC',
+  formLock: null, // null = random formation every match
+  lastForm: null,
+  seedBase: Math.floor(Math.random() * 4294967296),
+  matchNo: 0,
   owned: { teams: TEAMS.filter((x) => x.p === 0).map((x) => x.code), pitch: ['classic'], ball: ['classic'], rim: ['team'] },
   equip: { pitch: 'classic', ball: 'classic', rim: 'team' },
   quick: { diff: 0, len: 2 },
@@ -58,15 +64,22 @@ export async function mount(root, ctx) {
     const out = { ...d, ...s };
     for (const k of ['owned', 'equip', 'quick', 'pvp', 'prof', 'stats']) out[k] = { ...d[k], ...(s[k] || {}) };
     for (const k of ['teams', 'pitch', 'ball', 'rim']) if (!Array.isArray(out.owned[k])) out.owned[k] = d.owned[k];
-    if (!out.owned.teams.includes(out.team)) out.team = 'BR';
+    // migration: v2 adds the clubs (São Paulo FC becomes the default team) and formations
+    if (!(s.v >= 2)) {
+      if (out.team === 'BR') out.team = 'SPFC';
+      out.v = 2;
+    }
+    for (const x of TEAMS) if (x.p === 0 && !out.owned.teams.includes(x.code)) out.owned.teams.push(x.code);
+    if (!out.owned.teams.includes(out.team) || !TEAMS.some((x) => x.code === out.team)) out.team = 'SPFC';
+    if (!FORMATION_IDS.includes(out.formLock)) out.formLock = null;
+    if (!Array.isArray(out.lastForm)) out.lastForm = null;
+    if (!Number.isFinite(out.seedBase)) out.seedBase = Math.floor(Math.random() * 4294967296);
+    if (!Number.isFinite(out.matchNo)) out.matchNo = 0;
     return out;
   })();
   const save = () => ctx.store.set('save', S);
 
-  const tname = (code) => {
-    const c = byCode(code);
-    return c ? ctx.pick(c.name) : code;
-  };
+  const tname = (code) => teamName(code, ctx.pick);
   const tierName = (tier) =>
     tier < CHAMPIONS_TIER ? t('division', { n: CHAMPIONS_TIER - tier }) : tier === CHAMPIONS_TIER ? t('champions') : t('legend', { n: roman(tier - CHAMPIONS_TIER) });
   const fmt = (n) => Math.round(n).toLocaleString(ctx.lang === 'en' ? 'en-US' : ctx.lang === 'es' ? 'es-ES' : 'pt-BR');
@@ -120,7 +133,9 @@ export async function mount(root, ctx) {
   let matchCfg = null;
   let result = null;
 
+  let pm = null; // pre-match screen token (cancels its auto-start)
   function render() {
+    pm = null;
     if (match) {
       match.destroy();
       match = null;
@@ -162,7 +177,7 @@ export async function mount(root, ctx) {
     capPreview(code, side, rim, px).then((c) => alive && holder.append(c));
     return holder;
   }
-  const flagImg = (code, cls = '') => h('img', { class: `g-soccer-flag ${cls}`, src: flagSrc(code), alt: '', draggable: 'false' });
+  const flagImg = (code, cls = '') => h('img', { class: `g-soccer-flag ${cls} ${isClub(code) ? 'club' : ''}`, src: flagSrc(code), alt: '', draggable: 'false' });
   function screen(cls, ...kids) {
     return h('div', { class: `screen g-soccer-screen ${cls}` }, ...kids);
   }
@@ -290,6 +305,7 @@ export async function mount(root, ctx) {
               h('p', null, t('cupDesc')),
               h('div', { class: 'g-soccer-bc-foot' }, h('span', null, t('cupsWon', { n: S.prof.cups })), h('span', { class: 'btn primary small' }, t('play'))),
             ),
+            formPicker(),
             levelBlock(),
           ),
         ),
@@ -352,6 +368,7 @@ export async function mount(root, ctx) {
               h('div', { class: 'g-soccer-vs' }, capCanvas(S.team, 0, S.equip.rim, 50), h('b', null, t('vs')), capCanvas(oppCode, 1, 'team', 50)),
               h('div', { class: 'g-soccer-vsnames' }, h('span', null, tname(S.team)), h('span', null, tname(oppCode))),
               h('small', { class: 'muted' }, t('firstTo', { n: goals })),
+              formPicker(),
               h(
                 'button',
                 {
@@ -389,6 +406,7 @@ export async function mount(root, ctx) {
             { class: 'stack' },
             h('div', { class: 'g-soccer-cuphead' }, h('div', { class: 'g-soccer-bigtrophy' }, icon(h, 'trophy')), h('b', null, t('cupN', { n: cup.level + 1 })), h('small', null, t('cupsWon', { n: S.prof.cups }))),
             h('div', { class: 'g-soccer-ladder' }, rows.slice().reverse()),
+            formPicker(),
             h(
               'button',
               {
@@ -414,7 +432,12 @@ export async function mount(root, ctx) {
         ['ball', t('tabBall')],
         ['rim', t('tabRim')],
       ];
+      const hero = h('div', { class: 'g-soccer-hero' });
       function draw() {
+        clear(hero);
+        if (tab === 'teams')
+          hero.append(flagImg(S.team, 'hero'), h('div', { class: 'g-soccer-herotxt' }, h('small', null, isClub(S.team) ? t('yourClub') : t('yourTeam')), h('b', null, tname(S.team))));
+        hero.style.display = tab === 'teams' ? '' : 'none';
         clear(tabs);
         for (const [id, label] of TABS)
           tabs.append(
@@ -484,7 +507,7 @@ export async function mount(root, ctx) {
         draw();
       }
       draw();
-      return screen('g-soccer-shop', h('h2', { class: 'g-soccer-h' }, t('shop')), tabs, body);
+      return screen('g-soccer-shop', h('h2', { class: 'g-soccer-h' }, t('shop')), hero, tabs, body);
     },
 
     profile() {
@@ -619,6 +642,7 @@ export async function mount(root, ctx) {
               ),
           h('div', { class: 'section-title' }, t('length')),
           chips(lenItems, () => q.len, (v) => (q.len = v)),
+          formPicker(),
           pvp ? null : reward,
           h('button', { class: 'btn primary big block', onclick: start }, icon(h, 'play'), t('start')),
         ),
@@ -651,9 +675,105 @@ export async function mount(root, ctx) {
   }
 
   // ---------- matches ----------
+  // Disc colours used in the mini formation diagram.
+  const discColors = (code, side) => {
+    const k = kitOf(code);
+    if (k) return { fill: k.dome[1], ring: k.ring[1] };
+    return side === 0 ? { fill: '#e5261c', ring: '#f6c21a' } : { fill: '#1f5fe0', ring: '#e4e8ee' };
+  };
+  // Mini pitch with both formations (you at the bottom, as in the match).
+  function formDiagram(forms, teams) {
+    const parts = [
+      '<svg viewBox="-4 -4 108 178" class="g-soccer-diag" aria-hidden="true">',
+      '<rect x="-3" y="-3" width="106" height="176" rx="7" fill="#5a2c0e"/>',
+      '<rect x="0" y="0" width="100" height="170" rx="3" fill="#2f8f3a"/>',
+      ...[0, 1, 2, 3, 4, 5].map((i) => `<rect x="0" y="${i * 28.33}" width="100" height="14.17" fill="#37a043" opacity=".55"/>`),
+      '<g fill="none" stroke="rgba(255,255,255,.75)" stroke-width="1.1"><rect x="1.4" y="1.4" width="97.2" height="167.2"/><path d="M1.4 85H98.6"/><circle cx="50" cy="85" r="14"/><path d="M18 1.4v23h64v-23M18 168.6v-23h64v23"/></g>',
+    ];
+    for (let side = 0; side < 2; side++) {
+      const c = discColors(teams[side], side);
+      layoutFormation(forms[side]).forEach(([x, y], i) => {
+        const px = side ? 100 - x : x;
+        const py = side ? 170 - y : y;
+        parts.push(`<circle cx="${px}" cy="${py + 1.2}" r="5.4" fill="rgba(0,0,0,.35)"/><circle cx="${px}" cy="${py}" r="5.2" fill="${c.fill}" stroke="${c.ring}" stroke-width="1.8"/>`);
+        if (i === 0) parts.push(`<circle cx="${px}" cy="${py}" r="1.7" fill="#fff"/>`);
+      });
+    }
+    parts.push('<circle cx="50" cy="85" r="2.6" fill="#fff" stroke="#111" stroke-width=".7"/></svg>');
+    return h('div', { class: 'g-soccer-diagwrap', html: parts.join('') });
+  }
+
+  // "Aleatória" (default) or a locked formation for your side.
+  function formPicker() {
+    const wrap = h('div', { class: 'chips g-soccer-chips g-soccer-formchips' });
+    const draw = () => {
+      clear(wrap);
+      for (const [v, label] of [[null, t('formRandom')], ...FORMATIONS.map((f) => [f.id, f.id])])
+        wrap.append(h('button', { class: `chip ${S.formLock === v ? 'active' : ''}`, onclick: () => ((S.formLock = v), save(), sfx.play('tap'), draw()) }, v === null ? '🎲 ' + label : label));
+    };
+    draw();
+    return h('div', { class: 'g-soccer-formpick' }, h('div', { class: 'section-title' }, t('formation')), wrap, h('small', { class: 'muted' }, t('formLockHint')));
+  }
+
   function startMatch(cfg) {
     sfx.play('select');
     if (match) match.destroy();
+    match = null;
+    result = null;
+    // seeded per match (save seed + match counter + round) so every match differs but is reproducible
+    const ca = S.career?.season;
+    const round = cfg.kind === 'career' && ca ? ca.round + 10 * ca.tier : cfg.kind === 'cup' && S.cup ? S.cup.round + 10 * S.cup.level : 0;
+    const seed = hashSeed(S.seedBase, S.matchNo++, cfg.kind, round, cfg.teams.join('-'));
+    const forms = pickFormations(rng(seed), { lock: S.formLock, prev: S.lastForm });
+    S.lastForm = forms;
+    save();
+    showPrematch(cfg, forms, seed);
+  }
+
+  function showPrematch(cfg, forms, seed) {
+    clear(root);
+    header('menu');
+    const token = {};
+    pm = token;
+    const go = () => {
+      if (pm !== token || !alive) return;
+      pm = null;
+      beginMatch(cfg, forms, seed);
+    };
+    const pvp = cfg.kind === 'pvp';
+    const style = ['attacking', 'balanced', 'cautious'][hashSeed(seed, 'style') % 3];
+    const cd = h('small', { class: 'muted g-soccer-center' }, '');
+    const side = (i, who) =>
+      h('div', { class: 'g-soccer-pmside' }, capCanvas(cfg.teams[i], i, i === 0 ? S.equip.rim : 'team', 58), h('b', null, tname(cfg.teams[i])), h('span', { class: 'g-soccer-pmform' }, h('small', null, who), h('i', null, forms[i])));
+    const el = screen(
+      'g-soccer-prematch',
+      stagger(
+        h(
+          'div',
+          { class: 'stack' },
+          h('h2', { class: 'g-soccer-h g-soccer-center' }, t('formationVs', { a: forms[0], b: forms[1] })),
+          h('div', { class: 'g-soccer-pmrow' }, side(0, pvp ? t('player', { n: 1 }) : t('formYou')), formDiagram(forms, cfg.teams), side(1, pvp ? t('player', { n: 2 }) : t('formRival'))),
+          pvp ? null : h('div', { class: 'g-soccer-pmstyle' }, h('small', null, t('rivalStyle')), h('b', null, t('style_' + style))),
+          h('button', { class: 'btn primary big block', onclick: go }, icon(h, 'play'), t('kickOffNow')),
+          cd,
+        ),
+      ),
+    );
+    root.append(el);
+    // the match starts by itself after a short look at the formations (tap to skip)
+    let n = 5;
+    cd.textContent = t('pmStarting', { n });
+    const tick = () => {
+      if (pm !== token || !alive) return;
+      n--;
+      if (n <= 0) return go();
+      cd.textContent = t('pmStarting', { n });
+      later(tick, 1000);
+    };
+    later(tick, 1000);
+  }
+
+  function beginMatch(cfg, forms, seed) {
     clear(root);
     header('match');
     matchCfg = cfg;
@@ -673,6 +793,8 @@ export async function mount(root, ctx) {
       ball: S.equip.ball,
       rim: S.equip.rim,
       hint: !S.hinted,
+      forms,
+      seed,
       onEnd: (res) => onMatchEnd(cfg, res),
     });
   }

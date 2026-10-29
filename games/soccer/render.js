@@ -4,6 +4,7 @@
 import { W, L, GOAL_D, GX0, GX1, POST_R } from './physics.js';
 import { rng } from '../../js/core/ui.js';
 import { byCode, flagUrl } from '../../js/data/countries.js';
+import { isClub, kitOf, crestUrl } from './teams.js';
 
 
 // ---------- colour helpers ----------
@@ -20,20 +21,31 @@ export function shade(hex, amt) {
 
 // ---------- flags ----------
 const flagCache = new Map();
-export function loadFlag(code) {
-  if (flagCache.has(code)) return flagCache.get(code);
-  const c = byCode(code);
+function loadImg(src, key) {
+  if (flagCache.has(key)) return flagCache.get(key);
   const p = new Promise((resolve) => {
+    if (!src) return resolve(null);
     const img = new Image();
     img.onload = () => resolve(img);
     img.onerror = () => resolve(null);
-    img.src = c ? flagUrl(c) : '';
-    if (!c) resolve(null);
+    img.src = src;
   });
-  flagCache.set(code, p);
+  flagCache.set(key, p);
   return p;
 }
+// Emblem for the discs: the flag of a national team, or the simplified crest of a club.
+export function loadFlag(code) {
+  if (isClub(code)) return loadImg(crestUrl(code, false), code + ':s');
+  const c = byCode(code);
+  return loadImg(c ? flagUrl(c) : '', code);
+}
+// Full crest (with stars) for the pitch watermark.
+export function loadCrest(code) {
+  return loadImg(crestUrl(code, true), code + ':f');
+}
+// Source for <img> badges: flag, or the full club crest.
 export function flagSrc(code) {
+  if (isClub(code)) return crestUrl(code, true);
   const c = byCode(code);
   return c ? flagUrl(c) : '';
 }
@@ -310,6 +322,16 @@ function drawMarkings(g, st) {
   g.restore();
 }
 
+// Subtle club crest watermark inside the centre circle.
+function drawMark(g, img) {
+  const h = 21;
+  const w = (h * img.naturalWidth) / (img.naturalHeight || 1);
+  g.save();
+  g.globalAlpha = 0.2;
+  g.drawImage(img, W / 2 - w / 2, L / 2 - h / 2 + 0.5, w, h);
+  g.restore();
+}
+
 function drawPockets(g, st) {
   for (const top of [true, false]) {
     const y = top ? -GOAL_D : L;
@@ -360,7 +382,7 @@ function drawLighting(g, st) {
 }
 
 // Renders the static table + pitch for a turf style into a cw×ch (css px) context.
-export function drawStatic(g, lay, styleId) {
+export function drawStatic(g, lay, styleId, mark) {
   const st = STYLES[styleId] || STYLES.classic;
   g.fillStyle = '#0a0a0c';
   g.fillRect(0, 0, lay.cw, lay.ch);
@@ -371,6 +393,7 @@ export function drawStatic(g, lay, styleId) {
   drawSurface(g, st, lay);
   drawPockets(g, st);
   drawMarkings(g, st);
+  if (mark) drawMark(g, mark);
   drawLighting(g, st);
   g.restore();
 }
@@ -483,8 +506,8 @@ function ringFill(g, rim, sd, r) {
 
 // Pre-renders a cap (with its drop shadow) of radius rPx css pixels.
 // `img` is the team flag, shown as a small emblem in the middle of the dome.
-export function capSprite(img, side, rim, rPx, dpr) {
-  const sd = SIDES[side] || SIDES[0];
+export function capSprite(img, side, rim, rPx, dpr, kit) {
+  const sd = kit ? { ...(SIDES[side] || SIDES[0]), ...kit } : SIDES[side] || SIDES[0];
   const r = rPx;
   const pad = Math.ceil(r * 0.5);
   const size = Math.ceil((r * 2 + pad * 2) * dpr);
@@ -551,8 +574,29 @@ export function capSprite(img, side, rim, rPx, dpr) {
   g.beginPath();
   g.arc(0, dy, dr, 0, Math.PI * 2);
   g.fill();
-  // flag emblem
-  if (img) {
+  // club kit: red / black bands on the white dome (clipped to the dome)
+  if (kit && kit.bands) {
+    g.save();
+    g.beginPath();
+    g.arc(0, dy, dr, 0, Math.PI * 2);
+    g.clip();
+    g.fillStyle = kit.bands[0];
+    g.fillRect(-dr, dy - dr, dr * 2, dr * 0.5);
+    g.fillStyle = kit.bands[1];
+    g.fillRect(-dr, dy + dr * 0.5, dr * 2, dr * 0.5);
+    g.restore();
+  }
+  // club crest emblem (shield, drawn as is) or flag emblem (round)
+  if (img && kit) {
+    const eh = dr * 1.22;
+    const ew = (eh * img.naturalWidth) / (img.naturalHeight || 1);
+    g.save();
+    g.shadowColor = 'rgba(0,0,0,0.45)';
+    g.shadowBlur = r * 0.08;
+    g.shadowOffsetY = r * 0.03;
+    g.drawImage(img, -ew / 2, dy - eh / 2 + dr * 0.02, ew, eh);
+    g.restore();
+  } else if (img) {
     const er = dr * 0.5;
     g.save();
     g.beginPath();
@@ -731,7 +775,7 @@ export function pitchPreview(styleId, w = 96, h = 132) {
 export async function capPreview(code, side, rim, px = 52) {
   const dpr = Math.min(3, window.devicePixelRatio || 1);
   const img = code ? await loadFlag(code) : null;
-  const sp = capSprite(img, side, rim, px * 0.4, dpr);
+  const sp = capSprite(img, side, rim, px * 0.4, dpr, code ? kitOf(code) : null);
   const c = document.createElement('canvas');
   c.width = c.height = px * dpr;
   c.style.width = c.style.height = px + 'px';

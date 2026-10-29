@@ -15,6 +15,21 @@ function arc(cx, cy, r, a0, a1, n) {
   return pts;
 }
 
+// Chaikin corner cutting (keeps the end points): rounded ramp rails that the ball follows exactly
+function smoothPath(path, iters = 2) {
+  let p = path.map((q) => [q[0], q[1]]);
+  for (let k = 0; k < iters; k++) {
+    const out = [p[0]];
+    for (let i = 0; i < p.length - 1; i++) {
+      const a = p[i], b = p[i + 1];
+      out.push([a[0] * 0.75 + b[0] * 0.25, a[1] * 0.75 + b[1] * 0.25], [a[0] * 0.25 + b[0] * 0.75, a[1] * 0.25 + b[1] * 0.75]);
+    }
+    out.push(p[p.length - 1]);
+    p = out;
+  }
+  return p;
+}
+
 function build(opts) {
   const segs = [];
   const wall = (x1, y1, x2, y2, e = 0.42, extra = {}) => segs.push({ x1, y1, x2, y2, e, kind: 'wall', ...extra });
@@ -78,7 +93,7 @@ function build(opts) {
     segs.push({ x1: s.x1, y1: s.y1, x2: s.x2, y2: s.y2, e: 0.3, kind: 'standup', id });
   }
   // lane posts at the top
-  const lanes = opts.lanes.map((x, i) => ({ x, y: 88, r: 13, ch: opts.laneLetters[i] }));
+  const lanes = opts.lanes.map((x, i) => ({ x, y: 88, r: 13, ch: opts.laneLetters[i], color: (opts.laneColors || [])[i] || '#ffffff' }));
   const sp = opts.lanes[1] - opts.lanes[0];
   for (let i = 0; i <= opts.lanes.length; i++) {
     const x = opts.lanes[0] - sp / 2 + i * sp;
@@ -101,7 +116,7 @@ function build(opts) {
     lanes,
     laneLetters: opts.laneLetters,
     spinner: opts.spinner,
-    ramps: opts.ramps,
+    ramps: opts.ramps.map((r) => ({ ...r, path: smoothPath(r.path) })),
     inlanes: [
       { x: 57, y: 596, r: 11, side: 'L' },
       { x: mx(57), y: 596, r: 11, side: 'R' },
@@ -126,7 +141,8 @@ const NEON = () =>
     bumpers: [{ x: 122, y: 218 }, { x: 242, y: 218 }, { x: 182, y: 290 }],
     posts: [{ x: 92, y: 455 }, { x: 272, y: 455 }],
     lanes: [137, 182, 227],
-    laneLetters: ['N', 'E', 'O'],
+    laneLetters: ['', '', ''],
+    laneColors: ['#46d84a', '#3aa8ff', '#ff8a2a'],
     spinner: { x: 182, y: 172, w: 44 },
     drops: [{ x: 344, y: 384, n: 3, face: 'L' }],
     standups: [
@@ -142,12 +158,10 @@ const NEON = () =>
       },
     ],
     missions: [
-      { id: 'bumperAll', type: 'bumperAll', goal: 3 },
-      { id: 'ramp', type: 'count', ev: 'ramp', goal: 3 },
-      { id: 'bank', type: 'count', ev: 'bank', goal: 1 },
-      { id: 'spin', type: 'count', ev: 'spin', goal: 40 },
-      { id: 'combo', type: 'combo', goal: 4 },
-      { id: 'multiball', type: 'count', ev: 'multiball', goal: 1 },
+      { id: 'discover', type: 'bumperAll', goal: 3 },
+      { id: 'catch', type: 'count', ev: 'ramp', goal: 3 },
+      { id: 'train', type: 'count', ev: 'bank', goal: 1 },
+      { id: 'battle', type: 'count', ev: 'multiball', goal: 1 },
     ],
     deco: { inserts: [[182, 372], [150, 420], [214, 420], [182, 470]] },
   });
@@ -160,7 +174,8 @@ const SPACE = () =>
     bumpers: [{ x: 182, y: 232 }, { x: 128, y: 306 }, { x: 236, y: 306 }],
     posts: [{ x: 120, y: 470 }, { x: 244, y: 470 }],
     lanes: [122, 162, 202, 242],
-    laneLetters: ['M', 'A', 'R', 'S'],
+    laneLetters: ['', '', '', ''],
+    laneColors: ['#ff4d6d', '#ffd23a', '#5ad8ff', '#b66bff'],
     spinner: { x: 182, y: 388, w: 44 },
     drops: [{ x: 20, y: 330, n: 3, face: 'R' }],
     standups: [
@@ -179,12 +194,10 @@ const SPACE = () =>
       },
     ],
     missions: [
-      { id: 'bumperHits', type: 'count', ev: 'bumper', goal: 25 },
-      { id: 'lanes', type: 'count', ev: 'lanes', goal: 2 },
-      { id: 'ramp2', type: 'count', ev: 'ramp', goal: 2 },
-      { id: 'standup', type: 'count', ev: 'standup', goal: 6 },
-      { id: 'bank2', type: 'count', ev: 'bank', goal: 2 },
-      { id: 'multiball', type: 'count', ev: 'multiball', goal: 1 },
+      { id: 'discover2', type: 'count', ev: 'lanes', goal: 2 },
+      { id: 'catch2', type: 'count', ev: 'ramp', goal: 2 },
+      { id: 'train2', type: 'count', ev: 'standup', goal: 6 },
+      { id: 'battle2', type: 'count', ev: 'multiball', goal: 1 },
     ],
     unlock: { score: 50000, missions: 6 },
     deco: { inserts: [[182, 520], [150, 440], [214, 440], [182, 340]] },

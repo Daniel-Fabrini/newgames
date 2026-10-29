@@ -64,18 +64,22 @@ function body(kind, team, x, y) {
 }
 
 // bodies[0] is the ball, 1..5 are team 0, 6..10 are team 1.
-export function createWorld() {
+// `forms` = [layoutTeam0, layoutTeam1], each 5 [x, y] pairs in team-0 space (default: classic 2-2).
+export function createWorld(forms) {
   const bodies = [body('ball', -1, W / 2, L / 2)];
-  for (let t = 0; t < 2; t++) for (const [x, y] of FORMATION) bodies.push(body('cap', t, t ? W - x : x, t ? L - y : y));
-  return { bodies, goal: -1, time: 0 };
+  const f = forms || [FORMATION, FORMATION];
+  for (let t = 0; t < 2; t++) for (const [x, y] of f[t]) bodies.push(body('cap', t, t ? W - x : x, t ? L - y : y));
+  return { bodies, goal: -1, time: 0, form: f };
 }
 
-export function resetPositions(world) {
+export function resetPositions(world, forms) {
   const b = world.bodies;
+  if (forms) world.form = forms;
+  const f = world.form || [FORMATION, FORMATION];
   b[0].x = W / 2;
   b[0].y = L / 2;
   for (let t = 0; t < 2; t++)
-    FORMATION.forEach(([x, y], i) => {
+    f[t].forEach(([x, y], i) => {
       const c = b[1 + t * 5 + i];
       c.x = t ? W - x : x;
       c.y = t ? L - y : y;

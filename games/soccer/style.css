@@ -1371,3 +1371,164 @@
   flex-direction: column;
   gap: 8px;
 }
+
+/* ---------- club crests ---------- */
+.g-soccer-flag.club {
+  object-fit: contain;
+  box-shadow: none;
+  border-radius: 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
+}
+.g-soccer-flag.sq.club {
+  width: 56px;
+  height: 56px;
+  padding: 4px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 50% 30%, #2a2a31, #101013);
+  border: 2px solid #e5261c;
+  box-shadow: 0 0 0 2px #f6c21a, 0 6px 16px rgba(0, 0, 0, 0.5);
+  filter: none;
+}
+.g-soccer-flag.sq.side1.club {
+  border-color: #1f5fe0;
+  box-shadow: 0 0 0 2px #e4e8ee, 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+.g-soccer-itprev .g-soccer-flag.sq.club {
+  width: 62px;
+  height: 62px;
+}
+.g-soccer-av.club {
+  background: radial-gradient(circle at 50% 30%, #2a2a31, #0d0d10);
+}
+.g-soccer-av.club img {
+  object-fit: contain;
+  padding: 3px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+.g-soccer-rung .g-soccer-flag.club,
+.g-soccer-tr .g-soccer-flag.club {
+  width: 22px;
+  height: 24px;
+}
+
+/* shop: current team hero */
+.g-soccer-hero {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #1c1c21, var(--gs-panel-2));
+  border: 1px solid var(--gs-line);
+  box-shadow: var(--gs-glow);
+}
+.g-soccer-flag.hero {
+  width: 62px;
+  height: 70px;
+}
+.g-soccer-flag.hero:not(.club) {
+  height: 46px;
+  border-radius: 8px;
+}
+.g-soccer-herotxt {
+  display: flex;
+  flex-direction: column;
+}
+.g-soccer-herotxt small {
+  color: var(--primary);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+}
+.g-soccer-herotxt b {
+  font-size: 20px;
+  font-weight: 1000;
+}
+
+/* ---------- formations ---------- */
+.g-soccer-formpick {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.g-soccer-formchips {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.g-soccer-formchips .chip {
+  flex: 0 0 auto;
+  min-width: 52px;
+  padding-inline: 12px;
+}
+.g-soccer-pmrow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 140px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+.g-soccer-diagwrap {
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.55));
+}
+.g-soccer-diag {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.g-soccer-pmside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  min-width: 0;
+}
+.g-soccer-pmside > b {
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.15;
+}
+.g-soccer-pmform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--gs-line);
+  background: rgba(247, 215, 116, 0.08);
+}
+.g-soccer-pmform small {
+  font-size: 10.5px;
+  color: #b9b9c4;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.g-soccer-pmform i {
+  font-style: normal;
+  font-weight: 1000;
+  font-size: 20px;
+  color: #f7d774;
+}
+.g-soccer-pmstyle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.g-soccer-pmstyle small {
+  color: #b9b9c4;
+}
+.g-soccer-pmstyle b {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(247, 215, 116, 0.14);
+  color: #f7d774;
+  font-size: 13px;
+}
+.g-soccer-pmform i {
+  white-space: nowrap;
+  font-size: 17px;
+}
+.g-soccer-pmform {
+  padding-inline: 8px;
+}

@@ -44,6 +44,8 @@ export function createRenderer(canvas, tb, opts = {}) {
   const parts = [];
   const pops = [];
   let lastT = 0;
+  const art = opts.art || null;
+  const rampLayer = document.createElement('canvas');
 
   function resize(w, h, ratio) {
     dpr = ratio;
@@ -58,9 +60,24 @@ export function createRenderer(canvas, tb, opts = {}) {
     oy = (h - H * k) / 2;
     base.width = Math.max(2, Math.round(W * k * dpr));
     base.height = Math.max(2, Math.round(H * k * dpr));
-    bake();
+    if (art) bakeArt();
+    else bake();
   }
   const toTable = (px, py) => ({ x: (px - ox) / k, y: (py - oy) / k });
+
+  // ------------------------------------------------------------------ pre-rendered artwork (Blender) scaled once
+  function bakeArt() {
+    const g = bctx;
+    g.setTransform(1, 0, 0, 1, 0, 0);
+    g.imageSmoothingQuality = 'high';
+    g.clearRect(0, 0, base.width, base.height);
+    g.drawImage(art.base, 0, 0, base.width, base.height);
+    rampLayer.width = base.width;
+    rampLayer.height = base.height;
+    const r = rampLayer.getContext('2d');
+    r.imageSmoothingQuality = 'high';
+    r.drawImage(art.ramp, 0, 0, base.width, base.height);
+  }
 
   // ------------------------------------------------------------------ baked art
   function bake() {
@@ -269,6 +286,7 @@ export function createRenderer(canvas, tb, opts = {}) {
 
   // ------------------------------------------------------------------ frame
   function draw(game, now) {
+    if (art) return drawArt(game, now);
     const dt = Math.min(0.05, lastT ? (now - lastT) / 1000 : 0.016);
     lastT = now;
     const sim = game.sim;
@@ -621,6 +639,11 @@ export function createRenderer(canvas, tb, opts = {}) {
       drawBall(b.x - 1, b.y - 5, 1.18, 1);
     }
 
+    drawFx(game, dt, tsec);
+    ctx.restore();
+  }
+
+  function drawFx(game, dt, tsec) {
     // ----- sparks, popups
     ctx.globalCompositeOperation = 'lighter';
     for (let i = parts.length - 1; i >= 0; i--) {
@@ -664,7 +687,6 @@ export function createRenderer(canvas, tb, opts = {}) {
       ctx.fillStyle = `rgba(255,40,40,${0.12 + 0.08 * Math.sin(tsec * 10)})`;
       ctx.fillRect(0, 0, W, H);
     }
-    ctx.restore();
   }
 
   function drawBall(x, y, s, raised) {

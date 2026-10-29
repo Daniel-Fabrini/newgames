@@ -263,7 +263,7 @@ test('missions complete in order and pay out', () => {
   assert.equal(g.stats.missions, 2);
   const s = new Game({ table: 'space', seed: 5 });
   s.phase = 'play';
-  for (let i = 0; i < 25; i++) s.handle({ t: 'bumper', i: i % 3 });
+  s.mission('lanes', {}); s.mission('lanes', {});
   assert.equal(s.stats.missions, 1);
 });
 

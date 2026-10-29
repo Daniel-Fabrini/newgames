@@ -112,3 +112,19 @@
 .g-fb-match.two .g-fb-pad { padding-top: 4px; padding-bottom: 4px; }
 .g-fb-match.two .g-fb-pad:last-child { padding-bottom: calc(4px + var(--safe-bottom, 0px)); }
 .g-fb-match.two .g-fb-auto { height: 20px; }
+
+/* ---- premium HUD / crest */
+.g-fb-hero-crest { width: 52px; height: 65px; flex: none; filter: drop-shadow(0 6px 10px rgba(0,0,0,.6)); }
+.g-fb-crest { width: 22px; height: 27px; flex: none; filter: drop-shadow(0 2px 3px rgba(0,0,0,.6)); }
+.g-fb-crest.big { width: 44px; height: 55px; }
+.g-fb-kit { width: 18px !important; height: 18px !important; border-radius: 6px !important; border: 2px solid rgba(255,255,255,.85); box-shadow: 0 2px 5px rgba(0,0,0,.5) !important; }
+.g-fb-hud { padding: 8px 8px 3px; }
+.g-fb-team { position: relative; overflow: hidden; border: 1px solid rgba(247, 215, 116, 0.55); background: linear-gradient(180deg, #26221a 0%, #100e0a 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 6px 14px rgba(0,0,0,.5); }
+.g-fb-team::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #d8202a 0 34%, #fff 34% 66%, #111 66%); }
+.g-fb-team.t1::before { left: auto; right: 0; background: #2f7cff; }
+.g-fb-mid { padding: 3px 8px; border-radius: 12px; background: linear-gradient(180deg, #1b1810, #0b0a07); border: 1px solid rgba(247,215,116,.35); }
+.g-fb-pausebtn { background: linear-gradient(180deg, #2a261a, #100e0a); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 6px 14px rgba(0,0,0,.5); }
+.g-fb-stage::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 45%, rgba(0,0,0,0) 60%, rgba(0,0,0,.45) 100%); }
+.g-fb-match { background: radial-gradient(130% 80% at 50% 40%, #1d1a12 0%, #0a0a0c 70%); }
+.g-fb-msg { z-index: 2; background: radial-gradient(closest-side, rgba(0,0,0,.35), rgba(0,0,0,0)); text-shadow: 0 4px 0 rgba(0,0,0,.5), 0 0 28px rgba(255,214,102,.45), 0 0 24px rgba(0,0,0,.7); }
+.g-fb-stage > canvas { z-index: 0; }
