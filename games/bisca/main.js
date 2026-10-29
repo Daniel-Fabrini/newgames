@@ -698,7 +698,7 @@ export async function mount(root, ctx) {
   function roundBody(rd) {
     const [a, b] = rd.points;
     const res = rd.result;
-    const sub = res.team < 0 ? t('roundDrawSub') : `${kindLabel(res.kind)} · ${res.pontos === 1 ? t('pontosWon1') : t('pontosWon', { n: res.pontos })}`;
+    const sub = res.team < 0 ? t('roundDrawSub') : `${kindLabel(res.kind)} · ${teamLabel(res.team)}: ${res.pontos === 1 ? t('pontosWon1') : t('pontosWon', { n: res.pontos })}`;
     const bar = h('div', { class: 'g-bisca-bar', role: 'img', 'aria-label': `${teamLabel(0)} ${a}, ${teamLabel(1)} ${b}` },
       h('i', { class: 't0', style: { width: (a / 120) * 100 + '%' } }),
       h('i', { class: 't1', style: { width: (b / 120) * 100 + '%' } }),

@@ -134,9 +134,9 @@
 }
 
 /* stock + face-up trunfo (sideways, under the stock) */
-.g-bisca-stock { position: absolute; left: 16px; top: 30%; width: calc(var(--cw) * 2); height: calc(var(--cw) * 1.5); z-index: 2; }
+.g-bisca-stock { position: absolute; left: 16px; top: 30%; width: calc(var(--cw) * 2.25); height: calc(var(--cw) * 1.5); z-index: 2; }
 .g-bisca-table.n4 .g-bisca-stock { top: 22%; }
-.g-bisca-tr { position: absolute; left: calc(var(--cw) * 0.6); top: calc(var(--cw) * 0.45); width: calc(var(--cw) * 1.4); height: var(--cw); }
+.g-bisca-tr { position: absolute; left: calc(var(--cw) * 0.82); top: calc(var(--cw) * 0.45); width: calc(var(--cw) * 1.4); height: var(--cw); }
 .g-bisca-tr .dc { position: absolute; left: calc(var(--cw) * 0.2); top: calc(var(--cw) * -0.2); transform: rotate(90deg); }
 .g-bisca-sstk { position: absolute; left: 0; top: 0; width: var(--cw); height: calc(var(--cw) * 1.4); }
 .g-bisca-stcnt {

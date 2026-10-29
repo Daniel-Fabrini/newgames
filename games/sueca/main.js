@@ -612,7 +612,7 @@ export async function mount(root, ctx) {
     const [a, b] = rd.points;
     const res = rd.result;
     const head = res.team < 0 ? t('roundDraw') : res.team === 0 ? t('roundWin') : t('roundLoss');
-    const sub = res.team < 0 ? t('roundDrawSub') : `${kindLabel(res.kind)} · ${res.jogos === 1 ? t('jogosWon1') : t('jogosWon', { n: res.jogos })}`;
+    const sub = res.team < 0 ? t('roundDrawSub') : `${kindLabel(res.kind)} · ${t(res.team === 0 ? 'us' : 'them')}: ${res.jogos === 1 ? t('jogosWon1') : t('jogosWon', { n: res.jogos })}`;
     const bar = h('div', { class: 'g-sueca-bar', role: 'img', 'aria-label': `${t('us')} ${a}, ${t('them')} ${b}` },
       h('i', { class: 't0', style: { width: (a / 120) * 100 + '%' } }),
       h('i', { class: 't1', style: { width: (b / 120) * 100 + '%' } }),

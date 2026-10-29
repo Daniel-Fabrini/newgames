@@ -331,7 +331,7 @@ export async function mount(root, ctx) {
     const info = h('div', { class: 'g-buraco-info' }, turnInd, hint, lastLine);
     const centre = h('div', { class: 'g-buraco-centre' }, stockPile, pileWrap, info);
     // actions
-    const bar = T.actionBar([], {});
+    const bar = T.actionBar([], { onDisabled: (reason) => { sfx.error(); ctx.ui.toast(reason, 2400); } });
     bar.classList.add('g-buraco-bar');
     // hand
     const handBox = h('div', { class: 'g-buraco-hand' });
