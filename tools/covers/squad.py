@@ -30,13 +30,14 @@ objs = []
 objs.append(cylinder(3.3, 0.5, sand, (0, 0, -0.25), bevel=0.22, seg=96))
 objs.append(cylinder(3.25, 0.6, sand2, (0, 0, -0.75), bevel=0.15, seg=96))
 # explosion behind
-fx = [(2.0, 1.2, 1.0, 1.0, fire3), (2.6, 1.0, 1.4, 0.8, fire1), (1.4, 1.4, 1.4, 0.7, fire1), (2.0, 0.8, 1.5, 0.5, fire2),
-      (2.5, 0.7, 1.0, 0.5, fire2), (1.0, 1.4, 1.0, 0.45, fire3)]
-for x, y, z, r, m in fx:
+for x, y, z, r, m in [(2.1, 1.3, 1.0, 1.1, fire3), (1.3, 1.4, 0.9, 0.7, fire3), (2.9, 1.2, 0.9, 0.7, fire3),
+                      (2.0, 1.0, 1.25, 0.85, fire1), (2.7, 0.9, 1.0, 0.5, fire1), (1.4, 1.0, 1.0, 0.5, fire1),
+                      (2.0, 0.6, 1.2, 0.5, fire2)]:
     objs.append(sphere(r, m, (x, y, z), seg=32))
-for x, y, z, h, m in [(1.4, 1.2, 1.9, 1.5, fire1), (2.0, 1.1, 2.2, 1.9, fire2), (2.6, 1.0, 2.0, 1.4, fire1), (1.8, 1.0, 1.7, 1.2, fire3), (2.3, 0.8, 1.8, 1.3, fire2)]:
-    objs.append(cone(0.55, 0.0, h, m, (x, y, z), seg=24))
-for x, z, r, m in [(2.2, 2.9, 0.8, smoke), (1.4, 2.6, 0.6, smoke2), (3.0, 2.8, 0.55, smoke2), (2.4, 3.6, 0.55, smoke), (3.4, 2.0, 0.5, smoke)]:
+for x, y, z, h, r, m in [(1.5, 1.2, 2.0, 1.8, 0.5, fire3), (2.1, 1.2, 2.4, 2.3, 0.7, fire1), (2.7, 1.1, 2.0, 1.6, 0.5, fire3),
+                         (2.1, 0.8, 2.0, 1.6, 0.4, fire2)]:
+    objs.append(cone(r, 0.0, h, m, (x, y, z), seg=24))
+for x, z, r, m in [(2.2, 4.0, 0.7, smoke), (1.5, 3.7, 0.5, smoke2), (3.0, 3.8, 0.5, smoke2), (2.5, 4.6, 0.5, smoke)]:
     objs.append(sphere(r, m, (x, 1.3, z), seg=32))
 for i in range(10):
     a = random.uniform(0, 6.28)

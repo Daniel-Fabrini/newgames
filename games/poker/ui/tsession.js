@@ -2,6 +2,8 @@
 import * as T from '../tournament/tournament.js';
 import { fmt } from './table.js';
 
+const short = (n) => (n < 1000 ? String(n) : n < 1e6 ? String(+(n / 1000).toFixed(2)) + 'K' : String(+(n / 1e6).toFixed(2)) + 'M');
+
 export function createTournamentSession(tour, { heroFrame = '', rivalNames = {}, L = {}, tx = (o) => o } = {}) {
   const t = tour;
   let pendingRound = [];
@@ -60,7 +62,7 @@ export function createTournamentSession(tour, { heroFrame = '', rivalNames = {},
     hud() {
       const s = T.standing(t);
       return [
-        { label: L.blinds || 'Blinds', value: `${fmt(s.blinds.sb)}/${fmt(s.blinds.bb)}`, gold: true },
+        { label: L.blinds || 'Blinds', value: `${short(s.blinds.sb)}/${short(s.blinds.bb)}`, gold: true },
         { label: L.level || 'Level', value: s.level },
         { label: L.players || 'Players', value: String(s.remaining) },
         { label: L.rank || 'Rank', value: s.chipRank ? String(s.chipRank) : '-' },
@@ -72,9 +74,9 @@ export function createTournamentSession(tour, { heroFrame = '', rivalNames = {},
       const parts = [];
       if (s.bubble) parts.push(L.bubble || 'Bubble');
       else if (s.inMoney && s.entrants > s.paid + 1) parts.push(L.inMoney || 'In the money');
-      parts.push((L.next || 'Next {blinds} in {n}').replace('{blinds}', `${fmt(s.nextBlinds.sb)}/${fmt(s.nextBlinds.bb)}`).replace('{n}', s.handsToNextLevel));
-      if (s.blinds.ante) parts.push(`${L.ante || 'Ante'} ${fmt(s.blinds.ante)}`);
-      parts.push(`${L.avg || 'Avg'} ${fmt(s.avgStack)}`);
+      parts.push((L.next || 'Next {blinds} in {n}').replace('{blinds}', `${short(s.nextBlinds.sb)}/${short(s.nextBlinds.bb)}`).replace('{n}', s.handsToNextLevel));
+      if (s.blinds.ante) parts.push(`${L.ante || 'Ante'} ${short(s.blinds.ante)}`);
+      parts.push(`${L.avg || 'Avg'} ${short(s.avgStack)}`);
       return parts.join(' · ');
     },
     simulate() {

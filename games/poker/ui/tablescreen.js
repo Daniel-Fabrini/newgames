@@ -213,7 +213,7 @@ export function createTableScreen(root, deps) {
         logLine(txt + (d.allIn ? ' · ' + t('act.allin') : ''), d.allIn ? 'allin' : '');
         announce(txt + (d.allIn ? ', ' + t('act.allin') : ''));
         if (d.p === disp.D.heroIdx && d.type === 'fold') ctxInfo.heroFolded = true;
-        if (d.allIn && s.stack === 0 && !reduce()) table.banner(t('act.allin'), 'allin');
+        if (d.allIn && s.stack === 0 && d.p === disp.D.heroIdx && !reduce()) table.banner(t('act.allin'), 'allin');
         if (d.allIn) coachTrigger('first_allin');
         await wait(d.p === disp.D.heroIdx ? 220 : d.type === 'fold' ? 260 : 420);
         break;
