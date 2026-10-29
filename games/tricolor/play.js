@@ -95,7 +95,7 @@ function questionScreen(app, st, save, alive) {
         const hasLife = Object.values(initial).some((n) => n > 0);
         for (const k of ['fifty', 'crowd', 'phone', 'swap']) {
           if (!initial[k]) continue;
-          const b = h('button', { class: 'tc-life', 'aria-label': t(`life.${k}.n`), onclick: () => openHelp(), html: k === 'fifty' ? '<b>50:50</b>' : ico(k) });
+          const b = h('button', { class: 'tc-life', 'aria-label': t(`life.${k}.n`), onclick: () => lifeTap(k), html: k === 'fifty' ? '<b>50:50</b>' : ico(k) });
           lifeBtns[k] = b;
           row.append(b);
         }
@@ -314,7 +314,10 @@ function questionScreen(app, st, save, alive) {
           if (k === 'crowd' && st.aids.crowd) showCrowd(st.aids.crowd);
           if (k === 'phone' && st.aids.phone) phoneFlow(app, st, bank, v, sc, true);
         };
-        for (const k of ['crowd', 'phone']) if (lifeBtns[k]) lifeBtns[k].onclick = () => (st.lifelines[k] > 0 || !st.aids[k] ? openHelp() : reopen(k));
+        function lifeTap(k) {
+          if ((k === 'crowd' || k === 'phone') && !(st.lifelines[k] > 0) && st.aids[k]) return busy ? null : reopen(k);
+          openHelp();
+        }
         refreshLives();
 
         // --- entrance ---
