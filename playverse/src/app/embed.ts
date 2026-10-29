@@ -12,7 +12,10 @@ import { isLocale, type Locale } from '../i18n/locales';
  *
  *   child → parent  { type: 'pv-exit' }                                  leave the game (back to the lobby)
  *   child → parent  { type: 'pv-result', game, outcome, score?, level? } a real match / level finished
- *   parent → child  { type: 'pv-back' }                                  Android/header back button
+ *   child → parent  { type: 'pv-ready' }                                 the page is up and listening
+ *   parent → child  { type: 'pv-back' }                                  Android/header back button; the child
+ *                                                                        answers 'pv-handled' (it stayed in the
+ *                                                                        game) or 'pv-exit' (it is at its root)
  */
 const params = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams();
 
@@ -85,7 +88,10 @@ export function registerBackHandler(fn: BackHandler): () => void {
 export function requestBack(): void {
   for (let i = handlers.length - 1; i >= 0; i--) {
     const entry = handlers[i];
-    if (entry && entry.fn()) return;
+    if (entry && entry.fn()) {
+      postToParent({ type: 'pv-handled' });
+      return;
+    }
   }
   postExit();
 }
@@ -106,4 +112,5 @@ if (EMBED && typeof window !== 'undefined') {
     const data = event.data as { type?: unknown } | null;
     if (data && data.type === 'pv-back') requestBack();
   });
+  postToParent({ type: 'pv-ready' });
 }

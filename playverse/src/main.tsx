@@ -10,6 +10,7 @@ import './styles/tokens.css';
 import './styles/base.css';
 import './styles/components.css';
 import './styles/app.css';
+import './styles/embed.css';
 
 const container = document.getElementById('root');
 if (!container) throw new Error('Root element #root not found');

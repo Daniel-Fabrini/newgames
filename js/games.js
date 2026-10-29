@@ -411,7 +411,7 @@ export const GAMES = [
       { id: 'ai', icon: 'user', label: { pt: 'Contra o PC', en: 'Vs Computer', es: 'Contra la IA' } },
       { id: '2p', icon: 'users', label: { pt: '2 Jogadores', en: '2 Players', es: '2 Jugadores' } },
     ],
-    trophies: ['🏆', '🁣', '🎲', '⭐', '🎯'],
+    trophies: ['🏆', '🀄', '🎲', '⭐', '🎯'],
     load: () => import('../games/pv/domino.js'),
   },
   {
@@ -430,7 +430,7 @@ export const GAMES = [
       { id: 'medium', icon: 'two', label: { pt: 'Médio', en: 'Medium', es: 'Medio' } },
       { id: 'hard', icon: 'three', label: { pt: 'Difícil', en: 'Hard', es: 'Difícil' } },
     ],
-    trophies: ['🏆', '🔟', '🧠', '⭐', '🎯'],
+    trophies: ['🏆', '🧮', '🧠', '⭐', '🎯'],
     load: () => import('../games/pv/sudoku.js'),
   },
   {
@@ -453,7 +453,7 @@ export const GAMES = [
     cat: 'puzzle',
     progress: 100,
     name: { pt: 'Palavras Cruzadas', en: 'Crossword', es: 'Crucigrama' },
-    sub: { pt: 'Cruzadas em Português', en: 'Word Puzzles', es: 'Crucigramas' },
+    sub: { pt: 'Palavras e Dicas', en: 'Word Puzzles', es: 'Crucigramas' },
     about: {
       pt: 'Resolva as dicas e complete a grade. Grades geradas para cada idioma, com verificação de letras e palavras reveladas.',
       en: 'Solve the clues and complete the grid. Grids generated for each language, with letter checking and word reveals.',

@@ -1,0 +1,484 @@
+/*
+ * Embed mode (inside DA Games): black & gold theme.
+ * Everything here is scoped to html[data-embed], so the standalone PlayVerse app keeps its own look.
+ * Concept (same as DA Games): a black console — every panel is a dark slab with a hairline gold edge;
+ * gold is for actions, titles and rewards. Game colours that carry meaning (liquids, tiles, suits,
+ * pips, pieces) are left alone.
+ */
+html[data-embed][data-theme] {
+  --gold-hi: #fff1b8;
+  --gold: #f3c24a;
+  --gold-lo: #b97f0e;
+  --gold-grad: linear-gradient(180deg, #fff0a8 0%, #f6cf55 38%, #e3a723 72%, #c98a10 100%);
+  --gold-edge: linear-gradient(160deg, #f7d774, #c9971c);
+  --ink-on-gold: #1a1102;
+
+  /* PlayVerse brand constants → gold */
+  --brand-gold: #f3c24a;
+  --brand-gold-2: #c98a10;
+  --brand-blue: #f3c24a;
+  --brand-blue-2: #c98a10;
+  --brand-purple: #e3a723;
+  --brand-night: #0a0a0c;
+
+  --c-bg: #0a0a0c;
+  --c-bg-glow-1: rgba(243, 194, 74, 0.1);
+  --c-bg-glow-2: rgba(243, 194, 74, 0.04);
+  --c-surface: rgba(21, 21, 24, 0.94);
+  --c-surface-solid: #131316;
+  --c-surface-2: #1c1c21;
+  --c-surface-3: #2a2a31;
+  --c-overlay: rgba(0, 0, 0, 0.78);
+  --c-border: rgba(233, 189, 82, 0.3);
+  --c-border-strong: rgba(233, 189, 82, 0.6);
+  --c-text: #ffffff;
+  --c-text-2: #d6cfbd;
+  --c-text-3: #9a917d;
+  --c-primary: #f3c24a;
+  --c-primary-hover: #ffd768;
+  --c-primary-press: #c98a10;
+  --c-primary-soft: rgba(243, 194, 74, 0.16);
+  --c-on-primary: #1a1102;
+  --c-gold-text: #ffd768;
+  --c-gold-soft: rgba(243, 194, 74, 0.16);
+  --c-focus: #ffd768;
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 14px 40px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 0 1px rgba(233, 189, 82, 0.35), 0 0 18px rgba(243, 194, 74, 0.14);
+  --board-bg: #101013;
+  --board-cell: #1a1a1f;
+  --board-line: rgba(233, 189, 82, 0.16);
+  --g-block-puzzle: #c9971c;
+  --g-water-sort: #c9971c;
+  --g-snake: #c9971c;
+  --g-number-match: #c9971c;
+  --g-game-2048: #c9971c;
+  --g-solitaire: #c9971c;
+  --g-checkers: #c9971c;
+  --g-domino: #c9971c;
+  --g-sudoku: #c9971c;
+  --g-crossword: #c9971c;
+  /* a slab: dark fill + gold hairline + faint glow, reused by boards and panels */
+  --slab-bg: linear-gradient(165deg, #1a1a1f, #0e0e11);
+  --slab-border: 1px solid transparent;
+  --slab-shadow: 0 14px 36px rgba(0, 0, 0, 0.65), 0 0 22px rgba(243, 194, 74, 0.1);
+}
+
+html[data-embed],
+html[data-embed] body {
+  background: #0a0a0c;
+}
+
+html[data-embed] body {
+  background:
+    radial-gradient(120% 45% at 50% -8%, rgba(243, 194, 74, 0.12), transparent 62%),
+    #0a0a0c;
+  background-attachment: fixed;
+  overscroll-behavior: none;
+}
+
+/* ───────────── Top bar: DA Games already shows back + title, keep only the game's own actions ───────────── */
+html[data-embed] .game-topbar {
+  min-height: 0;
+  padding: 6px var(--space-3) 2px;
+  justify-content: space-between;
+}
+
+html[data-embed] .game-topbar > .icon-btn,
+html[data-embed] .game-topbar__icon,
+html[data-embed] .game-topbar__text h1 {
+  display: none;
+}
+
+html[data-embed] .game-topbar__text {
+  display: block;
+}
+
+html[data-embed] .game-topbar__subtitle {
+  font-size: var(--fs-sm);
+  color: var(--c-gold-text);
+  letter-spacing: 0.02em;
+}
+
+html[data-embed] .game-topbar__actions .icon-btn {
+  width: 40px;
+  height: 40px;
+}
+
+html[data-embed] .toast-host {
+  bottom: calc(var(--safe-bottom) + var(--space-4));
+}
+
+/* ───────────── Buttons ───────────── */
+html[data-embed] .btn--primary,
+html[data-embed] .btn--gold {
+  --btn-fg: var(--ink-on-gold);
+  --btn-border: rgba(255, 241, 184, 0.55);
+  background: var(--gold-grad);
+  color: var(--ink-on-gold);
+  box-shadow:
+    0 6px 18px rgba(243, 194, 74, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -2px 0 rgba(120, 70, 0, 0.35);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+html[data-embed] .btn--secondary {
+  background: linear-gradient(180deg, #202026, #17171b);
+  border-color: var(--c-border-strong);
+  color: var(--gold-hi);
+}
+
+html[data-embed] .btn--secondary:hover:not(:disabled) {
+  background: linear-gradient(180deg, #2a2a31, #1d1d22);
+}
+
+html[data-embed] .btn--ghost {
+  color: var(--c-text-2);
+}
+
+html[data-embed] .btn--danger {
+  background: linear-gradient(180deg, #e0334c, #a8142c);
+}
+
+html[data-embed] .icon-btn {
+  background: linear-gradient(180deg, #1d1d22, #121215);
+  border-color: var(--c-border-strong);
+  color: var(--gold);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+html[data-embed] .icon-btn--primary,
+html[data-embed] .icon-btn--gold {
+  background: var(--gold-grad);
+  color: var(--ink-on-gold);
+  border-color: rgba(255, 241, 184, 0.55);
+}
+
+html[data-embed] .segmented {
+  background: #0f0f12;
+  border-color: var(--c-border);
+}
+
+html[data-embed] .segmented__option.is-selected {
+  background: var(--gold-grad);
+  color: var(--ink-on-gold);
+  box-shadow: 0 3px 10px rgba(243, 194, 74, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+html[data-embed] .switch.is-on {
+  background: var(--gold-grad);
+}
+
+html[data-embed] .switch.is-on .switch__thumb {
+  background: #1a1102;
+}
+
+html[data-embed] .input {
+  background: #0f0f12;
+}
+
+/* ───────────── Stats strip & toolbar ───────────── */
+html[data-embed] .stat-pill {
+  background: linear-gradient(180deg, #19191d, #101013);
+  border-color: var(--c-border);
+}
+
+html[data-embed] .stat-pill.is-primary {
+  border-color: var(--c-border-strong);
+  background: linear-gradient(180deg, rgba(243, 194, 74, 0.2), #121215);
+  box-shadow: 0 0 14px rgba(243, 194, 74, 0.12);
+}
+
+html[data-embed] .stat-pill__label {
+  color: var(--c-text-3);
+}
+
+html[data-embed] .stat-pill.is-primary .stat-pill__label {
+  color: var(--c-gold-text);
+}
+
+html[data-embed] .tool-btn {
+  background: linear-gradient(180deg, #1d1d22, #121215);
+  border-color: var(--c-border);
+  color: var(--c-text);
+}
+
+html[data-embed] .tool-btn__icon {
+  color: var(--gold);
+}
+
+html[data-embed] .tool-btn.is-active {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, rgba(243, 194, 74, 0.24), #141417);
+  color: var(--gold-hi);
+}
+
+html[data-embed] .tool-btn__badge,
+html[data-embed] .icon-btn__badge {
+  background: var(--gold-grad);
+  color: var(--ink-on-gold);
+}
+
+/* ───────────── Setup screen ───────────── */
+html[data-embed] .setup__card {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(165deg, #19191d, #0f0f12) padding-box,
+    var(--gold-edge) border-box;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 18px rgba(243, 194, 74, 0.08);
+}
+
+html[data-embed] .setup__hero h2 {
+  background: var(--gold-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ───────────── Dialogs ───────────── */
+html[data-embed] .modal {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(170deg, #1b1b20, #0f0f12) padding-box,
+    var(--gold-edge) border-box;
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(243, 194, 74, 0.16);
+}
+
+html[data-embed] .modal::backdrop {
+  background: rgba(0, 0, 0, 0.78);
+}
+
+html[data-embed] .modal__icon {
+  background: var(--c-gold-soft);
+  color: var(--gold);
+  border: 1px solid var(--c-border);
+}
+
+html[data-embed] .modal__title {
+  color: var(--gold-hi);
+}
+
+html[data-embed] .pause-menu__settings,
+html[data-embed] .result__stat {
+  background: #17171b;
+  border: 1px solid var(--c-border);
+}
+
+html[data-embed] .result__badge {
+  background: radial-gradient(circle at 35% 30%, #2c2c33, #0e0e11);
+  border-color: var(--c-border-strong);
+  color: var(--gold);
+  box-shadow: 0 0 28px rgba(243, 194, 74, 0.25);
+}
+
+html[data-embed] .result--win .result__badge {
+  background: radial-gradient(circle at 35% 30%, #fff0a8, #e3a723);
+  border-color: #fff1b8;
+  color: #3a2100;
+  box-shadow: 0 0 40px rgba(243, 194, 74, 0.6);
+}
+
+html[data-embed] .toast {
+  background: #17171b;
+  border-color: var(--c-border-strong);
+}
+
+/* ───────────── Level select ───────────── */
+html[data-embed] .level-tile {
+  background: linear-gradient(180deg, #1d1d22, #121215);
+  border-color: var(--c-border);
+}
+
+html[data-embed] .level-tile.is-done {
+  background: linear-gradient(180deg, rgba(243, 194, 74, 0.28), #17171b);
+  border-color: var(--c-border-strong);
+}
+
+html[data-embed] .level-tile.is-current {
+  border-color: var(--gold);
+  box-shadow: 0 0 16px rgba(243, 194, 74, 0.4);
+}
+
+/* ───────────── Boards: dark slabs with a gold edge ───────────── */
+html[data-embed] .bp-board,
+html[data-embed] .t48-board,
+html[data-embed] .nm-board,
+html[data-embed] .ck-board {
+  background:
+    var(--slab-bg) padding-box,
+    var(--gold-edge) border-box;
+  border: 1.5px solid transparent;
+  box-shadow: var(--slab-shadow);
+}
+
+/* Block Puzzle */
+html[data-embed] .bp-slot {
+  background: linear-gradient(180deg, #1d1d22, #121215);
+  border-color: var(--c-border);
+}
+html[data-embed] .bp-slot:disabled {
+  background: transparent;
+}
+html[data-embed] .bp-cell {
+  box-shadow: inset 0 0 0 0.5px rgba(233, 189, 82, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+}
+html[data-embed] .bp-cell.is-alt {
+  background: rgba(243, 194, 74, 0.07);
+}
+
+/* Snake / sudoku / misc info panels */
+html[data-embed] .sn-best,
+html[data-embed] .sn-countdown__num {
+  background: #17171b;
+  border: 1px solid var(--c-border);
+}
+html[data-embed] .sn-countdown {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Sudoku */
+html[data-embed] .sd-board {
+  --sd-cell: #141417;
+  --sd-line: rgba(233, 189, 82, 0.18);
+  --sd-strong: rgba(233, 189, 82, 0.75);
+  --sd-related: #211f17;
+  --sd-same: #4a3a10;
+  --sd-selected: #6b5012;
+  --sd-entry: #ffd768;
+  --sd-note: #b3a98f;
+  background: var(--gold-edge);
+  box-shadow: var(--slab-shadow);
+}
+html[data-embed] .sd-board.is-solved {
+  background: var(--gold-grad);
+}
+html[data-embed] .sd-key {
+  background: linear-gradient(180deg, #25252b, #17171b);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 3px 0 rgba(0, 0, 0, 0.5);
+}
+html[data-embed] .sd-levels .segmented__option.is-selected::before {
+  background: var(--ink-on-gold);
+  box-shadow: inset 0 0 0 4px #f3c24a;
+  border-color: var(--ink-on-gold);
+}
+
+/* Checkers: the dark squares are the board's colour, keep them warm and neutral */
+html[data-embed] .ck-sq--dark {
+  background: linear-gradient(145deg, #3a3427, #26221a);
+}
+html[data-embed] .ck-sq.is-last {
+  background: linear-gradient(145deg, #6b5a22, #54461a);
+}
+
+/* 2048 / Number Match */
+html[data-embed] .t48-cell {
+  background: rgba(243, 194, 74, 0.06);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+html[data-embed] .nm-cell.is-digit {
+  background: linear-gradient(180deg, #2b2b32 0%, #1f1f25 55%, #18181c 100%);
+}
+html[data-embed] .nm-cell.is-hint::after {
+  border-color: var(--gold);
+}
+
+/* Solitaire / Domino felt: dark with a gold tint instead of indigo */
+html[data-embed] .sol-slot__mark {
+  border-color: rgba(233, 189, 82, 0.4);
+  color: rgba(233, 189, 82, 0.4);
+}
+html[data-embed] .sol-target {
+  box-shadow: 0 0 0 2px var(--gold), 0 0 14px rgba(243, 194, 74, 0.65);
+  background: rgba(243, 194, 74, 0.1);
+}
+html[data-embed] .sol-count {
+  background: rgba(0, 0, 0, 0.82);
+}
+
+/* Domino table */
+html[data-embed] .dm-table {
+  background:
+    radial-gradient(110% 80% at 50% 45%, rgba(243, 194, 74, 0.1), transparent 70%),
+    linear-gradient(165deg, #1a1a1f 0%, #121215 55%, #0c0c0e 100%) padding-box,
+    var(--gold-edge) border-box;
+  border: 1.5px solid transparent;
+  box-shadow: inset 0 2px 22px rgba(0, 0, 0, 0.55), var(--slab-shadow);
+}
+html[data-embed] .dm-back {
+  background: linear-gradient(160deg, #f3c24a 0%, #b97f0e 55%, #6e4806 100%);
+}
+
+/* Crossword */
+html[data-embed] .cw-board {
+  --tile: #fbf7ea;
+  --tile-2: #ebe2c6;
+  --ink: #1a1710;
+  --num: #7a6a3a;
+  --word: #f6e3a6;
+  --word-2: #ecd07a;
+  background:
+    linear-gradient(160deg, #1a1a1f, #0e0e11) padding-box,
+    var(--gold-edge) border-box;
+  border: 1.5px solid transparent;
+  box-shadow: var(--slab-shadow);
+}
+html[data-embed] .cw-cell.is-ok .cw-letter {
+  color: #1d7a45;
+}
+html[data-embed] .cw-cell.is-ok::after {
+  background: #1d7a45;
+}
+html[data-embed] .cw-cell.is-revealed .cw-letter {
+  color: #9a5b00;
+}
+
+/* Solitaire card ink */
+html[data-embed] .sol-board {
+  --sol-black: #17171d;
+}
+
+/* Snake board frame and pad */
+html[data-embed] .sn-board {
+  background: #0c0c0f;
+  border: 1.5px solid transparent;
+  background:
+    #0c0c0f padding-box,
+    var(--gold-edge) border-box;
+  box-shadow: var(--slab-shadow);
+}
+html[data-embed] .sn-pad {
+  background: linear-gradient(180deg, #25252b, #17171b);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 0 rgba(0, 0, 0, 0.55);
+  color: var(--gold);
+}
+
+/* Solitaire card back: black with a gold lattice */
+html[data-embed] .sol-card__back {
+  border-color: rgba(0, 0, 0, 0.8);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 40%),
+    repeating-linear-gradient(45deg, rgba(243, 194, 74, 0.28) 0 1px, transparent 1px 6px),
+    repeating-linear-gradient(-45deg, rgba(243, 194, 74, 0.28) 0 1px, transparent 1px 6px),
+    radial-gradient(120% 90% at 30% 15%, #3a3a42 0%, #1d1d22 48%, #0c0c0f 100%);
+  box-shadow:
+    inset 0 0 0 calc(var(--cw) * 0.055) #111114,
+    inset 0 0 0 calc(var(--cw) * 0.055 + 1.5px) rgba(243, 194, 74, 0.85);
+}
+html[data-embed] .sol-card__back-emblem {
+  background: radial-gradient(circle, #fff0a8 0 22%, #e3a723 24% 40%, #111114 42%);
+}
+
+/* 2048: the two lowest tiles in warm cream instead of lavender */
+html[data-embed] .t48-v2 {
+  --tile-bg: linear-gradient(180deg, #fbf3da, #ecdfb4);
+}
+html[data-embed] .t48-v4 {
+  --tile-bg: linear-gradient(180deg, #f6e3a6, #e6c872);
+}
+html[data-embed] .t48-v2 > span,
+html[data-embed] .t48-v4 > span {
+  color: #3a2c08;
+}

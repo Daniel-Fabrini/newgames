@@ -93,7 +93,9 @@ export function supportsVibration(): boolean {
 /** Plays the sound and vibration for a game event, according to the settings. */
 export function feedback(kind: FeedbackKind): void {
   const { sound, haptics } = settingsStore.get();
-  if (haptics && supportsVibration()) {
+  // Browsers refuse vibration before the first tap (and log an intervention): wait for a user gesture.
+  const activated = typeof navigator.userActivation === 'undefined' || navigator.userActivation.hasBeenActive;
+  if (haptics && activated && supportsVibration()) {
     try {
       navigator.vibrate(VIBRATION[kind]);
     } catch {

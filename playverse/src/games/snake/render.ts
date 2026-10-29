@@ -1,3 +1,4 @@
+import { EMBED } from '../../app/embed';
 import { BONUS_TICKS, VECTORS, directionBetween, type GameState, type Point } from './engine';
 
 /**
@@ -120,6 +121,18 @@ const PALETTES: Record<Theme, Palette> = {
     dead: 'rgba(225, 29, 72, 0.12)',
   },
 };
+
+// Embedded in DA Games: neutral black board with gold lines instead of the indigo night sky.
+if (EMBED) {
+  Object.assign(PALETTES.dark, {
+    bgTop: '#18181c',
+    bgBottom: '#0c0c0f',
+    cell: 'rgba(255, 255, 255, 0.035)',
+    line: 'rgba(233, 189, 82, 0.12)',
+    shadow: 'rgba(0, 0, 0, 0.5)',
+    popupStroke: 'rgba(0, 0, 0, 0.85)',
+  });
+}
 
 export const POPUP_MS = 700;
 const TAU = Math.PI * 2;

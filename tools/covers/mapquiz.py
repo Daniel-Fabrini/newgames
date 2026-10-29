@@ -4,9 +4,9 @@ from rig import *
 from globe import globe_material
 from mathutils import Vector, Quaternion
 new_scene('#5fe0e8', '#0a6f9e', samples=int(os.environ.get('SAMPLES', 128)))
-Z = 1.55
+Z = 1.2
 C = Vector((0, 0, Z))
-R = 1.4
+R = 1.25
 sphere(R, globe_material(ocean='#1479d8', land='#52c43a', land2='#38a03a', thresh=0.5, seed=7.0), loc=C)
 
 def frame(d, dist, scale=1.0, upright=False):
@@ -23,12 +23,12 @@ def frame(d, dist, scale=1.0, upright=False):
 # map pin (local +Z points away from globe)
 red = glossy('#d8121e', 0.2, 0.8)
 white = glossy('#ffffff', 0.3, 0.4)
-pin = frame((0.12, -0.3, 0.95), R - 0.02, 0.85)
+pin = frame((0.1, -0.12, 0.98), R - 0.02, 0.98)
 head = sphere(0.5, red, loc=(0, 0, 1.12))
 cn = cone(0.4, 0.0, 1.1, red, loc=(0, 0, 0.55), rot=(180, 0, 0))
 hole = sphere(0.2, white, loc=(0, 0, 1.12 - 0.0))
 # push hole to the camera-facing side: slightly offset along local -Y is arbitrary; keep it at center top
-hole.location = (0, -0.42, 1.12)
+hole.location = (0, -0.45, 1.12)
 hole.scale = (1, 0.3, 1)
 for o in (head, cn, hole):
     o.parent = pin

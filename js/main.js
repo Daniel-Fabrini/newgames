@@ -90,7 +90,7 @@ function parseRoute() {
   if (legacy && gameById(legacy[1])) return { view: 'play', id: legacy[1], mode: null };
   if (!hash || hash === 'home') return { view: 'home' };
   if (hash === 'favs' || hash === 'trophies' || hash === 'prefs') return { view: hash };
-  const m = hash.match(/^([a-z]+)(?:-(play)(?:-(\w+))?)?$/);
+  const m = hash.match(/^([a-z0-9]+)(?:-(play)(?:-(\w+))?)?$/);
   if (m && gameById(m[1])) {
     const g = gameById(m[1]);
     if (m[2] || g.lobby === false) return { view: 'play', id: g.id, mode: m[3] || null };
