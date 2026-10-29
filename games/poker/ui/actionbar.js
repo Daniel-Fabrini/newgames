@@ -78,7 +78,7 @@ export function createActionBar(host, { t, onSound = () => {}, prefs }) {
   }
   function sizeText(v) {
     if (v >= cur.maxTo) return `${t('act.allin')} · ${fmt(v, true)}`;
-    return `${cur.facing ? t('raiseTo') : t('betAmount')} ${fmt(v, true)}`;
+    return `${cur.facing ? t('act.raise') : t('act.bet')} ${fmt(v, true)}`;
   }
 
   function setValue(v, fromSlider = false) {

@@ -14,5 +14,5 @@ for i, r in enumerate(['J', 'Q', 'K']):
 parent(joker(), loc=(2.4, -1.8, 0.05), rot=(-9, 12, 0), scale=1.05)
 chip_stack(0.5, -2.7, 0.05, ['#f2c230'] * 3, 0.8, 1, stripe='#8a5a10')
 felt_podium('#0f8a4a', '#e8b830', 4.0)
-fit(0.58, 0.15)
+fit(0.62, 0.3)
 render('buraco')

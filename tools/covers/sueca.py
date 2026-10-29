@@ -21,5 +21,5 @@ for i in range(4):
     parent(c, loc=(-2.4, -1.5 + 0.0, 0.1 + i * 0.09), rot=(-90, 0, 20 - i * 3), scale=0.8)
 chip_stack(1.0, -2.5, 0.05, ['#e8b830', '#e8b830'], 0.8, 3, stripe='#8a5a10')
 felt_podium('#0f7a46', '#e8b830', 3.8)
-fit(0.64, -0.1, 0.3)
+fit(0.69, 0.1, 0.3)
 render('sueca')

@@ -22,5 +22,5 @@ bd = [sphere(0.55, glossy('#ffffff', 0.2, 0.8, name='badge'), loc=(0, 0, 0), sca
       text('+4', glossy('#e8202c', 0.25, 0.7, name='badget'), size=0.55, extrude=0.05, loc=(0, -0.2, 0), bevel=0.015)]
 parent(bd, loc=(2.7, -1.1, 3.0), rot=(-9, 8, 0), scale=1.0)
 felt_podium('#0b1c66', '#ff6a2a', 4.0)
-fit(0.6, -0.1, 0.35)
+fit(0.65, 0.1, 0.3)
 render('colors')

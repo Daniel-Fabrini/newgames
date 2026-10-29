@@ -142,7 +142,7 @@ export function createTableScreen(root, deps) {
     const step = coachQ.shift();
     coachEl = h('div', { class: 'pk-coach', role: 'status' }, h('div', { class: 'pk-grow' }, h('b', {}, t('coach.tip')), step.text), h('button', { type: 'button', onclick: () => dismissCoach() }, t('coach.ok')));
     tableHost.append(coachEl);
-    coachTid = setTimeout(() => dismissCoach(), 11000);
+    coachTid = setTimeout(() => dismissCoach(), 8000);
     timers.add(coachTid);
   }
   function dismissCoach() {

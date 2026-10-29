@@ -18,5 +18,5 @@ hand = [playing_card('Q', 'heart'), playing_card('7', 'club'), playing_card('K',
 fan(hand, [-22, 0, 22], base=(0.3, 2.6, 0.05), dx=0.05, dy=-0.12, scale=1.35)
 chip_stack(-2.7, -1.9, 0.05, ['#f2c230'] * 3, 0.9, 1, stripe='#8a5a10')
 felt_podium('#0d7f88', '#e8b830', 3.8)
-fit(0.66, -0.1, -0.2)
+fit(0.7, 0.1, -0.2)
 render('bisca')
