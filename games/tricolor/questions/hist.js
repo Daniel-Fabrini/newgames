@@ -181,40 +181,14 @@ export default [
   },
   {
     "id": "hist-008",
-    "q": "Quem foi o presidente que dá nome oficial ao estádio e morreu em 1958, antes de ele ser concluído?",
-    "a": [
-      "Cícero Pompeu de Toledo",
-      "Laudo Natel",
-      "Edgard de Souza Aranha",
-      "Manoel do Carmo Mecca"
-    ],
-    "c": 0,
-    "cat": "hist",
-    "d": 2,
-    "exp": "O estádio recebeu o nome de Cícero depois de sua morte, em 1958.",
-    "src": [
-      {
-        "n": "Wikipedia (en) — History of São Paulo FC",
-        "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
-      },
-      {
-        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-      }
-    ],
-    "when": "1958",
-    "ok": true
-  },
-  {
-    "id": "hist-009",
     "q": "Qual rival o São Paulo derrotou por 3 a 1 no recorde de público do Pacaembu, em 13 de setembro de 1953?",
     "a": [
-      "Corinthians",
       "Palmeiras",
+      "Corinthians",
       "Santos",
       "Portuguesa"
     ],
-    "c": 1,
+    "c": 0,
     "cat": "hist",
     "d": 4,
     "exp": "O jogo reuniu 77.275 pessoas, maior público da história do Pacaembu.",
@@ -228,15 +202,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-010",
+    "id": "hist-009",
     "q": "Qual empresa de material esportivo foi a primeira fornecedora do São Paulo, em 1960?",
     "a": [
       "Adidas",
+      "Athleta",
       "Penalty",
-      "Reebok",
-      "Athleta"
+      "Reebok"
     ],
-    "c": 3,
+    "c": 1,
     "cat": "hist",
     "d": 4,
     "exp": "A Athleta vestiu o clube a partir de 1960; Adidas, Reebok e outras vieram depois.",
@@ -254,15 +228,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-011",
+    "id": "hist-010",
     "q": "Em 1971, o São Paulo chegou à final de qual competição nacional, sua melhor campanha até então?",
     "a": [
-      "Campeonato Brasileiro",
       "Taça Brasil",
       "Torneio Rio-São Paulo",
-      "Copa dos Campeões"
+      "Copa dos Campeões",
+      "Campeonato Brasileiro"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "hist",
     "d": 3,
     "exp": "O vice-campeonato de 1971 deu vaga na Libertadores de 1972, em que o clube terminou em 4º.",
@@ -276,15 +250,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-012",
+    "id": "hist-011",
     "q": "Em que ano o São Paulo conquistou seu primeiro Campeonato Brasileiro?",
     "a": [
+      "1977",
       "1971",
       "1981",
-      "1977",
       "1986"
     ],
-    "c": 2,
+    "c": 0,
     "cat": "hist",
     "d": 1,
     "exp": "O primeiro título nacional veio em 1977, sobre o Atlético Mineiro, no Mineirão, nos pênaltis.",
@@ -302,15 +276,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-013",
+    "id": "hist-012",
     "q": "Qual time o São Paulo derrotou na final do Campeonato Brasileiro de 1977, no Mineirão?",
     "a": [
       "Cruzeiro",
       "Palmeiras",
-      "Internacional",
-      "Atlético Mineiro"
+      "Atlético Mineiro",
+      "Internacional"
     ],
-    "c": 3,
+    "c": 2,
     "cat": "hist",
     "d": 2,
     "exp": "A final foi jogo único: 0 a 0 no tempo normal e na prorrogação e vitória tricolor nos pênaltis.",
@@ -324,15 +298,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-014",
+    "id": "hist-013",
     "q": "Como terminou o jogo da final do Brasileiro de 1977 antes da disputa de pênaltis?",
     "a": [
       "1 a 1 após prorrogação",
       "2 a 2 no tempo normal",
-      "0 a 0 após prorrogação",
-      "1 a 0 para o Atlético-MG"
+      "1 a 0 para o Atlético-MG",
+      "0 a 0 após prorrogação"
     ],
-    "c": 2,
+    "c": 3,
     "cat": "hist",
     "d": 3,
     "exp": "O goleiro Waldir Peres foi decisivo e o Atlético errou três cobranças.",
@@ -346,15 +320,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-015",
+    "id": "hist-014",
     "q": "Por que Serginho Chulapa não jogou a final do Brasileiro de 1977?",
     "a": [
       "Estava lesionado",
-      "Estava suspenso por chutar um bandeirinha",
       "Havia sido vendido",
+      "Estava suspenso por chutar um bandeirinha",
       "Estava servindo à seleção"
     ],
-    "c": 1,
+    "c": 2,
     "cat": "hist",
     "d": 3,
     "exp": "Chulapa foi suspenso depois de chutar um bandeirinha em jogo anterior do campeonato.",
@@ -368,15 +342,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-016",
+    "id": "hist-015",
     "q": "Quem é descrito como o maior artilheiro da história do São Paulo?",
     "a": [
-      "Serginho Chulapa",
       "Raí",
+      "Serginho Chulapa",
       "Careca",
       "Luís Fabiano"
     ],
-    "c": 0,
+    "c": 1,
     "cat": "hist",
     "d": 2,
     "exp": "A história do clube aponta Serginho Chulapa como o maior goleador tricolor; ele saiu para o Santos em 1983.",
@@ -390,15 +364,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-017",
+    "id": "hist-016",
     "q": "Qual time o São Paulo derrotou na final do Brasileiro de 1986?",
     "a": [
+      "Guarani",
       "Flamengo",
       "Atlético Mineiro",
-      "Guarani",
       "Corinthians"
     ],
-    "c": 2,
+    "c": 0,
     "cat": "hist",
     "d": 3,
     "exp": "Houve 1 a 1 nos dois jogos e o São Paulo venceu nos pênaltis, depois de um 3 a 2 do Guarani na prorrogação.",
@@ -412,15 +386,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-018",
+    "id": "hist-017",
     "q": "Quem empatou no último minuto da prorrogação da final do Brasileiro de 1986, levando a decisão aos pênaltis?",
     "a": [
       "Müller",
       "Silas",
-      "Pita",
-      "Careca"
+      "Careca",
+      "Pita"
     ],
-    "c": 3,
+    "c": 2,
     "cat": "hist",
     "d": 2,
     "exp": "Careca igualou o placar no último minuto, depois de o Guarani virar para 3 a 2.",
@@ -434,15 +408,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-019",
+    "id": "hist-018",
     "q": "Quantos Campeonatos Brasileiros o São Paulo conquistou?",
     "a": [
-      "6",
       "3",
       "4",
-      "5"
+      "5",
+      "6"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "hist",
     "d": 2,
     "exp": "Os títulos vieram em 1977, 1986, 1991, 2006, 2007 e 2008.",
@@ -450,21 +424,25 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC.Net — Resumo da história do time São Paulo (SP)",
+        "u": "https://spfc.net/news/263157/resumo-da-historia-do-time-sao-paulo-sp.html"
       }
     ],
     "when": "1977–2008",
     "ok": true
   },
   {
-    "id": "hist-020",
+    "id": "hist-019",
     "q": "Em que ano foi inaugurado o CT da Barra Funda, hoje Centro de Treinamento Frederico Antonio Germano Menzen?",
     "a": [
-      "1983",
       "1988",
+      "1983",
       "1991",
       "1995"
     ],
-    "c": 1,
+    "c": 0,
     "cat": "hist",
     "d": 4,
     "exp": "O CT foi inaugurado em 9 de abril de 1988 e leva o nome do sócio nº 1 e ex-presidente do clube.",
@@ -482,7 +460,7 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-021",
+    "id": "hist-020",
     "q": "Qual ex-presidente e sócio nº 1 dá nome ao CT da Barra Funda?",
     "a": [
       "Cícero Pompeu de Toledo",
@@ -504,15 +482,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-022",
+    "id": "hist-021",
     "q": "Quem comandou o São Paulo nos títulos da Libertadores de 1992 e 1993?",
     "a": [
       "Carlos Alberto Silva",
-      "Cilinho",
       "Telê Santana",
+      "Cilinho",
       "Muricy Ramalho"
     ],
-    "c": 2,
+    "c": 1,
     "cat": "hist",
     "d": 1,
     "exp": "Telê assumiu o time em 1990 e liderou a chamada Era Telê, com o Paulista de 1991 e as duas Libertadores.",
@@ -530,15 +508,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-023",
+    "id": "hist-022",
     "q": "Qual time argentino o São Paulo derrotou nos pênaltis na final da Libertadores de 1992?",
     "a": [
       "Boca Juniors",
       "River Plate",
-      "Independiente",
-      "Newell's Old Boys"
+      "Newell's Old Boys",
+      "Independiente"
     ],
-    "c": 3,
+    "c": 2,
     "cat": "hist",
     "d": 2,
     "exp": "O São Paulo perdeu por 1 a 0 em Buenos Aires, venceu por 1 a 0 no Morumbi e levou nos pênaltis.",
@@ -552,15 +530,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-024",
+    "id": "hist-023",
     "q": "Quantas Copas Libertadores o São Paulo conquistou?",
     "a": [
-      "3",
       "1",
       "2",
-      "4"
+      "4",
+      "3"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "hist",
     "d": 1,
     "exp": "O clube foi campeão em 1992, 1993 e 2005.",
@@ -574,15 +552,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-025",
+    "id": "hist-024",
     "q": "Quem marcou os dois gols da virada do São Paulo sobre o Barcelona na final do Mundial Interclubes de 1992?",
     "a": [
+      "Raí",
       "Müller",
       "Palhinha",
-      "Raí",
       "Cafu"
     ],
-    "c": 2,
+    "c": 0,
     "cat": "hist",
     "d": 1,
     "exp": "O Barcelona abriu o placar, e Raí marcou duas vezes. O técnico adversário era Johan Cruijff.",
@@ -596,15 +574,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-026",
+    "id": "hist-025",
     "q": "Qual time chileno o São Paulo derrotou na final da Libertadores de 1993?",
     "a": [
-      "Universidad Católica",
       "Colo-Colo",
       "Cobreloa",
+      "Universidad Católica",
       "Unión Española"
     ],
-    "c": 0,
+    "c": 2,
     "cat": "hist",
     "d": 2,
     "exp": "O São Paulo ganhou por 5 a 1 no Morumbi, perdeu por 2 a 0 no Chile e ficou com o título por 5 a 3 no agregado.",
@@ -618,15 +596,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-027",
+    "id": "hist-026",
     "q": "Qual foi o placar do jogo de volta da final da Libertadores de 1993, em Santiago?",
     "a": [
-      "São Paulo 1 a 0",
       "Universidad Católica 2 a 0",
+      "São Paulo 1 a 0",
       "Empate em 1 a 1",
       "São Paulo 2 a 1"
     ],
-    "c": 1,
+    "c": 0,
     "cat": "hist",
     "d": 3,
     "exp": "Mesmo derrotado, o São Paulo foi campeão por 5 a 3 no agregado.",
@@ -640,15 +618,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-028",
+    "id": "hist-027",
     "q": "Qual troféu o São Paulo conquistou em 1994 vencendo o Peñarol com o time apelidado \"Expressinho\"?",
     "a": [
       "Recopa Sul-Americana",
+      "Copa Conmebol",
       "Supercopa Libertadores",
-      "Copa Master da Conmebol",
-      "Copa Conmebol"
+      "Copa Master da Conmebol"
     ],
-    "c": 3,
+    "c": 1,
     "cat": "hist",
     "d": 4,
     "exp": "O Expressinho, com Rogério Ceni, Juninho Paulista e Denílson, ganhou a Copa Conmebol de 1994.",
@@ -666,7 +644,7 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-029",
+    "id": "hist-028",
     "q": "Qual apelido teve o time reserva do São Paulo campeão da Copa Conmebol de 1994?",
     "a": [
       "Menudos do Morumbi",
@@ -688,15 +666,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-030",
+    "id": "hist-029",
     "q": "O que encerrou a Era Telê Santana no São Paulo, em 1995-1996?",
     "a": [
       "Demissão após rebaixamento",
-      "Problemas de saúde do técnico",
       "Transferência para a seleção",
-      "Fim do contrato com o Morumbi"
+      "Fim do contrato com o Morumbi",
+      "Problemas de saúde do técnico"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "hist",
     "d": 3,
     "exp": "Telê adoeceu e foi substituído, encerrando um ciclo de títulos.",
@@ -710,15 +688,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-031",
+    "id": "hist-030",
     "q": "Qual espaço do clube foi inaugurado em 1994?",
     "a": [
       "CT de Cotia",
-      "REFFIS",
       "Memorial Luiz Cássio dos Santos Werneck",
+      "REFFIS",
       "CT da Barra Funda"
     ],
-    "c": 2,
+    "c": 1,
     "cat": "hist",
     "d": 4,
     "exp": "O Memorial Luiz Cássio dos Santos Werneck abriu em 1994; o REFFIS veio em 2004 e o CT de Cotia, em 2005.",
@@ -732,15 +710,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-032",
+    "id": "hist-031",
     "q": "Que nome tem o CT de Guarapiranga, inaugurado em 13 de dezembro de 1997?",
     "a": [
-      "Homero Bellintani",
       "Frederico Menzen",
       "Laudo Natel",
+      "Homero Bellintani",
       "Cícero Pompeu de Toledo"
     ],
-    "c": 0,
+    "c": 2,
     "cat": "hist",
     "d": 4,
     "exp": "O centro foi aberto depois da fusão com o Estrela da Saúde e hoje serve mais ao social e à observação de atletas.",
@@ -754,15 +732,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-033",
+    "id": "hist-032",
     "q": "Qual rival carioca o São Paulo derrotou na final do Torneio Rio-São Paulo de 2001?",
     "a": [
-      "Flamengo",
       "Botafogo",
+      "Flamengo",
       "Vasco",
       "Fluminense"
     ],
-    "c": 1,
+    "c": 0,
     "cat": "hist",
     "d": 3,
     "exp": "O elenco de 2001 tinha Luís Fabiano, Júlio Baptista e Kaká.",
@@ -780,15 +758,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-034",
+    "id": "hist-033",
     "q": "Quem venceu o São Paulo na final do Torneio Rio-São Paulo de 2002?",
     "a": [
       "Palmeiras",
+      "Corinthians",
       "Santos",
-      "Botafogo",
-      "Corinthians"
+      "Botafogo"
     ],
-    "c": 3,
+    "c": 1,
     "cat": "hist",
     "d": 3,
     "exp": "O Corinthians foi campeão do Rio-SP de 2002, batendo o São Paulo na decisão.",
@@ -806,15 +784,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-035",
+    "id": "hist-034",
     "q": "Qual time colombiano eliminou o São Paulo na semifinal da Libertadores de 2004?",
     "a": [
-      "Once Caldas",
       "Atlético Nacional",
       "Deportivo Cali",
-      "América de Cali"
+      "América de Cali",
+      "Once Caldas"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "hist",
     "d": 3,
     "exp": "O Once Caldas seguiu e conquistou a taça de 2004.",
@@ -832,15 +810,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-036",
+    "id": "hist-035",
     "q": "Qual time o São Paulo derrotou na final da Libertadores de 2005?",
     "a": [
+      "Atlético Paranaense",
       "Internacional",
       "Boca Juniors",
-      "Atlético Paranaense",
       "Santos"
     ],
-    "c": 2,
+    "c": 0,
     "cat": "hist",
     "d": 2,
     "exp": "Depois de 1 a 1 em Porto Alegre, o São Paulo ganhou por 4 a 0 no Morumbi em 14 de julho de 2005.",
@@ -858,15 +836,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-037",
+    "id": "hist-036",
     "q": "Qual foi o placar do jogo de volta da final da Libertadores de 2005, no Morumbi?",
     "a": [
       "São Paulo 2 a 0",
       "São Paulo 3 a 1",
-      "São Paulo 1 a 0",
-      "São Paulo 4 a 0"
+      "São Paulo 4 a 0",
+      "São Paulo 1 a 0"
     ],
-    "c": 3,
+    "c": 2,
     "cat": "hist",
     "d": 3,
     "exp": "O título saiu em 14 de julho de 2005, depois do 1 a 1 da ida.",
@@ -880,15 +858,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-038",
+    "id": "hist-037",
     "q": "Quem fez o gol da vitória por 1 a 0 sobre o Liverpool na final do Mundial de Clubes de 2005?",
     "a": [
-      "Mineiro",
       "Amoroso",
       "Rogério Ceni",
-      "Aloísio"
+      "Aloísio",
+      "Mineiro"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "hist",
     "d": 2,
     "exp": "Mineiro marcou o gol do título mundial, e Rogério Ceni jogou lesionado.",
@@ -906,15 +884,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-039",
+    "id": "hist-038",
     "q": "Quais três títulos formaram a tríplice coroa do São Paulo em 2005?",
     "a": [
+      "Paulista, Libertadores e Mundial de Clubes",
       "Brasileiro, Libertadores e Mundial",
       "Paulista, Brasileiro e Libertadores",
-      "Paulista, Libertadores e Mundial de Clubes",
       "Copa do Brasil, Libertadores e Mundial"
     ],
-    "c": 2,
+    "c": 0,
     "cat": "hist",
     "d": 2,
     "exp": "Em 2005 o clube venceu o Paulista, a Libertadores e o Mundial da Fifa.",
@@ -932,15 +910,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-040",
+    "id": "hist-039",
     "q": "O que o São Paulo se tornou ao ganhar a Libertadores de 2005?",
     "a": [
       "O primeiro brasileiro campeão invicto",
-      "O primeiro time brasileiro com três títulos da competição",
       "O primeiro a ganhar duas seguidas",
+      "O primeiro time brasileiro com três títulos da competição",
       "O primeiro com Libertadores e Copa do Brasil"
     ],
-    "c": 1,
+    "c": 2,
     "cat": "hist",
     "d": 3,
     "exp": "Com 1992, 1993 e 2005, tornou-se o primeiro brasileiro com três Libertadores.",
@@ -954,7 +932,7 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-041",
+    "id": "hist-040",
     "q": "Como se chama o CT de Cotia, inaugurado em 16 de julho de 2005?",
     "a": [
       "CT Homero Bellintani",
@@ -980,15 +958,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-042",
+    "id": "hist-041",
     "q": "Qual técnico comandou o São Paulo nos três Brasileiros seguidos, de 2006 a 2008?",
     "a": [
-      "Muricy Ramalho",
       "Emerson Leão",
+      "Muricy Ramalho",
       "Paulo Autuori",
       "Ricardo Gomes"
     ],
-    "c": 0,
+    "c": 1,
     "cat": "hist",
     "d": 4,
     "exp": "Muricy conquistou o tricampeonato brasileiro (2006, 2007 e 2008), na era dos pontos corridos.",
@@ -1006,15 +984,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-043",
+    "id": "hist-042",
     "q": "Quem foi o autor do gol da vitória por 1 a 0 sobre o Goiás que deu o tri brasileiro ao São Paulo em 2008?",
     "a": [
+      "Borges",
       "Hugo",
       "Dagoberto",
-      "Aloísio",
-      "Borges"
+      "Aloísio"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "hist",
     "d": 4,
     "exp": "O gol saiu na última rodada, no Morumbi.",
@@ -1028,15 +1006,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-044",
+    "id": "hist-043",
     "q": "Em 2007, contra qual time o São Paulo confirmou em casa o bicampeonato brasileiro, vencendo por 3 a 0?",
     "a": [
       "Goiás",
       "Náutico",
-      "América-RN",
-      "Vasco"
+      "Vasco",
+      "América-RN"
     ],
-    "c": 2,
+    "c": 3,
     "cat": "hist",
     "d": 3,
     "exp": "Foi o segundo título brasileiro seguido de Muricy Ramalho.",
@@ -1054,15 +1032,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-045",
+    "id": "hist-044",
     "q": "Qual rival venceu o São Paulo na final da Libertadores de 2006?",
     "a": [
       "Boca Juniors",
-      "Internacional",
       "Santos",
+      "Internacional",
       "Cruzeiro"
     ],
-    "c": 1,
+    "c": 2,
     "cat": "hist",
     "d": 2,
     "exp": "O Inter foi campeão de 2006; o São Paulo também foi vice na Recopa e no Paulista daquele ano.",
@@ -1080,15 +1058,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-046",
+    "id": "hist-045",
     "q": "Quantos pontos de vantagem o São Paulo teve para o segundo colocado no Brasileiro de 2006?",
     "a": [
       "3",
+      "9",
       "5",
-      "12",
-      "9"
+      "12"
     ],
-    "c": 3,
+    "c": 1,
     "cat": "hist",
     "d": 4,
     "exp": "O São Paulo foi campeão nove pontos à frente do vice.",
@@ -1102,15 +1080,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-047",
+    "id": "hist-046",
     "q": "Quem substituiu Muricy Ramalho no São Paulo após sua demissão, em 19 de junho de 2009?",
     "a": [
-      "Ricardo Gomes",
       "Paulo César Carpegiani",
       "Ney Franco",
-      "Emerson Leão"
+      "Emerson Leão",
+      "Ricardo Gomes"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "hist",
     "d": 4,
     "exp": "Muricy foi demitido em junho de 2009, e Ricardo Gomes assumiu.",
@@ -1124,15 +1102,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-048",
+    "id": "hist-047",
     "q": "Qual time argentino o São Paulo derrotou na final da Copa Sul-Americana de 2012?",
     "a": [
+      "Tigre",
       "Independiente",
       "Boca Juniors",
-      "Tigre",
       "Lanús"
     ],
-    "c": 2,
+    "c": 0,
     "cat": "hist",
     "d": 2,
     "exp": "Gols de Lucas e Osvaldo deram o primeiro título sul-americano do São Paulo.",
@@ -1150,15 +1128,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-049",
+    "id": "hist-048",
     "q": "Por quanto o São Paulo vendeu o meia Lucas ao PSG, após a Sul-Americana de 2012?",
     "a": [
       "R$ 48 milhões",
-      "R$ 108 milhões",
       "R$ 78 milhões",
+      "R$ 108 milhões",
       "R$ 150 milhões"
     ],
-    "c": 1,
+    "c": 2,
     "cat": "hist",
     "d": 4,
     "exp": "Lucas foi o destaque do título de 2012 e foi vendido ao PSG.",
@@ -1172,15 +1150,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-050",
+    "id": "hist-049",
     "q": "Qual time japonês venceu o São Paulo na Copa Suruga Bank de 2013, por 3 a 2?",
     "a": [
-      "Kashima Antlers",
       "Urawa Reds",
+      "Kashima Antlers",
       "Gamba Osaka",
       "Sanfrecce Hiroshima"
     ],
-    "c": 0,
+    "c": 1,
     "cat": "hist",
     "d": 4,
     "exp": "O São Paulo foi vice da Suruga e ganhou a Copa Eusébio, no mesmo ano.",
@@ -1194,15 +1172,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-051",
+    "id": "hist-050",
     "q": "Quem assumiu a presidência do São Paulo após a renúncia de Carlos Miguel Aidar, em 2015?",
     "a": [
+      "Carlos Augusto de Barros e Silva (Leco)",
       "Juvenal Juvêncio",
       "Julio Casares",
-      "Marcelo Portugal Gouvêa",
-      "Carlos Augusto de Barros e Silva (Leco)"
+      "Marcelo Portugal Gouvêa"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "hist",
     "d": 4,
     "exp": "Aidar renunciou em meio a denúncias; Leco assumiu e foi reeleito em 2017.",
@@ -1216,15 +1194,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-052",
+    "id": "hist-051",
     "q": "Em que ano Rogério Ceni estreou como treinador do São Paulo?",
     "a": [
       "2015",
       "2019",
-      "2017",
-      "2021"
+      "2021",
+      "2017"
     ],
-    "c": 2,
+    "c": 3,
     "cat": "hist",
     "d": 3,
     "exp": "Ceni treinou o clube pela primeira vez em 2017 e voltou em 2021.",
@@ -1238,15 +1216,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-053",
+    "id": "hist-052",
     "q": "Quantas partidas oficiais Rogério Ceni disputou pelo São Paulo, recorde do clube?",
     "a": [
-      "1.237",
       "1.112",
       "1.201",
+      "1.237",
       "1.303"
     ],
-    "c": 0,
+    "c": 2,
     "cat": "hist",
     "d": 3,
     "exp": "Rogério Ceni é o jogador com mais jogos pelo São Paulo, com 1.237 partidas.",
@@ -1260,15 +1238,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-054",
+    "id": "hist-053",
     "q": "Quem substituiu Rogério Ceni no comando do São Paulo, em abril de 2023?",
     "a": [
+      "Dorival Júnior",
       "Hernán Crespo",
       "Fernando Diniz",
-      "Dorival Júnior",
       "Luis Zubeldía"
     ],
-    "c": 2,
+    "c": 0,
     "cat": "hist",
     "d": 2,
     "exp": "Ceni foi contratado em outubro de 2021 e Dorival o substituiu em abril de 2023.",
@@ -1282,15 +1260,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-055",
+    "id": "hist-054",
     "q": "Qual clube o São Paulo derrotou na final da Copa do Brasil de 2023, seu primeiro título na competição?",
     "a": [
       "Palmeiras",
       "Corinthians",
-      "Grêmio",
-      "Flamengo"
+      "Flamengo",
+      "Grêmio"
     ],
-    "c": 3,
+    "c": 2,
     "cat": "hist",
     "d": 1,
     "exp": "O Tricolor venceu por 1 a 0 no Maracanã e empatou por 1 a 1 no Morumbi.",
@@ -1308,15 +1286,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-056",
+    "id": "hist-055",
     "q": "Em qual estádio o São Paulo conquistou a Supercopa Rei de 2024, nos pênaltis sobre o Palmeiras?",
     "a": [
       "Maracanã",
-      "Mineirão",
       "Morumbi",
-      "Allianz Parque"
+      "Allianz Parque",
+      "Mineirão"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "hist",
     "d": 3,
     "exp": "Depois do 0 a 0, o São Paulo venceu por 4 a 2 nos pênaltis, em 4 de fevereiro de 2024.",
@@ -1334,15 +1312,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-057",
+    "id": "hist-056",
     "q": "Que feito o São Paulo alcançou com a Supercopa Rei de 2024?",
     "a": [
       "Primeiro tetracampeão brasileiro",
+      "Único brasileiro com todos os títulos atuais em disputa",
       "Primeiro a ganhar quatro títulos no mesmo ano",
-      "Único clube com sete Libertadores",
-      "Único brasileiro com todos os títulos atuais em disputa"
+      "Único clube com sete Libertadores"
     ],
-    "c": 3,
+    "c": 1,
     "cat": "hist",
     "d": 3,
     "exp": "O clube ganhou todos os títulos atualmente em disputa para clubes brasileiros.",
@@ -1360,15 +1338,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-058",
+    "id": "hist-057",
     "q": "Qual foi o placar da derrota do São Paulo para o Fluminense no Maracanã, em novembro de 2025?",
     "a": [
       "4 a 0",
       "5 a 1",
-      "6 a 0",
-      "3 a 0"
+      "3 a 0",
+      "6 a 0"
     ],
-    "c": 2,
+    "c": 3,
     "cat": "hist",
     "d": 3,
     "exp": "A goleada iniciou uma \"limpa\" na diretoria tricolor.",
@@ -1386,15 +1364,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-059",
+    "id": "hist-058",
     "q": "Quem assumiu a presidência do São Paulo em 16 de janeiro de 2026, após o impeachment de Julio Casares?",
     "a": [
-      "Harry Massis Júnior",
       "Carlos Augusto de Barros e Silva",
       "Juvenal Juvêncio",
+      "Harry Massis Júnior",
       "Marcelo Portugal Gouvêa"
     ],
-    "c": 0,
+    "c": 2,
     "cat": "hist",
     "d": 4,
     "exp": "Casares sofreu impeachment e, depois da vacância, Harry Massis Júnior assumiu o clube.",
@@ -1412,15 +1390,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-060",
+    "id": "hist-059",
     "q": "Quantos títulos internacionais oficiais o São Paulo possui, segundo a Wikipédia?",
     "a": [
-      "9",
       "12",
+      "9",
       "10",
       "14"
     ],
-    "c": 1,
+    "c": 0,
     "cat": "hist",
     "d": 4,
     "exp": "São 3 Libertadores, 1 Sul-Americana, 2 Recopas, 1 Supercopa Libertadores, 1 Conmebol, 1 Copa Master, 2 Intercontinentais e 1 Mundial.",
@@ -1434,15 +1412,15 @@ export default [
     "ok": true
   },
   {
-    "id": "hist-061",
+    "id": "hist-060",
     "q": "Quem compôs o hino oficial do São Paulo?",
     "a": [
-      "Porphyrio da Paz",
       "Cícero Pompeu de Toledo",
+      "Porphyrio da Paz",
       "Vicente Paiva",
       "Laudo Natel"
     ],
-    "c": 0,
+    "c": 1,
     "cat": "hist",
     "d": 4,
     "exp": "O hino é de Porphyrio da Paz, então diretor de futebol do clube.",
@@ -1450,9 +1428,341 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC.Net — Resumo da história do time São Paulo (SP)",
+        "u": "https://spfc.net/news/263157/resumo-da-historia-do-time-sao-paulo-sp.html"
       }
     ],
     "when": "1930–1950",
+    "ok": true
+  },
+  {
+    "id": "hist-061",
+    "q": "Qual era a capacidade registrada do Morumbi na conclusão das obras, em 25 de janeiro de 1970?",
+    "a": [
+      "149.408 pessoas",
+      "120.000 pessoas",
+      "100.000 pessoas",
+      "80.000 pessoas"
+    ],
+    "c": 0,
+    "cat": "hist",
+    "d": 4,
+    "exp": "Na partida contra o Porto, o estádio, então com capacidade de 149.408, recebeu 107.869 pagantes segundo o site oficial.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — A conclusão do Estádio do MorumBIS",
+        "u": "https://www.saopaulofc.net/a-conclusao-do-estadio-do-morumbis/"
+      }
+    ],
+    "when": "1970",
+    "ok": true
+  },
+  {
+    "id": "hist-062",
+    "q": "Quem presidia o São Paulo na conclusão do Morumbi, em 1970?",
+    "a": [
+      "Cícero Pompeu de Toledo",
+      "Porfírio da Paz",
+      "Laudo Natel",
+      "Manoel do Carmo Mecca"
+    ],
+    "c": 2,
+    "cat": "hist",
+    "d": 3,
+    "exp": "Laudo Natel liderou o clube em sete mandatos, de 1958 a 1971, incluindo a conclusão do estádio.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — A conclusão do Estádio do MorumBIS",
+        "u": "https://www.saopaulofc.net/a-conclusao-do-estadio-do-morumbis/"
+      }
+    ],
+    "when": "1958–1971",
+    "ok": true
+  },
+  {
+    "id": "hist-063",
+    "q": "Quem marcou o primeiro gol da história do Morumbi, em 2 de outubro de 1960?",
+    "a": [
+      "Canhoteiro",
+      "Gino Orlando",
+      "Gonçalo",
+      "Peixinho"
+    ],
+    "c": 3,
+    "cat": "hist",
+    "d": 3,
+    "exp": "Arnaldo Poffo Garcia, o Peixinho, marcou aos 12 minutos do 1º tempo, no 1 a 0 sobre o Sporting.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — A inauguração do Estádio Cícero Pompeu de Toledo",
+        "u": "https://www.saopaulofc.net/a-inauguracao-do-estadio-cicero-pompeu-de-toledo/"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: O histórico geral do Morumbi",
+        "u": "https://www.saopaulofc.net/enciclopedia-o-historico-geral-do-morumbi/"
+      }
+    ],
+    "when": "1960",
+    "ok": true
+  },
+  {
+    "id": "hist-064",
+    "q": "Quem era o técnico do São Paulo na inauguração parcial do Morumbi, em 1960?",
+    "a": [
+      "Béla Guttmann",
+      "Flávio Costa",
+      "Vicente Feola",
+      "Zezé Moreira"
+    ],
+    "c": 1,
+    "cat": "hist",
+    "d": 4,
+    "exp": "Flávio Costa comandou o time; o Sporting, de Alfredo Gonzalez, perdeu por 1 a 0.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — A inauguração do Estádio Cícero Pompeu de Toledo",
+        "u": "https://www.saopaulofc.net/a-inauguracao-do-estadio-cicero-pompeu-de-toledo/"
+      }
+    ],
+    "when": "1960",
+    "ok": true
+  },
+  {
+    "id": "hist-065",
+    "q": "Em que ano o São Paulo vendeu o terreno do Canindé para bancar parte da construção do Morumbi?",
+    "a": [
+      "1950",
+      "1955",
+      "1958",
+      "1962"
+    ],
+    "c": 1,
+    "cat": "hist",
+    "d": 4,
+    "exp": "A venda, por cerca de Cr$ 12 milhões, foi feita em abril de 1955.",
+    "src": [
+      {
+        "n": "SPFC.Net — A grande, épica, curiosa e verdadeira história da construção do Morumbi",
+        "u": "https://spfc.net/news/34968/a-grande-epica-curiosa-e-verdadeira-historia-da-construcao-do-morumbi.html"
+      }
+    ],
+    "when": "1955",
+    "ok": true
+  },
+  {
+    "id": "hist-066",
+    "q": "Qual era a capacidade prevista no projeto original do Morumbi, segundo o SPFC.Net?",
+    "a": [
+      "80 mil pessoas",
+      "100 mil pessoas",
+      "200 mil pessoas",
+      "120 mil pessoas"
+    ],
+    "c": 3,
+    "cat": "hist",
+    "d": 4,
+    "exp": "O projeto de Vilanova Artigas previa quatro anéis e capacidade para 120 mil pessoas.",
+    "src": [
+      {
+        "n": "SPFC.Net — A grande, épica, curiosa e verdadeira história da construção do Morumbi",
+        "u": "https://spfc.net/news/34968/a-grande-epica-curiosa-e-verdadeira-historia-da-construcao-do-morumbi.html"
+      }
+    ],
+    "when": "1950–1954",
+    "ok": true
+  },
+  {
+    "id": "hist-067",
+    "q": "Qual campanha de venda de carnês financiou a conclusão do Morumbi em 1968?",
+    "a": [
+      "Tijolo Tricolor",
+      "Morumbi é Nosso",
+      "A Grande Jogada é Construir o Paulistão",
+      "Faça Parte da Fé"
+    ],
+    "c": 2,
+    "cat": "hist",
+    "d": 4,
+    "exp": "A campanha vendeu centenas de milhares de carnês a Cr$ 5,00 cada.",
+    "src": [
+      {
+        "n": "SPFC.Net — A grande, épica, curiosa e verdadeira história da construção do Morumbi",
+        "u": "https://spfc.net/news/34968/a-grande-epica-curiosa-e-verdadeira-historia-da-construcao-do-morumbi.html"
+      }
+    ],
+    "when": "1968",
+    "ok": true
+  },
+  {
+    "id": "hist-068",
+    "q": "Quem marcou o gol de número 3.000 da história do Morumbi, em 4 de julho de 1992, contra o Flamengo?",
+    "a": [
+      "Raí",
+      "Müller",
+      "Palhinha",
+      "Careca"
+    ],
+    "c": 0,
+    "cat": "hist",
+    "d": 4,
+    "exp": "Raí fez o gol na vitória por 2 a 0 sobre o Flamengo, segundo as estatísticas oficiais do estádio.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: O histórico geral do Morumbi",
+        "u": "https://www.saopaulofc.net/enciclopedia-o-historico-geral-do-morumbi/"
+      }
+    ],
+    "when": "1992",
+    "ok": true
+  },
+  {
+    "id": "hist-069",
+    "q": "Qual jogador, revelado pelo clube e consagrado na Europa, voltou ao São Paulo em 2014?",
+    "a": [
+      "Lucas",
+      "Rodrigo Caio",
+      "Kaká",
+      "Philippe Coutinho"
+    ],
+    "c": 2,
+    "cat": "hist",
+    "d": 3,
+    "exp": "Kaká retornou ao Tricolor em 2014, anos depois de ser revelado pelo clube.",
+    "src": [
+      {
+        "n": "SPFC.Net — Resumo da história do time São Paulo (SP)",
+        "u": "https://spfc.net/news/263157/resumo-da-historia-do-time-sao-paulo-sp.html"
+      }
+    ],
+    "when": "2014",
+    "ok": true
+  },
+  {
+    "id": "hist-070",
+    "q": "Qual título de 1993, disputado entre campeões da Libertadores, o São Paulo conquistou?",
+    "a": [
+      "Copa Conmebol",
+      "Copa Master",
+      "Recopa Sul-Americana",
+      "Supercopa Libertadores"
+    ],
+    "c": 3,
+    "cat": "hist",
+    "d": 3,
+    "exp": "Em 1993, o clube também ganhou a Recopa Sul-Americana, que repetiu em 1994.",
+    "src": [
+      {
+        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      }
+    ],
+    "when": "1993",
+    "ok": true
+  },
+  {
+    "id": "hist-071",
+    "q": "Quantas Recopas Sul-Americanas o São Paulo conquistou, em 1993 e 1994?",
+    "a": [
+      "2",
+      "1",
+      "3",
+      "4"
+    ],
+    "c": 0,
+    "cat": "hist",
+    "d": 3,
+    "exp": "O clube ganhou a Recopa de 1993 e a de 1994, esta sobre o Botafogo.",
+    "src": [
+      {
+        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      }
+    ],
+    "when": "1993–1994",
+    "ok": true
+  },
+  {
+    "id": "hist-072",
+    "q": "Em que ano o São Paulo conquistou a Copa Master da Conmebol?",
+    "a": [
+      "1994",
+      "1996",
+      "1995",
+      "1998"
+    ],
+    "c": 1,
+    "cat": "hist",
+    "d": 4,
+    "exp": "A Copa Master de 1996 integra os títulos internacionais do clube.",
+    "src": [
+      {
+        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      }
+    ],
+    "when": "1996",
+    "ok": true
+  },
+  {
+    "id": "hist-073",
+    "q": "Quem é o recordista de jogos pelo São Paulo e maior goleiro-artilheiro do mundo, segundo o clube?",
+    "a": [
+      "Zetti",
+      "Waldir Peres",
+      "Gilmar",
+      "Rogério Ceni"
+    ],
+    "c": 3,
+    "cat": "hist",
+    "d": 2,
+    "exp": "O site oficial e a Wikipédia destacam Ceni como maior goleiro-artilheiro da história do futebol.",
+    "src": [
+      {
+        "n": "SPFC.Net — Resumo da história do time São Paulo (SP)",
+        "u": "https://spfc.net/news/263157/resumo-da-historia-do-time-sao-paulo-sp.html"
+      },
+      {
+        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      }
+    ],
+    "when": "1990–2015",
+    "ok": true
+  },
+  {
+    "id": "hist-074",
+    "q": "Quantos Campeonatos Brasileiros seguidos o São Paulo venceu entre 2006 e 2008, algo inédito na era dos pontos corridos?",
+    "a": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "c": 1,
+    "cat": "hist",
+    "d": 3,
+    "exp": "O tricampeonato brasileiro (2006, 2007 e 2008) foi conquistado sob Muricy Ramalho.",
+    "src": [
+      {
+        "n": "SPFC.Net — Resumo da história do time São Paulo (SP)",
+        "u": "https://spfc.net/news/263157/resumo-da-historia-do-time-sao-paulo-sp.html"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      }
+    ],
+    "when": "2006–2008",
     "ok": true
   }
 ];

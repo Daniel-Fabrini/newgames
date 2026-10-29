@@ -2006,36 +2006,14 @@ export default [
  },
  {
   "id": "copas-1090",
-  "q": "Que clube venceu o São Paulo na final da Copa São Paulo de Futebol Júnior de 2007?",
-  "a": [
-   "Corinthians",
-   "Atlético Mineiro",
-   "Cruzeiro",
-   "Palmeiras"
-  ],
-  "c": 2,
-  "cat": "copas",
-  "d": 4,
-  "exp": "O Cruzeiro foi campeão em 2007; o São Paulo ficou com o vice.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
-    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
-   }
-  ],
-  "when": "2007",
-  "ok": true
- },
- {
-  "id": "copas-1091",
   "q": "Que clube venceu o São Paulo na final da Copa São Paulo de Futebol Júnior de 2004?",
   "a": [
-   "Corinthians",
    "Santos",
    "Palmeiras",
+   "Corinthians",
    "Nacional-SP"
   ],
-  "c": 0,
+  "c": 2,
   "cat": "copas",
   "d": 3,
   "exp": "O Corinthians foi campeão de 2004; o Tricolor perdeu a decisão.",
@@ -2049,81 +2027,15 @@ export default [
   "ok": true
  },
  {
-  "id": "copas-1092",
-  "q": "Que clube venceu o São Paulo na final da Copa São Paulo de Futebol Júnior de 1992?",
-  "a": [
-   "Corinthians",
-   "Vasco da Gama",
-   "Guarani",
-   "Ponte Preta"
-  ],
-  "c": 1,
-  "cat": "copas",
-  "d": 4,
-  "exp": "O Vasco foi campeão em 1992; o São Paulo seria campeão no ano seguinte, em 1993.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
-    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
-   }
-  ],
-  "when": "1992",
-  "ok": true
- },
- {
-  "id": "copas-1093",
-  "q": "Que clube venceu o São Paulo na final da Copa São Paulo de Futebol Júnior de 2001?",
-  "a": [
-   "Roma Barueri",
-   "Juventus-SP",
-   "Portuguesa",
-   "Santo André"
-  ],
-  "c": 0,
-  "cat": "copas",
-  "d": 4,
-  "exp": "Em 2001 o Tricolor foi vice; o campeão foi o Roma, de Barueri.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
-    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
-   }
-  ],
-  "when": "2001",
-  "ok": true
- },
- {
-  "id": "copas-1094",
-  "q": "Que clube venceu o São Paulo na final da Copa São Paulo de Futebol Júnior de 1994?",
-  "a": [
-   "Corinthians",
-   "Ponte Preta",
-   "Guarani",
-   "Internacional"
-  ],
-  "c": 2,
-  "cat": "copas",
-  "d": 4,
-  "exp": "O Guarani foi campeão de 1994, ano em que o São Paulo foi vice.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — Copa São Paulo de Futebol Júnior",
-    "u": "https://pt.wikipedia.org/wiki/Copa_S%C3%A3o_Paulo_de_Futebol_J%C3%BAnior"
-   }
-  ],
-  "when": "1994",
-  "ok": true
- },
- {
-  "id": "copas-1095",
+  "id": "copas-1091",
   "q": "Com que clubes o São Paulo dividiu o Grupo B do Torneio Rio-São Paulo de 2001?",
   "a": [
-   "Flamengo, Vasco e Botafogo",
    "Santos, Corinthians e Palmeiras",
+   "Flamengo, Vasco e Botafogo",
    "Santos, Fluminense e Palmeiras",
    "Corinthians, Botafogo e Vasco"
   ],
-  "c": 1,
+  "c": 0,
   "cat": "copas",
   "d": 4,
   "exp": "O São Paulo foi o 2º do grupo, com 7 pontos; o Santos foi o 1º, com 10.",
@@ -2137,15 +2049,15 @@ export default [
   "ok": true
  },
  {
-  "id": "idolos-1096",
+  "id": "idolos-1092",
   "q": "Que apelido a imprensa uruguaia deu a Leônidas da Silva por sua elasticidade?",
   "a": [
    "Pé de Ouro",
+   "Homem-Borracha",
    "Rei da Bicicleta",
-   "Camisa 9",
-   "Homem-Borracha"
+   "Camisa 9"
   ],
-  "c": 3,
+  "c": 1,
   "cat": "idolos",
   "d": 3,
   "exp": "Leônidas, o Diamante Negro, também era chamado de Homem-Borracha.",
@@ -2159,15 +2071,15 @@ export default [
   "ok": true
  },
  {
-  "id": "tecnicos-1097",
+  "id": "tecnicos-1093",
   "q": "Quantos jogos Rogério Ceni comandou na primeira passagem como técnico do São Paulo, em 2017?",
   "a": [
+   "37",
    "21",
    "52",
-   "37",
    "68"
   ],
-  "c": 2,
+  "c": 0,
   "cat": "tecnicos",
   "d": 4,
   "exp": "Foram 14 vitórias, 13 empates e 10 derrotas; ele foi demitido em 3 de julho de 2017.",
@@ -2181,15 +2093,15 @@ export default [
   "ok": true
  },
  {
-  "id": "tecnicos-1098",
+  "id": "tecnicos-1094",
   "q": "Em que data Rogério Ceni foi nomeado técnico do São Paulo pela primeira vez?",
   "a": [
    "13 de outubro de 2021",
    "19 de janeiro de 2017",
-   "11 de dezembro de 2015",
-   "24 de novembro de 2016"
+   "24 de novembro de 2016",
+   "11 de dezembro de 2015"
   ],
-  "c": 3,
+  "c": 2,
   "cat": "tecnicos",
   "d": 4,
   "exp": "Seu primeiro jogo foi em 19 de janeiro de 2017, pela Florida Cup, contra o River Plate.",
@@ -2203,7 +2115,7 @@ export default [
   "ok": true
  },
  {
-  "id": "tecnicos-1099",
+  "id": "tecnicos-1095",
   "q": "Que título Rogério Ceni conquistou como técnico do São Paulo, em janeiro de 2017?",
   "a": [
    "Campeonato Paulista",
@@ -2225,15 +2137,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1100",
+  "id": "cultura-1096",
   "q": "Em que data o segundo uniforme do São Paulo foi usado pela primeira vez, na vitória por 4 a 0 sobre o Santos?",
   "a": [
-   "29 de maio de 1932",
    "25 de janeiro de 1930",
    "9 de julho de 1933",
-   "16 de dezembro de 1935"
+   "16 de dezembro de 1935",
+   "29 de maio de 1932"
   ],
-  "c": 0,
+  "c": 3,
   "cat": "cultura",
   "d": 4,
   "exp": "O escudo foi acrescentado ao uniforme em 9 de julho de 1933.",
@@ -2247,15 +2159,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1101",
+  "id": "cultura-1097",
   "q": "Em que data o escudo foi acrescentado ao uniforme do São Paulo?",
   "a": [
-   "9 de julho de 1933",
    "29 de maio de 1932",
    "25 de janeiro de 1931",
+   "9 de julho de 1933",
    "4 de junho de 1935"
   ],
-  "c": 0,
+  "c": 2,
   "cat": "cultura",
   "d": 4,
   "exp": "O segundo uniforme havia estreado em 29 de maio de 1932.",
@@ -2269,7 +2181,7 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1102",
+  "id": "cultura-1098",
   "q": "Em que ano a faixa branca central da camisa titular do São Paulo foi estreitada?",
   "a": [
    "1975",
@@ -2291,7 +2203,7 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1103",
+  "id": "cultura-1099",
   "q": "Em 1966, o São Paulo usou em dez jogos do Paulista um uniforme com que característica?",
   "a": [
    "Camisa lilás",
@@ -2317,15 +2229,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1104",
+  "id": "cultura-1100",
   "q": "Que marca vestiu o São Paulo de 1960 a 1967?",
   "a": [
+   "Athleta",
    "Penalty",
    "Topper",
-   "Athleta",
    "Dell'erba"
   ],
-  "c": 2,
+  "c": 0,
   "cat": "cultura",
   "d": 4,
   "exp": "Até 1960 o uniforme era fornecido pelo próprio clube; depois vieram Athleta, HerinGol, Scratch e Penalty.",
@@ -2339,15 +2251,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1105",
+  "id": "cultura-1101",
   "q": "Que marca vestiu o São Paulo de 2003 a 2005, antes da Reebok?",
   "a": [
+   "Topper",
    "Penalty",
    "Adidas",
-   "Topper",
    "Umbro"
   ],
-  "c": 2,
+  "c": 0,
   "cat": "cultura",
   "d": 4,
   "exp": "A Topper fez o uniforme do título da Libertadores e do Mundial de 2005.",
@@ -2361,7 +2273,7 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1106",
+  "id": "cultura-1102",
   "q": "Que empresa foi patrocinadora máster do São Paulo de 2012 a 2014?",
   "a": [
    "LG",
@@ -2383,15 +2295,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1107",
+  "id": "cultura-1103",
   "q": "Que casa de apostas foi patrocinadora máster do São Paulo a partir de junho de 2021?",
   "a": [
-   "Sportsbet.io",
    "Superbet",
+   "Sportsbet.io",
    "Betano",
    "Bet365"
   ],
-  "c": 0,
+  "c": 1,
   "cat": "cultura",
   "d": 3,
   "exp": "A Sportsbet.io foi a master de 2021 a 2023; a Superbet assumiu em 2024.",
@@ -2409,15 +2321,15 @@ export default [
   "ok": true
  },
  {
-  "id": "hist-1108",
+  "id": "hist-1104",
   "q": "Que centro de reabilitação, criado em 2004, funciona ao lado do CT da Barra Funda?",
   "a": [
    "CEPRAF",
-   "REFFIS",
    "Cotia Saúde",
+   "REFFIS",
    "CReFiSP"
   ],
-  "c": 1,
+  "c": 2,
   "cat": "hist",
   "d": 4,
   "exp": "O REFFIS é a unidade de reabilitação física e fisiologia esportiva do clube.",
@@ -2431,15 +2343,15 @@ export default [
   "ok": true
  },
  {
-  "id": "cultura-1109",
+  "id": "cultura-1105",
   "q": "Em que estádio costuma ser disputada a final da Copa São Paulo de Futebol Júnior?",
   "a": [
    "Morumbi",
    "Canindé",
-   "Parque São Jorge",
-   "Pacaembu"
+   "Pacaembu",
+   "Parque São Jorge"
   ],
-  "c": 3,
+  "c": 2,
   "cat": "cultura",
   "d": 2,
   "exp": "A final é tradicionalmente no Pacaembu, embora tenha passado por outros estádios, como o Allianz Parque.",

@@ -42,7 +42,7 @@ export default [
     ],
     "c": 2,
     "cat": "fund",
-    "d": 2,
+    "d": 1,
     "exp": "A data oficial coincide com o aniversário da cidade de São Paulo, embora a ata tenha sido assinada dias depois.",
     "src": [
       {
@@ -258,7 +258,7 @@ export default [
     ],
     "c": 1,
     "cat": "fund",
-    "d": 3,
+    "d": 2,
     "exp": "As listras vermelhas e pretas homenageavam o Paulistano e a AA das Palmeiras.",
     "src": [
       {
@@ -384,7 +384,7 @@ export default [
     ],
     "c": 1,
     "cat": "fund",
-    "d": 2,
+    "d": 1,
     "exp": "Friedenreich foi um dos fundadores do clube em 1930 e campeão paulista de 1931.",
     "src": [
       {
@@ -406,7 +406,7 @@ export default [
     ],
     "c": 3,
     "cat": "fund",
-    "d": 4,
+    "d": 3,
     "exp": "Friedenreich nasceu em São Paulo em 18 de julho de 1892 e morreu em 1969.",
     "src": [
       {
@@ -480,7 +480,7 @@ export default [
     ],
     "c": 2,
     "cat": "fund",
-    "d": 4,
+    "d": 3,
     "exp": "A história do clube registra a conquista do Torneio Início de 1932.",
     "src": [
       {
@@ -502,7 +502,7 @@ export default [
     ],
     "c": 0,
     "cat": "fund",
-    "d": 4,
+    "d": 3,
     "exp": "O São Paulo ganhou por 11 a 0 em casa, na temporada em que foi vice-campeão paulista.",
     "src": [
       {
@@ -524,7 +524,7 @@ export default [
     ],
     "c": 3,
     "cat": "fund",
-    "d": 4,
+    "d": 3,
     "exp": "Foi a melhor vitória da temporada de 1933, em que o clube foi vice no Paulista.",
     "src": [
       {
@@ -880,7 +880,7 @@ export default [
     ],
     "c": 0,
     "cat": "fund",
-    "d": 4,
+    "d": 3,
     "exp": "O amistoso preparatório terminou 7 a 3 para o São Paulo.",
     "src": [
       {
@@ -954,7 +954,7 @@ export default [
     ],
     "c": 3,
     "cat": "fund",
-    "d": 4,
+    "d": 3,
     "exp": "Sem sede, o elenco ficou alojado na Igreja da Consolação.",
     "src": [
       {
@@ -1188,7 +1188,7 @@ export default [
     ],
     "c": 0,
     "cat": "fund",
-    "d": 3,
+    "d": 2,
     "exp": "O jogo, no Pacaembu, reuniu recorde de 70.281 pagantes e deu origem ao apelido Majestoso.",
     "src": [
       {
@@ -1240,7 +1240,7 @@ export default [
     ],
     "c": 0,
     "cat": "fund",
-    "d": 3,
+    "d": 2,
     "exp": "Leônidas foi campeão paulista em 1943, 1945, 1946, 1948 e 1949.",
     "src": [
       {
@@ -1288,7 +1288,7 @@ export default [
     ],
     "c": 1,
     "cat": "fund",
-    "d": 2,
+    "d": 1,
     "exp": "O time dos anos 1940, de Leônidas, Remo e Teixeirinha, ganhou cinco títulos paulistas.",
     "src": [
       {
@@ -1388,7 +1388,7 @@ export default [
     ],
     "c": 3,
     "cat": "fund",
-    "d": 2,
+    "d": 1,
     "exp": "As estrelas homenageiam os recordes mundiais de Adhemar no salto triplo, em Helsinque 1952 e no Pan de 1955.",
     "src": [
       {
@@ -1414,7 +1414,7 @@ export default [
     ],
     "c": 2,
     "cat": "fund",
-    "d": 3,
+    "d": 2,
     "exp": "Os recordes de Adhemar no salto triplo foram feitos em Helsinque 1952 e no Pan de 1955.",
     "src": [
       {
@@ -1440,7 +1440,7 @@ export default [
     ],
     "c": 3,
     "cat": "fund",
-    "d": 2,
+    "d": 1,
     "exp": "As três estrelas vermelhas simbolizam os títulos mundiais do clube.",
     "src": [
       {
@@ -1484,7 +1484,7 @@ export default [
     ],
     "c": 2,
     "cat": "fund",
-    "d": 3,
+    "d": 2,
     "exp": "A AA das Palmeiras foi fundada em 9 de novembro de 1902.",
     "src": [
       {
@@ -1506,7 +1506,7 @@ export default [
     ],
     "c": 0,
     "cat": "fund",
-    "d": 3,
+    "d": 2,
     "exp": "O Paulistano nasceu em 1900 e encerrou seu futebol no início de 1930.",
     "src": [
       {
@@ -1576,7 +1576,7 @@ export default [
     ],
     "c": 3,
     "cat": "fund",
-    "d": 3,
+    "d": 2,
     "exp": "O Palestra Itália passou a se chamar Palmeiras em 1942, em homenagem à AA das Palmeiras.",
     "src": [
       {
@@ -1698,7 +1698,7 @@ export default [
     ],
     "c": 3,
     "cat": "fund",
-    "d": 4,
+    "d": 3,
     "exp": "O aviso da diretoria do Grêmio Tricolor saiu no Correio de São Paulo no próprio dia 16.",
     "src": [
       {
@@ -1750,7 +1750,7 @@ export default [
     ],
     "c": 2,
     "cat": "fund",
-    "d": 4,
+    "d": 3,
     "exp": "O Grêmio Tricolor foi fundado em 9 de fevereiro de 1935 e depois se tornou o Grêmio São-Paulino.",
     "src": [
       {
@@ -1776,7 +1776,7 @@ export default [
     ],
     "c": 0,
     "cat": "fund",
-    "d": 4,
+    "d": 3,
     "exp": "O clube existiu até 16 de dezembro de 1935, quando os sócios voltaram ao São Paulo Futebol Clube.",
     "src": [
       {
@@ -1802,7 +1802,7 @@ export default [
     ],
     "c": 1,
     "cat": "fund",
-    "d": 4,
+    "d": 3,
     "exp": "Os atletas rebeldes encerraram o Independente em 16 de dezembro de 1935, com a volta ao São Paulo.",
     "src": [
       {
@@ -1846,7 +1846,7 @@ export default [
     ],
     "c": 1,
     "cat": "fund",
-    "d": 4,
+    "d": 3,
     "exp": "O Paulistano tem 11 títulos e a AA das Palmeiras, 3.",
     "src": [
       {
@@ -1872,7 +1872,7 @@ export default [
     ],
     "c": 2,
     "cat": "fund",
-    "d": 4,
+    "d": 3,
     "exp": "O Paulistano ganhou quatro paulistas em sequência e somou 11 no total.",
     "src": [
       {
@@ -1903,32 +1903,6 @@ export default [
       }
     ],
     "when": "1904",
-    "ok": true
-  },
-  {
-    "id": "fund-077",
-    "q": "Qual foi a data de fundação do Paulistano, segundo o site oficial do São Paulo?",
-    "a": [
-      "29 de dezembro de 1900",
-      "30 de novembro de 1900",
-      "29 de dezembro de 1902",
-      "9 de novembro de 1902"
-    ],
-    "c": 0,
-    "cat": "fund",
-    "d": 3,
-    "exp": "O site oficial registra a fundação do Paulistano em 29 de dezembro de 1900.",
-    "src": [
-      {
-        "n": "SPFC (site oficial) — Enciclopédia: A genealogia do São Paulo",
-        "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
-      },
-      {
-        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
-        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
-      }
-    ],
-    "when": "1900",
     "ok": true
   }
 ];
