@@ -22,7 +22,7 @@ export function createTournament(seed = 1, diff = 0.5) {
     [ids[i], ids[j]] = [ids[j], ids[i]];
   }
   const mk = (a, b) => ({ a, b, ga: null, gb: null, winner: null });
-  return {
+  const tr = {
     seed,
     diff,
     round: 0,
@@ -36,6 +36,8 @@ export function createTournament(seed = 1, diff = 0.5) {
     eliminated: false,
     rngState: Math.floor(rnd() * 1e9),
   };
+  simulateOthers(tr);
+  return tr;
 }
 
 export const teamOf = (id) => (id === YOU.id ? YOU : TEAMS.find((t) => t.id === id) || null);
@@ -77,6 +79,7 @@ function advance(tr) {
     m.b = cur[i * 2 + 1].winner;
   });
   tr.round++;
+  simulateOthers(tr);
 }
 
 /** Simulate every match of the current round that does not involve the player. */
