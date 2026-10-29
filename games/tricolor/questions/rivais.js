@@ -1362,7 +1362,7 @@ export default [
   },
   {
     "id": "rivais-048",
-    "q": "Segundo a Enciclopédia do site oficial (dados até 2025), quantos mata-matas o São Paulo venceu contra o Corinthians?",
+    "q": "Pela contagem da Enciclopédia oficial (até 2025), o Corinthians eliminou o São Paulo 18 vezes em confrontos eliminatórios. E quantas vezes o Tricolor eliminou o rival?",
     "a": [
       "Nove",
       "Três",

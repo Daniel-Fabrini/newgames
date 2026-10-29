@@ -328,18 +328,7 @@ export default [
     ok: true,
   },
   // ——— Supercopa Libertadores 1993 ———
-  {
-    id: 'copas-2003',
-    q: 'Segundo a Wikipédia (pt), qual foi o placar da disputa de pênaltis da final da Supercopa Libertadores de 1993, contra o Flamengo?',
-    a: ['4 a 3', '5 a 3', '5 a 4', '6 a 5'],
-    c: 1,
-    cat: 'copas',
-    d: 4,
-    exp: 'Depois de dois empates por 2 a 2, o São Paulo ganhou por 5 a 3 nos pênaltis no Morumbi, em 24/11/1993, segundo o verbete. A RSSSF registra outro placar para a disputa: 4-5 (Flamengo 4, São Paulo 5).',
-    src: [S.wikiSup93, S.rsssfSup93],
-    when: '1993',
-    ok: true,
-  },
+  
   {
     id: 'copas-2004',
     q: 'Segundo a Wikipédia (pt), qual jogador do Flamengo desperdiçou sua cobrança nos pênaltis da final da Supercopa Libertadores de 1993?',
@@ -516,18 +505,7 @@ export default [
     ok: true,
   },
   // ——— Palhinha 1992 ———
-  {
-    id: 'lib-2003',
-    q: 'Segundo a RSSSF, quantos gols marcou Palhinha, artilheiro da Libertadores de 1992 conquistada pelo São Paulo?',
-    a: ['5', '7', '9', '11'],
-    c: 1,
-    cat: 'lib',
-    d: 3,
-    exp: 'A lista de artilheiros da RSSSF põe Palhinha (Jorge Ferreira da Silva) sozinho no topo em 1992, com 7 gols, e a Wikipédia em inglês dá o mesmo número. Não encontramos fonte de referência com outro total.',
-    src: [S.rsssfLibTops, S.enLibTops],
-    when: '1992',
-    ok: true,
-  },
+  
   // ——— Futebol feminino ———
   {
     id: 'outras-2001',

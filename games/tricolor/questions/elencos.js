@@ -628,67 +628,6 @@ export default [
     "v2": true
   },
   {
-    "id": "elencos-022",
-    "q": "Quem é o maior artilheiro da história do São Paulo, com 242 gols?",
-    "a": [
-      "Serginho Chulapa",
-      "Luis Fabiano",
-      "Raí",
-      "Gino Orlando"
-    ],
-    "c": 0,
-    "cat": "elencos",
-    "d": 1,
-    "exp": "Segundo a Enciclopédia do site oficial (dados até 2025), Serginho Chulapa lidera com 242 gols, à frente de Gino Orlando (233) e Luis Fabiano (212).",
-    "src": [
-      {
-        "n": "São Paulo FC (site oficial) — Enciclopédia: maiores artilheiros",
-        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
-      },
-      {
-        "n": "São Paulo FC (site oficial) — Grandes Ídolos",
-        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
-      },
-      {
-        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-      }
-    ],
-    "when": "1973–1982",
-    "ok": true,
-    "v2": true
-  },
-  {
-    "id": "elencos-023",
-    "q": "Quem é o terceiro maior artilheiro da história do clube, com 212 gols em 352 jogos?",
-    "a": [
-      "Müller",
-      "Raí",
-      "França",
-      "Luis Fabiano"
-    ],
-    "c": 3,
-    "cat": "elencos",
-    "d": 3,
-    "exp": "Luis Fabiano soma 212 gols em 352 jogos em suas passagens pelo São Paulo; Müller marcou 160 e Raí, 128.",
-    "src": [
-      {
-        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-      },
-      {
-        "n": "Wikipédia (pt) — Luís Fabiano",
-        "u": "https://pt.wikipedia.org/wiki/Lu%C3%ADs_Fabiano"
-      },
-      {
-        "n": "São Paulo FC (site oficial) — Enciclopédia: maiores artilheiros",
-        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
-      }
-    ],
-    "ok": true,
-    "v2": true
-  },
-  {
     "id": "elencos-024",
     "q": "Quantos gols Müller marcou pelo São Paulo, segundo o site oficial?",
     "a": [
@@ -1462,7 +1401,7 @@ export default [
   },
   {
     "id": "elencos-051",
-    "q": "Em que jogo Telê Santana assumiu o São Paulo, em 14 de outubro de 1990?",
+    "q": "Segundo o site oficial, em que jogo Telê Santana estreou no comando do São Paulo, em 14 de outubro de 1990?",
     "a": [
       "Vitória sobre o Corinthians",
       "Empate por 0 a 0 com o São José",
@@ -1472,7 +1411,7 @@ export default [
     "c": 1,
     "cat": "elencos",
     "d": 4,
-    "exp": "Telê estreou no empate sem gols com o São José, herdando um time em 10º lugar na tabela.",
+    "exp": "O site oficial registra a estreia de Telê no empate sem gols com o São José, em 14/10/1990, herdando um time em 10º lugar; algumas fontes datam a contratação de dias antes (12 de outubro).",
     "src": [
       {
         "n": "São Paulo FC (site oficial) — História — Mundo",
@@ -1895,7 +1834,7 @@ export default [
   },
   {
     "id": "elencos-066",
-    "q": "Por quanto o São Paulo vendeu Lucas Moura ao Paris Saint-Germain, em 2012?",
+    "q": "Segundo o anúncio do São Paulo noticiado pela imprensa em 2012, por quanto o clube vendeu Lucas Moura ao Paris Saint-Germain?",
     "a": [
       "43 milhões de euros",
       "20 milhões de euros",
@@ -1905,20 +1844,21 @@ export default [
     "c": 0,
     "cat": "elencos",
     "d": 3,
-    "exp": "A venda foi anunciada em 8 de agosto de 2012 e rendeu 43 milhões de euros.",
+    "exp": "A Trivela registrou a venda, confirmada pelo São Paulo em agosto de 2012, por € 43,3 milhões (R$ 108,3 milhões); a Wikipédia (pt) também cita 43 milhões de euros. Outras fontes, como a Wikipédia em inglês, falam em cerca de € 45 milhões.",
     "src": [
-      {
-        "n": "Wikipédia (pt) — Lucas Moura",
-        "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
-      },
       {
         "n": "Trivela — São Paulo confirma venda de Lucas ao PSG por € 43 milhões",
         "u": "https://trivela.com.br/franca/sao-paulo-confirma-venda-de-lucas-ao-psg-e-fatura-e-43-milhoes/"
+      },
+      {
+        "n": "Wikipédia (pt) — Lucas Moura",
+        "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
       }
     ],
     "when": "2012",
     "ok": true,
-    "v2": true
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "elencos-067",
