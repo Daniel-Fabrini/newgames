@@ -288,8 +288,8 @@ elif MODE == 'rails':
     vo = bpy.data.objects.new('vig', sp); sc.collection.objects.link(vo); vo.location = (0, 0, 60)
     render('rails', sc)
 elif MODE == 'men':
-    CW, CH, PPU = 108, 264, 12
-    sc = setup(CW, CH, 22.0, sun_energy=5.2, world=1.3)
+    CW, CH, PPU = 168, 336, 14
+    sc = setup(CW, CH, 24.0, sun_energy=5.2, world=1.3)
     skin = glossy('#ffd8b5', 0.4, 0.3, name='skin'); hair = glossy('#7a4f2a', 0.4, 0.4, name='hair')
     shoe = glossy('#111317', 0.25, 0.8, name='shoe'); sole = matte('#f2f2f2', 0.5, name='sole')
     kits = {
@@ -302,16 +302,31 @@ elif MODE == 'men':
         sh = _mat(f'shirt{team}', k['shirt'], 0.35, 0.0, 0.5, '#ffffff' if team == 0 else '#2f7cff', 0.5 if team == 0 else 0.15); s1 = glossy(k['stripe1'], 0.3, 0.6, name=f's1{team}')
         s2 = glossy(k['stripe2'], 0.3, 0.6, name=f's2{team}'); sho = glossy(k['shorts'], 0.35, 0.5, name=f'shorts{team}')
         sk = glossy(k['sock'], 0.35, 0.5, name=f'sock{team}')
+        steel_ = metal('#dfe5ec', 0.12, name='rodsteel2')
+        dark_ = glossy('#101114', 0.4, 0.3, name='eye')
         parts = [
-            box((3.8, 3.4, 5.0), sh, loc=(0, -0.9, -1.9), bevel=0.6),
-            box((3.95, 0.65, 5.1), s1, loc=(0, -0.12, -1.9), bevel=0.12),
-            box((3.95, 0.6, 5.1), s2, loc=(0, 0.5, -1.9), bevel=0.12),
-            sphere(0.95, sh, loc=(-1.95, -1.2, 0.3), seg=24), sphere(0.95, sh, loc=(1.95, -1.2, 0.3), seg=24),
-            sphere(1.1, skin, loc=(0, -1.75, 1.9), seg=32),
-            sphere(1.12, hair, loc=(0, -2.35, 2.35), seg=32, scale=(1, 0.8, 0.55)),
-            box((3.1, 2.0, 2.6), sho, loc=(0, -0.3, -5.6), bevel=0.35),
-            box((2.6, 1.7, 2.8), sk, loc=(0, -0.1, -7.6), bevel=0.3),
-            box((3.8, 3.4, 1.3), shoe, loc=(0, 0, -8.8), bevel=0.55),
+            # torso (shirt) with the kit band across the chest, sleeves and arms reaching forward
+            box((5.0, 3.8, 5.2), sh, loc=(0, -1.0, -1.9), bevel=0.8),
+            box((5.15, 0.8, 5.3), s1, loc=(0, 0.15, -1.9), bevel=0.15),
+            box((5.15, 0.7, 5.3), s2, loc=(0, 0.9, -1.9), bevel=0.15),
+            sphere(1.15, sh, loc=(-2.75, -1.1, 0.2), seg=24), sphere(1.15, sh, loc=(2.75, -1.1, 0.2), seg=24),
+            box((1.25, 3.4, 1.25), sh, loc=(-3.05, 0.4, -0.5), bevel=0.4), box((1.25, 3.4, 1.25), sh, loc=(3.05, 0.4, -0.5), bevel=0.4),
+            sphere(0.72, skin, loc=(-3.05, 2.3, -0.5), seg=20), sphere(0.72, skin, loc=(3.05, 2.3, -0.5), seg=20),
+            # head: face towards +y (nose, eyes), hair cap behind
+            sphere(1.5, skin, loc=(0, -1.5, 2.2), seg=32),
+            sphere(0.33, skin, loc=(0, -0.05, 2.1), seg=16),
+            sphere(0.2, dark_, loc=(-0.55, -0.2, 2.6), seg=12), sphere(0.2, dark_, loc=(0.55, -0.2, 2.6), seg=12),
+            sphere(0.38, skin, loc=(-1.5, -1.6, 2.1), seg=14), sphere(0.38, skin, loc=(1.5, -1.6, 2.1), seg=14),
+            sphere(1.55, hair, loc=(0, -2.0, 2.75), seg=32, scale=(1, 0.85, 0.62)),
+            # chrome rod through the body with collars
+            cylinder(0.5, 9.0, steel_, loc=(0, 0, 0), rot=(0, 90, 0), bevel=0, seg=20),
+            cylinder(0.9, 0.55, steel_, loc=(-3.0, 0, 0), rot=(0, 90, 0), bevel=0.08, seg=24),
+            cylinder(0.9, 0.55, steel_, loc=(3.0, 0, 0), rot=(0, 90, 0), bevel=0.08, seg=24),
+            # shorts, socks, boots
+            box((4.2, 2.8, 2.8), sho, loc=(0, -0.3, -5.7), bevel=0.5),
+            box((3.2, 2.0, 2.8), sk, loc=(0, -0.1, -7.7), bevel=0.4),
+            box((3.8, 3.4, 1.3), shoe, loc=(0, 0, -8.8), bevel=0.6),
+            box((2.2, 0.35, 1.35), sole, loc=(0, 0.9, -8.75), bevel=0.05),
             box((3.9, 3.5, 0.3), sole, loc=(0, 0, -9.35), bevel=0.1),
         ]
         figs[team] = (parent(parts), parts)

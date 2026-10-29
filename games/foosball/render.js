@@ -5,7 +5,7 @@ import { T, manX, footY, footActive, goalX0, goalX1 } from './physics.js';
 
 export const VIEW = { mx: 13.5, my: 14 }; // margin (units) around the playfield (matches the backdrop render)
 const TH_MIN = -1.0, TH_STEP = 2.1 / 15, NA = 16; // sprite angles
-const CW = 108, CH = 264, SPR_W = 11.7, SPR_H = 28.6; // sprite cell (px) and its size in table units
+const CW = 168, CH = 336, SPR_W = 12, SPR_H = 24; // sprite cell (px) and its size in table units
 const BALL_N = 12, BALL_PX = 120, BALL_U = 6;
 
 let assetsP = null;
@@ -232,7 +232,7 @@ export function createRenderer(canvas, { reduced = false } = {}) {
       g.fillStyle = cg;
       g.fillRect(mx - 4, fy - 4, 8.4, 8.4);
       g.globalAlpha = 0.34;
-      const ox = 1.0 + lift * 2.2, oy = 1.5 + lift * 2.6;
+      const ox = 1.0 + lift * 3.6, oy = 1.5 + lift * 4.2;
       g.drawImage(menShadow, (idx * CW) / 3, (r.team * CH) / 3, CW / 3, CH / 3, mx - SPR_W / 2 + ox - 0.4, r.y - SPR_H / 2 + oy - 0.4, SPR_W + 0.8, SPR_H + 0.8);
       g.restore();
     }
