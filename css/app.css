@@ -2338,3 +2338,15 @@ img {
 .profile-card + .section-head {
   margin-top: 2px;
 }
+.splash-art {
+  max-height: 46vh;
+  min-height: 260px;
+}
+.sf-card {
+  width: 40%;
+  max-width: 176px;
+}
+.sf-card {
+  width: 36%;
+  transform: translateX(calc(var(--k) * 56%)) translateY(calc(var(--d) * var(--d) * 6%)) rotate(calc(var(--k) * 8deg)) scale(calc(1 - var(--d) * 0.09));
+}
