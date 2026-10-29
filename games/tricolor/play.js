@@ -4,7 +4,7 @@ import { crest, trophy, crowdSil, avatar, ico } from './art.js';
 import { LADDER, SAFE_STEPS, MODES, THEMES, TIME_ATTACK, recentLimit } from './config.js';
 import { money, prizeOnWrong, prizeOnStop } from './prizes.js';
 import { randSeed } from './rng.js';
-import { IDOLS, POS } from './idols.js';
+import { IDOLS, POS, idolPortrait, idolCard } from './idols.js';
 import { createSession, currentView, answer, next, stop, timeUp, cur, canUse, useFifty, useCrowd, usePhone, callIdol, useSwap, summary, scoreOf, serialize, dailyPlan, dayKey, stepNo } from './session.js';
 import { recordMatch, recordDaily, pushRecent, xpFor, ACHIEVEMENTS } from './stats.js';
 import { confirmBox, fmtScore, fmtDur, modes, stats, lifelineRows } from './screens.js';
@@ -350,9 +350,8 @@ async function leaveMatch(app, st) {
 
 // ------------------------------------------------------------------ phone call
 const IDOL_TONE_ROLE = (i) => POS[i.pos];
-function idolAvatar(i) {
-  const kind = i.coach ? 'coach' : i.pos === 'gk' ? 'exPlayer' : i.pos === 'fw' ? 'fan' : i.pos === 'mid' ? 'director' : 'journalist';
-  return h('div', { class: 'tc-avatar', html: avatar(kind) + `<em class="ini">${i.initials}</em>` });
+function idolAvatar(i, card = false) {
+  return h('div', { class: `tc-avatar ${card ? 'card' : ''}` }, h('img', { src: card ? idolCard(i.id) : idolPortrait(i.id), alt: i.name, draggable: 'false' }));
 }
 function phoneFlow(app, st, bank, v, sc, reopen = false) {
   const { t, audio } = app;
@@ -402,7 +401,7 @@ function phoneFlow(app, st, bank, v, sc, reopen = false) {
     h('p', { class: 'tc-sheet-text' }, t('call.choose')),
     h('div', { class: 'tc-offer' }, ph.offer.map((id) => {
       const i = IDOLS.find((x) => x.id === id);
-      return h('button', { class: 'tc-idol', onclick: () => { audio.tap(); const hint = callIdol(st, bank, id); app.saveResume(serialize(st)); ring(i, hint); sheet.el.classList.add('incall'); } }, idolAvatar(i), h('b', null, i.name), h('small', null, `${IDOL_TONE_ROLE(i)[lang]} · ${i.years}`));
+      return h('button', { class: 'tc-idol', 'aria-label': i.name, onclick: () => { audio.tap(); const hint = callIdol(st, bank, id); app.saveResume(serialize(st)); ring(i, hint); } }, idolAvatar(i, true), h('small', null, i.years));
     })),
     foot,
   );

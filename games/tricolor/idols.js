@@ -15,8 +15,8 @@ export const IDOLS = [
   { id: 'pedrorocha', name: 'Pedro Rocha', pos: 'mid', years: '1970–1977', from: 1970, to: 1977, initials: 'PR', url: 'https://pt.wikipedia.org/wiki/Pedro_Rocha' },
   { id: 'lugano', name: 'Lugano', pos: 'cb', years: '2003–2006 · 2016–2017', from: 2003, to: 2017, initials: 'LU', url: 'https://pt.wikipedia.org/wiki/Diego_Lugano' },
   { id: 'muricy', name: 'Muricy Ramalho', pos: 'coach', coach: true, years: '2006–2009 · 2013–2015', from: 2006, to: 2015, initials: 'MR', url: 'https://pt.wikipedia.org/wiki/Muricy_Ramalho' },
-  { id: 'chulapa', name: 'Serginho Chulapa', pos: 'fw', years: '1973–1982', from: 1973, to: 1982, initials: 'SC', url: 'https://pt.wikipedia.org/wiki/Serginho_Chulapa' },
-  { id: 'lf', name: 'Luís Fabiano', pos: 'fw', years: '2001 · 2002–2004 · 2011–2015', from: 2001, to: 2015, initials: 'LF', url: 'https://pt.wikipedia.org/wiki/Lu%C3%ADs_Fabiano' },
+  { id: 'serginho', name: 'Serginho Chulapa', pos: 'fw', years: '1973–1982', from: 1973, to: 1982, initials: 'SC', url: 'https://pt.wikipedia.org/wiki/Serginho_Chulapa' },
+  { id: 'luisfabiano', name: 'Luís Fabiano', pos: 'fw', years: '2001 · 2002–2004 · 2011–2015', from: 2001, to: 2015, initials: 'LF', url: 'https://pt.wikipedia.org/wiki/Lu%C3%ADs_Fabiano' },
 ];
 export const POS = {
   gk: { pt: 'Goleiro', en: 'Goalkeeper', es: 'Portero' },
@@ -26,3 +26,8 @@ export const POS = {
   cb: { pt: 'Zagueiro', en: 'Centre-back', es: 'Defensa central' },
   coach: { pt: 'Técnico', en: 'Coach', es: 'Entrenador' },
 };
+
+const base = new URL('./assets/idols/', import.meta.url);
+/** portrait (call frame) and full card (picker) of the user's own illustrations */
+export const idolPortrait = (id) => new URL(`${id}.webp`, base).href;
+export const idolCard = (id) => new URL(`${id}_card.webp`, base).href;

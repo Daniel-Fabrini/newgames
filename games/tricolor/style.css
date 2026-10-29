@@ -20,10 +20,10 @@
 /* ---------- backdrop ---------- */
 .tc-bg { position: absolute; inset: 0; transition: filter 0.8s ease, opacity 0.8s ease; }
 .tc-bg .tc-bg-svg { width: 100%; height: 100%; display: block; }
-.tc-bg-home { filter: saturate(1.15) brightness(1.05); }
-.tc-bg-stands { filter: brightness(0.5) saturate(1.1); }
-.tc-bg-dim { filter: brightness(0.28) saturate(0.9) blur(1.5px); }
-.tc-bg-gold { filter: brightness(0.9) saturate(1.3) sepia(0.25) hue-rotate(-8deg); }
+.tc-bg-home { filter: saturate(1.1) brightness(0.62) blur(1.3px); }
+.tc-bg-stands { filter: brightness(0.36) saturate(1.1) blur(1.3px); }
+.tc-bg-dim { filter: brightness(0.2) saturate(0.9) blur(2px); }
+.tc-bg-gold { filter: brightness(0.55) saturate(1.3) sepia(0.2) blur(1.2px); }
 .tc-vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 40%, transparent 35%, rgba(0, 0, 0, 0.72) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.35), transparent 28%, transparent 60%, rgba(0, 0, 0, 0.7)); }
 .tc-lamp { animation: tc-twinkle 3.2s ease-in-out infinite; transform-box: fill-box; }
 .tc-lamp:nth-child(2n) { animation-delay: -1.4s; }
@@ -106,7 +106,7 @@
 .tc-modelist.two .tc-mode b { font-size: 12px; }
 .tc-modelist.two .tc-mode small { display: none; }
 .tc-modelist.two .tc-mode .ic { width: 24px; font-size: 18px; }
-.tc-striplab { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.3) inset; margin-top: auto; min-height: 110px; flex: 0 1 160px; }
+.tc-striplab { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.3) inset; margin-top: auto; min-height: 110px; flex: 1 1 150px; max-height: 230px; }
 .tc-striplab > div:first-child, .tc-strip { width: 100%; height: 100%; display: block; }
 .tc-striplab > div:first-child { position: absolute; inset: 0; }
 .tc-striptxt { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; padding: 16px 0 6px; background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), transparent); display: flex; flex-direction: column; }
@@ -388,3 +388,9 @@
 @media (prefers-reduced-motion: reduce) {
   .g-tricolor *, .g-tricolor *::before { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+.tc-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tc-avatar.card { border-radius: 10px; aspect-ratio: 283 / 312; background: none; }
+.tc-avatar.card img { object-fit: contain; }
+.tc-idol { padding: 4px 4px 6px; }
+.tc-idol .tc-avatar { aspect-ratio: 283 / 312; }

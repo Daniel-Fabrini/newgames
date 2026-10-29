@@ -3,7 +3,7 @@
 export default [
   {
     "id": "hist-001",
-    "q": "Qual presidente, de 1947 a 1957, deu nome oficial ao estádio do Morumbi?",
+    "q": "Qual presidente, de 1947 a 1957, dá nome oficial ao estádio do Morumbi?",
     "a": [
       "Laudo Natel",
       "Cícero Pompeu de Toledo",
@@ -13,7 +13,7 @@ export default [
     "c": 1,
     "cat": "hist",
     "d": 2,
-    "exp": "Cícero Pompeu de Toledo presidiu o clube de 1947 a 1957, decidiu construir um grande estádio e deu nome ao Morumbi.",
+    "exp": "Cícero Pompeu de Toledo presidiu o clube de 1947 a 1957, decidiu construir um grande estádio, hoje batizado com seu nome.",
     "src": [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
@@ -1693,6 +1693,28 @@ export default [
       }
     ],
     "when": "1990–2015",
+    "ok": true
+  },
+  {
+    "id": "hist-072",
+    "q": "Qual time argentino derrotou o São Paulo nos pênaltis na final da Libertadores de 1994?",
+    "a": [
+      "Boca Juniors",
+      "Vélez Sarsfield",
+      "River Plate",
+      "Newell's Old Boys"
+    ],
+    "c": 1,
+    "cat": "hist",
+    "d": 3,
+    "exp": "O Vélez venceu a ida por 1 a 0 e perdeu a volta por 1 a 0 no Morumbi; nos pênaltis, ganhou por 5 a 3 e levou seu primeiro título.",
+    "src": [
+      {
+        "n": "Wikipédia (pt) — Copa Libertadores da América de 1994",
+        "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1994"
+      }
+    ],
+    "when": "1994",
     "ok": true
   }
 ];

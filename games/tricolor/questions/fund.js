@@ -1830,5 +1830,113 @@ export default [
     ],
     "when": "1904",
     "ok": true
+  },
+  {
+    "id": "fund-074",
+    "q": "A que horas começou a assembleia de fundação do São Paulo, em 25 de janeiro de 1930?",
+    "a": [
+      "10h",
+      "14h",
+      "16h",
+      "20h"
+    ],
+    "c": 1,
+    "cat": "fund",
+    "d": 4,
+    "exp": "A reunião no nº 28 da Praça da República começou às 14h do dia 25 e só terminou depois da meia-noite.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — 1930 e 1935: conheça e entenda a história do Tricolor",
+        "u": "https://www.saopaulofc.net/1930-e-1935-conheca-e-entenda-a-historia-do-tricolor/"
+      },
+      {
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
+      }
+    ],
+    "when": "1930",
+    "ok": true
+  },
+  {
+    "id": "fund-075",
+    "q": "A que horas começou a assembleia de refundação do São Paulo, em 16 de dezembro de 1935?",
+    "a": [
+      "14h",
+      "17h",
+      "20h",
+      "22h"
+    ],
+    "c": 2,
+    "cat": "fund",
+    "d": 4,
+    "exp": "A multidão já esperava às 19h; a reunião terminou perto da meia-noite.",
+    "src": [
+      {
+        "n": "SPFC (site oficial) — 16 de dezembro: a refundação do São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/16-de-dezembro-a-refundacao-do-sao-paulo-futebol-clube/"
+      },
+      {
+        "n": "SPFC (site oficial) — O dia em que o Tricolor renasceu para o futebol",
+        "u": "https://www.saopaulofc.net/o-dia-em-que-o-tricolor-renasceu-para-o-futebol/"
+      }
+    ],
+    "when": "1935",
+    "ok": true
+  },
+  {
+    "id": "fund-076",
+    "q": "Quem treinou o São Paulo nas temporadas de 1932, 1933 e 1934?",
+    "a": [
+      "Rubens Salles",
+      "Armando Del Debbio",
+      "Vicente Feola",
+      "Joreca"
+    ],
+    "c": 0,
+    "cat": "fund",
+    "d": 4,
+    "exp": "As páginas das temporadas do clube listam Rubens Salles (Sales) como técnico de 1930 a 1934.",
+    "src": [
+      {
+        "n": "Wikipedia (en) — 1932 São Paulo FC season",
+        "u": "https://en.wikipedia.org/wiki/1932_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "Wikipedia (en) — 1933 São Paulo FC season",
+        "u": "https://en.wikipedia.org/wiki/1933_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "Wikipedia (en) — 1934 São Paulo FC season",
+        "u": "https://en.wikipedia.org/wiki/1934_S%C3%A3o_Paulo_FC_season"
+      }
+    ],
+    "when": "1932–1934",
+    "ok": true
+  },
+  {
+    "id": "fund-077",
+    "q": "Em que colocação o São Paulo terminou o Campeonato Paulista de 1937?",
+    "a": [
+      "7º lugar",
+      "2º lugar",
+      "4º lugar",
+      "10º lugar"
+    ],
+    "c": 0,
+    "cat": "fund",
+    "d": 4,
+    "exp": "O clube fez 8 pontos em 9 jogos em 1937, ano em que ganhou o apelido Clube da Fé.",
+    "src": [
+      {
+        "n": "Wikipedia (en) — 1937 São Paulo FC season",
+        "u": "https://en.wikipedia.org/wiki/1937_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      }
+    ],
+    "when": "1937",
+    "ok": true
   }
 ];
