@@ -16,36 +16,32 @@ const star = (cx, cy, R, fill) => {
 
 const SHIELD = 'M10 28H90V70C90 98 68 114 50 122C32 114 10 98 10 70Z';
 
-// Sao Paulo FC crest: shield with a black SPFC banner, red | white | black body and 5 stars
-// (outer two yellow, inner three red). `stars:false` is the simplified version used on the discs.
+// Sao Paulo FC crest (as on the club's shield): white pentagon shield with a thin black outline,
+// a black banner with the white SPFC lettering, a red left triangle and a black right triangle
+// split by a white vertical stem, and 5 stars above (outer two yellow, the other three red).
+// `stars:false` is the simplified version used on the discs.
 function spfcCrest(stars) {
   const starsSvg = stars
     ? [
-        [15, 21, '#ffd21f'],
-        [32, 11.5, '#e30613'],
-        [50, 8, '#e30613'],
-        [68, 11.5, '#e30613'],
-        [85, 21, '#ffd21f'],
+        [225, 34, '#e8202a'],
+        [80, 94, '#ffd21f'],
+        [178, 94, '#e8202a'],
+        [274, 94, '#e8202a'],
+        [370, 94, '#ffd21f'],
       ]
-        .map(([x, y, c]) => star(x, y, 8, c))
+        .map(([x, y, c]) => star(x, y, 30, c))
         .join('')
     : '';
-  const vb = stars ? '0 0 100 126' : '4 24 92 102';
-  const [w, h] = stars ? [200, 252] : [184, 204];
+  const vb = stars ? '0 0 455 520' : '14 120 427 398';
+  const [w, h] = stars ? [182, 208] : [171, 159];
   return (
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb}" width="${w}" height="${h}">` +
-    `<defs><clipPath id="s"><path d="${SHIELD}"/></clipPath></defs>` +
     starsSvg +
-    `<path d="${SHIELD}" fill="none" stroke="rgba(0,0,0,.6)" stroke-width="7" stroke-linejoin="round"/>` +
-    `<g clip-path="url(#s)">` +
-    `<rect x="0" y="52" width="100" height="80" fill="#fff"/>` +
-    `<rect x="0" y="52" width="38" height="80" fill="#e30613"/>` +
-    `<rect x="62" y="52" width="40" height="80" fill="#111"/>` +
-    `<rect x="0" y="26" width="100" height="26" fill="#111"/>` +
-    `<rect x="0" y="52" width="100" height="2.2" fill="#fff"/>` +
-    `</g>` +
-    `<text x="50" y="47" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="22" fill="#fff" textLength="68" lengthAdjust="spacingAndGlyphs">SPFC</text>` +
-    `<path d="${SHIELD}" fill="none" stroke="#fff" stroke-width="3.4" stroke-linejoin="round"/>` +
+    `<path d="M28 128H427V270L227.5 510L28 270Z" fill="#fff" stroke="#111" stroke-width="5" stroke-linejoin="miter"/>` +
+    `<rect x="52" y="152" width="351" height="100" fill="#111"/>` +
+    `<text x="227.5" y="232" text-anchor="middle" font-family="Arial Black,Arial,Helvetica,sans-serif" font-weight="900" font-size="92" fill="#fff" textLength="318" lengthAdjust="spacingAndGlyphs">SPFC</text>` +
+    `<polygon points="53,272 198,272 198,442" fill="#e8202a"/>` +
+    `<polygon points="402,272 257,272 257,442" fill="#111"/>` +
     `</svg>`
   );
 }
