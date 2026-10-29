@@ -12,7 +12,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O primeiro título estadual veio em 1931, no segundo ano de vida do clube, com 45 pontos em 26 jogos.",
     "src": [
       {
@@ -38,7 +38,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "A FPF contabiliza 22 títulos paulistas do São Paulo, o último deles em 2021. O clube ainda tem o Supercampeonato Paulista de 2002 à parte.",
     "src": [
       {
@@ -68,7 +68,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "1",
+    "d": 1,
     "exp": "O São Paulo empatou em 0 a 0 no Allianz Parque e venceu por 2 a 0 no Morumbi, em 23 de maio de 2021.",
     "src": [
       {
@@ -94,7 +94,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "1",
+    "d": 1,
     "exp": "O argentino Hernán Crespo comandou o Tricolor na conquista do 22º Paulistão e foi eleito o melhor treinador da competição.",
     "src": [
       {
@@ -116,7 +116,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "A ida terminou 0 a 0 em 20 de maio; na volta, no Morumbi, o São Paulo ganhou por 2 a 0. Ambos os jogos tiveram portões fechados por causa da pandemia.",
     "src": [
       {
@@ -138,7 +138,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "As duas partidas da decisão de 2021 foram realizadas sem público devido à pandemia de Covid-19.",
     "src": [
       {
@@ -160,7 +160,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O São Paulo goleou o Corinthians por 4 a 1, no Estádio Alfredo Schürig, no último jogo do campeonato de 1931.",
     "src": [
       {
@@ -186,7 +186,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Armandinho marcou duas vezes; Friedenreich e Araken Patusca completaram o placar.",
     "src": [
       {
@@ -208,7 +208,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O Palestra Itália (atual Palmeiras) ficou em segundo; Santos e Atlético Santista completaram as primeiras colocações.",
     "src": [
       {
@@ -230,7 +230,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "O artilheiro foi Feitiço, do Santos, com 39 gols, ainda que o título tenha ficado com o São Paulo.",
     "src": [
       {
@@ -252,7 +252,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "Ex-jogador do Paulistano, Rubens Salles foi o primeiro treinador campeão do São Paulo.",
     "src": [
       {
@@ -278,7 +278,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "O São Paulo foi campeão com 45 pontos em 26 jogos (20 vitórias, 5 empates e 1 derrota).",
     "src": [
       {
@@ -300,7 +300,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "Em 1930 o clube foi vice-campeão, com 41 pontos em 26 jogos, atrás do Corinthians.",
     "src": [
       {
@@ -326,7 +326,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O Corinthians foi campeão invicto, com 16 pontos contra 14 do São Paulo. A decisão foi encerrada em abril de 1939.",
     "src": [
       {
@@ -352,7 +352,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "O jogo foi suspenso com o São Paulo vencendo por 1 a 0 e retomado dois dias depois, quando o Corinthians empatou e garantiu o título pela vantagem de pontos.",
     "src": [
       {
@@ -374,7 +374,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "Em 1943 o São Paulo conquistou seu 2º título paulista, o primeiro desde a refundação de 1935; o Corinthians ficou em segundo.",
     "src": [
       {
@@ -396,7 +396,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "No Pacaembu, o 0 a 0 com o Palmeiras bastou ao São Paulo, já que o rival precisava vencer para forçar um triangular.",
     "src": [
       {
@@ -422,7 +422,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "Joreca (Jorge Gomes de Lima) comandou o time de Leônidas, Sastre e Remo na conquista de 1943.",
     "src": [
       {
@@ -444,7 +444,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "Como três clubes brigavam pelo título, dizia-se que seria decidido na moeda; o São Paulo só ganharia se ela ficasse de pé, o que virou a lenda do título de 1943.",
     "src": [
       {
@@ -470,7 +470,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "No Pacaembu, gols de Luizinho (2) e Leônidas da Silva garantiram o 3º título paulista do São Paulo.",
     "src": [
       {
@@ -492,7 +492,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Leônidas marcou quatro vezes na maior goleada daquele Campeonato Paulista.",
     "src": [
       {
@@ -514,7 +514,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O São Paulo foi campeão de 1946 sem perder, com 17 vitórias e 3 empates em 20 jogos.",
     "src": [
       {
@@ -536,7 +536,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Foram 17 vitórias e 3 empates em 20 jogos, com 62 gols marcados e 20 sofridos.",
     "src": [
       {
@@ -558,7 +558,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O São Paulo somou 37 pontos e o Corinthians, 36; a Portuguesa foi terceira, com 28.",
     "src": [
       {
@@ -580,7 +580,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Renganeschi marcou o gol da vitória sobre o Palmeiras na reta final do campeonato invicto de 1946.",
     "src": [
       {
@@ -602,7 +602,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "Vicente Feola comandou o Tricolor nos títulos paulistas de 1948 e 1949.",
     "src": [
       {
@@ -628,7 +628,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "Em 18 de dezembro de 1948, no Pacaembu, Ponce de León fez dois; Leônidas e Remo fizeram os demais.",
     "src": [
       {
@@ -650,7 +650,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "Teixeirinha, Friaça (2) e Alemãozinho marcaram os gols do 6º título paulista do clube.",
     "src": [
       {
@@ -672,7 +672,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "Friaça foi o goleador do campeonato de 1949 e figura entre os craques daquele Tricolor.",
     "src": [
       {
@@ -694,7 +694,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "A vitória por 3 a 1 na Vila Belmiro garantiu o título na véspera do IV Centenário da capital paulista, daí o apelido de \"campeão do IV Centenário\".",
     "src": [
       {
@@ -720,7 +720,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O jogo de 24 de janeiro de 1954 foi na Vila Belmiro, com gols de Maurinho, Albella e Negri.",
     "src": [
       {
@@ -742,7 +742,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Jim Lopes comandou o time de Poy, De Sordi, Maurinho e Teixeirinha, que fez 50 pontos em 28 jogos.",
     "src": [
       {
@@ -764,7 +764,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "Béla Guttmann treinou o Tricolor no 8º título estadual, conquistado com o reforço do veterano Zizinho.",
     "src": [
       {
@@ -790,7 +790,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Em 29 de dezembro de 1957, no Pacaembu, Amaury, Canhoteiro e Maurinho marcaram os gols do São Paulo.",
     "src": [
       {
@@ -812,7 +812,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "O título de 1970 encerrou um jejum de treze anos no Campeonato Paulista.",
     "src": [
       {
@@ -838,7 +838,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "Em Campinas, Toninho Guerreiro e Paulo marcaram os gols do 9º título paulista.",
     "src": [
       {
@@ -860,7 +860,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "Zezé Moreira comandou o time de Toninho Guerreiro, Gérson e Terto no 9º título estadual.",
     "src": [
       {
@@ -882,7 +882,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Toninho Guerreiro foi o goleador do campeonato do título que encerrou o jejum de 13 anos.",
     "src": [
       {
@@ -904,7 +904,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "Toninho Guerreiro marcou aos 5 minutos; o gol de empate de Leivinha foi anulado por mão pelo árbitro Armando Marques.",
     "src": [
       {
@@ -926,7 +926,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "O gol saiu logo aos 5 minutos do primeiro tempo, no Morumbi.",
     "src": [
       {
@@ -948,7 +948,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "Osvaldo Brandão comandou o time de Gérson, Pedro Rocha e Pablo Forlán.",
     "src": [
       {
@@ -970,7 +970,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "O empate sem gols no Pacaembu, em 3 de setembro de 1972, deu o título ao Palmeiras; o São Paulo, de Toninho Guerreiro (17 gols), foi vice.",
     "src": [
       {
@@ -992,7 +992,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "A final de 26 de agosto de 1973 acabou 0 a 0 e a disputa de pênaltis foi encerrada antes do fim; a FPF proclamou Santos e Portuguesa campeões.",
     "src": [
       {
@@ -1014,7 +1014,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O São Paulo ganhou a ida por 1 a 0 (Pedro Rocha), perdeu a volta pelo mesmo placar e venceu a disputa de pênaltis por 3 a 0.",
     "src": [
       {
@@ -1036,7 +1036,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Depois de 1 a 0 para cada lado, o goleiro Waldir Peres foi destaque na decisão por pênaltis.",
     "src": [
       {
@@ -1058,7 +1058,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Serginho Chulapa terminou como goleador do campeonato do 11º título paulista.",
     "src": [
       {
@@ -1080,7 +1080,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "José Poy comandou o Tricolor naquele título, sobre a Portuguesa.",
     "src": [
       {
@@ -1102,7 +1102,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O São Paulo venceu os dois jogos por 1 a 0, no Morumbi, e conquistou o 12º título estadual.",
     "src": [
       {
@@ -1124,7 +1124,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Os dois jogos, em 16 e 19 de novembro de 1980, terminaram 1 a 0 para o São Paulo.",
     "src": [
       {
@@ -1146,7 +1146,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Carlos Alberto Silva comandou o Tricolor no título sobre o Santos de Pepe.",
     "src": [
       {
@@ -1168,7 +1168,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "Depois do 1 a 1 na ida, o São Paulo venceu por 2 a 0 no Morumbi, com gols de Renato e Serginho Chulapa.",
     "src": [
       {
@@ -1190,7 +1190,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Formiga comandou o Tricolor no 13º título estadual.",
     "src": [
       {
@@ -1212,7 +1212,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O Corinthians venceu por 1 a 0 e 3 a 1, em 8 e 12 de dezembro de 1982.",
     "src": [
       {
@@ -1234,7 +1234,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "1",
+    "d": 1,
     "exp": "O time jovem de Cilinho, com Careca, Müller e Silas, foi comparado à banda Menudo.",
     "src": [
       {
@@ -1256,7 +1256,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O 14º título estadual saiu em 22 de dezembro de 1985, depois de 3 a 1 na ida, no Morumbi.",
     "src": [
       {
@@ -1278,7 +1278,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "Careca foi o goleador do campeonato do 14º título paulista do Tricolor.",
     "src": [
       {
@@ -1300,7 +1300,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "Cilinho comandou os \"Menudos do Morumbi\" na conquista de 1985.",
     "src": [
       {
@@ -1322,7 +1322,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "A Inter de Limeira foi o primeiro time do interior campeão paulista; o São Paulo ficou em 6º, com 42 pontos, apesar de ser campeão brasileiro no fim do ano.",
     "src": [
       {
@@ -1348,7 +1348,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "1",
+    "d": 1,
     "exp": "Depois de 2 a 1 na ida, o 0 a 0 da volta deu o 15º título ao Tricolor de Cilinho.",
     "src": [
       {
@@ -1370,7 +1370,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "O São Paulo venceu por 1 a 0 (gol contra) e empatou em 0 a 0; o campeonato recebeu o nome de Copa Centenário da República.",
     "src": [
       {
@@ -1392,7 +1392,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "O São Paulo venceu por 1 a 0 diante de 50.366 pessoas; no jogo de volta, o 0 a 0 deu o título ao Tricolor.",
     "src": [
       {
@@ -1414,7 +1414,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "A edição de 1989 foi batizada de Copa Centenário da República, em alusão aos cem anos da República.",
     "src": [
       {
@@ -1436,7 +1436,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Carlos Alberto Silva comandou o time de Raí, Ricardo Rocha e Bobô no 16º título estadual.",
     "src": [
       {
@@ -1458,7 +1458,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "1",
+    "d": 1,
     "exp": "Em 8 de dezembro de 1991, no Morumbi, Raí fez os três; o 0 a 0 da volta deu o 17º título.",
     "src": [
       {
@@ -1480,7 +1480,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "Raí terminou a competição de 1991 como artilheiro, com 20 gols.",
     "src": [
       {
@@ -1502,7 +1502,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "1",
+    "d": 1,
     "exp": "Telê Santana ganhou o bicampeonato estadual (1991 e 1992) à frente do Tricolor.",
     "src": [
       {
@@ -1528,7 +1528,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "1",
+    "d": 1,
     "exp": "O São Paulo venceu por 4 a 2 na ida e por 2 a 1 na volta, em 20 de dezembro de 1992.",
     "src": [
       {
@@ -1550,7 +1550,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Foram 4 a 2 na primeira partida e 2 a 1 na segunda.",
     "src": [
       {
@@ -1572,7 +1572,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Depois de perder a ida por 2 a 1, o São Paulo venceu por 3 a 1 em 10 de maio de 1998 e conquistou o 19º título.",
     "src": [
       {
@@ -1598,7 +1598,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "Nelsinho Baptista comandou o Tricolor na final contra o Corinthians.",
     "src": [
       {
@@ -1620,7 +1620,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O São Paulo venceu por 1 a 0 na ida e empatou por 2 a 2 na volta (3 a 2 no agregado), conquistando o 20º título.",
     "src": [
       {
@@ -1642,7 +1642,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "França foi o goleador do campeonato que deu o 20º título estadual ao Tricolor.",
     "src": [
       {
@@ -1664,7 +1664,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "4",
+    "d": 4,
     "exp": "O título de 2000 foi o último de Raí no clube, segundo a história do São Paulo.",
     "src": [
       {
@@ -1686,7 +1686,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O Supercampeonato foi disputado em maio de 2002 por quatro clubes; o São Paulo bateu o Ituano por 2 a 2 e 4 a 1 na final.",
     "src": [
       {
@@ -1712,7 +1712,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "O Ituano chegou à final e perdeu por 6 a 3 no agregado. Palmeiras e Corinthians foram eliminados nas semifinais.",
     "src": [
       {
@@ -1734,7 +1734,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "O torneio teve só quatro participantes: Ituano, Corinthians, São Paulo e Palmeiras.",
     "src": [
       {
@@ -1756,7 +1756,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O 21º título foi decidido em liga de pontos corridos; o São Paulo somou 45 pontos em 19 jogos.",
     "src": [
       {
@@ -1778,7 +1778,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "O jogo foi no Estádio Wilson Fernandes de Barros, em Mogi Mirim, e o título veio duas rodadas antes do fim.",
     "src": [
       {
@@ -1800,7 +1800,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "1",
+    "d": 1,
     "exp": "O São Paulo foi vice-campeão em 2019, perdendo a final para o Corinthians, em abril daquele ano.",
     "src": [
       {
@@ -1826,7 +1826,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "1",
+    "d": 1,
     "exp": "O Palmeiras ganhou por 3 a 1 no Morumbi e por 4 a 0 no Allianz Parque.",
     "src": [
       {
@@ -1848,7 +1848,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "Após 0 a 0, o Água Santa venceu por 6 a 5 nos pênaltis e chegou à final contra o Palmeiras.",
     "src": [
       {
@@ -1870,7 +1870,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "O São Paulo, que liderou o Grupo D, empatou por 1 a 1 e perdeu nos pênaltis.",
     "src": [
       {
@@ -1892,7 +1892,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "O Santos venceu o jogo-desempate por 4 a 2, em 3 de janeiro de 1957, e o jornalista Thomaz Mazzoni batizou a rivalidade de San-São.",
     "src": [
       {
@@ -1918,7 +1918,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "1",
+    "d": 1,
     "exp": "Pelé, do Santos, marcou 58 gols; o São Paulo ficou em 2º, com 60 pontos e a melhor defesa.",
     "src": [
       {
@@ -1940,7 +1940,7 @@ export default [
     ],
     "c": 3,
     "cat": "paul",
-    "d": "3",
+    "d": 3,
     "exp": "No Pacaembu, a chuva transformou o campo em lamaçal; o empate bastou ao Palmeiras e o São Paulo foi vice.",
     "src": [
       {
@@ -1962,7 +1962,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "O Palmeiras, de Evair (23 gols), levou o 20º título; o São Paulo terminou com 41 pontos em 30 jogos.",
     "src": [
       {
@@ -1984,7 +1984,7 @@ export default [
     ],
     "c": 1,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "Em 1990, o Bragantino bateu o Novorizontino numa \"final caipira\"; o São Paulo ficou em 15º.",
     "src": [
       {
@@ -2006,7 +2006,7 @@ export default [
     ],
     "c": 0,
     "cat": "paul",
-    "d": "1",
+    "d": 1,
     "exp": "O Corinthians tem 31 títulos, o Palmeiras 27, e São Paulo e Santos 22 cada.",
     "src": [
       {
@@ -2031,7 +2031,7 @@ export default [
     ],
     "c": 2,
     "cat": "paul",
-    "d": "2",
+    "d": 2,
     "exp": "São Paulo e Santos aparecem empatados com 22 títulos estaduais cada.",
     "src": [
       {

@@ -8,7 +8,7 @@ import { MODES, LADDER, SAFE_STEPS, TIME_ATTACK, pointsFor, THEMES } from './con
 import { prizeOnWrong, prizeOnStop } from './prizes.js';
 import { rngFrom, hashSeed } from './rng.js';
 import { drawQuestion, markUsed, presentOrder, viewOf, newSelState } from './select.js';
-import { fiftyFifty, crowdVote, phoneHint } from './lifelines.js';
+import { fiftyFifty, crowdVote, offerIdols, idolHint } from './lifelines.js';
 
 const byId = (bank) => {
   if (!bank._idx || bank._idxLen !== bank.length) {
@@ -126,13 +126,21 @@ export function useCrowd(st, bank) {
   st.lifelines.crowd--;
   return st.aids.crowd;
 }
+/** Uses the lifeline: offers 3 idols (era/role matched); then call callIdol() with the chosen one */
 export function usePhone(st, bank) {
   if (!canUse(st, 'phone')) return null;
   const v = currentView(st, bank);
-  st.aids.phone = phoneHint(v, v.d, st.hidden, rngFrom(st));
+  st.aids.phone = { offer: offerIdols(v, rngFrom(st)), hint: null };
   st.lifelines.phone--;
   return st.aids.phone;
 }
+export function callIdol(st, bank, idolId) {
+  const ph = st.aids.phone;
+  if (!ph || ph.hint || !ph.offer.includes(idolId)) return null;
+  ph.hint = idolHint(currentView(st, bank), idolId, rngFrom(st));
+  return ph.hint;
+}
+
 /** Swap: a NEW question of the same step / difficulty / value replaces the current one (old one stays "used"). */
 export function useSwap(st, bank) {
   if (!canUse(st, 'swap')) return false;

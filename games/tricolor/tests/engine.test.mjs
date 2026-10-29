@@ -5,7 +5,9 @@ import { validateBank } from '../questions/schema.js';
 import { LADDER, SAFE_STEPS, MODES, mainDiff, recentLimit, THEMES } from '../config.js';
 import { prizeOnWrong, prizeOnStop, money } from '../prizes.js';
 import { createSession, answer, next, stop, cur, currentView, useFifty, useCrowd, usePhone, useSwap, summary, serialize, restore, dailyPlan, scoreOf } from '../session.js';
-import { crowdVote, fiftyFifty, phoneHint, maskedClue } from '../lifelines.js';
+import { crowdVote, fiftyFifty, offerIdols, idolHint, clueOf, HINT_VARIANTS } from '../lifelines.js';
+import { IDOLS, POS } from '../idols.js';
+import STRINGS from '../strings.js';
 import { drawQuestion, newSelState, markUsed, presentOrder, viewOf } from '../select.js';
 import { rngFrom, hashSeed, nextRand } from '../rng.js';
 
@@ -167,46 +169,44 @@ test('lifelines: crowd sums to 100, respects hidden, reliability falls with diff
   assert.ok(stat[4].avg > 30 && stat[4].avg < 62, JSON.stringify(stat));
 });
 
-test('lifelines: phone hint is truthful, never invents and does not always give the answer away', () => {
-  const rnd = seeded(5);
-  const kinds = { 1: {}, 4: {} };
-  for (const d of [1, 2, 3, 4]) {
-    for (let i = 0; i < 600; i++) {
-      const q = bank[i % bank.length];
-      const v = viewOf(q, [0, 1, 2, 3].sort(() => rnd() - 0.5));
-      const hidden = i % 6 === 0 ? [0, 1, 2, 3].filter((x) => x !== v.c).slice(0, 2) : [];
-      const h = phoneHint(v, d, hidden, rnd);
-      kinds[d] && (kinds[d][h.kind] = (kinds[d][h.kind] || 0) + 1);
-      if (h.kind === 'sure' || h.kind === 'lean') assert.deepEqual(h.letters, [v.c]);
-      if (h.kind === 'narrow') {
-        assert.equal(h.letters.length, 2);
-        assert.ok(h.letters.includes(v.c));
-        assert.ok(h.letters.every((l) => !hidden.includes(l)));
-      }
-      if (h.kind === 'exclude') {
-        assert.equal(h.letters.length, 1);
-        assert.notEqual(h.letters[0], v.c);
-        assert.ok(!hidden.includes(h.letters[0]));
-      }
-      if (h.kind === 'context') {
-        assert.ok(v.exp.includes(h.quote.replace(/…/g, '').trim().split('…')[0].trim().slice(0, 8)) || true);
-        const ans = v.a[v.c];
-        assert.ok(!h.quote.includes(ans), 'clue leaks the answer: ' + h.quote);
-      }
-      assert.ok(h.letters.every((l) => l >= 0 && l <= 3));
-    }
+test('idols: 15 valid entries', () => {
+  assert.equal(IDOLS.length, 15);
+  assert.equal(new Set(IDOLS.map((i) => i.id)).size, 15);
+  for (const i of IDOLS) {
+    assert.ok(i.name && POS[i.pos] && /\d{4}/.test(i.years) && i.from <= i.to && i.initials.length >= 2 && /^https:\/\/pt\.wikipedia\.org\//.test(i.url), i.id);
   }
-  assert.ok((kinds[4].sure || 0) < 200, 'd4 gives the answer away too often');
-  assert.ok((kinds[1].sure || 0) > 250, 'd1 should often be confident');
-  assert.ok(Object.keys(kinds[4]).length >= 4);
 });
 
-test('maskedClue masks the answer and only uses text of the explanation', () => {
-  const v = { q: 'Em que ano?', a: ['1990', '1991', '1992', '1993'], c: 2, exp: 'O clube conquistou o título continental em 1992. A final foi disputada em dois jogos.' };
-  const c = maskedClue(v);
-  assert.ok(c && !c.includes('1992') && c.includes('…'));
-  const v2 = { q: '?', a: ['Telê Santana', 'Muricy Ramalho', 'Rogério Ceni', 'Raí'], c: 0, exp: 'Telê Santana foi ele.' };
-  assert.equal(maskedClue(v2), null, 'too little left → no clue');
+test('phone: 3 distinct idols offered, hint ALWAYS points to the correct letter and text, clue comes from exp', () => {
+  const rnd = seeded(5);
+  for (let i = 0; i < 800; i++) {
+    const q = bank[i % bank.length];
+    const v = viewOf(q, [0, 1, 2, 3].sort(() => rnd() - 0.5));
+    const off = offerIdols(v, rnd);
+    assert.equal(new Set(off).size, 3);
+    off.forEach((id) => assert.ok(IDOLS.some((x) => x.id === id)));
+    const h = idolHint(v, off[i % 3], rnd);
+    assert.equal(h.letter, v.c);
+    assert.equal(h.answer, v.a[v.c]);
+    assert.ok(h.variant >= 0 && h.variant < HINT_VARIANTS);
+    if (h.clue) assert.ok(v.exp.startsWith(h.clue.slice(0, 20)));
+  }
+  const coachQ = { ...bank[0], cat: 'tecnicos' };
+  let coaches = 0;
+  for (let i = 0; i < 100; i++) coaches += offerIdols(viewOf(coachQ, [0, 1, 2, 3]), rnd).some((id) => IDOLS.find((x) => x.id === id).coach) ? 1 : 0;
+  assert.equal(coaches, 100);
+  const eraQ = { ...bank[0], when: '1943' };
+  assert.ok(offerIdols(viewOf(eraQ, [0, 1, 2, 3]), seeded(1)).includes('leonidas'));
+  assert.equal(clueOf(''), null);
+});
+
+test('phone strings exist in pt/en/es with the same number of variants and placeholders', () => {
+  for (const lang of ['pt', 'en', 'es'])
+    for (const tone of ['calm', 'direct', 'vet'])
+      for (let n = 0; n < HINT_VARIANTS; n++) {
+        const s = STRINGS[lang][`hint.${tone}.${n}`];
+        assert.ok(s && s.includes('{letter}') && s.includes('{ans}'), `${lang} hint.${tone}.${n}`);
+      }
 });
 
 test('swap: same step & difficulty, new question, old one not reused, lifelines still work', () => {
