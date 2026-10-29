@@ -60,8 +60,9 @@
 .pk-ci-br { right: 0.2em; bottom: 0.17em; transform: rotate(180deg); }
 .pk-cmid { position: absolute; inset: 0; display: grid; place-items: center; }
 .pk-cmid i { font-style: normal; font-size: 2.1em; opacity: 0.95; }
-.pk-cmid.is-face { background: linear-gradient(180deg, transparent 22%, color-mix(in srgb, var(--ink) 9%, transparent) 22% 78%, transparent 78%); }
-.pk-cmid.is-face em { position: absolute; font-style: normal; font-size: 2.35em; font-family: Georgia, 'Times New Roman', serif; opacity: 0.18; font-weight: 900; }
+.pk-cmid.is-face { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.1em; margin: 0.9em 0.55em; border-radius: 0.3em; border: 1.5px solid color-mix(in srgb, var(--ink) 28%, transparent); background: linear-gradient(160deg, color-mix(in srgb, var(--ink) 9%, transparent), color-mix(in srgb, var(--ink) 3%, transparent)); inset: 0; }
+.pk-cmid.is-face em { font-style: normal; font-size: 1.9em; font-family: Georgia, 'Times New Roman', serif; font-weight: 900; line-height: 1; }
+.pk-cmid.is-face i { font-size: 1.15em; }
 .pk-card.back {
   background:
     radial-gradient(circle at 50% 50%, var(--bk3, #e8c76a) 0 7%, transparent 8%),
@@ -178,7 +179,7 @@
 .pk-handname { position: absolute; top: 70px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 10px; font-weight: 800; padding: 1px 7px; border-radius: 99px; background: #000c; color: var(--pk-gold); }
 
 /* hero */
-.pk-hero-area { position: absolute; left: 0; right: 0; bottom: 8.5%; height: 27%; display: flex; justify-content: center; align-items: flex-end; pointer-events: none; z-index: 3; }
+.pk-hero-area { position: absolute; left: 0; right: 0; bottom: 10.5%; height: 27%; display: flex; justify-content: center; align-items: flex-end; pointer-events: none; z-index: 3; }
 .pk-hero-cards { display: flex; margin-bottom: 0; padding-bottom: 0; transform: translateY(2px); }
 .pk-hero-cards .pk-card { margin: 0 -9px; filter: drop-shadow(0 6px 10px #000a); transform-origin: 50% 100%; }
 .pk-hero-cards .pk-card:nth-child(1) { transform: rotate(-6deg); }

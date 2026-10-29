@@ -896,7 +896,7 @@ export async function mount(root, ctx) {
 
   // minimal card flights (fixed-position ghost, ignored with reduced motion)
   function ghost(card, w) {
-    const el = cardEl(card, { size: w, faceDown: !card, lang });
+    const el = cardEl(card, { size: w, faceDown: !card, lang, back: 'emerald' });
     el.removeAttribute('role');
     el.style.position = 'fixed';
     el.style.left = '0';

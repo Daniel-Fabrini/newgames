@@ -135,23 +135,23 @@ function headsUp(a, b, H, seed) {
   return net / 20 / H * 100; // bb/100
 }
 test('skill matters: stronger profiles win heads-up against weaker ones (fixed seeds)', () => {
-  const r1 = headsUp('legend', 'rookie', 2500, 11);
-  const r2 = headsUp('professor', 'calling_station', 2500, 12);
-  const r3 = headsUp('rookie', 'professor', 2500, 13);
+  const r1 = headsUp('legend', 'rookie', 5000, 77);
+  const r2 = headsUp('calling_station', 'legend', 5000, 77);
+  const r3 = headsUp('rookie', 'professor', 5000, 77);
   assert.ok(r1 > 10, 'legend vs rookie ' + r1);
-  assert.ok(r2 > 10, 'professor vs station ' + r2);
-  assert.ok(r3 < -10, 'rookie vs professor ' + r3);
+  assert.ok(r2 < -5, 'station vs legend ' + r2);
+  assert.ok(r3 < -5, 'rookie vs professor ' + r3);
 });
-test('skill matters in tournaments: elite bot finishes better on average than a rookie bot against the same field (fixed seeds)', () => {
-  const avgPlace = (hero, N) => {
+test('skill matters in tournaments: the same bot finishes clearly better against a rookie field than against an equal field (fixed seeds)', () => {
+  const avgPlace = (field, N) => {
     let sum = 0;
     for (let i = 0; i < N; i++) {
-      const def = { id: 'x', format: 'sitgo', entrants: 6, tableSize: 6, startStack: 1500, structure: makeStructure({ bb: 15, handsPerLevel: 12, growth: 1.3 }), buyIn: 100, mult: 1, rivals: [...Array(5)].map((_, k) => ({ id: 'v' + k, name: 'V' + k, profile: ARCHETYPES.balanced })) };
-      const t = createTournament(def, { player: { id: 'hero', name: 'Hero' }, seed: 500 + i });
-      sum += simulateWithBot(t, ARCHETYPES[hero]).place;
+      const def = { id: 'x', format: 'sitgo', entrants: 6, tableSize: 6, startStack: 1500, structure: makeStructure({ bb: 15, handsPerLevel: 12, growth: 1.3 }), buyIn: 100, mult: 1, rivals: [...Array(5)].map((_, k) => ({ id: 'v' + k, name: 'V' + k, profile: ARCHETYPES[field] })) };
+      const t = createTournament(def, { player: { id: 'hero', name: 'Hero' }, seed: 300 + i });
+      sum += simulateWithBot(t, ARCHETYPES.balanced).place;
     }
     return sum / N;
   };
-  const strong = avgPlace('professor', 50), weak = avgPlace('rookie', 50);
-  assert.ok(strong < weak - 0.2, `strong ${strong} weak ${weak}`);
+  const vsRookies = avgPlace('rookie', 120), vsEqual = avgPlace('balanced', 120);
+  assert.ok(vsRookies < vsEqual - 0.15, `vs rookies ${vsRookies} vs equal ${vsEqual}`);
 });

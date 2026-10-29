@@ -15,7 +15,7 @@ export function trophySVG(tier = 'intl', { locked = false, size = 120 } = {}) {
 <defs><linearGradient id="${g}a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset=".55" stop-color="${c2}"/><stop offset="1" stop-color="${c3}"/></linearGradient>
 <linearGradient id="${g}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2b12"/><stop offset="1" stop-color="#150f06"/></linearGradient>
 <radialGradient id="${g}g" cx=".5" cy=".4" r=".6"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
-${world ? `<g opacity=".9" fill="none" stroke="url(#${g}a)" stroke-width="3" stroke-linecap="round"><path d="M22 96C6 80 6 50 24 30M98 96c16-16 16-46-2-66"/></g><g fill="url(#${g}a)">${[0, 1, 2, 3, 4].map((i) => `<ellipse cx="${13 + i * 2.2}" cy="${42 + i * 11}" rx="3.5" ry="7" transform="rotate(${-30 + i * 14} ${13 + i * 2.2} ${42 + i * 11})"/><ellipse cx="${107 - i * 2.2}" cy="${42 + i * 11}" rx="3.5" ry="7" transform="rotate(${30 - i * 14} ${107 - i * 2.2} ${42 + i * 11})"/>`).join('')}</g>` : ''}
+${world ? `<g fill="url(#${g}a)" opacity=".95">${Array.from({ length: 8 }, (_, i) => { const phi = 14 + i * 17; const r = (phi * Math.PI) / 180; const y = 62 + 44 * Math.cos(r); const xl = 60 - 50 * Math.sin(r); const xr = 60 + 50 * Math.sin(r); const rot = 90 - phi - 22; return `<ellipse cx="${xl.toFixed(1)}" cy="${y.toFixed(1)}" rx="3.6" ry="8.5" transform="rotate(${rot.toFixed(1)} ${xl.toFixed(1)} ${y.toFixed(1)})"/><ellipse cx="${xr.toFixed(1)}" cy="${y.toFixed(1)}" rx="3.6" ry="8.5" transform="rotate(${(-rot).toFixed(1)} ${xr.toFixed(1)} ${y.toFixed(1)})"/>`; }).join('')}</g>` : ''}
 <path d="M34 16h52v8c0 22-10 38-26 42-16-4-26-20-26-42z" fill="url(#${g}a)"/>
 <path d="M34 24H20c0 18 8 28 20 30M86 24h14c0 18-8 28-20 30" fill="none" stroke="url(#${g}a)" stroke-width="5" stroke-linecap="round"/>
 <path d="M52 66h16v14H52z" fill="url(#${g}a)"/>
@@ -28,8 +28,22 @@ ${world ? `<g opacity=".9" fill="none" stroke="url(#${g}a)" stroke-width="3" str
 
 export function laurelSVG(size = 80) {
   const g = 'pkl' + uid++;
+  let leaves = '';
+  const n = 9;
+  for (let i = 0; i < n; i++) {
+    const phi = 8 + i * (140 / (n - 1));
+    const r = (phi * Math.PI) / 180;
+    const y = 44 + 27 * Math.cos(r);
+    const xl = 40 - 27 * Math.sin(r);
+    const xr = 40 + 27 * Math.sin(r);
+    const rot = 90 - phi - 22;
+    const ry = 8.5 - i * 0.35;
+    leaves += `<ellipse cx="${xl.toFixed(1)}" cy="${y.toFixed(1)}" rx="3.4" ry="${ry.toFixed(1)}" transform="rotate(${rot.toFixed(1)} ${xl.toFixed(1)} ${y.toFixed(1)})"/>`;
+    leaves += `<ellipse cx="${xr.toFixed(1)}" cy="${y.toFixed(1)}" rx="3.4" ry="${ry.toFixed(1)}" transform="rotate(${(-rot).toFixed(1)} ${xr.toFixed(1)} ${y.toFixed(1)})"/>`;
+  }
   return `<svg width="${size}" height="${size}" viewBox="0 0 80 80" aria-hidden="true"><defs><linearGradient id="${g}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset="1" stop-color="#c9971c"/></linearGradient></defs>
-<g fill="url(#${g})">${[0, 1, 2, 3, 4, 5].map((i) => `<ellipse cx="${14 + i * 1.5}" cy="${56 - i * 8}" rx="3" ry="6.500" transform="rotate(${-35 + i * 12} ${14 + i * 1.5} ${56 - i * 8})"/><ellipse cx="${66 - i * 1.5}" cy="${56 - i * 8}" rx="3" ry="6.500" transform="rotate(${35 - i * 12} ${66 - i * 1.5} ${56 - i * 8})"/>`).join('')}</g></svg>`;
+<path d="M40 74C20 70 9 56 10 34M40 74c20-4 31-18 30-40" fill="none" stroke="url(#${g})" stroke-width="2.2" stroke-linecap="round" opacity=".9"/>
+<g fill="url(#${g})">${leaves}</g><path d="M40 28l3 6.500 7 .9-5.200 4.800 1.300 7L40 43.700 33.900 47.200l1.300-7L30 35.400l7-.9z" fill="url(#${g})"/></svg>`;
 }
 
 /** Circuit emblem (badge). id: local|regional|intl|world|quick */
