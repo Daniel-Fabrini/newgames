@@ -22,7 +22,7 @@ function straightTop(mask) {
   // add ace-low bit
   const m = (mask << 1) | (mask >> 12 & 1);
   for (let top = 12; top >= 3; top--) {
-    const need = 0x1F << (top - 3 + 1); // bits shifted by 1 because of ace-low bit 0
+    const need = 0x1F << (top - 3); // ranks top-4..top live at bits top-3..top+1 (bit 0 = ace-low)
     if ((m & need) === need) return top;
   }
   return -1;

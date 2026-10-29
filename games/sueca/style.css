@@ -1,0 +1,242 @@
+/* Sueca — deep green felt, midnight surround, gold accents. Everything is scoped under .g-sueca. */
+.g-sueca {
+  --sq-gold: #f3c24a;
+  --sq-gold-d: #c9971c;
+  --sq-us: #f3c24a;
+  --sq-them: #6fb2ff;
+  --sq-ink: #f6eedb;
+  --sq-mute: rgba(246, 238, 219, 0.62);
+  --sq-panel: rgba(10, 12, 17, 0.78);
+  background: radial-gradient(120% 70% at 50% 0%, #121826 0%, #090b11 60%, #06070b 100%);
+  color: var(--sq-ink);
+  font-family: var(--dc-font, 'Nunito', system-ui, sans-serif);
+}
+.g-sueca * { box-sizing: border-box; }
+.g-sueca button { font-family: inherit; }
+
+/* ---------------- menu ---------------- */
+.g-sueca-menu {
+  position: absolute; inset: 0; overflow-y: auto; padding: 22px 18px calc(24px + var(--safe-bottom, 0px));
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.g-sueca-fan { display: flex; justify-content: center; align-items: flex-end; height: 128px; margin-top: 6px; }
+.g-sueca-fan .dc { margin: 0 -17px; transform-origin: 50% 100%; box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5); }
+.g-sueca-title {
+  margin: 8px 0 0; font-size: 40px; font-weight: 900; letter-spacing: 0.04em; line-height: 1;
+  background: linear-gradient(180deg, #fff1b8 0%, #f3c24a 48%, #c9971c 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(243, 194, 74, 0.25));
+}
+.g-sueca-tag { margin: 0 0 12px; color: var(--sq-mute); font-size: 14px; text-align: center; }
+.g-sueca-mlist { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 10px; }
+.g-sueca-mbtn {
+  display: flex; align-items: center; gap: 14px; width: 100%; padding: 14px 16px; border-radius: 16px; cursor: pointer; text-align: left;
+  color: var(--sq-ink); background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)); border: 1px solid rgba(243, 194, 74, 0.28);
+  transition: transform 0.12s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.g-sueca-mbtn:hover { border-color: rgba(243, 194, 74, 0.6); }
+.g-sueca-mbtn:active { transform: scale(0.985); }
+.g-sueca-mbtn:focus-visible, .g-sueca-link:focus-visible, .g-sueca-tool:focus-visible, .g-sueca-pbtn:focus-visible { outline: 3px solid var(--sq-gold); outline-offset: 2px; }
+.g-sueca-mbtn.primary { background: linear-gradient(180deg, #f7d774, #c9971c); border-color: transparent; color: #1b1203; box-shadow: 0 6px 18px rgba(201, 151, 28, 0.35); }
+.g-sueca-mico { width: 34px; height: 34px; display: grid; place-items: center; flex: none; border-radius: 10px; background: rgba(243, 194, 74, 0.12); color: var(--sq-gold); }
+.g-sueca-mbtn.primary .g-sueca-mico { background: rgba(0, 0, 0, 0.12); color: #1b1203; }
+.g-sueca-mico svg { width: 22px; height: 22px; }
+.g-sueca-mtx { display: flex; flex-direction: column; min-width: 0; }
+.g-sueca-mtx b { font-size: 16px; font-weight: 900; }
+.g-sueca-mtx small { font-size: 12.5px; opacity: 0.72; margin-top: 1px; }
+.g-sueca-mlinks { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; justify-content: center; }
+.g-sueca-link {
+  display: inline-flex; align-items: center; gap: 7px; padding: 9px 14px; min-height: 44px; border-radius: 999px; cursor: pointer;
+  background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); color: var(--sq-ink); font-weight: 800; font-size: 13.5px;
+}
+.g-sueca-link svg { width: 18px; height: 18px; color: var(--sq-gold); }
+
+/* ---------------- stats page ---------------- */
+.g-sueca-page { position: absolute; inset: 0; overflow-y: auto; padding: 18px 16px calc(24px + var(--safe-bottom, 0px)); max-width: 520px; margin: 0 auto; }
+.g-sueca-pagehead h2 { margin: 0 0 14px; font-size: 24px; font-weight: 900; color: var(--sq-gold); }
+.g-sueca-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.g-sueca-tile { background: var(--sq-panel); border: 1px solid rgba(243, 194, 74, 0.2); border-radius: 14px; padding: 12px 6px; text-align: center; display: flex; flex-direction: column; gap: 3px; }
+.g-sueca-tile b { font-size: 22px; font-weight: 900; font-variant-numeric: tabular-nums; }
+.g-sueca-tile span { font-size: 11px; color: var(--sq-mute); font-weight: 700; line-height: 1.2; }
+.g-sueca-sub { margin: 20px 0 8px; font-size: 14px; color: var(--sq-mute); text-transform: uppercase; letter-spacing: 0.08em; }
+.g-sueca-muted { color: var(--sq-mute); font-size: 14px; }
+.g-sueca-hist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.g-sueca-hrow { display: grid; grid-template-columns: 70px 1fr auto; gap: 8px; align-items: center; padding: 10px 12px; border-radius: 12px; background: var(--sq-panel); border-left: 3px solid #888; font-size: 13.5px; }
+.g-sueca-hrow.is-win { border-color: #5fd08f; }
+.g-sueca-hrow.is-loss { border-color: #e0687a; }
+.g-sueca-hres { font-weight: 900; }
+.g-sueca-pagebtns { display: flex; gap: 10px; margin-top: 22px; }
+.g-sueca-pbtn { flex: 1; min-height: 46px; border-radius: 14px; border: 1px solid rgba(243, 194, 74, 0.4); background: rgba(255, 255, 255, 0.05); color: var(--sq-ink); font-weight: 900; font-size: 14px; cursor: pointer; }
+.g-sueca-pbtn.danger { border-color: rgba(224, 104, 122, 0.55); color: #ff9aa8; }
+
+/* ---------------- game layout ---------------- */
+.g-sueca-game { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 6px; padding: 6px 8px calc(6px + var(--safe-bottom, 0px)); }
+.g-sueca-hud { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: stretch; }
+.g-sueca-team {
+  display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 6px 10px; min-width: 0; border-radius: 12px;
+  background: var(--sq-panel); border: 1px solid color-mix(in srgb, var(--tc) 38%, transparent); box-shadow: inset 3px 0 0 var(--tc);
+}
+.g-sueca-team.t1 { text-align: right; box-shadow: inset -3px 0 0 var(--tc); align-items: flex-end; }
+.g-sueca-tname { font-size: 13px; font-weight: 900; color: var(--tc); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.1; }
+.g-sueca-tsub { font-size: 11.5px; color: var(--sq-mute); font-weight: 700; line-height: 1.2; white-space: nowrap; }
+.g-sueca-pips { display: inline-flex; gap: 4px; align-items: center; }
+.g-sueca-pips i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--tc); opacity: 0.55; transition: all 0.3s ease; }
+.g-sueca-pips i.on { background: var(--tc); opacity: 1; box-shadow: 0 0 8px var(--tc); }
+.g-sueca-pips.big i { width: 14px; height: 14px; }
+.g-sueca-trump {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; min-width: 62px; padding: 3px 8px 2px;
+  border-radius: 14px; background: var(--sq-panel); border: 1px solid rgba(243, 194, 74, 0.55); box-shadow: 0 0 14px rgba(243, 194, 74, 0.2);
+}
+.g-sueca-trump small { font-size: 10px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sq-gold); line-height: 1; }
+.g-sueca-tglyph { font-size: 26px; line-height: 1; color: #fff7e0; font-weight: 900; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); }
+.g-sueca-tglyph.s0, .g-sueca-tglyph.s1 { color: #ff6b79; }
+
+.g-sueca-table { position: relative; flex: 1; min-height: 0; border-radius: 26px; overflow: hidden; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(243, 194, 74, 0.28), inset 0 0 0 5px rgba(8, 10, 14, 0.9); }
+.g-sueca-felt {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(70% 55% at 50% 46%, rgba(255, 255, 255, 0.09), transparent 70%),
+    radial-gradient(120% 100% at 50% 45%, #1d7050 0%, #135239 52%, #0a3123 100%);
+}
+.g-sueca-felt::before { /* soft woven texture */
+  content: ''; position: absolute; inset: 0; opacity: 0.5; mix-blend-mode: soft-light;
+  background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 4px), repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.07) 0 1px, transparent 1px 4px);
+}
+.g-sueca-felt::after { /* inner gold hairline */
+  content: ''; position: absolute; inset: 9px; border-radius: 19px; border: 1px solid rgba(243, 194, 74, 0.22); pointer-events: none;
+}
+
+.g-sueca-tools { position: absolute; top: 14px; display: flex; flex-direction: column; gap: 6px; z-index: 6; }
+.g-sueca-tools.l { left: 14px; }
+.g-sueca-tools.r { right: 14px; }
+.g-sueca-tool {
+  width: 38px; height: 38px; display: grid; place-items: center; padding: 0; border-radius: 12px; cursor: pointer; color: var(--sq-ink);
+  background: rgba(8, 10, 14, 0.62); border: 1px solid rgba(255, 255, 255, 0.14); backdrop-filter: blur(4px);
+}
+.g-sueca-tool svg { width: 20px; height: 20px; }
+.g-sueca-tool:disabled { opacity: 0.35; cursor: default; }
+.g-sueca-tool:not(:disabled):hover { border-color: rgba(243, 194, 74, 0.7); color: var(--sq-gold); }
+
+/* seats */
+.g-sueca-seat { position: absolute; z-index: 3; display: flex; align-items: center; gap: 8px; }
+.g-sueca-seat.s2 { top: 12px; left: 50%; transform: translateX(-50%); flex-direction: row; }
+.g-sueca-seat.s1 { right: 8px; top: 42%; transform: translateY(-50%); flex-direction: column; gap: 6px; }
+.g-sueca-seat.s3 { left: 8px; top: 42%; transform: translateY(-50%); flex-direction: column; gap: 6px; }
+.g-sueca-seat.s0 { bottom: 8px; left: 50%; transform: translateX(-50%); flex-direction: row-reverse; }
+.g-sueca-seat .dt-chip-name { max-width: 70px; }
+.g-sueca-seat .dt-chip-sub { color: rgba(246, 238, 219, 0.75); font-weight: 700; font-size: 10.5px; }
+.g-sueca-seat.s0 .dt-chip { flex-direction: row; gap: 6px; padding-right: 10px; background: rgba(8, 10, 14, 0.55); border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.1); }
+.g-sueca-stack { position: relative; width: calc(var(--cw) + 12px); height: calc(var(--cw) * 1.4 + 8px); display: flex; align-items: flex-end; }
+.g-sueca-stack.is-empty { opacity: 0.25; }
+.g-sueca-scnt {
+  position: absolute; right: -2px; bottom: -4px; min-width: 20px; height: 20px; padding: 0 5px; display: grid; place-items: center; border-radius: 999px;
+  background: #0d0f14; color: var(--sq-ink); border: 1px solid rgba(243, 194, 74, 0.6); font-size: 11.5px; font-weight: 900; z-index: 4;
+}
+.g-sueca-tcard { display: none; flex-direction: column; align-items: center; gap: 2px; }
+.g-sueca-tcard.on { display: flex; }
+.g-sueca-tcard small { font-size: 9.5px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sq-gold); text-shadow: 0 1px 2px #000; }
+.g-sueca-seat.s0 .g-sueca-tcard { flex-direction: row; gap: 5px; }
+.g-sueca-seat.s0 .g-sueca-tcard small { writing-mode: horizontal-tb; }
+
+/* trick area */
+.g-sueca-trick { position: absolute; left: 50%; top: 45%; width: calc(var(--cw) * 3.7); height: calc(var(--cw) * 3.15); transform: translate(-50%, -50%); z-index: 4; pointer-events: none; }
+.g-sueca-slot { position: absolute; width: var(--cw); height: calc(var(--cw) * 1.4); transform: translate(-50%, -50%); }
+.g-sueca-slot.p0 { left: 50%; top: 80%; }
+.g-sueca-slot.p1 { left: 83%; top: 50%; }
+.g-sueca-slot.p2 { left: 50%; top: 20%; }
+.g-sueca-slot.p3 { left: 17%; top: 50%; }
+.g-sueca-slot .dc { position: absolute; inset: 0; }
+.g-sueca-slot .dc.is-hl { z-index: 3; }
+.g-sueca-slot::before { content: ''; position: absolute; inset: 0; border-radius: calc(var(--cw) * 0.08); border: 1px dashed rgba(246, 238, 219, 0.14); }
+
+/* piles */
+.g-sueca-pile { position: absolute; bottom: 12px; display: flex; align-items: center; gap: 8px; z-index: 3; }
+.g-sueca-pile.t0 { left: 14px; }
+.g-sueca-pile.t1 { right: 14px; flex-direction: row-reverse; text-align: right; }
+.g-sueca-pstack { position: relative; width: var(--cw); height: calc(var(--cw) * 1.4); }
+.g-sueca-pempty { width: 100%; height: 100%; border-radius: 6px; border: 1px dashed color-mix(in srgb, var(--tc) 55%, transparent); }
+.g-sueca-pstack .dc { box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5); outline: 1px solid color-mix(in srgb, var(--tc) 60%, transparent); }
+.g-sueca-pinfo { display: flex; flex-direction: column; line-height: 1.15; }
+.g-sueca-plab { font-size: 11px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tc); text-shadow: 0 1px 2px #000; }
+.g-sueca-pn { font-size: 11px; color: var(--sq-mute); font-weight: 700; }
+.g-sueca-pn b { color: var(--sq-ink); font-size: 14px; font-variant-numeric: tabular-nums; }
+.g-sueca-ppts { font-size: 11px; font-weight: 800; color: var(--tc); }
+
+.g-sueca-flash {
+  position: absolute; left: 50%; top: 22%; transform: translate(-50%, -6px); z-index: 8; padding: 8px 16px; border-radius: 999px; max-width: 86%; text-align: center;
+  background: rgba(8, 10, 14, 0.86); border: 1px solid rgba(243, 194, 74, 0.6); font-size: 13.5px; font-weight: 900; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.25s ease; color: var(--sq-ink);
+}
+.g-sueca-flash.show { opacity: 1; transform: translate(-50%, 0); }
+.g-sueca-flash.us { border-color: var(--sq-us); color: var(--sq-us); }
+.g-sueca-flash.them { border-color: var(--sq-them); color: var(--sq-them); }
+.g-sueca-flash.warn { border-color: #e0687a; color: #ffb1bb; }
+
+.g-sueca-status { height: 20px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--sq-mute); }
+.g-sueca-status.mine { color: var(--sq-gold); }
+.g-sueca-hand { position: relative; flex: none; padding-bottom: 10px; }
+.g-sueca-hand .dh { --cw: var(--hcw); }
+.g-sueca-hand.is-waiting .dc.is-disabled { filter: none; }
+.g-sueca-hand .dh-slot.is-off { cursor: default; }
+
+/* played card landing */
+.g-sueca-played { animation: gSuecaLand 0.22s ease-out; }
+@keyframes gSuecaLand { 0% { filter: brightness(1.25); } 100% { filter: none; } }
+
+/* ---------------- modals / result bodies ---------------- */
+.g-sueca-rbody { display: flex; flex-direction: column; gap: 12px; }
+.g-sueca-rsub { margin: 0; text-align: center; font-weight: 900; font-size: 15px; color: var(--sq-gold); }
+.g-sueca-rbody.loss .g-sueca-rsub { color: #ff9aa8; }
+.g-sueca-rbody.draw .g-sueca-rsub { color: var(--sq-ink); }
+.g-sueca-rscore { display: flex; align-items: flex-end; justify-content: center; gap: 18px; }
+.g-sueca-rscore > div { display: flex; flex-direction: column; align-items: center; }
+.g-sueca-rscore small { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; }
+.g-sueca-rscore b { font-size: 40px; line-height: 1; font-weight: 900; font-variant-numeric: tabular-nums; }
+.g-sueca-rscore .t0 { color: var(--sq-us); }
+.g-sueca-rscore .t1 { color: var(--sq-them); }
+.g-sueca-rscore .vs { color: var(--sq-mute); font-size: 20px; padding-bottom: 6px; }
+.g-sueca-bar { position: relative; height: 14px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); display: flex; overflow: visible; margin: 4px 0 14px; }
+.g-sueca-bar i { display: block; height: 100%; transition: width 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.g-sueca-bar i.t0 { background: linear-gradient(90deg, #c9971c, #f7d774); border-radius: 999px 0 0 999px; }
+.g-sueca-bar i.t1 { background: linear-gradient(90deg, #4a8fe0, #8cc4ff); border-radius: 0 999px 999px 0; margin-left: auto; position: absolute; right: 0; top: 0; }
+.g-sueca-bar .mid { position: absolute; left: 50%; top: -5px; bottom: -5px; width: 2px; background: #fff; font-style: normal; box-shadow: 0 0 6px rgba(255, 255, 255, 0.7); }
+.g-sueca-bar .mid span { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: 900; color: var(--sq-mute); margin-top: 1px; }
+.g-sueca-rrow { display: flex; justify-content: space-between; font-size: 14px; padding: 7px 2px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.g-sueca-rrow span { color: var(--sq-mute); font-weight: 700; }
+.g-sueca-rrow b { font-variant-numeric: tabular-nums; }
+.g-sueca-rtotal { display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.g-sueca-rtotal small { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--sq-mute); font-weight: 900; }
+.g-sueca-rtotal > div { display: flex; align-items: center; gap: 12px; }
+.g-sueca-rtotal .vs { font-weight: 900; font-size: 16px; min-width: 52px; text-align: center; }
+
+.g-sueca-lt { position: relative; height: calc(var(--cw) * 3.5); width: calc(var(--cw) * 3.6); margin: 4px auto 0; }
+.g-sueca-ltc { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 3px; transform: translate(-50%, -50%); }
+.g-sueca-ltc small { font-size: 11px; font-weight: 800; color: var(--sq-mute); }
+.g-sueca-ltc.win small { color: var(--sq-gold); }
+.g-sueca-ltc.p0 { left: 50%; top: 80%; }
+.g-sueca-ltc.p1 { left: 82%; top: 50%; }
+.g-sueca-ltc.p2 { left: 50%; top: 20%; }
+.g-sueca-ltc.p3 { left: 18%; top: 50%; }
+.g-sueca-ltsum { text-align: center; margin: 8px 0 0; font-weight: 800; font-size: 13.5px; color: var(--sq-mute); }
+
+.g-sueca-opts { display: flex; flex-direction: column; gap: 4px; }
+.g-sueca-opt { display: flex; align-items: center; gap: 12px; padding: 10px 2px; min-height: 52px; position: relative; cursor: pointer; border-top: 1px solid rgba(255, 255, 255, 0.07); }
+.g-sueca-opt:first-child { border-top: 0; }
+.g-sueca-opt-tx { flex: 1; display: flex; flex-direction: column; }
+.g-sueca-opt-tx b { font-size: 14.5px; }
+.g-sueca-opt-tx small { font-size: 12px; color: var(--sq-mute); }
+.g-sueca-opt input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; margin: 0; }
+.g-sueca-sw { width: 46px; height: 26px; border-radius: 999px; background: rgba(255, 255, 255, 0.16); position: relative; transition: background 0.2s; flex: none; }
+.g-sueca-sw::after { content: ''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); }
+.g-sueca-opt input:checked ~ .g-sueca-sw { background: var(--sq-gold-d); }
+.g-sueca-opt input:checked ~ .g-sueca-sw::after { transform: translateX(20px); }
+.g-sueca-opt input:focus-visible ~ .g-sueca-sw { outline: 3px solid var(--sq-gold); outline-offset: 2px; }
+
+@media (min-width: 700px) and (min-height: 600px) {
+  .g-sueca-game { max-width: 900px; margin: 0 auto; width: 100%; }
+}
+@media (max-height: 640px) {
+  .g-sueca-fan { height: 96px; }
+  .g-sueca-fan .dc { --cw: 58px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .g-sueca-played, .g-sueca-bar i, .g-sueca-flash { animation: none; transition: none; }
+}

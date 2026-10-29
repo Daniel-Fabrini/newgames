@@ -24,8 +24,8 @@
 .g-poker[data-theme='slate'] { --pk-felt1: #4a5568; --pk-felt2: #2b3340; --pk-felt3: #151a22; --pk-rail1: #6b5a2b; --pk-rail2: #2e260f; }
 .g-poker[data-theme='gold_room'] { --pk-felt1: #6d2f8f; --pk-felt2: #3f1a5c; --pk-felt3: #1e0a33; --pk-rail1: #e0b04a; --pk-rail2: #7a5412; }
 .g-poker[data-theme='teal'] { --pk-felt1: #11766f; --pk-felt2: #0a4642; --pk-felt3: #052725; --pk-rail1: #35302a; --pk-rail2: #181512; }
-.g-poker[data-deck='fourcolor'] .pk-card.s-d { --ink: var(--pk-blu); }
-.g-poker[data-deck='fourcolor'] .pk-card.s-c { --ink: var(--pk-grn); }
+[data-deck='fourcolor'] .pk-card.s-d { --ink: var(--pk-blu); }
+[data-deck='fourcolor'] .pk-card.s-c { --ink: var(--pk-grn); }
 
 .g-poker button { font-family: inherit; }
 .g-poker .pk-screen { position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden; }
@@ -72,11 +72,11 @@
 }
 .pk-card.back .pk-back-in { position: absolute; inset: 7%; border-radius: calc(var(--cw) * 0.07); border: 1px solid color-mix(in srgb, var(--bk3, #e8c76a) 70%, transparent); }
 /* card backs (ids match career/rewards.js) */
-.g-poker[data-back='midnight'] { --bk1: #232a4d; --bk2: #0b0f26; --bk3: #9db4ff; }
-.g-poker[data-back='crimson'] { --bk1: #8d1d2e; --bk2: #4a0b16; }
-.g-poker[data-back='emerald'] { --bk1: #1b6a47; --bk2: #0a3524; }
-.g-poker[data-back='royal'] { --bk1: #5a3a9a; --bk2: #261548; --bk3: #ffe9a3; }
-.g-poker[data-back='gold'] { --bk1: #c9971c; --bk2: #6b4f1d; --bk3: #fff6cf; }
+[data-back='midnight'] { --bk1: #232a4d; --bk2: #0b0f26; --bk3: #9db4ff; }
+[data-back='crimson'] { --bk1: #8d1d2e; --bk2: #4a0b16; }
+[data-back='emerald'] { --bk1: #1b6a47; --bk2: #0a3524; }
+[data-back='royal'] { --bk1: #5a3a9a; --bk2: #261548; --bk3: #ffe9a3; }
+[data-back='gold'] { --bk1: #c9971c; --bk2: #6b4f1d; --bk3: #fff6cf; }
 .pk-card.mini { --cw: 24px; }
 .pk-card.mini .pk-back-in { inset: 9%; }
 .pk-card.board { --cw: 56px; }

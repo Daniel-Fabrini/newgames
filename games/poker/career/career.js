@@ -70,6 +70,7 @@ export function circuitInfo(c, id) {
   const ci = CIRCUIT_BY_ID[id]; const evs = listEvents(c, id);
   return { ...ci, unlocked: circuitUnlocked(c, id), unlockReq: ci.unlock ? evalReq(c, ci.unlock) : null, events: evs, played: circuitPlayed(c, id), points: c.pts[id]?.you || 0, rank: circuitRank(c, id), titlesWon: evs.filter((e) => e.completed && e.event.title).length };
 }
+export function markTutorialDone(c) { c.flags.tutorialDone = true; evaluateAchievements(c, 0); refreshUnlocks(c); return c; }
 export function currentCircuit(c) { return CIRCUIT_IDS.filter((k) => c.unlocked.includes(k)).pop(); }
 /** The map for the UI: four nodes with state. */
 export function progressionMap(c) {
@@ -132,19 +133,11 @@ export function forfeitEvent(c, { now = 0 } = {}) {
   const t = c.tournament; if (!t) throw new Error('no tournament');
   const me = human(t);
   if (!me.out) {
-    if (t.hand) { // abandon the live hand: fold everything for the player, let the engine finish
-      let g = 0;
-      while (t.phase === 'hand' && !human(t).out && g++ < 400) {
-        const a = t.hand.players[t.hand.toAct]; const fo = a.id === t.playerId ? { type: 'fold' } : null;
-        if (fo) import('../tournament/tournament.js').then(() => {}); // (no-op, keeps module graph static)
-        break;
-      }
-    }
-    me.out = true; me.place = t.remaining; me.stack = 0; t.remaining -= 1;
-    t.hand = null; t.phase = 'between'; t.pending = null;
-    t.entrants.forEach((e) => { if (e !== me) e.ko += 0; });
+    // abandon the live hand (its bets are discarded; entrant stacks are still the start-of-hand values) and drop the player
+    me.out = true; me.place = t.remaining; t.remaining -= 1; t.totalChips -= me.stack; me.stack = 0;
+    t.hand = null; t.handTable = -1; t.phase = 'between'; t.pending = null; t.forfeited = true;
     for (const tb of t.tables) { const s = tb.seats.indexOf(me.idx); if (s >= 0) tb.seats[s] = -1; }
-    t.forfeited = true;
+    if (t.remaining <= 1) { const w = t.entrants.find((x) => !x.out); if (w) { w.place = 1; w.out = true; t.remaining = 1; t.phase = 'finished'; } }
   }
   return finishEvent(c, { now });
 }

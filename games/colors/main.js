@@ -121,7 +121,7 @@ export async function mount(root, ctx) {
       const body = node ? (typeof node === 'function' ? node(close) : node) : h('p', null, text);
       const acts = (actions || []).map((a) => h('button', { type: 'button', class: `dc-btn ${a.primary ? 'is-primary' : a.danger ? 'is-danger' : 'is-secondary'}`, onclick: () => close(a.value) }, a.label));
       const box = h('div', { class: `dt-modal g-colors-dlg ${cls}`, role: 'dialog', 'aria-modal': 'true', 'aria-label': title || '' }, title ? h('h2', { class: 'dt-modal-title' }, title) : null, h('div', { class: 'dt-modal-body' }, body), acts.length ? h('div', { class: 'dt-modal-actions' }, acts) : null);
-      const overlay = h('div', { class: 'dt-overlay' }, box);
+      const overlay = h('div', { class: 'dt-overlay', style: { zIndex: 1000 } }, box);
       if (dismissible) overlay.addEventListener('click', (e) => e.target === overlay && close(null));
       if (dialogClose) dialogClose(null);
       dialogClose = close;
@@ -453,8 +453,8 @@ export async function mount(root, ctx) {
     const s = match.s;
     const W = root.clientWidth || 390;
     const Hh = root.clientHeight || 760;
-    const hw = Math.max(50, Math.min(80, Math.round(Math.min(W * 0.19, Hh * 0.105))));
-    const pw = Math.max(54, Math.min(76, Math.round(Math.min(W * 0.17, Hh * 0.095))));
+    const hw = Math.max(50, Math.min(90, Math.round(Math.min(W * 0.215, Hh * 0.115))));
+    const pw = Math.max(56, Math.min(92, Math.round(Math.min(W * 0.205, Hh * 0.11))));
     const ow = Math.max(30, Math.min(40, Math.round(W * 0.095)));
     app.style.setProperty('--gc-hand', hw + 'px');
     app.style.setProperty('--gc-pile', pw + 'px');
@@ -564,7 +564,7 @@ export async function mount(root, ctx) {
         if (!ui || !root.clientWidth) return;
         if (Math.abs(root.clientWidth - lw) > 20) {
           lw = root.clientWidth;
-          const nh = Math.max(50, Math.min(80, Math.round(Math.min(lw * 0.19, root.clientHeight * 0.105))));
+          const nh = Math.max(50, Math.min(90, Math.round(Math.min(lw * 0.215, root.clientHeight * 0.115))));
           app.style.setProperty('--gc-hand', nh + 'px');
           ui.hand.setSize(nh);
         }
@@ -712,13 +712,15 @@ export async function mount(root, ctx) {
     return { x: r.left - b.left + r.width / 2, y: r.top - b.top + r.height / 2 };
   }
   function floatText(text, p, kind = '') {
-    if (!ui || reduce()) {
-      flashMsg(text);
-      return;
-    }
+    if (!ui) return;
     const pos = p === 'centre' ? relPos(ui.piles) : relPos(seatAnchor(p));
     const el = h('div', { class: `g-colors-float ${kind}`, style: { left: pos.x + 'px', top: pos.y + 'px' } }, text);
     ui.fx.append(el);
+    if (reduce()) {
+      el.style.transform = 'translate(-50%,-110%)';
+      later(() => el.remove(), 900);
+      return;
+    }
     const a = el.animate(
       [
         { transform: 'translate(-50%,-50%) scale(.5)', opacity: 0 },
@@ -956,7 +958,6 @@ export async function mount(root, ctx) {
           const id = String(mine[r]);
           const el = ui.hand.cardEl(id);
           if (el) {
-            el.style.visibility = 'hidden';
             flights.push(
               anim.flyCard(el, deckRect, null, { duration: 300, delay, faceDownFrom: true, onStart: () => cs.deal() }),
             );
@@ -1246,13 +1247,14 @@ export async function mount(root, ctx) {
           grid.append(
             h(
               'button',
-              { type: 'button', class: 'g-colors-pickbtn', style: { '--pc': UNO_HEX[COLOR_KEYS[c]] }, 'aria-label': colorName(c), onclick: () => close(c) },
+              { type: 'button', class: 'g-colors-pickbtn', 'aria-label': colorName(c), onclick: () => close(c) },
               h('i', null),
               h('span', null, colorName(c)),
               mineColors[c] ? h('small', null, String(mineColors[c])) : null,
             ),
           );
         }
+        grid.querySelectorAll('.g-colors-pickbtn').forEach((b, i) => b.style.setProperty('--pc', UNO_HEX[COLOR_KEYS[i]]));
         const kh = (e) => {
           const k = '1234'.indexOf(e.key);
           if (k >= 0 && e.key) {
@@ -1277,7 +1279,7 @@ export async function mount(root, ctx) {
     const target = s.chal.target;
     return ask({
       title: t('challengeTitle'),
-      text: t('challengeText', { name: nameOf(target), color: colorName(s.color) }),
+      node: h('div', null, h('p', null, t('challengeText', { name: nameOf(target), color: colorName(s.color) })), h('p', { class: 'g-colors-prevc' }, h('i', { style: { background: UNO_HEX[COLOR_KEYS[s.chal.prevColor]] } }), t('challengePrev', { color: colorName(s.chal.prevColor) }))),
       actions: [
         { label: t('challengeNo'), value: false },
         { label: t('challengeYes'), value: true, primary: true },

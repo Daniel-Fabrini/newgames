@@ -229,7 +229,7 @@ export async function mount(root, ctx) {
     clear(root);
     const sz = sizes();
     const seatEl = (seat) => {
-      const chip = playerChip({ name: seatName(seat), avatar: AVATARS[seat], color: TEAM_COLOR[R.teamOf(seat)], size: seat === 2 ? 'md' : 'sm', layout: 'col', sub: seat === 0 ? '' : t(SEAT_KEY[seat]) });
+      const chip = playerChip({ name: seatName(seat), avatar: AVATARS[seat], color: TEAM_COLOR[R.teamOf(seat)], size: seat === 2 ? 'md' : 'sm', layout: 'col', sub: seat === 0 ? '' : seat === 2 ? t('partner') : t('rival') });
       const stack = h('div', { class: 'g-sueca-stack', style: { '--cw': sz.stack + 'px' }, 'aria-hidden': 'true' });
       const tcard = h('div', { class: 'g-sueca-tcard', title: t('trunfo') });
       const el = h('div', { class: `g-sueca-seat s${seat}`, dataset: { seat } }, chip, seat === 0 ? null : stack, tcard);
@@ -242,7 +242,7 @@ export async function mount(root, ctx) {
       const cnt = h('b', { class: 'g-sueca-pcnt' }, '0');
       const lab = h('span', { class: 'g-sueca-plab' }, t(team === 0 ? 'us' : 'them'));
       const pts_ = h('span', { class: 'g-sueca-ppts' });
-      return { el: h('div', { class: `g-sueca-pile t${team}`, style: { '--tc': TEAM_COLOR[team] } }, stack, h('div', { class: 'g-sueca-pinfo' }, lab, h('span', { class: 'g-sueca-pn' }, cnt, ' ', t('tricks').toLowerCase()), pts_)), stack, cnt, pts_ };
+      return { el: h('div', { class: `g-sueca-pile t${team}`, style: { '--tc': TEAM_COLOR[team] } }, stack, h('div', { class: 'g-sueca-pinfo' }, lab, h('span', { class: 'g-sueca-pn' }, cnt, ' ', t('tricks').toLowerCase()), pts_)), stack, cnt, pts: pts_ };
     };
     const piles = [pile(0), pile(1)];
     const tool = (ico, label, onclick) => h('button', { type: 'button', class: 'g-sueca-tool', 'aria-label': label, title: label, onclick, html: ICONS[ico] });
@@ -558,8 +558,10 @@ export async function mount(root, ctx) {
     hand.setPlayable(() => false);
     const el = placeTrickCard(seat, c);
     cs.place();
-    refs.seats[S.dealer].tcard.classList.toggle('on', !(c === S.trumpCard) && S.dealer >= 0);
-    if (c === S.trumpCard) refs.seats[S.dealer].tcard.textContent = '';
+    if (c === S.trumpCard) {
+      refs.seats[S.dealer].tcard.textContent = '';
+      refs.seats[S.dealer].tcard.classList.remove('on');
+    }
     setTurnUI();
     await anim.flyCard(el, fromRect, null, { duration: 380, faceDownFrom: seat !== 0, arc: seat === 0 ? 24 : 14 });
     el.classList.add('g-sueca-played');
@@ -722,9 +724,13 @@ export async function mount(root, ctx) {
   // ---------- start ----------
   if (ctx.mode === 'match' || ctx.mode === 'round') {
     const saved = save.load();
-    if (saved && ctx.mode === (saved.opts.single ? 'round' : 'match') && saved.phase !== 'matchEnd') {
+    if (saved && saved.phase !== 'matchEnd') {
       showMenu();
-      newGame({ single: ctx.mode === 'round' });
+      modal({ root, title: t('continue'), body: t('continueInfo', { round: saved.round + 1, us: saved.jogos[0], them: saved.jogos[1] }), actions: [{ label: t('newMatch'), value: 'new' }, { label: t('continue'), value: 'resume', primary: true }], lang: ctx.lang }).then((v) => {
+        if (disposed) return;
+        if (v === 'resume') resumeSaved();
+        else { save.clear(); newGame({ single: ctx.mode === 'round' }); }
+      });
     } else newGame({ single: ctx.mode === 'round' });
   } else showMenu();
 

@@ -101,13 +101,13 @@ function dealTable(t, tb, round) {
 const idMaps = new WeakMap();
 const entById = (t, id) => { let m = idMaps.get(t); if (!m || m.size !== t.entrants.length) { m = new Map(t.entrants.map((e) => [e.id, e])); idMaps.set(t, m); } return m.get(id); };
 
-function aiChoose(t, state, fast) {
+function aiChoose(t, state, fast, profileOverride) {
   const idx = state.toAct; const id = state.players[idx].id; const e = entById(t, id);
   const view = viewFor(state, idx);
   const rng = mulberry32(mixSeed(t.seed, 2002, state.handNo, state.log.length, idx, e.idx));
   const s = standing(t);
   const ctx = { stats: t.stats, agent: (t.agents[id] ||= { tilt: 0 }), fast, pressure: { bubble: s.bubble, finalTable: s.finalTable, avgStack: s.avgStack, playersLeft: t.remaining, paid: s.paid } };
-  return decide(view, e.profile || makeProfile('balanced'), rng, ctx);
+  return decide(view, profileOverride || e.profile || makeProfile('balanced'), rng, ctx);
 }
 
 /** Start the next round: simulate every other table by one hand, then deal the player's table.
@@ -136,7 +136,14 @@ export function startNextHand(t, opts = {}) {
   if (focus >= 0) {
     const tb = t.tables.find((x) => x.id === focus);
     const h = dealTable(t, tb, round);
-    if (h) { t.hand = h.state; t.handTable = tb.id; t.phase = 'hand'; t.pending.start = h.events; return { events: t.events.slice(), hand: t.hand, handEvents: h.events }; }
+    if (h) {
+      t.hand = h.state; t.handTable = tb.id; t.phase = 'hand'; t.pending.start = h.events;
+      if (h.state.phase === 'done') { // everything was all-in from the blinds/antes: nothing to decide, hand is already over
+        const st = h.state; concludeInteractive(t);
+        return { events: t.events.slice(), hand: null, handEvents: h.events, instant: true, finishedHand: st };
+      }
+      return { events: t.events.slice(), hand: t.hand, handEvents: h.events };
+    }
   }
   finalizeRound(t);
   return { events: t.events.slice(), hand: null };
@@ -160,6 +167,23 @@ export function aiAct(t) {
   const action = aiChoose(t, t.hand, false);
   const events = act(t, action);
   return { action, events, idx: a.idx };
+}
+/** Let a bot (profile) play the human seat's current turn: used by headless simulators / tests. */
+export function botAct(t, profile) {
+  const a = actor(t);
+  if (a.kind !== 'human') throw new Error('not the human turn');
+  const action = aiChoose(t, t.hand, false, profile);
+  return { action, events: act(t, action), idx: a.idx };
+}
+/** Play the whole tournament headlessly with a bot in the human seat (profile object). */
+export function simulateWithBot(t, profile, maxRounds = 5000) {
+  let g = 0;
+  while (t.phase !== 'finished' && !human(t).out) {
+    if (t.phase !== 'hand') startNextHand(t, { interactive: true });
+    while (t.phase === 'hand') { const a = actor(t); if (a.kind === 'human') botAct(t, profile); else aiAct(t); }
+    if (++g > maxRounds) throw new Error('tournament did not terminate');
+  }
+  return simulateToEnd(t);
 }
 export function legal(t) { return t.hand ? legalActions(t.hand) : null; }
 export function humanView(t) { return t.hand ? publicView(t.hand, t.hand.players.findIndex((p) => p.id === t.playerId)) : null; }
@@ -241,6 +265,10 @@ function updateStats(t, st) {
 
 function finalizeRound(t) {
   const busts = t.pending.busts; t.pending = null;
+  if (t.def.format === 'quick') { // cash-style: busted players rebuy automatically, blinds fixed, never finishes
+    for (const b of busts) { const e = entById(t, b.id); e.stack = t.def.startStack; e.rebuys = (e.rebuys || 0) + 1; t.totalChips += t.def.startStack; t.events.push({ t: 'rebuy', id: e.id, isPlayer: e.isPlayer }); }
+    t.phase = 'between'; return;
+  }
   const before = t.remaining;
   // worse start stack => worse place; ties by id for determinism
   busts.sort((a, b) => a.startStack - b.startStack || (a.id < b.id ? -1 : 1));

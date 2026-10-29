@@ -23,6 +23,7 @@ const PRESETS = {
   p9: { s: 1, hr: 'mohawk', hc: 8, j: 8, bg: 0, acc: ['earring'] },
   p10: { s: 5, hr: 'bob', hc: 4, j: 9, bg: 1, acc: ['glasses'] },
   p11: { s: 6, hr: 'short', hc: 0, j: 0, bg: 2, acc: ['scarf'] },
+  unknown: { s: 6, hr: 'bald', hc: 0, j: 4, bg: 2, acc: ['shades'], expr: 'neutral', mystery: true },
   p12: { s: 4, hr: 'fedora', hc: 0, j: 4, bg: 3, acc: [], cap: '#2a2a2f' },
   // rivals (ids match career/rivals.js)
   tito: { s: 2, hr: 'curly', hc: 1, j: 7, bg: 3, acc: [], expr: 'smile' },
@@ -73,6 +74,9 @@ let uid = 0;
 /** Returns an SVG string. opts: { expr: 'neutral'|'smile'|'smirk'|'stern'|'sad' } */
 export function avatarSVG(id, opts = {}) {
   const p = derive(id || 'p1');
+  if (p.mystery) {
+    return `<svg class="pk-av-svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><defs><radialGradient id="pkmy" cx="50%" cy="35%" r="80%"><stop offset="0" stop-color="#2b2b33"/><stop offset="1" stop-color="#0c0c10"/></radialGradient></defs><rect width="64" height="64" fill="url(#pkmy)"/><circle cx="32" cy="26" r="11" fill="#444452"/><path d="M10 64c1-13 10-19 22-19s21 6 22 19z" fill="#444452"/><text x="32" y="33" text-anchor="middle" font-size="16" font-weight="900" fill="#c9971c" font-family="Nunito,sans-serif">?</text></svg>`;
+  }
   const gid = 'pkav' + uid++;
   const skin = SKINS[p.s];
   const hair = HAIRC[p.hc];

@@ -132,6 +132,33 @@ export function createTableScreen(root, deps) {
     ctx.ui.modal({ title: t('settings'), body, actions: [{ label: t('close'), value: 1, primary: true }] });
   }
 
+  // ---- coachmarks (tutorial / first events) ----
+  let coach = null;
+  let coachQ = [];
+  let coachEl = null;
+  let coachTid = 0;
+  function pumpCoach() {
+    if (coachEl || !coachQ.length || disposed) return;
+    const step = coachQ.shift();
+    coachEl = h('div', { class: 'pk-coach', role: 'status' }, h('div', { class: 'pk-grow' }, h('b', {}, t('coach.tip')), step.text), h('button', { type: 'button', onclick: () => dismissCoach() }, t('coach.ok')));
+    tableHost.append(coachEl);
+    coachTid = setTimeout(() => dismissCoach(), 11000);
+    timers.add(coachTid);
+  }
+  function dismissCoach() {
+    clearTimeout(coachTid);
+    if (coachEl) coachEl.remove();
+    coachEl = null;
+    setTimeout(pumpCoach, 450);
+  }
+  function coachTrigger(trigger) {
+    if (!coach) return;
+    const s = coach.take(trigger);
+    if (!s) return;
+    coachQ.push(s);
+    pumpCoach();
+  }
+
   // ---- play ----
   let heroIdxCur = -1;
   let disp = null;
@@ -163,6 +190,8 @@ export function createTableScreen(root, deps) {
       case 'deal':
         render();
         sound.deal();
+        coachTrigger('first_hand');
+        coachTrigger('first_blinds');
         await wait(520);
         break;
       case 'ante':
@@ -185,6 +214,7 @@ export function createTableScreen(root, deps) {
         announce(txt + (d.allIn ? ', ' + t('act.allin') : ''));
         if (d.p === disp.D.heroIdx && d.type === 'fold') ctxInfo.heroFolded = true;
         if (d.allIn && s.stack === 0 && !reduce()) table.banner(t('act.allin'), 'allin');
+        if (d.allIn) coachTrigger('first_allin');
         await wait(d.p === disp.D.heroIdx ? 220 : d.type === 'fold' ? 260 : 420);
         break;
       }
@@ -194,6 +224,7 @@ export function createTableScreen(root, deps) {
         await wait(reduce() ? 0 : 380);
         render();
         sound.flip();
+        if (d.street === 'flop') coachTrigger('first_flop');
         const names = { flop: t('street.flop'), turn: t('street.turn'), river: t('street.river') };
         logLine(`${names[d.street]}: ${d.cards.map(cardText).join(' ')}`, 'street');
         announce(`${names[d.street]}: ${d.cards.map((c) => cardLabel(c, lang)).join(', ')}`);
@@ -214,6 +245,7 @@ export function createTableScreen(root, deps) {
         }
         render();
         sound.flip();
+        coachTrigger('first_showdown');
         for (const r of d.reveals) {
           if (r.mucked) logLine(t('log.mucks', { name: nameOf(r.p) }));
           else logLine(t('log.shows', { name: nameOf(r.p), cards: r.hole.map(cardStr).map(cardText).join(' '), hand: t('hand.' + r.hand) }), 'show');
@@ -298,6 +330,8 @@ export function createTableScreen(root, deps) {
         const L = session.legal();
         const bb = session.bb();
         announce(t('yourTurn'));
+        coachTrigger('first_turn');
+        if (L.toCall > 0) coachTrigger('first_facing_bet');
         const timerSec = prefs.get('timer') || 0;
         const act = await bar.prompt({
           toCall: L.toCall,
@@ -378,6 +412,7 @@ export function createTableScreen(root, deps) {
   /** Runs hands until the session finishes, the hero is out or the player leaves. */
   async function run(session, opts = {}) {
     currentSession = session;
+    coach = opts.coach || null;
     let outcome = 'finished';
     for (;;) {
       if (disposed) return 'quit';
@@ -390,6 +425,10 @@ export function createTableScreen(root, deps) {
       renderHud(session.hud());
       setStrip(session.strip ? session.strip() : null);
       if (opts.onHandEnd) await opts.onHandEnd(session, info);
+      for (const ev of info.round) {
+        if (ev.t === 'level_up') coachTrigger('first_level_up');
+        else if (ev.t === 'bubble') coachTrigger('bubble');
+      }
       if (opts.roundText) {
         let k = 0;
         for (const ev of info.round) {
@@ -406,6 +445,10 @@ export function createTableScreen(root, deps) {
         break;
       }
       if (session.isFinished && session.isFinished()) break;
+      if (opts.stopWhen && opts.stopWhen()) {
+        outcome = 'stopped';
+        break;
+      }
       await between(session, info);
     }
     return outcome;
