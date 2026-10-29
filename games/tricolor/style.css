@@ -73,8 +73,8 @@
 .tc-podium { position: relative; display: flex; flex-direction: column; align-items: center; height: 100%; max-height: 270px; justify-content: flex-end; }
 .tc-glowring { position: absolute; bottom: 14%; width: 240px; height: 240px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 220, 120, 0.5), rgba(255, 80, 60, 0.16) 55%, transparent 70%); animation: tc-pulse 3.6s ease-in-out infinite; }
 @keyframes tc-pulse { 50% { transform: scale(1.1); opacity: 0.75; } }
-.tc-trophy { position: relative; height: calc(100% - 12px); aspect-ratio: 220 / 300; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.65)); animation: tc-float 4.5s ease-in-out infinite; }
-.tc-trophy svg { width: 100%; height: 100%; }
+.tc-trophy { position: relative; height: calc(100% - 12px); aspect-ratio: 666 / 785; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.65)); animation: tc-float 4.5s ease-in-out infinite; }
+.tc-trophy svg, .tc-trophy img { width: 100%; height: 100%; }
 @keyframes tc-float { 50% { transform: translateY(-5px); } }
 .tc-plate { width: 250px; height: 14px; border-radius: 50%; background: radial-gradient(ellipse, #3a0b10, #000 70%); box-shadow: 0 0 0 2px #7e0a12, 0 0 24px rgba(212, 16, 28, 0.6); margin-top: -6px; }
 .tc-banner { position: absolute; bottom: 14%; width: 118px; padding: 8px 6px; font-size: 11px; line-height: 1.15; font-weight: 1000; text-transform: uppercase; letter-spacing: 0.02em; color: #14090a; background: repeating-linear-gradient(180deg, #f4f4f4 0 33%, #d4101c 33% 66%, #111 66% 100%); background: linear-gradient(180deg, #f4f4f4, #e6e6e6); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); border-top: 5px solid #d4101c; border-bottom: 5px solid #111; }
@@ -343,8 +343,8 @@
 .tc-crowdsil svg { width: 100%; height: 100%; display: block; }
 .tc-result .tc-explain { max-height: 31vh; overflow-y: auto; text-align: left; max-width: 380px; }
 .tc-congrats { gap: 8px; }
-.tc-cup { height: clamp(150px, 30vh, 250px); aspect-ratio: 220 / 300; filter: drop-shadow(0 0 30px rgba(255, 215, 107, 0.6)); animation: tc-float 4.5s ease-in-out infinite; }
-.tc-cup svg { width: 100%; height: 100%; }
+.tc-cup { height: clamp(150px, 30vh, 250px); aspect-ratio: 666 / 785; filter: drop-shadow(0 0 30px rgba(255, 215, 107, 0.6)); animation: tc-float 4.5s ease-in-out infinite; }
+.tc-cup svg, .tc-cup img { width: 100%; height: 100%; }
 .tc-reach { margin: 0; font-weight: 900; letter-spacing: 0.12em; font-size: 14px; display: flex; flex-direction: column; gap: 2px; }
 .tc-reach b { font-size: 32px; letter-spacing: 0; background: var(--goldg); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 2px 0 #3a2200); }
 .tc-champ { padding: 4px 22px; font-weight: 1000; letter-spacing: 0.3em; font-size: 12px; border-radius: 999px; box-shadow: 0 0 0 1.5px #ffd76b inset; color: #ffd76b; background: rgba(0, 0, 0, 0.6); }
@@ -397,3 +397,16 @@
 .tc-idol { padding: 4px 4px 6px; }
 .tc-idol .tc-avatar { aspect-ratio: 283 / 312; }
 .tc-q.explaining .tc-qchip { margin-top: 8px; }
+
+/* trophy image (replaces the old SVG cup) */
+.tc-trophy-img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 26px rgba(255, 200, 80, 0.35));
+  user-select: none;
+  -webkit-user-drag: none;
+}

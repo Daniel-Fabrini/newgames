@@ -47,22 +47,10 @@ export const defs = () =>
 </defs></svg>`;
 
 // ---------------------------------------------------------------- trophy
-/** Golden cup with the crest on the bowl, on a plinth. */
+/** The trophy (image supplied by the user: assets/trophy.webp, transparent background). */
+const TROPHY_URL = new URL('./assets/trophy.webp', import.meta.url).href;
 export function trophy({ cls = '' } = {}) {
-  return `<svg class="${cls}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 300" aria-hidden="true">
-<ellipse cx="110" cy="286" rx="86" ry="10" fill="#000" opacity=".45"/>
-<path d="M50 268h120l8 14H42z" fill="url(#tc-black)" stroke="#e9ae2a" stroke-width="2"/>
-<rect x="62" y="244" width="96" height="26" rx="4" fill="url(#tc-goldH)"/>
-<path d="M70 244c4-12 14-18 40-18s36 6 40 18z" fill="url(#tc-goldH)"/>
-<rect x="96" y="176" width="28" height="56" fill="url(#tc-goldH)"/>
-<ellipse cx="110" cy="196" rx="22" ry="7" fill="url(#tc-goldH)"/><ellipse cx="110" cy="216" rx="20" ry="6" fill="url(#tc-goldH)"/>
-<path d="M44 52c-30 0-34 40-6 62 14 11 30 12 36 10l2-14c-10 2-20-2-26-12-8-13-2-28 10-28z" fill="none" stroke="url(#tc-goldH)" stroke-width="11" stroke-linecap="round"/>
-<path d="M176 52c30 0 34 40 6 62-14 11-30 12-36 10l-2-14c10 2 20-2 26-12 8-13 2-28-10-28z" fill="none" stroke="url(#tc-goldH)" stroke-width="11" stroke-linecap="round"/>
-<path d="M36 36h148c0 62-14 112-74 140C50 148 36 98 36 36z" fill="url(#tc-goldH)"/>
-<path d="M46 40h20c0 56 10 96 36 122-34-24-56-60-56-122z" fill="#fff" opacity=".28"/>
-<ellipse cx="110" cy="36" rx="74" ry="11" fill="#f9d96a"/><ellipse cx="110" cy="36" rx="64" ry="7" fill="#7a4b06"/>
-<g transform="translate(86 62) scale(.092)">${crest({ stars: true }).replace(/<svg[^>]*>|<\/svg>/g, '')}</g>
-</svg>`;
+  return `<img class="tc-trophy-img ${cls}" src="${TROPHY_URL}" alt="" draggable="false" decoding="async">`;
 }
 
 // ---------------------------------------------------------------- stadium backdrop

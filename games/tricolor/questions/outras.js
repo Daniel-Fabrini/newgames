@@ -17,10 +17,15 @@ export default [
    {
     "n": "Soccerway — São Paulo bate Corinthians nos pênaltis e conquista Supercopa Feminina",
     "u": "https://br.soccerway.com/noticias/futebol-supercopa-do-brasil-feminina-sao-paulo-bate-corinthians-nos-penaltis-e-conquista-supercopa-feminina/M7pI0b95"
+   },
+   {
+    "n": "Wikipedia (en) — 2025 Supercopa do Brasil de Futebol Feminino",
+    "u": "https://en.wikipedia.org/wiki/2025_Supercopa_do_Brasil_de_Futebol_Feminino"
    }
   ],
   "when": "2025",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-002",
@@ -39,10 +44,15 @@ export default [
    {
     "n": "Soccerway — São Paulo bate Corinthians nos pênaltis e conquista Supercopa Feminina",
     "u": "https://br.soccerway.com/noticias/futebol-supercopa-do-brasil-feminina-sao-paulo-bate-corinthians-nos-penaltis-e-conquista-supercopa-feminina/M7pI0b95"
+   },
+   {
+    "n": "Wikipedia (en) — 2025 Supercopa do Brasil de Futebol Feminino",
+    "u": "https://en.wikipedia.org/wiki/2025_Supercopa_do_Brasil_de_Futebol_Feminino"
    }
   ],
   "when": "2025",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-003",
@@ -61,14 +71,19 @@ export default [
    {
     "n": "Soccerway — São Paulo bate Corinthians nos pênaltis e conquista Supercopa Feminina",
     "u": "https://br.soccerway.com/noticias/futebol-supercopa-do-brasil-feminina-sao-paulo-bate-corinthians-nos-penaltis-e-conquista-supercopa-feminina/M7pI0b95"
+   },
+   {
+    "n": "Wikipedia (en) — 2025 Supercopa do Brasil de Futebol Feminino",
+    "u": "https://en.wikipedia.org/wiki/2025_Supercopa_do_Brasil_de_Futebol_Feminino"
    }
   ],
   "when": "2025",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-004",
-  "q": "Em que ano foi criada a Supercopa do Brasil Feminina, que o São Paulo conquistou em 2025?",
+  "q": "Em que ano foi disputada a primeira edição da Supercopa do Brasil Feminina, que o São Paulo conquistou em 2025?",
   "a": [
    "2020",
    "2021",
@@ -78,15 +93,21 @@ export default [
   "c": 2,
   "cat": "outras",
   "d": 3,
-  "exp": "Segundo a reportagem, o Corinthians havia vencido todas as edições da Supercopa Feminina desde a sua criação, em 2022, até o título do São Paulo.",
+  "exp": "Anunciada em 2021, a Supercopa Feminina teve sua primeira edição em 2022; o Corinthians venceu as três primeiras (2022 a 2024) até o título do São Paulo em 2025.",
   "src": [
    {
     "n": "Soccerway — São Paulo bate Corinthians nos pênaltis e conquista Supercopa Feminina",
     "u": "https://br.soccerway.com/noticias/futebol-supercopa-do-brasil-feminina-sao-paulo-bate-corinthians-nos-penaltis-e-conquista-supercopa-feminina/M7pI0b95"
+   },
+   {
+    "n": "Wikipedia (en) — Supercopa do Brasil de Futebol Feminino",
+    "u": "https://en.wikipedia.org/wiki/Supercopa_do_Brasil_de_Futebol_Feminino"
    }
   ],
   "when": "2022",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "fixed": true
  },
  {
   "id": "outras-005",
@@ -107,12 +128,17 @@ export default [
     "u": "https://www.dgabc.com.br/Noticia/4350625/sao-paulo-bate-corinthians-e-conquista-brasileiro-feminino"
    },
    {
-    "n": "ABC do ABC — São Paulo segura empate com o Corinthians e é campeão no Brasileirão Feminino",
-    "u": "https://abcdoabc.com.br/sao-paulo-segura-empate-por-1-a-1-com-o-corinth/"
+    "n": "Correio 24 Horas — São Paulo é campeão do Brasileirão Feminino com recorde de público e prêmio de R$ 2 milhões",
+    "u": "https://www.correio24horas.com.br/esportes/sao-paulo-e-campeao-do-brasileirao-feminino-com-recorde-de-publico-e-premio-historico-de-r-2-milhoes-1026"
+   },
+   {
+    "n": "Tribuna de Jundiaí — São Paulo é campeão do Brasileiro Feminino após empatar com o Corinthians",
+    "u": "https://tribunadejundiai.com.br/mais/esportes/sao-paulo-e-campeao-do-brasileiro-feminino-apos-empatar-com-o-corinthians/"
    }
   ],
   "when": "2026",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-006",
@@ -126,19 +152,20 @@ export default [
   "c": 1,
   "cat": "outras",
   "d": 3,
-  "exp": "Thiago Viana é o técnico do time feminino tricolor desde 2023 e comandou a equipe na conquista de 2026.",
+  "exp": "Thiago Viana, que trabalhava na base do clube desde 2017, foi anunciado técnico do time feminino em dezembro de 2022, assumiu em 2023 e comandou a equipe na conquista de 2026.",
   "src": [
    {
     "n": "DGABC — São Paulo bate Corinthians e conquista Brasileiro Feminino",
     "u": "https://www.dgabc.com.br/Noticia/4350625/sao-paulo-bate-corinthians-e-conquista-brasileiro-feminino"
    },
    {
-    "n": "Wikipedia (en) — São Paulo FC (women)",
-    "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(women)"
+    "n": "Tribuna de Jundiaí — São Paulo é campeão do Brasileiro Feminino após empatar com o Corinthians",
+    "u": "https://tribunadejundiai.com.br/mais/esportes/sao-paulo-e-campeao-do-brasileiro-feminino-apos-empatar-com-o-corinthians/"
    }
   ],
   "when": "2026",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-007",
@@ -157,10 +184,19 @@ export default [
    {
     "n": "ABC do ABC — São Paulo segura empate com o Corinthians e é campeão no Brasileirão Feminino",
     "u": "https://abcdoabc.com.br/sao-paulo-segura-empate-por-1-a-1-com-o-corinth/"
+   },
+   {
+    "n": "Tribuna de Jundiaí — São Paulo é campeão do Brasileiro Feminino após empatar com o Corinthians",
+    "u": "https://tribunadejundiai.com.br/mais/esportes/sao-paulo-e-campeao-do-brasileiro-feminino-apos-empatar-com-o-corinthians/"
+   },
+   {
+    "n": "Correio 24 Horas — São Paulo é campeão do Brasileirão Feminino com recorde de público e prêmio de R$ 2 milhões",
+    "u": "https://www.correio24horas.com.br/esportes/sao-paulo-e-campeao-do-brasileirao-feminino-com-recorde-de-publico-e-premio-historico-de-r-2-milhoes-1026"
    }
   ],
   "when": "2026",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-008",
@@ -174,15 +210,24 @@ export default [
   "c": 3,
   "cat": "outras",
   "d": 2,
-  "exp": "O São Paulo foi campeão da primeira edição do Brasileiro feminino da CBF, disputada de 1997 a 2001.",
+  "exp": "Em 1997 o São Paulo venceu o I Campeonato Brasileiro de Futebol Feminino, promovido pela CBF; a entidade hoje só reconhece os títulos a partir de 2013.",
   "src": [
    {
     "n": "DGABC — Entenda por que CBF considera inédito o título do Brasileirão Feminino do São Paulo",
     "u": "https://www.dgabc.com.br/Noticia/4350637/entenda-por-que-cbf-considera-inedito-o-titulo-do-brasileirao-feminino-do-sao-paulo"
+   },
+   {
+    "n": "Site oficial do São Paulo — Campeão Brasileiro Feminino de 1997",
+    "u": "https://www.saopaulofc.net/2025-11-30_campeao-brasileiro-feminino-de-1997/"
+   },
+   {
+    "n": "Placar — São Paulo rumo ao bi ou título inédito? Entenda confusão no Brasileirão feminino",
+    "u": "https://placar.com.br/futebol-feminino/sao-paulo-rumo-ao-bi-ou-titulo-inedito-entenda-confusao-no-brasileirao-feminino/"
    }
   ],
   "when": "1997",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-009",
@@ -201,10 +246,19 @@ export default [
    {
     "n": "DGABC — Entenda por que CBF considera inédito o título do Brasileirão Feminino do São Paulo",
     "u": "https://www.dgabc.com.br/Noticia/4350637/entenda-por-que-cbf-considera-inedito-o-titulo-do-brasileirao-feminino-do-sao-paulo"
+   },
+   {
+    "n": "Site oficial do São Paulo — Campeão Brasileiro Feminino de 1997",
+    "u": "https://www.saopaulofc.net/2025-11-30_campeao-brasileiro-feminino-de-1997/"
+   },
+   {
+    "n": "Placar — São Paulo rumo ao bi ou título inédito? Entenda confusão no Brasileirão feminino",
+    "u": "https://placar.com.br/futebol-feminino/sao-paulo-rumo-ao-bi-ou-titulo-inedito-entenda-confusao-no-brasileirao-feminino/"
    }
   ],
   "when": "1997",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-010",
@@ -223,10 +277,15 @@ export default [
    {
     "n": "DGABC — Entenda por que CBF considera inédito o título do Brasileirão Feminino do São Paulo",
     "u": "https://www.dgabc.com.br/Noticia/4350637/entenda-por-que-cbf-considera-inedito-o-titulo-do-brasileirao-feminino-do-sao-paulo"
+   },
+   {
+    "n": "Placar — São Paulo rumo ao bi ou título inédito? Entenda confusão no Brasileirão feminino",
+    "u": "https://placar.com.br/futebol-feminino/sao-paulo-rumo-ao-bi-ou-titulo-inedito-entenda-confusao-no-brasileirao-feminino/"
    }
   ],
   "when": "2013",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-011",
@@ -249,10 +308,15 @@ export default [
    {
     "n": "90min — São Paulo finalista do Brasileirão Feminino e vaga inédita na Libertadores",
     "u": "https://www.90min.com/pt-br/posts/finalista-brasileirao-feminino-sao-paulo-vaga-inedita-libertadores"
+   },
+   {
+    "n": "Correio 24 Horas — São Paulo é campeão do Brasileirão Feminino com recorde de público e prêmio de R$ 2 milhões",
+    "u": "https://www.correio24horas.com.br/esportes/sao-paulo-e-campeao-do-brasileirao-feminino-com-recorde-de-publico-e-premio-historico-de-r-2-milhoes-1026"
    }
   ],
   "when": "2026",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-012",
@@ -273,12 +337,13 @@ export default [
     "u": "https://www.90min.com/pt-br/posts/finalista-brasileirao-feminino-sao-paulo-vaga-inedita-libertadores"
    },
    {
-    "n": "Wikipedia (en) — São Paulo FC (women)",
-    "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(women)"
+    "n": "Itatiaia — São Paulo x Corinthians: tudo sobre a final inédita do Brasileiro Feminino (2024)",
+    "u": "https://www.itatiaia.com.br/esportes/futebol/futebol-feminino/brasileiro-feminino/sao-paulo-x-corinthians-tudo-sobre-a-final-inedita-do-brasileiro-feminino/"
    }
   ],
   "when": "2024",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-013",
@@ -297,10 +362,15 @@ export default [
    {
     "n": "90min — Corinthians vence São Paulo no Morumbis e abre vantagem na final (15/09/2024)",
     "u": "https://www.90min.com/pt-br/posts/corinthians-vence-sao-paulo-morumbis-e-abre-vantagem-final-brasileirao-feminino-15-09-2024"
+   },
+   {
+    "n": "CNN Brasil — Brasileirão Feminino: Corinthians vence São Paulo e se aproxima do hexa",
+    "u": "https://www.cnnbrasil.com.br/esportes/futebol/brasileirao-feminino-corinthians-vence-sao-paulo-e-se-aproxima-do-hexa/"
    }
   ],
   "when": "2024",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-014",
@@ -319,10 +389,15 @@ export default [
    {
     "n": "90min — São Paulo finalista do Brasileirão Feminino e vaga inédita na Libertadores",
     "u": "https://www.90min.com/pt-br/posts/finalista-brasileirao-feminino-sao-paulo-vaga-inedita-libertadores"
+   },
+   {
+    "n": "Lance! — Libertadores Feminina de 2024 tem três equipes brasileiras; duas já garantiram vagas para 2025",
+    "u": "https://www.lance.com.br/libertadores/libertadores-feminina-de-2024-tera-tres-equipes-brasileiras-corinthians-e-sao-paulo-ja-garantiram-vaga-para-2025.html"
    }
   ],
   "when": "2025",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-015",
@@ -336,19 +411,24 @@ export default [
   "c": 2,
   "cat": "outras",
   "d": 4,
-  "exp": "Na estreia na Libertadores Feminina, o São Paulo avançou do Grupo C, mas caiu para o Deportivo Cali nas quartas.",
+  "exp": "Na estreia na Libertadores Feminina, o São Paulo passou da fase de grupos (duas vitórias e uma derrota), mas caiu para o Deportivo Cali nas quartas, por 2 a 0.",
   "src": [
    {
     "n": "Wikipedia (en) — São Paulo FC (women)",
     "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(women)"
+   },
+   {
+    "n": "Gazeta Esportiva — São Paulo perde do Deportivo Cali e se despede da Libertadores feminina nas quartas",
+    "u": "https://www.gazetaesportiva.com/times/sao-paulo/sao-paulo-perde-deportivo-cali-libertadores-feminina/"
    }
   ],
   "when": "2025",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-016",
-  "q": "Que atacante, ex-seleção brasileira, foi anunciada pelo futebol feminino do São Paulo em 14 de janeiro de 2019?",
+  "q": "Que atacante da seleção brasileira foi anunciada pelo futebol feminino do São Paulo em 14 de janeiro de 2019?",
   "a": [
    "Marta",
    "Formiga",
@@ -363,10 +443,19 @@ export default [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube (futebol feminino)",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube_(futebol_feminino)"
+   },
+   {
+    "n": "Gazeta Esportiva — São Paulo anuncia Cristiane para o futebol feminino",
+    "u": "https://www.gazetaesportiva.com/times/sao-paulo/sao-paulo-anuncia-cristiane-para-o-futebol-feminino/"
+   },
+   {
+    "n": "Goal — Especulada no Barcelona, Cristiane é anunciada como reforço da equipe feminina do São Paulo",
+    "u": "https://www.goal.com/br/not%C3%ADcias/especulada-no-barcelona-cristiane-e-anunciada-como-reforco-da-equipe-feminina-do-sao-paulo/xi4fa808zgm41ltfaubi75hq5"
    }
   ],
   "when": "2019",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-017",
@@ -380,19 +469,20 @@ export default [
   "c": 2,
   "cat": "outras",
   "d": 3,
-  "exp": "A desativação foi anunciada em março de 2000, quando muitas jogadoras brasileiras seguiram para a liga profissional dos EUA.",
+  "exp": "O departamento feminino foi encerrado em 2000 (a Wikipédia fala em março; o histórico do clube, em data pouco posterior aos Jogos de Sydney), depois da fase vitoriosa iniciada em 1997.",
   "src": [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube (futebol feminino)",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube_(futebol_feminino)"
    },
    {
-    "n": "Wikipedia (en) — São Paulo FC (women)",
-    "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(women)"
+    "n": "SPFCpédia (site oficial, 2019) — Grandes Ídolos: futebol feminino",
+    "u": "https://www.spfcpedia.com.br/artigos/B09_Feminino.pdf"
    }
   ],
   "when": "2000",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-018",
@@ -409,16 +499,17 @@ export default [
   "exp": "O time reativado em 2015 chegou à decisão estadual e foi vice-campeão, mas acabou desfeito pouco depois por falta de patrocínio.",
   "src": [
    {
-    "n": "Wikipedia (en) — São Paulo FC (women)",
-    "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(women)"
-   },
-   {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube (futebol feminino)",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube_(futebol_feminino)"
+   },
+   {
+    "n": "Campeões do Futebol — Campeonato Paulista de Futebol Feminino",
+    "u": "https://www.campeoesdofutebol.com.br/paulista_feminino.html"
    }
   ],
   "when": "2015",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-019",
@@ -439,12 +530,17 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube_(futebol_feminino)"
    },
    {
-    "n": "Wikipedia (en) — São Paulo FC (women)",
-    "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(women)"
+    "n": "Campeões do Futebol — Campeonato Paulista de Futebol Feminino",
+    "u": "https://www.campeoesdofutebol.com.br/paulista_feminino.html"
+   },
+   {
+    "n": "SPFCpédia (site oficial, 2019) — Grandes Ídolos: futebol feminino",
+    "u": "https://www.spfcpedia.com.br/artigos/B09_Feminino.pdf"
    }
   ],
   "when": "1997–1999",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-020",
@@ -463,10 +559,19 @@ export default [
    {
     "n": "Wikipedia (en) — São Paulo FC (women)",
     "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(women)"
+   },
+   {
+    "n": "DOL — São Paulo aplica goleada histórica no Paulistão feminino",
+    "u": "https://dol.com.br/esporte/esporte-brasil/612164/sao-paulo-aplica-goleada-historica-no-paulistao-feminino"
+   },
+   {
+    "n": "Jornal de Brasília — São Paulo goleia o Taboão por 29 a 0 pelo Paulista feminino",
+    "u": "https://jornaldebrasilia.com.br/torcida/sao-paulo-goleia-o-taboao-por-29-a-0-pelo-paulista-feminino/"
    }
   ],
   "when": "2020",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-021",
@@ -488,11 +593,12 @@ export default [
    }
   ],
   "when": "1998",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "outras-022",
-  "q": "Quem é a maior artilheira da história do futebol feminino do São Paulo, com 177 gols em 49 partidas (dados da Wikipédia)?",
+  "q": "Segundo o site oficial do São Paulo, que atacante do time feminino marcou 57 gols em 27 jogos em 1997 e teria passado dos 200 gols pelo clube?",
   "a": [
    "Cristiane",
    "Kátia Cilene",
@@ -502,15 +608,25 @@ export default [
   "c": 1,
   "cat": "outras",
   "d": 3,
-  "exp": "Kátia Cilene, atacante da fase inicial do time (1997–2000), soma 177 gols, a melhor média de gols por jogo do clube.",
+  "exp": "Kátia Cilene (1997–2000) é tida como a maior artilheira do time feminino. O clube estima mais de 200 gols (a SPFCpédia fala em mais de 230), enquanto a Wikipédia registra 177 gols em 49 jogos.",
   "src": [
+   {
+    "n": "Site oficial do São Paulo — 25 anos do primeiro título do futebol feminino",
+    "u": "https://www.saopaulofc.net/25-anos-do-primeiro-titulo-do-futebol-feminino/"
+   },
+   {
+    "n": "SPFCpédia (site oficial, 2019) — Grandes Ídolos: futebol feminino",
+    "u": "https://www.spfcpedia.com.br/artigos/B09_Feminino.pdf"
+   },
    {
     "n": "Wikipedia (en) — São Paulo FC (women)",
     "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(women)"
    }
   ],
   "when": "1997–2000",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "conflict": true
  },
  {
   "id": "outras-023",
@@ -527,16 +643,17 @@ export default [
   "exp": "José Duarte montou o time em 1997 e é o técnico com mais títulos na história do futebol feminino do São Paulo.",
   "src": [
    {
-    "n": "Wikipedia (en) — São Paulo FC (women)",
-    "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(women)"
-   },
-   {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube (futebol feminino)",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube_(futebol_feminino)"
+   },
+   {
+    "n": "Site oficial do São Paulo — Campeão Brasileiro Feminino de 1997",
+    "u": "https://www.saopaulofc.net/2025-11-30_campeao-brasileiro-feminino-de-1997/"
    }
   ],
   "when": "1997",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-024",
@@ -550,19 +667,20 @@ export default [
   "c": 0,
   "cat": "outras",
   "d": 3,
-  "exp": "Lucas Piccinato dirigiu a equipe em 131 jogos, o maior número entre os técnicos do time feminino.",
+  "exp": "Lucas Piccinato deixou o clube em dezembro de 2022, encerrando um ciclo de quatro anos, com os títulos da Série A2 de 2019 e da Brasil Ladies Cup de 2021.",
   "src": [
-   {
-    "n": "Wikipedia (en) — São Paulo FC (women)",
-    "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(women)"
-   },
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube (futebol feminino)",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube_(futebol_feminino)"
+   },
+   {
+    "n": "Gazeta Esportiva — São Paulo anuncia saída do técnico do time feminino Lucas Piccinato",
+    "u": "https://www.gazetaesportiva.com/times/sao-paulo/sao-paulo-anuncia-saida-do-tecnico-do-time-feminino-lucas-piccinato/"
    }
   ],
   "when": "2019–2022",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-025",
@@ -583,12 +701,13 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube_(futebol_feminino)"
    },
    {
-    "n": "Wikipedia (en) — São Paulo FC (women)",
-    "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(women)"
+    "n": "SPFC 24 Horas — São Paulo visa obras no estádio em Cotia para receber jogos de base e feminino",
+    "u": "https://spfc24horas.com.br/sao-paulo-visa-obras-no-estadio-em-cotia-para-receber-jogos-de-base-e-feminino/"
    }
   ],
   "when": "2019",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-026",
@@ -609,12 +728,13 @@ export default [
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube_(futebol_feminino)"
    },
    {
-    "n": "Wikipedia (en) — São Paulo FC (women)",
-    "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(women)"
+    "n": "Goal — Especulada no Barcelona, Cristiane é anunciada como reforço da equipe feminina do São Paulo",
+    "u": "https://www.goal.com/br/not%C3%ADcias/especulada-no-barcelona-cristiane-e-anunciada-como-reforco-da-equipe-feminina-do-sao-paulo/xi4fa808zgm41ltfaubi75hq5"
    }
   ],
   "when": "2017",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-027",
@@ -633,9 +753,14 @@ export default [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube (futebol feminino)",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube_(futebol_feminino)"
+   },
+   {
+    "n": "Lance! (Lancepédia) — Como os times femininos da Série A são popularmente conhecidos?",
+    "u": "https://www.lance.com.br/lancepedia/alcunhas-dos-times-femininos-do-brasil-apelidos.html"
    }
   ],
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-028",
@@ -649,19 +774,20 @@ export default [
   "c": 3,
   "cat": "outras",
   "d": 4,
-  "exp": "A Brasil Ladies Cup de 2021 consta entre os torneios amistosos vencidos pelo time feminino.",
+  "exp": "Em 19 de dezembro de 2021 o São Paulo venceu o Santos por 3 a 2, no Allianz Parque, e ficou com a primeira edição da Brasil Ladies Cup.",
   "src": [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube (futebol feminino)",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube_(futebol_feminino)"
    },
    {
-    "n": "Wikipedia (en) — São Paulo FC (women)",
-    "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(women)"
+    "n": "Site oficial do São Paulo — São Paulo vence o Santos e conquista o Brasil Ladies Cup",
+    "u": "https://www.saopaulofc.net/sao-paulo-vence-o-santos-e-conquista-o-brasil-ladies-cup/"
    }
   ],
   "when": "2021",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-029",
@@ -680,10 +806,15 @@ export default [
    {
     "n": "Gazeta Esportiva — São Paulo vence o Biguá e conquista a Champions League das Américas de basquete",
     "u": "https://www.gazetaesportiva.com/times/sao-paulo/sao-paulo-vence-o-bigua-e-conquista-a-champions-league-das-americas-de-basquete-de-forma-invicta/"
+   },
+   {
+    "n": "Olimpíada Todo Dia — São Paulo bate Biguá e levanta sua primeira taça internacional",
+    "u": "https://olimpiadatododia.com.br/basquete/430708-sao-paulo-final-champions-league-americas-basquete-ao-vivo"
    }
   ],
   "when": "2022",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-030",
@@ -702,10 +833,15 @@ export default [
    {
     "n": "Gazeta Esportiva — São Paulo vence o Biguá e conquista a Champions League das Américas de basquete",
     "u": "https://www.gazetaesportiva.com/times/sao-paulo/sao-paulo-vence-o-bigua-e-conquista-a-champions-league-das-americas-de-basquete-de-forma-invicta/"
+   },
+   {
+    "n": "Olimpíada Todo Dia — São Paulo bate Biguá e levanta sua primeira taça internacional",
+    "u": "https://olimpiadatododia.com.br/basquete/430708-sao-paulo-final-champions-league-americas-basquete-ao-vivo"
    }
   ],
   "when": "2022",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-031",
@@ -719,15 +855,20 @@ export default [
   "c": 2,
   "cat": "outras",
   "d": 4,
-  "exp": "O São Paulo venceu por 98 a 84, com o Biguá reagindo apenas no último quarto (24 a 14).",
+  "exp": "O São Paulo venceu por 98 a 84; após três quartos vencia por 84 a 60, e o Biguá reagiu só no último período (24 a 14).",
   "src": [
    {
     "n": "Gazeta Esportiva — São Paulo vence o Biguá e conquista a Champions League das Américas de basquete",
     "u": "https://www.gazetaesportiva.com/times/sao-paulo/sao-paulo-vence-o-bigua-e-conquista-a-champions-league-das-americas-de-basquete-de-forma-invicta/"
+   },
+   {
+    "n": "Olimpíada Todo Dia — São Paulo bate Biguá e levanta sua primeira taça internacional",
+    "u": "https://olimpiadatododia.com.br/basquete/430708-sao-paulo-final-champions-league-americas-basquete-ao-vivo"
    }
   ],
   "when": "2022",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-032",
@@ -746,10 +887,15 @@ export default [
    {
     "n": "Gazeta Esportiva — São Paulo vence o Biguá e conquista a Champions League das Américas de basquete",
     "u": "https://www.gazetaesportiva.com/times/sao-paulo/sao-paulo-vence-o-bigua-e-conquista-a-champions-league-das-americas-de-basquete-de-forma-invicta/"
+   },
+   {
+    "n": "Olimpíada Todo Dia — São Paulo bate Biguá e levanta sua primeira taça internacional",
+    "u": "https://olimpiadatododia.com.br/basquete/430708-sao-paulo-final-champions-league-americas-basquete-ao-vivo"
    }
   ],
   "when": "2022",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-033",
@@ -768,14 +914,19 @@ export default [
    {
     "n": "Gazeta Esportiva — São Paulo vence o Biguá e conquista a Champions League das Américas de basquete",
     "u": "https://www.gazetaesportiva.com/times/sao-paulo/sao-paulo-vence-o-bigua-e-conquista-a-champions-league-das-americas-de-basquete-de-forma-invicta/"
+   },
+   {
+    "n": "Olimpíada Todo Dia — São Paulo bate Biguá e levanta sua primeira taça internacional",
+    "u": "https://olimpiadatododia.com.br/basquete/430708-sao-paulo-final-champions-league-americas-basquete-ao-vivo"
    }
   ],
   "when": "2022",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-034",
-  "q": "O título da Champions League das Américas de 2022 deu ao São Paulo vaga no Mundial de Clubes de basquete de que ano?",
+  "q": "O título da Champions League das Américas de 2022 deu ao São Paulo vaga na Copa Intercontinental da Fiba (o Mundial de clubes de basquete) de que ano?",
   "a": [
    "2022",
    "2024",
@@ -785,15 +936,20 @@ export default [
   "c": 2,
   "cat": "outras",
   "d": 4,
-  "exp": "Segundo a Gazeta Esportiva, o título garantiu a vaga no Mundial de Clubes de 2023.",
+  "exp": "O São Paulo disputou a Copa Intercontinental de fevereiro de 2023, em Tenerife, e foi vice-campeão ao perder a final para o Lenovo Tenerife.",
   "src": [
    {
     "n": "Gazeta Esportiva — São Paulo vence o Biguá e conquista a Champions League das Américas de basquete",
     "u": "https://www.gazetaesportiva.com/times/sao-paulo/sao-paulo-vence-o-bigua-e-conquista-a-champions-league-das-americas-de-basquete-de-forma-invicta/"
+   },
+   {
+    "n": "Wikipedia (en) — 2023 FIBA Intercontinental Cup (February)",
+    "u": "https://en.wikipedia.org/wiki/2023_FIBA_Intercontinental_Cup_(February)"
    }
   ],
   "when": "2023",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-035",
@@ -812,10 +968,15 @@ export default [
    {
     "n": "Gazeta Esportiva — São Paulo vence o Biguá e conquista a Champions League das Américas de basquete",
     "u": "https://www.gazetaesportiva.com/times/sao-paulo/sao-paulo-vence-o-bigua-e-conquista-a-champions-league-das-americas-de-basquete-de-forma-invicta/"
+   },
+   {
+    "n": "Olimpíada Todo Dia — São Paulo bate Biguá e levanta sua primeira taça internacional",
+    "u": "https://olimpiadatododia.com.br/basquete/430708-sao-paulo-final-champions-league-americas-basquete-ao-vivo"
    }
   ],
   "when": "2022",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-036",
@@ -829,15 +990,20 @@ export default [
   "c": 1,
   "cat": "outras",
   "d": 3,
-  "exp": "O clube anunciou em maio de 2025 o fim do time masculino, três anos após o título continental invicto.",
+  "exp": "O clube anunciou em 19 de maio de 2025 o fim do time masculino, três anos após o título continental invicto.",
   "src": [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Poder360 — São Paulo encerra equipe masculina de basquete profissional",
+    "u": "https://www.poder360.com.br/poder-sportsmkt/sao-paulo-encerra-equipe-masculina-de-basquete-profissional/"
    }
   ],
   "when": "2025",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-037",
@@ -851,19 +1017,24 @@ export default [
   "c": 2,
   "cat": "outras",
   "d": 4,
-  "exp": "O time masculino venceu o Campeonato Paulista de 2021 e, em 2022, conquistou a Champions League das Américas.",
+  "exp": "Em outubro de 2021 o São Paulo bateu o Sesi Franca na final e ficou com o Paulista; em 2022, conquistou a Champions League das Américas.",
   "src": [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Federação Paulista de Basketball — São Paulo é campeão paulista!",
+    "u": "https://fpb.com.br/sao-paulo-e-campeao-paulista/"
    }
   ],
   "when": "2021",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-038",
-  "q": "Qual foi a melhor colocação do São Paulo na Liga Nacional de Futsal, alcançada em 1999 em parceria com Osasco?",
+  "q": "Em que posição o São Paulo, em parceria com Osasco, terminou a Liga Nacional de Futsal de 1999?",
   "a": [
    "4º lugar entre 13 equipes",
    "Vice-campeão",
@@ -873,15 +1044,20 @@ export default [
   "c": 0,
   "cat": "outras",
   "d": 4,
-  "exp": "O clube disputou a Liga Nacional dezesseis vezes, sempre em parceria; o melhor resultado foi o 4º lugar em 1999.",
+  "exp": "Na Liga de 1999, vencida pelo Atlético/Pax de Minas, o São Paulo/Osasco foi o 4º entre 13 equipes; segundo a Wikipédia, é a melhor campanha do clube na competição.",
   "src": [
    {
     "n": "Wikipedia (en) — São Paulo FC (futsal)",
     "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(futsal)"
+   },
+   {
+    "n": "RSSSF Brasil — Brazil, Futsal League 1999",
+    "u": "http://www.rsssfbrasil.com/tablesae/br1999fsl.htm"
    }
   ],
   "when": "1999",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-039",
@@ -904,10 +1080,15 @@ export default [
    {
     "n": "Wikipedia (en) — São Paulo FC (futsal)",
     "u": "https://en.wikipedia.org/wiki/S%25C3%25A3o_Paulo_FC_(futsal)"
+   },
+   {
+    "n": "SPFCpédia (site oficial, 2019) — Conquistas: esportes",
+    "u": "https://www.spfcpedia.com.br/artigos/F06_Esportes.pdf"
    }
   ],
   "when": "1998",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-040",
@@ -929,7 +1110,8 @@ export default [
    }
   ],
   "when": "1969",
-  "ok": true
+  "ok": true,
+  "v2": false
  },
  {
   "id": "outras-041",
@@ -948,10 +1130,15 @@ export default [
    {
     "n": "Wikipédia (pt) — Adhemar Ferreira da Silva",
     "u": "https://pt.wikipedia.org/wiki/Adhemar_Ferreira_da_Silva"
+   },
+   {
+    "n": "World Athletics — Brazil's two-time Olympic champion Adhemar Ferreira da Silva passes away",
+    "u": "https://worldathletics.org/news/news/brazilian-olympic-champion-adhemar-ferreira-d"
    }
   ],
   "when": "1952–1956",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-042",
@@ -974,10 +1161,15 @@ export default [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "World Athletics — Brazil's two-time Olympic champion Adhemar Ferreira da Silva passes away",
+    "u": "https://worldathletics.org/news/news/brazilian-olympic-champion-adhemar-ferreira-d"
    }
   ],
   "when": "1952–1956",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-043",
@@ -996,10 +1188,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Adhemar Ferreira da Silva",
     "u": "https://pt.wikipedia.org/wiki/Adhemar_Ferreira_da_Silva"
+   },
+   {
+    "n": "World Athletics — Brazil's two-time Olympic champion Adhemar Ferreira da Silva passes away",
+    "u": "https://worldathletics.org/news/news/brazilian-olympic-champion-adhemar-ferreira-d"
+   },
+   {
+    "n": "Site oficial do São Paulo — A medalha de ouro olímpica e o recorde mundial de Adhemar Ferreira da Silva em 1952",
+    "u": "https://www.saopaulofc.net/a-medalha-de-ouro-olimpica-e-o-recorde-mundial-de-adhemar-ferreira-da-silva-em-1952/"
    }
   ],
   "when": "1952",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-044",
@@ -1018,10 +1219,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Adhemar Ferreira da Silva",
     "u": "https://pt.wikipedia.org/wiki/Adhemar_Ferreira_da_Silva"
+   },
+   {
+    "n": "World Athletics — Brazil's two-time Olympic champion Adhemar Ferreira da Silva passes away",
+    "u": "https://worldathletics.org/news/news/brazilian-olympic-champion-adhemar-ferreira-d"
+   },
+   {
+    "n": "Site oficial do São Paulo — A medalha de ouro olímpica e o recorde mundial de Adhemar Ferreira da Silva em 1952",
+    "u": "https://www.saopaulofc.net/a-medalha-de-ouro-olimpica-e-o-recorde-mundial-de-adhemar-ferreira-da-silva-em-1952/"
    }
   ],
   "when": "1955",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-045",
@@ -1035,15 +1245,20 @@ export default [
   "c": 0,
   "cat": "outras",
   "d": 3,
-  "exp": "Naquele dia ele registrou 16,01 m, a primeira vez que alguém passou dos 16 m.",
+  "exp": "Naquele dia ele registrou 16,01 m, primeira marca acima dos 16 m; em dezembro de 1950 já havia igualado o recorde de 16,00 m.",
   "src": [
    {
     "n": "Wikipédia (pt) — Adhemar Ferreira da Silva",
     "u": "https://pt.wikipedia.org/wiki/Adhemar_Ferreira_da_Silva"
+   },
+   {
+    "n": "World Athletics — Brazil's two-time Olympic champion Adhemar Ferreira da Silva passes away",
+    "u": "https://worldathletics.org/news/news/brazilian-olympic-champion-adhemar-ferreira-d"
    }
   ],
   "when": "1951",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-046",
@@ -1062,14 +1277,19 @@ export default [
    {
     "n": "Wikipédia (pt) — Adhemar Ferreira da Silva",
     "u": "https://pt.wikipedia.org/wiki/Adhemar_Ferreira_da_Silva"
+   },
+   {
+    "n": "Prefeitura de São Paulo (Patrimônio Histórico) — Adhemar Ferreira da Silva",
+    "u": "https://prefeitura.sp.gov.br/web/cultura/w/patrimonio_historico/adote_obra/33705"
    }
   ],
   "when": "1947",
-  "ok": true
+  "ok": true,
+  "v2": true
  },
  {
   "id": "outras-047",
-  "q": "Em que ano foi criado o departamento de atletismo do São Paulo, que revelou Adhemar Ferreira da Silva?",
+  "q": "Segundo a Wikipédia, em que ano foi criado o departamento de atletismo do São Paulo, que revelou Adhemar Ferreira da Silva?",
   "a": [
    "1930",
    "1935",
@@ -1079,15 +1299,25 @@ export default [
   "c": 3,
   "cat": "outras",
   "d": 4,
-  "exp": "O atletismo tricolor começou em 1943 e venceu 14 Paulistas seguidos até 1957.",
+  "exp": "Wikipédia e imprensa apontam 1943, com 14 Paulistas seguidos de 1944 a 1957. O site oficial não dá a data de criação e lista um título por equipes na São Silvestre já em 1942.",
   "src": [
    {
     "n": "Wikipédia (pt) — São Paulo Futebol Clube",
     "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+   },
+   {
+    "n": "Dry Telecom — São Paulo FC: soberania além do futebol",
+    "u": "https://drytelecom.com.br/artigo/sao-paulo-fc-soberania-alem-do-futebol"
+   },
+   {
+    "n": "Site oficial do São Paulo — No dia do atletismo, relembre a história do Tricolor com o esporte",
+    "u": "https://www.saopaulofc.net/no-dia-do-atletismo-relembre-a-historia-do-tricolor-com-o-esporte/"
    }
   ],
   "when": "1943",
-  "ok": true
+  "ok": true,
+  "v2": true,
+  "conflict": true
  },
  {
   "id": "outras-048",
@@ -1106,9 +1336,18 @@ export default [
    {
     "n": "Wikipédia (pt) — Adhemar Ferreira da Silva",
     "u": "https://pt.wikipedia.org/wiki/Adhemar_Ferreira_da_Silva"
+   },
+   {
+    "n": "World Athletics — Brazil's two-time Olympic champion Adhemar Ferreira da Silva passes away",
+    "u": "https://worldathletics.org/news/news/brazilian-olympic-champion-adhemar-ferreira-d"
+   },
+   {
+    "n": "Site oficial do São Paulo — A medalha de ouro olímpica e o recorde mundial de Adhemar Ferreira da Silva em 1952",
+    "u": "https://www.saopaulofc.net/a-medalha-de-ouro-olimpica-e-o-recorde-mundial-de-adhemar-ferreira-da-silva-em-1952/"
    }
   ],
   "when": "2001",
-  "ok": true
+  "ok": true,
+  "v2": true
  }
 ];
