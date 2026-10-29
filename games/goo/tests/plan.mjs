@@ -42,7 +42,7 @@ function potentialFor(level) {
   };
 }
 
-export function plan(level, { beam = 4, expand = 10, step = 20, log = console.log, maxDepth = 40, keep = 36, extra = 10 } = {}) {
+export function plan(level, { beam = 4, expand = 10, step = 20, log = console.log, maxDepth = 40, keep = 36, extra = 10, deadline = Infinity } = {}) {
   const pot = potentialFor(level);
   const root = new Sim(level);
   settle(root);
@@ -52,6 +52,7 @@ export function plan(level, { beam = 4, expand = 10, step = 20, log = console.lo
   const total = Object.values(level.stock).reduce((a, c) => a + c, 0);
   const work = new Sim(level);
   for (let depth = 0; depth < Math.min(maxDepth, total); depth++) {
+    if (Date.now() > deadline) return null;
     const children = [];
     for (const st of states) {
       work.restore(st.snap);
@@ -140,7 +141,7 @@ if (process.argv[1] && process.argv[1].endsWith('plan.mjs')) {
     console.log('planning', id);
     let seq = null;
     for (const cfg of [{ beam: 3, expand: 6 }, { beam: 5, expand: 10 }, { beam: 8, expand: 14, step: 16 }]) {
-      seq = plan(level, cfg);
+      seq = plan(level, { ...cfg, deadline: Date.now() + (Number(process.env.LIMIT) || 240) * 1000 });
       if (seq) {
         const res = playSolution(level, seq);
         if (res.sim.status === 'won') break;

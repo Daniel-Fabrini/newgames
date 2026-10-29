@@ -40,5 +40,5 @@ rod(1.8, red, [-0.4, 0.4])
 slab = parent(objs, loc=(0, 0.5, 2.0), rot=(46, 0, -16))
 soccer_ball(1.0, loc=(-0.3, -2.5, 1.0), rot=(20, 10, 40))
 
-fit(0.84, 0.75)
+fit(0.78, -0.35)
 render('foosball')

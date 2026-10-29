@@ -737,8 +737,9 @@ export function createRenderer(canvas) {
     const pipe = lv.pipe;
     const a0 = (lv.anchors && lv.anchors[0]) || [60, 600];
     // saved goos wait next to the pipe (or beside the first anchor for height goals) and hop in on a win
-    const baseX = pipe ? pipe.x + pipe.r + 22 : a0[0] - 46;
-    const dir = pipe ? 1 : -1;
+    let dir = pipe ? 1 : -1;
+    if (pipe && pipe.x + pipe.r + 22 + (need - 1) * 32 > lv.bounds[2] - 16) dir = -1;
+    const baseX = pipe ? pipe.x + dir * (pipe.r + 22) : a0[0] - 46;
     const gy = (pipe ? pipe.y + 20 : a0[1] + 8) - 15;
     const wonT = sim.status === 'won' ? f.time - f.winTime : -1;
     for (let i = 0; i < need; i++) {
