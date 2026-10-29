@@ -194,7 +194,7 @@ def build_table(only_rails=False):
     objs['rails'] = []
     # rails (hold rod holes in reality)
     for x0, x1 in ((-6.5, 0), (68, 74.5)):
-        objs['rails'].append(rect(x0, -14, x1, 134, 0, 2.7, woodm, bevel=0.9))
+        objs['rails'].append(rect(x0, -14, x1, 134, 0, 2.7, woodm, bevel=1.3))
     gold0 = metal('#e0b650', 0.16, name='gold')
     for x in (-3.25, 71.25):
         objs['rails'].append(rect(x - 0.3, -11.5, x + 0.3, 131.5, 2.5, 2.95, gold0, bevel=0.15))
@@ -202,9 +202,9 @@ def build_table(only_rails=False):
         return objs
     rect(-6.5, -14, 74.5, 134, -0.4, 1.0, woodd, bevel=0.2)
     for y0, y1, s0, s1 in ((-14, 0, -14, -9), (120, 134, 129, 134)):
-        rect(0, y0, 22, y1, 0, 2.7, woodm, bevel=0.8)
-        rect(46, y0, 68, y1, 0, 2.7, woodm, bevel=0.8)
-        rect(22, s0, 46, s1, 0, 2.7, woodm, bevel=0.8)
+        rect(0, y0, 22, y1, 0, 2.7, woodm, bevel=1.1)
+        rect(46, y0, 68, y1, 0, 2.7, woodm, bevel=1.1)
+        rect(22, s0, 46, s1, 0, 2.7, woodm, bevel=1.1)
     # pocket floor + nets
     for y0, y1, top in ((-9, 0, True), (120, 129, False)):
         rect(22, y0, 46, y1, 0.9, 1.15, dark, bevel=0.0)
@@ -250,7 +250,7 @@ def build_table(only_rails=False):
         pline(a, w * 0.8, Z, wm)
     pline([(0.6, 8.6), (0.6, 111.4)], w, Z, wm); pline([(67.4, 8.6), (67.4, 111.4)], w, Z, wm)
     # crest decal in the centre circle
-    image_decal(CREST, 14.0, 17.5, P(34, 59.5, 1.37), 'crest')
+    image_decal(CREST, 14.0, 16.0, P(34, 60, 1.37), 'crest')
     # score beads on the end strips
     gold = metal('#d9b04a', 0.18, name='gold')
     for yy, c1 in ((-11.5, '#2f7cff'), (131.5, '#e4372f')):
@@ -290,7 +290,7 @@ elif MODE == 'rails':
 elif MODE == 'men':
     CW, CH, PPU = 108, 264, 12
     sc = setup(CW, CH, 22.0, sun_energy=5.2, world=1.3)
-    skin = glossy('#f2c7a0', 0.4, 0.3, name='skin'); hair = glossy('#1b1410', 0.35, 0.5, name='hair')
+    skin = glossy('#ffd8b5', 0.4, 0.3, name='skin'); hair = glossy('#7a4f2a', 0.4, 0.4, name='hair')
     shoe = glossy('#111317', 0.25, 0.8, name='shoe'); sole = matte('#f2f2f2', 0.5, name='sole')
     kits = {
         0: dict(shirt='#f6f6f6', stripe1='#d8202a', stripe2='#111111', shorts='#111111', sock='#d8202a'),
@@ -299,7 +299,7 @@ elif MODE == 'men':
     figs = {}
     for team in (0, 1):
         k = kits[team]
-        sh = glossy(k['shirt'], 0.3, 0.6, name=f'shirt{team}'); s1 = glossy(k['stripe1'], 0.3, 0.6, name=f's1{team}')
+        sh = _mat(f'shirt{team}', k['shirt'], 0.35, 0.0, 0.5, '#ffffff' if team == 0 else '#2f7cff', 0.5 if team == 0 else 0.15); s1 = glossy(k['stripe1'], 0.3, 0.6, name=f's1{team}')
         s2 = glossy(k['stripe2'], 0.3, 0.6, name=f's2{team}'); sho = glossy(k['shorts'], 0.35, 0.5, name=f'shorts{team}')
         sk = glossy(k['sock'], 0.35, 0.5, name=f'sock{team}')
         parts = [
@@ -308,7 +308,7 @@ elif MODE == 'men':
             box((3.95, 0.6, 5.1), s2, loc=(0, 0.5, -1.9), bevel=0.12),
             sphere(0.95, sh, loc=(-1.95, -1.2, 0.3), seg=24), sphere(0.95, sh, loc=(1.95, -1.2, 0.3), seg=24),
             sphere(1.1, skin, loc=(0, -1.75, 1.9), seg=32),
-            sphere(1.15, hair, loc=(0, -1.95, 2.3), seg=32, scale=(1, 1, 0.6)),
+            sphere(1.12, hair, loc=(0, -2.35, 2.35), seg=32, scale=(1, 0.8, 0.55)),
             box((3.1, 2.0, 2.6), sho, loc=(0, -0.3, -5.6), bevel=0.35),
             box((2.6, 1.7, 2.8), sk, loc=(0, -0.1, -7.6), bevel=0.3),
             box((3.8, 3.4, 1.3), shoe, loc=(0, 0, -8.8), bevel=0.55),
