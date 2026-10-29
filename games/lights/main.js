@@ -1,37 +1,38 @@
 // Light Echo — shell entry. Modes: 'classic' | 'fast' | 'expert' (no mode → options overlay).
 // Pure rules live in logic.js; this file draws the glowing pads and runs the show/repeat loop.
 import STRINGS from './strings.js';
-import { MODES, createRun, timing } from './logic.js';
+import { MODES, createRun, timing, padCount } from './logic.js';
 
-const PALETTE = {
-  green: { c: '#35f07a', d: '#0e5a2c' },
-  red: { c: '#ff4d5e', d: '#6b1620' },
-  yellow: { c: '#ffd23a', d: '#6b5410' },
-  blue: { c: '#4d8dff', d: '#17316b' },
-  purple: { c: '#b46bff', d: '#431c70' },
-  cyan: { c: '#3be3ff', d: '#0f5560' },
-};
-const LAYOUT = {
-  4: ['green', 'red', 'yellow', 'blue'],
-  6: ['green', 'yellow', 'red', 'purple', 'blue', 'cyan'],
-};
-const FREQ = {
-  4: [261.63, 329.63, 392.0, 523.25],
-  6: [220.0, 261.63, 329.63, 392.0, 440.0, 523.25],
-};
+const PADS = [
+  { name: 'green', c: '#35f07a', d: '#0e5a2c', f: 261.63 },
+  { name: 'red', c: '#ff4d5e', d: '#6b1620', f: 293.66 },
+  { name: 'yellow', c: '#ffd23a', d: '#6b5410', f: 329.63 },
+  { name: 'blue', c: '#4d8dff', d: '#17316b', f: 392.0 },
+  { name: 'purple', c: '#b46bff', d: '#431c70', f: 440.0 },
+  { name: 'cyan', c: '#3be3ff', d: '#0f5560', f: 523.25 },
+  { name: 'orange', c: '#ff8a2a', d: '#6e3510', f: 587.33 },
+  { name: 'pink', c: '#ff6fc8', d: '#6b1f52', f: 659.25 },
+  { name: 'silver', c: '#e6e9f5', d: '#4a4d60', f: 783.99 },
+  { name: 'lime', c: '#c2f23a', d: '#4a5e12', f: 880.0 },
+];
 const NS = 'http://www.w3.org/2000/svg';
 
-function sectorPath(i, n) {
-  const start = n === 4 ? 180 : 240;
-  const span = 360 / n;
-  const a0 = ((start + i * span) * Math.PI) / 180;
-  const a1 = ((start + (i + 1) * span) * Math.PI) / 180;
+/** Angles (degrees) of pad i when the ring has n pads. */
+function span(i, n) {
+  const sp = 360 / n;
+  const start = n === 4 ? 180 : 270 - sp / 2;
+  return [start + i * sp, start + (i + 1) * sp];
+}
+function sectorPath(a0d, a1d) {
   const R = 187;
   const r = 69;
-  const half = 9; // half of the angular gap in svg units (stroke adds the rest)
+  const half = 7; // half of the angular gap in svg units (stroke adds the rest)
+  const a0 = (a0d * Math.PI) / 180;
+  const a1 = (a1d * Math.PI) / 180;
   const P = (rad, a) => `${(200 + rad * Math.cos(a)).toFixed(2)} ${(200 + rad * Math.sin(a)).toFixed(2)}`;
   const dO = half / R;
   const dI = half / r;
+  if (a1 - a0 < dI * 2 + 0.02) return 'M 200 200 Z';
   return `M ${P(R, a0 + dO)} A ${R} ${R} 0 0 1 ${P(R, a1 - dO)} L ${P(r, a1 - dI)} A ${r} ${r} 0 0 0 ${P(r, a0 + dI)} Z`;
 }
 
@@ -81,6 +82,8 @@ export async function mount(root, ctx) {
   let state = 'idle'; // idle | show | input | between | over
   let overlay = null;
   let pads = [];
+  let glosses = [];
+  let growRaf = 0;
   let nPads = MODES[cfg.mode].pads;
   const held = new Set();
 
@@ -111,7 +114,8 @@ export async function mount(root, ctx) {
   const hub = h('div', { class: 'g-lights-hub' }, hubLbl, hubNum, hubSub);
   const svg = document.createElementNS(NS, 'svg');
   svg.setAttribute('viewBox', '0 0 400 400');
-  const board = h('div', { class: 'g-lights-board locked', role: 'group', 'aria-label': t('board') }, svg, hub);
+  const banner = h('div', { class: 'g-lights-banner', 'aria-hidden': 'true' }, '');
+  const board = h('div', { class: 'g-lights-board locked', role: 'group', 'aria-label': t('board') }, svg, hub, banner);
   const status = h('div', { class: 'g-lights-status', role: 'status', 'aria-live': 'polite' }, '');
   const keyHint = h('span', null, '');
   const restartBtn = h('button', { class: 'icon-btn', 'aria-label': t('restart'), onclick: () => openOptions() }, '↺');
@@ -126,35 +130,74 @@ export async function mount(root, ctx) {
   );
   root.append(view);
 
-  function buildPads() {
-    nPads = MODES[cfg.mode].pads;
+  function setD(i, a0, a1) {
+    const d = sectorPath(a0, a1);
+    pads[i].setAttribute('d', d);
+    glosses[i].setAttribute('d', d);
+  }
+  function addPad(i) {
+    const pal = PADS[i];
+    const p = document.createElementNS(NS, 'path');
+    p.setAttribute('class', 'g-lights-pad');
+    p.setAttribute('style', `--c:${pal.c};--d:${pal.d}`);
+    p.setAttribute('tabindex', '0');
+    p.setAttribute('role', 'button');
+    p.setAttribute('aria-label', t('pad', { c: t('c_' + pal.name) }));
+    p.dataset.i = i;
+    const gl = document.createElementNS(NS, 'path');
+    gl.setAttribute('class', 'g-lights-gloss');
+    svg.append(p);
+    svg.append(gl);
+    pads.push(p);
+    glosses.push(gl);
+  }
+  function buildPads(n) {
+    cancelAnimationFrame(growRaf);
+    nPads = n;
     svg.replaceChildren();
     const defs = document.createElementNS(NS, 'defs');
     defs.innerHTML = '<linearGradient id="g-lights-gloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".30"/><stop offset=".45" stop-color="#fff" stop-opacity=".04"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></linearGradient>';
     svg.append(defs);
     pads = [];
-    for (let i = 0; i < nPads; i++) {
-      const name = LAYOUT[nPads][i];
-      const pal = PALETTE[name];
-      const d = sectorPath(i, nPads);
-      const p = document.createElementNS(NS, 'path');
-      p.setAttribute('d', d);
-      p.setAttribute('class', 'g-lights-pad');
-      p.setAttribute('style', `--c:${pal.c};--d:${pal.d}`);
-      p.setAttribute('tabindex', '0');
-      p.setAttribute('role', 'button');
-      p.setAttribute('aria-label', t('pad', { c: t('c_' + name) }));
-      p.dataset.i = i;
-      const gl = document.createElementNS(NS, 'path');
-      gl.setAttribute('d', d);
-      gl.setAttribute('class', 'g-lights-gloss');
-      svg.append(p);
-      svg.append(gl);
-      pads.push(p);
+    glosses = [];
+    for (let i = 0; i < n; i++) {
+      addPad(i);
+      setD(i, ...span(i, n));
     }
-    keyHint.textContent = t('keys', { n: nPads });
+    updateKeyHint();
   }
-  buildPads();
+  function updateKeyHint() {
+    keyHint.textContent = t('keys', { n: nPads > 9 ? '9/0' : nPads });
+  }
+  /** Add one pad: the ring re-lays out smoothly and the new wedge grows in. */
+  function growTo(n) {
+    const from = nPads;
+    if (n <= from) return;
+    const target = from + 1;
+    addPad(from);
+    nPads = target;
+    updateKeyHint();
+    const last = span(from - 1, from)[1];
+    const oldA = (i) => (i < from ? span(i, from) : [last, last]);
+    const newA = (i) => span(i, target);
+    const T = reduced ? 1 : 520;
+    const t0 = performance.now();
+    const step = (now) => {
+      const k = Math.min(1, (now - t0) / T);
+      const e = 1 - Math.pow(1 - k, 3);
+      for (let i = 0; i < target; i++) {
+        const [x0, x1] = oldA(i);
+        const [y0, y1] = newA(i);
+        setD(i, x0 + (y0 - x0) * e, x1 + (y1 - x1) * e);
+      }
+      if (k < 1 && alive) growRaf = requestAnimationFrame(step);
+    };
+    growRaf = requestAnimationFrame(step);
+    pads[from].classList.add('born');
+    later(() => pads[from].classList.remove('born'), 700);
+    if (n > target) later(() => growTo(n), T + 60);
+  }
+  buildPads(MODES[cfg.mode].pads);
 
   function layout() {
     const w = root.clientWidth;
@@ -191,11 +234,20 @@ export async function mount(root, ctx) {
       lives.setAttribute('aria-label', t('lives', { n: run ? run.lives : 3 }));
     }
   }
+  function showBanner(n) {
+    banner.textContent = t('plusLight', { n });
+    banner.classList.remove('show');
+    void banner.offsetWidth;
+    banner.classList.add('show');
+    setStatus(t('plusLight', { n }), 'good');
+    ctx.sfx.play('levelup');
+    vib([20, 30, 20]);
+  }
   const lock = (on) => board.classList.toggle('locked', on);
 
   function lightOn(i, dur) {
     pads[i].classList.add('lit');
-    const f = FREQ[nPads][i];
+    const f = PADS[i].f;
     tone({ freq: f, dur: Math.max(0.16, dur), type: 'sine', vol: 0.34 });
     tone({ freq: f * 2, dur: Math.max(0.12, dur * 0.7), type: 'triangle', vol: 0.07 });
   }
@@ -210,7 +262,9 @@ export async function mount(root, ctx) {
     clearTimers();
     closeOverlay();
     safe(() => store.update('stats', (s) => ({ ...s, plays: (s.plays || 0) + 1 }), {}));
-    run = createRun({ mode: cfg.mode, strict: cfg.strict, seed: (Math.random() * 4294967296) >>> 0 });
+    const sr = safe(() => store.get('startRound', 1), 1); // dev hook: jump straight to a later round
+    run = createRun({ mode: cfg.mode, strict: cfg.strict, seed: (Math.random() * 4294967296) >>> 0, startRound: Number.isFinite(+sr) ? +sr : 1 });
+    buildPads(run.pads);
     state = 'between';
     pads.forEach((p) => p.classList.remove('lit'));
     board.classList.remove('dead');
@@ -222,6 +276,18 @@ export async function mount(root, ctx) {
 
   function playSequence() {
     if (!run || run.status !== 'playing') return;
+    const want = run.pads;
+    if (want !== nPads) {
+      state = 'between';
+      lock(true);
+      const added = want - nPads;
+      growTo(want);
+      showBanner(added);
+      const idx = want - 1;
+      later(() => flash(idx, 380), 600);
+      later(playSequence, 1500 + (added - 1) * 580);
+      return;
+    }
     state = 'show';
     lock(true);
     held.clear();
@@ -304,7 +370,7 @@ export async function mount(root, ctx) {
       const p = k;
       later(() => {
         pads[p].classList.add('lit');
-        tone({ freq: FREQ[n][k] * 2, dur: 0.1, type: 'triangle', vol: 0.12 });
+        tone({ freq: PADS[k].f * 2, dur: 0.1, type: 'triangle', vol: 0.12 });
       }, k * 55);
       later(() => lightOff(p), k * 55 + 130);
     }
@@ -360,7 +426,7 @@ export async function mount(root, ctx) {
         chip(cfg.mode === m, t(m), t(m + 'Sub'), () => {
           cfg.mode = m;
           saveCfg();
-          buildPads();
+          buildPads(MODES[cfg.mode].pads);
           hud();
           rebuild();
         }),
@@ -388,7 +454,7 @@ export async function mount(root, ctx) {
         info.newRec ? h('p', { class: 'rec' }, '🏆 ' + t('newRecord')) : best ? h('p', null, t('bestRounds', { n: best.round })) : null,
       ];
     } else {
-      head = [h('h3', null, ctx.pick({ pt: 'Siga as Luzes', en: 'Light Echo', es: 'Sigue las Luces' })), h('p', null, best ? t('bestRounds', { n: best.round }) : t('noBest'))];
+      head = [h('h3', null, ctx.pick({ pt: 'Siga as Luzes', en: 'Light Echo', es: 'Sigue las Luces' })), h('p', null, best ? t('bestRounds', { n: best.round }) : t('noBest')), h('p', { style: 'font-size:12.5px;opacity:.8' }, t('growNote'))];
     }
     const startBtn = h('button', { class: 'btn primary big block', onclick: () => begin() }, kind === 'over' ? t('again') : t('start'));
     overlay = h(
@@ -430,13 +496,14 @@ export async function mount(root, ctx) {
   svg.addEventListener('pointerleave', up);
   svg.addEventListener('contextmenu', (e) => e.preventDefault());
 
+  const keyIdx = (k) => (k === '0' ? 9 : /^[1-9]$/.test(k) ? +k - 1 : -1);
   const keysDown = new Set();
   const onKeyDown = (e) => {
     if (overlay || e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
-    const n = parseInt(e.key, 10);
-    if (n >= 1 && n <= nPads) {
+    const ki = keyIdx(e.key);
+    if (ki >= 0 && ki < nPads) {
       keysDown.add(e.key);
-      press(n - 1);
+      press(ki);
       e.preventDefault();
       return;
     }
@@ -449,8 +516,8 @@ export async function mount(root, ctx) {
   const onKeyUp = (e) => {
     if (!keysDown.has(e.key)) return;
     keysDown.delete(e.key);
-    const n = parseInt(e.key, 10);
-    if (n >= 1 && n <= nPads) later(() => release(n - 1), 90);
+    const ki = keyIdx(e.key);
+    if (ki >= 0 && ki < nPads) later(() => release(ki), 90);
     else if (e.target?.dataset?.i !== undefined) later(() => release(+e.target.dataset.i), 90);
   };
   window.addEventListener('keydown', onKeyDown);

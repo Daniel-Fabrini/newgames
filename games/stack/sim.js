@@ -5,6 +5,7 @@ import * as C from './vendor/cannon-es.js';
 export const W = 1;
 export const H = 0.6;
 export const L = 3;
+export const TUNE = { hold: 10, pulled: 0.3, side: 0.1, floor: 2 };
 export const GAP = 0.012; // lateral gap between neighbours at the start
 export const LAYERS = 18;
 export const SLOTS = [-(W + GAP), 0, W + GAP];
@@ -49,9 +50,10 @@ export function createSim(diffId = 'normal', saved = null) {
     const la = a.userData ? a.userData.layer : -1;
     const lb = b.userData ? b.userData.layer : -1;
     let k;
-    if (la < 0 || lb < 0) k = 2;
-    else if (la === lb) k = 0.1;
-    else k = Math.max(0.15, (topIdx - Math.min(la, lb) + 0.6) / 28.8);
+    if (la < 0 || lb < 0) k = TUNE.floor;
+    else if (la === lb) k = TUNE.side;
+    else k = Math.max(0.15, (topIdx - Math.min(la, lb) + 0.6) / TUNE.hold);
+    if (a.userData?.state === 'hand' || b.userData?.state === 'hand') k *= TUNE.pulled;
     return k * world.dt;
   };
 

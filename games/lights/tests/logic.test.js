@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { padAt, sequence, timing, roundScore, judge, createRun, MODES } from '../logic.js';
+import { padAt, sequence, timing, roundScore, judge, createRun, MODES, padCount, stepPads, modeSequence, MAX_PADS } from '../logic.js';
 
 test('sequence is deterministic and prefix-stable', () => {
   const a = sequence(1234, 4, 30);
@@ -84,8 +84,59 @@ test('relaxed mode gives 3 lives, resets streak and replays', () => {
   assert.equal(run.press(w).result, 'over');
 });
 
-test('expert uses six pads', () => {
+test('expert starts with six pads', () => {
   const run = createRun({ mode: 'expert', seed: 2 });
   assert.equal(run.pads, 6);
-  assert.ok(sequence(2, run.pads, 100).some((p) => p >= 4));
+  assert.ok(modeSequence('expert', 2, 100).some((p) => p >= 4));
+});
+
+test('pad schedule grows at the thresholds, is monotonic and capped', () => {
+  for (const mode of Object.keys(MODES)) {
+    const m = MODES[mode];
+    assert.equal(padCount(mode, 1), m.pads);
+    let prev = m.pads;
+    for (let r = 1; r < 120; r++) {
+      const n = padCount(mode, r);
+      assert.ok(n >= prev && n - prev <= 1 && n <= MAX_PADS);
+      prev = n;
+    }
+    m.grow.forEach((r, k) => {
+      assert.equal(padCount(mode, r - 1), m.pads + k);
+      assert.equal(padCount(mode, r), m.pads + k + 1);
+    });
+    assert.equal(padCount(mode, 500), MAX_PADS);
+  }
+  assert.equal(padCount('classic', 8), 5);
+  assert.equal(padCount('classic', 14), 6);
+  assert.ok(padCount('fast', 12) > padCount('classic', 12));
+});
+
+test('new pad is only used from the round after it appears; sequences stay deterministic', () => {
+  for (const mode of Object.keys(MODES)) {
+    const m = MODES[mode];
+    for (const T of m.grow) {
+      const before = padCount(mode, T - 1);
+      const seq = modeSequence(mode, 4242, T); // sequence of round T
+      assert.ok(seq.every((p) => p < padCount(mode, T)));
+      // the new step of round T still draws from the old pad set
+      assert.ok(seq[T - 1] < before);
+    }
+    const a = modeSequence(mode, 99, 60);
+    assert.deepEqual(a, modeSequence(mode, 99, 60));
+    assert.deepEqual(modeSequence(mode, 99, 25), a.slice(0, 25));
+    assert.ok(a.every((p, i) => p < stepPads(mode, i)));
+  }
+  const hi = modeSequence('classic', 5, 80);
+  assert.ok(hi.some((p) => p >= 8));
+});
+
+test('a run past a threshold plays through with the larger ring', () => {
+  const run = createRun({ mode: 'fast', seed: 8, startRound: 5 });
+  assert.equal(run.pads, 4);
+  for (const p of run.seq()) run.press(p);
+  assert.equal(run.round, 6);
+  assert.equal(run.pads, 5);
+  let last;
+  for (const p of run.seq()) last = run.press(p);
+  assert.equal(last.result, 'round');
 });
