@@ -247,9 +247,9 @@ add({
   id: 'w5l2', world: 5, bounds: [0, -520, 720, 700], killY: 900,
   terrain: [ground(-200, 920, 640)],
   anchors: anchorsOn([240, 310, 380, 450], 640),
-  goal: { type: 'height', y: -100, base: 640 }, need: 2,
+  goal: { type: 'height', y: -200, base: 640 }, need: 2,
   plan: [],
-  stock: { goo: 14, heavy: 4, balloon: 4 }, stars: [18, 21],
+  stock: { goo: 14, heavy: 4, balloon: 8 }, stars: [18, 21],
 });
 add({
   id: 'w5l3', world: 5, bounds: [0, 80, 800, 880], killY: 900,

@@ -23,6 +23,7 @@ import biscaEntry from '../games/bisca/entry.js';
 import pokerEntry from '../games/poker/entry.js';
 import foosballEntry from '../games/foosball/entry.js';
 import pinballEntry from '../games/pinball/entry.js';
+import gooEntry from '../games/goo/entry.js';
 
 export const GAMES = [
   {
@@ -499,7 +500,7 @@ export const GAMES = [
 ];
 
 // Games that ship their own entry.js
-GAMES.push(minesEntry, lightsEntry, stackEntry, mazeEntry, trucoEntry, colorsEntry, blackjackEntry, buracoEntry, suecaEntry, biscaEntry, pokerEntry, foosballEntry, pinballEntry);
+GAMES.push(minesEntry, lightsEntry, stackEntry, mazeEntry, trucoEntry, colorsEntry, blackjackEntry, buracoEntry, suecaEntry, biscaEntry, pokerEntry, foosballEntry, pinballEntry, gooEntry);
 
 export const CATEGORIES = [
   { id: 'all', label: { pt: 'Todos', en: 'All', es: 'Todos' } },

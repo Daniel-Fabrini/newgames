@@ -27,7 +27,7 @@ def ball(p, r, mat, look=(0.15, 0.0)):
         objs.append(sphere(r * 0.13, black, loc=(ex + look[0] * r * 0.1, y - r * 1.0, ez - r * 0.02), seg=24))
 
 
-def link(a, b, rr=0.075):
+def link(a, b, rr=0.1):
     a, b = Vector(a), Vector(b)
     d = b - a
     o = cylinder(rr, d.length, rod, loc=tuple((a + b) / 2), bevel=0.0, seg=24)
@@ -64,5 +64,5 @@ for s in (-1, 1):
     objs.append(sphere(0.1, black, loc=(ex, -0.78, 5.6), seg=24))
 g = parent(objs, rot=(0, 0, 0))
 podium('#e0a526', 3.8, 0.5, z=0.0)
-fit(0.5, 0.55)
+fit(0.6, 0.1)
 render('goo')
