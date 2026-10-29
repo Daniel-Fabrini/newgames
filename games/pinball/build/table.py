@@ -38,8 +38,8 @@ w = bpy.data.worlds.new('w')
 sc.world = w
 w.use_nodes = True
 bg = w.node_tree.nodes['Background']
-bg.inputs['Color'].default_value = (0.8, 0.85, 1.0, 1)
-bg.inputs['Strength'].default_value = 0.9
+bg.inputs['Color'].default_value = (0.35, 0.4, 0.55, 1)
+bg.inputs['Strength'].default_value = 0.3
 
 
 def light(kind, loc, energy, size=1.0, target=(0, 0, 0), color=(1, 1, 1), angle=None):
@@ -57,8 +57,8 @@ def light(kind, loc, energy, size=1.0, target=(0, 0, 0), color=(1, 1, 1), angle=
     return o
 
 
-light('SUN', (-3, 3, 8), 2.4, angle=0.06, color=(1, 0.97, 0.92))
-light('AREA', (-1.0, 1.6, 6.5), 260, size=3.5)
+light('SUN', (-3, 3, 8), 2.1, angle=0.05, color=(1, 0.96, 0.9))
+light('AREA', (-1.0, 1.6, 6.5), 90, size=3.5)
 light('AREA', (1.5, -2, 5), 120, size=4, color=(0.9, 0.95, 1))
 
 cd = bpy.data.cameras.new('cam')
@@ -90,9 +90,9 @@ bsdf = nt.nodes['Principled BSDF']
 tex = nt.nodes.new('ShaderNodeTexImage')
 tex.image = img
 nt.links.new(tex.outputs['Color'], bsdf.inputs['Base Color'])
-bsdf.inputs['Roughness'].default_value = 0.2
-bsdf.inputs['Coat Weight'].default_value = 1.0
-bsdf.inputs['Coat Roughness'].default_value = 0.05
+bsdf.inputs['Roughness'].default_value = 0.4
+bsdf.inputs['Coat Weight'].default_value = 0.5
+bsdf.inputs['Coat Roughness'].default_value = 0.1
 bpy.ops.mesh.primitive_plane_add(size=1)
 pf = bpy.context.active_object
 pf.dimensions = (4.0, 8.0, 0)

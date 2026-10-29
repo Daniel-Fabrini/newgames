@@ -2,26 +2,49 @@ import os, sys, math
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from props import *
 from rig import _mat
+import bpy
 
-new_scene('#7a3cff', '#0b0620', samples=int(os.environ.get('S', 128)))
-plate = glossy('#2a1763', 0.35, 0.6, name='plate')
-rail = glossy('#f0be3a', 0.22, 0.7, name='rail')
-pink = glossy('#ff3da8', 0.2, 0.8, name='pink')
-cyan = glossy('#35e0ff', 0.2, 0.8, name='cyan')
-steel = metal('#d9dfe8', 0.1, name='steel')
-glow = _mat('glow', '#fff1a8', 0.2, 0.0, 0.8, '#ffc93c', 3.0)
-objs = [box((3.2, 4.2, 0.25), plate, loc=(0, 0, 0), bevel=0.12)]
-T, H = 0.14, 0.3
-for (x, y, w, d) in [(-1.65, 0, T, 4.3), (1.65, 0, T, 4.3), (0, 2.15, 3.4, T), (0, -2.15, 3.4, T)]:
-    objs.append(box((w, d, H), rail, loc=(x, y, 0.2), bevel=0.04))
-for (x, y, m) in [(-0.7, 0.9, pink), (0.7, 0.9, cyan), (0, 0.1, pink)]:
-    objs.append(cylinder(0.42, 0.22, rail, loc=(x, y, 0.2), bevel=0.04))
-    objs.append(cylinder(0.32, 0.34, m, loc=(x, y, 0.3), bevel=0.06))
+# Pokemon-themed pinball machine: the real pre-rendered playfield (games/pinball/art/base_neon.webp) on a tilted cabinet slab.
+new_scene('#4a7bff', '#0a1240', samples=int(os.environ.get('S', 128)))
+ART = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'games', 'pinball', 'art', 'base_neon.webp')
+tex_mat = image_material(ART, 0.25, 0.8, name='field')
+gold = glossy('#f0be3a', 0.25, 0.7, name='gold')
+dark = glossy('#15151f', 0.35, 0.5, name='cab')
+red = glossy('#e8262c', 0.15, 0.9, name='pbred')
+white = glossy('#f6f6fa', 0.15, 0.9, name='pbwhite')
+black = glossy('#101018', 0.25, 0.7, name='pbblack')
+steel = metal('#d9dfe8', 0.08, name='steel')
+objs = []
+FW, FH = 2.6, 5.2
+objs.append(box((FW + 0.5, FH + 0.5, 0.3), dark, loc=(0, 0, 0), bevel=0.12))
+objs.append(plane((FW, FH), tex_mat, loc=(0, 0, 0.17)))
 for sx in (-1, 1):
-    objs.append(box((0.9, 0.2, 0.28), rail, loc=(sx * 0.62, -1.55, 0.2), rot=(0, 0, sx * -28), bevel=0.06))
-objs.append(cylinder(0.22, 0.05, glow, loc=(0, 1.55, 0.14), bevel=0.01))
-g = parent(objs, rot=(52, 0, 10))
-sphere(0.38, steel, loc=(1.5, -2.5, 0.9))
-podium('#c9971c', 4.2, 0.5, z=-1.9)
-fit(0.9, 0.3)
+    objs.append(box((0.14, FH + 0.5, 0.45), gold, loc=(sx * (FW / 2 + 0.28), 0, 0.12), bevel=0.05))
+objs.append(box((FW + 0.7, 0.14, 0.45), gold, loc=(0, FH / 2 + 0.28, 0.12), bevel=0.05))
+objs.append(box((FW + 0.7, 0.14, 0.45), gold, loc=(0, -FH / 2 - 0.28, 0.12), bevel=0.05))
+g = parent(objs, rot=(48, 0, 8))
+# big Poke Ball hero in front of the table
+bx, by, bz, br = -1.9, -2.5, 1.0, 0.95
+objs2 = [sphere(br, white, loc=(bx, by, bz))]
+cap = sphere(br * 1.003, red, loc=(bx, by, bz))
+objs2.append(cap)
+# cut the red sphere to the upper half by scaling a box mask? simple approach: stack hemisphere via cone-less trick
+bpy.ops.mesh.primitive_uv_sphere_add(radius=br * 1.01, segments=64, ring_count=32, location=(bx, by, bz))
+half = bpy.context.active_object
+half.data.materials.append(red)
+import bmesh
+bm = bmesh.new()
+bm.from_mesh(half.data)
+bmesh.ops.bisect_plane(bm, geom=bm.verts[:] + bm.edges[:] + bm.faces[:], plane_co=(0, 0, 0), plane_no=(0, 0, 1), clear_inner=True)
+bm.to_mesh(half.data)
+bm.free()
+for p in half.data.polygons:
+    p.use_smooth = True
+bpy.data.objects.remove(cap, do_unlink=True)
+band = torus(br * 1.005, 0.07, black, loc=(bx, by, bz))
+btn = cylinder(0.26, 0.12, white, loc=(bx, by - br * 0.97, bz), rot=(90, 0, 0), bevel=0.02)
+ring = torus(0.27, 0.06, black, loc=(bx, by - br * 0.97, bz), rot=(90, 0, 0))
+sphere(0.34, steel, loc=(1.9, -2.7, 0.7))
+podium('#c9971c', 4.2, 0.5, z=-2.4)
+fit(0.7, 0.25)
 render('pinball')

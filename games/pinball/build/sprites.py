@@ -30,14 +30,19 @@ bgn = nt.nodes.new('ShaderNodeBackground')
 tc = nt.nodes.new('ShaderNodeTexCoord')
 sep = nt.nodes.new('ShaderNodeSeparateXYZ')
 ramp = nt.nodes.new('ShaderNodeValToRGB')
+mr = nt.nodes.new('ShaderNodeMath')
+mr.operation = 'MULTIPLY_ADD'
+mr.inputs[1].default_value = 0.5
+mr.inputs[2].default_value = 0.5
 nt.links.new(tc.outputs['Generated'], sep.inputs[0])
-nt.links.new(sep.outputs['Z'], ramp.inputs['Fac'])
-ramp.color_ramp.elements[0].position = 0.35
+nt.links.new(sep.outputs['Z'], mr.inputs[0])
+nt.links.new(mr.outputs[0], ramp.inputs['Fac'])
+ramp.color_ramp.elements[0].position = 0.45
 ramp.color_ramp.elements[0].color = (0.95, 0.97, 1.0, 1)
-ramp.color_ramp.elements[1].position = 0.9
+ramp.color_ramp.elements[1].position = 0.92
 ramp.color_ramp.elements[1].color = (0.05, 0.08, 0.2, 1)
 nt.links.new(ramp.outputs['Color'], bgn.inputs['Color'])
-bgn.inputs['Strength'].default_value = 1.4
+bgn.inputs['Strength'].default_value = 0.9
 nt.links.new(bgn.outputs[0], out.inputs[0])
 
 
@@ -53,8 +58,8 @@ def light(kind, loc, energy, size=1.0, color=(1, 1, 1), angle=None):
     o.rotation_euler = (Vector((0.5, 0, 0)) - Vector(loc)).to_track_quat('-Z', 'Y').to_euler()
 
 
-light('SUN', (-2, 2, 6), 3.0)
-light('AREA', (-0.4, 0.4, 2.0), 160, size=1.0)
+light('SUN', (-2, 2, 6), 1.6)
+light('AREA', (-0.4, 0.4, 2.0), 60, size=1.0)
 cd = bpy.data.cameras.new('cam')
 cd.type = 'ORTHO'
 cd.ortho_scale = 3.2

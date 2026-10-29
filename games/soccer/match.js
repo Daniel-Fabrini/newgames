@@ -594,6 +594,8 @@ export function createMatch(host, ctx, t, o) {
     return { t: best, hit, wall };
   }
 
+  const guideOn = o.skill == null || o.skill < 1.0;
+
   function drawAim(idx, a, p, finger) {
     const cx = B[idx].x;
     const cy = B[idx].y;
@@ -622,40 +624,42 @@ export function createMatch(host, ctx, t, o) {
     g.beginPath();
     g.arc(cx, cy, CAP_R + 1.6, a - Math.PI * p, a + Math.PI * p);
     g.stroke();
-    // trajectory guide
-    const maxLen = 22 + 70 * p;
-    const rc = raycast(cx, cy, ux, uy, CAP_R, idx, maxLen);
-    g.strokeStyle = 'rgba(255,255,255,0.75)';
-    g.lineWidth = 0.45;
-    g.setLineDash([0.1, 1.6]);
-    g.lineCap = 'round';
-    g.beginPath();
-    g.moveTo(cx + ux * (CAP_R + 2), cy + uy * (CAP_R + 2));
-    g.lineTo(cx + ux * rc.t, cy + uy * rc.t);
-    g.stroke();
-    g.setLineDash([]);
-    if (rc.t < maxLen) {
-      const gx = cx + ux * rc.t;
-      const gy = cy + uy * rc.t;
-      g.strokeStyle = 'rgba(255,255,255,0.6)';
-      g.lineWidth = 0.3;
+    // trajectory guide: only on the easy levels (and in 2P); medium/hard shots are aimed by eye
+    if (guideOn && finger) {
+      const maxLen = 22 + 70 * p;
+      const rc = raycast(cx, cy, ux, uy, CAP_R, idx, maxLen);
+      g.strokeStyle = 'rgba(255,255,255,0.75)';
+      g.lineWidth = 0.45;
+      g.setLineDash([0.1, 1.6]);
+      g.lineCap = 'round';
       g.beginPath();
-      g.arc(gx, gy, CAP_R, 0, Math.PI * 2);
+      g.moveTo(cx + ux * (CAP_R + 2), cy + uy * (CAP_R + 2));
+      g.lineTo(cx + ux * rc.t, cy + uy * rc.t);
       g.stroke();
-      if (rc.hit >= 0) {
-        const b = B[rc.hit];
-        let nx = b.x - gx;
-        let ny = b.y - gy;
-        const nl = Math.hypot(nx, ny) || 1;
-        nx /= nl;
-        ny /= nl;
-        const len = 8 + 22 * p * (b.kind === 'ball' ? 1.3 : 0.8);
-        g.strokeStyle = b.kind === 'ball' ? 'rgba(247,215,116,0.95)' : 'rgba(255,255,255,0.7)';
-        g.lineWidth = 0.5;
+      g.setLineDash([]);
+      if (rc.t < maxLen) {
+        const gx = cx + ux * rc.t;
+        const gy = cy + uy * rc.t;
+        g.strokeStyle = 'rgba(255,255,255,0.6)';
+        g.lineWidth = 0.3;
         g.beginPath();
-        g.moveTo(b.x + nx * b.r, b.y + ny * b.r);
-        g.lineTo(b.x + nx * (b.r + len), b.y + ny * (b.r + len));
+        g.arc(gx, gy, CAP_R, 0, Math.PI * 2);
         g.stroke();
+        if (rc.hit >= 0) {
+          const b = B[rc.hit];
+          let nx = b.x - gx;
+          let ny = b.y - gy;
+          const nl = Math.hypot(nx, ny) || 1;
+          nx /= nl;
+          ny /= nl;
+          const len = 8 + 22 * p * (b.kind === 'ball' ? 1.3 : 0.8);
+          g.strokeStyle = b.kind === 'ball' ? 'rgba(247,215,116,0.95)' : 'rgba(255,255,255,0.7)';
+          g.lineWidth = 0.5;
+          g.beginPath();
+          g.moveTo(b.x + nx * b.r, b.y + ny * b.r);
+          g.lineTo(b.x + nx * (b.r + len), b.y + ny * (b.r + len));
+          g.stroke();
+        }
       }
     }
     // arrow

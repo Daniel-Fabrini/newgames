@@ -58,13 +58,14 @@ export async function mount(root, ctx) {
   const canvas = h('canvas', { class: 'g-pinball-canvas', role: 'img', 'aria-label': t('tableLabel') });
   const plungerBtn = h('button', { class: 'g-pinball-plunger', type: 'button', 'aria-label': t('plungerAria') }, h('b', {}, t('plunger')), h('i'));
   const nudgeBtn = h('button', { class: 'g-pinball-nudge', type: 'button', 'aria-label': t('nudgeAria') }, t('nudge'));
-  const hintL = h('div', { class: 'g-pinball-padhint left', 'aria-hidden': 'true' }, '◀');
-  const hintR = h('div', { class: 'g-pinball-padhint right', 'aria-hidden': 'true' }, '▶');
+  const hintL = h('div', { class: 'g-pinball-fbtn left', 'aria-hidden': 'true', title: t('leftFlipper') }, h('i'));
+  const hintR = h('div', { class: 'g-pinball-fbtn right', 'aria-hidden': 'true', title: t('rightFlipper') }, h('i'));
   const stage = h('div', { class: 'g-pinball-stage', role: 'group', 'aria-label': t('leftFlipper') + ' / ' + t('rightFlipper') }, canvas, hintL, hintR, plungerBtn, nudgeBtn);
   const fwCanvas = h('canvas', { class: 'g-pinball-fw', 'aria-hidden': 'true' });
   const menu = h('div', { class: 'g-pinball-menu', hidden: true });
   const overlay = h('div', { class: 'g-pinball-overlay', hidden: true });
-  app.append(hud, dmdWrap, stage, fwCanvas, menu, overlay);
+  const backbox = h('div', { class: 'g-pinball-backbox' }, hud, dmdWrap);
+  app.append(backbox, stage, fwCanvas, menu, overlay);
   root.append(app);
 
   const dmd = createDMD(dmdCanvas);
@@ -117,19 +118,37 @@ export async function mount(root, ctx) {
   const padPointers = new Map();
   const keysDown = new Set();
 
+  // ------------------------------------------------------------------ pre-rendered table art (Blender) with procedural fallback
+  const artCache = {};
+  function loadArt(id) {
+    if (artCache[id]) return artCache[id];
+    const u = (n) => new URL('./art/' + n, import.meta.url).href;
+    const img = (src) => new Promise((res, rej) => {
+      const i = new Image();
+      i.decoding = 'async';
+      i.onload = () => res(i);
+      i.onerror = () => rej(new Error('img ' + src));
+      i.src = src;
+    });
+    artCache[id] = Promise.all([img(u(`base_${id}.webp`)), img(u(`ramp_${id}.webp`)), img(u(`sprites_${id}.webp`)), fetch(u(`inserts_${id}.json`)).then((r) => r.json())])
+      .then(([base, ramp, spr, inserts]) => ({ base, ramp, spr, inserts, url: u(`base_${id}.webp`) }))
+      .catch(() => null);
+    return artCache[id];
+  }
+
   // ------------------------------------------------------------------ layout
   function layout() {
     if (!alive) return;
     const w = root.clientWidth, hh = root.clientHeight;
     if (!w || !hh) return;
     dpr = Math.min(2, window.devicePixelRatio || 1);
-    const hudH = hud.offsetHeight || 46;
-    const dmdW = Math.min(w - 20, 380);
-    const dmdH = Math.round(Math.min(46, Math.max(34, hh * 0.05)));
+    const dmdW = Math.min(w - 44, 380);
+    const dmdH = Math.round(Math.min(44, Math.max(32, hh * 0.048)));
     dmdWrap.style.height = dmdH + 'px';
     dmdWrap.style.width = dmdW + 'px';
     dmd.resize(dmdW, dmdH, dpr);
-    const sh = hh - hudH - dmdH - 14;
+    const bbH = backbox.offsetHeight || 112;
+    const sh = hh - bbH - 4;
     const sw = Math.min(w, Math.floor(sh / 2));
     stage.style.height = sh + 'px';
     stage.style.width = sw + 'px';
@@ -150,15 +169,22 @@ export async function mount(root, ctx) {
 
   // ------------------------------------------------------------------ menu
   function thumb(id, locked) {
-    const tb = makeTable(id);
-    const c = h('canvas', { class: 'g-pinball-thumb', 'aria-hidden': 'true' });
-    const wpx = 92, hpx = 184;
-    const r = createRenderer(c, tb, { reduced: true });
-    r.resize(wpx, hpx, 2);
-    const dummy = { sim: new Sim(tb), phase: 'ready', charge: 0, lanes: tb.lanes.map((_, i) => i === 1), mbLit: false, multiball: false, mult: 2, saver: 0, skillT: 0, skillOpen: false, tilted: false, shake: 0 };
-    r.draw(dummy, 1000);
-    if (locked) c.classList.add('locked');
-    return c;
+    const wrap = h('div', { class: 'g-pinball-thumb' + (locked ? ' locked' : ''), 'aria-hidden': 'true' });
+    loadArt(id).then((art) => {
+      if (!alive) return;
+      if (art) {
+        const im = h('img', { src: art.url, alt: '', draggable: 'false' });
+        wrap.append(im);
+        return;
+      }
+      const tb = makeTable(id);
+      const c = h('canvas', {});
+      const r = createRenderer(c, tb, { reduced: true });
+      r.resize(92, 184, 2);
+      r.draw({ sim: new Sim(tb), phase: 'ready', charge: 0, lanes: tb.lanes.map((_, i) => i === 1), mbLit: false, multiball: false, mult: 2, saver: 0, skillT: 0, skillOpen: false, tilted: false, shake: 0 }, 1000);
+      wrap.append(c);
+    });
+    return wrap;
   }
   function showMenu() {
     ui = 'menu';
@@ -254,7 +280,9 @@ export async function mount(root, ctx) {
   }
 
   // ------------------------------------------------------------------ game flow
-  function startGame(tableId, missions) {
+  let starting = false;
+  async function startGame(tableId, missions) {
+    if (starting) return;
     if (tableLocked(tableId)) {
       toast(t('lockedMsg'));
       tableId = 'neon';
@@ -262,10 +290,14 @@ export async function mount(root, ctx) {
     selTable = tableId;
     rec.last = tableId;
     saveRec();
+    starting = true;
+    const art = await loadArt(tableId);
+    starting = false;
+    if (!alive) return;
     missionsRun = missions;
     finished = false;
     game = new Game({ table: tableId, balls: rec.settings.balls, seed: (Date.now() ^ (Math.random() * 1e9)) >>> 0, missionsMode: missions });
-    rend = createRenderer(canvas, game.tb, { reduced });
+    rend = createRenderer(canvas, game.tb, { reduced, art });
     ui = 'play';
     menu.hidden = true;
     app.classList.remove('in-menu');
@@ -325,6 +357,8 @@ export async function mount(root, ctx) {
       game.plunger(false);
     }
     plungerBtn.classList.remove('down');
+    hintL.classList.remove('down');
+    hintR.classList.remove('down');
   }
 
   function finishGame() {
@@ -392,6 +426,8 @@ export async function mount(root, ctx) {
     }
     game.pressFlipper('L', sides.has('L'));
     game.pressFlipper('R', sides.has('R'));
+    hintL.classList.toggle('down', sides.has('L'));
+    hintR.classList.toggle('down', sides.has('R'));
   }
   stage.addEventListener('pointerdown', (e) => {
     if (ui !== 'play' || e.target.closest('button')) return;

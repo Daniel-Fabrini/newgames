@@ -149,12 +149,12 @@ add({
 });
 add({
   id: 'w3l4', world: 3, bounds: [0, 80, 760, 880], killY: 900,
-  terrain: [ground(-200, 150, 620), ground(600, 960, 620)],
-  hazards: [spikes(150, 780, 600, 830)],
+  terrain: [ground(-200, 150, 620), ground(560, 960, 620)],
+  hazards: [spikes(150, 780, 560, 830)],
   anchors: anchorsOn([20, 80, 130], 620),
-  pipe: { x: 690, y: 600, r: 32 }, goal: { type: 'pipe' }, need: 2,
-  plan: [[150, 580], [375, 570], [600, 590], [690, 600]],
-  stock: { goo: 14, heavy: 4 }, stars: [12, 14],
+  pipe: { x: 670, y: 600, r: 32 }, goal: { type: 'pipe' }, need: 2,
+  plan: [[150, 580], [355, 570], [560, 590], [670, 600]],
+  stock: { goo: 18, heavy: 3 }, stars: [14, 16],
 });
 add({
   id: 'w3l5', world: 3, bounds: [0, 0, 720, 860], killY: 900,
@@ -206,8 +206,8 @@ add({
 add({
   id: 'w4l4', world: 4, bounds: [0, 0, 760, 880], killY: 900,
   terrain: [ground(-200, 170, 620), ground(580, 960, 620)],
-  pendulums: [{ px: 375, py: 100, len: 410, r: 32, amp: 0.7, period: 3.0, phase: 0.25 }],
-  winds: [{ x: 170, y: 100, w: 410, h: 800, fx: 380, fy: 0, period: 4, phase: 0.5 }],
+  pendulums: [{ px: 375, py: 100, len: 375, r: 32, amp: 0.7, period: 3.0, phase: 0.25 }],
+  winds: [{ x: 170, y: 100, w: 410, h: 800, fx: 300, fy: 0, period: 4, phase: 0.5 }],
   anchors: anchorsOn([20, 80, 130], 620),
   pipe: { x: 670, y: 600, r: 32 }, goal: { type: 'pipe' }, need: 2,
   plan: [[170, 580], [375, 590], [580, 590], [670, 600]],
@@ -237,11 +237,11 @@ add({
 // ============================================================= WORLD 5 — Grand finale
 add({
   id: 'w5l1', world: 5, bounds: [0, 80, 800, 880], killY: 900,
-  terrain: [ground(-200, 150, 620), ground(650, 1000, 620)],
+  terrain: [ground(-200, 150, 620), ground(590, 1000, 620)],
   anchors: anchorsOn([20, 80, 130], 620),
-  pipe: { x: 730, y: 600, r: 32 }, goal: { type: 'pipe' }, need: 2,
-  plan: [[150, 580], [400, 590], [650, 590], [730, 600]],
-  stock: { goo: 12, tacky: 8 }, stars: [14, 16],
+  pipe: { x: 710, y: 600, r: 32 }, goal: { type: 'pipe' }, need: 2,
+  plan: [[150, 580], [370, 590], [590, 590], [710, 600]],
+  stock: { goo: 14, tacky: 8 }, stars: [14, 16],
 });
 add({
   id: 'w5l2', world: 5, bounds: [0, -520, 720, 700], killY: 900,

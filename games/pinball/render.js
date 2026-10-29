@@ -643,6 +643,223 @@ export function createRenderer(canvas, tb, opts = {}) {
     ctx.restore();
   }
 
+  // ------------------------------------------------------------------ live layer over the pre-rendered art
+  const SPR = { flip: [0, 0, 224, 160, -32, -40, 112, 80], drop: [248, 40, 64, 80, -16, -20, 32, 40], ball: [356, 56, 48, 48, -12, -12, 24, 24] };
+  function sprite(key, x, y, rot = 0, mirror = false, scale = 1) {
+    const q = SPR[key];
+    ctx.save();
+    ctx.translate(x, y);
+    if (rot) ctx.rotate(rot);
+    if (mirror) ctx.scale(-1, 1);
+    if (scale !== 1) ctx.scale(scale, scale);
+    ctx.drawImage(art.spr, q[0], q[1], q[2], q[3], q[4], q[5], q[6], q[7]);
+    ctx.restore();
+  }
+  function insertLevel(n, game, tsec) {
+    const step = Math.floor(tsec * 7);
+    switch (n.group) {
+      case 'mult':
+        return n.idx < game.mult ? 0.95 : 0.04;
+      case 'ring':
+        return game.mbLit || game.multiball ? (((n.idx - step) % 12) + 12) % 12 < 3 ? 1 : 0.15 : 0.3 + 0.2 * Math.sin(tsec * 2 + n.idx * 0.5);
+      case 'arrow':
+        return game.mbLit || game.multiball ? (((n.idx - step) % 6) + 6) % 6 === 0 ? 1 : 0.2 : 0.22 + 0.12 * Math.sin(tsec * 3 - n.idx);
+      case 'mission':
+        if (game.allClear || n.idx < game.mi) return 1;
+        if (n.idx === game.mi) return Math.sin(tsec * 6) > -0.1 ? 1 : 0.2;
+        return 0.08;
+      default:
+        return 0.2 + 0.2 * Math.sin(tsec * 2 + n.idx * 1.7);
+    }
+  }
+  function drawArt(game, now) {
+    const dt = Math.min(0.05, lastT ? (now - lastT) / 1000 : 0.016);
+    lastT = now;
+    const sim = game.sim;
+    const tsec = now / 1000;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, cw, ch);
+    let sx = 0, sy = 0;
+    if (game.shake > 0 && !reduced) {
+      sx = (Math.random() - 0.5) * 7 * game.shake;
+      sy = (Math.random() - 0.5) * 7 * game.shake;
+    }
+    ctx.translate(ox + sx, oy + sy);
+    ctx.scale(k, k);
+    ctx.drawImage(base, 0, 0, W, H);
+    ctx.save();
+    outline(ctx);
+    ctx.clip();
+    // ----- lights (additive)
+    ctx.globalCompositeOperation = 'lighter';
+    for (const n of art.inserts) {
+      const a = insertLevel(n, game, tsec);
+      if (a < 0.05) continue;
+      glow(ctx, n.x, n.y, n.r * 3.4, n.color, Math.min(1, a) * 0.75);
+      if (a > 0.5) glow(ctx, n.x, n.y, n.r * 1.5, '#ffffff', a * 0.55);
+    }
+    tb.lanes.forEach((l, i) => {
+      const lit = game.lanes[i];
+      const skill = game.skillT > 0 && game.skillOpen && i === game.skillLane;
+      const a = lit ? 1 : skill ? (Math.sin(tsec * 12) > 0 ? 1 : 0.1) : 0.12;
+      glow(ctx, l.x, l.y, 24, skill && !lit ? '#ffffff' : l.color, a * 0.85);
+      if (a > 0.5) glow(ctx, l.x, l.y, 10, '#ffffff', 0.6);
+    });
+    for (const ol of tb.outlanes) {
+      if (ol.kickback && sim.kickArmed[ol.side] && sim.live) glow(ctx, ol.x, ol.y - 26, 15, '#7dffb0', 0.55 + 0.35 * Math.sin(tsec * 6));
+    }
+    if (game.saver > 0 && game.phase === 'play') glow(ctx, XC, 760, 28, '#ffb340', Math.sin(tsec * (game.saver < 3 ? 14 : 5)) > -0.2 ? 0.95 : 0.1);
+    if (game.mbLit) glow(ctx, tb.ramps[0].entry.x, tb.ramps[0].entry.y, 28, '#ff4d6d', 0.6 + 0.4 * Math.sin(tsec * 9));
+    tb.standups.forEach((s, i) => {
+      const p = sim.pulse.standups[i];
+      if (p > 0) {
+        ctx.strokeStyle = rgba('#ffffff', p);
+        ctx.lineWidth = 7;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(s.x1, s.y1);
+        ctx.lineTo(s.x2, s.y2);
+        ctx.stroke();
+        glow(ctx, (s.x1 + s.x2) / 2, (s.y1 + s.y2) / 2, 22, '#ffb36b', p * 0.8);
+      }
+    });
+    for (const s of tb.slings) {
+      const p = sim.pulse.slings[s.side === 'L' ? 0 : 1];
+      if (p > 0) {
+        ctx.strokeStyle = rgba('#ffffff', p);
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(s.pts[0][0], s.pts[0][1]);
+        ctx.lineTo(s.pts[2][0], s.pts[2][1]);
+        ctx.stroke();
+        glow(ctx, (s.pts[0][0] + s.pts[2][0]) / 2, (s.pts[0][1] + s.pts[2][1]) / 2, 36, '#ffd0a0', p * 0.8);
+      }
+    }
+    tb.bumpers.forEach((b, i) => {
+      const p = sim.pulse.bumpers[i];
+      glow(ctx, b.x, b.y, b.r * 1.5, '#ffffff', 0.08 + p * 0.5);
+      if (p > 0) {
+        ctx.strokeStyle = rgba('#ffffff', p * 0.9);
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r + 2 + (1 - p) * 8, 0, TAU);
+        ctx.stroke();
+      }
+    });
+    ctx.globalCompositeOperation = 'source-over';
+    // ----- drop targets that are up
+    tb.drops.forEach((d, i) => {
+      if (!sim.drops[i].down) {
+        ctx.fillStyle = 'rgba(0,0,0,0.4)';
+        ctx.fillRect(d.x - 2 + 2, d.y - 8.5 + 3, 6, 17);
+        sprite('drop', d.x, d.y);
+      }
+    });
+    // ----- spinner
+    if (tb.spinner && sim.spinner) {
+      const sp = tb.spinner;
+      const c = Math.abs(Math.cos(sim.spinner.ang));
+      ctx.fillStyle = 'rgba(0,0,0,0.4)';
+      ctx.fillRect(sp.x - sp.w / 2 + 2, sp.y - 1 + 3, sp.w, 3);
+      const gr = ctx.createLinearGradient(0, sp.y - 6, 0, sp.y + 2);
+      gr.addColorStop(0, '#ffffff');
+      gr.addColorStop(1, '#a9b3c6');
+      ctx.fillStyle = gr;
+      ctx.fillRect(sp.x - sp.w / 2, sp.y - 1 - c * 5, sp.w, 2 + c * 5);
+      ctx.fillStyle = '#2a2a33';
+      ctx.fillRect(sp.x - sp.w / 2 - 3, sp.y - 3, 3, 6);
+      ctx.fillRect(sp.x + sp.w / 2, sp.y - 3, 3, 6);
+    }
+    // ----- plunger
+    const pull = game.phase === 'ready' ? game.charge : 0;
+    const py = 777 + pull * 20;
+    ctx.strokeStyle = '#9aa2b4';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(369, py + 3);
+    for (let i = 0; i < 6; i++) ctx.lineTo(369 + (i % 2 ? 7 : -7), py + 3 + ((H - py) * (i + 1)) / 6);
+    ctx.stroke();
+    const plg = ctx.createLinearGradient(357, 0, 381, 0);
+    plg.addColorStop(0, '#6a7285');
+    plg.addColorStop(0.5, '#f0f3fa');
+    plg.addColorStop(1, '#6a7285');
+    ctx.fillStyle = plg;
+    ctx.fillRect(357, py, 24, 6);
+    // ----- flippers
+    for (const f of sim.flippers) {
+      if (f.tx === undefined) {
+        f.tx = f.px + (f.side === 'L' ? 1 : -1) * f.len * Math.cos(f.ang);
+        f.ty = f.py + f.len * Math.sin(f.ang);
+      }
+      ctx.save();
+      ctx.translate(3, 5);
+      hull(ctx, f.px, f.py, f.r0 + 1, f.tx, f.ty, f.r1 + 1);
+      ctx.fillStyle = 'rgba(0,0,0,0.5)';
+      ctx.fill();
+      ctx.restore();
+      const sc = f.len / 60;
+      sprite('flip', f.px, f.py, f.ang, f.side !== 'L', 1);
+      void sc;
+      if (f.on && sim.flippersOn && sim.live) {
+        ctx.globalCompositeOperation = 'lighter';
+        glow(ctx, (f.px + f.tx) / 2, (f.py + f.ty) / 2, 34, '#ffe08a', 0.28);
+        ctx.globalCompositeOperation = 'source-over';
+      }
+    }
+    // ----- balls
+    for (const b of sim.balls) {
+      let tr = trails.get(b.id);
+      if (!tr) trails.set(b.id, (tr = []));
+      tr.push(b.x, b.y);
+      if (tr.length > 22) tr.splice(0, 2);
+      if (b.ramp) continue;
+      const sp = Math.hypot(b.vx, b.vy);
+      if (sp > 260 && !reduced) {
+        ctx.globalCompositeOperation = 'lighter';
+        for (let i = 0; i < tr.length - 2; i += 2) {
+          const a = (i / tr.length) * Math.min(1, (sp - 200) / 900) * 0.35;
+          ctx.fillStyle = rgba('#bfe6ff', a);
+          ctx.beginPath();
+          ctx.arc(tr[i], tr[i + 1], R * (0.35 + 0.6 * (i / tr.length)), 0, TAU);
+          ctx.fill();
+        }
+        ctx.globalCompositeOperation = 'source-over';
+      }
+      let by = b.y;
+      if (game.phase === 'ready' && sim.inLane(b)) by += game.charge * 20;
+      ctx.fillStyle = 'rgba(0,0,0,0.4)';
+      ctx.beginPath();
+      ctx.ellipse(b.x + 2.8, by + 4, R * 0.95, R * 0.8, 0, 0, TAU);
+      ctx.fill();
+      sprite('ball', b.x, by);
+    }
+    for (const id of [...trails.keys()]) if (!sim.balls.some((b) => b.id === id)) trails.delete(id);
+    // ----- ramp layer + the ball riding it
+    ctx.drawImage(rampLayer, 0, 0, W, H);
+    for (const b of sim.balls) {
+      if (!b.ramp) continue;
+      ctx.fillStyle = 'rgba(0,0,0,0.3)';
+      ctx.beginPath();
+      ctx.ellipse(b.x + 4, b.y + 9, R * 0.95, R * 0.7, 0, 0, TAU);
+      ctx.fill();
+      sprite('ball', b.x - 1, b.y - 6, 0, false, 1.2);
+    }
+    // glass glare
+    ctx.globalCompositeOperation = 'lighter';
+    const gg = ctx.createLinearGradient(0, 0, W, H * 0.6);
+    gg.addColorStop(0, 'rgba(255,255,255,0.0)');
+    gg.addColorStop(0.35, 'rgba(255,255,255,0.07)');
+    gg.addColorStop(0.5, 'rgba(255,255,255,0.0)');
+    gg.addColorStop(0.7, 'rgba(255,255,255,0.05)');
+    gg.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = gg;
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'source-over';
+    drawFx(game, dt, tsec);
+    ctx.restore();
+  }
+
   function drawFx(game, dt, tsec) {
     // ----- sparks, popups
     ctx.globalCompositeOperation = 'lighter';
