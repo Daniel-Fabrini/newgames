@@ -17,14 +17,23 @@ export default [
       {
         "n": "Wikipédia (pt) — Vicente Feola",
         "u": "https://pt.wikipedia.org/wiki/Vicente_Feola"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Wikipédia (en) — Vicente Feola",
+        "u": "https://en.wikipedia.org/wiki/Vicente_Feola"
       }
     ],
     "when": "1958",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-002",
-    "q": "Quem é o técnico que mais comandou o São Paulo em jogos, com 555 partidas?",
+    "q": "Segundo o site oficial do São Paulo, quem é o técnico que mais vezes dirigiu a equipe?",
     "a": [
       "Vicente Feola",
       "Telê Santana",
@@ -34,8 +43,12 @@ export default [
     "c": 0,
     "cat": "tecnicos",
     "d": 3,
-    "exp": "Feola dirigiu o clube em 555 jogos (310 vitórias); Muricy Ramalho vem a seguir, com 474.",
+    "exp": "O site oficial aponta Vicente Feola como líder do ranking, com 532 jogos; a lista de treinadores da Wikipédia registra 555 partidas.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
       {
         "n": "Wikipédia (pt) — Lista de treinadores do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Lista_de_treinadores_do_São_Paulo_Futebol_Clube"
@@ -45,7 +58,9 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Vicente_Feola"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "tecnicos-003",
@@ -59,19 +74,28 @@ export default [
     "c": 3,
     "cat": "tecnicos",
     "d": 3,
-    "exp": "Segundo a Wikipédia, Feola foi campeão paulista pelo São Paulo em 1948 e 1949.",
+    "exp": "Feola foi o técnico dos títulos paulistas de 1948 e 1949, segundo o site oficial do clube e a Wikipédia.",
     "src": [
       {
         "n": "Wikipédia (pt) — Vicente Feola",
         "u": "https://pt.wikipedia.org/wiki/Vicente_Feola"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Wikipédia (en) — Vicente Feola",
+        "u": "https://en.wikipedia.org/wiki/Vicente_Feola"
       }
     ],
     "when": "1948–1949",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-004",
-    "q": "Que jovem craque Vicente Feola insistiu em levar à Copa de 1958?",
+    "q": "Que craque de 17 anos Vicente Feola lançou ao mundo na Copa de 1958?",
     "a": [
       "Garrincha",
       "Pelé",
@@ -81,30 +105,39 @@ export default [
     "c": 1,
     "cat": "tecnicos",
     "d": 2,
-    "exp": "Feola manteve a convocação de Pelé mesmo contra a vontade da CBD, após a lesão em amistoso.",
+    "exp": "Feola comandou o Brasil campeão de 1958 e apresentou ao mundo um Pelé de 17 anos.",
     "src": [
       {
         "n": "Wikipédia (pt) — Vicente Feola",
         "u": "https://pt.wikipedia.org/wiki/Vicente_Feola"
+      },
+      {
+        "n": "Wikipédia (en) — Vicente Feola",
+        "u": "https://en.wikipedia.org/wiki/Vicente_Feola"
       }
     ],
     "when": "1958",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-005",
-    "q": "Quantos jogos Vicente Feola comandou o São Paulo, segundo a Wikipédia?",
+    "q": "Segundo o site oficial do São Paulo, em quantos jogos Vicente Feola dirigiu a equipe?",
     "a": [
       "450",
-      "555",
+      "532",
       "620",
       "380"
     ],
     "c": 1,
     "cat": "tecnicos",
     "d": 4,
-    "exp": "A lista de treinadores do clube aponta Feola com 555 partidas.",
+    "exp": "O site oficial do clube registra 532 jogos de Feola, recorde entre os técnicos; a lista de treinadores da Wikipédia aponta 555.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
       {
         "n": "Wikipédia (pt) — Lista de treinadores do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Lista_de_treinadores_do_São_Paulo_Futebol_Clube"
@@ -114,7 +147,10 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Vicente_Feola"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true,
+    "fixed": true
   },
   {
     "id": "tecnicos-006",
@@ -135,12 +171,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Telê_Santana"
       },
       {
-        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-        "u": "https://pt.wikipedia.org/wiki/São_Paulo_Futebol_Clube"
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1992–1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-007",
@@ -154,23 +195,28 @@ export default [
     "c": 0,
     "cat": "tecnicos",
     "d": 2,
-    "exp": "Libertadores, Mundial, Supercopa e Recopa: a \"quádrupla coroa\" de 1993.",
+    "exp": "Em 1993 o São Paulo de Telê venceu Libertadores, Supercopa, Recopa e Mundial Interclubes.",
     "src": [
       {
         "n": "Wikipédia (pt) — Telê Santana",
         "u": "https://pt.wikipedia.org/wiki/Telê_Santana"
       },
       {
-        "n": "Wikipédia (pt) — Zetti",
-        "u": "https://pt.wikipedia.org/wiki/Zetti"
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Wikipédia (en) — Telê Santana",
+        "u": "https://en.wikipedia.org/wiki/Telê_Santana"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-008",
-    "q": "Em que ano Telê Santana sofreu uma isquemia cerebral que encerrou sua carreira de técnico?",
+    "q": "Em que ano Telê Santana sofreu o problema de saúde (uma isquemia cerebral) que encerrou sua carreira de técnico?",
     "a": [
       "1994",
       "1995",
@@ -180,15 +226,20 @@ export default [
     "c": 2,
     "cat": "tecnicos",
     "d": 2,
-    "exp": "Telê teve o problema de saúde em janeiro de 1996.",
+    "exp": "Telê deixou a carreira em 1996, após sofrer uma isquemia cerebral (AVC).",
     "src": [
       {
         "n": "Wikipédia (pt) — Telê Santana",
         "u": "https://pt.wikipedia.org/wiki/Telê_Santana"
+      },
+      {
+        "n": "Wikipédia (en) — Telê Santana",
+        "u": "https://en.wikipedia.org/wiki/Telê_Santana"
       }
     ],
     "when": "1996",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-009",
@@ -207,10 +258,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Telê Santana",
         "u": "https://pt.wikipedia.org/wiki/Telê_Santana"
+      },
+      {
+        "n": "Wikipédia (en) — Telê Santana",
+        "u": "https://en.wikipedia.org/wiki/Telê_Santana"
       }
     ],
     "when": "1982–1986",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-010",
@@ -229,9 +285,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Telê Santana",
         "u": "https://pt.wikipedia.org/wiki/Telê_Santana"
+      },
+      {
+        "n": "Wikipédia (es) — Telê Santana",
+        "u": "https://es.wikipedia.org/wiki/Telê_Santana"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-011",
@@ -250,10 +311,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Telê Santana",
         "u": "https://pt.wikipedia.org/wiki/Telê_Santana"
+      },
+      {
+        "n": "Wikipédia (en) — Telê Santana",
+        "u": "https://en.wikipedia.org/wiki/Telê_Santana"
       }
     ],
     "when": "1931",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-012",
@@ -267,19 +333,24 @@ export default [
     "c": 1,
     "cat": "tecnicos",
     "d": 2,
-    "exp": "Telê reconstruiu o time em 1990 e ficou até 1996.",
+    "exp": "Telê teve duas passagens pelo clube (1973 e 1990–1996); na segunda, reconstruiu o time a partir de 1990.",
     "src": [
       {
         "n": "Wikipédia (pt) — Telê Santana",
         "u": "https://pt.wikipedia.org/wiki/Telê_Santana"
       },
       {
-        "n": "Wikipédia (pt) — Lista de treinadores do São Paulo Futebol Clube",
-        "u": "https://pt.wikipedia.org/wiki/Lista_de_treinadores_do_São_Paulo_Futebol_Clube"
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Wikipédia (en) — Telê Santana",
+        "u": "https://en.wikipedia.org/wiki/Telê_Santana"
       }
     ],
     "when": "1990",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-013",
@@ -298,10 +369,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Telê Santana",
         "u": "https://pt.wikipedia.org/wiki/Telê_Santana"
+      },
+      {
+        "n": "Wikipédia (en) — Telê Santana",
+        "u": "https://en.wikipedia.org/wiki/Telê_Santana"
       }
     ],
     "when": "1971",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-014",
@@ -315,19 +391,24 @@ export default [
     "c": 3,
     "cat": "tecnicos",
     "d": 4,
-    "exp": "No Al-Ahli, Telê ganhou o campeonato saudita de 1983–84 e a Copa do Golfo de 1985.",
+    "exp": "Telê treinou o Al-Ahli, da Arábia Saudita, de 1983 a 1985, entre suas duas Copas pela seleção.",
     "src": [
       {
         "n": "Wikipédia (pt) — Telê Santana",
         "u": "https://pt.wikipedia.org/wiki/Telê_Santana"
+      },
+      {
+        "n": "Wikipédia (en) — Telê Santana",
+        "u": "https://en.wikipedia.org/wiki/Telê_Santana"
       }
     ],
     "when": "1983–1985",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-015",
-    "q": "Quem comandou o São Paulo na Recopa Sul-Americana de 1993, contra o Cruzeiro?",
+    "q": "Quem comandou o São Paulo na Recopa Sul-Americana disputada em 1993, contra o Cruzeiro?",
     "a": [
       "Telê Santana",
       "Muricy Ramalho",
@@ -342,10 +423,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Recopa Sul-Americana de 1993",
         "u": "https://pt.wikipedia.org/wiki/Recopa_Sul-Americana_de_1993"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-016",
@@ -366,12 +452,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Muricy_Ramalho"
       },
       {
-        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-        "u": "https://pt.wikipedia.org/wiki/São_Paulo_Futebol_Clube"
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "2006–2008",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-017",
@@ -390,10 +481,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Muricy Ramalho",
         "u": "https://pt.wikipedia.org/wiki/Muricy_Ramalho"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 2011",
+        "u": "https://rsssf.org/sacups/copa2011.html"
+      },
+      {
+        "n": "Wikipédia (en) — Muricy Ramalho",
+        "u": "https://en.wikipedia.org/wiki/Muricy_Ramalho"
       }
     ],
     "when": "2011",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-018",
@@ -412,10 +512,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Muricy Ramalho",
         "u": "https://pt.wikipedia.org/wiki/Muricy_Ramalho"
+      },
+      {
+        "n": "Wikipédia (en) — Muricy Ramalho",
+        "u": "https://en.wikipedia.org/wiki/Muricy_Ramalho"
       }
     ],
     "when": "2010",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-019",
@@ -434,10 +539,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Muricy Ramalho",
         "u": "https://pt.wikipedia.org/wiki/Muricy_Ramalho"
+      },
+      {
+        "n": "Wikipédia (en) — Muricy Ramalho",
+        "u": "https://en.wikipedia.org/wiki/Muricy_Ramalho"
       }
     ],
     "when": "1979–1985",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-020",
@@ -458,12 +568,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Muricy_Ramalho"
       },
       {
-        "n": "Wikipédia (pt) — Rubens Minelli",
-        "u": "https://pt.wikipedia.org/wiki/Rubens_Minelli"
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1975–1977",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-021",
@@ -484,12 +599,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Copa_Conmebol_de_1994"
       },
       {
-        "n": "Wikipédia (pt) — Muricy Ramalho",
-        "u": "https://pt.wikipedia.org/wiki/Muricy_Ramalho"
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Trivela — Expressinho do São Paulo conquistou a Copa Conmebol de 1994",
+        "u": "https://trivela.com.br/america-do-sul/com-ceni-e-muricy-ramalho-expressinho-do-sao-paulo-foi-ate-o-fim-e-conquistou-a-copa-conmebol-de-1994/"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-022",
@@ -508,10 +628,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Rubens Minelli",
         "u": "https://pt.wikipedia.org/wiki/Rubens_Minelli"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1977",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-023",
@@ -530,10 +659,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Rubens Minelli",
         "u": "https://pt.wikipedia.org/wiki/Rubens_Minelli"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1975–1976",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-024",
@@ -556,10 +690,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/São_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1984–1986",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-025",
@@ -573,15 +712,24 @@ export default [
     "c": 2,
     "cat": "tecnicos",
     "d": 3,
-    "exp": "Segundo a Wikipédia, Cilinho venceu os Paulistas de 1985 e 1987 com o São Paulo.",
+    "exp": "Cilinho foi o técnico dos títulos paulistas de 1985 e 1987, segundo as fichas do site oficial do clube.",
     "src": [
       {
         "n": "Wikipédia (pt) — Cilinho",
         "u": "https://pt.wikipedia.org/wiki/Cilinho"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Wikipédia (en) — Cilinho",
+        "u": "https://en.wikipedia.org/wiki/Cilinho"
       }
     ],
     "when": "1985–1987",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-026",
@@ -600,10 +748,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Cilinho",
         "u": "https://pt.wikipedia.org/wiki/Cilinho"
+      },
+      {
+        "n": "Wikipédia (en) — Cilinho",
+        "u": "https://en.wikipedia.org/wiki/Cilinho"
       }
     ],
     "when": "1939–2019",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-027",
@@ -622,10 +775,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Béla Guttmann",
         "u": "https://pt.wikipedia.org/wiki/Béla_Guttmann"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Wikipédia (en) — Béla Guttmann",
+        "u": "https://en.wikipedia.org/wiki/Béla_Guttmann"
       }
     ],
     "when": "1957–1958",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-028",
@@ -644,10 +806,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Béla Guttmann",
         "u": "https://pt.wikipedia.org/wiki/Béla_Guttmann"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Wikipédia (en) — Béla Guttmann",
+        "u": "https://en.wikipedia.org/wiki/Béla_Guttmann"
       }
     ],
     "when": "1957",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-029",
@@ -666,10 +837,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Béla Guttmann",
         "u": "https://pt.wikipedia.org/wiki/Béla_Guttmann"
+      },
+      {
+        "n": "Wikipédia (en) — Béla Guttmann",
+        "u": "https://en.wikipedia.org/wiki/Béla_Guttmann"
       }
     ],
     "when": "1961–1962",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-030",
@@ -688,10 +864,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Paulo Autuori",
         "u": "https://pt.wikipedia.org/wiki/Paulo_Autuori"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — História recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-031",
@@ -710,10 +895,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Paulo Autuori",
         "u": "https://pt.wikipedia.org/wiki/Paulo_Autuori"
+      },
+      {
+        "n": "Wikipédia (en) — Paulo Autuori",
+        "u": "https://en.wikipedia.org/wiki/Paulo_Autuori"
       }
     ],
     "when": "1997",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-032",
@@ -732,10 +922,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Paulo Autuori",
         "u": "https://pt.wikipedia.org/wiki/Paulo_Autuori"
+      },
+      {
+        "n": "Wikipédia (en) — Paulo Autuori",
+        "u": "https://en.wikipedia.org/wiki/Paulo_Autuori"
       }
     ],
     "when": "1995",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-033",
@@ -756,12 +951,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Paulo_Autuori"
       },
       {
-        "n": "Wikipédia (pt) — Emerson Leão",
-        "u": "https://pt.wikipedia.org/wiki/Emerson_Leão"
+        "n": "Site oficial do São Paulo FC — História recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      },
+      {
+        "n": "Wikipédia (en) — Paulo Autuori",
+        "u": "https://en.wikipedia.org/wiki/Paulo_Autuori"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-034",
@@ -780,10 +980,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Emerson Leão",
         "u": "https://pt.wikipedia.org/wiki/Emerson_Leão"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — História recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-035",
@@ -797,15 +1006,25 @@ export default [
     "c": 3,
     "cat": "tecnicos",
     "d": 1,
-    "exp": "Crespo foi anunciado em fevereiro de 2021 e venceu o Paulista; foi seu primeiro título como técnico.",
+    "exp": "Crespo foi anunciado em fevereiro de 2021 e venceu o Paulista sobre o Palmeiras (2 a 0 no agregado), primeiro título do clube em nove anos. Antes, já havia vencido a Sul-Americana de 2020 pelo Defensa y Justicia.",
     "src": [
       {
         "n": "Wikipédia (pt) — Hernán Crespo",
         "u": "https://pt.wikipedia.org/wiki/Hernán_Crespo"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Wikipédia (en) — Hernán Crespo",
+        "u": "https://en.wikipedia.org/wiki/Hernán_Crespo"
       }
     ],
     "when": "2021",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "tecnicos-036",
@@ -828,9 +1047,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Lista de treinadores do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Lista_de_treinadores_do_São_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "Wikipédia (en) — Hernán Crespo",
+        "u": "https://en.wikipedia.org/wiki/Hernán_Crespo"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-037",
@@ -849,10 +1073,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Hernán Crespo",
         "u": "https://pt.wikipedia.org/wiki/Hernán_Crespo"
+      },
+      {
+        "n": "Wikipédia (en) — Hernán Crespo",
+        "u": "https://en.wikipedia.org/wiki/Hernán_Crespo"
       }
     ],
     "when": "2020",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-038",
@@ -873,12 +1102,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Dorival_Júnior"
       },
       {
-        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-        "u": "https://pt.wikipedia.org/wiki/São_Paulo_Futebol_Clube"
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Wikipédia (en) — Dorival Júnior",
+        "u": "https://en.wikipedia.org/wiki/Dorival_Júnior"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-039",
@@ -897,10 +1131,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Dorival Júnior",
         "u": "https://pt.wikipedia.org/wiki/Dorival_Júnior"
+      },
+      {
+        "n": "Wikipédia (en) — Dorival Júnior",
+        "u": "https://en.wikipedia.org/wiki/Dorival_Júnior"
       }
     ],
     "when": "2022",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-040",
@@ -919,10 +1158,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Dorival Júnior",
         "u": "https://pt.wikipedia.org/wiki/Dorival_Júnior"
+      },
+      {
+        "n": "Wikipédia (en) — Dorival Júnior",
+        "u": "https://en.wikipedia.org/wiki/Dorival_Júnior"
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-041",
@@ -943,12 +1187,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/São_Paulo_Futebol_Clube"
       },
       {
-        "n": "Wikipédia (pt) — Dorival Júnior",
-        "u": "https://pt.wikipedia.org/wiki/Dorival_Júnior"
+        "n": "Wikipédia (en) — Dorival Júnior",
+        "u": "https://en.wikipedia.org/wiki/Dorival_Júnior"
+      },
+      {
+        "n": "Wikipédia (en) — Rogério Ceni",
+        "u": "https://en.wikipedia.org/wiki/Rogério_Ceni"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-042",
@@ -967,10 +1216,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Ney Franco",
         "u": "https://pt.wikipedia.org/wiki/Ney_Franco"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Wikipédia (en) — Ney Franco",
+        "u": "https://en.wikipedia.org/wiki/Ney_Franco"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-043",
@@ -989,10 +1247,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Ney Franco",
         "u": "https://pt.wikipedia.org/wiki/Ney_Franco"
+      },
+      {
+        "n": "Wikipédia (en) — Ney Franco",
+        "u": "https://en.wikipedia.org/wiki/Ney_Franco"
       }
     ],
     "when": "2011",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-044",
@@ -1011,10 +1274,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Juan Carlos Osorio",
         "u": "https://pt.wikipedia.org/wiki/Juan_Carlos_Osorio"
+      },
+      {
+        "n": "Wikipédia (en) — Juan Carlos Osorio",
+        "u": "https://en.wikipedia.org/wiki/Juan_Carlos_Osorio"
       }
     ],
     "when": "2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-045",
@@ -1033,10 +1301,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Edgardo Bauza",
         "u": "https://pt.wikipedia.org/wiki/Edgardo_Bauza"
+      },
+      {
+        "n": "Wikipédia (en) — Edgardo Bauza",
+        "u": "https://en.wikipedia.org/wiki/Edgardo_Bauza"
       }
     ],
     "when": "2016",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-046",
@@ -1055,14 +1328,23 @@ export default [
       {
         "n": "Wikipédia (pt) — Edgardo Bauza",
         "u": "https://pt.wikipedia.org/wiki/Edgardo_Bauza"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 2008",
+        "u": "https://rsssf.org/sacups/copa08.html"
+      },
+      {
+        "n": "Wikipédia (en) — Edgardo Bauza",
+        "u": "https://en.wikipedia.org/wiki/Edgardo_Bauza"
       }
     ],
     "when": "2008",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-047",
-    "q": "Qual era o apelido de Edgardo Bauza, ligado ao tamanho dos seus pés?",
+    "q": "Por qual apelido era conhecido o técnico argentino Edgardo Bauza?",
     "a": [
       "Patón",
       "Pelado",
@@ -1072,14 +1354,19 @@ export default [
     "c": 0,
     "cat": "tecnicos",
     "d": 4,
-    "exp": "Bauza era chamado de \"Patón\", por calçar 46.",
+    "exp": "Bauza é conhecido como \"Patón\" (segundo a Wikipédia em português, por calçar 46).",
     "src": [
       {
         "n": "Wikipédia (pt) — Edgardo Bauza",
         "u": "https://pt.wikipedia.org/wiki/Edgardo_Bauza"
+      },
+      {
+        "n": "Wikipédia (en) — Edgardo Bauza",
+        "u": "https://en.wikipedia.org/wiki/Edgardo_Bauza"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-048",
@@ -1098,10 +1385,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Diego Aguirre",
         "u": "https://pt.wikipedia.org/wiki/Diego_Aguirre"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 2011",
+        "u": "https://rsssf.org/sacups/copa2011.html"
+      },
+      {
+        "n": "Wikipédia (en) — Diego Aguirre",
+        "u": "https://en.wikipedia.org/wiki/Diego_Aguirre_(Uruguayan_footballer)"
       }
     ],
     "when": "2018",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-049",
@@ -1120,10 +1416,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Luis Zubeldía",
         "u": "https://pt.wikipedia.org/wiki/Luis_Zubeldía"
+      },
+      {
+        "n": "Wikipédia (en) — Luis Zubeldía",
+        "u": "https://en.wikipedia.org/wiki/Luis_Zubeldía"
       }
     ],
     "when": "2024–2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-050",
@@ -1142,10 +1443,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Luis Zubeldía",
         "u": "https://pt.wikipedia.org/wiki/Luis_Zubeldía"
+      },
+      {
+        "n": "Wikipédia (en) — Luis Zubeldía",
+        "u": "https://en.wikipedia.org/wiki/Luis_Zubeldía"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-051",
@@ -1168,10 +1474,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Sul-Americana de 2022",
         "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2022"
+      },
+      {
+        "n": "Wikipédia (en) — Rogério Ceni",
+        "u": "https://en.wikipedia.org/wiki/Rogério_Ceni"
       }
     ],
     "when": "2022",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-052",
@@ -1185,15 +1496,20 @@ export default [
     "c": 1,
     "cat": "tecnicos",
     "d": 2,
-    "exp": "A estreia foi em 19 de janeiro de 2017, na Florida Cup; ele deixou o cargo em julho do mesmo ano.",
+    "exp": "Ceni assumiu no fim de 2016 e estreou em janeiro de 2017; deixou o cargo em julho do mesmo ano.",
     "src": [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rogério_Ceni"
+      },
+      {
+        "n": "Wikipédia (en) — Rogério Ceni",
+        "u": "https://en.wikipedia.org/wiki/Rogério_Ceni"
       }
     ],
     "when": "2017",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-053",
@@ -1212,10 +1528,19 @@ export default [
       {
         "n": "Wikipédia (pt) — José Poy",
         "u": "https://pt.wikipedia.org/wiki/José_Poy"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Conquistas (fichas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1975",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-054",
@@ -1229,15 +1554,20 @@ export default [
     "c": 3,
     "cat": "tecnicos",
     "d": 4,
-    "exp": "A Wikipédia cita os vice-campeonatos nacionais de 1971 e 1973 sob Poy.",
+    "exp": "Segundo o site oficial do clube, Poy foi vice-campeão nacional em 1971 e 1973 e campeão paulista em 1975 como técnico.",
     "src": [
       {
         "n": "Wikipédia (pt) — José Poy",
         "u": "https://pt.wikipedia.org/wiki/José_Poy"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1971–1973",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "tecnicos-055",
@@ -1256,9 +1586,14 @@ export default [
       {
         "n": "Wikipédia (pt) — José Poy",
         "u": "https://pt.wikipedia.org/wiki/José_Poy"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Grandes ídolos (técnicos)",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1974",
-    "ok": true
+    "ok": true,
+    "v2": true
   }
 ];

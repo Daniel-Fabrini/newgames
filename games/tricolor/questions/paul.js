@@ -22,10 +22,15 @@ export default [
       {
         "n": "Wikipedia (en) — 1931 São Paulo FC season",
         "u": "https://en.wikipedia.org/wiki/1931_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1931",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1931.htm"
       }
     ],
     "when": "1931",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-002",
@@ -42,20 +47,21 @@ export default [
     "exp": "A FPF contabiliza 22 títulos paulistas do São Paulo, o último deles em 2021. O clube ainda tem o Supercampeonato Paulista de 2002 à parte.",
     "src": [
       {
-        "n": "Wikipédia (pt) — Campeonato Paulista de Futebol",
-        "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol"
-      },
-      {
         "n": "Wikipédia (pt) — Lista de campeões do Campeonato Paulista",
         "u": "https://pt.wikipedia.org/wiki/Lista_de_campe%C3%B5es_do_Campeonato_Paulista_de_Futebol"
       },
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "CNN Brasil — São Paulo quebra jejum de 15 anos e leva a taça do Paulista 2021",
+        "u": "https://www.cnnbrasil.com.br/esporte/sao-paulo-e-palmeiras-decidem-paulistao-no-morumbi/"
       }
     ],
     "when": "1931–2021",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-003",
@@ -78,10 +84,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — O São Paulo é campeão paulista de 2021",
+        "u": "https://www.saopaulofc.net/o-sao-paulo-e-campeao-paulista-de-2021/"
       }
     ],
     "when": "2021",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-004",
@@ -100,10 +111,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 2021",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2021"
+      },
+      {
+        "n": "SPFC (site oficial) — O São Paulo é campeão paulista de 2021",
+        "u": "https://www.saopaulofc.net/o-sao-paulo-e-campeao-paulista-de-2021/"
       }
     ],
     "when": "2021",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-005",
@@ -122,10 +138,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 2021",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2021"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 2021",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp2021.htm"
       }
     ],
     "when": "2021",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-006",
@@ -144,10 +165,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 2021",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2021"
+      },
+      {
+        "n": "Wikipedia (en) — 2021 Campeonato Paulista",
+        "u": "https://en.wikipedia.org/wiki/2021_Campeonato_Paulista"
       }
     ],
     "when": "2021",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-007",
@@ -170,10 +196,15 @@ export default [
       {
         "n": "Wikipedia (en) — 1931 São Paulo FC season",
         "u": "https://en.wikipedia.org/wiki/1931_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "SPFC (site oficial) — 85 anos do primeiro título do São Paulo",
+        "u": "https://www.saopaulofc.net/85-anos-do-primeiro-titulo-do-sao-paulo/"
       }
     ],
     "when": "1931",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-008",
@@ -192,10 +223,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1931",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1931"
+      },
+      {
+        "n": "SPFC (site oficial) — 85 anos do primeiro título do São Paulo",
+        "u": "https://www.saopaulofc.net/85-anos-do-primeiro-titulo-do-sao-paulo/"
       }
     ],
     "when": "1931",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-009",
@@ -214,10 +250,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1931",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1931"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1931",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1931.htm"
       }
     ],
     "when": "1931",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-010",
@@ -236,10 +277,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1931",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1931"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista: artilheiros",
+        "u": "https://www.rsssfbrasil.com/tablessz/sptops.htm"
       }
     ],
     "when": "1931",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-011",
@@ -262,10 +308,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1931",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1931"
+      },
+      {
+        "n": "SPFC (site oficial) — 85 anos do primeiro título do São Paulo",
+        "u": "https://www.saopaulofc.net/85-anos-do-primeiro-titulo-do-sao-paulo/"
       }
     ],
     "when": "1931",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-012",
@@ -284,10 +335,15 @@ export default [
       {
         "n": "Wikipedia (en) — 1931 São Paulo FC season",
         "u": "https://en.wikipedia.org/wiki/1931_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1931",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1931.htm"
       }
     ],
     "when": "1931",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-013",
@@ -310,10 +366,15 @@ export default [
       {
         "n": "Wikipedia (en) — 1930 São Paulo FC season",
         "u": "https://en.wikipedia.org/wiki/1930_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: Campeonato Paulista",
+        "u": "https://www.saopaulofc.net/enciclopedia-campeonato-paulista-2/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-014",
@@ -327,7 +388,7 @@ export default [
     "c": 2,
     "cat": "paul",
     "d": 2,
-    "exp": "O Corinthians foi campeão invicto, com 16 pontos contra 14 do São Paulo. A decisão foi encerrada em abril de 1939.",
+    "exp": "O Corinthians foi campeão invicto, e o São Paulo terminou em segundo, com 14 pontos. A decisão foi encerrada em abril de 1939.",
     "src": [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1938",
@@ -336,10 +397,15 @@ export default [
       {
         "n": "Wikipedia (en) — 1938 São Paulo FC season",
         "u": "https://en.wikipedia.org/wiki/1938_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1938",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1938.htm"
       }
     ],
     "when": "1938",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-015",
@@ -361,7 +427,8 @@ export default [
       }
     ],
     "when": "1938–1939",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "paul-016",
@@ -380,10 +447,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1943",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1943"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1943",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1943.htm"
       }
     ],
     "when": "1943",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-017",
@@ -406,10 +478,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Há 70 anos a moeda cai em pé",
+        "u": "https://www.saopaulofc.net/ha-70-anos-a-moeda-cai-em-pe/"
       }
     ],
     "when": "1943",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-018",
@@ -428,10 +505,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1943",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1943"
+      },
+      {
+        "n": "SPFC (site oficial) — Há 70 anos a moeda cai em pé",
+        "u": "https://www.saopaulofc.net/ha-70-anos-a-moeda-cai-em-pe/"
       }
     ],
     "when": "1943",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-019",
@@ -454,10 +536,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Há 70 anos a moeda cai em pé",
+        "u": "https://www.saopaulofc.net/ha-70-anos-a-moeda-cai-em-pe/"
       }
     ],
     "when": "1943",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-020",
@@ -476,10 +563,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1945",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1945"
+      },
+      {
+        "n": "SPFC (site oficial) — Campeão Paulista de 1945",
+        "u": "https://www.saopaulofc.net/campeao-paulista-de-1945/"
       }
     ],
     "when": "1945",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-021",
@@ -498,10 +590,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1945",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1945"
+      },
+      {
+        "n": "SPFC (site oficial) — Campeão Paulista de 1945",
+        "u": "https://www.saopaulofc.net/campeao-paulista-de-1945/"
       }
     ],
     "when": "1945",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-022",
@@ -520,10 +617,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1946",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1946"
+      },
+      {
+        "n": "SPFC (site oficial) — 70 anos do primeiro título invicto do Tricolor",
+        "u": "https://www.saopaulofc.net/70-anos-do-primeiro-titulo-invicto-do-tricolor/"
       }
     ],
     "when": "1946",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-023",
@@ -542,10 +644,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1946",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1946"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1946",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1946.htm"
       }
     ],
     "when": "1946",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-024",
@@ -564,10 +671,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1946",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1946"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1946",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1946.htm"
       }
     ],
     "when": "1946",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-025",
@@ -586,10 +698,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1946",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1946"
+      },
+      {
+        "n": "SPFC (site oficial) — 70 anos do primeiro título invicto do Tricolor",
+        "u": "https://www.saopaulofc.net/70-anos-do-primeiro-titulo-invicto-do-tricolor/"
       }
     ],
     "when": "1946",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-026",
@@ -612,10 +729,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1949",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1949"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "1948–1949",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-027",
@@ -634,10 +756,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1948",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1948"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "1948",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-028",
@@ -651,15 +778,21 @@ export default [
     "c": 2,
     "cat": "paul",
     "d": 2,
-    "exp": "Teixeirinha, Friaça (2) e Alemãozinho marcaram os gols do 6º título paulista do clube.",
+    "exp": "Friaça (2) e Teixeirinha marcaram os gols da vitória que deu ao São Paulo o 6º título paulista.",
     "src": [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1949",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1949"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "1949",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "paul-029",
@@ -678,10 +811,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1949",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1949"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista: artilheiros",
+        "u": "https://www.rsssfbrasil.com/tablessz/sptops.htm"
       }
     ],
     "when": "1949",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-030",
@@ -704,10 +842,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — A conquista do Paulistão de 1953",
+        "u": "https://www.saopaulofc.net/a-conquista-do-paulistao-de-1953/"
       }
     ],
     "when": "1953–1954",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-031",
@@ -726,10 +869,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1953",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1953"
+      },
+      {
+        "n": "SPFC (site oficial) — A conquista do Paulistão de 1953",
+        "u": "https://www.saopaulofc.net/a-conquista-do-paulistao-de-1953/"
       }
     ],
     "when": "1953–1954",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-032",
@@ -748,10 +896,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1953",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1953"
+      },
+      {
+        "n": "SPFC (site oficial) — A conquista do Paulistão de 1953",
+        "u": "https://www.saopaulofc.net/a-conquista-do-paulistao-de-1953/"
       }
     ],
     "when": "1953",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-033",
@@ -774,10 +927,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Há 60 anos, sob garrafadas, o Tricolor sagrou-se campeão",
+        "u": "https://www.saopaulofc.net/ha-60-anos-sob-garrafadas-o-tricolor-sagrou-se-campeao/"
       }
     ],
     "when": "1957",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-034",
@@ -796,10 +954,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1957",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1957"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "1957",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-035",
@@ -822,10 +985,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1970",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1970"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
     "when": "1957–1970",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-036",
@@ -844,10 +1012,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1970",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1970"
+      },
+      {
+        "n": "SPFC (site oficial) — Campeão Paulista de 1970",
+        "u": "https://www.saopaulofc.net/campeao-paulista-de-1970/"
       }
     ],
     "when": "1970",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-037",
@@ -866,10 +1039,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1970",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1970"
+      },
+      {
+        "n": "SPFC (site oficial) — Campeão Paulista de 1970",
+        "u": "https://www.saopaulofc.net/campeao-paulista-de-1970/"
       }
     ],
     "when": "1970",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-038",
@@ -888,10 +1066,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1970",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1970"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista: artilheiros",
+        "u": "https://www.rsssfbrasil.com/tablessz/sptops.htm"
       }
     ],
     "when": "1970",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-039",
@@ -910,10 +1093,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1971",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1971"
+      },
+      {
+        "n": "Lance! — Choque-Rei já decidiu Brasileiro, e serviu de vingança para o Palmeiras",
+        "u": "https://www.lance.com.br/palmeiras/choque-rei-decidiu-brasileiro-serviu-vinganca-para.html"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
     "when": "1971",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-040",
@@ -932,10 +1124,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1971",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1971"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "1971",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-041",
@@ -954,10 +1151,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1972",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1972"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1972",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1972.htm"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: Campeonato Paulista",
+        "u": "https://www.saopaulofc.net/enciclopedia-campeonato-paulista-2/"
       }
     ],
     "when": "1972",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-042",
@@ -976,10 +1182,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1973",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1973"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1973",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1973.htm"
       }
     ],
     "when": "1973",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-043",
@@ -998,10 +1209,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1975",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1975"
+      },
+      {
+        "n": "SPFC (site oficial) — Campeão Paulista de 1975",
+        "u": "https://www.saopaulofc.net/campeao-paulista-de-1975/"
       }
     ],
     "when": "1975",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-044",
@@ -1020,14 +1236,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1975",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1975"
+      },
+      {
+        "n": "SPFC (site oficial) — Campeão Paulista de 1975",
+        "u": "https://www.saopaulofc.net/campeao-paulista-de-1975/"
       }
     ],
     "when": "1975",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-045",
-    "q": "Quem foi o artilheiro do Campeonato Paulista de 1975, com 22 gols, pelo São Paulo?",
+    "q": "Segundo o site oficial do São Paulo, quem foi o artilheiro do Campeonato Paulista de 1975, com 22 gols pelo clube?",
     "a": [
       "Pedro Rocha",
       "Terto",
@@ -1037,15 +1258,25 @@ export default [
     "c": 2,
     "cat": "paul",
     "d": 4,
-    "exp": "Serginho Chulapa terminou como goleador do campeonato do 11º título paulista.",
+    "exp": "O site oficial e a Wikipédia creditam 22 gols a Serginho Chulapa no Paulista de 1975; a RSSSF também o aponta como artilheiro, mas com 19 gols.",
     "src": [
+      {
+        "n": "SPFC (site oficial) — Guia histórico do Campeonato Paulista (2012)",
+        "u": "https://www.saopaulofc.net/guia-historico-do-campeonato-paulista-2/"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista: artilheiros",
+        "u": "https://www.rsssfbrasil.com/tablessz/sptops.htm"
+      },
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1975",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1975"
       }
     ],
     "when": "1975",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "paul-046",
@@ -1064,10 +1295,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1975",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1975"
+      },
+      {
+        "n": "SPFC (site oficial) — Campeão Paulista de 1975",
+        "u": "https://www.saopaulofc.net/campeao-paulista-de-1975/"
       }
     ],
     "when": "1975",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-047",
@@ -1086,10 +1322,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1980",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1980"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1980",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1980.htm"
       }
     ],
     "when": "1980",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-048",
@@ -1108,10 +1349,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1980",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1980"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1980",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1980.htm"
       }
     ],
     "when": "1980",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-049",
@@ -1130,10 +1376,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1980",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1980"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "1980",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-050",
@@ -1152,10 +1403,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1981",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1981"
+      },
+      {
+        "n": "SPFC (site oficial) — Aniversário da conquista do Paulistão de 1981",
+        "u": "https://www.saopaulofc.net/aniversario-da-conquista-do-paulistao-de-1981/"
       }
     ],
     "when": "1981",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-051",
@@ -1174,10 +1430,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1981",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1981"
+      },
+      {
+        "n": "SPFC (site oficial) — Aniversário da conquista do Paulistão de 1981",
+        "u": "https://www.saopaulofc.net/aniversario-da-conquista-do-paulistao-de-1981/"
       }
     ],
     "when": "1981",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-052",
@@ -1196,10 +1457,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1982",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1982"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1982",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1982.htm"
       }
     ],
     "when": "1982",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-053",
@@ -1218,10 +1484,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1985",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1985"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
     "when": "1985",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-054",
@@ -1240,10 +1511,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1985",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1985"
+      },
+      {
+        "n": "SPFC (site oficial) — Em 1985, jogo tumultuado e título garantido",
+        "u": "https://www.saopaulofc.net/em-1985-jogo-tumultuado-e-titulo-garantido/"
       }
     ],
     "when": "1985",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-055",
@@ -1262,10 +1538,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1985",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1985"
+      },
+      {
+        "n": "SPFC (site oficial) — Guia histórico do Campeonato Paulista (2012)",
+        "u": "https://www.saopaulofc.net/guia-historico-do-campeonato-paulista-2/"
       }
     ],
     "when": "1985",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-056",
@@ -1284,10 +1565,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1985",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1985"
+      },
+      {
+        "n": "SPFC (site oficial) — Em 1985, jogo tumultuado e título garantido",
+        "u": "https://www.saopaulofc.net/em-1985-jogo-tumultuado-e-titulo-garantido/"
       }
     ],
     "when": "1985",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-057",
@@ -1301,7 +1587,7 @@ export default [
     "c": 0,
     "cat": "paul",
     "d": 3,
-    "exp": "A Inter de Limeira foi o primeiro time do interior campeão paulista; o São Paulo ficou em 6º, com 42 pontos, apesar de ser campeão brasileiro no fim do ano.",
+    "exp": "A Inter de Limeira foi o primeiro time do interior campeão paulista; o São Paulo, que seria campeão brasileiro no fim do ano, não chegou às semifinais.",
     "src": [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1986",
@@ -1310,10 +1596,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1986",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1986.htm"
       }
     ],
     "when": "1986",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-058",
@@ -1332,10 +1623,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1987",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1987"
+      },
+      {
+        "n": "SPFC (site oficial) — Campeão Paulista de 1987",
+        "u": "https://www.saopaulofc.net/campeao-paulista-de-1987/"
       }
     ],
     "when": "1987",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-059",
@@ -1354,10 +1650,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1989",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1989"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1989",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1989.htm"
       }
     ],
     "when": "1989",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-060",
@@ -1379,7 +1680,8 @@ export default [
       }
     ],
     "when": "1989",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "paul-061",
@@ -1401,7 +1703,8 @@ export default [
       }
     ],
     "when": "1989",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "paul-062",
@@ -1420,10 +1723,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1989",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1989"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "1989",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-063",
@@ -1442,10 +1750,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1991",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1991"
+      },
+      {
+        "n": "SPFC (site oficial) — Os três gols de Raí e o título do Paulista de 1991",
+        "u": "https://www.saopaulofc.net/os-tres-gols-de-rai-e-o-titulo-do-paulista-de-1991/"
       }
     ],
     "when": "1991",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-064",
@@ -1464,10 +1777,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1991",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1991"
+      },
+      {
+        "n": "SPFC (site oficial) — Guia histórico do Campeonato Paulista (2012)",
+        "u": "https://www.saopaulofc.net/guia-historico-do-campeonato-paulista-2/"
       }
     ],
     "when": "1991",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-065",
@@ -1490,10 +1808,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1992",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1992"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "1991–1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-066",
@@ -1512,10 +1835,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1992",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1992"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1992",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1992.htm"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-067",
@@ -1534,10 +1862,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1992",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1992"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1992",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1992.htm"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-068",
@@ -1560,10 +1893,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — A conquista do Campeonato Paulista de 1998",
+        "u": "https://www.saopaulofc.net/a-conquista-do-campeonato-paulista-de-1998/"
       }
     ],
     "when": "1998",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-069",
@@ -1582,10 +1920,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1998",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1998"
+      },
+      {
+        "n": "SPFC (site oficial) — A conquista do Campeonato Paulista de 1998",
+        "u": "https://www.saopaulofc.net/a-conquista-do-campeonato-paulista-de-1998/"
       }
     ],
     "when": "1998",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-070",
@@ -1604,10 +1947,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 2000",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2000"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "2000",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-071",
@@ -1626,10 +1974,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 2000",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2000"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista: artilheiros",
+        "u": "https://www.rsssfbrasil.com/tablessz/sptops.htm"
       }
     ],
     "when": "2000",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-072",
@@ -1651,7 +2004,8 @@ export default [
       }
     ],
     "when": "2000",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "paul-073",
@@ -1665,7 +2019,7 @@ export default [
     "c": 1,
     "cat": "paul",
     "d": 2,
-    "exp": "O Supercampeonato foi disputado em maio de 2002 por quatro clubes; o São Paulo bateu o Ituano por 2 a 2 e 4 a 1 na final.",
+    "exp": "O Supercampeonato foi disputado em maio de 2002 por quatro clubes; na final, o São Paulo empatou com o Ituano por 2 a 2 e venceu por 4 a 1.",
     "src": [
       {
         "n": "Wikipédia (pt) — Supercampeonato Paulista de Futebol de 2002",
@@ -1674,10 +2028,16 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Campeão do Super Paulista de 2002",
+        "u": "https://www.saopaulofc.net/campeao-do-super-paulista-de-2002/"
       }
     ],
     "when": "2002",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "paul-074",
@@ -1696,10 +2056,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Supercampeonato Paulista de Futebol de 2002",
         "u": "https://pt.wikipedia.org/wiki/Supercampeonato_Paulista_de_Futebol_de_2002"
+      },
+      {
+        "n": "RSSSF Brasil — Supercampeonato Paulista 2002",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp2002sc.htm"
       }
     ],
     "when": "2002",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-075",
@@ -1718,10 +2083,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Supercampeonato Paulista de Futebol de 2002",
         "u": "https://pt.wikipedia.org/wiki/Supercampeonato_Paulista_de_Futebol_de_2002"
+      },
+      {
+        "n": "RSSSF Brasil — Supercampeonato Paulista 2002",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp2002sc.htm"
       }
     ],
     "when": "2002",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-076",
@@ -1740,10 +2110,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 2005",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2005"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 2005",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp2005.htm"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-077",
@@ -1762,10 +2137,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 2005",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2005"
+      },
+      {
+        "n": "SPFC (site oficial) — A conquista do Campeonato Paulista de 2005",
+        "u": "https://www.saopaulofc.net/a-conquista-do-campeonato-paulista-de-2005/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-078",
@@ -1788,10 +2168,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 2019",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp2019.htm"
       }
     ],
     "when": "2019",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-079",
@@ -1810,10 +2195,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 2022",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2022"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 2022",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp2022.htm"
       }
     ],
     "when": "2022",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-080",
@@ -1832,10 +2222,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 2023",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2023"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 2023",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp2023.htm"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-081",
@@ -1854,14 +2249,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 2024",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2024"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 2024",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp2024.htm"
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-082",
-    "q": "Qual apelido nasceu do jogo extra de 1957, entre São Paulo e Santos, que decidiu o Paulista de 1956?",
+    "q": "Qual apelido, criado pelo jornalista Thomaz Mazzoni, tem o clássico entre São Paulo e Santos, que decidiu o Paulista de 1956 num jogo extra?",
     "a": [
       "San-São",
       "Majestoso",
@@ -1871,19 +2271,25 @@ export default [
     "c": 0,
     "cat": "paul",
     "d": 3,
-    "exp": "O Santos venceu o jogo-desempate por 4 a 2, em 3 de janeiro de 1957, e o jornalista Thomaz Mazzoni batizou a rivalidade de San-São.",
+    "exp": "O Santos venceu o jogo-desempate por 4 a 2, em 3 de janeiro de 1957. Segundo o site oficial, o apelido San-São foi dado por Mazzoni ainda nos anos 1940, e não nesse jogo.",
     "src": [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1956",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1956"
       },
       {
-        "n": "Wikipedia (en) — History of São Paulo FC",
-        "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+        "n": "SPFC (site oficial) — Enciclopédia: SanSão",
+        "u": "https://www.saopaulofc.net/enciclopedia-sansao-2/"
+      },
+      {
+        "n": "Jovem Pan — Thomaz Mazzoni foi o primeiro grande cronista esportivo do Brasil",
+        "u": "https://jovempan.com.br/colunistas/thiago-uberreich/thomaz-mazzoni-foi-o-primeiro-grande-cronista-esportivo-do-brasil-e-escreveu-obras-preciosas/"
       }
     ],
     "when": "1956–1957",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "paul-083",
@@ -1902,10 +2308,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1958",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1958"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista: artilheiros",
+        "u": "https://www.rsssfbrasil.com/tablessz/sptops.htm"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1958",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1958.htm"
       }
     ],
     "when": "1958",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-084",
@@ -1919,15 +2334,20 @@ export default [
     "c": 2,
     "cat": "paul",
     "d": 3,
-    "exp": "No Pacaembu, a chuva transformou o campo em lamaçal; o empate bastou ao Palmeiras e o São Paulo foi vice.",
+    "exp": "Na última rodada, disputada em 28 de janeiro de 1951 no Pacaembu, a chuva transformou o campo num lamaçal; o empate bastou ao Palmeiras, e o São Paulo foi vice.",
     "src": [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1950",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1950"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1950",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1950.htm"
       }
     ],
     "when": "1950",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "paul-085",
@@ -1946,10 +2366,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1994",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1994"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1994",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1994.htm"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-086",
@@ -1968,10 +2393,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1990",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1990"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1990",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1990.htm"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Mundo",
+        "u": "https://www.saopaulofc.net/o-clube/historia/mundo/"
       }
     ],
     "when": "1990",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-087",
@@ -1985,18 +2419,23 @@ export default [
     "c": 1,
     "cat": "paul",
     "d": 1,
-    "exp": "O Corinthians tem 31 títulos, o Palmeiras 27, e São Paulo e Santos 22 cada.",
+    "exp": "Até 2026 o Corinthians soma 31 títulos e o Palmeiras 27, e São Paulo e Santos têm 22 cada.",
     "src": [
       {
         "n": "Wikipédia (pt) — Lista de campeões do Campeonato Paulista",
         "u": "https://pt.wikipedia.org/wiki/Lista_de_campe%C3%B5es_do_Campeonato_Paulista_de_Futebol"
       },
       {
-        "n": "Wikipédia (pt) — Campeonato Paulista de Futebol",
-        "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol"
+        "n": "RSSSF Brasil — Campeonato Paulista: lista de campeões",
+        "u": "https://www.rsssfbrasil.com/tablessz/spcamp.htm"
+      },
+      {
+        "n": "Diário do Nordeste — Palmeiras se sagra campeão paulista em 2026",
+        "u": "https://diariodonordeste.verdesmares.com.br/jogada/novorizontino-x-palmeiras-na-final-do-campeonato-paulista-veja-onde-assistir-horario-e-escalacoes-1.3748394"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "paul-088",
@@ -2019,8 +2458,13 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de Futebol",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista: lista de campeões",
+        "u": "https://www.rsssfbrasil.com/tablessz/spcamp.htm"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   }
 ];

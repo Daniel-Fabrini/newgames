@@ -3,7 +3,7 @@
 export default [
   {
     "id": "hist-001",
-    "q": "Qual presidente, de 1947 a 1957, dá nome oficial ao estádio do Morumbi?",
+    "q": "Qual presidente do São Paulo, no cargo a partir de 1947 e idealizador do grande estádio, dá nome oficial ao Morumbi?",
     "a": [
       "Laudo Natel",
       "Cícero Pompeu de Toledo",
@@ -13,8 +13,12 @@ export default [
     "c": 1,
     "cat": "hist",
     "d": 2,
-    "exp": "Cícero Pompeu de Toledo presidiu o clube de 1947 a 1957, decidiu construir um grande estádio, hoje batizado com seu nome.",
+    "exp": "Em 1956 o Conselho Deliberativo batizou o estádio de Cícero Pompeu de Toledo, seu grande idealizador. As fontes divergem sobre o fim do mandato (1957 na Wikipédia em português; 1958 na RSSSF e no quadro da Wikipédia).",
     "src": [
+      {
+        "n": "SPFC (site oficial) — História: MorumBIS",
+        "u": "https://www.saopaulofc.net/o-clube/historia/morumbis/"
+      },
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
@@ -25,7 +29,10 @@ export default [
       }
     ],
     "when": "1947–1957",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true,
+    "conflict": true
   },
   {
     "id": "hist-002",
@@ -48,14 +55,19 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Canindé",
+        "u": "https://www.saopaulofc.net/o-clube/historia/caninde/"
       }
     ],
     "when": "1950–1960",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-003",
-    "q": "Qual local, barrado por Jânio Quadros, era a primeira opção do São Paulo para o novo estádio?",
+    "q": "Qual local, ao lado de onde surgiria o parque homônimo, foi a primeira opção do São Paulo para o novo estádio, sem aval da Prefeitura?",
     "a": [
       "Pacaembu",
       "Interlagos",
@@ -65,15 +77,21 @@ export default [
     "c": 2,
     "cat": "hist",
     "d": 4,
-    "exp": "Depois que o projeto no Ibirapuera foi bloqueado, o clube adquiriu terreno no Morumbi.",
+    "exp": "Segundo o site oficial, a Prefeitura não aprovou a negociação da área no Ibirapuera (a Wikipédia atribui o veto a Jânio Quadros), e o clube obteve o terreno no Morumbi.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: MorumBIS",
+        "u": "https://www.saopaulofc.net/o-clube/historia/morumbis/"
       }
     ],
     "when": "1950–1952",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "hist-004",
@@ -96,10 +114,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — História: MorumBIS",
+        "u": "https://www.saopaulofc.net/o-clube/historia/morumbis/"
       }
     ],
     "when": "1952",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-005",
@@ -122,10 +145,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: MorumBIS",
+        "u": "https://www.saopaulofc.net/o-clube/historia/morumbis/"
       }
     ],
     "when": "1950",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-006",
@@ -139,7 +167,7 @@ export default [
     "c": 2,
     "cat": "hist",
     "d": 2,
-    "exp": "O São Paulo venceu o Sporting por 1 a 0, gol de Peixinho, diante de 64.748 pagantes, com o estádio ainda inacabado.",
+    "exp": "O São Paulo venceu o Sporting por 1 a 0, gol de Peixinho, com o estádio ainda inacabado; segundo o site oficial, foram 56.448 pagantes e 64.748 presentes.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
@@ -148,10 +176,16 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: MorumBIS",
+        "u": "https://www.saopaulofc.net/o-clube/historia/morumbis/"
       }
     ],
     "when": "1960",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "hist-007",
@@ -174,14 +208,19 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: MorumBIS",
+        "u": "https://www.saopaulofc.net/o-clube/historia/morumbis/"
       }
     ],
     "when": "1970",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-008",
-    "q": "Qual rival o São Paulo derrotou por 3 a 1 no recorde de público do Pacaembu, em 13 de setembro de 1953?",
+    "q": "Qual rival o São Paulo derrotou por 3 a 1 no Pacaembu, em 13 de setembro de 1953, na campanha do título paulista daquele ano?",
     "a": [
       "Palmeiras",
       "Corinthians",
@@ -191,15 +230,26 @@ export default [
     "c": 0,
     "cat": "hist",
     "d": 4,
-    "exp": "O jogo reuniu 77.275 pessoas, maior público da história do Pacaembu.",
+    "exp": "A vitória sobre o Palmeiras consta da campanha de 1953 publicada pelo site oficial. A Wikipédia cita esse jogo (77.275 pessoas) como recorde de público do Pacaembu, mas o site oficial considera recorde o Majestoso de 24 de maio de 1942.",
     "src": [
+      {
+        "n": "SPFC (site oficial) — A conquista do Paulistão de 1953",
+        "u": "https://www.saopaulofc.net/a-conquista-do-paulistao-de-1953/"
+      },
+      {
+        "n": "SPFC (site oficial) — A estreia de Leônidas, o primeiro Majestoso e o recorde do Pacaembu",
+        "u": "https://www.saopaulofc.net/a-estreia-de-leonidas-o-primeiro-majestoso-e-o-recorde-do-pacaembu/"
+      },
       {
         "n": "Wikipédia (pt) — Estádio do Pacaembu",
         "u": "https://pt.wikipedia.org/wiki/Est%C3%A1dio_do_Pacaembu"
       }
     ],
     "when": "1953",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true,
+    "conflict": true
   },
   {
     "id": "hist-009",
@@ -225,7 +275,8 @@ export default [
       }
     ],
     "when": "1960",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-010",
@@ -239,15 +290,20 @@ export default [
     "c": 3,
     "cat": "hist",
     "d": 3,
-    "exp": "O vice-campeonato de 1971 deu vaga na Libertadores de 1972, em que o clube terminou em 4º.",
+    "exp": "O vice-campeonato brasileiro de 1971 levou o clube à sua primeira Libertadores, em 1972.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
     "when": "1971",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-011",
@@ -270,10 +326,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
     "when": "1977",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-012",
@@ -292,10 +353,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
     "when": "1977",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-013",
@@ -314,10 +380,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
     "when": "1977",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-014",
@@ -336,10 +407,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
     "when": "1977",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-015",
@@ -358,10 +434,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: maiores artilheiros do São Paulo",
+        "u": "https://www.saopaulofc.net/enciclopedia-maiores-artilheiros-do-sao-paulo-2/"
       }
     ],
     "when": "1970–1983",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-016",
@@ -375,15 +456,21 @@ export default [
     "c": 0,
     "cat": "hist",
     "d": 3,
-    "exp": "Houve 1 a 1 nos dois jogos e o São Paulo venceu nos pênaltis, depois de um 3 a 2 do Guarani na prorrogação.",
+    "exp": "Depois de 1 a 1 na ida, o jogo decisivo em Campinas terminou 3 a 3 após a prorrogação, com empate de Careca no fim, e o São Paulo venceu nos pênaltis.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
     "when": "1986",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "hist-017",
@@ -402,10 +489,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
     "when": "1986",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-018",
@@ -428,10 +520,15 @@ export default [
       {
         "n": "SPFC.Net — Resumo da história do time São Paulo (SP)",
         "u": "https://spfc.net/news/263157/resumo-da-historia-do-time-sao-paulo-sp.html"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "1977–2008",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-019",
@@ -454,10 +551,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
     "when": "1988",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-020",
@@ -476,10 +578,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
     "when": "1988",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-021",
@@ -502,10 +609,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "1990–1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-022",
@@ -524,10 +636,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Mundo",
+        "u": "https://www.saopaulofc.net/o-clube/historia/mundo/"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-023",
@@ -546,10 +663,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "1992–2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-024",
@@ -568,10 +690,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Mundo",
+        "u": "https://www.saopaulofc.net/o-clube/historia/mundo/"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-025",
@@ -590,10 +717,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Mundo",
+        "u": "https://www.saopaulofc.net/o-clube/historia/mundo/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-026",
@@ -612,10 +744,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-027",
@@ -638,10 +775,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-028",
@@ -660,10 +802,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-029",
@@ -685,7 +832,8 @@ export default [
       }
     ],
     "when": "1995–1996",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-030",
@@ -699,15 +847,21 @@ export default [
     "c": 1,
     "cat": "hist",
     "d": 3,
-    "exp": "O Memorial Luiz Cássio dos Santos Werneck abriu em 1994; o REFFIS veio em 2004 e o CT de Cotia, em 2005.",
+    "exp": "Segundo o site oficial, o Memorial foi inaugurado em 28 de março de 1994; o REFFIS é de 2003 e o CT de Cotia, de 2005.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Memorial São-Paulino",
+        "u": "https://www.saopaulofc.net/o-clube/memorial-sao-paulino/"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "hist-031",
@@ -729,7 +883,8 @@ export default [
       }
     ],
     "when": "1997",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-032",
@@ -752,10 +907,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2001",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-033",
@@ -781,7 +941,8 @@ export default [
       }
     ],
     "when": "2002",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-034",
@@ -804,10 +965,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2004",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-035",
@@ -830,10 +996,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-036",
@@ -856,10 +1027,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-037",
@@ -882,10 +1058,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-038",
@@ -904,10 +1085,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-039",
@@ -930,10 +1116,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2004–2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-040",
@@ -956,10 +1147,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2006–2008",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-041",
@@ -973,15 +1169,21 @@ export default [
     "c": 1,
     "cat": "hist",
     "d": 3,
-    "exp": "O gol saiu na última rodada, no Morumbi.",
+    "exp": "O gol de Borges, em 7 de dezembro de 2008, no Bezerrão, em Gama (DF), na última rodada, deu o título ao São Paulo.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "2008",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "hist-042",
@@ -1004,10 +1206,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2007",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-043",
@@ -1030,10 +1237,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2006",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-044",
@@ -1055,7 +1267,8 @@ export default [
       }
     ],
     "when": "2006",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-045",
@@ -1077,7 +1290,8 @@ export default [
       }
     ],
     "when": "2009",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-046",
@@ -1091,7 +1305,7 @@ export default [
     "c": 3,
     "cat": "hist",
     "d": 2,
-    "exp": "Gols de Lucas e Osvaldo deram o primeiro título sul-americano do São Paulo.",
+    "exp": "Gols de Lucas e Osvaldo deram ao São Paulo a Sul-Americana de 2012, conquistada de forma invicta, o 12º título internacional do clube.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
@@ -1100,10 +1314,16 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "hist-047",
@@ -1125,7 +1345,8 @@ export default [
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-048",
@@ -1147,7 +1368,8 @@ export default [
       }
     ],
     "when": "2013",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-049",
@@ -1169,7 +1391,8 @@ export default [
       }
     ],
     "when": "2015",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-050",
@@ -1191,7 +1414,8 @@ export default [
       }
     ],
     "when": "2017",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-051",
@@ -1210,10 +1434,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: recordes individuais",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-individuais-2/"
       }
     ],
     "when": "1990–2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-052",
@@ -1232,10 +1461,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Conquistas",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-053",
@@ -1258,10 +1492,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Conquistas",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-054",
@@ -1284,10 +1523,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — Conquistas",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-055",
@@ -1313,7 +1557,8 @@ export default [
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-056",
@@ -1339,7 +1584,8 @@ export default [
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-057",
@@ -1365,7 +1611,8 @@ export default [
       }
     ],
     "when": "2026",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-058",
@@ -1384,10 +1631,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "1992–2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-059",
@@ -1410,10 +1662,15 @@ export default [
       {
         "n": "SPFC.Net — Resumo da história do time São Paulo (SP)",
         "u": "https://spfc.net/news/263157/resumo-da-historia-do-time-sao-paulo-sp.html"
+      },
+      {
+        "n": "SPFC (site oficial) — Símbolos",
+        "u": "https://www.saopaulofc.net/o-clube/simbolos/"
       }
     ],
     "when": "1930–1950",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-060",
@@ -1435,7 +1692,8 @@ export default [
       }
     ],
     "when": "1970",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-061",
@@ -1457,7 +1715,8 @@ export default [
       }
     ],
     "when": "1958–1971",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-062",
@@ -1480,10 +1739,15 @@ export default [
       {
         "n": "SPFC (site oficial) — Enciclopédia: O histórico geral do Morumbi",
         "u": "https://www.saopaulofc.net/enciclopedia-o-historico-geral-do-morumbi/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1960",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-063",
@@ -1502,10 +1766,15 @@ export default [
       {
         "n": "SPFC.Net — A grande, épica, curiosa e verdadeira história da construção do Morumbi",
         "u": "https://spfc.net/news/34968/a-grande-epica-curiosa-e-verdadeira-historia-da-construcao-do-morumbi.html"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Canindé",
+        "u": "https://www.saopaulofc.net/o-clube/historia/caninde/"
       }
     ],
     "when": "1955",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-064",
@@ -1524,10 +1793,15 @@ export default [
       {
         "n": "SPFC.Net — A grande, épica, curiosa e verdadeira história da construção do Morumbi",
         "u": "https://spfc.net/news/34968/a-grande-epica-curiosa-e-verdadeira-historia-da-construcao-do-morumbi.html"
+      },
+      {
+        "n": "SPFC (site oficial) — História: MorumBIS",
+        "u": "https://www.saopaulofc.net/o-clube/historia/morumbis/"
       }
     ],
     "when": "1950–1954",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-065",
@@ -1546,10 +1820,15 @@ export default [
       {
         "n": "SPFC.Net — A grande, épica, curiosa e verdadeira história da construção do Morumbi",
         "u": "https://spfc.net/news/34968/a-grande-epica-curiosa-e-verdadeira-historia-da-construcao-do-morumbi.html"
+      },
+      {
+        "n": "SPFC (site oficial) — História: MorumBIS",
+        "u": "https://www.saopaulofc.net/o-clube/historia/morumbis/"
       }
     ],
     "when": "1968",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-066",
@@ -1571,7 +1850,8 @@ export default [
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "hist-067",
@@ -1590,10 +1870,15 @@ export default [
       {
         "n": "SPFC.Net — Resumo da história do time São Paulo (SP)",
         "u": "https://spfc.net/news/263157/resumo-da-historia-do-time-sao-paulo-sp.html"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2014",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-068",
@@ -1616,10 +1901,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Mundo",
+        "u": "https://www.saopaulofc.net/o-clube/historia/mundo/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-069",
@@ -1642,10 +1932,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "1993–1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-070",
@@ -1664,10 +1959,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: os títulos do Tricolor em detalhes",
+        "u": "https://www.saopaulofc.net/enciclopedia-os-titulos-do-tricolor-em-detalhes/"
       }
     ],
     "when": "1996",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-071",
@@ -1690,10 +1990,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "1990–2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "hist-072",
@@ -1712,9 +2017,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1994",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1994"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   }
 ];

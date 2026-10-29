@@ -531,7 +531,7 @@ function congrats(app, st, sum, res) {
     (el) => {
       el.classList.add('tc-congrats');
       put(el, 
-        h('div', { class: 'tc-champphoto' }, h('img', { src: new URL('./assets/ceni_champion.webp', import.meta.url).href, alt: '', draggable: 'false' }), h('div', { class: 'tc-cup small', html: trophy() })),
+        h('div', { class: 'tc-champphoto' }, h('img', { src: new URL('./assets/ceni_champion.webp', import.meta.url).href, alt: '', draggable: 'false' })) ,
         h('h2', { class: 'tc-big gold' }, t('congrats')),
         h('p', { class: 'tc-reach' }, t('reached'), h('b', null, t('oneMillion'))),
         h('div', { class: 'tc-champ' }, t('champion')),

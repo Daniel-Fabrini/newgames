@@ -24,12 +24,13 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       },
       {
-        "n": "Wikipedia (en) — History of São Paulo FC",
-        "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-002",
@@ -52,10 +53,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Floresta",
+        "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-003",
@@ -80,12 +86,13 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       },
       {
-        "n": "Wikipédia (pt) — Associação Atlética das Palmeiras",
-        "u": "https://pt.wikipedia.org/wiki/Associa%C3%A7%C3%A3o_Atl%C3%A9tica_das_Palmeiras"
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-004",
@@ -110,12 +117,13 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Associa%C3%A7%C3%A3o_Atl%C3%A9tica_das_Palmeiras"
       },
       {
-        "n": "Wikipédia (pt) — Chácara da Floresta",
-        "u": "https://pt.wikipedia.org/wiki/Ch%C3%A1cara_da_Floresta"
+        "n": "SPFC (site oficial) — Enciclopédia: a genealogia do São Paulo",
+        "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-005",
@@ -136,12 +144,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       },
       {
-        "n": "Wikipédia (pt) — Club Athletico Paulistano",
-        "u": "https://pt.wikipedia.org/wiki/Club_Athletico_Paulistano"
+        "n": "SPFC (site oficial) — História: Floresta",
+        "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista: lista de campeões",
+        "u": "https://www.rsssfbrasil.com/tablessz/spcamp.htm"
       }
     ],
     "when": "1929–1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-006",
@@ -171,7 +184,8 @@ export default [
       }
     ],
     "when": "1930–1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-007",
@@ -190,25 +204,34 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Símbolos",
+        "u": "https://www.saopaulofc.net/o-clube/simbolos/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-008",
-    "q": "Que desenho tinha o uniforme criado em 1930, em homenagem aos dois clubes fundadores?",
+    "q": "Segundo o site oficial do São Paulo, como era a camisa do primeiro uniforme, de 1930, que uniu as cores dos dois clubes fundadores?",
     "a": [
       "Listras vermelhas e pretas",
       "Camisa branca com faixa tricolor",
       "Metades vermelha e preta",
       "Camisa toda vermelha"
     ],
-    "c": 0,
+    "c": 1,
     "cat": "fund",
     "d": 2,
-    "exp": "As listras vermelhas e pretas homenageavam o Paulistano e a AA das Palmeiras.",
+    "exp": "Segundo o site oficial, o uniforme de 1930 era branco com a faixa vermelha, branca e preta (vermelho do Paulistano, preto da AA das Palmeiras); a camisa listrada só surgiu em 1932, como uniforme nº 2. A Wikipédia descreve o uniforme de 1930 como listrado.",
     "src": [
+      {
+        "n": "SPFC (site oficial) — Símbolos",
+        "u": "https://www.saopaulofc.net/o-clube/simbolos/"
+      },
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
@@ -219,11 +242,14 @@ export default [
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true,
+    "conflict": true
   },
   {
     "id": "fund-009",
-    "q": "Quem desenhou o escudo e o uniforme do São Paulo na fundação?",
+    "q": "Quem desenhou o escudo do São Paulo, o \"coração de cinco pontas\", poucos dias após a fundação em 1930?",
     "a": [
       "Vilanova Artigas",
       "Ramos de Azevedo",
@@ -233,7 +259,7 @@ export default [
     "c": 3,
     "cat": "fund",
     "d": 4,
-    "exp": "O estilista alemão Walter Ostrich criou escudo e camisa, com ajuda de Firmiano de Moraes Pinto Filho.",
+    "exp": "Segundo o site oficial, o escudo foi desenhado para um concurso interno pelo estilista alemão Walter Ostrich, com a colaboração do fundador Firmiano de Morais Pinto Filho.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
@@ -242,10 +268,16 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Símbolos",
+        "u": "https://www.saopaulofc.net/o-clube/simbolos/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "fund-010",
@@ -268,10 +300,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-011",
@@ -297,11 +334,12 @@ export default [
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "fund-012",
-    "q": "Quem foi o maior goleador do São Paulo em 1930, com 31 gols em todas as competições?",
+    "q": "Segundo o site oficial do São Paulo, quem foi o artilheiro do clube em 1930, seu primeiro ano de vida?",
     "a": [
       "Arthur Friedenreich",
       "Armandinho",
@@ -311,15 +349,22 @@ export default [
     "c": 0,
     "cat": "fund",
     "d": 3,
-    "exp": "Friedenreich fez 27 gols no Paulista e 4 em amistosos no primeiro ano do clube.",
+    "exp": "O site oficial aponta Friedenreich como artilheiro de 1930, com 36 gols em 31 jogos; a Wikipédia (en) registra 31 gols (27 no Paulista e 4 em amistosos).",
     "src": [
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: artilheiros do Tricolor ano a ano",
+        "u": "https://www.saopaulofc.net/enciclopedia-artilheiros-do-tricolor-ano-a-ano-2/"
+      },
       {
         "n": "Wikipedia (en) — 1930 São Paulo FC season",
         "u": "https://en.wikipedia.org/wiki/1930_S%C3%A3o_Paulo_FC_season"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true,
+    "conflict": true
   },
   {
     "id": "fund-013",
@@ -338,10 +383,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Arthur Friedenreich",
         "u": "https://pt.wikipedia.org/wiki/Arthur_Friedenreich"
+      },
+      {
+        "n": "SPFC (site oficial) — 120 anos de história de Arthur Friedenreich",
+        "u": "https://www.saopaulofc.net/120-anos-de-historia-de-arthur-friedenreich/"
       }
     ],
     "when": "1930–1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-014",
@@ -360,10 +410,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Arthur Friedenreich",
         "u": "https://pt.wikipedia.org/wiki/Arthur_Friedenreich"
+      },
+      {
+        "n": "SPFC (site oficial) — 120 anos de história de Arthur Friedenreich",
+        "u": "https://www.saopaulofc.net/120-anos-de-historia-de-arthur-friedenreich/"
       }
     ],
     "when": "1892",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-015",
@@ -382,10 +437,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Arthur Friedenreich",
         "u": "https://pt.wikipedia.org/wiki/Arthur_Friedenreich"
+      },
+      {
+        "n": "SPFC (site oficial) — 120 anos de história de Arthur Friedenreich",
+        "u": "https://www.saopaulofc.net/120-anos-de-historia-de-arthur-friedenreich/"
       }
     ],
     "when": "1919",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-016",
@@ -415,7 +475,8 @@ export default [
       }
     ],
     "when": "1930–1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-017",
@@ -434,10 +495,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — Conquistas",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1932",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-018",
@@ -456,10 +522,15 @@ export default [
       {
         "n": "Wikipedia (en) — 1932 São Paulo FC season",
         "u": "https://en.wikipedia.org/wiki/1932_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1932",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1932.htm"
       }
     ],
     "when": "1932",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-019",
@@ -478,10 +549,19 @@ export default [
       {
         "n": "Wikipedia (en) — 1933 São Paulo FC season",
         "u": "https://en.wikipedia.org/wiki/1933_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "SPFC (site oficial) — Guia histórico do Campeonato Paulista (2012)",
+        "u": "https://www.saopaulofc.net/guia-historico-do-campeonato-paulista-2/"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1933",
+        "u": "https://www.rsssfbrasil.com/tablessz/sp1933.htm"
       }
     ],
     "when": "1933",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-020",
@@ -504,10 +584,15 @@ export default [
       {
         "n": "Wikipedia (en) — 1933 São Paulo FC season",
         "u": "https://en.wikipedia.org/wiki/1933_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Floresta",
+        "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
       }
     ],
     "when": "1933",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-021",
@@ -521,7 +606,7 @@ export default [
     "c": 3,
     "cat": "fund",
     "d": 2,
-    "exp": "A história do clube registra o jogo contra o Santos como a primeira partida profissional do país.",
+    "exp": "Segundo o site oficial, o primeiro jogo da era profissional foi em 12 de março de 1933: São Paulo 5 a 1 no Santos, na Vila Belmiro.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
@@ -530,10 +615,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Floresta",
+        "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
       }
     ],
     "when": "1933",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-022",
@@ -558,34 +648,41 @@ export default [
         "u": "https://en.wikipedia.org/wiki/1934_S%C3%A3o_Paulo_FC_season"
       },
       {
-        "n": "Wikipedia (en) — 1936 São Paulo FC season",
-        "u": "https://en.wikipedia.org/wiki/1936_S%C3%A3o_Paulo_FC_season"
+        "n": "SPFC (site oficial) — Enciclopédia: Campeonato Paulista",
+        "u": "https://www.saopaulofc.net/enciclopedia-campeonato-paulista-2/"
       }
     ],
     "when": "1930–1937",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-023",
-    "q": "Quanto o clube pagou, em contos de réis, pelo palacete Trocadero, na Rua Conselheiro Crispiniano?",
+    "q": "Segundo o site oficial do São Paulo, de quanto era a dívida total atribuída ao aluguel do Palácio do Trocadero, usada em 1935 para justificar a fusão com o Tietê?",
     "a": [
-      "90 contos",
-      "190 contos",
-      "290 contos",
-      "500 contos"
+      "190 contos de réis",
+      "214 contos de réis",
+      "114 contos de réis",
+      "381 contos de réis"
     ],
     "c": 1,
     "cat": "fund",
     "d": 4,
-    "exp": "O palacete serviu de sede social nos primeiros anos do clube.",
+    "exp": "O site oficial fala em aluguel do Trocadero e numa dívida total de 214 contos de réis, chamada de pretexto (só em 1933 o futebol arrecadara 381 contos); a Wikipédia diz que o palacete foi comprado por 190 contos.",
     "src": [
+      {
+        "n": "SPFC (site oficial) — História: Floresta",
+        "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
+      },
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1930–1935",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "fund-024",
@@ -607,7 +704,8 @@ export default [
       }
     ],
     "when": "1938–1946",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "fund-025",
@@ -628,16 +726,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       },
       {
-        "n": "Wikipedia (en) — History of São Paulo FC",
-        "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
-      },
-      {
         "n": "Lance! — O São Paulo Futebol Clube teve outro nome?",
         "u": "https://www.lance.com.br/lancepedia/o-sao-paulo-futebol-clube-teve-outro-nome.html"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Floresta",
+        "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-026",
@@ -656,10 +755,15 @@ export default [
       {
         "n": "Lance! — O São Paulo Futebol Clube teve outro nome?",
         "u": "https://www.lance.com.br/lancepedia/o-sao-paulo-futebol-clube-teve-outro-nome.html"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: a genealogia do São Paulo",
+        "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-027",
@@ -682,14 +786,19 @@ export default [
       {
         "n": "Lance! — O São Paulo Futebol Clube teve outro nome?",
         "u": "https://www.lance.com.br/lancepedia/o-sao-paulo-futebol-clube-teve-outro-nome.html"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: a genealogia do São Paulo",
+        "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-028",
-    "q": "Em que data o São Paulo foi refundado, hoje celebrada como Dia Tricolor?",
+    "q": "Em que data o São Paulo Futebol Clube foi reorganizado (refundado), depois do breve encerramento de 1935?",
     "a": [
       "25 de janeiro de 1935",
       "14 de maio de 1935",
@@ -699,23 +808,25 @@ export default [
     "c": 3,
     "cat": "fund",
     "d": 2,
-    "exp": "Em 16 de dezembro de 1935 o clube voltou ao nome São Paulo Futebol Clube, usado desde então.",
+    "exp": "Em 16 de dezembro de 1935 o clube foi reorganizado com o nome São Paulo Futebol Clube; desde 2013 o clube considera 1930 a fundação e 1935 a reorganização.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       },
       {
-        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-      },
-      {
         "n": "Lance! — O São Paulo Futebol Clube teve outro nome?",
         "u": "https://www.lance.com.br/lancepedia/o-sao-paulo-futebol-clube-teve-outro-nome.html"
+      },
+      {
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "fund-029",
@@ -738,10 +849,15 @@ export default [
       {
         "n": "Wikipedia (en) — 1936 São Paulo FC season",
         "u": "https://en.wikipedia.org/wiki/1936_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Reinício",
+        "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
       }
     ],
     "when": "1935–1936",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-030",
@@ -760,10 +876,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — O São Paulo FC parabeniza e relembra Porphyrio da Paz",
+        "u": "https://www.saopaulofc.net/o-sao-paulo-fc-parabeniza-e-relembra-porphyrio-da-paz/"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-031",
@@ -786,10 +907,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Reinício",
+        "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-032",
@@ -803,7 +929,7 @@ export default [
     "c": 1,
     "cat": "fund",
     "d": 3,
-    "exp": "A estreia foi no Estádio Antônio Alonso e terminou em vitória por 3 a 2.",
+    "exp": "O São Paulo venceu a Portuguesa Santista por 3 a 2. Segundo o site oficial o jogo foi no Parque Antarctica; a Wikipédia cita o Estádio Antônio Alonso.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
@@ -812,10 +938,16 @@ export default [
       {
         "n": "Wikipedia (en) — 1936 São Paulo FC season",
         "u": "https://en.wikipedia.org/wiki/1936_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Reinício",
+        "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
       }
     ],
     "when": "1936",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "fund-033",
@@ -834,10 +966,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Reinício",
+        "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-034",
@@ -860,10 +997,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: Campeonato Paulista",
+        "u": "https://www.saopaulofc.net/enciclopedia-campeonato-paulista-2/"
       }
     ],
     "when": "1936",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-035",
@@ -886,10 +1028,15 @@ export default [
       {
         "n": "Wikipedia (en) — 1937 São Paulo FC season",
         "u": "https://en.wikipedia.org/wiki/1937_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Reinício",
+        "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
       }
     ],
     "when": "1936",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-036",
@@ -908,10 +1055,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Reinício",
+        "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
       }
     ],
     "when": "1935–1936",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-037",
@@ -934,10 +1086,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Reinício",
+        "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
       }
     ],
     "when": "1937",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-038",
@@ -958,16 +1115,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       },
       {
-        "n": "Wikipedia (en) — History of São Paulo FC",
-        "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
-      },
-      {
         "n": "Wikipédia (pt) — Roberto Gomes Pedrosa",
         "u": "https://pt.wikipedia.org/wiki/Roberto_Gomes_Pedrosa"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: a genealogia do São Paulo",
+        "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
       }
     ],
     "when": "1938",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-039",
@@ -990,10 +1148,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Reinício",
+        "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
       }
     ],
     "when": "1938",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-040",
@@ -1016,10 +1179,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: a genealogia do São Paulo",
+        "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
       }
     ],
     "when": "1939",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-041",
@@ -1042,10 +1210,15 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Reinício",
+        "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
       }
     ],
     "when": "1940",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-042",
@@ -1068,10 +1241,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Reinício",
+        "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
       }
     ],
     "when": "1940",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-043",
@@ -1094,10 +1272,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Reinício",
+        "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
       }
     ],
     "when": "1940",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-044",
@@ -1120,10 +1303,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Canindé",
+        "u": "https://www.saopaulofc.net/o-clube/historia/caninde/"
       }
     ],
     "when": "1942",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-045",
@@ -1137,7 +1325,7 @@ export default [
     "c": 2,
     "cat": "fund",
     "d": 2,
-    "exp": "O jogo, no Pacaembu, reuniu recorde de 70.281 pagantes e deu origem ao apelido Majestoso.",
+    "exp": "O jogo, no Pacaembu, terminou 3 a 3 e teve público recorde do estádio (72.078 presentes, segundo o site oficial); dele nasceu o apelido Majestoso.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
@@ -1146,10 +1334,16 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — A estreia de Leônidas, o primeiro Majestoso e o recorde do Pacaembu",
+        "u": "https://www.saopaulofc.net/a-estreia-de-leonidas-o-primeiro-majestoso-e-o-recorde-do-pacaembu/"
       }
     ],
     "when": "1942",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "fund-046",
@@ -1172,10 +1366,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — A estreia de Leônidas, o primeiro Majestoso e o recorde do Pacaembu",
+        "u": "https://www.saopaulofc.net/a-estreia-de-leonidas-o-primeiro-majestoso-e-o-recorde-do-pacaembu/"
       }
     ],
     "when": "1942",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-047",
@@ -1194,14 +1393,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Leônidas da Silva",
         "u": "https://pt.wikipedia.org/wiki/Le%C3%B4nidas_da_Silva"
+      },
+      {
+        "n": "SPFC (site oficial) — Em dezembro de 1950, Leônidas se despedia do Tricolor",
+        "u": "https://www.saopaulofc.net/em-dezembro-de-1950-leonidas-se-despedia-do-tricolor/"
       }
     ],
     "when": "1942–1950",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-048",
-    "q": "Em que ano Leônidas da Silva se aposentou, depois de marcar seu último gol pelo São Paulo em 4 de janeiro?",
+    "q": "Segundo o site oficial do São Paulo, em que ano Leônidas da Silva pendurou as chuteiras e se despediu do clube?",
     "a": [
       "1946",
       "1948",
@@ -1211,8 +1415,12 @@ export default [
     "c": 3,
     "cat": "fund",
     "d": 3,
-    "exp": "Leônidas fez seu último gol em 4 de janeiro de 1950 e se aposentou em 21 de janeiro do mesmo ano.",
+    "exp": "O site oficial diz que Leônidas encerrou a carreira em 1950, com jogos pelo São Paulo ainda em dezembro daquele ano; a Wikipédia fala em último gol em 4 de janeiro e aposentadoria em 21 de janeiro de 1950.",
     "src": [
+      {
+        "n": "SPFC (site oficial) — Em dezembro de 1950, Leônidas se despedia do Tricolor",
+        "u": "https://www.saopaulofc.net/em-dezembro-de-1950-leonidas-se-despedia-do-tricolor/"
+      },
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
@@ -1223,7 +1431,10 @@ export default [
       }
     ],
     "when": "1950",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true,
+    "conflict": true
   },
   {
     "id": "fund-049",
@@ -1246,10 +1457,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Canindé",
+        "u": "https://www.saopaulofc.net/o-clube/historia/caninde/"
       }
     ],
     "when": "1940–1949",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-050",
@@ -1272,14 +1488,19 @@ export default [
       {
         "n": "Wikipedia (en) — History of São Paulo FC",
         "u": "https://en.wikipedia.org/wiki/History_of_S%C3%A3o_Paulo_FC"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Canindé",
+        "u": "https://www.saopaulofc.net/o-clube/historia/caninde/"
       }
     ],
     "when": "1940–1949",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-051",
-    "q": "Qual apelido o São Paulo ganhou depois de comprar o terreno no bairro do Canindé, em 1942?",
+    "q": "Qual apelido o São Paulo ganhou no período em que se instalou no bairro do Canindé, nos anos 1940?",
     "a": [
       "Tricolor da Floresta",
       "Tricolor do Canindé",
@@ -1289,8 +1510,12 @@ export default [
     "c": 1,
     "cat": "fund",
     "d": 2,
-    "exp": "O terreno do Canindé foi adquirido nos anos 1940, antes da decisão de construir o Morumbi.",
+    "exp": "Segundo o site oficial, o clube passou a usar o Canindé em 1942, com a incorporação da Associação Alemã de Esportes, comprou o terreno em 29 de janeiro de 1944 e o vendeu em 27 de maio de 1955.",
     "src": [
+      {
+        "n": "SPFC (site oficial) — História: Canindé",
+        "u": "https://www.saopaulofc.net/o-clube/historia/caninde/"
+      },
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
@@ -1301,7 +1526,9 @@ export default [
       }
     ],
     "when": "1940–1950",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "fund-052",
@@ -1320,14 +1547,19 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Canindé",
+        "u": "https://www.saopaulofc.net/o-clube/historia/caninde/"
       }
     ],
     "when": "1944–1957",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-053",
-    "q": "Que atleta do São Paulo motivou a colocação de duas estrelas douradas no escudo, em 1955?",
+    "q": "Que atleta do São Paulo é homenageado pelas duas estrelas douradas que o clube usa sobre o escudo?",
     "a": [
       "Éder Jofre",
       "Adhemar Ferreira da Silva",
@@ -1337,7 +1569,7 @@ export default [
     "c": 1,
     "cat": "fund",
     "d": 1,
-    "exp": "As estrelas homenageiam os recordes mundiais de Adhemar no salto triplo, em Helsinque 1952 e no Pan de 1955.",
+    "exp": "As estrelas homenageiam os recordes mundiais de Adhemar no salto triplo, em Helsinque 1952 e no Pan de 1955; segundo o site oficial, são insígnias usadas na bandeira e nos uniformes.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
@@ -1346,10 +1578,16 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Símbolos",
+        "u": "https://www.saopaulofc.net/o-clube/simbolos/"
       }
     ],
     "when": "1955",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "fund-054",
@@ -1372,10 +1610,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Símbolos",
+        "u": "https://www.saopaulofc.net/o-clube/simbolos/"
       }
     ],
     "when": "1952–1955",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-055",
@@ -1394,10 +1637,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Símbolos",
+        "u": "https://www.saopaulofc.net/o-clube/simbolos/"
       }
     ],
     "when": "1992–2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-056",
@@ -1416,10 +1664,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Símbolos",
+        "u": "https://www.saopaulofc.net/o-clube/simbolos/"
       }
     ],
     "when": "1940",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-057",
@@ -1438,10 +1691,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Associação Atlética das Palmeiras",
         "u": "https://pt.wikipedia.org/wiki/Associa%C3%A7%C3%A3o_Atl%C3%A9tica_das_Palmeiras"
+      },
+      {
+        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
+        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
       }
     ],
     "when": "1902",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-058",
@@ -1464,10 +1722,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Lista de campeões do Campeonato Paulista",
         "u": "https://pt.wikipedia.org/wiki/Lista_de_campe%C3%B5es_do_Campeonato_Paulista_de_Futebol"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista: lista de campeões",
+        "u": "https://www.rsssfbrasil.com/tablessz/spcamp.htm"
       }
     ],
     "when": "1909–1915",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-059",
@@ -1486,10 +1749,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Club Athletico Paulistano",
         "u": "https://pt.wikipedia.org/wiki/Club_Athletico_Paulistano"
+      },
+      {
+        "n": "SPFC (site oficial) — História: Floresta",
+        "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-060",
@@ -1511,7 +1779,8 @@ export default [
       }
     ],
     "when": "1942",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "fund-061",
@@ -1532,12 +1801,13 @@ export default [
         "u": "https://www.saopaulofc.net/1930-e-1935-conheca-e-entenda-a-historia-do-tricolor/"
       },
       {
-        "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
-        "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
+        "n": "SPFC (site oficial) — História: Floresta",
+        "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-062",
@@ -1559,7 +1829,8 @@ export default [
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "fund-063",
@@ -1585,7 +1856,8 @@ export default [
       }
     ],
     "when": "2013",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "fund-064",
@@ -1608,10 +1880,15 @@ export default [
       {
         "n": "SPFC (site oficial) — O dia em que o Tricolor renasceu para o futebol",
         "u": "https://www.saopaulofc.net/o-dia-em-que-o-tricolor-renasceu-para-o-futebol/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-065",
@@ -1637,7 +1914,8 @@ export default [
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "fund-066",
@@ -1660,10 +1938,15 @@ export default [
       {
         "n": "SPFC (site oficial) — O dia em que o Tricolor renasceu para o futebol",
         "u": "https://www.saopaulofc.net/o-dia-em-que-o-tricolor-renasceu-para-o-futebol/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-067",
@@ -1689,7 +1972,8 @@ export default [
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "fund-068",
@@ -1712,10 +1996,15 @@ export default [
       {
         "n": "SPFC (site oficial) — O dia em que o Tricolor renasceu para o futebol",
         "u": "https://www.saopaulofc.net/o-dia-em-que-o-tricolor-renasceu-para-o-futebol/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-069",
@@ -1734,10 +2023,15 @@ export default [
       {
         "n": "SPFC (site oficial) — Enciclopédia: A genealogia do São Paulo",
         "u": "https://www.saopaulofc.net/enciclopedia-a-genealogia-do-sao-paulo/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-070",
@@ -1759,7 +2053,8 @@ export default [
       }
     ],
     "when": "1942",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "fund-071",
@@ -1782,10 +2077,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Lista de campeões do Campeonato Paulista",
         "u": "https://pt.wikipedia.org/wiki/Lista_de_campe%C3%B5es_do_Campeonato_Paulista_de_Futebol"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista: lista de campeões",
+        "u": "https://www.rsssfbrasil.com/tablessz/spcamp.htm"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-072",
@@ -1804,10 +2104,15 @@ export default [
       {
         "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
         "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista: lista de campeões",
+        "u": "https://www.rsssfbrasil.com/tablessz/spcamp.htm"
       }
     ],
     "when": "1916–1919",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-073",
@@ -1829,7 +2134,8 @@ export default [
       }
     ],
     "when": "1904",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "fund-074",
@@ -1852,10 +2158,15 @@ export default [
       {
         "n": "SPFC (site oficial) — 94 anos de São Paulo Futebol Clube",
         "u": "https://www.saopaulofc.net/94-anos-de-sao-paulo-futebol-clube/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-075",
@@ -1878,10 +2189,15 @@ export default [
       {
         "n": "SPFC (site oficial) — O dia em que o Tricolor renasceu para o futebol",
         "u": "https://www.saopaulofc.net/o-dia-em-que-o-tricolor-renasceu-para-o-futebol/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "fund-076",
@@ -1911,7 +2227,8 @@ export default [
       }
     ],
     "when": "1932–1934",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "fund-077",
@@ -1934,9 +2251,14 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "SPFC (site oficial) — Enciclopédia: Campeonato Paulista",
+        "u": "https://www.saopaulofc.net/enciclopedia-campeonato-paulista-2/"
       }
     ],
     "when": "1937",
-    "ok": true
+    "ok": true,
+    "v2": true
   }
 ];
