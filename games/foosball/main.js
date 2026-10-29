@@ -567,7 +567,7 @@ export async function mount(root, ctx) {
           hi.push(p.own[p.sel]);
           if (p.charge) charge[p.charge.rod] = 0.25 + 0.75 * clamp((nowMs() - p.charge.t0) / 1000 / 0.55, 0, 1);
         }
-        renderer.draw(s, { hi, charge }, ctrl.paused ? 0 : dt);
+        renderer.draw(s, { hi, charge, poss: s.phase === 'play' ? s.lastTouch : -1 }, ctrl.paused ? 0 : dt);
       }
     }
 

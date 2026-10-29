@@ -5,7 +5,7 @@ import { T, manX, footY, footActive, goalX0, goalX1 } from './physics.js';
 
 export const VIEW = { mx: 13.5, my: 14 }; // margin (units) around the playfield (matches the backdrop render)
 const TH_MIN = -1.0, TH_STEP = 2.1 / 15, NA = 16; // sprite angles
-const CW = 108, CH = 264, SPR_W = 10.8, SPR_H = 26.4; // sprite cell (px) and its size in table units
+const CW = 108, CH = 264, SPR_W = 11.7, SPR_H = 28.6; // sprite cell (px) and its size in table units
 const BALL_N = 12, BALL_PX = 120, BALL_U = 6;
 
 let assetsP = null;
@@ -36,6 +36,7 @@ export function createRenderer(canvas, { reduced = false } = {}) {
   const parts = [];
   let shake = 0;
   let goalFlash = { team: -1, t: 0 };
+  let punch = 0;
   let A = null; // assets
   let menCan = null, menShadow = null, oppCan = null; // sprite atlases
   const kits = [{ main: '#e4372f' }, { main: '#2f7cff' }];
@@ -105,12 +106,40 @@ export function createRenderer(canvas, { reduced = false } = {}) {
   }
   const tf = (g) => g.setTransform(R.dpr * R.sc, 0, 0, R.dpr * R.sc, R.dpr * R.ox, R.dpr * R.oy);
 
+  // dark stadium hall: floodlight cones, blurred crowd bokeh, floor glow
+  function ambience(g, w, h) {
+    const bgG = g.createRadialGradient(w / 2, h * 0.45, h * 0.05, w / 2, h * 0.5, h * 0.75);
+    bgG.addColorStop(0, '#1d2230'); bgG.addColorStop(0.55, '#0c0e15'); bgG.addColorStop(1, '#040507');
+    g.fillStyle = bgG; g.fillRect(0, 0, w, h);
+    let seed = 7;
+    const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    g.globalCompositeOperation = 'lighter';
+    for (const fx of [0.12, 0.88]) {
+      const cone = g.createLinearGradient(w * fx, 0, w * (fx < 0.5 ? 0.55 : 0.45), h * 0.8);
+      cone.addColorStop(0, 'rgba(255,244,210,.22)'); cone.addColorStop(1, 'rgba(255,244,210,0)');
+      g.fillStyle = cone;
+      g.beginPath(); g.moveTo(w * fx - w * 0.04, 0); g.lineTo(w * fx + w * 0.04, 0); g.lineTo(w * (fx < 0.5 ? 0.95 : 0.05), h * 0.8); g.lineTo(w * (fx < 0.5 ? 0.2 : 0.8), h * 0.8); g.closePath(); g.fill();
+    }
+    const cols = ['255,214,102', '228,55,47', '255,255,255', '90,140,255'];
+    for (let i = 0; i < 70; i++) {
+      const x = rnd() * w, y = h * (0.02 + rnd() * 0.16 + (i % 2) * 0.8), r = (3 + rnd() * 9) * R.dpr;
+      const gg = g.createRadialGradient(x, y, 0, x, y, r);
+      gg.addColorStop(0, `rgba(${cols[i % 4]},${0.12 + rnd() * 0.18})`); gg.addColorStop(1, 'rgba(0,0,0,0)');
+      g.fillStyle = gg; g.fillRect(x - r, y - r, r * 2, r * 2);
+    }
+    g.globalCompositeOperation = 'source-over';
+  }
+
   function paintLayers() {
     const g = bg.getContext('2d'), f = fg.getContext('2d');
     g.setTransform(1, 0, 0, 1, 0, 0); f.setTransform(1, 0, 0, 1, 0, 0);
     g.clearRect(0, 0, bg.width, bg.height); f.clearRect(0, 0, fg.width, fg.height);
     tf(g); tf(f);
     g.imageSmoothingQuality = 'high'; f.imageSmoothingQuality = 'high';
+    g.save();
+    g.setTransform(1, 0, 0, 1, 0, 0);
+    ambience(g, bg.width, bg.height);
+    g.restore();
     if (A) {
       g.drawImage(A.backdrop, -VIEW.mx, -VIEW.my, T.W + VIEW.mx * 2, T.H + VIEW.my * 2);
       if (A.rails) f.drawImage(A.rails, -VIEW.mx, -VIEW.my, T.W + VIEW.mx * 2, T.H + VIEW.my * 2);
@@ -121,7 +150,7 @@ export function createRenderer(canvas, { reduced = false } = {}) {
   }
 
   // ---------------------------------------------------------------- rods and men
-  function chrome(g, x0, x1, y, th, hi, charge) {
+  function chrome(g, x0, x1, y, th, hi, charge, spec = 0) {
     if (hi || charge > 0) {
       g.save();
       g.shadowColor = charge > 0 ? `rgba(255,${160 - 60 * charge | 0},40,1)` : '#ffd45a';
@@ -136,6 +165,12 @@ export function createRenderer(canvas, { reduced = false } = {}) {
     gr.addColorStop(0.62, '#6b7686'); gr.addColorStop(0.85, '#c8d0dc'); gr.addColorStop(1, '#4a5361');
     g.fillStyle = gr;
     g.fillRect(x0, y - th, x1 - x0, th * 2);
+    if (x1 - x0 > 30) {
+      const px = x0 + (((spec * 17 + clock * 6) % (x1 - x0 + 24)) - 12);
+      const sg = g.createLinearGradient(px - 7, 0, px + 7, 0);
+      sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(0.5, 'rgba(255,255,255,.9)'); sg.addColorStop(1, 'rgba(255,255,255,0)');
+      g.fillStyle = sg; g.fillRect(px - 7, y - th * 0.7, 14, th * 0.55);
+    }
   }
 
   function drawRodBar(g, r, hi, charge) {
@@ -144,7 +179,7 @@ export function createRenderer(canvas, { reduced = false } = {}) {
     g.fillRect(0, r.y + 0.9, T.W, 1.5);
     g.fillStyle = 'rgba(0,0,0,.12)';
     g.fillRect(0, r.y + 1.6, T.W, 1.4);
-    chrome(g, 0, T.W, r.y, 0.78, hi, charge);
+    chrome(g, 0, T.W, r.y, 0.78, hi, charge, r.x);
   }
 
   function drawOutside(g, r, hi, charge) {
@@ -314,7 +349,16 @@ export function createRenderer(canvas, { reduced = false } = {}) {
       shake = Math.max(0, shake - dt * 4.2);
       sx = (Math.random() - 0.5) * shake * 1.6; sy = (Math.random() - 0.5) * shake * 1.6;
     }
+    const pk = punch > 0 && !reduced ? (punch = Math.max(0, punch - dt * 2.2), Math.sin(punch * Math.PI) * 0.035) : 0;
+    c.save();
+    if (pk) { c.translate(canvas.width / 2, canvas.height / 2); c.scale(1 + pk, 1 + pk); c.translate(-canvas.width / 2, -canvas.height / 2); }
     c.drawImage(bg, sx * R.sc * R.dpr, sy * R.sc * R.dpr);
+    if (view.poss === 0 || view.poss === 1) {
+      const col = view.poss === 0 ? '228,55,47' : kitRgb(1);
+      const pg = c.createLinearGradient(0, view.poss === 0 ? canvas.height : 0, 0, view.poss === 0 ? canvas.height * 0.7 : canvas.height * 0.3);
+      pg.addColorStop(0, `rgba(${col},${0.22 + 0.08 * Math.sin(clock * 4)})`); pg.addColorStop(1, `rgba(${col},0)`);
+      c.fillStyle = pg; c.fillRect(0, 0, canvas.width, canvas.height);
+    }
     tf(c);
     c.translate(sx, sy);
     drawBall(c, s);
@@ -329,13 +373,20 @@ export function createRenderer(canvas, { reduced = false } = {}) {
     for (const r of s.rods) drawOutside(c, r, hi.includes(r.i), ch[r.i] || 0);
     drawNet(c, dt);
     drawParts(c, dt);
+    c.restore();
+    if (goalFlash.t > 0.9 && !reduced) {
+      c.setTransform(1, 0, 0, 1, 0, 0);
+      c.fillStyle = `rgba(255,255,255,${(goalFlash.t - 0.9) * 1.6})`;
+      c.fillRect(0, 0, canvas.width, canvas.height);
+    }
   }
+  const kitRgb = (i) => hexRgb(kits[i].main).join(',');
 
   // ---------------------------------------------------------------- fx api
   function burst(team, x, y) {
     if (reduced) return;
     const main = kits[team].main;
-    const cols = [main, '#ffd45a', '#ffffff', shade(main, 1.3), '#111111'];
+    const cols = team === 0 ? ['#d8202a', '#ffffff', '#111111', '#ff4a52', '#ffffff'] : [main, '#ffd45a', '#ffffff', shade(main, 1.3), '#111111'];
     for (let i = 0; i < 90; i++) {
       const a = Math.random() * Math.PI * 2, sp = 20 + Math.random() * 80;
       parts.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, rot: Math.random() * 6, vr: (Math.random() - 0.5) * 18, col: cols[i % cols.length], s: 0.5 + Math.random() * 0.8, life: 1.3 + Math.random() * 1.3, max: 2, fade: 0.7 });
@@ -359,7 +410,7 @@ export function createRenderer(canvas, { reduced = false } = {}) {
     get hasAssets() { return !!A; },
     setKits(a, b) { kits[0].main = a; kits[1].main = b; },
     shake(v = 1) { shake = Math.max(shake, v); },
-    goal(team) { goalFlash = { team, t: 1.3 }; },
+    goal(team) { goalFlash = { team, t: 1.3 }; punch = 1; },
     clearFx() { parts.length = 0; trail.length = 0; },
     toTable(px, py) { return { x: (px - R.ox) / R.sc, y: (py - R.oy) / R.sc }; },
     toScreen(x, y) { return { x: R.ox + x * R.sc, y: R.oy + y * R.sc }; },
