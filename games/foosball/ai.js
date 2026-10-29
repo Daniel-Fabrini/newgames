@@ -1,17 +1,17 @@
 // Foosball AI. Reads only the (delayed) ball state, drives rods through the same API as a human
 // (target x + kick) so slide speed / rod limits are enforced by the simulation itself.
-import { T, clamp, mulberry, manX, footY, setRodTarget, kickRod, goalX0, goalX1 } from './physics.js';
+import { T, clamp, mulberry, manX, footY, setRodTarget, kickRod, chargeRod, goalX0, goalX1 } from './physics.js';
 
 export const DIFFS = { easy: 0.12, normal: 0.5, hard: 0.92 };
 
 export function aiParams(skill) {
   const k = clamp(skill, 0, 1);
   return {
-    delay: 0.34 - 0.28 * k, // perception delay (s)
-    noise: 5.2 - 4.4 * k, // prediction error sd (units)
-    vmax: 62 + 64 * k, // max slide speed
-    cd: 0.85 - 0.55 * k, // min time between kicks of one rod
-    react: 0.22 - 0.16 * k, // time ball must sit in the strike zone before kicking
+    delay: 0.42 - 0.28 * k, // perception delay (s)
+    noise: 7.5 - 5.5 * k, // prediction error sd (units)
+    vmax: 40 + 86 * k, // max slide speed
+    cd: 1.0 - 0.7 * k, // min time between kicks of one rod
+    react: 0.3 - 0.24 * k, // time ball must sit in the strike zone before kicking
     aimSkill: 0.15 + 0.8 * k,
   };
 }
@@ -51,7 +51,7 @@ export function createAI(team, skill, seed = 7) {
       for (const r of s.rods) {
         if (r.team !== team) continue;
         r.vmax = P.vmax;
-        const q = st[r.i] || (st[r.i] = { cd: 0, zone: 0 });
+        const q = st[r.i] || (st[r.i] = { cd: 0, zone: 0, until: 0, dir: 0 });
         q.cd -= dt;
         // where will the ball cross this rod?
         let px = b.x;
@@ -62,20 +62,38 @@ export function createAI(team, skill, seed = 7) {
         px = clamp(px + (noise[r.i] || 0), 2, T.W - 2);
         const rel = (b.y - r.y) * r.s; // > 0: ball is ahead of the rod (towards the opponent)
         let target;
-        if (rel > -4 && rel < 16) {
-          // engage: put the nearest man on the ball
+        const slow = Math.hypot(b.vx, b.vy) < 25;
+        const base = { ...r, x: 0 };
+        const nearestMan = (x) => {
           let best = 0, bd = 1e9;
           for (let k = 0; k < r.n; k++) {
-            const d = Math.abs(manX({ ...r, x: 0 }, k) - px);
+            const d = Math.abs(manX(base, k) - x);
             if (d < bd) { bd = d; best = k; }
           }
-          target = px - manX({ ...r, x: 0 }, best);
+          return best;
+        };
+        const windup = slow && rel > -6.5 && rel < 5;
+        if (!windup && rel > -4.6 && rel <= 0.6) {
+          // fast ball level with the rod: do not shove it sideways, clear the men away from it
+          let best = r.x, bd = 1e9;
+          for (let c = -r.slide; c <= r.slide + 1e-6; c += 1) {
+            let m = 1e9;
+            for (let k = 0; k < r.n; k++) m = Math.min(m, Math.abs(manX({ ...r, x: c }, k) - b.x));
+            if (m < 5) continue;
+            const d = Math.abs(c - r.x);
+            if (d < bd) { bd = d; best = c; }
+          }
+          target = best;
+        } else if (windup || (rel > 0.6 && rel < 16)) {
+          const best = nearestMan(px);
+          target = px - manX(base, best);
+          if (windup && r.ph === 0 && s.phase === 'play' && q.cd <= 0) chargeRod(s, r.i);
           // strike?
           const man = manX(r, best);
           const fy = footY(r);
           const dx = Math.abs(man - b.x);
           const ahead = (b.y - fy) * r.s;
-          const inZone = dx < 2.7 && ahead > 0.4 && ahead < 5.8;
+          const inZone = dx < 2.7 && ahead > 0.4 && ahead < 9;
           q.zone = inZone ? q.zone + dt : 0;
           if (inZone && q.zone >= P.react && q.cd <= 0 && s.phase === 'play' && r.ph !== 2) {
             const bsp = Math.hypot(b.vx, b.vy);
@@ -89,20 +107,18 @@ export function createAI(team, skill, seed = 7) {
               if (r.kind === 'att' || r.kind === 'mid') {
                 const gx = (goalX0 + goalX1) / 2;
                 const dir = b.x > gx ? -1 : 1;
-                target += dir * 7 * (rnd() < P.aimSkill ? 1 : -1);
+                q.dir = dir * (rnd() < P.aimSkill ? 1 : -1);
+                q.until = now + 0.14;
               }
             }
           }
+          if (q.until > now) target = r.x + q.dir * 14;
         } else if (r.kind === 'gk') {
-          target = (T.W / 2 + (px - T.W / 2) * 0.62) - T.W / 2;
+          target = T.W / 2 + (px - T.W / 2) * 0.62 - T.W / 2;
         } else {
-          let best = 0, bd = 1e9;
-          for (let k = 0; k < r.n; k++) {
-            const d = Math.abs(manX({ ...r, x: 0 }, k) - px);
-            if (d < bd) { bd = d; best = k; }
-          }
-          target = px - manX({ ...r, x: 0 }, best);
+          target = px - manX(base, nearestMan(px));
         }
+        if (r.ph === 1 && !windup) kickRod(s, r.i, 0.3);
         setRodTarget(s, r.i, target);
       }
     },

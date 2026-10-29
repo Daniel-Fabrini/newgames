@@ -3,7 +3,7 @@ export const W = 400;
 export const H = 800;
 export const XC = 182; // axis of symmetry of the playfield (between the left wall and the launch-lane wall)
 export const LANE_X = 369;
-export const BALL_START = { x: LANE_X, y: 766 };
+export const BALL_START = { x: LANE_X, y: 768 };
 const mx = (x) => 2 * XC - x;
 
 function arc(cx, cy, r, a0, a1, n) {
@@ -82,7 +82,7 @@ function build(opts) {
   const sp = opts.lanes[1] - opts.lanes[0];
   for (let i = 0; i <= opts.lanes.length; i++) {
     const x = opts.lanes[0] - sp / 2 + i * sp;
-    wall(x, 52, x, 100, 0.45);
+    wall(x, 70, x, 104, 0.45);
   }
   for (const g of opts.guides || []) wall(g[0], g[1], g[2], g[3], 0.4);
 
