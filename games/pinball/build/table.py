@@ -90,9 +90,10 @@ bsdf = nt.nodes['Principled BSDF']
 tex = nt.nodes.new('ShaderNodeTexImage')
 tex.image = img
 nt.links.new(tex.outputs['Color'], bsdf.inputs['Base Color'])
-bsdf.inputs['Roughness'].default_value = 0.4
-bsdf.inputs['Coat Weight'].default_value = 0.5
-bsdf.inputs['Coat Roughness'].default_value = 0.1
+bsdf.inputs['Roughness'].default_value = 0.5
+bsdf.inputs['Coat Weight'].default_value = 0.3
+bsdf.inputs['Coat Roughness'].default_value = 0.12
+bsdf.inputs['Specular IOR Level'].default_value = 0.25
 bpy.ops.mesh.primitive_plane_add(size=1)
 pf = bpy.context.active_object
 pf.dimensions = (4.0, 8.0, 0)

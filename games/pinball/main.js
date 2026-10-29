@@ -57,7 +57,7 @@ export async function mount(root, ctx) {
   const dmdWrap = h('div', { class: 'g-pinball-dmdwrap' }, dmdCanvas);
   const canvas = h('canvas', { class: 'g-pinball-canvas', role: 'img', 'aria-label': t('tableLabel') });
   const plungerBtn = h('button', { class: 'g-pinball-plunger', type: 'button', 'aria-label': t('plungerAria') }, h('b', {}, t('plunger')), h('i'));
-  const nudgeBtn = h('button', { class: 'g-pinball-nudge', type: 'button', 'aria-label': t('nudgeAria') }, t('nudge'));
+  const nudgeBtn = h('button', { class: 'g-pinball-nudge', type: 'button', 'aria-label': t('nudgeAria'), title: t('nudge') }, '⇅');
   const hintL = h('div', { class: 'g-pinball-fbtn left', 'aria-hidden': 'true', title: t('leftFlipper') }, h('i'));
   const hintR = h('div', { class: 'g-pinball-fbtn right', 'aria-hidden': 'true', title: t('rightFlipper') }, h('i'));
   const stage = h('div', { class: 'g-pinball-stage', role: 'group', 'aria-label': t('leftFlipper') + ' / ' + t('rightFlipper') }, canvas, hintL, hintR, plungerBtn, nudgeBtn);

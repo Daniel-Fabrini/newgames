@@ -149,11 +149,11 @@ add({
 });
 add({
   id: 'w3l4', world: 3, bounds: [0, 80, 760, 880], killY: 900,
-  terrain: [ground(-200, 150, 620), ground(560, 960, 620)],
-  hazards: [spikes(150, 780, 560, 830)],
+  terrain: [ground(-200, 150, 620), ground(510, 960, 620)],
+  hazards: [spikes(150, 780, 510, 830)],
   anchors: anchorsOn([20, 80, 130], 620),
-  pipe: { x: 670, y: 600, r: 32 }, goal: { type: 'pipe' }, need: 2,
-  plan: [[150, 580], [355, 570], [560, 590], [670, 600]],
+  pipe: { x: 620, y: 600, r: 32 }, goal: { type: 'pipe' }, need: 2,
+  plan: [[150, 580], [330, 570], [510, 590], [620, 600]],
   stock: { goo: 18, heavy: 3 }, stars: [14, 16],
 });
 add({
@@ -207,7 +207,7 @@ add({
   id: 'w4l4', world: 4, bounds: [0, 0, 760, 880], killY: 900,
   terrain: [ground(-200, 170, 620), ground(580, 960, 620)],
   pendulums: [{ px: 375, py: 100, len: 375, r: 32, amp: 0.7, period: 3.0, phase: 0.25 }],
-  winds: [{ x: 170, y: 100, w: 410, h: 800, fx: 300, fy: 0, period: 4, phase: 0.5 }],
+  winds: [{ x: 170, y: 100, w: 410, h: 800, fx: 180, fy: 0, period: 4, phase: 0.5 }],
   anchors: anchorsOn([20, 80, 130], 620),
   pipe: { x: 670, y: 600, r: 32 }, goal: { type: 'pipe' }, need: 2,
   plan: [[170, 580], [375, 590], [580, 590], [670, 600]],
@@ -237,17 +237,17 @@ add({
 // ============================================================= WORLD 5 — Grand finale
 add({
   id: 'w5l1', world: 5, bounds: [0, 80, 800, 880], killY: 900,
-  terrain: [ground(-200, 150, 620), ground(590, 1000, 620)],
+  terrain: [ground(-200, 150, 620), ground(520, 1000, 620)],
   anchors: anchorsOn([20, 80, 130], 620),
-  pipe: { x: 710, y: 600, r: 32 }, goal: { type: 'pipe' }, need: 2,
-  plan: [[150, 580], [370, 590], [590, 590], [710, 600]],
+  pipe: { x: 640, y: 600, r: 32 }, goal: { type: 'pipe' }, need: 2,
+  plan: [[150, 580], [335, 590], [520, 590], [640, 600]],
   stock: { goo: 14, tacky: 8 }, stars: [14, 16],
 });
 add({
   id: 'w5l2', world: 5, bounds: [0, -520, 720, 700], killY: 900,
   terrain: [ground(-200, 920, 640)],
   anchors: anchorsOn([240, 310, 380, 450], 640),
-  goal: { type: 'height', y: -260, base: 640 }, need: 2,
+  goal: { type: 'height', y: -100, base: 640 }, need: 2,
   plan: [],
   stock: { goo: 14, heavy: 4, balloon: 4 }, stars: [18, 21],
 });
@@ -271,12 +271,12 @@ add({
 });
 add({
   id: 'w5l5', world: 5, bounds: [0, 0, 800, 880], killY: 900,
-  terrain: [ground(-200, 150, 620), ground(650, 1000, 620)],
-  hazards: [spikes(150, 300, 650, 370, 'down')],
-  winds: [{ x: 150, y: 200, w: 500, h: 700, fx: 360, fy: 0, period: 3.6, phase: 0 }],
+  terrain: [ground(-200, 150, 620), ground(540, 1000, 620)],
+  hazards: [spikes(150, 300, 540, 370, 'down')],
+  winds: [{ x: 150, y: 200, w: 390, h: 700, fx: 260, fy: 0, period: 3.6, phase: 0 }],
   anchors: anchorsOn([20, 80, 130], 620),
-  pipe: { x: 730, y: 600, r: 32 }, goal: { type: 'pipe' }, need: 2,
-  plan: [[150, 580], [400, 590], [650, 590], [730, 600]],
+  pipe: { x: 660, y: 600, r: 32 }, goal: { type: 'pipe' }, need: 2,
+  plan: [[150, 580], [345, 590], [540, 590], [660, 600]],
   stock: { goo: 24, heavy: 3 }, stars: [18, 21],
 });
 add({

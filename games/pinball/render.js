@@ -256,12 +256,29 @@ export function createRenderer(canvas, tb, opts = {}) {
   }
 
   // ------------------------------------------------------------------ helpers
+  const glowCache = new Map();
+  function glowSprite(color) {
+    let g = glowCache.get(color);
+    if (!g) {
+      g = document.createElement('canvas');
+      g.width = g.height = 64;
+      const x = g.getContext('2d');
+      const gr = x.createRadialGradient(32, 32, 0, 32, 32, 32);
+      gr.addColorStop(0, rgba(color, 1));
+      gr.addColorStop(0.35, rgba(color, 0.5));
+      gr.addColorStop(1, rgba(color, 0));
+      x.fillStyle = gr;
+      x.fillRect(0, 0, 64, 64);
+      glowCache.set(color, g);
+    }
+    return g;
+  }
   function glow(c, x, y, r, color, a) {
-    const gr = c.createRadialGradient(x, y, 0, x, y, r);
-    gr.addColorStop(0, rgba(color, a));
-    gr.addColorStop(1, rgba(color, 0));
-    c.fillStyle = gr;
-    c.fillRect(x - r, y - r, r * 2, r * 2);
+    if (a <= 0.01) return;
+    const prev = c.globalAlpha;
+    c.globalAlpha = Math.min(1, a) * prev;
+    c.drawImage(glowSprite(color), x - r, y - r, r * 2, r * 2);
+    c.globalAlpha = prev;
   }
   function hull(c, px, py, r0, tx, ty, r1) {
     const dx = tx - px, dy = ty - py;
@@ -687,6 +704,16 @@ export function createRenderer(canvas, tb, opts = {}) {
     ctx.translate(ox + sx, oy + sy);
     ctx.scale(k, k);
     ctx.drawImage(base, 0, 0, W, H);
+    // dark surround outside the table outline (hides the render's glossy veil there)
+    ctx.fillStyle = '#05050a';
+    ctx.beginPath();
+    ctx.rect(-10, -10, W + 20, H + 20);
+    ctx.moveTo(14, 200);
+    ctx.arc(200, 200, 186, Math.PI, TAU);
+    ctx.lineTo(386, H + 10);
+    ctx.lineTo(14, H + 10);
+    ctx.closePath();
+    ctx.fill('evenodd');
     ctx.save();
     outline(ctx);
     ctx.clip();
@@ -708,7 +735,7 @@ export function createRenderer(canvas, tb, opts = {}) {
     for (const ol of tb.outlanes) {
       if (ol.kickback && sim.kickArmed[ol.side] && sim.live) glow(ctx, ol.x, ol.y - 26, 15, '#7dffb0', 0.55 + 0.35 * Math.sin(tsec * 6));
     }
-    if (game.saver > 0 && game.phase === 'play') glow(ctx, XC, 760, 28, '#ffb340', Math.sin(tsec * (game.saver < 3 ? 14 : 5)) > -0.2 ? 0.95 : 0.1);
+    if (game.saver > 0 && game.phase === 'play') glow(ctx, XC, 742, 14, '#ffb340', Math.sin(tsec * (game.saver < 3 ? 14 : 5)) > -0.2 ? 0.95 : 0.1);
     if (game.mbLit) glow(ctx, tb.ramps[0].entry.x, tb.ramps[0].entry.y, 28, '#ff4d6d', 0.6 + 0.4 * Math.sin(tsec * 9));
     tb.standups.forEach((s, i) => {
       const p = sim.pulse.standups[i];

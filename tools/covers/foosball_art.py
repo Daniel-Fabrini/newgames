@@ -289,7 +289,7 @@ elif MODE == 'rails':
     render('rails', sc)
 elif MODE == 'men':
     CW, CH, PPU = 108, 264, 12
-    sc = setup(CW, CH, 22.0, sun_energy=3.4, world=0.7)
+    sc = setup(CW, CH, 22.0, sun_energy=5.2, world=1.3)
     skin = glossy('#f2c7a0', 0.4, 0.3, name='skin'); hair = glossy('#1b1410', 0.35, 0.5, name='hair')
     shoe = glossy('#111317', 0.25, 0.8, name='shoe'); sole = matte('#f2f2f2', 0.5, name='sole')
     kits = {
@@ -303,12 +303,12 @@ elif MODE == 'men':
         s2 = glossy(k['stripe2'], 0.3, 0.6, name=f's2{team}'); sho = glossy(k['shorts'], 0.35, 0.5, name=f'shorts{team}')
         sk = glossy(k['sock'], 0.35, 0.5, name=f'sock{team}')
         parts = [
-            box((3.8, 2.5, 5.0), sh, loc=(0, -0.9, -1.9), bevel=0.55),
-            box((3.9, 0.5, 5.1), s2, loc=(0, -1.55, -1.9), bevel=0.1),
-            box((3.9, 0.5, 5.1), s1, loc=(0, -0.95, -1.9), bevel=0.1),
-            sphere(0.95, sh, loc=(-1.95, -0.9, 0.3), seg=24), sphere(0.95, sh, loc=(1.95, -0.9, 0.3), seg=24),
-            sphere(1.4, skin, loc=(0, -0.9, 1.9), seg=32),
-            sphere(1.45, hair, loc=(0, -1.15, 2.35), seg=32, scale=(1, 1, 0.6)),
+            box((3.8, 3.4, 5.0), sh, loc=(0, -0.9, -1.9), bevel=0.6),
+            box((3.95, 0.65, 5.1), s1, loc=(0, -0.12, -1.9), bevel=0.12),
+            box((3.95, 0.6, 5.1), s2, loc=(0, 0.5, -1.9), bevel=0.12),
+            sphere(0.95, sh, loc=(-1.95, -1.2, 0.3), seg=24), sphere(0.95, sh, loc=(1.95, -1.2, 0.3), seg=24),
+            sphere(1.1, skin, loc=(0, -1.75, 1.9), seg=32),
+            sphere(1.15, hair, loc=(0, -1.95, 2.3), seg=32, scale=(1, 1, 0.6)),
             box((3.1, 2.0, 2.6), sho, loc=(0, -0.3, -5.6), bevel=0.35),
             box((2.6, 1.7, 2.8), sk, loc=(0, -0.1, -7.6), bevel=0.3),
             box((3.8, 3.4, 1.3), shoe, loc=(0, 0, -8.8), bevel=0.55),

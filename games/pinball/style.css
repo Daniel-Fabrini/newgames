@@ -214,10 +214,10 @@
 }
 .g-pinball-plunger {
   position: absolute;
-  right: 6px;
-  bottom: 78px;
-  width: 74px;
-  height: 74px;
+  right: 4px;
+  bottom: 70px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   border: 2px solid #8b6a1a;
   background: radial-gradient(circle at 35% 28%, #ffffff 0%, #d7dce6 22%, #8a93a6 55%, #3c4252 100%);
@@ -229,7 +229,7 @@
   box-shadow: 0 8px 14px rgba(0, 0, 0, 0.6), inset 0 -6px 10px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(243, 194, 74, 0.5);
   cursor: pointer;
   touch-action: none;
-  transform: translateY(calc(var(--p, 0) * 16px));
+  transform: translateY(calc(var(--p, 0) * 12px));
 }
 .g-pinball-plunger::after {
   content: '';
@@ -249,8 +249,8 @@
   inset: -6px;
   border-radius: 50%;
   background: conic-gradient(#f7d774 calc(var(--p, 0) * 360deg), transparent 0);
-  -webkit-mask: radial-gradient(circle, transparent 38px, #000 39px);
-  mask: radial-gradient(circle, transparent 38px, #000 39px);
+  -webkit-mask: radial-gradient(circle, transparent 31px, #000 32px);
+  mask: radial-gradient(circle, transparent 31px, #000 32px);
   pointer-events: none;
 }
 .g-pinball-plunger.down {
@@ -263,12 +263,13 @@
 }
 .g-pinball-nudge {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 6px;
-  min-width: 96px;
-  height: 40px;
-  border-radius: 14px;
+  left: 4px;
+  bottom: 70px;
+  min-width: 0;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border-radius: 50%;
   border: 1px solid rgba(243, 194, 74, 0.55);
   background: linear-gradient(180deg, rgba(40, 36, 26, 0.9), rgba(12, 10, 7, 0.9));
   color: #f7d774;
@@ -276,6 +277,19 @@
   letter-spacing: 1px;
   cursor: pointer;
   touch-action: none;
+}
+.g-pinball-nudge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-size: 20px;
+}
+.g-pinball-nudge small {
+  font-size: 8px;
+  letter-spacing: 0.4px;
+  margin-top: 2px;
 }
 .g-pinball-nudge.warn {
   border-color: #ff4a3d;

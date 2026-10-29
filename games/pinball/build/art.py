@@ -320,10 +320,37 @@ def paint(spec):
     hexq = [P(ex + 31 * math.cos(math.radians(30 + 60 * k)), ey + 31 * math.sin(math.radians(30 + 60 * k))) for k in range(6)]
     d.polygon(hexq, outline=hexc(spec['emblem_col']) + (255,))
     d.text(P(ex, ey + 1), 'R', font=font(40), fill=hexc(spec['emblem_col']) + (255,), anchor='mm', stroke_width=int(2 * S), stroke_fill=(255, 255, 255, 255))
-    # --- element badges & hazard signs
-    for (bx_, by_, ic, c) in spec['badges']:
-        plate(d, bx_, by_, 9, hexc(c) + (255,))
-        ic(d, bx_, by_, 4.8, (255, 255, 255, 255))
+
+    # --- tapered colour lanes pointing at the ring, with a badge at the far end
+    sl = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    sd = ImageDraw.Draw(sl)
+    for (ang, col, ic, rin, rout) in spec['strips']:
+        a0 = math.radians(ang)
+        def pt(r, da):
+            return P(RING[0] + r * math.cos(a0 + math.radians(da)), RING[1] + r * math.sin(a0 + math.radians(da)))
+        poly = [pt(rin, -3.6), pt(rout, -6.5), pt(rout, 6.5), pt(rin, 3.6)]
+        sd.polygon(poly, fill=hexc(col) + (235,))
+        sd.line(poly + [poly[0]], fill=(255, 255, 255, 255), width=int(1.6 * S))
+        sd.line([pt(rin + 8, 0), pt(rout - 14, 0)], fill=(255, 255, 255, 120), width=int(1.2 * S))
+    sl = sl.filter(ImageFilter.GaussianBlur(0.5))
+    img.alpha_composite(sl)
+    d = ImageDraw.Draw(img, 'RGBA')
+    for (ang, col, ic, rin, rout) in spec['strips']:
+        bx_ = RING[0] + (rout + 4) * math.cos(math.radians(ang))
+        by_ = RING[1] + (rout + 4) * math.sin(math.radians(ang))
+        plate(d, bx_, by_, 9.5, hexc(col) + (255,))
+        ic(d, bx_, by_, 5, (255, 255, 255, 255))
+
+    # --- scenery bits: lightning, grass, flames
+    for (zx, zy, zc) in spec.get('bolts', []):
+        pts = [P(zx, zy), P(zx - 9, zy + 16), P(zx + 2, zy + 16), P(zx - 10, zy + 38), P(zx + 14, zy + 10), P(zx + 3, zy + 10), P(zx + 12, zy - 6)]
+        d.polygon(pts, fill=hexc(zc) + (230,), outline=(255, 255, 255, 255))
+    for (gx, gy) in spec.get('grass', []):
+        for k in range(5):
+            d.polygon([P(gx + k * 5 - 3, gy), P(gx + k * 5, gy - 12 - (k % 2) * 5), P(gx + k * 5 + 3, gy)], fill=(40, 150, 50, 255), outline=(15, 70, 25, 255))
+    for (fx_, fy_) in spec.get('flames', []):
+        flame_icon(d, fx_, fy_, 7, (255, 140, 30, 255))
+    # --- hazard signs
     for (sx_, sy_) in spec['signs']:
         d.polygon([P(sx_, sy_ - 9), P(sx_ + 10, sy_ + 8), P(sx_ - 10, sy_ + 8)], fill=(255, 215, 40, 255), outline=(20, 20, 20, 255))
         d.line([P(sx_ - 3, sy_ - 1), P(sx_ + 3, sy_ + 5)], fill=(20, 20, 20, 255), width=int(1.6 * S))
@@ -389,11 +416,11 @@ NEON = dict(
     lanes=[(137, '#2fa83c', leaf_icon), (182, '#2a7fe0', drop_icon), (227, '#f07a1c', flame_icon)],
     chevrons=[(46, 476, 0, '#ff9a2a'), (46, 452, 0, '#ff7a1c'), (46, 428, 0, '#ff5a1c'), (322, 350, 0, '#ff9a2a'), (322, 326, 0, '#ff7a1c')],
     arrows=[(46, 482), (46, 458), (46, 434), (322, 356), (322, 332), (322, 308)], arrow_color='#ff8a2a',
-    emblem=(182, 242), emblem_col='#e23636', borders=[200, 225, 250, 292, 318, 340], badges=[(60, 330, leaf_icon, '#2fa83c'), (100, 372, drop_icon, '#2a7fe0'), (268, 372, flame_icon, '#f07a1c'), (306, 330, bolt_icon, '#f0c020')], signs=[(78, 420), (286, 420), (44, 600), (320, 600)], mult_y=372, panel='#f08a1c', panel_rot=-12, panel_pos=(300, 502), mission_labels=['DISCOVER', 'CATCH', 'TRAIN', 'BATTLE'],
+    emblem=(182, 242), emblem_col='#e23636', borders=[200, 225, 250, 292, 318, 340], strips=[(238, '#1f6fd8', drop_icon, 112, 232), (254, '#2fa8e8', eye_icon, 112, 236), (286, '#f0b020', bolt_icon, 112, 236), (302, '#e86a1c', flame_icon, 112, 232)], signs=[(78, 420), (286, 420), (44, 600), (320, 600)], bolts=[(296, 150, '#ffe14a'), (338, 190, '#ffe14a'), (40, 160, '#ffffff')], grass=[(24, 560), (24, 590), (60, 520), (36, 470)], flames=[(344, 540), (330, 575), (300, 440)], mult_y=372, panel='#f08a1c', panel_rot=-12, panel_pos=(300, 502), mission_labels=['DISCOVER', 'CATCH', 'TRAIN', 'BATTLE'],
     mission_pts=[(286 - 2, 478 + 2), (284, 494), (282, 510), (280, 526)],
     figs=[('meowth', 182, 74, 40, False, {}), ('pikachu', 322, 138, 56, True, {}), ('eevee', 94, 535, 46, False, {}),
           ('bulbasaur', 138, 628, 36, False, {}), ('squirtle', 182, 636, 40, False, {}), ('charmander', 226, 628, 38, True, {}),
-          ('mewtwo', XC, 474, 74, False, dict(tint='#3a2478', alpha=0.7, shadow=False)), ('snorlax', 182, 800, 70, False, {})],
+          ('mewtwo', XC, 474, 74, False, dict(tint='#3a2478', alpha=0.7, shadow=False)), ('snorlax', 182, 800, 54, False, {})],
 )
 SPACE = dict(
     id='space', seed=9, night='#2a0f55', sky=['#7a3cff'], mode_y=300, bowl='#6a3cd0', ring='#b030d0', apron='#8a1fb0', badge_y=426, badge=('#7a2fd0',), psychic=True,
@@ -403,11 +430,11 @@ SPACE = dict(
     lanes=[(122, '#e8407a', bolt_icon), (162, '#f0c020', star_icon if False else bolt_icon), (202, '#38c0e8', eye_icon), (242, '#a050f0', flame_icon)],
     chevrons=[(318, 476, 0, '#ff5aa0'), (318, 452, 0, '#ff3a8a'), (46, 520, 0, '#ff9a2a'), (46, 498, 0, '#ff7a1c')],
     arrows=[(46, 526), (46, 504), (318, 482), (318, 458), (318, 434), (46, 548)], arrow_color='#ff5aa0',
-    emblem=(182, 268), emblem_col='#c040f0', borders=[200, 225, 250, 292, 318, 340], badges=[(60, 330, eye_icon, '#38c0e8'), (100, 372, bolt_icon, '#e8407a'), (268, 372, flame_icon, '#f07a1c'), (306, 330, leaf_icon, '#a050f0')], signs=[(78, 420), (286, 420), (44, 600), (320, 600)], mult_y=372, panel='#c02a8a', panel_rot=12, panel_pos=(78, 502), mission_labels=['DISCOVER', 'CATCH', 'TRAIN', 'BATTLE'],
+    emblem=(182, 296), emblem_col='#c040f0', borders=[200, 225, 250, 292, 318, 340], strips=[(238, '#38c0e8', eye_icon, 112, 232), (254, '#e8407a', bolt_icon, 112, 236), (286, '#f07a1c', flame_icon, 112, 236), (302, '#a050f0', leaf_icon, 112, 232)], signs=[(78, 420), (286, 420), (44, 600), (320, 600)], bolts=[(330, 190, '#7ae8ff'), (296, 150, '#7ae8ff'), (50, 190, '#ff7ad8')], grass=[], flames=[(344, 560), (330, 590)], mult_y=350, panel='#c02a8a', panel_rot=12, panel_pos=(78, 502), mission_labels=['DISCOVER', 'CATCH', 'TRAIN', 'BATTLE'],
     mission_pts=[(56, 478 + 2), (58, 494), (60, 510), (62, 526)],
     figs=[('mewtwo', 182, 86, 54, False, {}), ('meowth', 326, 142, 50, True, {}), ('ditto', 300, 520, 26, False, {}),
           ('eevee', 140, 628, 38, False, {}), ('pikachu', 182, 636, 42, False, {}), ('squirtle', 226, 628, 36, True, {}),
-          ('charmander', 70, 640, 30, False, {}), ('snorlax', 182, 800, 70, False, {})],
+          ('charmander', 70, 640, 30, False, {}), ('snorlax', 182, 800, 54, False, {})],
 )
 
 if __name__ == '__main__':

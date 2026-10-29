@@ -7,7 +7,12 @@ import bpy
 # Pokemon-themed pinball machine: the real pre-rendered playfield (games/pinball/art/base_neon.webp) on a tilted cabinet slab.
 new_scene('#4a7bff', '#0a1240', samples=int(os.environ.get('S', 128)))
 ART = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'games', 'pinball', 'art', 'base_neon.webp')
-tex_mat = image_material(ART, 0.25, 0.8, name='field')
+tex_mat = image_material(ART, 0.3, 0.6, name='field')
+_n = tex_mat.node_tree
+_b = _n.nodes['Principled BSDF']
+_t = [n for n in _n.nodes if n.type == 'TEX_IMAGE'][0]
+_n.links.new(_t.outputs['Color'], _b.inputs['Emission Color'])
+_b.inputs['Emission Strength'].default_value = 0.75
 gold = glossy('#f0be3a', 0.25, 0.7, name='gold')
 dark = glossy('#15151f', 0.35, 0.5, name='cab')
 red = glossy('#e8262c', 0.15, 0.9, name='pbred')
@@ -22,7 +27,7 @@ for sx in (-1, 1):
     objs.append(box((0.14, FH + 0.5, 0.45), gold, loc=(sx * (FW / 2 + 0.28), 0, 0.12), bevel=0.05))
 objs.append(box((FW + 0.7, 0.14, 0.45), gold, loc=(0, FH / 2 + 0.28, 0.12), bevel=0.05))
 objs.append(box((FW + 0.7, 0.14, 0.45), gold, loc=(0, -FH / 2 - 0.28, 0.12), bevel=0.05))
-g = parent(objs, rot=(48, 0, 8))
+g = parent(objs, rot=(52, 0, 7))
 # big Poke Ball hero in front of the table
 bx, by, bz, br = -1.9, -2.5, 1.0, 0.95
 objs2 = [sphere(br, white, loc=(bx, by, bz))]
@@ -46,5 +51,5 @@ btn = cylinder(0.26, 0.12, white, loc=(bx, by - br * 0.97, bz), rot=(90, 0, 0), 
 ring = torus(0.27, 0.06, black, loc=(bx, by - br * 0.97, bz), rot=(90, 0, 0))
 sphere(0.34, steel, loc=(1.9, -2.7, 0.7))
 podium('#c9971c', 4.2, 0.5, z=-2.4)
-fit(0.7, 0.25)
+fit(0.72, 0.55)
 render('pinball')

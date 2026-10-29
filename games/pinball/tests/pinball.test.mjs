@@ -349,3 +349,32 @@ test('full random game terminates on both tables with sane results', () => {
     }
   }
 });
+
+test('tables: 4 missions each (discover/catch/train/battle), ramp rails start/end at the entry/exit', () => {
+  for (const id of TABLE_IDS) {
+    const tb = makeTable(id);
+    assert.equal(tb.missions.length, 4);
+    for (const r of tb.ramps) {
+      const a = r.path[0], b = r.path[r.path.length - 1];
+      assert.ok(Math.hypot(a[0] - r.entry.x, a[1] - r.entry.y) < 1e-6);
+      assert.ok(Math.hypot(b[0] - r.exit.x, b[1] - (r.exit.y - 2)) < 2.5);
+      assert.ok(r.path.length > 10);
+    }
+  }
+});
+
+test('artwork inserts: valid positions inside the table, known groups, art files present', async () => {
+  const fs = await import('node:fs');
+  const path = await import('node:path');
+  const dir = path.join(path.dirname(new URL(import.meta.url).pathname), '..', 'art');
+  for (const id of TABLE_IDS) {
+    const ins = JSON.parse(fs.readFileSync(path.join(dir, `inserts_${id}.json`), 'utf8'));
+    assert.ok(ins.length > 20);
+    for (const n of ins) {
+      assert.ok(n.x > 0 && n.x < 400 && n.y > 0 && n.y < 800, 'inside');
+      assert.ok(['mult', 'ring', 'arrow', 'mission', 'amb'].includes(n.group));
+    }
+    assert.equal(ins.filter((n) => n.group === 'mission').length, 4);
+    for (const f of ['base', 'ramp', 'sprites']) assert.ok(fs.existsSync(path.join(dir, `${f}_${id}.webp`)), `${f}_${id}.webp`);
+  }
+});
