@@ -53,32 +53,43 @@ const ICONS: Record<GameId, Draw> = {
   'water-sort': (g, u) => (
     <>
       <defs>
-        <linearGradient id={g('glass')} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#fff" stopOpacity="0.55" />
-          <stop offset="0.5" stopColor="#fff" stopOpacity="0.1" />
-          <stop offset="1" stopColor="#fff" stopOpacity="0.4" />
+        <linearGradient id={g('spec')} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#000" stopOpacity="0.22" />
+          <stop offset="0.2" stopColor="#fff" stopOpacity="0.6" />
+          <stop offset="0.34" stopColor="#fff" stopOpacity="0" />
+          <stop offset="0.8" stopColor="#000" stopOpacity="0" />
+          <stop offset="1" stopColor="#000" stopOpacity="0.3" />
         </linearGradient>
+        {[3, 24, 45].map((x) => (
+          <clipPath key={x} id={g(`c${x}`)}>
+            <path d={`M${x + 1.6} 22C${x + 1.6} 20 ${x + 4} 19 ${x + 8} 19S${x + 14.4} 20 ${x + 14.4} 22V50C${x + 14.4} 55 ${x + 11} 58 ${x + 8} 58S${x + 1.6} 55 ${x + 1.6} 50Z`} />
+          </clipPath>
+        ))}
       </defs>
       {[
-        { x: 6, colors: ['#22c55e', '#facc15', '#f97316', '#ef4444'] },
-        { x: 25, colors: ['#3b82f6', '#a855f7', '#ec4899', '#f97316'] },
-        { x: 44, colors: ['#22d3ee', '#22d3ee', '#3b82f6', '#22c55e'] },
-      ].map((tube) => (
-        <g key={tube.x}>
-          {tube.colors.map((c, i) => (
-            <rect
-              key={i}
-              x={tube.x + 2}
-              y={16 + i * 10.5}
-              width={10}
-              height={i === 3 ? 12 : 11}
-              rx={i === 3 ? 5 : 0}
-              fill={c}
-            />
-          ))}
-          <rect x={tube.x} y={6} width={14} height={54} rx={7} fill={u('glass')} stroke="#e8ecff" strokeWidth="1.6" />
-          <rect x={tube.x - 1.5} y={5} width={17} height={4} rx={2} fill="#e8ecff" />
-          <rect x={tube.x + 3} y={14} width={2.4} height={34} rx={1.2} fill="#fff" opacity="0.55" />
+        { x: 3, colors: ['#8b3fd1', '#f8d416', '#6cc12a', '#f0701a'], cork: true },
+        { x: 24, colors: ['#19a7e3', '#e8231a', '#f8d416', '#6cc12a'], cork: false },
+        { x: 45, colors: ['#f0701a', '#19a7e3', '#8b3fd1', '#e8231a'], cork: false },
+      ].map((b) => (
+        <g key={b.x}>
+          <path
+            d={`M${b.x + 5} 7V14C${b.x + 5} 17 ${b.x} 17 ${b.x} 21V50C${b.x} 56 ${b.x + 4} 60 ${b.x + 8} 60S${b.x + 16} 56 ${b.x + 16} 50V21C${b.x + 16} 17 ${b.x + 11} 17 ${b.x + 11} 14V7Z`}
+            fill="#1a1458"
+            stroke="#7cc8ff"
+            strokeWidth="1.6"
+            strokeLinejoin="round"
+          />
+          <g clipPath={`url(#${g(`c${b.x}`)})`}>
+            {b.colors.map((c, i) => (
+              <g key={i}>
+                <rect x={b.x} y={19 + i * 9.5} width={16} height={i === 0 ? 11 : 10.5} fill={c} />
+                <rect x={b.x} y={19 + i * 9.5} width={16} height={i === 0 ? 11 : 10.5} fill={u('spec')} />
+              </g>
+            ))}
+            <ellipse cx={b.x + 8} cy={19.4} rx={6.4} ry={2} fill="#fff" opacity="0.4" />
+          </g>
+          <ellipse cx={b.x + 8} cy={7} rx={4.6} ry={1.9} fill="#bfe3ff" stroke="#5aa8e8" strokeWidth="0.8" />
+          {b.cork && <path d={`M${b.x + 4} 2.5h8l-1 6h-6z`} fill="#d9a05b" stroke="#a8672f" strokeWidth="0.8" />}
         </g>
       ))}
     </>

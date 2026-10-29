@@ -2,7 +2,7 @@
  * Bottle layout: picks the number of rows (1–3) that gives the largest bottles that fit the
  * available stage, so up to 14 bottles fit a 360×740 phone without cropping.
  */
-export const BOTTLE_RATIO = 2.6; // height / width
+export const BOTTLE_RATIO = 3.0; // height / width
 export const LIFT_RATIO = 0.13; // selected bottles rise by this fraction of their height
 export const LABEL_PX = 0; // bottle number under each bottle
 export const MAX_BOTTLE_W = 92;
@@ -40,7 +40,7 @@ function split(count: number, rows: number): number[][] {
 function widthFor(width: number, height: number, count: number, rows: number): number {
   const perRow = Math.ceil(count / rows);
   const byWidth = width / (perRow + (perRow - 1) * GAP_RATIO + 0.2);
-  const rowSpace = (height - (rows - 1) * ROW_GAP_PX) / rows - LABEL_PX;
+  const rowSpace = (height - (rows - 1) * ROW_GAP_PX) / rows - LABEL_PX - 2; // 2px slack for rounding
   const byHeight = rowSpace / (BOTTLE_RATIO * (1 + LIFT_RATIO));
   return Math.min(byWidth, byHeight, MAX_BOTTLE_W);
 }

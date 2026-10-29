@@ -12,8 +12,8 @@
 }
 
 .ws-board {
-  --u: 14.9%; /* one liquid unit, as a fraction of the bottle height */
-  --b: 3.5%; /* liquid starts this far above the bottle base */
+  --u: 20%; /* one liquid unit, as a fraction of the bottle height */
+  --b: 2.7%; /* liquid starts this far above the bottle base */
   --ws-select: #9dbbff;
   position: relative;
   display: grid;
@@ -36,11 +36,13 @@
 
 .ws-board::before {
   background:
-    radial-gradient(70% 38% at 50% 100%, rgba(168, 85, 247, 0.32), transparent 70%),
-    radial-gradient(120% 85% at 50% 36%, #43309f 0%, #2a1e78 42%, #160f45 78%, #0c0828 100%);
+    radial-gradient(60% 30% at 50% 100%, rgba(150, 70, 255, 0.34), transparent 72%),
+    radial-gradient(34% 22% at 12% 22%, rgba(110, 90, 255, 0.16), transparent 70%),
+    radial-gradient(30% 20% at 90% 60%, rgba(90, 120, 255, 0.14), transparent 70%),
+    radial-gradient(130% 90% at 50% 30%, #2a1f86 0%, #1a1260 40%, #0f0a40 72%, #080628 100%);
   box-shadow:
-    inset 0 0 60px 6px rgba(4, 2, 24, 0.7),
-    inset 0 0 0 1px rgba(170, 160, 255, 0.18),
+    inset 0 0 70px 8px rgba(2, 1, 20, 0.75),
+    inset 0 0 0 1px rgba(150, 170, 255, 0.2),
     0 10px 30px rgba(0, 0, 0, 0.45);
 }
 
@@ -52,9 +54,13 @@
     radial-gradient(1.8px 1.8px at 24% 46%, #bfc6ff, transparent),
     radial-gradient(2.2px 2.2px at 6% 72%, #fff, transparent),
     radial-gradient(1.8px 1.8px at 64% 66%, #d8dcff, transparent),
-    radial-gradient(1.8px 1.8px at 46% 88%, #fff, transparent),
+    radial-gradient(2.4px 2.4px at 46% 90%, #fff, transparent),
     radial-gradient(1.8px 1.8px at 93% 84%, #bfc6ff, transparent),
-    radial-gradient(2px 2px at 38% 24%, #fff, transparent);
+    radial-gradient(2px 2px at 38% 24%, #fff, transparent),
+    radial-gradient(5px 5px at 70% 28%, rgba(180, 190, 255, 0.28), transparent),
+    radial-gradient(7px 7px at 18% 58%, rgba(160, 170, 255, 0.2), transparent),
+    radial-gradient(6px 6px at 84% 76%, rgba(190, 150, 255, 0.22), transparent),
+    radial-gradient(4px 4px at 52% 8%, rgba(190, 200, 255, 0.3), transparent);
   opacity: 0.8;
   animation: ws-twinkle 4.4s var(--ease-in-out) infinite alternate;
 }
@@ -97,12 +103,14 @@
   content: '';
   position: absolute;
   left: 50%;
-  bottom: 12px;
-  width: calc(var(--bw) * 1.15);
-  height: calc(var(--bw) * 0.26);
-  margin-left: calc(var(--bw) * -0.575);
+  bottom: -2px;
+  width: calc(var(--bw) * 1.3);
+  height: calc(var(--bw) * 0.34);
+  margin-left: calc(var(--bw) * -0.65);
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(3, 0, 30, 0.7), rgba(3, 0, 30, 0.28) 60%, transparent);
+  background:
+    radial-gradient(closest-side, rgba(2, 0, 28, 0.75), rgba(2, 0, 28, 0.3) 55%, transparent),
+    radial-gradient(closest-side, rgba(70, 150, 255, 0.4), transparent);
   transition:
     transform 220ms var(--ease-out),
     opacity 220ms var(--ease-out);
@@ -120,7 +128,9 @@
   flex: none;
   width: var(--bw);
   height: var(--bh);
-  margin-bottom: 4px;
+  margin-bottom: calc(var(--bw) * 0.1);
+  --eh: calc(var(--bw) * 0.19);
+  --uh: calc(var(--bh) * 0.2);
   padding: 0;
   border: 0;
   background: none;
@@ -148,7 +158,7 @@
 .ws-glass {
   position: absolute;
   inset: 0;
-  filter: drop-shadow(0 3px 3px rgba(3, 0, 28, 0.45));
+  filter: drop-shadow(0 0 3px rgba(70, 150, 255, 0.5)) drop-shadow(0 4px 4px rgba(2, 0, 30, 0.5));
   transition: filter 200ms var(--ease-out);
 }
 
@@ -162,17 +172,17 @@
 }
 
 .ws-glass::before {
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20260%27%20preserveAspectRatio%3D%27none%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20x2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23b9c4ff%27%20stop-opacity%3D%27.30%27%2F%3E%3Cstop%20offset%3D%27.35%27%20stop-color%3D%27%23b9c4ff%27%20stop-opacity%3D%27.07%27%2F%3E%3Cstop%20offset%3D%27.7%27%20stop-color%3D%27%23b9c4ff%27%20stop-opacity%3D%27.06%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23b9c4ff%27%20stop-opacity%3D%27.26%27%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%27M34%206V52C34%2074%204%2078%204%20112V224C4%20246%2018%20258%2040%20258H60C82%20258%2096%20246%2096%20224V112C96%2078%2066%2074%2066%2052V6Z%27%20fill%3D%27url%28%23g%29%27%2F%3E%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20300%27%20preserveAspectRatio%3D%27none%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%270%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231a1470%27%20stop-opacity%3D%27.55%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23080632%27%20stop-opacity%3D%27.78%27%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%27M36%2010V22C36%2032%204%2032%204%2048V268C4%20288%2016%20298%2036%20298H64C84%20298%2096%20288%2096%20268V48C96%2032%2064%2032%2064%2022V10Z%27%20fill%3D%27url%28%23g%29%27%2F%3E%3C%2Fsvg%3E");
 }
 
 /* Front of the glass: thick edge, inner shadow and the white specular highlights, over the liquid. */
 .ws-glass::after {
   z-index: 2;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20260%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M40%206V54C40%2078%2011%2082%2011%20114V222C11%20240%2022%20251%2040%20251H60C78%20251%2089%20240%2089%20222V114C89%2082%2060%2078%2060%2054V6Z%27%20fill%3D%27none%27%20stroke%3D%27%230a0640%27%20stroke-opacity%3D%27.28%27%20stroke-width%3D%275%27%2F%3E%3Cpath%20d%3D%27M34%206V52C34%2074%204%2078%204%20112V224C4%20246%2018%20258%2040%20258H60C82%20258%2096%20246%2096%20224V112C96%2078%2066%2074%2066%2052V6Z%27%20fill%3D%27none%27%20stroke%3D%27%23e9edff%27%20stroke-opacity%3D%27.92%27%20stroke-width%3D%273.4%27%20stroke-linejoin%3D%27round%27%2F%3E%3Cpath%20d%3D%27M40%206V54C40%2078%2011%2082%2011%20114V222C11%20240%2022%20251%2040%20251H60C78%20251%2089%20240%2089%20222V114C89%2082%2060%2078%2060%2054V6Z%27%20fill%3D%27none%27%20stroke%3D%27%23fff%27%20stroke-opacity%3D%27.35%27%20stroke-width%3D%271.1%27%2F%3E%3Cpath%20d%3D%27M19%20126C16%20150%2016%20196%2022%20226%27%20fill%3D%27none%27%20stroke%3D%27%23fff%27%20stroke-opacity%3D%27.8%27%20stroke-width%3D%275.5%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M17%20108C19%2098%2025%2092%2032%2088%27%20fill%3D%27none%27%20stroke%3D%27%23fff%27%20stroke-opacity%3D%27.6%27%20stroke-width%3D%273.4%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M85%20150V196%27%20fill%3D%27none%27%20stroke%3D%27%23fff%27%20stroke-opacity%3D%27.4%27%20stroke-width%3D%273.2%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M41.5%2016V46%27%20fill%3D%27none%27%20stroke%3D%27%23fff%27%20stroke-opacity%3D%27.75%27%20stroke-width%3D%273%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M34%20242C42%20246%2058%20246%2066%20242%27%20fill%3D%27none%27%20stroke%3D%27%23fff%27%20stroke-opacity%3D%27.3%27%20stroke-width%3D%273%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20300%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M40%2010V24C40%2036%209%2036%209%2052V266C9%20282%2020%20292%2038%20292H62C80%20292%2091%20282%2091%20266V52C91%2036%2060%2036%2060%2024V10Z%27%20fill%3D%27none%27%20stroke%3D%27%2303012a%27%20stroke-opacity%3D%27.5%27%20stroke-width%3D%274%27%2F%3E%3Cpath%20d%3D%27M36%2010V22C36%2032%204%2032%204%2048V268C4%20288%2016%20298%2036%20298H64C84%20298%2096%20288%2096%20268V48C96%2032%2064%2032%2064%2022V10Z%27%20fill%3D%27none%27%20stroke%3D%27%237fcbff%27%20stroke-width%3D%273%27%20stroke-linejoin%3D%27round%27%2F%3E%3Cpath%20d%3D%27M36%2010V22C36%2032%204%2032%204%2048V268C4%20288%2016%20298%2036%20298H64C84%20298%2096%20288%2096%20268V48C96%2032%2064%2032%2064%2022V10Z%27%20fill%3D%27none%27%20stroke%3D%27%23dff3ff%27%20stroke-opacity%3D%27.55%27%20stroke-width%3D%271%27%20stroke-linejoin%3D%27round%27%20transform%3D%27translate%280%20-.4%29%27%2F%3E%3Cpath%20d%3D%27M13%20276C16%20286%2024%20289.5%2038%20289.5H62C76%20289.5%2084%20286%2087%20276%27%20fill%3D%27none%27%20stroke%3D%27%23bfe6ff%27%20stroke-opacity%3D%27.75%27%20stroke-width%3D%273%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M13.5%2064V250%27%20fill%3D%27none%27%20stroke%3D%27%23fff%27%20stroke-opacity%3D%27.28%27%20stroke-width%3D%273%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M86%2090V230%27%20fill%3D%27none%27%20stroke%3D%27%23fff%27%20stroke-opacity%3D%27.18%27%20stroke-width%3D%272.4%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M42%2014V26%27%20fill%3D%27none%27%20stroke%3D%27%23fff%27%20stroke-opacity%3D%27.6%27%20stroke-width%3D%272.4%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E");
 }
 
 .ws-bottle.is-selected .ws-glass {
-  filter: drop-shadow(0 0 3px var(--ws-select)) drop-shadow(0 0 12px rgba(120, 160, 255, 0.85));
+  filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 7px #7cc8ff) drop-shadow(0 0 16px rgba(110, 170, 255, 0.85));
 }
 
 .ws-bottle.is-done .ws-glass {
@@ -202,10 +212,16 @@
 .ws-liquid {
   position: absolute;
   inset: 0;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20260%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M40%206V54C40%2078%2011%2082%2011%20114V222C11%20240%2022%20251%2040%20251H60C78%20251%2089%20240%2089%20222V114C89%2082%2060%2078%2060%2054V6Z%27%20fill%3D%27%23000%27%2F%3E%3C%2Fsvg%3E") center / 100% 100% no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20260%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M40%206V54C40%2078%2011%2082%2011%20114V222C11%20240%2022%20251%2040%20251H60C78%20251%2089%20240%2089%20222V114C89%2082%2060%2078%2060%2054V6Z%27%20fill%3D%27%23000%27%2F%3E%3C%2Fsvg%3E") center / 100% 100% no-repeat;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20300%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M40%2010V24C40%2036%209%2036%209%2052V266C9%20282%2020%20292%2038%20292H62C80%20292%2091%20282%2091%20266V52C91%2036%2060%2036%2060%2024V10Z%27%20fill%3D%27%23000%27%2F%3E%3C%2Fsvg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20300%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M40%2010V24C40%2036%209%2036%209%2052V266C9%20282%2020%20292%2038%20292H62C80%20292%2091%20282%2091%20266V52C91%2036%2060%2036%2060%2024V10Z%27%20fill%3D%27%23000%27%2F%3E%3C%2Fsvg%3E") center / 100% 100% no-repeat;
 }
 
+.ws-fluid {
+  position: absolute;
+  inset: 0;
+}
+
+/* Each layer is a cylinder slice: flat colour, a vertical specular band on the left, dark right edge. */
 .ws-seg,
 .ws-drain {
   position: absolute;
@@ -213,8 +229,8 @@
   right: 0;
   bottom: calc(var(--b) + var(--i) * var(--u));
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 38%, rgba(0, 0, 40, 0.16)),
-    linear-gradient(90deg, var(--shade) 0%, var(--base) 22%, var(--base) 58%, color-mix(in srgb, var(--base) 68%, var(--light)) 74%, var(--base) 86%, var(--shade) 100%);
+    linear-gradient(90deg, rgba(0, 0, 30, 0.28) 0%, rgba(0, 0, 30, 0) 9%, rgba(255, 255, 255, 0) 11%, rgba(255, 255, 255, 0.62) 17%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0) 31%, rgba(255, 255, 255, 0) 78%, rgba(255, 255, 255, 0.22) 84%, rgba(255, 255, 255, 0) 88%, rgba(0, 0, 30, 0.34) 100%),
+    var(--base);
 }
 
 .ws-seg {
@@ -224,25 +240,32 @@
   color: var(--ink);
 }
 
-/* Glossy ellipse on the surface of each layer: its upper half is covered by the layer above. */
-.ws-seg.is-run-top::before {
+/* The bottom of a layer is the front edge of its elliptical base: a downward arc over the layer below. */
+.ws-seg.is-run-bottom:not(.is-bottom) {
+  bottom: calc(var(--b) + var(--i) * var(--u) - var(--eh));
+  height: calc(var(--u) + var(--eh) + 1px);
+  border-radius: 0 0 50% 50% / 0 0 var(--eh) var(--eh);
+}
+
+/* The surface of the liquid, seen slightly from above: a lighter ellipse. */
+.ws-seg.is-top::before {
   content: '';
   position: absolute;
-  top: calc(var(--bw) * -0.12);
+  top: calc(var(--eh) * -1);
   left: 0;
   right: 0;
-  height: calc(var(--bw) * 0.24);
+  height: calc(var(--eh) * 2);
   border-radius: 50%;
   background:
-    radial-gradient(55% 50% at 36% 40%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 72%),
-    color-mix(in srgb, var(--light) 75%, var(--base));
-  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--shade) 60%, transparent);
+    radial-gradient(50% 45% at 30% 42%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 75%),
+    color-mix(in srgb, var(--base) 55%, #fff);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--base) 70%, #fff);
 }
 
 .ws-sym {
   position: relative;
   z-index: 1;
-  width: calc(var(--bw) * 0.3);
+  width: calc(var(--bw) * 0.34);
   height: auto;
   aspect-ratio: 1;
   filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.18));
@@ -265,7 +288,7 @@
 .ws-drain {
   height: calc(var(--n) * var(--u));
   transform-origin: 50% 100%;
-  animation: ws-drain 400ms 200ms var(--ease-in-out) both;
+  animation: ws-drain 300ms 260ms var(--ease-in-out) both;
 }
 
 @keyframes ws-drain {
@@ -277,19 +300,21 @@
   }
 }
 
-/* Thick glass lip around the mouth of the neck. */
+/* Thick glass ring around the mouth: an ellipse seen slightly from above. */
 .ws-rim {
   position: absolute;
   z-index: 3;
-  top: -1px;
-  left: 27%;
-  right: 27%;
-  height: max(5px, calc(var(--bw) * 0.17));
-  border-radius: 45% 45% 40% 40% / 70% 70% 50% 50%;
-  background: linear-gradient(180deg, #ffffff, #d3dbff 45%, #8d9bea);
+  top: calc(var(--bw) * -0.05);
+  left: 29%;
+  right: 29%;
+  height: calc(var(--bw) * 0.2);
+  box-sizing: border-box;
+  border: max(2px, calc(var(--bw) * 0.05)) solid #aedcff;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, #05031f, #1b1670);
   box-shadow:
-    0 2px 3px rgba(3, 0, 28, 0.4),
-    inset 0 1px 0 #fff;
+    0 1px 2px rgba(2, 0, 30, 0.6),
+    0 0 6px rgba(110, 190, 255, 0.55);
   pointer-events: none;
 }
 
@@ -297,16 +322,18 @@
 .ws-cap {
   position: absolute;
   z-index: 4;
-  top: calc(var(--bw) * -0.24);
-  left: 30%;
-  right: 30%;
-  height: calc(var(--bw) * 0.4);
-  border-radius: calc(var(--bw) * 0.08) calc(var(--bw) * 0.08) 3px 3px;
-  clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
+  top: calc(var(--bw) * -0.3);
+  left: 31%;
+  right: 31%;
+  height: calc(var(--bw) * 0.48);
+  clip-path: polygon(2% 0, 98% 0, 90% 100%, 10% 100%);
+  border-radius: calc(var(--bw) * 0.06);
   background:
-    radial-gradient(circle at 25% 35%, rgba(90, 50, 20, 0.45) 0 7%, transparent 9%),
-    radial-gradient(circle at 70% 60%, rgba(90, 50, 20, 0.4) 0 6%, transparent 8%),
-    linear-gradient(90deg, #a8672f, #e0aa6c 38%, #cf9555 62%, #8a5223);
+    linear-gradient(180deg, #f6d27a 0 22%, #b8862a 22% 30%, transparent 30%),
+    radial-gradient(circle at 28% 55%, rgba(110, 60, 20, 0.5) 0 6%, transparent 8%),
+    radial-gradient(circle at 70% 75%, rgba(110, 60, 20, 0.45) 0 5%, transparent 7%),
+    linear-gradient(90deg, #a8672f, #e6b274 36%, #d09a5a 62%, #8a5223);
+  filter: drop-shadow(0 0 5px rgba(255, 200, 80, 0.8));
   animation: ws-cap-in 340ms var(--ease-spring) both;
   pointer-events: none;
 }
@@ -325,7 +352,7 @@
 .ws-hint-badge {
   position: absolute;
   z-index: 6;
-  top: -22px;
+  top: calc(var(--bw) * -0.5 - 12px);
   left: 50%;
   display: grid;
   place-items: center;
@@ -339,6 +366,7 @@
   pointer-events: none;
 }
 
+
 .ws-num {
   display: none;
   height: 18px;
@@ -349,7 +377,7 @@
 }
 
 /* ───────────── Pour animation ───────────── */
-/* The source lifts, tilts over the target (mouth down), pours a coloured stream, then settles back. */
+/* The source lifts, tilts over the target (mouth down) and pours a thin stream; the liquid inside keeps a level surface. */
 .ws-bottle.is-pouring {
   z-index: 5;
   will-change: transform;
@@ -363,7 +391,7 @@
     transform: translate(0, 0) rotate(0deg);
   }
   12% {
-    transform: translate(0, calc(var(--bh) * -0.16)) rotate(0deg);
+    transform: translate(0, calc(var(--bh) * -0.12)) rotate(0deg);
   }
   32%,
   70% {
@@ -379,7 +407,7 @@
     transform: translate(0, 0) rotate(0deg);
   }
   12% {
-    transform: translate(0, calc(var(--bh) * -0.16)) rotate(0deg);
+    transform: translate(0, calc(var(--bh) * -0.12)) rotate(0deg);
   }
   32%,
   70% {
@@ -390,33 +418,125 @@
   }
 }
 
+/* While pouring, the liquid is re-parented to a group that counter-rotates, so layers stay horizontal. */
+.ws-bottle.is-pouring .ws-fluid {
+  inset: auto;
+  left: 50%;
+  top: calc(var(--bh) * 0.973);
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  animation-duration: 780ms;
+  animation-timing-function: var(--ease-in-out);
+  animation-fill-mode: both;
+}
+
+@keyframes ws-fluid-a {
+  0%,
+  12% {
+    transform: translate(0, 0) rotate(0deg) scale(1, 1);
+  }
+  32%,
+  70% {
+    transform: translate(var(--fx), var(--fy)) rotate(var(--fr)) scale(1, 0.33);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(1, 1);
+  }
+}
+
+@keyframes ws-fluid-b {
+  0%,
+  12% {
+    transform: translate(0, 0) rotate(0deg) scale(1, 1);
+  }
+  32%,
+  70% {
+    transform: translate(var(--fx), var(--fy)) rotate(var(--fr)) scale(1, 0.33);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(1, 1);
+  }
+}
+
+.ws-bottle.is-pouring .ws-seg,
+.ws-bottle.is-pouring .ws-drain {
+  left: calc(var(--bw) * -4);
+  right: auto;
+  width: calc(var(--bw) * 8);
+  bottom: calc(var(--i) * var(--uh));
+  height: calc(var(--uh) + 1px);
+  border-radius: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 40%, rgba(0, 0, 30, 0.22)),
+    var(--base);
+}
+
+.ws-bottle.is-pouring .ws-drain {
+  height: calc(var(--n) * var(--uh));
+}
+
+.ws-bottle.is-pouring .ws-seg.is-top {
+  box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.5);
+}
+
+.ws-bottle.is-pouring .ws-seg::before {
+  display: none;
+}
+
 .ws-stream {
-  --sw: max(4px, calc(var(--bw) * 0.14));
+  --sw: max(3px, calc(var(--bw) * 0.075));
   position: absolute;
   z-index: 4;
-  top: calc(var(--bw) * -0.33);
-  left: calc(50% - var(--dir) * var(--bw) * 0.1 - var(--sw) / 2);
+  top: calc(var(--bw) * -0.36);
+  left: calc(50% - var(--dir) * var(--bw) * 0.11 - var(--sw) / 2);
   width: var(--sw);
-  height: calc(var(--bh) * (0.965 - 0.149 * var(--fill)) + var(--bw) * 0.33);
+  height: calc(var(--bh) * (0.973 - 0.2 * var(--fill)) + var(--bw) * 0.36);
   border-radius: var(--radius-full);
-  background: linear-gradient(90deg, var(--shade), var(--base) 40%, color-mix(in srgb, var(--base) 60%, white) 62%, var(--shade));
+  background: linear-gradient(90deg, var(--shade), var(--base) 35%, color-mix(in srgb, var(--base) 55%, white) 55%, var(--base));
   transform-origin: 50% 0;
-  animation: ws-stream 640ms 190ms var(--ease-out) both;
+  animation: ws-stream 520ms 250ms var(--ease-out) both;
   pointer-events: none;
 }
 
-/* Ripple where the stream lands. */
+/* Splash droplets where the stream lands. */
+.ws-stream::before,
 .ws-stream::after {
   content: '';
   position: absolute;
   left: 50%;
-  bottom: calc(var(--bw) * -0.07);
-  width: calc(var(--bw) * 0.5);
-  height: calc(var(--bw) * 0.14);
-  margin-left: calc(var(--bw) * -0.25);
+  bottom: calc(var(--bw) * -0.02);
+  width: calc(var(--bw) * 0.7);
+  height: calc(var(--bw) * 0.4);
+  margin-left: calc(var(--bw) * -0.35);
+  background:
+    radial-gradient(circle at 12% 70%, var(--base) 0 2.2px, transparent 2.8px),
+    radial-gradient(circle at 26% 22%, var(--base) 0 1.8px, transparent 2.4px),
+    radial-gradient(circle at 80% 30%, var(--base) 0 2.2px, transparent 2.8px),
+    radial-gradient(circle at 92% 75%, var(--base) 0 1.6px, transparent 2.2px);
+  animation: ws-splash 360ms ease-in-out infinite alternate;
+}
+
+.ws-stream::after {
+  bottom: calc(var(--bw) * -0.1);
+  height: calc(var(--bw) * 0.2);
+  margin-left: calc(var(--bw) * -0.32);
+  width: calc(var(--bw) * 0.64);
   border-radius: 50%;
-  background: color-mix(in srgb, var(--base) 55%, white);
-  opacity: 0.8;
+  background: color-mix(in srgb, var(--base) 50%, white);
+  opacity: 0.55;
+  animation: none;
+}
+
+@keyframes ws-splash {
+  from {
+    transform: translateY(2px) scale(0.85);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(-4px) scale(1.05);
+    opacity: 1;
+  }
 }
 
 @keyframes ws-stream {
@@ -424,17 +544,39 @@
     transform: scaleY(0);
     opacity: 1;
   }
-  18% {
+  14% {
     transform: scaleY(1);
     opacity: 1;
   }
-  78% {
+  80% {
     transform: scaleY(1);
     opacity: 1;
   }
   100% {
     transform: scaleY(1);
     opacity: 0;
+  }
+}
+
+/* Bubbles rising in the bottle that receives the liquid. */
+.ws-bubbles {
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: var(--b);
+  height: calc(var(--fill) * var(--u));
+  background:
+    radial-gradient(circle at 30% 80%, rgba(255, 255, 255, 0.5) 0 1.6px, transparent 2.2px) 0 0 / 100% 37px,
+    radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.45) 0 1.2px, transparent 1.8px) 0 11px / 100% 53px;
+  animation: ws-bubbles 700ms linear infinite;
+  pointer-events: none;
+}
+
+@keyframes ws-bubbles {
+  to {
+    background-position:
+      0 -37px,
+      0 -53px;
   }
 }
 
@@ -489,7 +631,9 @@
     transition: none;
   }
 
-  .ws-cap {
+  .ws-cap,
+  .ws-bubbles,
+  .ws-stream::before {
     animation: none;
   }
 }
