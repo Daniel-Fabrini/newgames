@@ -20,8 +20,8 @@ for (x, y, m) in [(-0.7, 0.9, pink), (0.7, 0.9, cyan), (0, 0.1, pink)]:
 for sx in (-1, 1):
     objs.append(box((0.9, 0.2, 0.28), rail, loc=(sx * 0.62, -1.55, 0.2), rot=(0, 0, sx * -28), bevel=0.06))
 objs.append(cylinder(0.22, 0.05, glow, loc=(0, 1.55, 0.14), bevel=0.01))
-g = parent(objs, rot=(58, 0, 12))
-sphere(0.42, steel, loc=(0.3, -1.9, 1.5))
+g = parent(objs, rot=(52, 0, 10))
+sphere(0.38, steel, loc=(1.5, -2.5, 0.9))
 podium('#c9971c', 4.2, 0.5, z=-1.9)
-fit(0.62, 0.5)
+fit(0.9, 0.3)
 render('pinball')
