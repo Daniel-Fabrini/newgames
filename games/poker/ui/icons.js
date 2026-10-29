@@ -1,0 +1,37 @@
+// Inline SVG icons (24x24, currentColor) for the poker UI.
+const s = (inner, extra = '') => `<svg class="pk-ico" viewBox="0 0 24 24" aria-hidden="true" ${extra}>${inner}</svg>`;
+const st = (d, w = 2) => `<path d="${d}" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+export const ICON = {
+  log: s(st('M6 4h12v16H6zM9 9h6M9 13h6M9 17h3')),
+  gear: s('<circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="2"/>' + st('M12 2.8v2.6M12 18.6v2.6M4.6 7.2l2.2 1.3M17.2 15.5l2.2 1.3M4.6 16.8l2.2-1.3M17.2 8.5l2.2-1.3')),
+  x: s(st('M6.5 6.5l11 11M17.5 6.5l-11 11', 2.4)),
+  ff: s('<path d="M4 6l8 6-8 6zM12 6l8 6-8 6z" fill="currentColor"/>'),
+  next: s('<path d="M8 5l8 7-8 7z" fill="currentColor"/>'),
+  play: s('<path d="M7 4.8v14.4l12-7.2z" fill="currentColor"/>'),
+  check: s(st('M5 12.5l4.5 4.5L19 7.5', 2.8)),
+  lock: s('<rect x="5" y="10.5" width="14" height="10" rx="2.5" fill="currentColor"/>' + st('M8 10.5V8a4 4 0 0 1 8 0v2.5')),
+  star: s('<path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8 6.6 19.7l1.1-6.1L3.2 9.4l6.1-.8z" fill="currentColor"/>'),
+  trophy: s('<path d="M7 3h10v2h3v2a4.5 4.5 0 0 1-4.2 4.5A5.5 5.5 0 0 1 13 15.8V18h3v3H8v-3h3v-2.2A5.5 5.5 0 0 1 8.2 11.5 4.5 4.5 0 0 1 4 7V5h3z" fill="currentColor"/>'),
+  crown: s('<path d="M3 8l4.5 3.5L12 4l4.5 7.5L21 8l-2 11H5z" fill="currentColor"/>'),
+  user: s('<circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 21c.7-4.2 4-6.4 8-6.4s7.300 2.200 8 6.400z" fill="currentColor"/>'),
+  users: s('<circle cx="8.500" cy="8.500" r="3.400" fill="currentColor"/><circle cx="16.600" cy="9.300" r="2.800" fill="currentColor" opacity=".75"/><path d="M2 20c.5-3.800 3.300-5.800 6.500-5.800S14.500 16.200 15 20zM15.500 14.600c3-.3 5.800 1.300 6.500 5.400h-5" fill="currentColor"/>'),
+  map: s(st('M3 6.5l6-2.500 6 2.500 6-2.500v13.500l-6 2.500-6-2.500-6 2.500zM9 4v13.500M15 6.500V20')),
+  chart: s(st('M5 19V11M12 19V5M19 19v-6', 2.8)),
+  cards: s('<rect x="3.500" y="5" width="10" height="14" rx="2" transform="rotate(-10 8.500 12)" fill="none" stroke="currentColor" stroke-width="2"/><rect x="10.500" y="5" width="10" height="14" rx="2" transform="rotate(8 15.500 12)" fill="currentColor"/>'),
+  chips: s('<ellipse cx="12" cy="8" rx="8" ry="3.600" fill="currentColor"/><path d="M4 11v3c0 2 3.600 3.600 8 3.600s8-1.600 8-3.600v-3c0 2-3.600 3.600-8 3.600S4 13 4 11z" fill="currentColor" opacity=".7"/>'),
+  help: s('<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>' + st('M9.600 9.600a2.500 2.500 0 1 1 3.600 2.200c-.8.400-1.200.900-1.200 1.700') + '<circle cx="12" cy="17" r="1.200" fill="currentColor"/>'),
+  edit: s(st('M4 20l4.200-1 10-10a2.200 2.200 0 0 0-3.200-3.200l-10 10zM13.500 7.500l3 3')),
+  target: s('<circle cx="12" cy="12" r="8.500" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.500" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="1.500" fill="currentColor"/>'),
+  swords: s(st('M5 4l9 9M4 8l4 4M19 4l-9 9M20 8l-4 4M7 17l-3 3M17 17l3 3')),
+  book: s(st('M5 4.500A1.500 1.500 0 0 1 6.500 3H19v15H6.500A1.500 1.500 0 0 0 5 19.500zM5 19.500A1.500 1.500 0 0 0 6.500 21H19v-3')),
+  flame: s('<path d="M12 2.500c1 3.500 5.500 5.700 5.500 11a5.500 5.500 0 0 1-11 0c0-2.200 1-3.700 2-4.700.2 1.300.8 2 1.500 2.200C9.500 8 10.500 5 12 2.500z" fill="currentColor"/>'),
+  coin: s('<circle cx="12" cy="12" r="8.500" fill="currentColor"/><circle cx="12" cy="12" r="5.600" fill="none" stroke="#0008" stroke-width="1.500"/>'),
+  arrow: s(st('M5 12h14M13 6l6 6-6 6', 2.400)),
+  back: s(st('M14.500 5.500L8 12l6.500 6.500', 2.600)),
+  swap: s(st('M7 7h11l-3-3M17 17H6l3 3', 2.200)),
+  pause: s('<rect x="6" y="5" width="4" height="14" rx="1.200" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1.200" fill="currentColor"/>'),
+  bolt: s('<path d="M13 2L5 13.500h5.500L9.500 22 19 10h-5.500z" fill="currentColor"/>'),
+  shield: s('<path d="M12 2.500l8 3v6c0 5-3.500 8.500-8 10-4.500-1.500-8-5-8-10v-6z" fill="currentColor"/>'),
+  skull: s('<path d="M12 3c4.500 0 8 3 8 7.500 0 2.300-1 4-2.500 5V19a1.500 1.500 0 0 1-1.500 1.500h-1V18h-2v2.500h-2V18h-2v2.500H8A1.500 1.500 0 0 1 6.500 19v-3.500C5 14.500 4 12.800 4 10.500 4 6 7.500 3 12 3z" fill="currentColor"/><circle cx="9" cy="11" r="1.800" fill="#0a0a0c"/><circle cx="15" cy="11" r="1.800" fill="#0a0a0c"/>'),
+};
