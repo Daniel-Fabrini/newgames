@@ -301,7 +301,8 @@ export class Sim {
       while (take.length > 1) take.pop();
     }
     res.links = take.map((c) => ({ id: c.n.id, x: c.n.x, y: c.n.y, d: c.d }));
-    if (!T.pin && res.links.length === 0) {
+    if (res.links.length === 0) {
+      // every piece (pins included) must hang on the existing structure, otherwise pins could be dropped anywhere as free anchors
       res.reason = 'far';
       return res;
     }

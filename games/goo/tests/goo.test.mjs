@@ -115,9 +115,10 @@ test('attach selection: nearest nodes, reach limit, spacing, terrain blocking, l
   assert.equal(s.preview('goo', 100, 606).reason, 'close');
   assert.equal(s.preview('goo', 100, 660).reason, 'blocked');
   assert.equal(s.preview('stake', 100, 300).reason, 'noground');
-  const sp = s.preview('stake', -100, 640);
+  const sp = s.preview('stake', 205, 630);
   assert.ok(sp.valid, 'stake snaps onto the terrain surface');
   assert.ok(Math.abs(sp.y - 620) < 14);
+  assert.equal(s.preview('stake', 400, 640).valid, false, 'a pin far from the structure is rejected');
   // line of sight: a slab between the goo and the anchors blocks the strands
   const open = new Sim(arena({ anchors: [[100, 612], [160, 612]] }));
   assert.equal(open.preview('goo', 130, 500).valid, true);
