@@ -36,13 +36,13 @@ def rod(a, bb, rad, mat):
 
 # body: trench coat
 ell(1, (1.55, 1.0, 1.25), coat, (0, 0.1, 0.55))
-ell(1, (0.55, 0.35, 0.75), shirt, (0, -0.8, 1.3))
+ell(1, (0.42, 0.3, 0.5), shirt, (0, -0.85, 1.4))
 # lapels
 for s in (-1, 1):
     ell(1, (0.38, 0.22, 0.8), coat2, (s * 0.55, -0.82, 1.2), rot=(0, s * 22, s * -8))
 # tie
-ell(1, (0.17, 0.12, 0.5), band, (0, -0.95, 1.0))
-ell(1, (0.22, 0.14, 0.15), band, (0, -0.97, 1.5))
+ell(1, (0.12, 0.09, 0.38), band, (0, -1.1, 1.15))
+ell(1, (0.17, 0.1, 0.1), band, (0, -1.12, 1.55))
 # head
 ell(1.15, (1.0, 0.95, 1.02), skin, (0, 0, 2.75))
 # ears
@@ -67,8 +67,8 @@ for s in (-1, 1):
 rod((-0.1, -1.08, 2.85), (0.1, -1.08, 2.85), 0.03, gold)
 # nose + smile
 ell(0.16, (1, 0.9, 0.9), glossy('#ffa882', 0.3, 0.4, 'nose'), (0, -1.12, 2.55))
-ell(0.28, (1.2, 0.3, 0.17), black, (0, -1.04, 2.1))
-ell(0.3, (1.35, 0.4, 0.18), skin, (0, -1.08, 2.19))
+ell(0.26, (1.1, 0.35, 0.8), black, (0, -1.07, 2.12))
+ell(0.14, (1.3, 0.3, 0.45), glossy('#ff6a7a', 0.3, 0.4, 'tongue'), (0, -1.12, 2.02))
 # fedora
 cone(0.98, 0.78, 0.8, hat, loc=(0, 0.05, 3.9))
 cylinder(0.99, 0.18, band, loc=(0, 0.05, 3.62), bevel=0.04, seg=64)
@@ -85,8 +85,10 @@ for i, (dx, dz) in enumerate([(-0.12, 0.18), (0.0, 0.26), (0.12, 0.2)]):
     ell(0.12, (1, 1, 1.2), skin, (2.62 + dx * 1.3, -1.98, 0.7 + dz))
 # glint on lens
 ell(0.1, (0.5, 0.2, 2.2), white, (lens_c[0] - 0.45, -1.78, lens_c[2] + 0.3), rot=(0, 35, 0))
+K = 0.8
 for o in bpy.data.objects:
-    if o.parent is None and o.type in ('MESH', 'EMPTY'):
-        o.location.z += 0.1
+    if o.parent is None and o.type in ('MESH', 'EMPTY', 'CURVE', 'FONT'):
+        o.location = (o.location[0] * K - 0.2, o.location[1] * K, o.location[2] * K + 0.05)
+        o.scale = (o.scale[0] * K, o.scale[1] * K, o.scale[2] * K)
 shadow_catcher(0.0)
 render('waldo')
