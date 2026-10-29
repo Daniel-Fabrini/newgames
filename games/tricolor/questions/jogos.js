@@ -370,36 +370,14 @@ export default [
   },
   {
     "id": "jogos-017",
-    "q": "Qual foi o placar do jogo de volta da final da Libertadores de 2005, no Morumbi?",
-    "a": [
-      "São Paulo 2 x 0 Atlético Paranaense",
-      "São Paulo 4 x 0 Atlético Paranaense",
-      "São Paulo 3 x 1 Atlético Paranaense",
-      "São Paulo 3 x 0 Atlético Paranaense"
-    ],
-    "c": 1,
-    "cat": "jogos",
-    "d": 2,
-    "exp": "Em 14 de julho de 2005, com gols de Amoroso, Fabão, Luizão e Tardelli, o São Paulo confirmou o título.",
-    "src": [
-      {
-        "n": "Wikipédia (pt) — Copa Libertadores da América de 2005",
-        "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2005"
-      }
-    ],
-    "when": "2005",
-    "ok": true
-  },
-  {
-    "id": "jogos-018",
     "q": "Qual jogador abriu o placar do 4 a 0 sobre o Atlético Paranaense na final da Libertadores de 2005?",
     "a": [
       "Luizão",
-      "Tardelli",
       "Amoroso",
+      "Tardelli",
       "Fabão"
     ],
-    "c": 2,
+    "c": 1,
     "cat": "jogos",
     "d": 3,
     "exp": "Amoroso marcou aos 16 minutos do primeiro tempo; Fabão, Luizão e Tardelli completaram a goleada.",
@@ -413,15 +391,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-019",
+    "id": "jogos-018",
     "q": "Em qual estádio foi disputado o primeiro jogo da final da Libertadores de 2005, empatado em 1 a 1?",
     "a": [
       "Couto Pereira, em Curitiba",
       "Pacaembu, em São Paulo",
-      "Mineirão, em Belo Horizonte",
-      "Beira-Rio, em Porto Alegre"
+      "Beira-Rio, em Porto Alegre",
+      "Mineirão, em Belo Horizonte"
     ],
-    "c": 3,
+    "c": 2,
     "cat": "jogos",
     "d": 1,
     "exp": "O Atlético Paranaense mandou o jogo de ida no Beira-Rio, em 6 de julho de 2005, e empatou em 1 a 1 com o São Paulo.",
@@ -435,15 +413,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-020",
+    "id": "jogos-019",
     "q": "Que time argentino o São Paulo eliminou nas semifinais da Libertadores de 2005?",
     "a": [
       "Boca Juniors",
-      "River Plate",
       "Racing",
-      "Vélez Sarsfield"
+      "Vélez Sarsfield",
+      "River Plate"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "jogos",
     "d": 2,
     "exp": "O São Paulo passou pelo River Plate por 5 a 2 no agregado (2 a 0 e 3 a 2).",
@@ -457,81 +435,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-021",
-    "q": "Qual rival paulista o São Paulo eliminou nas oitavas de final da Libertadores de 2005?",
-    "a": [
-      "Corinthians",
-      "Santos",
-      "Palmeiras",
-      "Ponte Preta"
-    ],
-    "c": 2,
-    "cat": "jogos",
-    "d": 2,
-    "exp": "O São Paulo venceu o Palmeiras por 3 a 0 no agregado (1 a 0 e 2 a 0).",
-    "src": [
-      {
-        "n": "Wikipedia (en) — 2005 Copa Libertadores",
-        "u": "https://en.wikipedia.org/wiki/2005_Copa_Libertadores"
-      }
-    ],
-    "when": "2005",
-    "ok": true
-  },
-  {
-    "id": "jogos-022",
-    "q": "Que time mexicano o São Paulo eliminou nas quartas de final da Libertadores de 2005?",
-    "a": [
-      "Chivas Guadalajara",
-      "América",
-      "Pumas",
-      "Tigres UANL"
-    ],
-    "c": 3,
-    "cat": "jogos",
-    "d": 4,
-    "exp": "O São Paulo passou pelos Tigres por 5 a 2 no agregado (4 a 0 e 1 a 2).",
-    "src": [
-      {
-        "n": "Wikipedia (en) — 2005 Copa Libertadores",
-        "u": "https://en.wikipedia.org/wiki/2005_Copa_Libertadores"
-      }
-    ],
-    "when": "2005",
-    "ok": true
-  },
-  {
-    "id": "jogos-023",
-    "q": "Quem derrotou o São Paulo na final da Libertadores de 2006?",
-    "a": [
-      "Internacional",
-      "Grêmio",
-      "Boca Juniors",
-      "River Plate"
-    ],
-    "c": 0,
-    "cat": "jogos",
-    "d": 1,
-    "exp": "O Internacional venceu por 2 a 1 no Morumbi e empatou por 2 a 2 no Beira-Rio, levando o título por 4 a 3 no agregado.",
-    "src": [
-      {
-        "n": "Wikipédia (pt) — Copa Libertadores da América de 2006",
-        "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2006"
-      }
-    ],
-    "when": "2006",
-    "ok": true
-  },
-  {
-    "id": "jogos-024",
+    "id": "jogos-020",
     "q": "Qual foi o placar do jogo de volta da final da Libertadores de 2006, no Beira-Rio?",
     "a": [
       "Internacional 1 x 0 São Paulo",
-      "Internacional 3 x 1 São Paulo",
       "Internacional 2 x 2 São Paulo",
+      "Internacional 3 x 1 São Paulo",
       "Internacional 1 x 1 São Paulo"
     ],
-    "c": 2,
+    "c": 1,
     "cat": "jogos",
     "d": 3,
     "exp": "Em 16 de agosto de 2006, Fabão e Lenílson marcaram para o São Paulo, mas o 4 a 3 no agregado deu o título ao Inter.",
@@ -545,15 +457,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-025",
+    "id": "jogos-021",
     "q": "Qual time espanhol o São Paulo derrotou na final do Mundial Interclubes de 1992?",
     "a": [
       "Real Madrid",
       "Atlético de Madrid",
-      "Valencia",
-      "Barcelona"
+      "Barcelona",
+      "Valencia"
     ],
-    "c": 3,
+    "c": 2,
     "cat": "jogos",
     "d": 1,
     "exp": "Em 13 de dezembro de 1992, em Tóquio, o São Paulo venceu o Barcelona de Johan Cruyff por 2 a 1.",
@@ -567,15 +479,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-026",
+    "id": "jogos-022",
     "q": "Qual jogador marcou os dois gols do São Paulo na final do Mundial de 1992 contra o Barcelona?",
     "a": [
-      "Raí",
       "Palhinha",
       "Müller",
-      "Cafu"
+      "Cafu",
+      "Raí"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "jogos",
     "d": 2,
     "exp": "Raí fez os dois gols da vitória por 2 a 1 e foi eleito o melhor em campo.",
@@ -589,15 +501,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-027",
+    "id": "jogos-023",
     "q": "Quem marcou o gol do Barcelona na final do Mundial de 1992, aos 12 minutos?",
     "a": [
-      "Romário",
       "Stoichkov",
+      "Romário",
       "Koeman",
       "Guardiola"
     ],
-    "c": 1,
+    "c": 0,
     "cat": "jogos",
     "d": 4,
     "exp": "O búlgaro Hristo Stoichkov abriu o placar para o Barcelona, mas o São Paulo virou.",
@@ -611,15 +523,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-028",
+    "id": "jogos-024",
     "q": "Quem treinava o Barcelona na final do Mundial de 1992 contra o São Paulo?",
     "a": [
       "Carlos Alberto Parreira",
       "Bobby Robson",
-      "Louis van Gaal",
-      "Johan Cruyff"
+      "Johan Cruyff",
+      "Louis van Gaal"
     ],
-    "c": 3,
+    "c": 2,
     "cat": "jogos",
     "d": 3,
     "exp": "O técnico do Barcelona era Johan Cruyff; no São Paulo, Telê Santana.",
@@ -633,15 +545,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-029",
+    "id": "jogos-025",
     "q": "Qual time italiano o São Paulo derrotou na final do Mundial Interclubes de 1993?",
     "a": [
-      "Milan",
       "Juventus",
       "Inter de Milão",
-      "Napoli"
+      "Napoli",
+      "Milan"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "jogos",
     "d": 1,
     "exp": "Em 12 de dezembro de 1993, em Tóquio, o São Paulo venceu o Milan por 3 a 2 e foi bicampeão mundial.",
@@ -655,15 +567,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-030",
+    "id": "jogos-026",
     "q": "Qual foi o placar da final do Mundial de 1993 entre São Paulo e Milan?",
     "a": [
-      "2 a 1",
       "3 a 2",
+      "2 a 1",
       "4 a 3",
       "2 a 0"
     ],
-    "c": 1,
+    "c": 0,
     "cat": "jogos",
     "d": 4,
     "exp": "O São Paulo venceu por 3 a 2, com gols de Palhinha, Cerezo e Müller; Massaro e Papin marcaram para o Milan.",
@@ -677,37 +589,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-031",
-    "q": "Quem marcou o gol da vitória do São Paulo sobre o Milan na final do Mundial de 1993, perto do fim do jogo?",
-    "a": [
-      "Raí",
-      "Palhinha",
-      "Müller",
-      "Cerezo"
-    ],
-    "c": 2,
-    "cat": "jogos",
-    "d": 3,
-    "exp": "Müller marcou aos 40 minutos da etapa final (as fontes divergem em poucos minutos) e garantiu o 3 a 2.",
-    "src": [
-      {
-        "n": "Goal — São Paulo x Milan 1993: escalações, gols e tudo sobre o jogo",
-        "u": "https://www.goal.com/br/not%C3%ADcias/sao-paulo-x-milan-1993-escalacoes-gols-e-tudo-sobre-o-jogo-do-penta-mundial/f88ipzce3axb1v7bj5xt8407g"
-      }
-    ],
-    "when": "1993",
-    "ok": true
-  },
-  {
-    "id": "jogos-032",
+    "id": "jogos-027",
     "q": "Quem abriu o placar para o São Paulo na final do Mundial de 1993, aos 19 minutos do primeiro tempo?",
     "a": [
-      "Palhinha",
       "Raí",
+      "Palhinha",
       "Müller",
       "Toninho Cerezo"
     ],
-    "c": 0,
+    "c": 1,
     "cat": "jogos",
     "d": 4,
     "exp": "Palhinha abriu o placar; depois vieram os gols de Cerezo e Müller.",
@@ -721,15 +611,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-033",
+    "id": "jogos-028",
     "q": "Por que o Milan disputou a Copa Intercontinental de 1993 contra o São Paulo?",
     "a": [
       "O Barcelona recusou a vaga",
-      "O Olympique de Marselha foi suspenso pela Uefa",
-      "O Real Madrid foi desclassificado por problemas de calendário",
-      "A Juventus sofreu punição da Fifa"
+      "O Real Madrid desistiu por causa do calendário",
+      "A Juventus sofreu punição da Fifa",
+      "O Olympique de Marselha foi suspenso pela Uefa"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "jogos",
     "d": 4,
     "exp": "O Marselha foi suspenso pela Uefa após escândalo de manipulação de resultados e o Milan ocupou a vaga na decisão contra o São Paulo.",
@@ -743,15 +633,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-034",
+    "id": "jogos-029",
     "q": "Em que estádio e cidade foi disputada a final do Mundial de Clubes de 2005, vencida pelo São Paulo?",
     "a": [
+      "Estádio Internacional de Yokohama",
       "Estádio Nacional de Tóquio",
       "Estádio Olímpico de Osaka",
-      "Estádio Internacional de Yokohama",
       "Estádio de Nagoya"
     ],
-    "c": 2,
+    "c": 0,
     "cat": "jogos",
     "d": 1,
     "exp": "Em 18 de dezembro de 2005, em Yokohama, o São Paulo venceu o Liverpool por 1 a 0.",
@@ -765,29 +655,7 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-035",
-    "q": "Quem marcou o gol da vitória do São Paulo por 1 a 0 sobre o Liverpool, na final do Mundial de 2005?",
-    "a": [
-      "Amoroso",
-      "Aloísio",
-      "Rogério Ceni",
-      "Mineiro"
-    ],
-    "c": 3,
-    "cat": "jogos",
-    "d": 1,
-    "exp": "Mineiro marcou aos 27 minutos do primeiro tempo e o São Paulo conquistou o título mundial.",
-    "src": [
-      {
-        "n": "Wikipédia (pt) — Copa do Mundo de Clubes da FIFA de 2005",
-        "u": "https://pt.wikipedia.org/wiki/Copa_do_Mundo_de_Clubes_da_FIFA_de_2005"
-      }
-    ],
-    "when": "2005",
-    "ok": true
-  },
-  {
-    "id": "jogos-036",
+    "id": "jogos-030",
     "q": "Qual time inglês o São Paulo venceu na final do Mundial de Clubes de 2005?",
     "a": [
       "Manchester United",
@@ -809,7 +677,7 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-037",
+    "id": "jogos-031",
     "q": "Qual foi o placar da semifinal do Mundial de 2005 entre São Paulo e Al-Ittihad?",
     "a": [
       "São Paulo 2 x 0 Al-Ittihad",
@@ -831,15 +699,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-038",
+    "id": "jogos-032",
     "q": "Contra qual time o São Paulo decidiu o Campeonato Brasileiro de 1977, seu primeiro título nacional?",
     "a": [
+      "Atlético Mineiro",
       "Cruzeiro",
       "Palmeiras",
-      "Vasco",
-      "Atlético Mineiro"
+      "Vasco"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "jogos",
     "d": 1,
     "exp": "A final foi disputada em jogo único no Mineirão, em 5 de março de 1978, e o São Paulo venceu nos pênaltis.",
@@ -857,41 +725,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-039",
-    "q": "Como foi decidida a final do Campeonato Brasileiro de 1977 entre Atlético Mineiro e São Paulo, no Mineirão?",
-    "a": [
-      "Nos pênaltis, após 0 a 0",
-      "Por 1 a 0, gol no fim do jogo",
-      "Por 2 a 1, na prorrogação",
-      "Pelo saldo de gols em dois jogos"
-    ],
-    "c": 0,
-    "cat": "jogos",
-    "d": 2,
-    "exp": "Foi a primeira decisão de Brasileiro resolvida por pênaltis: 0 a 0 no tempo normal e vitória são-paulina nas cobranças.",
-    "src": [
-      {
-        "n": "Placar — São Paulo frustrou Atlético-MG em BH, em seu primeiro título nacional",
-        "u": "https://placar.com.br/coluna/tbt-placar/sao-paulo-frustrou-atletico-mg-em-bh-em-seu-primeiro-titulo-nacional"
-      },
-      {
-        "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 1977",
-        "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1977"
-      }
-    ],
-    "when": "1977",
-    "ok": true
-  },
-  {
-    "id": "jogos-040",
+    "id": "jogos-033",
     "q": "Qual goleiro foi decisivo na disputa de pênaltis que deu ao São Paulo o título brasileiro de 1977?",
     "a": [
       "Poy",
-      "Gilmar Rinaldi",
       "Waldir Peres",
+      "Gilmar Rinaldi",
       "Zetti"
     ],
-    "c": 2,
+    "c": 1,
     "cat": "jogos",
     "d": 3,
     "exp": "Waldir Peres foi a figura da disputa de pênaltis no Mineirão, em março de 1978.",
@@ -909,37 +751,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-041",
-    "q": "Quem era o técnico do São Paulo campeão brasileiro de 1977?",
-    "a": [
-      "Telê Santana",
-      "Osvaldo Brandão",
-      "Cilinho",
-      "Rubens Minelli"
-    ],
-    "c": 3,
-    "cat": "jogos",
-    "d": 4,
-    "exp": "Rubens Minelli comandou o São Paulo na conquista do primeiro título nacional.",
-    "src": [
-      {
-        "n": "Placar — São Paulo frustrou Atlético-MG em BH, em seu primeiro título nacional",
-        "u": "https://placar.com.br/coluna/tbt-placar/sao-paulo-frustrou-atletico-mg-em-bh-em-seu-primeiro-titulo-nacional"
-      }
-    ],
-    "when": "1977",
-    "ok": true
-  },
-  {
-    "id": "jogos-042",
+    "id": "jogos-034",
     "q": "Quem eram os artilheiros de Atlético Mineiro e São Paulo que não jogaram a final do Brasileiro de 1977?",
     "a": [
-      "Reinaldo e Serginho Chulapa",
       "Dario e Pedro Rocha",
       "Éder e Zé Sérgio",
+      "Reinaldo e Serginho Chulapa",
       "Palhinha e Müller"
     ],
-    "c": 0,
+    "c": 2,
     "cat": "jogos",
     "d": 4,
     "exp": "Segundo o Lance!, nem Reinaldo (Atlético) nem Serginho Chulapa (São Paulo) atuaram na decisão.",
@@ -953,15 +773,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-043",
+    "id": "jogos-035",
     "q": "Contra qual time o São Paulo decidiu o Campeonato Brasileiro de 1986, disputado até fevereiro de 1987?",
     "a": [
       "Flamengo",
-      "Guarani",
       "Atlético Mineiro",
-      "Corinthians"
+      "Corinthians",
+      "Guarani"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "jogos",
     "d": 2,
     "exp": "O São Paulo venceu o Guarani nos pênaltis por 4 a 3, depois de 1 a 1 no Morumbi e 3 a 3 em Campinas, com prorrogação.",
@@ -975,15 +795,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-044",
+    "id": "jogos-036",
     "q": "Qual foi o placar da disputa de pênaltis que deu ao São Paulo o Brasileiro de 1986 sobre o Guarani?",
     "a": [
       "3 a 2",
+      "4 a 3",
       "5 a 4",
-      "3 a 1",
-      "4 a 3"
+      "3 a 1"
     ],
-    "c": 3,
+    "c": 1,
     "cat": "jogos",
     "d": 1,
     "exp": "Após o 3 a 3 na prorrogação no Brinco de Ouro, o São Paulo converteu as cobranças e ganhou por 4 a 3.",
@@ -997,15 +817,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-045",
+    "id": "jogos-037",
     "q": "Qual time carioca o São Paulo eliminou na semifinal do Campeonato Brasileiro de 1986?",
     "a": [
-      "América",
       "Fluminense",
       "Botafogo",
+      "América",
       "Bangu"
     ],
-    "c": 0,
+    "c": 2,
     "cat": "jogos",
     "d": 4,
     "exp": "O São Paulo venceu o América-RJ por 1 a 0 no Morumbi e empatou por 1 a 1 no Rio de Janeiro.",
@@ -1019,15 +839,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-046",
+    "id": "jogos-038",
     "q": "Contra qual time paulista o São Paulo decidiu o Campeonato Brasileiro de 1991?",
     "a": [
       "Corinthians",
-      "Bragantino",
       "Palmeiras",
-      "Santos"
+      "Santos",
+      "Bragantino"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "jogos",
     "d": 1,
     "exp": "O São Paulo venceu por 1 a 0 no Morumbi (Mário Tilico) e empatou por 0 a 0 em Bragança Paulista.",
@@ -1041,15 +861,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-047",
+    "id": "jogos-039",
     "q": "Quem marcou o único gol da final do Brasileiro de 1991 no primeiro jogo, no Morumbi?",
     "a": [
+      "Mário Tilico",
       "Raí",
       "Müller",
-      "Mário Tilico",
       "Macedo"
     ],
-    "c": 2,
+    "c": 0,
     "cat": "jogos",
     "d": 3,
     "exp": "Mário Tilico marcou aos 49 minutos do segundo tempo em 5 de junho de 1991.",
@@ -1063,15 +883,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-048",
+    "id": "jogos-040",
     "q": "Quem treinava o Bragantino na final do Campeonato Brasileiro de 1991?",
     "a": [
-      "Carlos Alberto Parreira",
       "Candinho",
       "Tite",
+      "Carlos Alberto Parreira",
       "Evaristo de Macedo"
     ],
-    "c": 0,
+    "c": 2,
     "cat": "jogos",
     "d": 4,
     "exp": "Parreira dirigia o Bragantino; o São Paulo era comandado por Telê Santana.",
@@ -1085,15 +905,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-049",
+    "id": "jogos-041",
     "q": "Quantos pontos fez o São Paulo no título brasileiro de 2006, em 38 rodadas?",
     "a": [
       "75",
-      "78",
       "80",
-      "84"
+      "84",
+      "78"
     ],
-    "c": 1,
+    "c": 3,
     "cat": "jogos",
     "d": 3,
     "exp": "O São Paulo ganhou 22 jogos, empatou 12 e perdeu 4, com 78 pontos, sob o comando de Muricy Ramalho.",
@@ -1107,37 +927,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-050",
-    "q": "Quantos pontos fez o São Paulo no título brasileiro de 2007?",
-    "a": [
-      "72",
-      "80",
-      "77",
-      "83"
-    ],
-    "c": 2,
-    "cat": "jogos",
-    "d": 2,
-    "exp": "O São Paulo somou 77 pontos (23 vitórias, 8 empates e 7 derrotas) e terminou 15 pontos à frente do Santos.",
-    "src": [
-      {
-        "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 2007",
-        "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007"
-      }
-    ],
-    "when": "2007",
-    "ok": true
-  },
-  {
-    "id": "jogos-051",
+    "id": "jogos-042",
     "q": "Contra qual time o São Paulo confirmou o título brasileiro de 2007, faltando quatro rodadas?",
     "a": [
+      "América-RN",
       "Fluminense",
       "Paraná",
-      "Sport",
-      "América-RN"
+      "Sport"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "jogos",
     "d": 4,
     "exp": "Em 31 de outubro de 2007, o São Paulo venceu o América de Natal por 3 a 0 no Morumbi e garantiu o tri.",
@@ -1151,7 +949,7 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-052",
+    "id": "jogos-043",
     "q": "Qual time foi vice-campeão brasileiro em 2008, três pontos atrás do São Paulo?",
     "a": [
       "Cruzeiro",
@@ -1173,15 +971,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-053",
+    "id": "jogos-044",
     "q": "Contra qual time o São Paulo conquistou seu primeiro título da Copa do Brasil, em 2023?",
     "a": [
       "Corinthians",
       "Palmeiras",
-      "Flamengo",
-      "Fluminense"
+      "Fluminense",
+      "Flamengo"
     ],
-    "c": 2,
+    "c": 3,
     "cat": "jogos",
     "d": 1,
     "exp": "O São Paulo venceu o Flamengo por 1 a 0 no Maracanã e empatou por 1 a 1 no Morumbi, levando o título por 2 a 1 no agregado.",
@@ -1199,15 +997,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-054",
+    "id": "jogos-045",
     "q": "Quem marcou o gol da vitória do São Paulo no Maracanã, no primeiro jogo da final da Copa do Brasil de 2023?",
     "a": [
+      "Calleri",
       "Luciano",
       "Pablo Maia",
-      "Rodrigo Nestor",
-      "Calleri"
+      "Rodrigo Nestor"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "jogos",
     "d": 2,
     "exp": "Calleri marcou aos 46 minutos do primeiro tempo, em 17 de setembro de 2023.",
@@ -1221,15 +1019,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-055",
+    "id": "jogos-046",
     "q": "Quem marcou o gol do São Paulo no empate por 1 a 1 que confirmou o título da Copa do Brasil de 2023?",
     "a": [
-      "Rodrigo Nestor",
       "Calleri",
+      "Rodrigo Nestor",
       "Luciano",
       "Wellington Rato"
     ],
-    "c": 0,
+    "c": 1,
     "cat": "jogos",
     "d": 3,
     "exp": "No Morumbi, em 24 de setembro de 2023, Rodrigo Nestor marcou nos acréscimos do primeiro tempo.",
@@ -1243,7 +1041,7 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-056",
+    "id": "jogos-047",
     "q": "Qual rival paulista o São Paulo eliminou nas quartas de final da Copa do Brasil de 2023?",
     "a": [
       "Santos",
@@ -1265,15 +1063,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-057",
+    "id": "jogos-048",
     "q": "Qual rival o São Paulo eliminou na semifinal da Copa do Brasil de 2023?",
     "a": [
+      "Corinthians",
       "Palmeiras",
       "Grêmio",
-      "Atlético Mineiro",
-      "Corinthians"
+      "Atlético Mineiro"
     ],
-    "c": 3,
+    "c": 0,
     "cat": "jogos",
     "d": 3,
     "exp": "Após perder o primeiro jogo por 2 a 1, o São Paulo venceu por 2 a 0 em casa e avançou por 3 a 2 no agregado.",
@@ -1287,15 +1085,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-058",
+    "id": "jogos-049",
     "q": "Contra qual time argentino o São Paulo decidiu a Copa Sul-Americana de 2012?",
     "a": [
-      "Tigre",
       "Arsenal de Sarandí",
+      "Tigre",
       "Lanús",
       "Estudiantes"
     ],
-    "c": 0,
+    "c": 1,
     "cat": "jogos",
     "d": 1,
     "exp": "Após 0 a 0 na Bombonera, o São Paulo venceu o jogo de volta por 2 a 0 no Morumbi, depois que o Tigre se recusou a voltar para o segundo tempo.",
@@ -1309,15 +1107,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-059",
+    "id": "jogos-050",
     "q": "O que aconteceu no segundo tempo da final da Sul-Americana de 2012, no Morumbi, entre São Paulo e Tigre?",
     "a": [
       "O jogo foi suspenso por falta de luz",
-      "O Tigre não voltou a campo e o jogo foi encerrado",
       "O São Paulo teve cinco jogadores expulsos",
+      "O Tigre não voltou a campo e o jogo foi encerrado",
       "O jogo foi para prorrogação e pênaltis"
     ],
-    "c": 1,
+    "c": 2,
     "cat": "jogos",
     "d": 2,
     "exp": "Após uma confusão no fim do primeiro tempo, o Tigre alegou ameaças da PM e não retornou; o árbitro encerrou a partida com 2 a 0.",
@@ -1331,7 +1129,7 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-060",
+    "id": "jogos-051",
     "q": "Quem marcou os gols do São Paulo na final da Sul-Americana de 2012, no Morumbi?",
     "a": [
       "Luis Fabiano e Jádson",
@@ -1353,15 +1151,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-061",
+    "id": "jogos-052",
     "q": "Quem era o técnico do São Paulo campeão da Sul-Americana de 2012?",
     "a": [
-      "Ney Franco",
       "Muricy Ramalho",
+      "Ney Franco",
       "Paulo Autuori",
       "Emerson Leão"
     ],
-    "c": 0,
+    "c": 1,
     "cat": "jogos",
     "d": 4,
     "exp": "Ney Franco comandou o São Paulo no primeiro título internacional do clube desde 2005.",
@@ -1375,15 +1173,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-062",
+    "id": "jogos-053",
     "q": "Contra qual time o São Paulo conquistou o Campeonato Paulista de 2021, após 0 a 0 e 2 a 0?",
     "a": [
       "Corinthians",
-      "Palmeiras",
       "Santos",
+      "Palmeiras",
       "Red Bull Bragantino"
     ],
-    "c": 1,
+    "c": 2,
     "cat": "jogos",
     "d": 2,
     "exp": "O São Paulo empatou sem gols no Allianz Parque e venceu por 2 a 0 no Morumbi, com gols de Luan e Luciano, em jogos sem torcida.",
@@ -1397,15 +1195,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-063",
+    "id": "jogos-054",
     "q": "Quem marcou os gols da vitória por 2 a 0 do São Paulo sobre o Palmeiras na final do Paulista de 2021?",
     "a": [
       "Pablo e Brenner",
       "Daniel Alves e Rigoni",
-      "Luan e Luciano",
-      "Reinaldo e Gabriel Sara"
+      "Reinaldo e Gabriel Sara",
+      "Luan e Luciano"
     ],
-    "c": 2,
+    "c": 3,
     "cat": "jogos",
     "d": 3,
     "exp": "Luan marcou aos 36 minutos do primeiro tempo e Luciano aos 31 do segundo, em 23 de maio de 2021.",
@@ -1419,7 +1217,7 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-064",
+    "id": "jogos-055",
     "q": "Qual rival o São Paulo derrotou na final do Campeonato Paulista de 2000, seu 20º título estadual?",
     "a": [
       "Santos",
@@ -1441,15 +1239,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-065",
+    "id": "jogos-056",
     "q": "Qual goleiro marcou um dos gols do São Paulo no empate por 2 a 2 com o Santos que confirmou o Paulista de 2000?",
     "a": [
       "Zetti",
-      "Rogério Ceni",
       "Gilmar Rinaldi",
+      "Rogério Ceni",
       "Waldir Peres"
     ],
-    "c": 1,
+    "c": 2,
     "cat": "jogos",
     "d": 4,
     "exp": "Rogério Ceni marcou aos 38 minutos do primeiro tempo; Marcelinho Paraíba fez o outro gol.",
@@ -1463,15 +1261,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-066",
+    "id": "jogos-057",
     "q": "Qual foi o placar da final de volta do Paulista de 1998 entre São Paulo e Corinthians, em 10 de maio?",
     "a": [
       "São Paulo 2 x 0 Corinthians",
       "São Paulo 2 x 1 Corinthians",
-      "São Paulo 3 x 1 Corinthians",
-      "São Paulo 4 x 1 Corinthians"
+      "São Paulo 4 x 1 Corinthians",
+      "São Paulo 3 x 1 Corinthians"
     ],
-    "c": 2,
+    "c": 3,
     "cat": "jogos",
     "d": 2,
     "exp": "Com gols de Raí e dois de França, o São Paulo reverteu a derrota por 2 a 1 do jogo de ida e foi campeão por 4 a 3 no agregado.",
@@ -1485,37 +1283,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-067",
-    "q": "Quem marcou os três gols da vitória do São Paulo por 3 a 0 sobre o Corinthians no primeiro jogo da final do Paulista de 1991?",
-    "a": [
-      "Müller",
-      "Elivélton",
-      "Macedo",
-      "Raí"
-    ],
-    "c": 3,
-    "cat": "jogos",
-    "d": 1,
-    "exp": "Raí marcou aos 16 do primeiro tempo e aos 14 e 17 do segundo; o 0 a 0 da volta confirmou o título.",
-    "src": [
-      {
-        "n": "Wikipédia (pt) — Campeonato Paulista de Futebol de 1991",
-        "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1991"
-      }
-    ],
-    "when": "1991",
-    "ok": true
-  },
-  {
-    "id": "jogos-068",
+    "id": "jogos-058",
     "q": "Contra qual rival o São Paulo foi campeão paulista de 1992, vencendo por 4 a 2 e 2 a 1?",
     "a": [
-      "Corinthians",
       "Palmeiras",
+      "Corinthians",
       "Santos",
       "Portuguesa"
     ],
-    "c": 1,
+    "c": 0,
     "cat": "jogos",
     "d": 3,
     "exp": "O São Paulo fez 6 a 3 no agregado, com Raí marcando três vezes no primeiro jogo.",
@@ -1529,15 +1305,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-069",
+    "id": "jogos-059",
     "q": "Qual foi o time do interior finalista do Paulista de 1989, derrotado pelo São Paulo?",
     "a": [
       "Ponte Preta",
-      "Guarani",
       "São José",
+      "Guarani",
       "Novorizontino"
     ],
-    "c": 2,
+    "c": 1,
     "cat": "jogos",
     "d": 4,
     "exp": "O São Paulo venceu o São José por 1 a 0 (gol contra de André Luís) e empatou por 0 a 0, conquistando o 16º título estadual.",
@@ -1551,7 +1327,7 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-070",
+    "id": "jogos-060",
     "q": "Quais foram os autores dos gols do São Paulo na vitória por 2 a 1 sobre o Corinthians no primeiro jogo da final do Paulista de 1987?",
     "a": [
       "Müller e Silas",
@@ -1573,7 +1349,7 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-071",
+    "id": "jogos-061",
     "q": "Contra qual time o São Paulo foi campeão paulista de 1985, seu 14º título estadual?",
     "a": [
       "Portuguesa",
@@ -1595,15 +1371,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-072",
+    "id": "jogos-062",
     "q": "Quem marcou dois gols na vitória por 3 a 1 sobre a Portuguesa no primeiro jogo da final do Paulista de 1985?",
     "a": [
       "Müller",
-      "Silas",
       "Careca",
+      "Silas",
       "Pita"
     ],
-    "c": 2,
+    "c": 1,
     "cat": "jogos",
     "d": 3,
     "exp": "Careca fez dois gols e Darío Pereyra um, em 15 de dezembro de 1985.",
@@ -1617,15 +1393,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-073",
+    "id": "jogos-063",
     "q": "Como o São Paulo conquistou o título paulista de 1975, o 11º do clube, contra a Portuguesa?",
     "a": [
       "Por 1 a 0 na prorrogação",
       "Por 2 a 1 no tempo normal",
-      "Por saldo de gols",
-      "Nos pênaltis, por 3 a 0"
+      "Nos pênaltis, por 3 a 0",
+      "Por saldo de gols"
     ],
-    "c": 3,
+    "c": 2,
     "cat": "jogos",
     "d": 4,
     "exp": "Após 1 a 0 para cada lado, a decisão foi aos pênaltis: o São Paulo converteu três e a Portuguesa errou as três cobranças.",
@@ -1639,7 +1415,7 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-074",
+    "id": "jogos-064",
     "q": "Contra qual time brasileiro o São Paulo conquistou a Supercopa Libertadores de 1993?",
     "a": [
       "Flamengo",
@@ -1661,7 +1437,7 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-075",
+    "id": "jogos-065",
     "q": "Qual foi o placar da disputa de pênaltis da final da Supercopa Libertadores de 1993 entre São Paulo e Flamengo?",
     "a": [
       "5 a 3",
@@ -1683,15 +1459,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-076",
+    "id": "jogos-066",
     "q": "Contra qual time brasileiro o São Paulo conquistou a Recopa em Kobe, no Japão, em abril de 1994?",
     "a": [
       "Cruzeiro",
       "Palmeiras",
-      "Vasco",
-      "Botafogo"
+      "Botafogo",
+      "Vasco"
     ],
-    "c": 3,
+    "c": 2,
     "cat": "jogos",
     "d": 3,
     "exp": "Em jogo único, em 3 de abril de 1994, o São Paulo venceu o Botafogo por 3 a 1, com gols de Leonardo, Guilherme e Euller.",
@@ -1709,15 +1485,15 @@ export default [
     "ok": true
   },
   {
-    "id": "jogos-077",
+    "id": "jogos-067",
     "q": "Quem marcou os gols do São Paulo na vitória por 3 a 1 sobre o Botafogo na Recopa disputada em Kobe, em 1994?",
     "a": [
-      "Leonardo, Guilherme e Euller",
       "Raí, Müller e Palhinha",
       "Leonardo, Raí e Juninho",
-      "Müller, Euller e Cafu"
+      "Müller, Euller e Cafu",
+      "Leonardo, Guilherme e Euller"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "jogos",
     "d": 4,
     "exp": "A RSSSF lista Leonardo (12'), Guilherme (73') e Euller (87') para o São Paulo; Roberto Cavalo descontou de pênalti.",

@@ -7,7 +7,7 @@ import { randSeed } from './rng.js';
 import { IDOLS, POS } from './idols.js';
 import { createSession, currentView, answer, next, stop, timeUp, cur, canUse, useFifty, useCrowd, usePhone, callIdol, useSwap, summary, scoreOf, serialize, dailyPlan, dayKey, stepNo } from './session.js';
 import { recordMatch, recordDaily, pushRecent, xpFor, ACHIEVEMENTS } from './stats.js';
-import { confirmBox, fmtScore, fmtDur, modes, rules, themesGrid, dailyScreen, stats } from './screens.js';
+import { confirmBox, fmtScore, fmtDur, modes, stats, lifelineRows } from './screens.js';
 
 const L = 'ABCD';
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;

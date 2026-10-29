@@ -1003,40 +1003,14 @@ export default [
  },
  {
   "id": "outras-044",
-  "q": "Quantas estrelas douradas, em homenagem a Adhemar Ferreira da Silva, aparecem no escudo do São Paulo?",
-  "a": [
-   "Uma",
-   "Três",
-   "Cinco",
-   "Duas"
-  ],
-  "c": 3,
-  "cat": "outras",
-  "d": 2,
-  "exp": "As duas estrelas douradas lembram seus recordes mundiais em Helsinque 1952 e nos Jogos Pan-Americanos de 1955.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   },
-   {
-    "n": "Wikipédia (pt) — Uniformes do São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1955",
-  "ok": true
- },
- {
-  "id": "outras-045",
   "q": "Em que cidade Adhemar fez, em 1955, o recorde mundial de 16,56 m nos Jogos Pan-Americanos?",
   "a": [
-   "Cidade do México",
    "Buenos Aires",
    "Chicago",
-   "São Paulo"
+   "São Paulo",
+   "Cidade do México"
   ],
-  "c": 0,
+  "c": 3,
   "cat": "outras",
   "d": 3,
   "exp": "Em 1955, na Cidade do México, o saltador do São Paulo marcou 16,56 m, sua melhor marca.",
@@ -1050,15 +1024,15 @@ export default [
   "ok": true
  },
  {
-  "id": "outras-046",
+  "id": "outras-045",
   "q": "Em 30 de setembro de 1951, no Rio de Janeiro, Adhemar foi o primeiro atleta a saltar acima de qual marca no salto triplo?",
   "a": [
+   "16 metros",
    "15 metros",
    "17 metros",
-   "16 metros",
    "15,5 metros"
   ],
-  "c": 2,
+  "c": 0,
   "cat": "outras",
   "d": 3,
   "exp": "Naquele dia ele registrou 16,01 m, a primeira vez que alguém passou dos 16 m.",
@@ -1072,15 +1046,15 @@ export default [
   "ok": true
  },
  {
-  "id": "outras-047",
+  "id": "outras-046",
   "q": "Em que ano Adhemar Ferreira da Silva passou a competir pelo São Paulo?",
   "a": [
    "1943",
    "1950",
-   "1952",
-   "1947"
+   "1947",
+   "1952"
   ],
-  "c": 3,
+  "c": 2,
   "cat": "outras",
   "d": 4,
   "exp": "Ele começou a defender as cores tricolores em 1947.",
@@ -1094,15 +1068,15 @@ export default [
   "ok": true
  },
  {
-  "id": "outras-048",
+  "id": "outras-047",
   "q": "Em que ano foi criado o departamento de atletismo do São Paulo, que revelou Adhemar Ferreira da Silva?",
   "a": [
    "1930",
-   "1943",
    "1935",
-   "1950"
+   "1950",
+   "1943"
   ],
-  "c": 1,
+  "c": 3,
   "cat": "outras",
   "d": 4,
   "exp": "O atletismo tricolor começou em 1943 e venceu 14 Paulistas seguidos até 1957.",
@@ -1116,37 +1090,15 @@ export default [
   "ok": true
  },
  {
-  "id": "outras-049",
-  "q": "Em que ano foram acrescentadas ao escudo do São Paulo as duas estrelas douradas em homenagem a Adhemar?",
-  "a": [
-   "1955",
-   "1952",
-   "1956",
-   "1960"
-  ],
-  "c": 0,
-  "cat": "outras",
-  "d": 3,
-  "exp": "As estrelas douradas foram incluídas em 1955; as três vermelhas, dos títulos mundiais, vieram em 2006.",
-  "src": [
-   {
-    "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-    "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-   }
-  ],
-  "when": "1955",
-  "ok": true
- },
- {
-  "id": "outras-050",
+  "id": "outras-048",
   "q": "Em que ano morreu Adhemar Ferreira da Silva, bicampeão olímpico do salto triplo?",
   "a": [
    "1999",
-   "2003",
    "2001",
+   "2003",
    "1995"
   ],
-  "c": 2,
+  "c": 1,
   "cat": "outras",
   "d": 3,
   "exp": "Adhemar nasceu em 29 de setembro de 1927 e morreu em 12 de janeiro de 2001, aos 73 anos.",
