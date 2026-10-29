@@ -15,6 +15,10 @@ export default [
     "exp": "Serginho Chulapa lidera a lista de artilheiros do clube com 242 gols, segundo o Lance! e a Wikipédia.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
+      {
         "n": "Lance! — Artilheiros do São Paulo: conheça os 10 maiores da história (25/09/2024)",
         "u": "https://www.lance.com.br/sao-paulo/artilheiros-sao-paulo.html"
       },
@@ -24,7 +28,8 @@ export default [
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-002",
@@ -41,6 +46,10 @@ export default [
     "exp": "Gino Orlando marcou 233 gols, atrás apenas de Serginho Chulapa (242).",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
+      {
         "n": "Lance! — Artilheiros do São Paulo: conheça os 10 maiores da história (25/09/2024)",
         "u": "https://www.lance.com.br/sao-paulo/artilheiros-sao-paulo.html"
       },
@@ -50,7 +59,8 @@ export default [
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-003",
@@ -67,6 +77,10 @@ export default [
     "exp": "Luis Fabiano marcou 212 gols pelo São Paulo, na terceira posição entre os maiores artilheiros do clube.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
+      {
         "n": "Lance! — Artilheiros do São Paulo: conheça os 10 maiores da história (25/09/2024)",
         "u": "https://www.lance.com.br/sao-paulo/artilheiros-sao-paulo.html"
       },
@@ -76,7 +90,8 @@ export default [
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-004",
@@ -93,6 +108,10 @@ export default [
     "exp": "Serginho Chulapa soma 242 gols, a maior marca da história do São Paulo.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
+      {
         "n": "Lance! — Artilheiros do São Paulo: conheça os 10 maiores da história (25/09/2024)",
         "u": "https://www.lance.com.br/sao-paulo/artilheiros-sao-paulo.html"
       },
@@ -102,7 +121,8 @@ export default [
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-005",
@@ -116,8 +136,12 @@ export default [
     "c": 2,
     "cat": "recordes",
     "d": 4,
-    "exp": "França aparece em quinto lugar na lista de artilheiros, com 182 gols, nas listas do Lance! e da Wikipédia.",
+    "exp": "França aparece em quinto lugar na lista de artilheiros do clube, com 182 gols, segundo o site oficial, o Lance! e a Wikipédia.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
       {
         "n": "Lance! — Artilheiros do São Paulo: conheça os 10 maiores da história (25/09/2024)",
         "u": "https://www.lance.com.br/sao-paulo/artilheiros-sao-paulo.html"
@@ -128,7 +152,8 @@ export default [
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-006",
@@ -145,6 +170,10 @@ export default [
     "exp": "Müller marcou 160 gols pelo clube, na sétima posição do ranking histórico.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
+      {
         "n": "Lance! — Artilheiros do São Paulo: conheça os 10 maiores da história (25/09/2024)",
         "u": "https://www.lance.com.br/sao-paulo/artilheiros-sao-paulo.html"
       },
@@ -154,11 +183,12 @@ export default [
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-007",
-    "q": "Qual craque da Seleção nos anos 1940, conhecido como Diamante Negro, marcou 144 gols pelo São Paulo e é o oitavo maior artilheiro (até 2025)?",
+    "q": "Qual craque da Seleção nos anos 1940, o \"Diamante Negro\", é o oitavo maior artilheiro do São Paulo, com 143 gols segundo o site oficial?",
     "a": [
       "Leônidas da Silva",
       "Teixeirinha",
@@ -168,8 +198,12 @@ export default [
     "c": 0,
     "cat": "recordes",
     "d": 2,
-    "exp": "Leônidas da Silva, o \"Diamante Negro\", fez 144 gols pelo São Paulo.",
+    "exp": "O site oficial registra 143 gols de Leônidas da Silva pelo clube (dados até 2025). O Lance! e a Wikipédia (en) contam 144.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
       {
         "n": "Lance! — Artilheiros do São Paulo: conheça os 10 maiores da história (25/09/2024)",
         "u": "https://www.lance.com.br/sao-paulo/artilheiros-sao-paulo.html"
@@ -180,7 +214,9 @@ export default [
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "recordes-008",
@@ -197,6 +233,10 @@ export default [
     "exp": "Rogério Ceni marcou 131 gols, a maior marca da história entre goleiros, e figura entre os dez maiores artilheiros do clube.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
+      {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
       },
@@ -206,7 +246,8 @@ export default [
       }
     ],
     "when": "2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-009",
@@ -223,12 +264,17 @@ export default [
     "exp": "O goleiro Waldir Peres disputou 617 partidas pelo São Paulo, atrás de Rogério Ceni.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais jogos",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-jogos/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-010",
@@ -245,12 +291,17 @@ export default [
     "exp": "Nílton de Sordi, lateral dos anos 1950, disputou 544 partidas pelo São Paulo.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais jogos",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-jogos/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-011",
@@ -267,16 +318,21 @@ export default [
     "exp": "Rogério Ceni tem o recorde de partidas do clube na Libertadores, com 90 jogos.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes individuais",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-individuais-2/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-012",
-    "q": "Quantos gols de Libertadores têm Luis Fabiano e Rogério Ceni, recorde do clube na competição (até 2025)?",
+    "q": "Quantos gols na Libertadores têm Calleri, Luís Fabiano e Rogério Ceni, que dividem o recorde do clube na competição (até 2025)?",
     "a": [
       "9",
       "11",
@@ -286,15 +342,21 @@ export default [
     "c": 3,
     "cat": "recordes",
     "d": 2,
-    "exp": "Luis Fabiano e Rogério Ceni dividem a marca de 14 gols do São Paulo na Libertadores.",
+    "exp": "Segundo o site oficial (dados até 2025), Calleri, Luís Fabiano e Rogério Ceni têm 14 gols cada na Libertadores. Listas mais antigas citavam só Luís Fabiano e Ceni.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "recordes-013",
@@ -311,12 +373,17 @@ export default [
     "exp": "Luis Fabiano marcou 108 gols pelo clube no Campeonato Brasileiro, segundo a lista de recordes.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-014",
@@ -333,12 +400,21 @@ export default [
     "exp": "Gino Orlando é o recordista de gols do clube no Paulista, com 142.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes individuais",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-individuais-2/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-015",
@@ -355,12 +431,17 @@ export default [
     "exp": "Waldir Peres é o recordista de partidas do clube no Paulista, com 343 jogos.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes individuais",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-individuais-2/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-016",
@@ -377,12 +458,21 @@ export default [
     "exp": "Dodô marcou 54 gols em 1997, maior marca de um jogador do São Paulo em um ano.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes individuais",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-individuais-2/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "1997",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-017",
@@ -399,16 +489,25 @@ export default [
     "exp": "Em 14 de agosto de 1943, Sastre fez seis gols na goleada por 9 a 0, recorde do clube em uma partida.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Almanaque: relação de jogos do masculino",
+        "u": "https://www.saopaulofc.net/almanaque-relacao-de-jogos-do-masculino/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "1943",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-018",
-    "q": "Quem tem mais hat-tricks na história do São Paulo, com 13 (até 2025)?",
+    "q": "Segundo o site oficial do São Paulo, quem fez mais \"trincas\" (três gols num mesmo jogo) pelo clube, com 12 (até 2025)?",
     "a": [
       "Serginho Chulapa",
       "Gino Orlando",
@@ -418,37 +517,57 @@ export default [
     "c": 2,
     "cat": "recordes",
     "d": 4,
-    "exp": "França é o jogador com mais hat-tricks pelo clube, segundo a lista de recordes.",
+    "exp": "A enciclopédia oficial lista França com 12 trincas, à frente de Serginho Chulapa (11). A lista de recordes da Wikipédia (en) atribui 13 hat-tricks a França.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: gols e goleadores",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-gols-e-goleadores/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes individuais",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-individuais-2/"
+      },
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "recordes-019",
-    "q": "Quantas vezes Serginho Chulapa terminou a temporada como artilheiro do clube, recorde do São Paulo (até 2025)?",
+    "q": "Segundo o site oficial do São Paulo (dados até 2025), quantas vezes Serginho Chulapa terminou a temporada como artilheiro do clube?",
     "a": [
-      "3",
-      "5",
-      "9",
-      "7"
+      "4",
+      "6",
+      "8",
+      "10"
     ],
-    "c": 3,
+    "c": 2,
     "cat": "recordes",
     "d": 1,
-    "exp": "Chulapa foi o goleador do clube em sete temporadas, maior marca da história.",
+    "exp": "A enciclopédia oficial atualizada lista 8 temporadas (1974 a 1977 e 1979 a 1982). Uma página oficial de 2017 e a Wikipédia (en) falam em 7, sem contar 1974.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: mais gols",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes individuais",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-individuais-2/"
+      },
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "recordes-020",
@@ -465,6 +584,10 @@ export default [
     "exp": "Em 28 de outubro de 2015, na derrota por 3 a 1 para o Santos pela Copa do Brasil, Ceni fez seu último jogo oficial aos 42 anos.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes individuais",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-individuais-2/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       },
@@ -474,7 +597,8 @@ export default [
       }
     ],
     "when": "2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-021",
@@ -491,12 +615,17 @@ export default [
     "exp": "O último jogo oficial de Ceni foi uma derrota por 3 a 1 para o Santos, na Vila Belmiro. O jogo de despedida foi no Morumbi, em 11 de dezembro de 2015.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: estreias e últimos jogos",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-estreias-e-ultimos-jogos/"
+      },
+      {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
       }
     ],
     "when": "2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-022",
@@ -513,18 +642,27 @@ export default [
     "exp": "Ceni estreou em 25 de junho de 1993 contra o Tenerife, no torneio de Santiago de Compostela.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: estreias e últimos jogos",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-estreias-e-ultimos-jogos/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Almanaque: relação de jogos do masculino",
+        "u": "https://www.saopaulofc.net/almanaque-relacao-de-jogos-do-masculino/"
+      },
+      {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-023",
-    "q": "Quantos pênaltis Rogério Ceni defendeu pelo São Paulo, recorde do clube (até 2025)?",
+    "q": "Segundo o site oficial do São Paulo, quantos pênaltis Rogério Ceni defendeu pelo clube?",
     "a": [
-      "50",
+      "51",
       "23",
       "35",
       "66"
@@ -532,15 +670,21 @@ export default [
     "c": 0,
     "cat": "recordes",
     "d": 4,
-    "exp": "A lista de recordes do clube aponta 50 pênaltis defendidos por Ceni.",
+    "exp": "A página de recordes individuais do site oficial (2017) registra 51 defesas de pênalti de Ceni; a lista da Wikipédia (en) traz 50.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes individuais",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-individuais-2/"
+      },
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "recordes-024",
@@ -557,12 +701,17 @@ export default [
     "exp": "Ceni jogou 132 partidas consecutivas entre 23 de janeiro de 2010 e 26 de outubro de 2011.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes individuais",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-individuais-2/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2011",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-025",
@@ -576,19 +725,20 @@ export default [
     "c": 3,
     "cat": "recordes",
     "d": 1,
-    "exp": "O São Paulo ficou 47 jogos sem perder, de 13 de novembro de 1974 a 3 de agosto de 1975, marca também citada pelo SPFC.Net.",
+    "exp": "O São Paulo ficou 47 jogos sem perder, de 13 de novembro de 1974 a 3 de agosto de 1975, recorde registrado pelo site oficial do clube.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: maiores sequências do clube",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-maiores-sequencias/"
+      },
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
-      },
-      {
-        "n": "SPFC.Net — A saga da construção do Morumbi",
-        "u": "https://spfc.net/news/160757/a-saga-da-constru231227o-do-morumbi.html"
       }
     ],
     "when": "1975",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-026",
@@ -605,12 +755,17 @@ export default [
     "exp": "Entre 20 de agosto e 7 de dezembro de 2008, o São Paulo ficou 18 partidas sem perder no Campeonato Brasileiro.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: maiores sequências do clube",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-maiores-sequencias/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2008",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-027",
@@ -627,12 +782,17 @@ export default [
     "exp": "O recorde de invencibilidade em casa são 31 jogos, de 20 de julho de 1986 a 22 de abril de 1987.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: maiores sequências do clube",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-maiores-sequencias/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "1987",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-028",
@@ -649,12 +809,21 @@ export default [
     "exp": "O clube chegou a 11 vitórias seguidas três vezes: em 1943, 1982 e 2012.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: maiores sequências do clube",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-maiores-sequencias/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes coletivos",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-coletivos-2/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-029",
@@ -671,12 +840,21 @@ export default [
     "exp": "Em 28 de março de 2001, o São Paulo goleou o Botafogo da Paraíba por 10 a 0 no Morumbi.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes coletivos",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-coletivos-2/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Almanaque: relação de jogos do masculino",
+        "u": "https://www.saopaulofc.net/almanaque-relacao-de-jogos-do-masculino/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2001",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-030",
@@ -693,12 +871,17 @@ export default [
     "exp": "Em 28 de setembro de 2004, o São Paulo bateu o Paysandu por 7 a 0 no Morumbi.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Almanaque: relação de jogos do masculino",
+        "u": "https://www.saopaulofc.net/almanaque-relacao-de-jogos-do-masculino/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2004",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-031",
@@ -715,12 +898,21 @@ export default [
     "exp": "Em 5 de abril de 2016, no Morumbi, o São Paulo venceu o Trujillanos, da Venezuela, por 6 a 0.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes coletivos",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-coletivos-2/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Almanaque: relação de jogos do masculino",
+        "u": "https://www.saopaulofc.net/almanaque-relacao-de-jogos-do-masculino/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2016",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-032",
@@ -737,12 +929,17 @@ export default [
     "exp": "O São Paulo venceu o Sírio por 12 a 1 (1933) e o Jabaquara por 12 a 1 (1945).",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes coletivos",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-coletivos-2/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "1945",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-033",
@@ -759,16 +956,21 @@ export default [
     "exp": "Cinco meses depois de fundado, o São Paulo venceu a seleção dos Estados Unidos por 5 a 3, em agosto de 1930.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Almanaque: relação de jogos do masculino",
+        "u": "https://www.saopaulofc.net/almanaque-relacao-de-jogos-do-masculino/"
+      },
+      {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-034",
-    "q": "Em 1962, o São Paulo goleou por 6 a 2, no Pacaembu, qual seleção?",
+    "q": "Em 1962, o São Paulo goleou por 6 a 2, no Pacaembu, a seleção sub-20 de qual país, segundo o almanaque oficial do clube?",
     "a": [
       "Argentina",
       "Uruguai",
@@ -778,15 +980,21 @@ export default [
     "c": 2,
     "cat": "recordes",
     "d": 1,
-    "exp": "Em 17 de fevereiro de 1962, o São Paulo bateu a seleção brasileira por 6 a 2 num amistoso no Pacaembu.",
+    "exp": "Em 17 de fevereiro de 1962 o São Paulo venceu por 6 a 2 num amistoso no Pacaembu. O almanaque oficial registra o adversário como \"Brasil Sub-20\"; a Wikipédia (en) fala apenas em seleção brasileira.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Almanaque: relação de jogos do masculino",
+        "u": "https://www.saopaulofc.net/almanaque-relacao-de-jogos-do-masculino/"
+      },
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "1962",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "recordes-035",
@@ -803,12 +1011,21 @@ export default [
     "exp": "Em 10 de julho de 1940, o São Paulo perdeu por 8 a 1 para o Botafogo, nas Laranjeiras.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Almanaque: relação de jogos do masculino",
+        "u": "https://www.saopaulofc.net/almanaque-relacao-de-jogos-do-masculino/"
+      },
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes individuais",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-individuais-2/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "1940",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-036",
@@ -825,12 +1042,17 @@ export default [
     "exp": "Em 25 de novembro de 2001, o São Paulo perdeu por 7 a 1 para o Vasco, em São Januário.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Almanaque: relação de jogos do masculino",
+        "u": "https://www.saopaulofc.net/almanaque-relacao-de-jogos-do-masculino/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2001",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-037",
@@ -847,12 +1069,17 @@ export default [
     "exp": "Em 20 de janeiro de 2021, pelo Brasileirão de 2020, o Internacional venceu por 5 a 1 no Morumbi.",
     "src": [
       {
+        "n": "Site oficial do São Paulo FC — Almanaque: relação de jogos do masculino",
+        "u": "https://www.saopaulofc.net/almanaque-relacao-de-jogos-do-masculino/"
+      },
+      {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2021",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-038",
@@ -866,15 +1093,20 @@ export default [
     "c": 3,
     "cat": "recordes",
     "d": 3,
-    "exp": "A invencibilidade em casa na Libertadores foi de 30 partidas, de 4 de junho de 1987 a 8 de março de 2006.",
+    "exp": "Como mandante na Libertadores, o São Paulo ficou 30 partidas sem perder, de 4 de junho de 1987 a 8 de março de 2006, segundo o site oficial.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: Conmebol Libertadores",
+        "u": "https://www.saopaulofc.net/enciclopedia-torneios-conmebol-libertadores/"
+      },
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2006",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-039",
@@ -888,15 +1120,20 @@ export default [
     "c": 0,
     "cat": "recordes",
     "d": 4,
-    "exp": "Na campanha do título de 2005, o São Paulo fez 34 gols e venceu 9 jogos, ambos recordes do clube em uma edição.",
+    "exp": "Na campanha do título de 2005, o São Paulo fez 34 gols e venceu 9 jogos (3 vitórias e 3 empates no grupo e 6 vitórias, 1 empate e 1 derrota no mata-mata, pela RSSSF), recordes do clube em uma edição.",
     "src": [
+      {
+        "n": "RSSSF — Copa Libertadores 2005",
+        "u": "https://www.rsssf.org/sacups/copa05.html"
+      },
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-040",
@@ -910,19 +1147,24 @@ export default [
     "c": 2,
     "cat": "recordes",
     "d": 1,
-    "exp": "Em 2005 o São Paulo perdeu apenas um jogo, junto com as 9 vitórias e os 34 gols que são recordes do clube na competição.",
+    "exp": "Em 2005 o São Paulo perdeu apenas um jogo, para o Tigres (2 a 1, no México), segundo a RSSSF; também fez 9 vitórias e 34 gols, recordes do clube na competição.",
     "src": [
+      {
+        "n": "RSSSF — Copa Libertadores 2005",
+        "u": "https://www.rsssf.org/sacups/copa05.html"
+      },
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-041",
-    "q": "Quem é o técnico com mais jogos pelo São Paulo, com 555 partidas entre 1937 e 1959?",
+    "q": "Quem é o técnico com mais jogos pelo São Paulo, com 562 partidas segundo o site oficial?",
     "a": [
       "Telê Santana",
       "Rubens Minelli",
@@ -932,15 +1174,21 @@ export default [
     "c": 3,
     "cat": "recordes",
     "d": 2,
-    "exp": "Vicente Feola comandou o clube em 555 jogos e venceu 310, recordes de partidas e vitórias de um treinador.",
+    "exp": "A enciclopédia oficial (dados até 2025) registra 562 jogos e 316 vitórias de Vicente Feola; a Wikipédia (en) traz 555 jogos e 310 vitórias, entre 1937 e 1959.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: técnicos com mais jogos",
+        "u": "https://www.saopaulofc.net/enciclopedia-tecnicos-mais-jogos/"
+      },
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "1959",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "recordes-042",
@@ -954,15 +1202,20 @@ export default [
     "c": 0,
     "cat": "recordes",
     "d": 3,
-    "exp": "A lista de recordes aponta Telê Santana como o técnico com mais títulos oficiais pelo clube, 10.",
+    "exp": "Segundo o site oficial, Telê Santana ganhou 10 títulos oficiais pelo clube, entre eles 2 Libertadores e 2 Mundiais (1992 e 1993).",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: títulos dos técnicos",
+        "u": "https://www.saopaulofc.net/enciclopedia-tecnicos-titulos/"
+      },
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2025",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-043",
@@ -984,7 +1237,8 @@ export default [
       }
     ],
     "when": "1986",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "recordes-044",
@@ -998,15 +1252,20 @@ export default [
     "c": 3,
     "cat": "recordes",
     "d": 4,
-    "exp": "Sérgio Valentim ficou 9 jogos sem sofrer gols, de 10 de maio a 30 de julho de 1972.",
+    "exp": "Sérgio Valentim ficou 9 jogos sem sofrer gols, de 10 de maio a 30 de julho de 1972, num total de 883 minutos, segundo o site oficial.",
     "src": [
+      {
+        "n": "Site oficial do São Paulo FC — Enciclopédia: recordes individuais",
+        "u": "https://www.saopaulofc.net/enciclopedia-recordes-individuais-2/"
+      },
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "1972",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-045",
@@ -1025,10 +1284,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 2006",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2006"
+      },
+      {
+        "n": "RSSSF — Brazil 2006 Championship",
+        "u": "https://www.rsssf.org/tablesb/braz06.html"
       }
     ],
     "when": "2006",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-046",
@@ -1047,10 +1311,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 2007",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007"
+      },
+      {
+        "n": "RSSSF — Brazil 2007 Championship",
+        "u": "https://www.rsssf.org/tablesb/braz07.html"
       }
     ],
     "when": "2007",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-047",
@@ -1069,10 +1338,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 2007",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007"
+      },
+      {
+        "n": "RSSSF — Brazil 2007 Championship",
+        "u": "https://www.rsssf.org/tablesb/braz07.html"
       }
     ],
     "when": "2007",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-048",
@@ -1091,10 +1365,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 2008",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008"
+      },
+      {
+        "n": "RSSSF — Brazil 2008 Championship",
+        "u": "https://www.rsssf.org/tablesb/braz08.html"
       }
     ],
     "when": "2008",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-049",
@@ -1108,15 +1387,20 @@ export default [
     "c": 1,
     "cat": "recordes",
     "d": 3,
-    "exp": "Giuliano Galoppo custou cerca de R$ 32,6 milhões (US$ 6 milhões) ao ser comprado do Banfield, em julho de 2022.",
+    "exp": "Giuliano Galoppo foi comprado do Banfield em julho de 2022 por cerca de R$ 32 milhões, a contratação mais cara da história do clube até então.",
     "src": [
+      {
+        "n": "Wikipédia (pt) — Giuliano Galoppo",
+        "u": "https://pt.wikipedia.org/wiki/Giuliano_Galoppo"
+      },
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
       }
     ],
     "when": "2022",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "recordes-050",
@@ -1130,15 +1414,20 @@ export default [
     "c": 2,
     "cat": "recordes",
     "d": 1,
-    "exp": "Lucas Moura foi vendido ao PSG por cerca de R$ 108,3 milhões (45 milhões de euros), em agosto de 2012.",
+    "exp": "Lucas Moura foi vendido ao PSG em agosto de 2012 por cerca de R$ 108 milhões (43 milhões de euros pela Wikipédia em português, 45 milhões pela lista em inglês).",
     "src": [
       {
         "n": "Wikipedia (en) — List of São Paulo FC records and statistics",
         "u": "https://en.wikipedia.org/wiki/List_of_S%C3%A3o_Paulo_FC_records_and_statistics"
+      },
+      {
+        "n": "Wikipédia (pt) — Lucas Moura",
+        "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "recordes-051",
@@ -1157,9 +1446,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 2007",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007"
+      },
+      {
+        "n": "Wikipédia (pt) — Prêmio Craque do Brasileirão",
+        "u": "https://pt.wikipedia.org/wiki/Pr%C3%AAmio_Craque_do_Brasileir%C3%A3o"
       }
     ],
     "when": "2007",
-    "ok": true
+    "ok": true,
+    "v2": true
   }
 ];

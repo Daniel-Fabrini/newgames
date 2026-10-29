@@ -19,15 +19,16 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
       },
       {
-        "n": "Wikipédia (pt) — San-São",
-        "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
+        "n": "Jovem Pan — Thomaz Mazzoni, o primeiro grande cronista esportivo",
+        "u": "https://jovempan.com.br/colunistas/thiago-uberreich/thomaz-mazzoni-foi-o-primeiro-grande-cronista-esportivo-do-brasil-e-escreveu-obras-preciosas/"
       },
       {
-        "n": "Wikipédia (pt) — Choque-Rei",
-        "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+        "n": "Gazeta Esportiva — O legado do jornal A Gazeta Esportiva",
+        "u": "https://www.gazetaesportiva.com/?p=2498450"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-002",
@@ -41,19 +42,24 @@ export default [
     "c": 0,
     "cat": "rivais",
     "d": 4,
-    "exp": "O nome San-São foi criado em 1956 pelo jornalista Tomás Mazzoni.",
+    "exp": "Segundo a Wikipédia, o confronto passou a ser tratado como clássico e ganhou o nome San-São em 1956, criação de Tomás Mazzoni; a Enciclopédia oficial já registra uma \"Taça San-São\" disputada em março de 1956.",
     "src": [
       {
         "n": "Wikipédia (pt) — San-São",
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
       },
       {
-        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+        "n": "São Paulo FC (site oficial) — Enciclopédia: gols e goleadas",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-gols-e-goleadas/"
+      },
+      {
+        "n": "Jovem Pan — Thomaz Mazzoni, o primeiro grande cronista esportivo",
+        "u": "https://jovempan.com.br/colunistas/thiago-uberreich/thomaz-mazzoni-foi-o-primeiro-grande-cronista-esportivo-do-brasil-e-escreveu-obras-preciosas/"
       }
     ],
     "when": "1956",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-003",
@@ -72,10 +78,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-004",
@@ -94,10 +105,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1933",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-005",
@@ -116,10 +132,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: gols e goleadas",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-gols-e-goleadas/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-006",
@@ -149,7 +174,8 @@ export default [
       }
     ],
     "when": "1957",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-007",
@@ -172,10 +198,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo FC",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1982",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-008",
@@ -198,10 +229,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Brasil",
         "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1990",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-009",
@@ -224,10 +260,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Recente",
         "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      },
+      {
+        "n": "Lance! — A história de Raí no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-rai-no-sao-paulo.html"
       }
     ],
     "when": "1998",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-010",
@@ -250,10 +291,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Conquistas",
         "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1991",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-011",
@@ -276,10 +322,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Lucas Moura",
         "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-012",
@@ -298,10 +349,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-013",
@@ -320,10 +376,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2017",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-014",
@@ -342,10 +403,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2003–2007",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-015",
@@ -367,7 +433,8 @@ export default [
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "rivais-016",
@@ -381,15 +448,20 @@ export default [
     "c": 1,
     "cat": "rivais",
     "d": 3,
-    "exp": "Até 10/05/2026 o retrospecto era de 367 jogos: 135 vitórias do Corinthians, 115 do São Paulo e 117 empates.",
+    "exp": "Até 10/05/2026 a Wikipédia contava 367 jogos: 135 vitórias do Corinthians, 115 do São Paulo e 117 empates. A Enciclopédia oficial, com dados até 31/12/2025, também registra 115 vitórias são-paulinas (em 365 jogos).",
     "src": [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: desempenho por adversários",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-desempenho-por-adversarios/"
       }
     ],
     "when": "2026",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-017",
@@ -403,7 +475,7 @@ export default [
     "c": 0,
     "cat": "rivais",
     "d": 3,
-    "exp": "A contagem da Wikipédia, de 25 de maio de 1930 a 10 de maio de 2026, é de 367 jogos.",
+    "exp": "A contagem da Wikipédia, de 25 de maio de 1930 a 10 de maio de 2026, é de 367 jogos. A Enciclopédia oficial registra 365 jogos até 31/12/2025, número compatível, mas que não confirma diretamente o total de maio de 2026.",
     "src": [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
@@ -411,7 +483,8 @@ export default [
       }
     ],
     "when": "2026",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "rivais-018",
@@ -432,7 +505,8 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "rivais-019",
@@ -446,8 +520,12 @@ export default [
     "c": 2,
     "cat": "rivais",
     "d": 1,
-    "exp": "O Corinthians é o adversário mais frequente: 367 jogos até maio de 2026, contra 356 com o Palmeiras e cerca de 329 com o Santos.",
+    "exp": "Segundo a Enciclopédia do site oficial (dados até 2025), o Corinthians é o adversário mais frequente, com 365 jogos, à frente de Palmeiras (352) e Santos (326).",
     "src": [
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: desempenho por adversários",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-desempenho-por-adversarios/"
+      },
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
@@ -455,13 +533,10 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
-      },
-      {
-        "n": "Wikipédia (pt) — Choque-Rei",
-        "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-020",
@@ -486,12 +561,13 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
       },
       {
-        "n": "Wikipédia (pt) — Choque-Rei",
-        "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+        "n": "São Paulo FC (site oficial) — Enciclopédia: desempenho por adversários",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-desempenho-por-adversarios/"
       }
     ],
     "when": "2026",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-021",
@@ -510,10 +586,15 @@ export default [
       {
         "n": "Wikipédia (pt) — San-São",
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-022",
@@ -527,19 +608,24 @@ export default [
     "c": 1,
     "cat": "rivais",
     "d": 2,
-    "exp": "O São Paulo goleou por 9 a 1 em 1944, na maior diferença do clássico até hoje; na preliminar de juvenis o placar foi 14 a 1.",
+    "exp": "O São Paulo goleou por 9 a 1 em 18 de junho de 1944, no Pacaembu, a maior diferença do clássico; no mesmo dia, os aspirantes também golearam o Santos (o site oficial dá 14 a 0 numa página e 14 a 1 em outra).",
     "src": [
       {
         "n": "Wikipédia (pt) — San-São",
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
       },
       {
-        "n": "São Paulo FC (site oficial) — História — Canindé",
-        "u": "https://www.saopaulofc.net/o-clube/historia/caninde/"
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — História — Reinício",
+        "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
       }
     ],
     "when": "1944",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-023",
@@ -558,10 +644,19 @@ export default [
       {
         "n": "Wikipédia (pt) — San-São",
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: gols e goleadas",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-gols-e-goleadas/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1963",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-024",
@@ -583,7 +678,8 @@ export default [
       }
     ],
     "when": "1963",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "rivais-025",
@@ -606,10 +702,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Brasil",
         "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1980",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-026",
@@ -632,10 +733,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Conquistas",
         "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-027",
@@ -658,10 +764,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Conquistas",
         "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Wikipédia (pt) — San-São",
+        "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
       }
     ],
     "when": "2000",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-028",
@@ -680,10 +791,15 @@ export default [
       {
         "n": "Wikipédia (pt) — San-São",
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-029",
@@ -702,10 +818,15 @@ export default [
       {
         "n": "Wikipédia (pt) — San-São",
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1942–1944",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-030",
@@ -730,12 +851,13 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
       },
       {
-        "n": "São Paulo FC (site oficial) — História — Floresta",
-        "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1933",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-031",
@@ -754,10 +876,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-032",
@@ -776,10 +903,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1939",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-033",
@@ -798,10 +930,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: gols e goleadas",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-gols-e-goleadas/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-034",
@@ -831,7 +972,8 @@ export default [
       }
     ],
     "when": "1943",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-035",
@@ -854,10 +996,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Conquistas",
         "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Wikipédia (pt) — Choque-Rei",
+        "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
       }
     ],
     "when": "1946",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-036",
@@ -879,11 +1026,12 @@ export default [
       }
     ],
     "when": "1950",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "rivais-037",
-    "q": "Como ficou conhecido o Choque-Rei decisivo de 1951, disputado em campo alagado, que o Palmeiras venceu de virada?",
+    "q": "Como ficou conhecido o Choque-Rei decisivo de 28 de janeiro de 1951, em campo alagado, cujo 1 a 1 deu ao Palmeiras o título paulista de 1950?",
     "a": [
       "O Jogo da Lama",
       "Tarde das Garrafadas",
@@ -893,15 +1041,25 @@ export default [
     "c": 0,
     "cat": "rivais",
     "d": 4,
-    "exp": "O \"Jogo da Lama\", de 28 de janeiro, teve o gol de empate de Aquiles após um empurrão de Jair no intervalo.",
+    "exp": "O \"Jogo da Lama\" terminou 1 a 1 (Teixeirinha abriu o placar, Aquiles empatou), resultado que bastava ao Palmeiras. A versão anterior dizia que o Palmeiras venceu de virada; o Almanaque oficial registra empate por 1 a 1.",
     "src": [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
+      },
+      {
+        "n": "Wikipédia (pt) — San-São",
+        "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
       }
     ],
     "when": "1951",
-    "ok": true
+    "ok": true,
+    "v2": false,
+    "fixed": true
   },
   {
     "id": "rivais-038",
@@ -924,14 +1082,19 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Conquistas",
         "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Wikipédia (pt) — Choque-Rei",
+        "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
       }
     ],
     "when": "1971",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-039",
-    "q": "Em que ano o Choque-Rei teve o maior público da rivalidade, 119.113 pessoas no Morumbi, na vitória por 1 a 0 do São Paulo?",
+    "q": "Em que ano o Choque-Rei teve seu maior público no Morumbi, na vitória por 1 a 0 do São Paulo pelo Campeonato Paulista?",
     "a": [
       "1992",
       "1971",
@@ -941,15 +1104,20 @@ export default [
     "c": 3,
     "cat": "rivais",
     "d": 3,
-    "exp": "Segundo a Wikipédia, o recorde é de 17 de junho de 1979.",
+    "exp": "O recorde é o jogo de 17 de junho de 1979: 112.016 pagantes segundo a Enciclopédia oficial (a Wikipédia fala em 119.113 pessoas no total).",
     "src": [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: maiores públicos no MorumBIS",
+        "u": "https://www.saopaulofc.net/enciclopedia-morumbis-torcida-maiores-publicos/"
       }
     ],
     "when": "1979",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-040",
@@ -970,16 +1138,17 @@ export default [
         "u": "https://www.saopaulofc.net/o-clube/historia/mundo/"
       },
       {
-        "n": "São Paulo FC (site oficial) — Conquistas",
-        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
-      },
-      {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-041",
@@ -1009,7 +1178,8 @@ export default [
       }
     ],
     "when": "2021",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-042",
@@ -1028,10 +1198,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2022",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-043",
@@ -1054,10 +1229,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-044",
@@ -1071,15 +1251,20 @@ export default [
     "c": 2,
     "cat": "rivais",
     "d": 2,
-    "exp": "Segundo o site oficial, o Palmeiras foi eliminado (derrota por 1 a 0 fora e vitória por 2 a 0 em casa).",
+    "exp": "Nas oitavas de final, o São Paulo venceu o Palmeiras por 1 a 0 no Parque Antarctica e por 2 a 0 no Morumbi (dois gols de falta de Cicinho), segundo o site oficial.",
     "src": [
       {
         "n": "São Paulo FC (site oficial) — História — Recente",
         "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-045",
@@ -1102,14 +1287,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-046",
-    "q": "Qual foi o placar com que o São Paulo goleou o Corinthians em 8 de maio de 2005, no Pacaembu, pelo Paulista?",
+    "q": "Qual foi o placar com que o São Paulo goleou o Corinthians em 8 de maio de 2005, no Pacaembu, pelo Campeonato Brasileiro?",
     "a": [
       "4 x 0",
       "5 x 1",
@@ -1119,15 +1309,25 @@ export default [
     "c": 1,
     "cat": "rivais",
     "d": 2,
-    "exp": "Segundo a Wikipédia, o São Paulo venceu por 5 a 1 em 8 de maio de 2005, uma das maiores goleadas do Majestoso.",
+    "exp": "O 5 a 1 foi a estreia de Paulo Autuori como técnico, pelo Brasileirão. A versão anterior dizia \"pelo Paulista\", mas o Almanaque oficial registra o jogo como Campeonato Brasileiro (o Paulista de 2005 já terminara em abril).",
     "src": [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: estreias e últimos jogos dos técnicos",
+        "u": "https://www.saopaulofc.net/enciclopedia-tecnicos-estreias-e-ultimos-jogos/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "rivais-047",
@@ -1150,32 +1350,43 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Recente",
         "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-048",
-    "q": "Quantas vezes o São Paulo eliminou o Corinthians em mata-matas, até a Copa do Brasil de 2023, segundo a Wikipédia?",
+    "q": "Segundo a Enciclopédia do site oficial (dados até 2025), quantos mata-matas o São Paulo venceu contra o Corinthians?",
     "a": [
       "Nove",
       "Três",
-      "Cinco",
-      "Sete"
+      "Sete",
+      "Cinco"
     ],
     "c": 2,
     "cat": "rivais",
     "d": 3,
-    "exp": "A lista inclui Conmebol 1994, Paulistas de 1975, 2000 e 2022 e a Copa do Brasil de 2023; o Corinthians eliminou o São Paulo nove vezes.",
+    "exp": "A Enciclopédia oficial contabiliza 25 mata-matas: 7 vencidos pelo São Paulo e 18 pelo Corinthians. A Wikipédia usa outro critério e lista 5 eliminações do Corinthians pelo São Paulo (incluindo a Copa do Brasil de 2023) e 9 no sentido inverso.",
     "src": [
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: desempenho por adversários",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-desempenho-por-adversarios/"
+      },
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "rivais-049",
@@ -1194,10 +1405,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2022",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-050",
@@ -1216,10 +1432,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "ABC do ABC — Jogadores que perderam mais de um pênalti no mesmo jogo",
+        "u": "https://abcdoabc.com.br/alem-de-benedetto-relembre-nomes-que-perderam-mais-de-um-penalti-no-mesmo-jogo/"
       }
     ],
     "when": "1999",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-051",
@@ -1238,54 +1459,74 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-052",
-    "q": "Qual foi o público de 27 de junho de 1971 no Morumbi, na vitória por 1 a 0 sobre o Palmeiras que deu o título paulista?",
+    "q": "Quantos pagantes viram, em 27 de junho de 1971, no Morumbi, a vitória por 1 a 0 sobre o Palmeiras que deu o título paulista ao São Paulo?",
     "a": [
       "98.200",
-      "115.435",
+      "103.887",
       "122.209",
       "80.640"
     ],
     "c": 1,
     "cat": "rivais",
     "d": 3,
-    "exp": "A Wikipédia lista o público de 115.435 (103.887 pagantes) como o segundo maior da história do Choque-Rei.",
+    "exp": "A súmula oficial registra 103.887 pagantes; a Wikipédia dá 115.435 pessoas no total, o segundo maior público da história do Choque-Rei.",
     "src": [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: maiores públicos no MorumBIS",
+        "u": "https://www.saopaulofc.net/enciclopedia-morumbis-torcida-maiores-publicos/"
       }
     ],
     "when": "1971",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-053",
-    "q": "Em 2 de setembro de 2000, o São Paulo bateu o Palmeiras por 3 a 0 e encerrou uma invencibilidade palmeirense de quase quantos anos no Brasileirão?",
+    "q": "Segundo o Almanaque oficial, o 3 a 0 sobre o Palmeiras em 2 de setembro de 2000 foi a primeira vitória do São Paulo sobre o rival em Brasileiros desde qual ano?",
     "a": [
-      "30 anos",
-      "10 anos",
-      "20 anos",
-      "15 anos"
+      "1970",
+      "1985",
+      "1978",
+      "1973"
     ],
-    "c": 0,
+    "c": 3,
     "cat": "rivais",
     "d": 3,
-    "exp": "O Palmeiras ficou 29 anos e nove meses sem perder para o São Paulo em Brasileiros (1970–2000), segundo a Wikipédia.",
+    "exp": "O Almanaque oficial registra vitórias são-paulinas no Brasileiro em 1972 e em 25/11/1973 e nenhuma outra até 2000 (quase 27 anos). A Wikipédia fala em 29 anos e nove meses de invencibilidade palmeirense, contagem que diverge dos jogos de 1972 e 1973.",
     "src": [
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
+      },
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
       }
     ],
     "when": "2000",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "rivais-054",
@@ -1304,10 +1545,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2005–2006",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-055",
@@ -1326,10 +1572,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2019",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-056",
@@ -1348,14 +1599,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2022",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-057",
-    "q": "Quantos mata-matas o São Paulo ganhou do Palmeiras, contra sete do rival, segundo a contagem da Wikipédia (até 2026)?",
+    "q": "Segundo a Enciclopédia do site oficial (dados até 2025), quantos mata-matas o São Paulo venceu contra o Palmeiras?",
     "a": [
       "12",
       "20",
@@ -1365,15 +1621,21 @@ export default [
     "c": 3,
     "cat": "rivais",
     "d": 3,
-    "exp": "A Wikipédia contabiliza 17 eliminações palmeirenses pelo São Paulo e 7 do São Paulo pelo Palmeiras.",
+    "exp": "A Enciclopédia oficial contabiliza 22 mata-matas: 17 vencidos pelo São Paulo e 5 pelo Palmeiras. A Wikipédia também chega a 17 eliminações palmeirenses, mas conta 7 do São Paulo pelo rival.",
     "src": [
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: desempenho por adversários",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-desempenho-por-adversarios/"
+      },
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
       }
     ],
     "when": "2026",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "rivais-058",
@@ -1392,10 +1654,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1956",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-059",
@@ -1409,7 +1676,7 @@ export default [
     "c": 1,
     "cat": "rivais",
     "d": 3,
-    "exp": "A Wikipédia lista o 6 a 2 de 1981 entre as maiores goleadas do clássico; o site oficial cita 6 a 2 na semifinal do Paulista de 1981.",
+    "exp": "A Enciclopédia oficial lista o 6 a 2 de 4 de outubro de 1981, no Morumbi, entre as maiores goleadas do clássico; o site oficial cita o jogo, com gol de chaleira de Mário Sérgio, na campanha do título paulista de 1981.",
     "src": [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
@@ -1418,10 +1685,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Brasil",
         "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: gols e goleadas",
+        "u": "https://www.saopaulofc.net/enciclopedia-clube-gols-e-goleadas/"
       }
     ],
     "when": "1981",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-060",
@@ -1440,10 +1712,15 @@ export default [
       {
         "n": "Wikipédia (pt) — San-São",
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-061",
@@ -1468,12 +1745,13 @@ export default [
         "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       },
       {
-        "n": "Wikipédia (pt) — História do São Paulo FC",
-        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1953",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-062",
@@ -1492,10 +1770,19 @@ export default [
       {
         "n": "Wikipédia (pt) — San-São",
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Grandes Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1967–1971",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-063",
@@ -1521,7 +1808,8 @@ export default [
       }
     ],
     "when": "2000",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "rivais-064",
@@ -1540,10 +1828,15 @@ export default [
       {
         "n": "Wikipédia (pt) — San-São",
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
+      },
+      {
+        "n": "Trivela — Serginho Chulapa aos 65 anos",
+        "u": "https://trivela.com.br/brasil/nos-seus-65-anos-serginho-tem-um-grande-presente-enfim-e-visto-como-gente-boa/"
       }
     ],
     "when": "1984",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-065",
@@ -1566,9 +1859,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "Jovem Pan — Thomaz Mazzoni, o primeiro grande cronista esportivo",
+        "u": "https://jovempan.com.br/colunistas/thiago-uberreich/thomaz-mazzoni-foi-o-primeiro-grande-cronista-esportivo-do-brasil-e-escreveu-obras-preciosas/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-066",
@@ -1591,9 +1889,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "Jovem Pan — Thomaz Mazzoni, o primeiro grande cronista esportivo",
+        "u": "https://jovempan.com.br/colunistas/thiago-uberreich/thomaz-mazzoni-foi-o-primeiro-grande-cronista-esportivo-do-brasil-e-escreveu-obras-preciosas/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-067",
@@ -1616,9 +1919,14 @@ export default [
       {
         "n": "Wikipédia (pt) — San-São",
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
+      },
+      {
+        "n": "Jovem Pan — Thomaz Mazzoni, o primeiro grande cronista esportivo",
+        "u": "https://jovempan.com.br/colunistas/thiago-uberreich/thomaz-mazzoni-foi-o-primeiro-grande-cronista-esportivo-do-brasil-e-escreveu-obras-preciosas/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-068",
@@ -1640,7 +1948,8 @@ export default [
       }
     ],
     "when": "1997",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "rivais-069",
@@ -1654,15 +1963,21 @@ export default [
     "c": 3,
     "cat": "rivais",
     "d": 3,
-    "exp": "A Wikipédia registra o São Paulo campeão do Torneio Início de 1940, com 2 a 0 sobre o Corinthians, em 14 de maio.",
+    "exp": "O São Paulo foi campeão do Torneio Início de 1940 com 2 a 0 sobre o Corinthians, em 19 de maio, segundo a lista de conquistas do site oficial (a Wikipédia dava 14 de maio, data em que o time jogou contra o Flamengo).",
     "src": [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1940",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "rivais-070",
@@ -1681,10 +1996,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "Lance! — Sidão brilha, e São Paulo é campeão sobre o Corinthians nos pênaltis",
+        "u": "https://www.lance.com.br/futebol-nacional/sidao-brilha-sao-paulo-campeao-sobre-corinthians-nos-penaltis.html"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2017",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-071",
@@ -1707,10 +2031,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo FC",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1973",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-072",
@@ -1733,10 +2062,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Brasil",
         "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1974",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-073",
@@ -1755,16 +2089,21 @@ export default [
       {
         "n": "Wikipédia (pt) — Choque-Rei",
         "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2000",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "rivais-074",
-    "q": "Quantos jogos o Santos ficou sem vencer o São Paulo, até a vitória por 2 a 1 na Vila Belmiro em 3 de outubro de 1948?",
+    "q": "Segundo o Almanaque oficial, quantos jogos o Santos ficou sem vencer o São Paulo até a vitória por 2 a 1 na Vila Belmiro, em 3 de outubro de 1948?",
     "a": [
-      "23",
+      "21",
       "13",
       "10",
       "31"
@@ -1772,19 +2111,25 @@ export default [
     "c": 0,
     "cat": "rivais",
     "d": 4,
-    "exp": "Segundo a Wikipédia, foram 23 jogos sem vitória santista, encerrados em 3 de outubro de 1948.",
+    "exp": "Pelo Almanaque oficial, foram 21 jogos sem vitória santista entre 18/08/1940 e 03/10/1948 (incluindo amistosos). A Wikipédia fala em 23 jogos, contagem que inclui partidas não listadas no Almanaque.",
     "src": [
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
+      },
       {
         "n": "Wikipédia (pt) — San-São",
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
       }
     ],
     "when": "1948",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "rivais-075",
-    "q": "Em agosto de 1970, uma vitória por 3 a 2 do São Paulo sobre o Santos encerrou uma série de quantos jogos sem derrota santista no clássico?",
+    "q": "Em julho de 1970, uma vitória por 3 a 2 do São Paulo sobre o Santos, no Parque Antarctica, encerrou uma série de quantos jogos sem derrota santista no clássico?",
     "a": [
       "7",
       "10",
@@ -1794,15 +2139,21 @@ export default [
     "c": 3,
     "cat": "rivais",
     "d": 4,
-    "exp": "A Wikipédia registra 13 jogos de invencibilidade do Santos, iniciada em 30 de outubro de 1966 e encerrada em 12 de agosto de 1970.",
+    "exp": "Depois do 2 a 1 são-paulino de 30/10/1966, o Santos ficou 13 jogos sem perder; a série acabou com o 3 a 2 de 12 de julho de 1970, segundo o Almanaque oficial (a Wikipédia dava 12 de agosto; em 9 de agosto houve outro 3 a 2).",
     "src": [
       {
         "n": "Wikipédia (pt) — San-São",
         "u": "https://pt.wikipedia.org/wiki/San-S%C3%A3o"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1970",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "rivais-076",
@@ -1816,7 +2167,7 @@ export default [
     "c": 1,
     "cat": "rivais",
     "d": 3,
-    "exp": "O site oficial cita os 4 a 0 sobre Palmeiras e Corinthians em 5 e 10 de agosto de 1980; a Wikipédia confirma os dois placares.",
+    "exp": "O site oficial cita os 4 a 0 sobre Palmeiras (5 de agosto, amistoso, segundo o Almanaque) e Corinthians (10 de agosto, pelo Paulista), em 1980.",
     "src": [
       {
         "n": "São Paulo FC (site oficial) — História — Brasil",
@@ -1827,11 +2178,12 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
       },
       {
-        "n": "Wikipédia (pt) — Choque-Rei",
-        "u": "https://pt.wikipedia.org/wiki/Choque-Rei"
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1980",
-    "ok": true
+    "ok": true,
+    "v2": true
   }
 ];

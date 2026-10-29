@@ -24,7 +24,8 @@ export default [
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-002",
@@ -43,10 +44,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Símbolos",
         "u": "https://www.saopaulofc.net/o-clube/simbolos/"
+      },
+      {
+        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-003",
@@ -71,7 +77,8 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-004",
@@ -94,9 +101,14 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — CA Paulistano",
         "u": "https://www.saopaulofc.net/?p=66"
+      },
+      {
+        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-005",
@@ -122,7 +134,8 @@ export default [
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-006",
@@ -144,7 +157,8 @@ export default [
       }
     ],
     "when": "1984",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-007",
@@ -169,7 +183,8 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-008",
@@ -194,7 +209,8 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-009",
@@ -213,9 +229,14 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Símbolos",
+        "u": "https://www.saopaulofc.net/o-clube/simbolos/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-010",
@@ -236,7 +257,8 @@ export default [
         "u": "https://www.saopaulofc.net/o-clube/simbolos/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-011",
@@ -261,7 +283,8 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-012",
@@ -280,10 +303,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Símbolos",
         "u": "https://www.saopaulofc.net/o-clube/simbolos/"
+      },
+      {
+        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1940",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-013",
@@ -308,7 +336,8 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-014",
@@ -334,7 +363,8 @@ export default [
       }
     ],
     "when": "1966",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-015",
@@ -360,7 +390,8 @@ export default [
       }
     ],
     "when": "1937",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-016",
@@ -385,7 +416,8 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-017",
@@ -404,9 +436,14 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "Máquina do Esporte — São Paulo oficializa longa \"Soberano\"",
+        "u": "https://maquinadoesporte.com.br/noticia/sao-paulo-oficializa-longa-soberano"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-018",
@@ -427,7 +464,8 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-019",
@@ -441,7 +479,7 @@ export default [
     "c": 0,
     "cat": "cultura",
     "d": 1,
-    "exp": "O Dia Tricolor lembra a ata de refundação de 16 de dezembro de 1935; uma lei municipal de 2006 o oficializou.",
+    "exp": "O Dia Tricolor lembra a ata de refundação de 16 de dezembro de 1935; a Lei municipal nº 14.229, de 11 de outubro de 2006, o incluiu no calendário oficial da cidade de São Paulo.",
     "src": [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
@@ -450,10 +488,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Reinício",
         "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
+      },
+      {
+        "n": "Prefeitura de São Paulo — Lei nº 14.229, de 11/10/2006 (Dia Tricolor)",
+        "u": "https://legislacao.prefeitura.sp.gov.br/leis/lei-14229-de-11-de-outubro-de-2006"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-020",
@@ -472,10 +515,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Floresta",
         "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
+      },
+      {
+        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-021",
@@ -494,10 +542,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Reinício",
         "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo FC",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-022",
@@ -516,10 +569,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Floresta",
         "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo FC",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-023",
@@ -542,10 +600,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Floresta",
         "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
+      },
+      {
+        "n": "Wikipedia (en) — São Paulo FC",
+        "u": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_FC"
       }
     ],
     "when": "1900",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-024",
@@ -564,10 +627,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Floresta",
         "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1930",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-025",
@@ -593,7 +661,8 @@ export default [
       }
     ],
     "when": "1988",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-026",
@@ -612,9 +681,14 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — História — Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-027",
@@ -637,10 +711,15 @@ export default [
       {
         "n": "Wikipédia (en) — CFA Cotia",
         "u": "https://en.wikipedia.org/wiki/CFA_Cotia"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — História — Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-028",
@@ -663,9 +742,14 @@ export default [
       {
         "n": "Wikipédia (en) — CFA Cotia",
         "u": "https://en.wikipedia.org/wiki/CFA_Cotia"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — História — Recente",
+        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-029",
@@ -684,9 +768,14 @@ export default [
       {
         "n": "Wikipédia (en) — CFA Cotia",
         "u": "https://en.wikipedia.org/wiki/CFA_Cotia"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-030",
@@ -708,7 +797,8 @@ export default [
       }
     ],
     "when": "2011",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-031",
@@ -730,7 +820,8 @@ export default [
       }
     ],
     "when": "1997",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-032",
@@ -756,7 +847,8 @@ export default [
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-033",
@@ -781,11 +873,12 @@ export default [
         "u": "https://www.saopaulofc.net/o-clube/memorial-sao-paulino/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-034",
-    "q": "Qual escultura em tamanho natural há no Memorial do São Paulo?",
+    "q": "Segundo a Wikipédia, qual escultura em tamanho natural fica no Memorial do São Paulo, no Morumbi?",
     "a": [
       "Uma estátua de Leônidas da Silva fazendo a bicicleta",
       "Uma estátua de Rogério Ceni defendendo um pênalti",
@@ -795,18 +888,19 @@ export default [
     "c": 0,
     "cat": "cultura",
     "d": 2,
-    "exp": "A Wikipédia cita a estátua de Leônidas da Silva na pose do seu famoso gol de bicicleta.",
+    "exp": "A Wikipédia cita a estátua de Leônidas da Silva na pose do seu famoso gol de bicicleta. O Memorial foi reformado e reaberto em 2023, e não há confirmação independente de que a peça siga exposta.",
     "src": [
       {
         "n": "Wikipédia (pt) — Memorial do São Paulo FC",
         "u": "https://pt.wikipedia.org/wiki/Memorial_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-035",
-    "q": "Em que portão do Morumbi fica o Memorial do São Paulo?",
+    "q": "Segundo a Wikipédia, em que portão do Morumbi fica o Memorial do São Paulo?",
     "a": [
       "Portão 1",
       "Portão 10",
@@ -823,7 +917,8 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Memorial_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-036",
@@ -842,32 +937,43 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Memorial São-Paulino",
         "u": "https://www.saopaulofc.net/o-clube/memorial-sao-paulino/"
+      },
+      {
+        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "2018",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-037",
-    "q": "Em que dia e mês foi fundada a Torcida Independente, uma das maiores organizadas do São Paulo, em 1972?",
+    "q": "Em que ano foi fundada a Torcida Independente, uma das maiores organizadas do São Paulo, surgida de uma cisão da TUSP?",
     "a": [
-      "25 de janeiro",
-      "1º de maio",
-      "17 de abril",
-      "16 de dezembro"
+      "1969",
+      "1984",
+      "1972",
+      "1978"
     ],
     "c": 2,
     "cat": "cultura",
     "d": 2,
-    "exp": "A Wikipédia informa a fundação em 17 de abril de 1972; a estreia oficial foi em 23 de abril, no Pacaembu.",
+    "exp": "A Independente nasceu em 1972, de dissidentes da TUSP. As fontes divergem no dia: a CNN Brasil fala em março de 1972 e a Wikipédia, em 17 de abril de 1972.",
     "src": [
+      {
+        "n": "CNN Brasil — As maiores torcidas organizadas do Brasil",
+        "u": "https://www.cnnbrasil.com.br/esportes/maiores-torcidas-organizadas-do-brasil/"
+      },
       {
         "n": "Wikipédia (pt) — Torcida Independente",
         "u": "https://pt.wikipedia.org/wiki/Torcida_Independente"
       }
     ],
     "when": "1972",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "conflict": true
   },
   {
     "id": "cultura-038",
@@ -886,13 +992,18 @@ export default [
       {
         "n": "Wikipédia (pt) — Torcida Independente",
         "u": "https://pt.wikipedia.org/wiki/Torcida_Independente"
+      },
+      {
+        "n": "CNN Brasil — As maiores torcidas organizadas do Brasil",
+        "u": "https://www.cnnbrasil.com.br/esportes/maiores-torcidas-organizadas-do-brasil/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-039",
-    "q": "Quem sugeriu o nome \"Torcida Tricolor Independente\" na reunião de fundação, em 1972?",
+    "q": "Segundo a Wikipédia, quem sugeriu o nome \"Torcida Tricolor Independente\" na reunião de fundação, em 1972?",
     "a": [
       "Reinaldo Cardoso",
       "Ricardo Rapp",
@@ -910,7 +1021,8 @@ export default [
       }
     ],
     "when": "1972",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-040",
@@ -931,7 +1043,8 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Torcida_Independente"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-041",
@@ -950,10 +1063,19 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "Auditório Ibirapuera — Quem inventou a torcida organizada?",
+        "u": "https://www.auditorioibirapuera.com.br/quem-inventou-a-torcida-organizada/"
+      },
+      {
+        "n": "Trivela — Corinthians x São Paulo: a primeira organizada",
+        "u": "https://trivela.com.br/brasil/campeonato-brasileiro/corinthians-sao-paulo-organizadas/"
       }
     ],
     "when": "1939",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-042",
@@ -975,7 +1097,8 @@ export default [
       }
     ],
     "when": "1982",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-043",
@@ -994,10 +1117,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Uniformes do São Paulo FC",
         "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "Máquina do Esporte — entrevista sobre a parceria Penalty–São Paulo",
+        "u": "https://maquinadoesporte.com.br/?p=333"
       }
     ],
     "when": "2006–2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-044",
@@ -1011,15 +1139,20 @@ export default [
     "c": 3,
     "cat": "cultura",
     "d": 2,
-    "exp": "A New Balance sucedeu a Adidas, que vestiu o clube de 2018 a 2023.",
+    "exp": "A New Balance assumiu o uniforme em 2024, com contrato até o fim de 2027, substituindo a Adidas.",
     "src": [
       {
         "n": "Wikipédia (pt) — Uniformes do São Paulo FC",
         "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "Trivela — São Paulo vestirá New Balance a partir de 2024",
+        "u": "https://trivela.com.br/brasil/campeonato-brasileiro/sao-paulo-new-balance-fornecedora/"
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-045",
@@ -1041,7 +1174,8 @@ export default [
       }
     ],
     "when": "1964",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-046",
@@ -1063,7 +1197,8 @@ export default [
       }
     ],
     "when": "1978",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-047",
@@ -1082,10 +1217,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Uniformes do São Paulo FC",
         "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "Gazeta Esportiva — São Paulo usará camisa especial pela Chape",
+        "u": "https://www.gazetaesportiva.com/times/sao-paulo/patrocinadores-liberam-e-sao-paulo-usara-camisa-especial-pela-chape/"
       }
     ],
     "when": "2016",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-048",
@@ -1104,10 +1244,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Uniformes do São Paulo FC",
         "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Símbolos",
+        "u": "https://www.saopaulofc.net/o-clube/simbolos/"
       }
     ],
     "when": "1932",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-049",
@@ -1130,9 +1275,14 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Grandes ídolos",
         "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-050",
@@ -1155,10 +1305,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Canindé",
         "u": "https://www.saopaulofc.net/o-clube/historia/caninde/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1944–1957",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-051",
@@ -1181,14 +1336,19 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Símbolos",
         "u": "https://www.saopaulofc.net/o-clube/simbolos/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Grandes Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1952",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-052",
-    "q": "Segundo a pesquisa Ibope encomendada pelo Lance! e publicada em 31 de maio de 2010, que posição a torcida do São Paulo ocupava no país?",
+    "q": "Na pesquisa Lance!/Ibope de torcidas divulgada em 2010, que posição a torcida do São Paulo ocupava no país?",
     "a": [
       "Segunda",
       "Terceira",
@@ -1198,15 +1358,20 @@ export default [
     "c": 1,
     "cat": "cultura",
     "d": 3,
-    "exp": "A Wikipédia cita o levantamento, que colocou a torcida são-paulina em terceiro lugar, atrás de Flamengo e Corinthians.",
+    "exp": "O levantamento Lance!/Ibope de 2010 colocou o São Paulo em terceiro (8,7%), atrás de Flamengo (17,2%) e Corinthians (13,4%), segundo a compilação da RSSSF Brasil.",
     "src": [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "RSSSF Brasil — As maiores torcidas do Brasil",
+        "u": "https://www.rsssfbrasil.com/miscellaneous/torcidas.htm"
       }
     ],
     "when": "2010",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-053",
@@ -1225,10 +1390,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Calendário Tricolor",
         "u": "https://www.saopaulofc.net/o-clube/calendario-tricolor/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-054",
@@ -1247,10 +1417,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Calendário Tricolor",
         "u": "https://www.saopaulofc.net/o-clube/calendario-tricolor/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-055",
@@ -1269,10 +1444,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Calendário Tricolor",
         "u": "https://www.saopaulofc.net/o-clube/calendario-tricolor/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1963",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-056",
@@ -1291,10 +1471,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Calendário Tricolor",
         "u": "https://www.saopaulofc.net/o-clube/calendario-tricolor/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1969",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-057",
@@ -1317,10 +1502,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Brasil",
         "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
+      },
+      {
+        "n": "Rolling Stone Brasil — Há 40 anos, Queen fazia 1º show no Brasil",
+        "u": "https://rollingstone.com.br/noticia/ha-40-anos-queen-fazia-1-show-no-brasil-e-criava-relacao-de-amor-com-o-pais/"
       }
     ],
     "when": "1981",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-058",
@@ -1339,14 +1529,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Estádio do Morumbi",
         "u": "https://pt.wikipedia.org/wiki/Est%C3%A1dio_do_Morumbi"
+      },
+      {
+        "n": "Rolling Stone Brasil — Gene Simmons cita Kiss no Brasil",
+        "u": "https://rollingstone.com.br/musica/gene-simmons-cita-kiss-no-brasil-ao-revelar-momento-que-gostaria-de-reviver/"
       }
     ],
     "when": "1983",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-059",
-    "q": "Qual grupo pop mexicano fez shows no Morumbi em 15 e 16 de março de 1985, ano em que o time da base ganhou o apelido de \"Menudos do Morumbi\"?",
+    "q": "Qual grupo pop porto-riquenho fez shows no Morumbi em 1985, ano em que o time de Cilinho ganhou o apelido de \"Menudos do Morumbi\"?",
     "a": [
       "RBD",
       "Los Bukis",
@@ -1356,7 +1551,7 @@ export default [
     "c": 3,
     "cat": "cultura",
     "d": 2,
-    "exp": "A Wikipédia registra os shows do Menudo no estádio em março de 1985; o apelido do time de Cilinho era uma brincadeira com o grupo.",
+    "exp": "O site oficial conta que o Menudo, grupo porto-riquenho, se apresentou no Morumbi em 1985 para 150 a 200 mil pessoas; o apelido do time era uma brincadeira com o grupo. (A versão anterior dizia \"mexicano\".)",
     "src": [
       {
         "n": "Wikipédia (pt) — Estádio do Morumbi",
@@ -1365,10 +1560,16 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo FC",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — História — Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
       }
     ],
     "when": "1985",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "cultura-060",
@@ -1387,10 +1588,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Estádio do Morumbi",
         "u": "https://pt.wikipedia.org/wiki/Est%C3%A1dio_do_Morumbi"
+      },
+      {
+        "n": "Rolling Stone Brasil — O Rei do Pop em verde-amarelo",
+        "u": "https://rollingstone.com.br/noticia/o-rei-do-pop-em-verde-amarelo/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-061",
@@ -1409,10 +1615,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Estádio do Morumbi",
         "u": "https://pt.wikipedia.org/wiki/Est%C3%A1dio_do_Morumbi"
+      },
+      {
+        "n": "U2Station — PopMart, 30/01/1998, São Paulo (Morumbi)",
+        "u": "https://www.u2station.com/tours/1998/01/january-30-1998---sao-paulo-brazil---morumbi.php"
       }
     ],
     "when": "1998",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-062",
@@ -1431,10 +1642,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Estádio do Morumbi",
         "u": "https://pt.wikipedia.org/wiki/Est%C3%A1dio_do_Morumbi"
+      },
+      {
+        "n": "TNH1 — São Paulo fecha acordo para chamar Morumbi de MorumBis",
+        "u": "https://www.tnh1.com.br/noticia/nid/sao-paulo-fecha-acordo-para-chamar-morumbi-de-morumbis-veja-valor/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-063",
@@ -1453,14 +1669,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Dragões da Real",
         "u": "https://pt.wikipedia.org/wiki/Drag%C3%B5es_da_Real"
+      },
+      {
+        "n": "Dragões da Real (site oficial da torcida)",
+        "u": "https://dragoesdareal.com.br/?p=28"
       }
     ],
     "when": "1984",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-064",
-    "q": "Em que ano a TUSP, torcida uniformizada nascida do Grêmio São-Paulino, foi extinta?",
+    "q": "Segundo a Wikipédia, em que ano a TUSP, torcida uniformizada nascida do Grêmio São-Paulino, foi extinta?",
     "a": [
       "1972",
       "1995",
@@ -1478,11 +1699,12 @@ export default [
       }
     ],
     "when": "1995",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-065",
-    "q": "Qual faixa a Torcida Independente exibiu nos primeiros anos, durante a \"Marcha do Silêncio\"?",
+    "q": "Segundo a Wikipédia, qual faixa a Torcida Independente exibiu nos primeiros anos, durante a \"Marcha do Silêncio\"?",
     "a": [
       "\"Fé e amor\"",
       "\"O Soberano chegou\"",
@@ -1499,7 +1721,8 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Torcida_Independente"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-066",
@@ -1522,14 +1745,19 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — CA Paulistano",
         "u": "https://www.saopaulofc.net/?p=66"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo FC",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-067",
-    "q": "Qual objeto de Adhemar Ferreira da Silva está exposto no Memorial do São Paulo?",
+    "q": "Segundo a Wikipédia, qual objeto de Adhemar Ferreira da Silva fica exposto no Memorial do São Paulo?",
     "a": [
       "As sapatilhas usadas nos Jogos de Helsinque, em 1952",
       "A medalha de ouro dos Jogos de Melbourne",
@@ -1547,29 +1775,32 @@ export default [
       }
     ],
     "when": "1952",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-068",
-    "q": "Qual documento de 1935, ligado à fusão com o Tietê, é guardado no Arquivo Histórico do São Paulo?",
+    "q": "Segundo o site oficial, qual livro guardado no Arquivo Histórico do São Paulo contém a ata da reconstrução do clube, em 1935?",
     "a": [
-      "A ata de fundação de 1930",
-      "O primeiro estatuto do clube",
-      "A planta do Morumbi",
-      "O livro da assembleia de 1935"
+      "O Livro de Sócios da Floresta",
+      "O livro de contabilidade da Comissão Pró-Estádio",
+      "O Livro de Ouro do Pacaembu",
+      "O Livro de Assembleias Gerais"
     ],
     "c": 3,
     "cat": "cultura",
     "d": 2,
-    "exp": "O site oficial informa que o Arquivo Histórico guarda o livro da assembleia de 1935.",
+    "exp": "O site oficial informa que o Arquivo Histórico guarda o Livro de Assembleias Gerais, com a ata da reconstrução do Tricolor em 1935, além do Livro de Sócios da Floresta e dos livros da Comissão Pró-Estádio. (A versão anterior ligava o documento à fusão com o Tietê, o que o site não diz.)",
     "src": [
       {
-        "n": "São Paulo FC (site oficial) — Memorial São-Paulino",
+        "n": "São Paulo FC (site oficial) — Memorial e Caminho dos Ídolos",
         "u": "https://www.saopaulofc.net/o-clube/memorial-sao-paulino/"
       }
     ],
     "when": "1935",
-    "ok": true
+    "ok": true,
+    "v2": false,
+    "fixed": true
   },
   {
     "id": "cultura-069",
@@ -1588,10 +1819,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Brasil",
         "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo FC",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1988",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-070",
@@ -1613,7 +1849,8 @@ export default [
       }
     ],
     "when": "1990",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-071",
@@ -1635,7 +1872,8 @@ export default [
       }
     ],
     "when": "1985–1991",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-072",
@@ -1657,7 +1895,8 @@ export default [
       }
     ],
     "when": "1981–1984",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-073",
@@ -1679,7 +1918,8 @@ export default [
       }
     ],
     "when": "1960–1967",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-074",
@@ -1701,7 +1941,8 @@ export default [
       }
     ],
     "when": "1993–1996",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-075",
@@ -1720,9 +1961,14 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "Jornal de Brasília — São Paulo planeja ação para atrair torcida mirim",
+        "u": "https://jornaldebrasilia.com.br/futebol/sao-paulo-planeja-acao-para-atrair-torcida-mirim/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-076",
@@ -1741,14 +1987,19 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — História — Floresta",
+        "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
       }
     ],
     "when": "1930–1935",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-077",
-    "q": "Em que ano uma lei municipal oficializou o Dia Tricolor, celebrado em 16 de dezembro?",
+    "q": "Em que ano uma lei municipal de São Paulo instituiu o Dia Tricolor, celebrado em 16 de dezembro?",
     "a": [
       "1942",
       "1966",
@@ -1758,15 +2009,20 @@ export default [
     "c": 2,
     "cat": "cultura",
     "d": 4,
-    "exp": "Segundo a Wikipédia, a data foi oficializada por lei municipal de 2006, lembrando a refundação de 1935.",
+    "exp": "A Lei municipal nº 14.229, de 11 de outubro de 2006, instituiu o \"Dia do São Paulo Futebol Clube, ou seja, o Dia Tricolor\", em 16 de dezembro, data da refundação de 1935.",
     "src": [
+      {
+        "n": "Prefeitura de São Paulo — Lei nº 14.229, de 11/10/2006 (Dia Tricolor)",
+        "u": "https://legislacao.prefeitura.sp.gov.br/leis/lei-14229-de-11-de-outubro-de-2006"
+      },
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "2006",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-078",
@@ -1785,10 +2041,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Reinício",
         "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo FC",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1936",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-079",
@@ -1807,10 +2068,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Canindé",
         "u": "https://www.saopaulofc.net/o-clube/historia/caninde/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo FC",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1944",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-080",
@@ -1829,9 +2095,14 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Reinício",
         "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo FC",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-081",
@@ -1850,10 +2121,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — MorumBIS",
         "u": "https://www.saopaulofc.net/o-clube/historia/morumbis/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo FC",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1968",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-082",
@@ -1875,7 +2151,8 @@ export default [
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-083",
@@ -1897,7 +2174,8 @@ export default [
       }
     ],
     "when": "1966",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "cultura-084",
@@ -1916,10 +2194,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Uniformes do São Paulo FC",
         "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "IstoÉ — São Paulo lança terceira camisa celeste em homenagem ao Uruguai",
+        "u": "https://istoe.com.br/sao-paulo-lanca-a-sua-terceira-camisa-azul-celeste-em-homenagem-ao-uruguai/"
       }
     ],
     "when": "2019",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-085",
@@ -1938,10 +2221,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Uniformes do São Paulo FC",
         "u": "https://pt.wikipedia.org/wiki/Uniformes_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "Gazeta Esportiva — São Paulo estreava uniforme todo vermelho",
+        "u": "https://www.gazetaesportiva.com/times/sao-paulo/ha-7-anos-sao-paulo-estreava-morumbi-todo-vermelho-com-uniforme-polemico/"
       }
     ],
     "when": "2013",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "cultura-086",
@@ -1963,6 +2251,7 @@ export default [
       }
     ],
     "when": "1983",
-    "ok": true
+    "ok": true,
+    "v2": false
   }
 ];

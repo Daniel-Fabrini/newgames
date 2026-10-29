@@ -19,12 +19,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
       },
       {
-        "n": "Wikipédia (pt) — Raí",
-        "u": "https://pt.wikipedia.org/wiki/Ra%C3%AD"
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Lance! — A história de Raí no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-rai-no-sao-paulo.html"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-002",
@@ -43,10 +48,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Recente",
         "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-003",
@@ -69,10 +79,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Canindé",
         "u": "https://www.saopaulofc.net/o-clube/historia/caninde/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1942",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-004",
@@ -95,10 +110,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Clássico Majestoso",
         "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1942",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-005",
@@ -117,10 +137,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Leônidas da Silva",
         "u": "https://pt.wikipedia.org/wiki/Le%C3%B4nidas_da_Silva"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Grandes Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1943–1949",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-006",
@@ -143,10 +172,15 @@ export default [
       {
         "n": "Wikipédia (pt) — História do São Paulo FC",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1940–1949",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-007",
@@ -169,10 +203,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Conquistas",
         "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo FC",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1946",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-008",
@@ -191,10 +230,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Grandes ídolos",
         "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: estreias e últimos jogos dos técnicos",
+        "u": "https://www.saopaulofc.net/enciclopedia-tecnicos-estreias-e-ultimos-jogos/"
       }
     ],
     "when": "1943–1946",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-009",
@@ -220,7 +264,8 @@ export default [
       }
     ],
     "when": "1931",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "elencos-010",
@@ -243,14 +288,19 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Floresta",
         "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1931",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-011",
-    "q": "Quem foi o técnico do São Paulo no primeiro jogo oficial do clube, o 0 a 0 com o Ypiranga em 16 de março de 1930?",
+    "q": "Quem era o técnico do São Paulo na vitória por 4 a 1 sobre o Corinthians que decidiu o Paulista de 1931, em 10 de janeiro de 1932?",
     "a": [
       "Armando del Debbio",
       "Joreca",
@@ -260,23 +310,29 @@ export default [
     "c": 3,
     "cat": "elencos",
     "d": 3,
-    "exp": "Rubens Salles, ex-jogador do Paulistano, comandou o time na estreia oficial, na Chácara da Floresta; também foi o técnico do primeiro título.",
+    "exp": "A súmula da decisão no site oficial registra Rubens Salles, ex-jogador do Paulistano, como técnico. A pergunta antiga (técnico do 1º jogo oficial, em 1930) foi trocada porque a Enciclopédia do clube só registra a estreia de Rubens Salles como técnico em 18/10/1931.",
     "src": [
       {
-        "n": "São Paulo FC (site oficial) — História — Floresta",
-        "u": "https://www.saopaulofc.net/o-clube/historia/floresta/"
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: estreias e últimos jogos dos técnicos",
+        "u": "https://www.saopaulofc.net/enciclopedia-tecnicos-estreias-e-ultimos-jogos/"
       },
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de 1931",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1931"
       }
     ],
-    "when": "1930",
-    "ok": true
+    "when": "1932",
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "elencos-012",
-    "q": "Qual atacante defendeu o São Paulo de 1930 a 1947 e foi campeão paulista em 1931 e também nos anos 1940?",
+    "q": "Qual atacante, vindo do Paulistano, jogou o primeiro jogo oficial do clube, em 1930, foi campeão paulista de 1931 e capitão do \"Rolo Compressor\" nos anos 1940?",
     "a": [
       "Teixeirinha",
       "Remo",
@@ -286,15 +342,24 @@ export default [
     "c": 2,
     "cat": "elencos",
     "d": 4,
-    "exp": "Luizinho (Luiz Mesquita de Oliveira) atuou de 1930 a 1947 e foi campeão paulista em 1931, 1943, 1945 e 1946, segundo o site oficial.",
+    "exp": "Luizinho (Luiz Mesquita de Oliveira) foi campeão paulista em 1931, 1943, 1945 e 1946 e marcou 176 gols; as súmulas oficiais das finais de 1943, 1945 e 1946 o mostram como capitão.",
     "src": [
       {
         "n": "São Paulo FC (site oficial) — Grandes ídolos",
         "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1930–1947",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-013",
@@ -308,19 +373,24 @@ export default [
     "c": 2,
     "cat": "elencos",
     "d": 4,
-    "exp": "King (Nivancir Innocêncio Fernandes) foi um dos jogadores de Curitiba contratados após a refundação e atuou em 204 jogos pelo clube.",
+    "exp": "King (Nivancir Innocêncio Fernandes), nascido em Curitiba, foi buscado no Paraná logo após a refundação e fez mais de 200 jogos pelo clube (204 segundo os Grandes Ídolos; 203 no Fichário).",
     "src": [
       {
         "n": "São Paulo FC (site oficial) — Grandes ídolos",
         "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       },
       {
-        "n": "São Paulo FC (site oficial) — História — Reinício",
-        "u": "https://www.saopaulofc.net/o-clube/historia/reinicio/"
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo FC",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1936–1947",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-014",
@@ -343,10 +413,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Grandes ídolos",
         "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1977",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-015",
@@ -365,10 +440,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Waldir Peres",
         "u": "https://pt.wikipedia.org/wiki/Waldir_Peres"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Grandes Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1977",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-016",
@@ -387,9 +471,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Serginho Chulapa",
         "u": "https://pt.wikipedia.org/wiki/Serginho_Chulapa"
+      },
+      {
+        "n": "Trivela — Serginho Chulapa aos 65 anos",
+        "u": "https://trivela.com.br/brasil/nos-seus-65-anos-serginho-tem-um-grande-presente-enfim-e-visto-como-gente-boa/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-017",
@@ -412,10 +501,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Careca (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Careca_(futebolista)"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1983",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-018",
@@ -438,10 +532,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Grandes ídolos",
         "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1983",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-019",
@@ -460,14 +559,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Careca (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/Careca_(futebolista)"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1987",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-020",
-    "q": "Como ficou conhecido o grupo de jovens promovidos pelo técnico Cilinho em 1985, entre eles Müller e Silas?",
+    "q": "Como ficou conhecida a equipe de jovens revelações montada pelo técnico Cilinho em meados dos anos 1980, com Müller, Silas e Sídnei?",
     "a": [
       "Máquina Tricolor",
       "Expressinho",
@@ -477,15 +581,24 @@ export default [
     "c": 3,
     "cat": "elencos",
     "d": 3,
-    "exp": "Em 1985, o técnico Cilinho promoveu Müller e Silas das categorias de base, e o grupo foi apelidado de \"Menudos do Morumbi\".",
+    "exp": "O time de Cilinho, campeão paulista de 1985, ganhou o apelido de \"Menudos do Morumbi\", em alusão ao grupo porto-riquenho Menudo, que fez shows no estádio em 1985.",
     "src": [
       {
         "n": "Wikipédia (pt) — História do São Paulo FC",
         "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — História — Brasil",
+        "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Grandes Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1985",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-021",
@@ -504,14 +617,19 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Brasil",
         "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
+      },
+      {
+        "n": "Wikipédia (pt) — História do São Paulo FC",
+        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1980",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-022",
-    "q": "Quem é o maior artilheiro da história do São Paulo (242 gols, segundo a Wikipédia, na temporada de 2021)?",
+    "q": "Quem é o maior artilheiro da história do São Paulo, com 242 gols?",
     "a": [
       "Serginho Chulapa",
       "Luis Fabiano",
@@ -521,11 +639,15 @@ export default [
     "c": 0,
     "cat": "elencos",
     "d": 1,
-    "exp": "Serginho Chulapa lidera com 242 gols, à frente de Gino Orlando (233) e Luis Fabiano (212).",
+    "exp": "Segundo a Enciclopédia do site oficial (dados até 2025), Serginho Chulapa lidera com 242 gols, à frente de Gino Orlando (233) e Luis Fabiano (212).",
     "src": [
       {
-        "n": "Wikipédia (en) — List of São Paulo FC players",
-        "u": "https://en.wikipedia.org/wiki/List_of_São_Paulo_FC_players"
+        "n": "São Paulo FC (site oficial) — Enciclopédia: maiores artilheiros",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Grandes Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       },
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
@@ -533,7 +655,8 @@ export default [
       }
     ],
     "when": "1973–1982",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-023",
@@ -558,11 +681,12 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Lu%C3%ADs_Fabiano"
       },
       {
-        "n": "São Paulo FC (site oficial) — Grandes ídolos",
-        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+        "n": "São Paulo FC (site oficial) — Enciclopédia: maiores artilheiros",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-024",
@@ -585,10 +709,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Müller (futebolista)",
         "u": "https://pt.wikipedia.org/wiki/M%C3%BCller_(futebolista)"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: maiores artilheiros",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
       }
     ],
     "when": "1984–1996",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-025",
@@ -605,24 +734,25 @@ export default [
     "exp": "Ceni atuou em 1.237 partidas e marcou 131 gols pelo São Paulo, segundo o site oficial e a Wikipédia.",
     "src": [
       {
-        "n": "São Paulo FC (site oficial) — Grandes ídolos",
-        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
-      },
-      {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
       },
       {
-        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
-        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+        "n": "Lance! — A história de Rogério Ceni no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-rogerio-ceni-no-sao-paulo.html"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1993–2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-026",
-    "q": "Quantos jogos fez Waldir Peres, o segundo jogador que mais atuou pelo São Paulo (até 2021)?",
+    "q": "Quantos jogos fez Waldir Peres, o segundo jogador que mais atuou pelo São Paulo?",
     "a": [
       "544",
       "525",
@@ -632,27 +762,28 @@ export default [
     "c": 3,
     "cat": "elencos",
     "d": 3,
-    "exp": "Waldir Peres tem 617 jogos, atrás apenas de Rogério Ceni; De Sordi vem a seguir, com 544.",
+    "exp": "Segundo a Enciclopédia do site oficial (dados até 2025), Waldir Peres tem 617 jogos, atrás apenas de Rogério Ceni (1.237); De Sordi vem a seguir, com 544.",
     "src": [
       {
-        "n": "Wikipédia (en) — List of São Paulo FC players",
-        "u": "https://en.wikipedia.org/wiki/List_of_São_Paulo_FC_players"
+        "n": "São Paulo FC (site oficial) — Enciclopédia: jogadores com mais jogos",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-jogos/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Grandes Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       },
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
-      },
-      {
-        "n": "São Paulo FC (site oficial) — Grandes ídolos",
-        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1973–1984",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-027",
-    "q": "Contra qual time Rogério Ceni fez sua estreia pelo São Paulo, em 25 de junho de 1993, vitória por 4 a 1 no Torneio de Santiago de Compostela?",
+    "q": "Contra qual time Rogério Ceni fez sua estreia pelo São Paulo, em 25 de junho de 1993, na vitória por 4 a 1 em torneio disputado em Santiago de Compostela?",
     "a": [
       "Real Madrid",
       "Tenerife",
@@ -662,19 +793,24 @@ export default [
     "c": 1,
     "cat": "elencos",
     "d": 4,
-    "exp": "Ceni estreou em 25/06/1993 diante do Tenerife e, segundo a Wikipédia, defendeu um pênalti.",
+    "exp": "Ceni estreou em 25/06/1993 diante do Tenerife (4 a 1), na Espanha; segundo a Wikipédia, defendeu um pênalti no jogo.",
     "src": [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
       },
       {
-        "n": "São Paulo FC (site oficial) — Grandes ídolos",
-        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Calendário Tricolor",
+        "u": "https://www.saopaulofc.net/o-clube/calendario-tricolor/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-028",
@@ -693,10 +829,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+      },
+      {
+        "n": "Lance! — A história de Rogério Ceni no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-rogerio-ceni-no-sao-paulo.html"
       }
     ],
     "when": "1997",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-029",
@@ -717,12 +858,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
       },
       {
-        "n": "Wikipédia (pt) — Clássico Majestoso",
-        "u": "https://pt.wikipedia.org/wiki/Cl%C3%A1ssico_Majestoso"
+        "n": "Lance! — A história de Rogério Ceni no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-rogerio-ceni-no-sao-paulo.html"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2011",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-030",
@@ -745,9 +891,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+      },
+      {
+        "n": "Lance! — A história de Rogério Ceni no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-rogerio-ceni-no-sao-paulo.html"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-031",
@@ -770,10 +921,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Grandes ídolos",
         "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Lance! — A história de Rogério Ceni no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-rogerio-ceni-no-sao-paulo.html"
       }
     ],
     "when": "2015",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-032",
@@ -795,7 +951,8 @@ export default [
       }
     ],
     "when": "2015",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "elencos-033",
@@ -814,9 +971,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-034",
@@ -835,10 +997,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1990",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-035",
@@ -860,7 +1027,8 @@ export default [
       }
     ],
     "when": "1999",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "elencos-036",
@@ -879,10 +1047,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Recente",
         "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      },
+      {
+        "n": "Jovem Pan — Rogério Ceni e o Morumbi (Rio-São Paulo 2001)",
+        "u": "https://jovempan.com.br/?p=115025"
       }
     ],
     "when": "2001",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-037",
@@ -903,16 +1076,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2006"
       },
       {
-        "n": "Wikipédia (pt) — Campeonato Brasileiro de 2007",
-        "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007"
+        "n": "São Paulo FC (site oficial) — Grandes Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       },
       {
-        "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008",
-        "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008"
+        "n": "São Paulo FC (site oficial) — Enciclopédia: premiações",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-premiacoes/"
       }
     ],
     "when": "2006–2008",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-038",
@@ -931,10 +1105,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de 2006",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2006"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "2006",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-039",
@@ -957,10 +1136,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Recente",
         "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      },
+      {
+        "n": "RSSSF — Brazil 2006",
+        "u": "https://www.rsssf.org/tablesb/braz06.html"
       }
     ],
     "when": "2006",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-040",
@@ -986,11 +1170,12 @@ export default [
       }
     ],
     "when": "2007",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-041",
-    "q": "Quem marcou o gol da vitória por 1 a 0 sobre o Goiás, em Brasília, que deu ao São Paulo o título brasileiro de 2008 na última rodada?",
+    "q": "Quem marcou o gol da vitória por 1 a 0 sobre o Goiás, no Bezerrão (Gama-DF), que deu ao São Paulo o título brasileiro de 2008 na última rodada?",
     "a": [
       "Hernanes",
       "Aloísio",
@@ -1000,7 +1185,7 @@ export default [
     "c": 2,
     "cat": "elencos",
     "d": 3,
-    "exp": "Borges decidiu o jogo de 7 de dezembro de 2008; foi o terceiro título seguido e o sexto do clube.",
+    "exp": "Borges decidiu o jogo de 7 de dezembro de 2008, no Distrito Federal; foi o terceiro título seguido e o sexto do clube.",
     "src": [
       {
         "n": "São Paulo FC (site oficial) — Conquistas",
@@ -1012,11 +1197,12 @@ export default [
       }
     ],
     "when": "2008",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-042",
-    "q": "Quem foi eleito o melhor jogador do Campeonato Brasileiro de 2008?",
+    "q": "Quem foi eleito o craque do Campeonato Brasileiro de 2008 no prêmio oficial da CBF (Craque do Brasileirão)?",
     "a": [
       "Hernanes",
       "Rogério Ceni",
@@ -1026,19 +1212,25 @@ export default [
     "c": 0,
     "cat": "elencos",
     "d": 3,
-    "exp": "Hernanes foi o craque do Brasileirão de 2008, campeão pelo São Paulo.",
+    "exp": "Hernanes foi o \"craque da competição\" no prêmio da CBF de 2008. A pergunta foi precisada porque a Bola de Ouro da revista Placar de 2008 foi para Rogério Ceni.",
     "src": [
       {
-        "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008",
-        "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008"
+        "n": "São Paulo FC (site oficial) — Enciclopédia: premiações",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-premiacoes/"
       },
       {
         "n": "Wikipédia (pt) — Hernanes",
         "u": "https://pt.wikipedia.org/wiki/Hernanes"
+      },
+      {
+        "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008",
+        "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008"
       }
     ],
     "when": "2008",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "elencos-043",
@@ -1057,10 +1249,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de 2007",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007"
+      },
+      {
+        "n": "RSSSF — Brazil 2007",
+        "u": "https://www.rsssf.org/tablesb/braz07.html"
       }
     ],
     "when": "2007",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-044",
@@ -1079,10 +1276,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008"
+      },
+      {
+        "n": "RSSSF — Brazil 2008",
+        "u": "https://www.rsssf.org/tablesb/braz08.html"
       }
     ],
     "when": "2008",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-045",
@@ -1101,10 +1303,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de 2008",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008"
+      },
+      {
+        "n": "RSSSF — Brazil 2008",
+        "u": "https://www.rsssf.org/tablesb/braz08.html"
       }
     ],
     "when": "2008",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-046",
@@ -1123,10 +1330,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Recente",
         "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-047",
@@ -1152,7 +1364,8 @@ export default [
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-048",
@@ -1171,10 +1384,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Mundial de Clubes da FIFA de 2005",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Mundial_de_Clubes_da_FIFA_de_2005"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: premiações",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-premiacoes/"
+      },
+      {
+        "n": "Lance! — A história de Rogério Ceni no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-rogerio-ceni-no-sao-paulo.html"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-049",
@@ -1197,10 +1419,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Recente",
         "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-050",
@@ -1219,10 +1446,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores de 2005",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2005"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 2005",
+        "u": "https://www.rsssf.org/sacups/copa05.html"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-051",
@@ -1241,10 +1477,19 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Mundo",
         "u": "https://www.saopaulofc.net/o-clube/historia/mundo/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: estreias e últimos jogos dos técnicos",
+        "u": "https://www.saopaulofc.net/enciclopedia-tecnicos-estreias-e-ultimos-jogos/"
+      },
+      {
+        "n": "Lance! — A história de Telê Santana no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-tele-santana-no-sao-paulo.html"
       }
     ],
     "when": "1990",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-052",
@@ -1263,10 +1508,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Telê Santana",
         "u": "https://pt.wikipedia.org/wiki/Tel%C3%AA_Santana"
+      },
+      {
+        "n": "Lance! — A história de Telê Santana no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-tele-santana-no-sao-paulo.html"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Grandes Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1996",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-053",
@@ -1285,10 +1539,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Zetti",
         "u": "https://pt.wikipedia.org/wiki/Zetti"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1990",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-054",
@@ -1311,10 +1570,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Zetti",
         "u": "https://pt.wikipedia.org/wiki/Zetti"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1990–1996",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-055",
@@ -1336,7 +1600,8 @@ export default [
       }
     ],
     "when": "1996",
-    "ok": true
+    "ok": true,
+    "v2": false
   },
   {
     "id": "elencos-056",
@@ -1355,10 +1620,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Raí",
         "u": "https://pt.wikipedia.org/wiki/Ra%C3%AD"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
+      },
+      {
+        "n": "Lance! — A história de Raí no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-rai-no-sao-paulo.html"
       }
     ],
     "when": "1987",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-057",
@@ -1377,10 +1651,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Raí",
         "u": "https://pt.wikipedia.org/wiki/Ra%C3%AD"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Grandes Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-058",
@@ -1403,10 +1682,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Raí",
         "u": "https://pt.wikipedia.org/wiki/Ra%C3%AD"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-059",
@@ -1425,10 +1709,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Raí",
         "u": "https://pt.wikipedia.org/wiki/Ra%C3%AD"
+      },
+      {
+        "n": "Lance! — A história de Raí no São Paulo",
+        "u": "https://www.lance.com.br/lancepedia/a-historia-de-rai-no-sao-paulo.html"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2000",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-060",
@@ -1447,10 +1740,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores de 1992",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: artilharias",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-artilharias/"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-061",
@@ -1473,10 +1771,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Mundo",
         "u": "https://www.saopaulofc.net/o-clube/historia/mundo/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1991",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-062",
@@ -1499,10 +1802,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Conquistas",
         "u": "https://www.saopaulofc.net/o-clube/conquistas/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-063",
@@ -1521,10 +1829,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Mundo",
         "u": "https://www.saopaulofc.net/o-clube/historia/mundo/"
+      },
+      {
+        "n": "Wikipédia (pt) — Zetti",
+        "u": "https://pt.wikipedia.org/wiki/Zetti"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-064",
@@ -1543,10 +1856,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Cafu",
         "u": "https://pt.wikipedia.org/wiki/Cafu"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Grandes Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
       }
     ],
     "when": "2002",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-065",
@@ -1565,10 +1883,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Cafu",
         "u": "https://pt.wikipedia.org/wiki/Cafu"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-066",
@@ -1587,10 +1910,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Lucas Moura",
         "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
+      },
+      {
+        "n": "Trivela — São Paulo confirma venda de Lucas ao PSG por € 43 milhões",
+        "u": "https://trivela.com.br/franca/sao-paulo-confirma-venda-de-lucas-ao-psg-e-fatura-e-43-milhoes/"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-067",
@@ -1613,10 +1941,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Recente",
         "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      },
+      {
+        "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
+        "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-068",
@@ -1635,10 +1968,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Recente",
         "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      },
+      {
+        "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
+        "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-069",
@@ -1657,10 +1995,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Casemiro",
         "u": "https://pt.wikipedia.org/wiki/Casemiro"
+      },
+      {
+        "n": "Diário do Nordeste — Quem é Casemiro",
+        "u": "https://diariodonordeste.verdesmares.com.br/jogada/futebol/copa-do-mundo/quem-e-casemiro-autor-do-gol-da-vitoria-do-brasil-contra-a-suica-na-copa-do-mundo-1.3306173"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "2013",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-070",
@@ -1679,10 +2026,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Kaká",
         "u": "https://pt.wikipedia.org/wiki/Kak%C3%A1"
+      },
+      {
+        "n": "Gazeta Esportiva — 10 curiosidades da carreira de Kaká",
+        "u": "https://www.gazetaesportiva.com/?p=2855526"
       }
     ],
     "when": "2003",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-071",
@@ -1705,10 +2057,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Recente",
         "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+      },
+      {
+        "n": "Wikipédia (pt) — Kaká",
+        "u": "https://pt.wikipedia.org/wiki/Kak%C3%A1"
       }
     ],
     "when": "2001",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-072",
@@ -1727,10 +2084,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Kaká",
         "u": "https://pt.wikipedia.org/wiki/Kak%C3%A1"
+      },
+      {
+        "n": "Gazeta Esportiva — 10 curiosidades da carreira de Kaká",
+        "u": "https://www.gazetaesportiva.com/?p=2855526"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "2014",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-073",
@@ -1749,9 +2115,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Hernanes",
         "u": "https://pt.wikipedia.org/wiki/Hernanes"
+      },
+      {
+        "n": "Lance! — Por onde anda Hernanes",
+        "u": "https://www.lance.com.br/lancepedia/por-onde-anda-hernanes.html"
       }
     ],
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-074",
@@ -1770,14 +2141,23 @@ export default [
       {
         "n": "Wikipédia (pt) — Nílton de Sordi",
         "u": "https://pt.wikipedia.org/wiki/N%C3%ADlton_de_Sordi"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Grandes Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1952–1965",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-075",
-    "q": "Qual atacante atuou de 1939 a 1956, marcou 188 gols e foi campeão paulista em 1943, 1945, 1946, 1948, 1949 e 1953?",
+    "q": "Qual ponta-esquerda, revelado pelo clube, atuou de 1939 a 1956 e foi campeão paulista em 1943, 1945, 1946, 1948, 1949 e 1953?",
     "a": [
       "Gino Orlando",
       "Teixeirinha",
@@ -1787,15 +2167,24 @@ export default [
     "c": 1,
     "cat": "elencos",
     "d": 3,
-    "exp": "Teixeirinha (Elisio dos Santos Teixeira) fez 188 gols em 525 jogos, segundo o site oficial.",
+    "exp": "Teixeirinha (Elisio dos Santos Teixeira) fez 525 jogos; o site oficial lhe atribui 188 gols nos Grandes Ídolos e 189 na Enciclopédia, o 4º maior artilheiro do clube.",
     "src": [
       {
         "n": "São Paulo FC (site oficial) — Grandes ídolos",
         "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: maiores artilheiros",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-gols/"
       }
     ],
     "when": "1939–1956",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-076",
@@ -1814,10 +2203,19 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Grandes ídolos",
         "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "Wikipédia (pt) — José Poy",
+        "u": "https://pt.wikipedia.org/wiki/Jos%C3%A9_Poy"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1975",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-077",
@@ -1831,19 +2229,24 @@ export default [
     "c": 2,
     "cat": "elencos",
     "d": 4,
-    "exp": "Zizinho chegou em 1957, aos 35 anos, e foi campeão paulista naquele ano.",
+    "exp": "Zizinho, nascido em 1921, foi contratado do Bangu e estreou em 10 de novembro de 1957; foi o maestro do time campeão paulista daquele ano.",
     "src": [
       {
         "n": "São Paulo FC (site oficial) — História — MorumBIS",
         "u": "https://www.saopaulofc.net/o-clube/historia/morumbis/"
       },
       {
-        "n": "Wikipédia (pt) — História do São Paulo FC",
-        "u": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria_do_S%C3%A3o_Paulo_Futebol_Clube"
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
+      },
+      {
+        "n": "Wikipédia (pt) — Béla Guttmann",
+        "u": "https://pt.wikipedia.org/wiki/B%C3%A9la_Guttmann"
       }
     ],
     "when": "1957",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-078",
@@ -1864,12 +2267,17 @@ export default [
         "u": "https://www.saopaulofc.net/o-clube/historia/morumbis/"
       },
       {
-        "n": "São Paulo FC (site oficial) — Grandes ídolos",
-        "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+        "n": "Wikipédia (pt) — Béla Guttmann",
+        "u": "https://pt.wikipedia.org/wiki/B%C3%A9la_Guttmann"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: estreias e últimos jogos dos técnicos",
+        "u": "https://www.saopaulofc.net/enciclopedia-tecnicos-estreias-e-ultimos-jogos/"
       }
     ],
     "when": "1957",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-079",
@@ -1888,10 +2296,15 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Brasil",
         "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
+      },
+      {
+        "n": "Wikipédia (pt) — São Paulo Futebol Clube",
+        "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
       }
     ],
     "when": "1957–1970",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-080",
@@ -1914,10 +2327,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de 1986",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1986"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Conquistas (súmulas das finais)",
+        "u": "https://www.saopaulofc.net/o-clube/conquistas/"
       }
     ],
     "when": "1985–1990",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-081",
@@ -1940,14 +2358,19 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — História — Brasil",
         "u": "https://www.saopaulofc.net/o-clube/historia/brasil/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1977–1988",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-082",
-    "q": "Qual lateral atuou 512 vezes pelo São Paulo entre 1979 e 1992 e foi campeão da Libertadores de 1992?",
+    "q": "Qual lateral-esquerdo, revelado pelo clube, atuou de 1979 a 1992 e foi campeão da Libertadores de 1992?",
     "a": [
       "Nelsinho",
       "Zé Teodoro",
@@ -1957,15 +2380,24 @@ export default [
     "c": 0,
     "cat": "elencos",
     "d": 4,
-    "exp": "Nelsinho (Nélson Luis Kerchner) foi campeão paulista seis vezes, brasileiro em 1986 e da Libertadores de 1992.",
+    "exp": "Nelsinho (Nélson Luis Kerchner) fez mais de 500 jogos (512 nos Grandes Ídolos, 516 no Fichário), foi campeão brasileiro em 1986, paulista várias vezes e da Libertadores de 1992.",
     "src": [
       {
         "n": "São Paulo FC (site oficial) — Grandes ídolos",
         "u": "https://www.saopaulofc.net/o-clube/grandes-idolos/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Enciclopédia: jogadores com mais jogos",
+        "u": "https://www.saopaulofc.net/enciclopedia-jogadores-mais-jogos/"
       }
     ],
     "when": "1979–1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-083",
@@ -1988,10 +2420,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1953–1962",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-084",
@@ -2010,10 +2447,19 @@ export default [
       {
         "n": "São Paulo FC (site oficial) — Calendário Tricolor",
         "u": "https://www.saopaulofc.net/o-clube/calendario-tricolor/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Memorial e Caminho dos Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/memorial-sao-paulino/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Fichário (perfis de todos os atletas)",
+        "u": "https://www.saopaulofc.net/o-clube/fichario/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "elencos-085",
@@ -2034,11 +2480,16 @@ export default [
         "u": "https://www.saopaulofc.net/o-clube/calendario-tricolor/"
       },
       {
-        "n": "São Paulo FC (site oficial) — História — Recente",
-        "u": "https://www.saopaulofc.net/o-clube/historia/recente/"
+        "n": "São Paulo FC (site oficial) — Memorial e Caminho dos Ídolos",
+        "u": "https://www.saopaulofc.net/o-clube/memorial-sao-paulino/"
+      },
+      {
+        "n": "São Paulo FC (site oficial) — Almanaque (relação de todos os jogos)",
+        "u": "https://www.saopaulofc.net/o-clube/almanaque/"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   }
 ];
