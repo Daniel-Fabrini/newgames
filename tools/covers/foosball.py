@@ -53,6 +53,9 @@ def rod(x, kit, ys):
             objs.append(box((0.34, 0.07, 0.64), black, loc=(x, y + 0.04, z - 0.46), bevel=0.02))
         objs.append(box((0.3, 0.3, 0.2), black if kit is white else white, loc=(x, y, z - 0.9), bevel=0.05))
         objs.append(box((0.34, 0.4, 0.2), shoe, loc=(x, y, 0.85), bevel=0.05))
+        for sx_ in (-1, 1):
+            objs.append(box((0.1, 0.3, 0.1), kit, loc=(x + sx_ * 0.24, y + (0.12 if kit is white else -0.12), z - 0.12), bevel=0.03))
+            objs.append(sphere(0.06, skin, loc=(x + sx_ * 0.24, y + (0.29 if kit is white else -0.29), z - 0.12)))
         objs.append(sphere(0.2, skin, loc=(x, y, z + 0.02)))
         objs.append(sphere(0.205, hair, loc=(x, y, z + 0.1), scale=(1, 1, 0.6)))
 rod(-2.0, blue, [0.0])
