@@ -49,27 +49,28 @@ def hull(L, B, D, mat):
     sm.levels = sm.render_levels = 2
     for p in mesh.polygons:
         p.use_smooth = True
-    o.data.materials.append(mat)
+    for mm in (mat, dgrey, red):
+        o.data.materials.append(mm)
+    for p in mesh.polygons:
+        zc = p.center.z
+        p.material_index = 1 if p.normal.z > 0.9 and zc > 0.2 * D else (2 if zc < -0.28 * D else 0)
     bpy.context.view_layer.objects.active = o
     return o
 
 
 def ship(x, y, ang, sc, kind=0):
-    p = [hull(3.4, 1.0, 0.5, grey)]
-    p.append(box((3.0, 0.8, 0.07), dgrey, (-0.05, 0, 0.27), bevel=0.02))                   # deck
-    p.append(box((3.35, 0.86, 0.1), red, (-0.1, 0, -0.18), bevel=0.04))                    # waterline stripe
-    p[-1].scale = (0.97, 0.98, 1)
+    p = [hull(3.5, 1.1, 0.6, grey)]
     p.append(box((1.0, 0.64, 0.4), white, (-0.5, 0, 0.5), bevel=0.1))
     p.append(box((0.62, 0.5, 0.3), white, (-0.55, 0, 0.85), bevel=0.09))
     p.append(box((0.74, 0.56, 0.06), steel, (-0.55, 0, 1.03), bevel=0.02))
     p.append(cylinder(0.035, 0.55, steel, (-0.55, 0, 1.3), bevel=0.0, seg=12))
-    p.append(cylinder(0.2, 0.2, red, (-0.55, 0, 1.35), rot=(0, 90, 0), bevel=0.02, seg=24).__class__ and cylinder(0.14, 0.4, red, (-1.1, 0, 0.62), bevel=0.04, seg=24))
+    p.append(cylinder(0.15, 0.45, red, (0.0, 0, 0.62), bevel=0.04, seg=24))
     p.append(torus(0.17, 0.03, steel, (-0.55, 0, 1.2), rot=(90, 0, 0)))
     for tx, sz in ((0.8, 1.0), (1.35, 0.85)):
         p.append(cylinder(0.27 * sz, 0.18, dgrey, (tx, 0, 0.36), bevel=0.05, seg=32))
         p.append(box((0.4 * sz, 0.32 * sz, 0.14), grey, (tx, 0, 0.5), bevel=0.05))
         p.append(cylinder(0.055, 0.85 * sz, steel, (tx + 0.55 * sz, 0.0, 0.52), rot=(0, 90, 0), bevel=0.0, seg=16))
-    return parent(p, loc=(x, y, 0), rot=(0, 0, ang), scale=sc)
+    return parent(p, loc=(x, y, 0.42 * sc), rot=(0, 0, ang), scale=sc)
 
 
 objs = []
@@ -82,12 +83,9 @@ for a in (0, 90, 45, 135):
     b.rotation_euler = (0, 0, math.radians(a))
     objs.append(b)
 # sweep wedge
-sw = cone(2.9, 0.0, 0.02, flame('#0e9ee8', 0.6, 'sweep'), (0, 0, 0.02), seg=3)
 objs.append(ship(-0.6, -1.1, -10, 1.15))
 objs.append(ship(1.3, 1.5, 8, 0.8))
 # wake foam behind big ship
-for k in range(5):
-    objs.append(sphere(0.3 - k * 0.04, foam, (-2.5 - k * 0.45, -1.0 - k * 0.1, 0.03), scale=(1.8, 1.0, 0.18), seg=24))
 # crown splash (shell hit) front right
 sx, sy = 2.0, -1.6
 objs.append(torus(0.55, 0.12, foam, (sx, sy, 0.1), scale=(1, 1, 0.6)))
@@ -100,5 +98,5 @@ objs.append(cone(0.34, 0.08, 1.7, foam, (sx, sy, 0.95)))
 for k in range(10):
     a = random.uniform(0, 6.28); r = random.uniform(0.5, 1.0)
     objs.append(sphere(random.uniform(0.07, 0.14), drop, (sx + math.cos(a) * r, sy + math.sin(a) * r * 0.8, random.uniform(0.5, 1.6)), seg=16))
-fit_g = parent(objs, loc=(0, 0, 0.8), rot=(24, 0, -8), scale=0.7)
+fit_g = parent(objs, loc=(0, 0, 0.8), rot=(24, 0, -8), scale=0.76)
 render('naval')
