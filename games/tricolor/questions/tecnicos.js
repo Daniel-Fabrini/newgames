@@ -153,7 +153,7 @@ export default [
     ],
     "c": 0,
     "cat": "tecnicos",
-    "d": 3,
+    "d": 2,
     "exp": "Libertadores, Mundial, Supercopa e Recopa: a \"quádrupla coroa\" de 1993.",
     "src": [
       {
@@ -179,7 +179,7 @@ export default [
     ],
     "c": 2,
     "cat": "tecnicos",
-    "d": 3,
+    "d": 2,
     "exp": "Telê teve o problema de saúde em janeiro de 1996.",
     "src": [
       {
@@ -201,7 +201,7 @@ export default [
     ],
     "c": 2,
     "cat": "tecnicos",
-    "d": 2,
+    "d": 1,
     "exp": "Telê comandou o Brasil em 1982 (eliminado pela Itália) e 1986 (eliminado pela França nos pênaltis).",
     "src": [
       {
@@ -244,7 +244,7 @@ export default [
     ],
     "c": 3,
     "cat": "tecnicos",
-    "d": 3,
+    "d": 2,
     "exp": "Telê nasceu em Itabirito (MG), em 26 de julho de 1931.",
     "src": [
       {
@@ -292,7 +292,7 @@ export default [
     ],
     "c": 1,
     "cat": "tecnicos",
-    "d": 3,
+    "d": 2,
     "exp": "Telê foi campeão brasileiro pelo Atlético-MG em 1971.",
     "src": [
       {
@@ -406,7 +406,7 @@ export default [
     ],
     "c": 0,
     "cat": "tecnicos",
-    "d": 3,
+    "d": 2,
     "exp": "Muricy foi campeão brasileiro de 2010 pelo Fluminense.",
     "src": [
       {
@@ -524,7 +524,7 @@ export default [
     ],
     "c": 0,
     "cat": "tecnicos",
-    "d": 3,
+    "d": 2,
     "exp": "Minelli foi bicampeão brasileiro pelo Internacional.",
     "src": [
       {
@@ -704,7 +704,7 @@ export default [
     ],
     "c": 0,
     "cat": "tecnicos",
-    "d": 3,
+    "d": 2,
     "exp": "Autuori foi campeão da Libertadores de 1997 com o Cruzeiro.",
     "src": [
       {
@@ -726,7 +726,7 @@ export default [
     ],
     "c": 2,
     "cat": "tecnicos",
-    "d": 3,
+    "d": 2,
     "exp": "Autuori foi campeão brasileiro de 1995 pelo Botafogo.",
     "src": [
       {
@@ -748,7 +748,7 @@ export default [
     ],
     "c": 2,
     "cat": "tecnicos",
-    "d": 3,
+    "d": 2,
     "exp": "Autuori assumiu o lugar de Leão e depois foi campeão da Libertadores.",
     "src": [
       {
@@ -796,7 +796,7 @@ export default [
     ],
     "c": 3,
     "cat": "tecnicos",
-    "d": 2,
+    "d": 1,
     "exp": "Crespo foi anunciado em fevereiro de 2021 e venceu o Paulista; foi seu primeiro título como técnico.",
     "src": [
       {
@@ -865,7 +865,7 @@ export default [
     ],
     "c": 3,
     "cat": "tecnicos",
-    "d": 2,
+    "d": 1,
     "exp": "Dorival assumiu em 2023 e conquistou a Copa do Brasil sobre o Flamengo.",
     "src": [
       {
@@ -891,7 +891,7 @@ export default [
     ],
     "c": 0,
     "cat": "tecnicos",
-    "d": 3,
+    "d": 2,
     "exp": "Dorival venceu as duas competições em 2022, pelo Flamengo.",
     "src": [
       {
@@ -913,7 +913,7 @@ export default [
     ],
     "c": 2,
     "cat": "tecnicos",
-    "d": 2,
+    "d": 1,
     "exp": "Dorival dirigiu a seleção brasileira de janeiro de 2024 a março de 2025.",
     "src": [
       {
@@ -935,7 +935,7 @@ export default [
     ],
     "c": 2,
     "cat": "tecnicos",
-    "d": 3,
+    "d": 2,
     "exp": "Ceni deixou o cargo em abril de 2023 e foi substituído por Dorival.",
     "src": [
       {
@@ -961,7 +961,7 @@ export default [
     ],
     "c": 0,
     "cat": "tecnicos",
-    "d": 3,
+    "d": 2,
     "exp": "Ney Franco assumiu em julho de 2012, no lugar de Leão, e levou o clube ao título.",
     "src": [
       {

@@ -107,7 +107,7 @@ export default [
     ],
     "c": 1,
     "cat": "copas",
-    "d": 2,
+    "d": 1,
     "exp": "Jonathan Calleri marcou aos 45 minutos do primeiro tempo (acréscimos) no Maracanã, em 17 de setembro de 2023.",
     "src": [
       {
@@ -177,7 +177,7 @@ export default [
     ],
     "c": 2,
     "cat": "copas",
-    "d": 3,
+    "d": 2,
     "exp": "Bruno Henrique abriu o placar para o Flamengo, e Nestor empatou para o São Paulo nos acréscimos.",
     "src": [
       {
@@ -199,7 +199,7 @@ export default [
     ],
     "c": 2,
     "cat": "copas",
-    "d": 2,
+    "d": 1,
     "exp": "Após perder por 2 a 1 na ida, o São Paulo venceu por 2 a 0 em casa e avançou ao eliminar o Corinthians.",
     "src": [
       {
@@ -287,7 +287,7 @@ export default [
     ],
     "c": 1,
     "cat": "copas",
-    "d": 2,
+    "d": 1,
     "exp": "O São Paulo bateu o Palmeiras nos pênaltis, após 0 a 0, e conquistou a Supercopa em 4 de fevereiro de 2024.",
     "src": [
       {
@@ -335,7 +335,7 @@ export default [
     ],
     "c": 0,
     "cat": "copas",
-    "d": 3,
+    "d": 2,
     "exp": "A decisão foi no Mineirão, em Belo Horizonte, em 4 de fevereiro de 2024.",
     "src": [
       {
@@ -379,7 +379,7 @@ export default [
     ],
     "c": 2,
     "cat": "copas",
-    "d": 2,
+    "d": 1,
     "exp": "A Supercopa de 2024 foi o primeiro título do clube nessa competição; a Copa do Brasil viera em 2023.",
     "src": [
       {
@@ -405,7 +405,7 @@ export default [
     ],
     "c": 0,
     "cat": "copas",
-    "d": 2,
+    "d": 1,
     "exp": "A competição foi rebatizada em 2024 como Supercopa Rei, em homenagem a Pelé.",
     "src": [
       {
@@ -479,7 +479,7 @@ export default [
     ],
     "c": 1,
     "cat": "copas",
-    "d": 3,
+    "d": 2,
     "exp": "Os dois jogos (Morumbi e Mineirão) terminaram sem gols, e o São Paulo ganhou nos pênaltis por 4 a 2.",
     "src": [
       {
@@ -501,7 +501,7 @@ export default [
     ],
     "c": 3,
     "cat": "copas",
-    "d": 3,
+    "d": 2,
     "exp": "A partida única foi disputada em Kobe, no Japão, em 3 de abril de 1994.",
     "src": [
       {
@@ -637,7 +637,7 @@ export default [
     ],
     "c": 1,
     "cat": "copas",
-    "d": 4,
+    "d": 2,
     "exp": "O São Paulo venceu o Independiente por 2 a 0 no Morumbi e empatou por 1 a 1 em Avellaneda.",
     "src": [
       {
@@ -681,7 +681,7 @@ export default [
     ],
     "c": 3,
     "cat": "copas",
-    "d": 3,
+    "d": 2,
     "exp": "O São Paulo foi campeão da Copa Conmebol de 1994, batendo o Peñarol por 7 a 4 no agregado.",
     "src": [
       {
@@ -821,7 +821,7 @@ export default [
     ],
     "c": 1,
     "cat": "copas",
-    "d": 3,
+    "d": 2,
     "exp": "O torneio foi realizado em Cuiabá (MT), de 8 a 12 de fevereiro de 1996.",
     "src": [
       {
@@ -931,7 +931,7 @@ export default [
     ],
     "c": 2,
     "cat": "copas",
-    "d": 3,
+    "d": 2,
     "exp": "O jogo de ida, em 5 de dezembro de 2012, terminou 0 a 0.",
     "src": [
       {
@@ -1071,7 +1071,7 @@ export default [
     ],
     "c": 0,
     "cat": "copas",
-    "d": 3,
+    "d": 2,
     "exp": "A final foi no Estádio Mario Alberto Kempes, em Córdoba; o São Paulo perdeu por 2 a 0.",
     "src": [
       {
@@ -1093,7 +1093,7 @@ export default [
     ],
     "c": 2,
     "cat": "copas",
-    "d": 3,
+    "d": 2,
     "exp": "O Atlético Nacional avançou à final; o campeão foi o River Plate.",
     "src": [
       {
@@ -1115,7 +1115,7 @@ export default [
     ],
     "c": 2,
     "cat": "copas",
-    "d": 3,
+    "d": 2,
     "exp": "O São Paulo foi campeão do Rio-São Paulo de 2001, segundo o artigo do torneio.",
     "src": [
       {

@@ -146,7 +146,7 @@ export default [
     ],
     "c": 0,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Leônidas morreu em 24 de janeiro de 2004, em Cotia (SP), de complicações do Alzheimer.",
     "src": [
       {
@@ -168,7 +168,7 @@ export default [
     ],
     "c": 2,
     "cat": "idolos",
-    "d": 2,
+    "d": 1,
     "exp": "Friedenreich, primeiro grande astro do futebol brasileiro, era chamado de \"El Tigre\".",
     "src": [
       {
@@ -407,7 +407,7 @@ export default [
     ],
     "c": 3,
     "cat": "idolos",
-    "d": 2,
+    "d": 1,
     "exp": "Gérson foi titular na final de 1970, contra a Itália.",
     "src": [
       {
@@ -429,7 +429,7 @@ export default [
     ],
     "c": 1,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Gérson jogou no Botafogo de 1963 a 1969 e foi ao São Paulo em julho de 1969.",
     "src": [
       {
@@ -494,7 +494,7 @@ export default [
     ],
     "c": 0,
     "cat": "idolos",
-    "d": 2,
+    "d": 1,
     "exp": "Raí jogou no PSG de 1993 a 1998 e voltou ao São Paulo em 1998.",
     "src": [
       {
@@ -538,7 +538,7 @@ export default [
     ],
     "c": 2,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Raí usava a camisa 10 e marcou de pênalti contra a Rússia na fase de grupos.",
     "src": [
       {
@@ -560,7 +560,7 @@ export default [
     ],
     "c": 0,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Raí foi capitão nos três primeiros jogos; depois a braçadeira passou a Dunga.",
     "src": [
       {
@@ -582,7 +582,7 @@ export default [
     ],
     "c": 3,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Raí jogou no PSG de 1993 a 1998 e retornou ao São Paulo, onde ficou até 2000.",
     "src": [
       {
@@ -626,7 +626,7 @@ export default [
     ],
     "c": 1,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "No Roma, Cafu ganhou o apelido \"Il Pendolino\" (o trem expresso).",
     "src": [
       {
@@ -647,7 +647,7 @@ export default [
     ],
     "c": 3,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Marcos Evangelista de Morais nasceu em Itaquaquecetuba em 7 de junho de 1970.",
     "src": [
       {
@@ -779,7 +779,7 @@ export default [
     ],
     "c": 1,
     "cat": "idolos",
-    "d": 2,
+    "d": 1,
     "exp": "Zetti defendeu o pênalti de Gamboa, do Newell's Old Boys, e garantiu o título de 1992.",
     "src": [
       {
@@ -1021,7 +1021,7 @@ export default [
     ],
     "c": 0,
     "cat": "idolos",
-    "d": 2,
+    "d": 1,
     "exp": "Ceni jogou até 2015 e se despediu no Morumbi em 11 de dezembro daquele ano.",
     "src": [
       {
@@ -1241,7 +1241,7 @@ export default [
     ],
     "c": 2,
     "cat": "idolos",
-    "d": 2,
+    "d": 1,
     "exp": "A venda ao PSG foi anunciada em agosto de 2012; Lucas se apresentou em janeiro de 2013.",
     "src": [
       {
@@ -1372,7 +1372,7 @@ export default [
     ],
     "c": 0,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "O Porto venceu a Copa Intercontinental de 2004.",
     "src": [
       {
@@ -1482,7 +1482,7 @@ export default [
     ],
     "c": 1,
     "cat": "idolos",
-    "d": 2,
+    "d": 1,
     "exp": "Lugano nasceu em Canelones, no Uruguai, e foi campeão da Copa América de 2011.",
     "src": [
       {
@@ -1525,7 +1525,7 @@ export default [
     ],
     "c": 3,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Lugano defendeu o Fenerbahçe de 2006 a 2011.",
     "src": [
       {
@@ -1569,7 +1569,7 @@ export default [
     ],
     "c": 2,
     "cat": "idolos",
-    "d": 2,
+    "d": 1,
     "exp": "Hernanes é conhecido como \"Profeta\".",
     "src": [
       {
@@ -1590,7 +1590,7 @@ export default [
     ],
     "c": 2,
     "cat": "idolos",
-    "d": 2,
+    "d": 1,
     "exp": "A Lazio o contratou em 2010 por 13,5 milhões de euros.",
     "src": [
       {
@@ -1656,7 +1656,7 @@ export default [
     ],
     "c": 1,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Müller jogou no Torino de 1988 a 1990.",
     "src": [
       {
@@ -1722,7 +1722,7 @@ export default [
     ],
     "c": 0,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Müller nasceu em Campo Grande, em 31 de janeiro de 1966.",
     "src": [
       {
@@ -1744,7 +1744,7 @@ export default [
     ],
     "c": 2,
     "cat": "idolos",
-    "d": 2,
+    "d": 1,
     "exp": "Careca atuou no Napoli e foi campeão italiano em 1989–90.",
     "src": [
       {
@@ -1810,7 +1810,7 @@ export default [
     ],
     "c": 3,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Careca jogou no Guarani de 1978 a 1982 e foi ao São Paulo na sequência.",
     "src": [
       {
@@ -1832,7 +1832,7 @@ export default [
     ],
     "c": 1,
     "cat": "idolos",
-    "d": 2,
+    "d": 1,
     "exp": "Segundo a Wikipédia, Serginho marcou 250 gols em 330 jogos entre 1973 e 1982.",
     "src": [
       {
@@ -1919,7 +1919,7 @@ export default [
     ],
     "c": 2,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Waldir Peres foi reserva em 1974 e 1978 e titular em 1982.",
     "src": [
       {
@@ -1985,7 +1985,7 @@ export default [
     ],
     "c": 3,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Ele estava no elenco campeão de 1958, na Suécia.",
     "src": [
       {
@@ -2007,7 +2007,7 @@ export default [
     ],
     "c": 1,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Zizinho foi eleito o melhor jogador da Copa de 1950, disputada no Brasil.",
     "src": [
       {
@@ -2203,7 +2203,7 @@ export default [
     ],
     "c": 1,
     "cat": "idolos",
-    "d": 3,
+    "d": 2,
     "exp": "Leonardo jogou no Kashima de 1994 a 1996.",
     "src": [
       {
