@@ -247,17 +247,32 @@
     const h = H * d.sizeK;
     return { w: h * (d.item ? 0.95 : 0.9), h: h * (d.item ? 0.62 : 0.85) };
   };
-  // Card portrait (for the wanted card / tray): centred on (cx, cy) inside a size x size box.
-  WA.drawIcon = function (g, id, cx, cy, size) {
+  // Card portrait: draws the target large, crops to its alpha bounds and fits it into size x size.
+  WA.renderIcon = function (id, size, pad = 0.08, mode) {
     const T0 = WA.TARGETS[id];
-    const d = T0.make(id === 'hero' ? 'wave' : id === 'wizard' ? 'hold2' : 'photo');
-    const flip = 1;
-    if (d.kind === 'person') {
-      const H = size * 0.9;
-      WA.drawPerson(g, Object.assign({ noShadow: true }, d.p), cx, cy + H * 0.5, H, flip);
-    } else {
-      const dk = d.item ? 1.05 : 0.95;
-      WA.sprite(g, cx - 0, cy + size * (d.item ? 0.28 : 0.42), size * dk * (d.item ? 1.0 : 0.95), d.fn, flip);
-    }
+    const d = T0.make(id === 'hero' ? 'wave' : id === 'wizard' ? 'hold2' : 'photo', 1);
+    const BIG = 1000;
+    const c = document.createElement('canvas');
+    c.width = BIG * 1.6;
+    c.height = BIG * 1.6;
+    const g = c.getContext('2d');
+    g.lineJoin = 'round';
+    g.lineCap = 'round';
+    const cx = c.width / 2, cy = c.height * 0.8;
+    if (d.kind === 'person') WA.drawPerson(g, Object.assign({ noShadow: true }, d.p), cx, cy, BIG * 0.9, 1);
+    else WA.sprite(g, cx, cy, BIG * (d.item ? 1.0 : 0.95), d.fn, 1);
+    const im = g.getImageData(0, 0, c.width, c.height).data;
+    let x0 = c.width, y0 = c.height, x1 = 0, y1 = 0;
+    for (let y = 0; y < c.height; y += 2) for (let x = 0; x < c.width; x += 2) if (im[(y * c.width + x) * 4 + 3] > 20) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+    let bw = x1 - x0 + 4, bh = y1 - y0 + 4;
+    if (mode === 'head') { bh = Math.min(bh, bw * 1.1); y1 = y0 + bh; }
+    const out = document.createElement('canvas');
+    out.width = size;
+    out.height = size;
+    const og = out.getContext('2d');
+    og.imageSmoothingQuality = 'high';
+    const k = Math.min((size * (1 - pad * 2)) / bw, (size * (1 - pad * 2)) / bh);
+    og.drawImage(c, x0 - 2, y0 - 2, bw, bh, (size - bw * k) / 2, (size - bh * k) / 2, bw * k, bh * k);
+    return out;
   };
 })();

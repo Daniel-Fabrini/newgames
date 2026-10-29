@@ -370,57 +370,290 @@
 .g-waldo-tray {
   position: absolute;
   left: 50%;
-  bottom: calc(12px + var(--safe-bottom));
+  bottom: calc(10px + var(--safe-bottom));
   transform: translateX(-50%);
-  width: min(calc(100% - 24px), 420px);
+  max-width: calc(100% - 20px);
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 14px 10px 10px;
-  border-radius: 24px;
-  background: linear-gradient(180deg, rgba(24, 24, 29, 0.99), rgba(9, 9, 12, 1));
+  gap: 6px;
+  padding: 6px 12px 6px 8px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(24, 24, 29, 0.97), rgba(9, 9, 12, 0.98));
   border: 1px solid var(--line);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.6), var(--glow);
-  pointer-events: none;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.6), var(--glow);
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
   z-index: 3;
+  -webkit-tap-highlight-color: transparent;
 }
-.g-waldo-tray-art {
+.g-waldo-tray:active {
+  transform: translateX(-50%) scale(0.98);
+}
+.g-waldo-chip {
+  position: relative;
   flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 50% 35%, #fff4cf, #e8cf8a);
+  border: 2px solid #c9971c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: filter 0.3s, opacity 0.3s;
 }
-.g-waldo-tray-art .g-waldo-portrait {
-  border-radius: 18px;
+.g-waldo-chip-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
-.g-waldo-tray-text {
-  flex: 1;
-  min-width: 0;
+.g-waldo-chip-ck {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 70, 30, 0.55);
+  color: #62ff9a;
+}
+.g-waldo-chip-ck .g-waldo-ico {
+  width: 28px;
+  height: 28px;
+  color: #62ff9a;
+  filter: drop-shadow(0 1px 0 #04210f);
+}
+.g-waldo-chip.found {
+  filter: grayscale(0.6);
+  opacity: 0.8;
+  border-color: #2ee66b;
+}
+.g-waldo-chip.found .g-waldo-chip-ck {
+  display: flex;
+}
+.g-waldo-tray-n {
+  flex: none;
+  min-width: 34px;
+  text-align: center;
+  color: var(--gold);
+  font-weight: 900;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.g-waldo-spr {
+  display: block;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ---------- wanted poster ---------- */
+.g-waldo-wanted {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  background: rgba(3, 3, 5, 0.72);
+  z-index: 6;
+  overflow-y: auto;
+}
+.g-waldo-wanted.show {
+  display: flex;
+  animation: g-waldo-fade 0.25s ease both;
+}
+.g-waldo-poster {
+  width: 100%;
+  max-width: 380px;
+  margin: auto;
+  padding: 16px 14px 16px;
+  border-radius: 26px;
+  background: radial-gradient(120% 60% at 50% 0%, rgba(243, 194, 74, 0.2), transparent 60%), linear-gradient(180deg, #1b1b20, #0d0d10);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), var(--glow);
+}
+.g-waldo-poster-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.g-waldo-poster-top h2 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 3px;
+  font-weight: 900;
+  background: var(--gold-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.g-waldo-poster-star .g-waldo-ico {
+  width: 22px;
+  height: 22px;
+}
+.g-waldo-poster-sub {
+  margin: 4px 0 12px;
+  text-align: center;
+  color: var(--text-2);
+  font-size: 13px;
+  font-weight: 800;
+}
+.g-waldo-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-bottom: 14px;
+}
+.g-waldo-wcard {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 3px;
+  padding: 8px 8px 9px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #23232a, #131317);
+  border: 1px solid var(--line-soft);
+  text-align: center;
+  min-width: 0;
 }
-.g-waldo-tray-title {
-  font-size: 18px;
+.g-waldo-wcard.found {
+  border-color: #2ee66b;
+  opacity: 0.75;
+}
+.g-waldo-wcard-art {
+  position: relative;
+  width: 92px;
+  height: 92px;
+  border-radius: 16px;
+  background: radial-gradient(circle at 50% 35%, #fff4cf, #e8cf8a);
+  border: 2px solid #c9971c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.g-waldo-wcard-img {
+  width: 86px;
+  height: 86px;
+  object-fit: contain;
+}
+.g-waldo-wcard-ck {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 70, 30, 0.55);
+}
+.g-waldo-wcard-ck .g-waldo-ico {
+  width: 44px;
+  height: 44px;
+  color: #62ff9a;
+}
+.g-waldo-wcard b {
+  font-size: 14px;
   font-weight: 900;
+  line-height: 1.15;
+  color: #fff;
+}
+.g-waldo-wcard small {
+  color: var(--text-2);
+  font-size: 11.5px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+.g-waldo-cards.n3 .g-waldo-wcard:nth-child(3) {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  text-align: left;
+  gap: 10px;
+  padding: 8px 12px;
+}
+.g-waldo-cards.n3 .g-waldo-wcard:nth-child(3) .g-waldo-wcard-art {
+  flex: none;
+}
+.g-waldo-cards.n3 .g-waldo-wcard:nth-child(3) > b,
+.g-waldo-cards.n3 .g-waldo-wcard:nth-child(3) > small {
+  display: block;
+}
+
+/* ---------- menu extras ---------- */
+.g-waldo-hero-art {
+  width: 118px;
+  height: 118px;
+  border-radius: 22px;
+  background: radial-gradient(circle at 50% 30%, #fff4cf, #e8cf8a 70%);
+  border: 2px solid #c9971c;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5), inset 0 0 18px rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.g-waldo-hero-img {
+  width: 112px;
+  height: 112px;
+  object-fit: contain;
+}
+.g-waldo-gallery .section-title {
+  margin: 4px 0 8px;
+}
+.g-waldo-thumbs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 2px 2px 10px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+.g-waldo-thumb {
+  position: relative;
+  flex: none;
+  width: 142px;
+  scroll-snap-align: start;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #0c0c0f;
+}
+.g-waldo-thumb img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.6;
+  object-fit: cover;
+}
+.g-waldo-thumb span {
+  display: block;
+  padding: 5px 8px 6px;
+  font-size: 12px;
+  font-weight: 800;
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.g-waldo-tray-sub {
-  color: var(--text-2);
-  font-size: 13.5px;
-  line-height: 1.3;
-  font-weight: 700;
+.g-waldo-thumb.locked img {
+  filter: grayscale(1) brightness(0.45) blur(1px);
 }
-.g-waldo-tray-sub.tip {
-  color: #ffd95a;
-  font-style: italic;
+.g-waldo-thumb.locked span {
+  color: var(--text-3);
 }
-.g-waldo-tray-sub.found {
-  color: var(--gold);
-  font-weight: 900;
+.g-waldo-hud-time.warn {
+  color: #ff8a95;
+  border-color: rgba(255, 74, 92, 0.7);
 }
-.g-waldo-tray-side {
-  flex: none;
+.g-waldo-loading .g-waldo-retry {
+  display: none;
+}
+.g-waldo-loading.error .g-waldo-retry {
+  display: inline-flex;
+}
+.g-waldo-loading.error .spinner {
+  display: none;
 }
 
 .g-waldo-loading {
@@ -588,9 +821,13 @@
     gap: 10px;
     padding: 10px;
   }
-  .g-waldo-hero-art .g-waldo-portrait {
-    width: 118px;
-    height: 118px;
+  .g-waldo-hero-art {
+    width: 98px;
+    height: 98px;
+  }
+  .g-waldo-hero-img {
+    width: 92px;
+    height: 92px;
   }
   .g-waldo-hero-text h2 {
     font-size: 19px;
@@ -601,10 +838,52 @@
   .g-waldo-stat b {
     font-size: 16px;
   }
-  .g-waldo-tray-title {
-    font-size: 16px;
+  .g-waldo-chip {
+    width: 42px;
+    height: 42px;
   }
-  .g-waldo-tray-sub {
-    font-size: 12.5px;
+  .g-waldo-chip-img {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* many targets: smaller cards so "Start" stays in view */
+.g-waldo-cards.n5 .g-waldo-wcard-art,
+.g-waldo-cards.n6 .g-waldo-wcard-art {
+  width: 66px;
+  height: 66px;
+  border-radius: 13px;
+}
+.g-waldo-cards.n5 .g-waldo-wcard-img,
+.g-waldo-cards.n6 .g-waldo-wcard-img {
+  width: 60px;
+  height: 60px;
+}
+.g-waldo-cards.n5 .g-waldo-wcard small,
+.g-waldo-cards.n6 .g-waldo-wcard small {
+  font-size: 10.5px;
+  line-height: 1.2;
+}
+.g-waldo-cards.n5 .g-waldo-wcard:nth-child(5) {
+  grid-column: 1 / -1;
+}
+.g-waldo-poster > .btn.primary {
+  position: sticky;
+  bottom: 0;
+}
+@media (max-height: 760px) {
+  .g-waldo-poster {
+    padding: 12px 12px 12px;
+  }
+  .g-waldo-poster-top h2 {
+    font-size: 26px;
+  }
+  .g-waldo-poster-sub {
+    margin-bottom: 8px;
+  }
+  .g-waldo-cards {
+    margin-bottom: 10px;
+    gap: 7px;
   }
 }

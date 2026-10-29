@@ -357,16 +357,20 @@
   P.cloud = (g, x, y, w, c = '#ffffff') => {
     setInk(w * 0.35);
     const s = [[-0.3, 0, 0.2], [-0.1, -0.1, 0.26], [0.15, -0.06, 0.22], [0.34, 0.02, 0.16], [0, 0.04, 0.24]];
-    g.beginPath();
-    for (const [dx, dy, r] of s) {
-      g.moveTo(x + (dx + r) * w, y + dy * w * 0.6);
-      g.arc(x + dx * w, y + dy * w * 0.6, r * w, 0, Math.PI * 2);
-    }
+    const circs = () => {
+      g.beginPath();
+      for (const [dx, dy, r] of s) {
+        g.moveTo(x + (dx + r) * w, y + dy * w * 0.6);
+        g.arc(x + dx * w, y + dy * w * 0.6, r * w, 0, Math.PI * 2);
+      }
+    };
+    circs();
+    g.lineWidth = WA.ink * 2.2;
+    g.strokeStyle = 'rgba(29,20,16,0.7)';
+    g.stroke();
+    circs();
     g.fillStyle = c;
     g.fill();
-    g.lineWidth = WA.ink * 0.8;
-    g.strokeStyle = 'rgba(29,20,16,0.55)';
-    g.stroke();
   };
   P.sandcastle = (g, x, y, w) => {
     setInk(w);

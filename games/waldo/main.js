@@ -1,33 +1,21 @@
-// "Cadê o Ruivinho?" — find the one character in a crowded, procedurally
-// painted scene. Modes: classic (chapters of 5 scenes, stars for speed),
-// timed (2 minutes, as many scenes as possible) and a daily scene with a streak.
-// Lobby modes map to ctx.mode: 'classic' | 'timed' | 'daily'.
+// "Detetive dos Personagens" — find Ruivinho and his friends in giant hand-inked crowd
+// pictures. Modes (lobby ids): classic (chapters of 5 scenes, stars for speed), timed
+// (2 minutes, as many scenes as possible) and a daily scene with a streak.
+// The pictures are rendered offline (see build/) and shipped as WebP + hit-data JSON.
 
 import STRINGS from './strings.js';
 import { icon } from './icons.js';
-import { buildScene } from './engine/scene.js';
-import { createViewer } from './engine/view.js';
-import { drawPortrait, targetPerson } from './engine/people.js';
-import { classicPlan, timedPlan, dailyPlan, starsFor, dateKey, yesterdayKey, mmss, makeClock, CHAPTER_SCENES, HINT_PRICE, DAILY_COINS } from './engine/progress.js';
+import { SceneView } from './engine/view.js';
+import { loadScene, loadMeta, loadImage, keepOnly, spriteUrl, sceneThumbUrl } from './engine/assets.js';
+import { SCENES, SCENE_KEY, TARGET_KEY, classicPlan, timedPlan, dailyPlan, resolveLevel, starsFor, dateKey, yesterdayKey, mmss, makeClock, CHAPTER_SCENES, HINT_PRICE, DAILY_COINS } from './engine/plan.js';
 
 const TIMED_SECONDS = 120;
-const TIMED_BONUS = 6;
+const TIMED_BONUS = 8;
 const WRONG_PENALTY = 3;
-const TIP_EVERY = 30;
+const TIP_EVERY = 35;
 const START_HINTS = 3;
-const THEME_KEY = {
-  beach: 'themeBeach',
-  station: 'themeStation',
-  ski: 'themeSki',
-  market: 'themeMarket',
-  street: 'themeStreet',
-  fair: 'themeFair',
-  stadium: 'themeStadium',
-  castle: 'themeCastle',
-  harbour: 'themeHarbour',
-  zoo: 'themeZoo',
-  library: 'themeLibrary',
-};
+const HINT_RADIUS = 250; // picture units
+const HINT_MS = 4200;
 
 export async function mount(root, ctx) {
   await ctx.loadCSS(new URL('./style.css', import.meta.url));
@@ -42,9 +30,9 @@ export async function mount(root, ctx) {
   let playEl = null;
   let viewer = null;
   let sess = null;
-  let pre = null; // { key, scene } prebuilt scene
   let sceneToken = 0;
   let modalOpen = false;
+  let hintFx = null;
   const timers = new Set();
   const later = (fn, ms) => {
     const id = setTimeout(() => {
@@ -62,6 +50,8 @@ export async function mount(root, ctx) {
   const getTimedBest = () => store.get('timedBest', { score: 0, scenes: 0 });
   const getDaily = () => store.get('daily', { last: null, streak: 0, best: null, days: {} });
 
+  const nameOf = (id) => t(`name${TARGET_KEY[id]}`);
+
   // ---------- small UI pieces ----------
   const coinPill = h('div', { class: 'g-waldo-pill g-waldo-coinpill' });
   const refreshCoins = () => {
@@ -72,34 +62,14 @@ export async function mount(root, ctx) {
     refreshCoins();
   };
 
-  function portraitCanvas(size, pose, bg) {
-    const c = document.createElement('canvas');
-    const d = Math.min(2, window.devicePixelRatio || 1);
-    c.width = Math.round(size * d);
-    c.height = Math.round(size * d);
-    c.style.width = `${size}px`;
-    c.style.height = `${size}px`;
-    c.className = 'g-waldo-portrait';
-    const g = c.getContext('2d');
-    g.scale(d, d);
-    const grd = g.createRadialGradient(size / 2, size * 0.38, 0, size / 2, size * 0.38, size * 0.62);
-    grd.addColorStop(0, bg[0]);
-    grd.addColorStop(1, bg[1]);
-    g.fillStyle = grd;
-    g.fillRect(0, 0, size, size);
-    g.fillStyle = 'rgba(255,220,120,0.10)';
-    for (let i = 0; i < 12; i++) {
-      const a = (i / 12) * Math.PI * 2;
-      g.beginPath();
-      g.moveTo(size / 2, size * 0.38);
-      g.lineTo(size / 2 + Math.cos(a) * size, size * 0.38 + Math.sin(a) * size);
-      g.lineTo(size / 2 + Math.cos(a + 0.12) * size, size * 0.38 + Math.sin(a + 0.12) * size);
-      g.closePath();
-      g.fill();
+  const spr = (name, cls = '', size = 0) => {
+    const im = h('img', { class: `g-waldo-spr ${cls}`, src: spriteUrl(name), alt: '', draggable: 'false' });
+    if (size) {
+      im.style.width = `${size}px`;
+      im.style.height = `${size}px`;
     }
-    drawPortrait(g, targetPerson(null, pose), size / 2, size * 0.5, size);
-    return c;
-  }
+    return im;
+  };
 
   function showCard({ title, stars = null, lines = [], actions = [] }) {
     if (!playEl) return;
@@ -136,7 +106,7 @@ export async function mount(root, ctx) {
     const v = await ctx.ui.modal({ dismissible: true, ...opts });
     modalOpen = false;
     if (!alive) return v;
-    if (sess && !sess.done && !document.hidden) resumeSess();
+    if (sess && !sess.done && !sess.intro && !document.hidden) resumeSess();
     return v;
   }
 
@@ -171,7 +141,7 @@ export async function mount(root, ctx) {
     const hero = h(
       'section',
       { class: 'g-waldo-hero' },
-      h('div', { class: 'g-waldo-hero-art' }, portraitCanvas(150, 'wave', ['#3d2a0a', '#0a0a0c'])),
+      h('div', { class: 'g-waldo-hero-art' }, spr('hero_big.webp', 'g-waldo-hero-img')),
       h('div', { class: 'g-waldo-hero-text' }, h('h2', null, t('heroTitle')), h('p', null, t('heroText'))),
     );
     const stats = h(
@@ -199,7 +169,7 @@ export async function mount(root, ctx) {
       h('div', { class: 'progress' }, h('i', { style: { width: `${pct}%` } })),
       h('small', { class: 'muted' }, `${c.run}/${CHAPTER_SCENES}`),
     );
-    const modeCard = (key, ico, title, sub, right, onclick) =>
+    const modeCard = (ico, title, sub, right, onclick) =>
       h(
         'button',
         { class: 'g-waldo-mode', onclick },
@@ -210,15 +180,33 @@ export async function mount(root, ctx) {
     const modes = h(
       'div',
       { class: 'g-waldo-modes' },
-      modeCard('classic', 'search', t('modeClassic'), t('modeClassicSub'), null, () => startClassic()),
-      modeCard('timed', 'clock', t('modeTimed'), t('modeTimedSub'), best.scenes ? t('best', { n: best.scenes }) : null, () => startTimed()),
+      modeCard('search', t('modeClassic'), t('modeClassicSub'), null, () => startClassic()),
+      modeCard('clock', t('modeTimed'), t('modeTimedSub'), best.scenes ? t('best', { n: best.scenes }) : null, () => startTimed()),
       modeCard(
-        'daily',
         'calendar',
         t('modeDaily'),
         t('modeDailySub'),
         doneToday ? h('span', { class: 'g-waldo-done', html: icon('check') }) : streakN ? h('span', { class: 'g-waldo-streak', html: icon('fire') }, streakN) : null,
         () => startDaily(false),
+      ),
+    );
+    // the album of pictures: reached ones are in colour
+    const reached = (i) => c.idx >= SCENES.length || c.idx >= i;
+    const gallery = h(
+      'section',
+      { class: 'g-waldo-gallery' },
+      h('h3', { class: 'section-title' }, t('scenesTitle')),
+      h(
+        'div',
+        { class: 'g-waldo-thumbs' },
+        SCENES.map((id, i) =>
+          h(
+            'div',
+            { class: `g-waldo-thumb ${reached(i) ? '' : 'locked'}` },
+            h('img', { src: sceneThumbUrl(id), alt: '', loading: 'lazy', draggable: 'false' }),
+            h('span', null, t(SCENE_KEY[id])),
+          ),
+        ),
       ),
     );
     menuEl = h(
@@ -229,10 +217,14 @@ export async function mount(root, ctx) {
       cta,
       ctaBar,
       modes,
+      gallery,
       h('button', { class: 'btn ghost block g-waldo-how', onclick: howToPlay }, h('span', { class: 'btn-ico', html: icon('book') }), t('howBtn')),
     );
     root.append(menuEl);
     requestAnimationFrame(() => menuEl && menuEl.classList.add('in'));
+    // warm up the first picture of the run
+    loadMeta(classicPlan(c.idx).scene).catch(() => {});
+    loadImage(classicPlan(c.idx).scene).catch(() => {});
   }
 
   function hideMenu() {
@@ -283,36 +275,31 @@ export async function mount(root, ctx) {
         'div',
         { class: 'g-waldo-hud' },
         h('div', { class: 'g-waldo-pill g-waldo-hud-left' }),
-        h('div', { class: 'g-waldo-hud-right' }, h('div', { class: 'g-waldo-pill g-waldo-hud-time' }), h('button', { class: 'g-waldo-hintbtn', 'aria-label': t('hintBuyTitle'), onclick: useHint }, h('span', { class: 'g-waldo-hint-ico', html: icon('search') }), h('b', { class: 'g-waldo-hint-count' }, String(getHints())))),
+        h(
+          'div',
+          { class: 'g-waldo-hud-right' },
+          h('div', { class: 'g-waldo-pill g-waldo-hud-time' }),
+          h('button', { class: 'g-waldo-hintbtn', 'aria-label': t('hintBtn'), onclick: useHint }, h('span', { class: 'g-waldo-hint-ico', html: icon('search') }), h('b', { class: 'g-waldo-hint-count' }, String(getHints()))),
+        ),
       ),
       h('div', { class: 'g-waldo-cap' }),
-      h(
-        'div',
-        { class: 'g-waldo-tray' },
-        h('div', { class: 'g-waldo-tray-art' }, portraitCanvas(64, 'stand', ['#3b2a0c', '#101014'])),
-        h('div', { class: 'g-waldo-tray-text' }, h('b', { class: 'g-waldo-tray-title' }, t('findTitle')), h('span', { class: 'g-waldo-tray-sub' })),
-        h('div', { class: 'g-waldo-tray-side' }),
-      ),
-      h('div', { class: 'g-waldo-loading' }, h('div', { class: 'spinner' }), h('div', { class: 'muted' }, t('loading'))),
+      h('button', { class: 'g-waldo-tray', onclick: () => showWanted(false), 'aria-label': t('wantedBtn') }),
+      h('div', { class: 'g-waldo-wanted' }),
+      h('div', { class: 'g-waldo-loading' }, h('div', { class: 'spinner' }), h('div', { class: 'muted g-waldo-loading-txt' }, t('loading')), h('button', { class: 'btn small g-waldo-retry', onclick: () => sess && startScene(sess.plan) }, t('retryLoad'))),
       h('div', { class: 'g-waldo-result' }),
     );
     root.append(playEl);
-    const view_ = playEl.querySelector('.g-waldo-view');
-    viewer = createViewer(view_, { onTap: handleTap });
+    viewer = new SceneView(playEl.querySelector('.g-waldo-view'), { onTap: handleTap, onMiss: handleMiss });
   }
 
   function endPlay() {
     sceneToken++;
+    hintFx = null;
     if (sess) {
       sess.done = true;
       sess.paused = true;
-      releaseScene(sess.scene);
     }
     sess = null;
-    if (pre) {
-      releaseScene(pre.scene);
-      pre = null;
-    }
     if (viewer) {
       viewer.destroy();
       viewer = null;
@@ -323,103 +310,86 @@ export async function mount(root, ctx) {
     }
   }
 
-  function releaseScene(scene) {
-    if (!scene || !scene.canvas) return;
-    scene.canvas.width = 0;
-    scene.canvas.height = 0;
-  }
-
-  function setLoading(on) {
+  function setLoading(on, error = false) {
     if (!playEl) return;
-    playEl.querySelector('.g-waldo-loading').classList.toggle('show', on);
+    const el = playEl.querySelector('.g-waldo-loading');
+    el.classList.toggle('show', on);
+    el.classList.toggle('error', on && error);
+    el.querySelector('.g-waldo-loading-txt').textContent = error ? t('loadError') : t('loading');
   }
 
-  function buildPlan(plan) {
-    let attempt = 0;
-    for (;;) {
-      try {
-        return buildScene(plan.theme, plan.seed + attempt * 7919, plan.lvl);
-      } catch (e) {
-        if (++attempt > 3) throw e;
-      }
+  // Wanted tray (bottom): one chip per thing to find.
+  function renderTray() {
+    if (!playEl || !sess || !sess.targets) return;
+    const tray = playEl.querySelector('.g-waldo-tray');
+    clear(tray);
+    sess.targets.forEach((tg) => {
+      tray.append(h('span', { class: `g-waldo-chip ${tg.found ? 'found' : ''}` }, spr(`${tg.id}_t.webp`, 'g-waldo-chip-img'), h('i', { class: 'g-waldo-chip-ck', html: icon('check') })));
+    });
+    const left = sess.targets.filter((x) => !x.found).length;
+    tray.append(h('span', { class: 'g-waldo-tray-n' }, t('leftN', { a: sess.targets.length - left, n: sess.targets.length })));
+  }
+
+  // The big "wanted" card: who to find. `first` = it is the level intro (clock waits for Start).
+  function showWanted(first) {
+    if (!playEl || !sess || !sess.targets || sess.done) return;
+    if (!first) {
+      if (sess.intro || modalOpen) return;
+      pauseSess();
     }
+    sess.wantedOpen = true;
+    const box = playEl.querySelector('.g-waldo-wanted');
+    clear(box);
+    const n = sess.targets.length;
+    box.append(
+      h(
+        'div',
+        { class: 'g-waldo-poster pop-in' },
+        h('div', { class: 'g-waldo-poster-top' }, h('span', { class: 'g-waldo-poster-star', html: icon('star') }), h('h2', null, t('wantedTitle')), h('span', { class: 'g-waldo-poster-star', html: icon('star') })),
+        h('p', { class: 'g-waldo-poster-sub' }, t('wantedSub', { n }) + ' · ' + t(SCENE_KEY[sess.plan.scene])),
+        h(
+          'div',
+          { class: `g-waldo-cards n${n}` },
+          sess.targets.map((tg) =>
+            h(
+              'div',
+              { class: `g-waldo-wcard ${tg.found ? 'found' : ''}` },
+              h('div', { class: 'g-waldo-wcard-art' }, spr(`${tg.id}.webp`, 'g-waldo-wcard-img'), tg.found ? h('i', { class: 'g-waldo-wcard-ck', html: icon('check') }) : null),
+              h('b', null, nameOf(tg.id)),
+              h('small', null, t(`desc${TARGET_KEY[tg.id]}`)),
+            ),
+          ),
+        ),
+        h('button', { class: 'btn primary big block', onclick: () => closeWanted(first) }, first ? t('startBtn') : t('keepPlaying')),
+      ),
+    );
+    box.classList.add('show');
   }
 
-  function prebuild(plan) {
-    if (!alive || (pre && pre.key === plan.key)) return;
-    later(() => {
-      if (!alive || (pre && pre.key === plan.key)) return;
-      if (pre) releaseScene(pre.scene);
-      pre = null;
-      try {
-        pre = { key: plan.key, scene: buildPlan(plan) };
-      } catch (e) {
-        console.error(e);
-      }
-    }, 250);
-  }
-
-  async function startScene(plan) {
-    if (!sess || !viewer) return;
-    const token = ++sceneToken;
-    sess.plan = plan;
-    sess.busy = true;
-    hideCard();
-    setLoading(true);
-    let scene = null;
-    if (pre && pre.key === plan.key) {
-      scene = pre.scene;
-      pre = null;
-    } else {
-      await new Promise((r) => requestAnimationFrame(() => later(r, 30)));
-      if (token !== sceneToken || !sess) return;
-      scene = buildPlan(plan);
-    }
-    if (token !== sceneToken || !sess) {
-      releaseScene(scene);
-      return;
-    }
-    const old = sess.scene;
-    sess.scene = scene;
-    viewer.setScene(scene);
-    releaseScene(old);
-    setLoading(false);
-    sess.clock = makeClock();
-    sess.penalty = 0;
-    sess.found = false;
-    sess.busy = false;
-    sess.tipIdx = 0;
-    sess.nextTip = TIP_EVERY;
-    sess.locked = false;
-    setTray(false);
-    updateHud();
-  }
-
-  function setTray(found) {
+  function closeWanted(first) {
     if (!playEl) return;
-    const sub = playEl.querySelector('.g-waldo-tray-sub');
-    const side = playEl.querySelector('.g-waldo-tray-side');
+    const box = playEl.querySelector('.g-waldo-wanted');
+    box.classList.remove('show');
+    clear(box);
     if (!sess) return;
-    if (!found) {
-      sub.textContent = t(THEME_KEY[sess.scene.theme] || 'themeBeach');
-      sub.className = 'g-waldo-tray-sub';
-      clear(side);
-    }
+    sess.wantedOpen = false;
+    if (first && sess.intro) {
+      sess.intro = false;
+      sess.clock = makeClock();
+      if (sess.gameClock) sess.gameClock.resume();
+      sess.paused = false;
+      sess.nextTip = TIP_EVERY;
+    } else if (!sess.done && !modalOpen) resumeSess();
+    if (viewer) viewer.request();
   }
 
-  function showTip(i) {
-    if (!playEl || !sess) return;
-    const sub = playEl.querySelector('.g-waldo-tray-sub');
-    sub.textContent = t(['tip1', 'tip2', 'tip3'][i % 3]);
-    sub.className = 'g-waldo-tray-sub tip';
-  }
-
-  function flashCaption(text) {
+  function flashCaption(text, ms = 2600) {
     const el = playEl && playEl.querySelector('.g-waldo-cap');
     if (!el) return;
     el.textContent = text;
     el.classList.remove('show');
     void el.offsetWidth;
+    el.style.animationDuration = `${ms}ms`;
     el.classList.add('show');
   }
 
@@ -436,28 +406,32 @@ export async function mount(root, ctx) {
     const time = playEl.querySelector('.g-waldo-hud-time');
     const count = playEl.querySelector('.g-waldo-hint-count');
     count.textContent = String(getHints());
+    const el = sess.clock.elapsed() + sess.penalty;
     if (sess.kind === 'classic') {
       const c = getClassic();
       left.textContent = t('sceneLabel', { n: c.run + 1, total: CHAPTER_SCENES });
-      time.textContent = mmss(sess.clock.elapsed() + sess.penalty);
+      time.textContent = sess.limit ? t('limitLabel', { t: mmss(Math.max(0, sess.limit - el)) }) : mmss(el);
+      time.classList.toggle('warn', !!sess.limit && sess.limit - el < 20);
     } else if (sess.kind === 'timed') {
       left.textContent = t('timedLabel', { t: mmss(sess.left) });
       time.textContent = t('timedScore', { n: sess.score });
     } else {
       left.textContent = sess.practice ? t('practice') : t('modeDaily');
-      time.textContent = mmss(sess.clock.elapsed() + sess.penalty);
+      time.textContent = mmss(el);
     }
   }
 
   function tick() {
     if (!sess || sess.done || sess.paused || !playEl) return;
-    if (!sess.found && sess.scene) {
+    if (sess.scene && !sess.intro) {
       const e = sess.clock.elapsed();
       if (e >= sess.nextTip) {
-        showTip(sess.tipIdx);
+        const left = sess.targets.filter((x) => !x.found);
+        if (left.length) flashCaption(t('tipLine', { t: t(`tip${TARGET_KEY[left[sess.tipIdx % left.length].id]}`) }), 4200);
         sess.tipIdx++;
         sess.nextTip += TIP_EVERY;
       }
+      if (sess.kind === 'classic' && sess.limit && e + sess.penalty >= sess.limit && !sess.ended) onTimeOut();
     }
     if (sess.kind === 'timed') {
       sess.left = TIMED_SECONDS + sess.bonus - sess.gameClock.elapsed() - sess.lost;
@@ -469,46 +443,151 @@ export async function mount(root, ctx) {
     updateHud();
   }
 
-  // ---------- taps ----------
-  function handleTap(x, y) {
-    if (!sess || sess.done || sess.paused || sess.busy || sess.locked || !sess.scene) return;
-    const tg = sess.scene.target;
-    const c = viewer.targetCss(tg);
-    const r = Math.max(26, viewer.targetRadius(tg) * 1.3);
-    if (Math.hypot(x - c.x, y - c.y) <= r) {
-      found();
-    } else {
-      wrongTap(x, y);
+  // ---------- scenes ----------
+  async function startScene(plan, { intro = true } = {}) {
+    if (!sess || !viewer) return;
+    const token = ++sceneToken;
+    sess.plan = plan;
+    sess.busy = true;
+    sess.scene = null;
+    sess.targets = null;
+    hideCard();
+    setLoading(true);
+    let data;
+    try {
+      data = await loadScene(plan.scene);
+    } catch (e) {
+      console.error(e);
+      if (token === sceneToken && playEl) setLoading(true, true);
+      return;
     }
-  }
-
-  function wrongTap(x, y) {
-    sess.locked = true;
-    later(() => {
-      if (sess) sess.locked = false;
-    }, 650);
-    viewer.addCross(x, y);
-    floatAt(x, y - 26, t('wrongTap'), 'bad');
-    ctx.sfx.play('error');
-    ctx.sfx.vibrate(40);
-    sess.penalty += WRONG_PENALTY;
-    if (sess.kind === 'timed') sess.lost += WRONG_PENALTY;
-    if (sess.kind === 'timed') floatAt(x, y + 10, t('penalty', { n: WRONG_PENALTY }), 'bad');
+    if (token !== sceneToken || !sess || !viewer) return;
+    const { meta, img } = data;
+    const lvl = resolveLevel(plan, meta);
+    const mirror = plan.lap % 2 === 1;
+    const W = meta.w, H = meta.h;
+    const flipBB = (b) => (mirror ? [W - b[2], b[1], W - b[0], b[3]] : b.slice());
+    const targets = lvl.ids.map((id) => ({ id, bb: flipBB(meta.targets[id].bb), found: false }));
+    const rg = lvl.region;
+    const region = { x: mirror ? W - (rg.x + rg.w) : rg.x, y: rg.y, w: rg.w, h: rg.h };
+    const scene = { W, H, img, mirror, region, marks: [] };
+    sess.scene = scene;
+    sess.targets = targets;
+    sess.par = lvl.par;
+    sess.limit = sess.kind === 'classic' ? lvl.limit : 0;
+    sess.penalty = 0;
+    sess.locked = false;
+    sess.tipIdx = 0;
+    sess.nextTip = TIP_EVERY;
+    sess.ended = false;
+    sess.foundCount = 0;
+    viewer.setScene(scene);
+    if (typeof window.__waldoDebug === 'function') window.__waldoDebug(() => ({ viewer, sess })); // test hook
+    setLoading(false);
+    renderTray();
+    // keep only this picture and the next one in memory
+    keepOnly([plan.scene, sess.nextScene || plan.scene]);
+    sess.busy = false;
+    const showIntro = intro && sess.kind !== 'timed' ? true : intro && sess.first;
+    if (showIntro) {
+      // the clock waits behind the Wanted card
+      sess.intro = true;
+      sess.paused = true;
+      sess.clock = makeClock();
+      sess.clock.pause();
+      if (sess.gameClock) sess.gameClock.pause();
+      later(() => showWanted(true), 60);
+    } else {
+      sess.intro = false;
+      sess.clock = makeClock();
+      sess.paused = false;
+      if (sess.gameClock) sess.gameClock.resume();
+      flashCaption(sess.targets.map((x) => nameOf(x.id)).join(' · '), 3000);
+    }
+    sess.first = false;
     updateHud();
   }
 
-  function found() {
-    sess.found = true;
-    sess.busy = true;
-    const tg = sess.scene.target;
-    viewer.addFound(tg);
+  // ---------- taps ----------
+  function handleTap(wx, wy) {
+    if (!sess || sess.done || sess.paused || sess.busy || sess.locked || !sess.scene || sess.intro) return false;
+    const z = viewer.z;
+    for (const tg of sess.targets) {
+      const [x0, y0, x1, y1] = tg.bb;
+      const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+      const hw = Math.max((x1 - x0) / 2 + 5 / z, 20 / z), hh = Math.max((y1 - y0) / 2 + 5 / z, 20 / z);
+      if (Math.abs(wx - cx) <= hw && Math.abs(wy - cy) <= hh) {
+        if (tg.found) return true; // already found: nothing happens
+        onTargetFound(tg);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function handleMiss(wx, wy, sx, sy) {
+    if (!sess || sess.done || sess.paused || sess.busy || sess.locked || !sess.scene || sess.intro) return;
+    wrongTap(wx, wy, sx, sy);
+  }
+
+  function wrongTap(wx, wy, sx, sy) {
+    sess.locked = true;
+    later(() => {
+      if (sess) sess.locked = false;
+    }, 500);
+    viewer.addEffect({
+      dur: 650,
+      draw(g, k, v) {
+        const p = v.worldToScreen(wx, wy);
+        const a = 1 - k;
+        const s = 13 + k * 3;
+        g.globalAlpha = a;
+        g.lineCap = 'round';
+        g.lineWidth = 7;
+        g.strokeStyle = '#220509';
+        g.beginPath();
+        g.moveTo(p.x - s, p.y - s);
+        g.lineTo(p.x + s, p.y + s);
+        g.moveTo(p.x + s, p.y - s);
+        g.lineTo(p.x - s, p.y + s);
+        g.stroke();
+        g.lineWidth = 4;
+        g.strokeStyle = '#ff4d5e';
+        g.stroke();
+      },
+    });
+    const left = sess.targets.filter((x) => !x.found);
+    floatAt(sx, sy - 28, left.length === 1 && left[0].id !== 'hero' ? t('wrongTapItem') : t('wrongTap'), 'bad');
+    ctx.sfx.play('error');
+    ctx.sfx.vibrate(40);
+    sess.penalty += WRONG_PENALTY;
+    if (sess.kind === 'timed') {
+      sess.lost += WRONG_PENALTY;
+      floatAt(sx, sy + 8, t('penalty', { n: WRONG_PENALTY }), 'bad');
+    }
+    updateHud();
+  }
+  const now = () => performance.now();
+
+  function onTargetFound(tg) {
+    tg.found = true;
+    sess.foundCount++;
+    const [x0, y0, x1, y1] = tg.bb;
+    sess.scene.marks.push({ x: (x0 + x1) / 2, y: (y0 + y1) / 2, rx: Math.max(26, (x1 - x0) / 2 + 12), ry: Math.max(26, (y1 - y0) / 2 + 10), t0: now() });
+    viewer.request();
+    renderTray();
     ctx.sfx.play('success');
     ctx.sfx.vibrate([20, 40, 20]);
-    ctx.ui.confetti(36);
-    const sub = playEl.querySelector('.g-waldo-tray-sub');
-    sub.textContent = t('foundCap');
-    sub.className = 'g-waldo-tray-sub found';
-    flashCaption(`${t('foundCap')} ${t(sess.scene.caption)}`);
+    const all = sess.targets.every((x) => x.found);
+    const p = viewer.worldToScreen((x0 + x1) / 2, (y0 + y1) / 2);
+    if (!all) {
+      flashCaption(t('foundName', { name: nameOf(tg.id) }), 1800);
+      return;
+    }
+    // everything found
+    sess.busy = true;
+    ctx.ui.confetti(40);
+    flashCaption(t('allFound'), 2000);
     if (sess.kind === 'classic') onFoundClassic();
     else if (sess.kind === 'timed') onFoundTimed();
     else onFoundDaily();
@@ -521,12 +600,14 @@ export async function mount(root, ctx) {
     const c = getClassic();
     playView();
     sess = newSession('classic', classicPlan(c.idx));
+    sess.nextScene = classicPlan(c.idx + 1).scene;
     startScene(sess.plan);
   }
 
   function onFoundClassic() {
     const secs = sess.clock.elapsed() + sess.penalty;
-    const stars = starsFor(secs, sess.plan.lvl);
+    const n = sess.targets.length;
+    const stars = starsFor(secs, sess.par);
     const c = getClassic();
     const runStars = c.runStars + stars;
     const finishedChapter = c.run + 1 >= CHAPTER_SCENES;
@@ -535,7 +616,7 @@ export async function mount(root, ctx) {
     c.runStars = runStars;
     c.stars += stars;
     c.scenes += 1;
-    const coins = 5 + stars * 3;
+    const coins = 3 + n * 2 + stars * 3;
     addCoins(coins);
     let chapterSummary = null;
     if (finishedChapter) {
@@ -545,16 +626,20 @@ export async function mount(root, ctx) {
       c.runStars = 0;
     }
     store.set('classic', c);
-    ctx.addXP?.(10 + stars * 5);
+    ctx.addXP?.(8 + n * 2 + stars * 5);
     pauseSess();
     sess.done = true;
+    // prepare the next picture while the result is shown
+    const next = classicPlan(c.idx);
+    loadMeta(next.scene).catch(() => {});
+    loadImage(next.scene).catch(() => {});
     later(() => {
       if (!sess) return;
       if (finishedChapter) {
         showCard({
           title: t('chapterDone'),
           stars: null,
-          lines: [t('chapterSummary', { n: chapterSummary }), t('timeLine', { s: secs.toFixed(1) })],
+          lines: [t('chapterSummary', { n: chapterSummary }), t('timeLine', { s: secs.toFixed(1) }), t('coinsGained', { n: coins })],
           actions: [
             { label: t('newChapter'), primary: true, onClick: () => startClassic() },
             { label: t('menu'), onClick: () => goMenu() },
@@ -564,7 +649,7 @@ export async function mount(root, ctx) {
         showCard({
           title: t('sceneDone'),
           stars,
-          lines: [t('starsOf', { n: stars }), t('timeLine', { s: secs.toFixed(1) }), t('coinsGained', { n: coins })],
+          lines: [t('foundLine', { n }), t('timeLine', { s: secs.toFixed(1) }), t('coinsGained', { n: coins })],
           actions: [
             { label: t('nextScene'), primary: true, onClick: () => startClassic() },
             { label: t('menu'), onClick: () => goMenu() },
@@ -572,8 +657,25 @@ export async function mount(root, ctx) {
         });
       }
       updateHud();
-    }, 1400);
-    prebuild(classicPlan(c.idx));
+    }, 1500);
+  }
+
+  function onTimeOut() {
+    sess.ended = true;
+    sess.done = true;
+    pauseSess();
+    ctx.sfx.play('lose');
+    later(() => {
+      if (!sess) return;
+      showCard({
+        title: t('timeOutTitle'),
+        lines: [t('timeOutText'), t('foundLine', { n: sess.foundCount })],
+        actions: [
+          { label: t('retry'), primary: true, onClick: () => startClassic() },
+          { label: t('menu'), onClick: () => goMenu() },
+        ],
+      });
+    }, 500);
   }
 
   // ---------- timed ----------
@@ -581,22 +683,24 @@ export async function mount(root, ctx) {
     hideMenu();
     endPlay();
     playView();
-    const seedSession = { seed: (Math.random() * 1e9) | 0, offset: (Math.random() * 11) | 0 };
+    const seedSession = { seed: (Math.random() * 1e9) | 0, offset: (Math.random() * SCENES.length) | 0 };
     sess = newSession('timed', timedPlan(seedSession, 0));
     sess.ts = seedSession;
     sess.k = 0;
+    sess.first = true;
     sess.found = 0;
     sess.score = 0;
     sess.bonus = 0;
     sess.lost = 0;
     sess.left = TIMED_SECONDS;
     sess.gameClock = makeClock();
+    sess.nextScene = timedPlan(seedSession, 1).scene;
     startScene(sess.plan);
   }
 
   function onFoundTimed() {
     const secs = sess.clock.elapsed();
-    const add = 100 + Math.max(0, 20 - secs) * 6;
+    const add = 100 * sess.targets.length + Math.max(0, 30 - secs) * 6;
     sess.score += Math.round(add);
     sess.found += 1;
     sess.bonus += TIMED_BONUS;
@@ -605,10 +709,12 @@ export async function mount(root, ctx) {
     floatAt(playEl.clientWidth - 72, 74, t('bonus', { n: TIMED_BONUS }), 'good');
     sess.k += 1;
     const next = timedPlan(sess.ts, sess.k);
-    prebuild(next);
+    sess.nextScene = timedPlan(sess.ts, sess.k + 1).scene;
+    loadMeta(next.scene).catch(() => {});
+    loadImage(next.scene).catch(() => {});
     later(() => {
-      if (sess && sess.kind === 'timed' && !sess.ended) startScene(next);
-    }, 1100);
+      if (sess && sess.kind === 'timed' && !sess.ended) startScene(next, { intro: false });
+    }, 1000);
   }
 
   function endTimed() {
@@ -653,6 +759,7 @@ export async function mount(root, ctx) {
     playView();
     sess = newSession('daily', dailyPlan(key));
     sess.practice = practice;
+    sess.nextScene = sess.plan.scene;
     startScene(sess.plan);
   }
 
@@ -682,12 +789,10 @@ export async function mount(root, ctx) {
       showCard({
         title: sess.practice ? t('sceneDone') : t('dailyDone'),
         lines: [t('timeLine', { s: secs.toFixed(1) }), sess.practice ? null : t('dailyStreakLine', { n: streakN }), sess.practice ? null : t('coinsGained', { n: DAILY_COINS })],
-        actions: [
-          { label: t('menu'), primary: true, onClick: () => goMenu() },
-        ],
+        actions: [{ label: t('menu'), primary: true, onClick: () => goMenu() }],
       });
       updateHud();
-    }, 1400);
+    }, 1500);
   }
 
   // ---------- session ----------
@@ -696,19 +801,24 @@ export async function mount(root, ctx) {
       kind,
       plan,
       scene: null,
+      targets: null,
       clock: makeClock(),
       gameClock: null,
       penalty: 0,
       lost: 0,
       bonus: 0,
+      limit: 0,
+      par: 30,
       locked: false,
       busy: false,
-      found: false,
+      intro: false,
+      wantedOpen: false,
       done: false,
       paused: false,
       tipIdx: 0,
       nextTip: TIP_EVERY,
       practice: false,
+      first: false,
     };
   }
 
@@ -718,8 +828,11 @@ export async function mount(root, ctx) {
     showMenu();
   }
 
+  // ---------- the magnifier hint ----------
   async function useHint() {
-    if (!sess || sess.done || sess.busy || !sess.scene) return;
+    if (!sess || sess.done || sess.busy || sess.intro || !sess.scene || hintFx) return;
+    const left = sess.targets.filter((x) => !x.found);
+    if (!left.length) return;
     if (getHints() <= 0) {
       const ok = await askModal({
         title: t('hintBuyTitle'),
@@ -739,14 +852,69 @@ export async function mount(root, ctx) {
     }
     store.set('hints', getHints() - 1);
     updateHud();
-    viewer.focusTarget(sess.scene.target, 2.3, 800);
-    viewer.addHint(sess.scene.target, 3.5);
+    const tg = left[0];
+    const [x0, y0, x1, y1] = tg.bb;
+    const tx = (x0 + x1) / 2, ty = (y0 + y1) / 2;
+    // the spotlight is off-centre so the player still has to look
+    const a = Math.random() * Math.PI * 2;
+    const R = HINT_RADIUS;
+    const cx = tx + Math.cos(a) * R * 0.38, cy = ty + Math.sin(a) * R * 0.38;
+    const zt = Math.min(viewer.maxZ, Math.max(viewer.minZ, (Math.min(viewer.w, viewer.h) * 0.46) / R));
+    viewer.flyTo(cx, cy, Math.max(viewer.z, Math.min(zt, viewer.z * 3)), 700);
     ctx.sfx.play('pop');
+    hintFx = viewer.addEffect({
+      dur: HINT_MS,
+      draw(g, k, v, el) {
+        const p = v.worldToScreen(cx, cy);
+        const r = R * v.z;
+        const fade = k < 0.08 ? k / 0.08 : k > 0.82 ? (1 - k) / 0.18 : 1;
+        const pulse = 1 + Math.sin(el / 160) * 0.025;
+        const rr = r * pulse;
+        // darken everything outside the lens
+        g.save();
+        g.globalAlpha = 0.62 * fade;
+        g.fillStyle = '#04040a';
+        g.beginPath();
+        g.rect(0, 0, v.w, v.h);
+        g.arc(p.x, p.y, rr, 0, Math.PI * 2, true);
+        g.fill('evenodd');
+        g.restore();
+        g.globalAlpha = fade;
+        // gold lens rim and handle
+        g.lineCap = 'round';
+        g.lineWidth = 9;
+        g.strokeStyle = '#6b4308';
+        g.beginPath();
+        g.arc(p.x, p.y, rr, 0, Math.PI * 2);
+        g.stroke();
+        g.lineWidth = 6;
+        g.strokeStyle = '#f7d774';
+        g.stroke();
+        const hx = p.x + Math.cos(Math.PI * 0.27) * rr, hy = p.y + Math.sin(Math.PI * 0.27) * rr;
+        g.lineWidth = 17;
+        g.strokeStyle = '#3b2604';
+        g.beginPath();
+        g.moveTo(hx, hy);
+        g.lineTo(hx + rr * 0.55, hy + rr * 0.55);
+        g.stroke();
+        g.lineWidth = 12;
+        g.strokeStyle = '#c9971c';
+        g.stroke();
+        g.globalAlpha = 1;
+      },
+      onEnd() {
+        hintFx = null;
+      },
+    });
   }
 
   // ---------- leaving ----------
   ctx.onBack(() => {
     if (modalOpen) return true;
+    if (view === 'play' && sess && sess.wantedOpen && !sess.intro) {
+      closeWanted(false);
+      return true;
+    }
     if (view === 'play' && sess && !sess.done) {
       askModal({
         title: t('leaveTitle'),
@@ -769,7 +937,7 @@ export async function mount(root, ctx) {
 
   const onVisibility = () => {
     if (document.hidden) pauseSess();
-    else if (!modalOpen) resumeSess();
+    else if (!modalOpen && sess && !sess.intro && !sess.wantedOpen) resumeSess();
   };
   document.addEventListener('visibilitychange', onVisibility);
 
@@ -788,8 +956,7 @@ export async function mount(root, ctx) {
     for (const id of timers) clearTimeout(id);
     timers.clear();
     endPlay();
-    if (pre) releaseScene(pre.scene);
-    pre = null;
+    keepOnly([]);
     ctx.setHeaderRight(null);
   };
 }

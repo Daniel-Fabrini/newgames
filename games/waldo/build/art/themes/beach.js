@@ -117,23 +117,23 @@
         S.occupy(x - w / 2, y - w * 1.1, x + w / 2, y, 2);
       });
       // --- sea zones: swimmers (far to near)
-      S.zone({ x0: 30, x1: W - 30, y0: 300, y1: 480, hh: [34, 44], water: true, waterLine: 38, d: 0.85, outfit: { sleeves: [['none', 100]] } });
-      S.zone({ x0: 30, x1: W - 30, y0: 480, y1: 700, hh: [44, 58], water: true, waterLine: 38, d: 0.9, outfit: { sleeves: [['none', 100]] } });
-      S.zone({ x0: 30, x1: W - 30, y0: 700, y1: 930, hh: [58, 72], water: true, waterLine: 36, d: 0.9, outfit: { sleeves: [['none', 100]] } });
+      S.zone({ x0: 30, x1: W - 30, y0: 300, y1: 480, hh: [40, 52], water: true, waterLine: 38, d: 0.34, outfit: { sleeves: [['none', 100]] } });
+      S.zone({ x0: 30, x1: W - 30, y0: 480, y1: 700, hh: [52, 66], water: true, waterLine: 38, d: 0.34, outfit: { sleeves: [['none', 100]] } });
+      S.zone({ x0: 30, x1: W - 30, y0: 700, y1: 930, hh: [66, 80], water: true, waterLine: 36, d: 0.4, outfit: { sleeves: [['none', 100]] } });
       // sea creatures, floats, rowboats with people
       const creature = (name, x, y, h, v, flip = 1) => S.item(y, (gg) => {
         WA.sprite(gg, x, y, h, (g2) => WA.CREATURES[name](g2, v), flip);
         P.ripple(gg, x - h * 0.2, y - 2, h * 0.9);
         P.ripple(gg, x + h * 0.3, y - 1, h * 0.7);
       });
-      for (let i = 0; i < 9; i++) creature(r.pick(['octopus', 'monster']), 150 + r() * (W - 300), 400 + r() * 480, 70 + r() * 40, { body: r.pick(['#3aa36b', '#7b4bb7', '#e8478a', '#f28a1e', '#18a5a5']), eyes: r.pick([1, 2, 3]), horns: r() < 0.5, grumpy: r() < 0.4 }, r.pick([1, -1]));
+      for (let i = 0; i < 12; i++) creature(r.pick(['octopus', 'monster']), 150 + r() * (W - 300), 400 + r() * 480, 110 + r() * 70, { body: r.pick(['#3aa36b', '#7b4bb7', '#e8478a', '#f28a1e', '#18a5a5']), eyes: r.pick([1, 2, 3]), horns: r() < 0.5, grumpy: r() < 0.4 }, r.pick([1, -1]));
       for (let i = 0; i < 16; i++) creature('fish', 80 + r() * (W - 160), 330 + r() * 560, 26 + r() * 14, { body: r.pick(['#f28a1e', '#e8478a', '#f9d71c', '#2fa84f']), stripe: r.pick([C.white, C.blue]) }, r.pick([1, -1]));
       for (let i = 0; i < 6; i++) creature('crab', 80 + r() * (W - 160), 960 + r() * 150, 38, { body: r.pick([C.red, C.orange]) });
       const rowing = (x, y, w, n) => {
         S.item(y - 1, (gg) => P.rowboat(gg, x, y, w, r.pick(['#b9722f', '#e8c37a', '#4a7ac4']), '#6a3d1e', 'back'));
         for (let i = 0; i < n; i++) {
           const px = x + (i - (n - 1) / 2) * w * 0.3;
-          const e = S.person(px, y + w * 0.05, w * 0.42, { water: true, waterLine: 30, p: { pose: r.pick(['sit', 'wave', 'cheer', 'sit']) } });
+          const e = S.person(px, y + w * 0.05, w * 0.6, { water: true, waterLine: 30, p: { pose: r.pick(['sit', 'wave', 'cheer', 'sit']) } });
           e.keep = false;
         }
         S.item(y + w * 0.06, (gg) => P.rowboat(gg, x, y, w, '#b9722f', '#6a3d1e', 'front'));
@@ -152,34 +152,24 @@
           P.surfboard(gg, x, y + 4, 40, r.pick(WA.BRIGHT), C.white, 1.55);
         });
       }
-      // pier
-      const px0 = 1950, px1 = 2260;
-      S.item(1000, (gg) => {
-        P.setInk(300);
-        WA.rrect(gg, px0, 740, px1 - px0, 260, 6, '#b88a4a');
-        for (let x = px0 + 10; x < px1; x += 22) WA.line(gg, x, 745, x, 995, 1.6, '#7a5a2b');
-        for (let y = 745; y < 995; y += 32) WA.line(gg, px0, y, px1, y, 2.2, '#7a5a2b');
-      }, { x0: px0, y0: 740, x1: px1, y1: 1000 });
-      S.item(741, () => {});
-      S.zone({ x0: px0 + 20, x1: px1 - 20, y0: 780, y1: 990, hh: [60, 72], d: 0.9 });
       // --- sand
       const sandOut = Object.assign({}, S.theme.outfit);
       S.zone({ x0: 30, x1: W - 30, y0: 1040, y1: 1340, hh: [74, 90], d: 0.85 });
       S.zone({ x0: 30, x1: W - 30, y0: 1340, y1: 1700, hh: [90, 112], d: 0.82 });
       S.zone({ x0: 30, x1: W - 30, y0: 1700, y1: 1990, hh: [112, 132], d: 0.8 });
       // palms along the back of the sand and scattered
-      for (let i = 0; i < 12; i++) {
-        const x = 100 + i * 270 + r() * 100, y = 1020 + r() * 60, h = 340 + r() * 140;
+      for (let i = 0; i < 9; i++) {
+        const x = 100 + i * 350 + r() * 100, y = 1020 + r() * 60, h = 280 + r() * 100;
         S.item(y, (gg) => P.palm(gg, x, y, h, r.range(-0.2, 0.2)), { x0: x - h * 0.4, x1: x + h * 0.4, y0: y - h, y1: y - h * 0.5 });
       }
-      for (let i = 0; i < 6; i++) {
-        const x = 100 + r() * (W - 200), y = 1500 + r() * 450, h = 400;
+      for (let i = 0; i < 3; i++) {
+        const x = 100 + r() * (W - 200), y = 1500 + r() * 450, h = 330;
         S.item(y, (gg) => P.palm(gg, x, y, h, r.range(-0.25, 0.25)), { x0: x - h * 0.4, x1: x + h * 0.4, y0: y - h, y1: y - h * 0.5 });
       }
       // beach cabins (striped!), tents, lifeguard towers, ice cream cart
       const pal2 = [[C.blue, C.white], [C.red, C.white], [C.yellow, C.white], [C.green, C.white], [C.pink, C.white], [C.orange, C.white], [C.teal, C.yellow]];
       for (let i = 0; i < 9; i++) {
-        const x = 130 + i * 340 + r() * 90, y = 1100 + r() * 90, w = 150 + r() * 40, [a, b] = r.pick(pal2);
+        const x = 130 + i * 340 + r() * 90, y = 1100 + r() * 90, w = 110 + r() * 30, [a, b] = r.pick(pal2);
         S.item(y, (gg) => P.beachCabin(gg, x, y, w, w * 1.25, a, b), { x0: x - w / 2, x1: x + w / 2, y0: y - w * 1.55, y1: y });
         S.occupy(x - w / 2, y - w, x + w / 2, y, 6);
       }

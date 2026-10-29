@@ -461,6 +461,22 @@
     for (const x of [-30, -15, 0, 15, 30]) dot(g, x, -30, 3, [C.yellow, C.red, C.green, C.blue, C.pink][(x / 15 + 2) | 0]);
   };
 
+
+  CR.elephant = (g, v = {}) => {
+    const b = v.body || '#a9b3c0';
+    shadow(g, 70, 6);
+    for (const x of [-46, -22, 26, 50]) rrect(g, x - 9, -42, 18, 42, 6, x < 0 ? shade(b, -0.1) : b);
+    ell(g, 0, -70, 62, 38, b);
+    // ear + head
+    circ(g, 62, -86, 28, b);
+    ell(g, 46, -86, 22, 30, shade(b, -0.12), 0.1);
+    limb(g, [[84, -84], [100, -62], [94, -30], [104, -16]], 14, b);
+    dot(g, 76, -94, 3);
+    poly(g, [[84, -74], [104, -66], [88, -64]], '#f6f1e4', WA.ink * 0.8);
+    limb(g, [[-60, -76], [-72, -60], [-70, -44]], 4, b);
+    if (v.blanket) { g.beginPath(); g.moveTo(-30, -100); g.lineTo(30, -100); g.lineTo(34, -64); g.lineTo(-34, -64); g.closePath(); WA.fillInk(g, v.blanket); }
+  };
+
   CR.chick = (g, v = {}) => {
     shadow(g, 14, 2.5);
     circ(g, 0, -18, 16, v.body || C.yellow);

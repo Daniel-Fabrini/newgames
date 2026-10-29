@@ -1,7 +1,7 @@
 // Random crowd members, the hero (Ruivinho) and its decoys.
 (function () {
   const WA = window.WA;
-  const { C } = WA;
+  const { C, shade } = WA;
 
   const MALE_HAIR = [['short', 5], ['sidepart', 3], ['bald', 1.2], ['spiky', 1], ['curly', 1.2], ['afro', 0.6], ['mohawk', 0.35], ['fringe', 1.5]];
   const FEM_HAIR = [['long', 4], ['bob', 2], ['pigtails', 1], ['bun', 1.4], ['ponytail', 2], ['braid', 0.9], ['curly', 1.2], ['afro', 0.5], ['short', 1], ['longwave', 1]];
@@ -110,6 +110,10 @@
     if (prop === 'camera' || prop === 'phone' || prop === 'binocs') p.pose = 'photo';
     if (prop === 'book' || prop === 'mug' || prop === 'popcorn' || prop === 'icecream' || prop === 'lollipop' || prop === 'bouquet' || prop === 'bag') p.pose = r.pick(['hold2', 'hold', 'stand']);
     if (prop && ['hold', 'hold2'].includes(p.pose) === false && ['book', 'mug', 'popcorn', 'icecream'].includes(prop)) p.pose = 'hold2';
+    if (r.chance(o.oddP == null ? 0.07 : o.oddP)) {
+      WA.applyCostume(p, r, o.costumes);
+      if (p.glasses === 'round' && p.top.pat === 'hstripe' && p.top.c === HERO_RED) p.glasses = 'sun';
+    }
     if (o.fixup) o.fixup(p, r);
     return p;
   };
@@ -117,6 +121,161 @@
   // extra pose with raised camera
   WA.POSES.photo = { R: [2.0, 1.3], L: [0.5, 1.9], r: [0.05, 0], l: [-0.05, 0] };
   WA.POSES.look = { R: [2.0, 1.45], L: [1.9, 1.45], r: [0.05, 0], l: [-0.05, 0] };
+
+
+  // ---------- costumed oddballs (knights, pirates, astronauts...) ----------
+  const COS = (WA.COSTUMES = {
+    knight(p, r) {
+      const m = r.pick(['#aab4be', '#c9d0d6', '#8d98a4']);
+      p.hat = { t: 'helmet', c: m, plume: r.pick([C.red, C.yellow, C.blue, C.white]) };
+      p.top = { pat: 'armor', c: m, c2: r.pick([C.red, C.blue, C.yellow]), sleeve: 'long', sleeveC: m };
+      p.bottom = { t: 'pants', c: shade(m, -0.2) };
+      p.shoe = '#5d636b';
+      p.gloveC = '#8d98a4';
+      p.prop = r.pick(['sword', 'shield', 'sword', null]);
+      p.propC = r.pick([C.red, C.blue, C.yellow]);
+      p.pose = r.pick(['stand', 'stand2', 'walk', 'hold2']);
+    },
+    pirate(p, r) {
+      p.hat = r.chance(0.55) ? { t: 'pirate', c: '#2a2a30' } : { t: 'bandana', c: r.pick([C.red, C.blue]), dots: C.white };
+      p.top = { pat: r.pick(['hstripe', 'solid', 'vstripe']), c: r.pick([C.white, '#2a2a30', C.red]), c2: r.pick(['#2a2a30', C.white, C.navy]), sleeve: 'long' };
+      if (p.top.pat === 'hstripe' && p.top.c === C.red) p.top.c2 = C.white;
+      if (r.chance(0.22)) { p.top = { pat: 'hstripe', c: C.red, c2: C.white, sleeve: 'long', n: 9 }; p.hat = { t: 'bandana', c: C.red, dots: C.white }; }
+      p.bottom = { t: 'pants', c: r.pick(['#5b3a1e', '#2a2a30', '#8a2f2f']) };
+      p.belt = '#2a2a30';
+      p.glasses = r.chance(0.5) ? 'patch' : null;
+      if (r.chance(0.5)) p.beard = { t: 'full', c: r.pick(['#2a1b12', '#8a5a2b', '#b0b4ba']) };
+      p.prop = r.pick(['sword', 'flag', 'map', null]);
+      p.shoe = '#2a1b12';
+    },
+    clown(p, r) {
+      p.hairS = 'afro';
+      p.hairC = r.pick(['#e8478a', '#3aa0e0', '#ff8c1a', '#6fcf4a', '#e5352b']);
+      p.hat = r.chance(0.4) ? { t: 'party', c: r.pick(WA.BRIGHT), c2: C.yellow } : null;
+      p.top = { pat: r.pick(['dots', 'vstripe', 'plaid']), c: r.pick(WA.BRIGHT), c2: r.pick(WA.BRIGHT), sleeve: 'long' };
+      p.bottom = { t: 'pants', c: r.pick(WA.BRIGHT) };
+      p.shoe = r.pick(['#e5352b', '#f9d71c']);
+      p.noseC = C.red;
+      p.mood = 'open';
+      p.wide = r.chance(0.4);
+      p.prop = r.pick(['balloons', 'balloons', 'flag', null]);
+    },
+    astronaut(p, r) {
+      p.hat = { t: 'astro' };
+      p.top = { pat: 'spacesuit', c: C.white, c2: C.red, sleeve: 'long', sleeveC: C.white };
+      p.bottom = { t: 'pants', c: '#e8edf2' };
+      p.shoe = '#9aa0a8';
+      p.gloveC = C.white;
+      p.glasses = null;
+      p.beard = null;
+      p.must = null;
+      p.prop = r.pick(['flag', null, null]);
+      p.propC = r.pick([C.red, C.blue]);
+    },
+    chef(p, r) {
+      p.hat = { t: 'chef', c: C.white };
+      p.top = { pat: 'apron', c: C.white, c2: C.white, sleeve: 'long', sleeveC: C.white };
+      p.bottom = { t: 'pants', c: '#4a5568' };
+      p.must = r.chance(0.5) ? '#2a1b12' : null;
+      p.prop = r.pick(['mug', 'bag', null, 'popcorn']);
+    },
+    viking(p, r) {
+      p.hat = { t: 'viking', c: '#8d98a4' };
+      p.top = { pat: 'armor', c: '#8a5a2b', c2: '#5b3a1e', sleeve: 'short' };
+      p.beard = { t: 'full', c: r.pick(['#d9531e', '#e8d27a', '#8a5a2b']) };
+      p.bottom = { t: 'pants', c: '#6a4b2a' };
+      p.wide = true;
+      p.prop = r.pick(['shield', 'mug', 'sword']);
+      p.propC = r.pick([C.red, C.yellow]);
+    },
+    cowboy(p, r) {
+      p.hat = { t: 'cowboy', c: r.pick(['#8a5a2b', '#5b3a1e', '#d9b27a']) };
+      p.top = { pat: 'plaid', c: r.pick([C.red, C.blue, C.green]), c2: C.white, sleeve: 'long' };
+      p.bottom = { t: 'pants', c: '#3a5a9a' };
+      p.must = '#5a3a22';
+      p.shoe = '#5b3a1e';
+    },
+    king(p, r) {
+      p.hat = { t: 'crown' };
+      p.cape = C.red;
+      p.top = { pat: 'suit', c: C.purple, c2: C.yellow, sleeve: 'long' };
+      p.bottom = { t: 'pants', c: C.purple };
+      p.beard = r.chance(0.6) ? { t: 'full', c: '#b0b4ba' } : null;
+      p.wide = r.chance(0.5);
+      p.prop = 'cane';
+    },
+    sailor(p, r) {
+      p.hat = { t: 'sailor', c: C.navy };
+      p.top = { pat: 'hstripe', c: C.white, c2: C.navy, sleeve: 'short', n: 9 };
+      p.bottom = { t: 'pants', c: C.white };
+      p.must = r.chance(0.4) ? '#2a1b12' : null;
+      p.shoe = '#2a2a30';
+    },
+    hero(p, r) {
+      const c = r.pick([C.red, C.blue, C.yellow, C.green, C.purple]);
+      p.cape = r.pick([C.red, C.yellow, C.blue]);
+      p.glasses = 'sun';
+      p.sunC = r.pick(['#141418', c]);
+      p.top = { pat: 'logo', c, c2: C.yellow, sleeve: 'short' };
+      p.bottom = { t: 'pants', c: shade(c, -0.25) };
+      p.shoe = r.pick([C.red, C.yellow]);
+      p.pose = r.pick(['arms', 'cheer', 'stand', 'point']);
+    },
+    scientist(p, r) {
+      p.top = { pat: 'jacket', c: C.white, c2: r.pick(WA.BRIGHT), sleeve: 'long' };
+      p.glasses = 'square';
+      p.bottom = { t: 'pants', c: '#4a5568' };
+      p.prop = r.pick(['book', 'map', null]);
+    },
+    explorer(p, r) {
+      p.hat = { t: r.pick(['straw', 'hard']), c: r.pick(['#d9b27a', '#8a9a4a', '#f2d15c']), c2: '#6a4b2a' };
+      p.top = { pat: 'plaid', c: '#c9b17a', c2: '#8a7a4a', sleeve: 'short' };
+      p.bottom = { t: 'shorts', c: '#8a7a4a' };
+      p.prop = r.pick(['binocs', 'map', 'camera']);
+      p.pose = 'look';
+    },
+    santa(p, r) {
+      p.hat = { t: 'santa' };
+      p.top = { pat: 'jacket', c: C.red, c2: C.white, sleeve: 'long' };
+      p.bottom = { t: 'pants', c: C.red };
+      p.beard = { t: 'long', c: C.white };
+      p.belt = '#2a2a30';
+      p.wide = true;
+      p.shoe = '#2a2a30';
+      p.prop = 'bag';
+      p.propC = C.red;
+    },
+    wizardish(p, r) {
+      const c = r.pick(['#7b3fb0', '#1f9a6a', '#c43a3a', '#2b55c4']);
+      p.hat = { t: 'wizard', c, c2: '#f9d71c' };
+      p.top = { pat: 'solid', c, c2: '#f9d71c', sleeve: 'long' };
+      p.bottom = { t: 'dress', c };
+      p.beard = r.chance(0.5) ? { t: 'long', c: r.pick(['#f2efe6', '#b0b4ba']) } : null;
+      p.prop = 'staff';
+    },
+    scarfskier(p, r) {
+      p.hat = { t: 'bobble', c: r.pick([C.blue, C.green, C.yellow, C.purple, C.orange]), band: C.white };
+      p.hat.pom = p.hat.c;
+      p.top = { pat: r.pick(['solid', 'diag', 'dots']), c: r.pick(WA.BRIGHT), c2: C.white, sleeve: 'long', sleeveC: null };
+      p.top.sleeveC = p.top.c;
+      p.bottom = { t: 'pants', c: r.pick([C.navy, C.black, C.teal]) };
+      p.glasses = r.chance(0.5) ? 'goggles' : null;
+    },
+    diver(p, r) {
+      p.hat = { t: 'swimcap', c: r.pick(WA.BRIGHT) };
+      p.glasses = 'goggles';
+      p.top = { pat: 'solid', c: '#2a2a30', c2: C.white, sleeve: 'long' };
+      p.bottom = { t: 'pants', c: '#2a2a30' };
+      p.shoe = C.yellow;
+    },
+  });
+  WA.DEFAULT_COSTUMES = [['knight', 2], ['pirate', 2], ['clown', 1.6], ['astronaut', 1.2], ['chef', 1.2], ['viking', 1], ['cowboy', 1.2], ['king', 0.8], ['sailor', 1.6], ['hero', 1], ['scientist', 0.8], ['explorer', 1.2], ['santa', 0.5], ['wizardish', 0.7]];
+  WA.applyCostume = (p, r, list) => {
+    const name = r.weighted(list || WA.DEFAULT_COSTUMES);
+    COS[name](p, r);
+    p.costume = name;
+    return p;
+  };
 
   // ---------- the hero: Ruivinho ----------
   WA.hero = function (pose, face) {

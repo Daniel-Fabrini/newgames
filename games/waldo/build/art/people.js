@@ -396,8 +396,8 @@
       case 'astro': {
         // glass bubble drawn over the head
         g.beginPath();
-        g.arc(hx, hy, R * 1.35, 0, Math.PI * 2);
-        g.fillStyle = 'rgba(190,230,255,0.38)';
+        g.arc(hx, hy, R * 1.3, 0, Math.PI * 2);
+        g.fillStyle = 'rgba(200,238,255,0.16)';
         g.fill();
         g.lineWidth = WA.ink * 1.6;
         g.strokeStyle = INK;
@@ -464,6 +464,12 @@
       g.fillStyle = 'rgba(255,255,255,0.5)';
       g.fill();
       g.stroke();
+    } else if (t === 'patch') {
+      line(g, hx - R * 0.97, ey - 2.4, hx + R * 0.97, ey - 0.6, WA.ink * 0.9, INK);
+      g.beginPath();
+      g.ellipse(ex2, ey, 3.1, 2.7, 0, 0, Math.PI * 2);
+      g.fillStyle = '#141418';
+      g.fill();
     } else if (t === 'heart') {
       for (const ex of [ex1, ex2]) {
         g.beginPath();
@@ -647,7 +653,7 @@
   // ---------- props held in hands ----------
   const PROPS = {
     balloons(g, x, y, ang, p) {
-      const cols = p.propC || [C.red, C.yellow, C.blue];
+      const cols = Array.isArray(p.propC) ? p.propC : [p.propC || C.red, C.yellow, C.blue, C.pink].slice(0, 3);
       const base = [x, y];
       cols.forEach((c, i) => {
         const bx = x + (i - (cols.length - 1) / 2) * 7, by = y - 34 - (i % 2) * 6;
@@ -893,6 +899,40 @@
       ell(g, 0, -14, 4.6, 20, p.propC || C.yellow, 0);
       line(g, 0, -33, 0, 5, WA.ink * 0.6, C.red);
       g.restore();
+    },
+    skipole(g, x, y) {
+      line(g, x, y + 2, x + 5, y + 38, WA.ink * 1.8, INK);
+      line(g, x, y + 2, x + 5, y + 38, WA.ink * 0.7, '#cfd3d8');
+      circ(g, x + 5, y + 34, 2.2, '#cfd3d8', WA.ink * 0.5);
+    },
+    suitcase(g, x, y, ang, p) {
+      const c = p.propC || C.brown;
+      arc(g, x, y + 2, 3.4, Math.PI, 0, WA.ink * 1.1, INK);
+      rrect(g, x - 7, y + 2, 14, 11, 2, c, WA.ink * 0.9);
+      line(g, x - 7, y + 6, x + 7, y + 6, WA.ink * 0.6, shade(c, -0.35));
+      rrect(g, x - 1.5, y + 5, 3, 2.4, 0.8, '#e8c040', WA.ink * 0.4);
+    },
+    toybear(g, x, y, ang, p) {
+      const b = p.toyC || '#c98a5a';
+      circ(g, x - 4.4, y - 11.4, 2.2, b, WA.ink * 0.5);
+      circ(g, x + 4.4, y - 11.4, 2.2, b, WA.ink * 0.5);
+      ell(g, x, y - 1, 5.6, 6.6, b, 0, WA.ink * 0.7);
+      circ(g, x, y - 9, 4.6, b, WA.ink * 0.7);
+      dot(g, x - 1.6, y - 9.4, 0.8);
+      dot(g, x + 1.6, y - 9.4, 0.8);
+      poly(g, [[x, y - 4], [x - 3.4, y - 6], [x - 3.4, y - 2]], p.bowC || C.red, WA.ink * 0.4);
+      poly(g, [[x, y - 4], [x + 3.4, y - 6], [x + 3.4, y - 2]], p.bowC || C.red, WA.ink * 0.4);
+    },
+    toyduck(g, x, y, ang, p) {
+      ell(g, x, y - 1, 6, 4, p.toyC || C.yellow, 0, WA.ink * 0.7);
+      circ(g, x + 3.6, y - 6.4, 3.2, p.toyC || C.yellow, WA.ink * 0.7);
+      poly(g, [[x + 6, y - 6.4], [x + 9.2, y - 5.6], [x + 6, y - 5]], C.orange, WA.ink * 0.4);
+    },
+    toyrobot(g, x, y) {
+      rrect(g, x - 4, y - 5, 8, 9, 1.5, '#b8c2cc', WA.ink * 0.7);
+      rrect(g, x - 3, y - 11, 6, 6, 1.5, '#b8c2cc', WA.ink * 0.7);
+      dot(g, x - 1.2, y - 8.4, 0.9, '#2b6fd1');
+      dot(g, x + 1.2, y - 8.4, 0.9, '#2b6fd1');
     },
     cane(g, x, y) {
       line(g, x, y + 8, x, y - 14, WA.ink * 2.0, INK);
@@ -1152,7 +1192,7 @@
     }
     // nose
     if (f > 0.4) {
-      ell(g, f * 8.0, hy0 + 1.8, 1.9, 1.6, sk, 0, ink * 0.75);
+      ell(g, f * 8.0, hy0 + 1.8, p.noseC ? 2.8 : 1.9, p.noseC ? 2.6 : 1.6, p.noseC || sk, 0, ink * 0.75);
     } else {
       arc(g, fx0, hy0 + 2.6, 1.2, 0.3, Math.PI - 0.3, ink * 0.65);
     }
