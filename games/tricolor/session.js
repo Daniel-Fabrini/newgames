@@ -293,6 +293,8 @@ export function summary(st, bank) {
     ids: answered.map((e) => e.id),
     rightIds: review.filter((r) => r.res === 'right').map((r) => r.id),
     steps: st.step + (cur(st)?.res ? 1 : 0),
+    reached: st.step + 1,
+    lifelinesUsed: Object.keys(MODES[st.mode].lifelines).reduce((n, k) => n + (MODES[st.mode].lifelines[k] - (st.lifelines[k] ?? 0)), 0),
   };
 }
 
