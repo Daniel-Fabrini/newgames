@@ -46,7 +46,7 @@ export const PALETTE: readonly LiquidStyle[] = [
   { base: '#f472b6', shade: '#be185d', light: '#fbcfe8', ink: DARK_INK, symbol: 'cross' },
   { base: '#92400e', shade: '#5a2408', light: '#c2783a', ink: LIGHT_INK, symbol: 'moon' },
   { base: '#eef2f7', shade: '#a8b3c4', light: '#ffffff', ink: DARK_INK, symbol: 'bolt' },
-  { base: '#64748b', shade: '#334155', light: '#94a3b8', ink: LIGHT_INK, symbol: 'ring' },
+  { base: '#d61fd6', shade: '#86198f', light: '#f0abfc', ink: LIGHT_INK, symbol: 'ring' },
 ];
 
 if (PALETTE.length < MAX_COLOURS) throw new Error('Water Sort palette is smaller than MAX_COLOURS');

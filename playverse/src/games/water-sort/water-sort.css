@@ -340,6 +340,7 @@
 }
 
 .ws-num {
+  display: none;
   height: 18px;
   font-size: var(--fs-2xs);
   font-weight: var(--fw-bold);

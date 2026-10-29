@@ -94,6 +94,6 @@ export interface WaterSortPrefs {
 }
 
 export const PREFS_KEY = 'prefs:water-sort';
-export const PREFS_VERSION = 1;
+export const PREFS_VERSION = 2;
 export const defaultPrefs: WaterSortPrefs = { symbols: false };
 export const prefsValidator: Validator<WaterSortPrefs> = v.object({ symbols: v.withDefault(v.boolean(), false) });

@@ -4,11 +4,11 @@
  */
 export const BOTTLE_RATIO = 2.6; // height / width
 export const LIFT_RATIO = 0.13; // selected bottles rise by this fraction of their height
-export const LABEL_PX = 18; // bottle number under each bottle
-export const MAX_BOTTLE_W = 74;
+export const LABEL_PX = 0; // bottle number under each bottle
+export const MAX_BOTTLE_W = 92;
 export const MIN_BOTTLE_W = 18;
 /** Bottles at least this wide are comfortable to tap: use the fewest rows that reach it. */
-export const COMFORT_BOTTLE_W = 50;
+export const COMFORT_BOTTLE_W = 76;
 const GAP_RATIO = 0.32; // horizontal gap as a fraction of the bottle width
 const ROW_GAP_PX = 10;
 
