@@ -22,18 +22,18 @@ for r in range(3):
 objs.append(box((3 * P + 0.35, 0.5, 3 * P + 0.35), glossy('#3a45d6', 0.3, 0.6, name='slab'), loc=(0, 0.6, 0), bevel=0.22))
 # slot highlight
 objs.append(box((T + 0.05, 0.08, T + 0.05), glossy('#8fffc0', 0.3, 0.6, name='slot'), loc=(P, 0.3, P), bevel=0.08))
-parent(objs, loc=(0, 0, 1.85), rot=(-6, 12, -6))
+parent(objs, loc=(0, 0, 1.6), rot=(-6, 12, -6))
 # floating tile being placed, glowing green with check mark
 tx = bpy.data.objects.new('t', None); bpy.context.scene.collection.objects.link(tx)
 parts = [box((T, T * 0.9, T), glossy('#ffd23a', 0.2, 0.8, name='gold_t'), bevel=0.14)]
 parts.append(text('4', glossy('#7a3a00', 0.3, 0.6, name='ink4'), size=0.62, extrude=0.05, loc=(0, -T * 0.45 - 0.005, 0), rot=(90, 0, 0), bevel=0.012))
 for p in parts: p.parent = tx
-tx.location = (1.55, -1.1, 3.45); tx.rotation_euler = (math.radians(-6), math.radians(12), math.radians(14)); tx.scale = (1.15,) * 3
+tx.location = (1.45, -1.3, 3.2); tx.rotation_euler = (math.radians(-6), math.radians(12), math.radians(14)); tx.scale = (1.15,) * 3
 # glow ring + check bubble
-chk = cylinder(0.42, 0.14, green, loc=(2.5, -1.6, 4.4), rot=(90, 0, 0), bevel=0.05)
+chk = cylinder(0.42, 0.14, green, loc=(2.0, -2.3, 1.2), rot=(90, 0, 0), bevel=0.05)
 w = glossy('#ffffff', 0.2, 0.8, name='chk')
-a = box((0.12, 0.1, 0.3), w, loc=(2.42, -1.72, 4.34), bevel=0.03, rot=(0, 0, 0)); a.rotation_euler = (0, math.radians(45), 0)
-b = box((0.12, 0.1, 0.55), w, loc=(2.59, -1.72, 4.42), bevel=0.03); b.rotation_euler = (0, math.radians(-45), 0)
+a = box((0.12, 0.1, 0.3), w, loc=(1.86, -2.42, 1.16), bevel=0.03, rot=(0, 0, 0)); a.rotation_euler = (0, math.radians(-45), 0)
+b = box((0.12, 0.1, 0.55), w, loc=(2.12, -2.42, 1.26), bevel=0.03); b.rotation_euler = (0, math.radians(45), 0)
 # pencil
 pen = []
 yel = glossy('#ffc21a', 0.25, 0.7, name='pen')
@@ -42,7 +42,7 @@ pen.append(cone(0.14, 0.04, 0.45, glossy('#f2c99a', 0.4, 0.3, name='wood'), loc=
 pen.append(cone(0.05, 0.0, 0.12, glossy('#222222', 0.3, 0.5, name='lead'), loc=(0, 0, -1.34), seg=16))
 pen.append(cylinder(0.15, 0.2, metal('#c8ccd8'), loc=(0, 0, 0.9), bevel=0.02))
 pen.append(cylinder(0.14, 0.2, glossy('#ff6a8a', 0.3, 0.6, name='eraser'), loc=(0, 0, 1.08), bevel=0.05))
-parent(pen, loc=(-2.1, -1.5, 0.95), rot=(0, 38, 8), scale=1.0)
-podium('#2a31b8', 3.2, 0.5, z=-0.35)
-fit(0.88, 0.0)
+parent(pen, loc=(-0.6, -2.5, 0.55), rot=(0, 78, -10), scale=1.0)
+podium('#2a31b8', 3.2, 0.5, z=-0.15)
+fit(0.9, 0.2, -0.15)
 render('sudoku')

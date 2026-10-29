@@ -27,6 +27,6 @@ x0 = -2.4
 for i, (t, bt, tilt) in enumerate([(3, 5, 0), (2, 6, 0), (4, 1, 15), (6, 3, 36), (5, 2, 62), (1, 4, 86)]):
     pv.append(dom(t, bt, (x0 + i * s0 + D / 2, 0, 0), tilt))
 parent(pv, loc=(0, 0, 0), rot=(0, 0, 32))
-podium('#1a7fa8', 3.1, 0.5, z=0)
-fit(0.98, 0.35, 0.0)
+podium('#1a7fa8', 2.9, 0.5, z=0)
+fit(0.92, 0.4, 0.0)
 render('domino')

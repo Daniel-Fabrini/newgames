@@ -147,9 +147,9 @@ export const Board = memo(function Board({
     setGeometry({
       id: pour.id,
       dir,
-      x: dx - dir * bottleW * 0.42 - sx,
-      y: d.top - s.top - bottleH * 0.16,
-      rot: dir * 74,
+      x: dx - dir * bottleW * 0.1 - sx,
+      y: d.top - s.top - bottleH * 0.12 - bottleW * 0.22,
+      rot: dir * 96,
     });
   }, [pour, bottleW, bottleH]);
 
@@ -240,7 +240,6 @@ export const Board = memo(function Board({
                           />
                         )}
                       </span>
-                      <span className="ws-shine" />
                     </span>
                     <span className="ws-rim" aria-hidden="true" />
                     {done && <span className="ws-cap" aria-hidden="true" />}

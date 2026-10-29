@@ -2,7 +2,7 @@
  * Bottle layout: picks the number of rows (1–3) that gives the largest bottles that fit the
  * available stage, so up to 14 bottles fit a 360×740 phone without cropping.
  */
-export const BOTTLE_RATIO = 3.3; // height / width
+export const BOTTLE_RATIO = 2.6; // height / width
 export const LIFT_RATIO = 0.13; // selected bottles rise by this fraction of their height
 export const LABEL_PX = 18; // bottle number under each bottle
 export const MAX_BOTTLE_W = 74;

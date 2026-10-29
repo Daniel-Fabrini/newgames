@@ -51,7 +51,7 @@ interface WinInfo {
   outcome: CompleteLevelOutcome;
 }
 
-const POUR_MS = 600;
+const POUR_MS = 800;
 const SAVE_TICK_MS = 5000;
 
 function boot(): { game: LevelState | null; elapsedMs: number } {

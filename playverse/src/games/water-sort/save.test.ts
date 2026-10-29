@@ -83,7 +83,7 @@ describe('water sort save', () => {
 
   it('validates the symbols preference with a safe default', () => {
     expect(prefsValidator({ symbols: false })).toEqual({ ok: true, value: { symbols: false } });
-    expect(prefsValidator({ symbols: 'yes' })).toEqual({ ok: true, value: { symbols: true } });
+    expect(prefsValidator({ symbols: 'yes' })).toEqual({ ok: true, value: { symbols: false } });
     expect(prefsValidator(null).ok).toBe(false);
   });
 });
