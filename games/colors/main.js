@@ -404,12 +404,9 @@ export async function mount(root, ctx) {
     const n = s.opts.players;
     match = { s, meta, mems: [], lastRoundSeen: s.round };
     buildTable(n);
-    backFn = async () => {
-      if (!match) return false;
-      if (s.phase === 'matchEnd') {
-        showMenu();
-        return true;
-      }
+    const confirmLeave = async () => {
+      if (!match) return;
+      if (s.phase === 'matchEnd') return showMenu();
       const v = await ask({
         title: t('leaveTitle'),
         text: t('leaveText'),
@@ -423,6 +420,10 @@ export async function mount(root, ctx) {
         persist();
         showMenu();
       }
+    };
+    backFn = () => {
+      if (!match) return false;
+      confirmLeave();
       return true;
     };
     freshMemories();

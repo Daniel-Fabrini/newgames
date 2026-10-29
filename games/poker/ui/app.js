@@ -120,7 +120,7 @@ export function createApp(root, ctx, STRINGS) {
     current = r && r.el ? r : { el: r };
     viewHost.append(current.el);
     app.view = name;
-    const isTab = !!TAB_SCREENS[name];
+    const isTab = !!TAB_SCREENS[name] && !(props && props.id);
     clear(tabHost);
     if (isTab && app.career) {
       app.tab = name;
@@ -245,7 +245,9 @@ export function createApp(root, ctx, STRINGS) {
     if (tour.phase === 'finished') return;
     const ov = overlay(root, 'sim');
     const num = h('b', { class: 'pk-sim-n' }, String(tour.remaining));
-    ov.el.append(h('div', { class: 'pk-spin' }), h('h2', {}, t('sim.title')), h('p', {}, t('sim.sub')), h('div', { class: 'pk-sim' }, h('small', {}, t('hud.players')), num));
+    const ticker = h('div', { class: 'pk-ticker' });
+    ov.el.append(h('div', { class: 'pk-spin' }), h('h2', {}, t('sim.title')), h('p', {}, t('sim.sub')), h('div', { class: 'pk-sim' }, h('small', {}, t('hud.players')), num), ticker);
+    let shown = tour.busts.length;
     let guard = 0;
     while (tour.phase !== 'finished' && !app.disposed) {
       const t0 = performance.now();
@@ -254,6 +256,14 @@ export function createApp(root, ctx, STRINGS) {
         if (++guard > 6000) break;
       }
       num.textContent = String(tour.remaining);
+      for (; shown < tour.busts.length; shown++) {
+        const b = tour.busts[shown];
+        const e = tour.entrants.find((x) => x.id === b.id);
+        if (e && (e.rivalId || b.place <= 9)) {
+          ticker.prepend(h('div', { class: 'pk-tk' }, h('b', {}, b.place + 'º'), h('span', {}, e.name)));
+          while (ticker.children.length > 4) ticker.lastChild.remove();
+        }
+      }
       await new Promise((r) => setTimeout(r, 0));
       if (guard > 6000) break;
     }
@@ -261,6 +271,12 @@ export function createApp(root, ctx, STRINGS) {
     await new Promise((r) => setTimeout(r, 260));
   }
   app.simulateWithProgress = simulateWithProgress;
+
+  async function showElimination(tour) {
+    const me = T.human(tour);
+    if (me.place === 1 || tour.phase === 'finished' && me.place === 1) return;
+    await playMoments(app, [{ kind: 'bust', place: me.place, entrants: tour.def.entrants, by: me.bustedBy ? tour.entrants.find((x) => x.id === me.bustedBy) : null }]);
+  }
 
   const namesOf = (tour) => (id) => {
     const e = tour.entrants.find((x) => x.id === id);
@@ -288,6 +304,7 @@ export function createApp(root, ctx, STRINGS) {
     if (!resume && ev.story) {
       await playMoments(app, [{ kind: 'story', event: ev, intro: true }]);
     }
+    if (!resume && ev.championship) await playMoments(app, [{ kind: 'ceremony', event: ev }]);
     const coachOn = ev.tutorial && !c.flags.tutorialDone;
     const res = await runTable(
       () => createTournamentSession(tour, { heroFrame: app.heroFrame(), L: hudLabels() }),
@@ -326,6 +343,7 @@ export function createApp(root, ctx, STRINGS) {
       app.saveCareer();
       return app.go('home');
     }
+    await showElimination(tour);
     await simulateWithProgress(tour);
     const report = C.finishEvent(c, { now: Date.now() });
     app.saveCareer();
@@ -367,6 +385,7 @@ export function createApp(root, ctx, STRINGS) {
     }
     if (res.outcome === 'left') return app.go('home');
     if (!T.human(tour).out) return app.go('home');
+    await showElimination(tour);
     await simulateWithProgress(tour);
     const result = T.tournamentResult(tour);
     recordQuickSitGo(app.quick, result);
@@ -495,6 +514,10 @@ export function createApp(root, ctx, STRINGS) {
     if (report.seasonEnded) list.push({ kind: 'season', season: report.seasonEnded });
     return list;
   }
+
+  app.momentsFromReport = momentsFromReport;
+  app.playMoments = (list) => playMoments(app, list);
+  app.showResults = (o) => showResults(app, o);
 
   // ---------- back button ----------
   ctx.onBack(() => {

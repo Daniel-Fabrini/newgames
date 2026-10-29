@@ -112,6 +112,17 @@ function build(app, m) {
       const s = m.season;
       return { node: box(kick(tr('moment.seasonK', { n: s.n })), h('div', { class: 'pk-in', html: s.champion ? trophySVG('intl', { size: 130 }) : laurelSVG(110) }), h('h2', { class: 'pk-in' }, s.champion ? tr('moment.seasonChamp') : tr('moment.seasonEnd', { r: ordinal(s.rank, app.lang) })), h('p', { class: 'pk-in' }, tr('moment.seasonText', { p: fmtN(s.points), e: s.events, w: s.wins }))), fx: s.champion ? true : false };
     }
+    case 'bust': {
+      const e = m.by;
+      const rv = e && e.rivalId ? app.RIVAL_BY_ID[e.rivalId] : null;
+      return { node: box(kick(tr('moment.bustK')), h('div', { class: 'pk-in', html: laurelSVG(96) }), h('h2', { class: 'pk-in' }, tr('moment.bust', { p: ordinal(m.place, app.lang) })), h('p', { class: 'pk-in' }, tr('moment.bustOf', { n: m.entrants })), e ? h('div', { class: 'pk-in pk-bustby' }, avatarEl(e.avatar, { size: 46, frame: rv ? 'gold' : '' }), h('div', {}, h('small', {}, tr('moment.bustBy')), h('b', {}, e.name))) : null), sfx: 'bust', cta: tr('moment.bustCta') };
+    }
+    case 'ceremony': {
+      const row = h('div', { class: 'pk-in pk-cer' });
+      for (const id of m.event.rivals.slice(0, 7)) row.append(avatarEl(app.RIVAL_BY_ID[id].avatar, { size: 44, frame: 'gold' }));
+      const lg = app.RIVAL_BY_ID.legend;
+      return { node: box(kick(tr('moment.cerK')), h('div', { class: 'pk-in', html: trophySVG('world', { size: 130 }) }), h('h2', { class: 'pk-in' }, tr('moment.cer')), h('p', { class: 'pk-in' }, tr('moment.cerText', { n: m.event.entrants })), row, h('p', { class: 'pk-in pk-quote' }, '“' + app.tx(lg.quotes[0]) + '” — ' + lg.name)), fx: 'spotlight', sfx: 'turn', cta: tr('moment.cerCta') };
+    }
     case 'tutorial':
       return { node: box(kick(tr('moment.tutK')), h('div', { class: 'pk-in', html: laurelSVG(120) }), h('h2', { class: 'pk-in' }, tr('moment.tut')), h('p', { class: 'pk-in' }, tr('moment.tutText'))), fx: 'chips', power: 0.6 };
     default:

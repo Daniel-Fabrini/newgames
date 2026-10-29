@@ -5,6 +5,7 @@ import { equity } from './equity.js';
 export { equity, preflopPct };
 
 const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const skill3 = (p) => (p.skill <= 4 ? 0.82 + 0.045 * p.skill : 1); // weak players under-weigh pot odds
 const gauss = (rng) => (rng() + rng() + rng() - 1.5) * 0.8165; // ~N(0,~0.5)
 
 function analyze(view) {
@@ -63,7 +64,8 @@ function opponentCuts(view, profile, ctx) {
     if (pfRaises >= 1) cut = pfRaises >= 3 ? 0.04 : pfRaises === 2 ? 0.1 : 0.28;
     else if (pfCalls >= 1) cut = 0.55;
     else cut = 0.8; // checked big blind / limp
-    cut *= Math.pow(0.68, postAgg) * Math.pow(0.9, postCalls);
+    const narrow = 0.66 + 0.3 * ((10 - profile.skill) / 9); // weak players under-react to aggression
+    cut *= Math.pow(narrow, postAgg) * Math.pow(0.9, postCalls);
     const st = stats[p.id];
     if (st && st.hands >= 6 && profile.adapt > 0) {
       const looseness = clamp(0.5 + (st.vpip / st.hands) * 1.1, 0.6, 1.5);
@@ -140,13 +142,13 @@ function raw(view, profile, rng, ctx, L) {
 function preflop(view, profile, rng, ctx, L, c) {
   const { me, M, late, icm, err, loosen, aggr, nOpp } = c;
   const bb = view.bb;
-  const pct = clamp(preflopPct(view.hole) + gauss(rng) * err * 0.1, 0, 1) / loosen;
+  const pct = clamp(preflopPct(view.hole) + gauss(rng) * err * 0.22, 0, 1) / loosen;
   const hist = view.history.filter((h) => h.street === 'preflop');
   const raises = hist.filter((h) => h.type === 'raise' || h.type === 'bet').length; // 0 = unopened
   const limpers = hist.filter((h) => h.type === 'call').length;
-  const shortHandedBoost = Math.pow(9 / Math.max(2, view.n), 0.55);
+  const shortHandedBoost = Math.pow(9 / Math.max(2, view.n), 0.4);
   const tightF = 1.55 - profile.tight * 1.1; // 1.0 at tight=.5
-  const openW = clamp((0.09 + 0.34 * late) * shortHandedBoost * tightF, 0.04, 0.85);
+  const openW = clamp((0.07 + 0.27 * late) * shortHandedBoost * tightF, 0.04, 0.85);
   const toCallBB = L.toCall / bb;
 
   if (raises === 0) {
@@ -176,15 +178,15 @@ function preflop(view, profile, rng, ctx, L, c) {
   const st = ctx.stats?.[raiser?.id];
   let cut = raises === 1 ? 0.22 : raises === 2 ? 0.1 : 0.05;
   if (st && st.hands >= 6) cut = clamp(Math.max(0.05, (st.pfr / st.hands) * 1.15) , 0.05, 0.5) * (raises === 1 ? 1 : 0.5);
-  if (raiser && raiser.allIn) cut = clamp(cut * 1.4, 0.06, 0.5);
+  if (raiser && raiser.allIn) { const rM = (raiser.stack + raiser.bet) / Math.max(1, view.sb + view.bb + view.ante * view.n); cut = clamp(Math.max(cut, 0.1 + 0.9 / Math.max(rM, 1.5) * 0.45), 0.08, 0.6); }
   if (raiser && raiser.bet >= raiser.stack * 0 + bb * 12 && raises === 1) cut = Math.min(cut, 0.12); // big sizing = tight
   const potBefore = view.pot;
-  const req = L.toCall / (potBefore + L.toCall);
+  const req = (L.toCall / (potBefore + L.toCall)) * (skill3(profile));
   const iters = c.fast ? 90 : Math.round(260 * (1 - err * 0.55));
   const cuts = new Array(Math.max(1, Math.min(nOpp, 3))).fill(0).map((_, k) => (k === 0 ? cut : 0.5));
-  const eq = clamp(equity(view.hole, [], cuts, rng, iters) + gauss(rng) * err * 0.06, 0, 1);
+  const eq = clamp(equity(view.hole, [], cuts, rng, iters) + gauss(rng) * err * 0.14, 0, 1);
   const commit = L.toCall / Math.max(1, me.stack + me.bet);
-  const margin = 0.025 + profile.tight * 0.05 - aggr * 0.02 + (late < 0.5 ? 0.02 : 0) + (commit > 0.5 ? icm : icm * 0.3) + (commit > 0.6 ? 0.03 * (1 - profile.risk) : 0);
+  const margin = 0.05 + profile.tight * 0.06 - aggr * 0.02 + (late < 0.5 ? 0.02 : 0) + (commit > 0.5 ? icm : icm * 0.3) + (commit > 0.6 ? 0.03 * (1 - profile.risk) : 0);
   const valueCut = [0, 0.03, 0.018, 0.012, 0.01][Math.min(raises, 4)] * (0.8 + aggr * 0.8);
   const canReraise = L.canRaise;
   if (canReraise && pct <= valueCut && M > 2) {
@@ -193,12 +195,13 @@ function preflop(view, profile, rng, ctx, L, c) {
   // 3-bet bluff / squeeze with blockers & suited connectors
   if (canReraise && raises === 1 && M > 15 && pct > 0.06 && pct < 0.35 && late > 0.4 && rng() < profile.bluff * aggr * 0.45) return reraise(view, L, raises, late);
   if (canReraise && eq > 0.64 + (raises > 1 ? 0.04 : 0) && rng() < aggr * 0.7 && M > 3) return reraise(view, L, raises, late);
-  if (L.toCall >= me.stack) { // call for everything
-    return eq > req + margin ? { type: 'call' } : { type: 'fold' };
+  if (L.toCall >= me.stack) { // call for everything: pure pot odds (+ICM pressure)
+    return eq > req + 0.01 + icm + (raiser && raiser.allIn ? 0 : 0.01) ? { type: 'call' } : { type: 'fold' };
   }
-  if (eq > req + margin) return { type: 'call' };
+  const callCap = 0.5 - profile.tight * 0.25 + (view.me === view.bbIdx ? 0.12 : 0);
+  if (eq > req + margin && pct <= callCap) return { type: 'call' };
   // cheap defend from the big blind
-  if (view.me === view.bbIdx && L.toCall <= bb * 2.5 && eq > req - 0.04 * (1 - profile.tight)) return { type: 'call' };
+  if (view.me === view.bbIdx && L.toCall <= bb * 2.5 && pct <= 0.45 && eq > req - 0.01 * (1 - profile.tight)) return { type: 'call' };
   return { type: 'fold' };
 }
 function rawOpen(view, L, sizeBB) {
@@ -220,7 +223,7 @@ function postflop(view, profile, rng, ctx, L, c) {
   const cuts = opponentCuts(view, profile, ctx);
   const iters = Math.round((fast ? 70 : 340) * (1 - err * 0.5) / (1 + 0.35 * (nOpp - 1)) );
   const cap = cuts.length; // everyone still in
-  const eq = clamp(equity(view.hole, board, cuts, rng, Math.max(40, iters)) + gauss(rng) * err * 0.08, 0, 1);
+  const eq = clamp(equity(view.hole, board, cuts, rng, Math.max(40, iters)) + gauss(rng) * err * 0.17, 0, 1);
   const wet = boardWetness(board);
   const draws = drawInfo(view.hole, board);
   const drawy = draws.flush || draws.straight;
@@ -254,10 +257,10 @@ function postflop(view, profile, rng, ctx, L, c) {
 
   // ---- facing a bet ----
   const toCall = L.toCall;
-  const req = toCall / (pot + toCall);
+  const req = (toCall / (pot + toCall)) * skill3(profile);
   const commit = toCall / Math.max(1, stack + me.bet);
   const bigBet = toCall > pot * 0.9;
-  let margin = 0.02 + profile.tight * 0.05 - aggr * 0.015 + (bigBet ? 0.04 * (1 - profile.risk) : 0);
+  let margin = 0.04 + profile.tight * 0.05 - aggr * 0.015 + (bigBet ? 0.04 * (1 - profile.risk) : 0);
   if (commit > 0.5 || toCall >= stack) margin += icm;
   if (drawy && view.street !== 'river' && toCall < stack) margin -= 0.04; // implied odds
   margin -= (loosen - 1) * 0.1;
@@ -275,6 +278,6 @@ function postflop(view, profile, rng, ctx, L, c) {
     if (drawy && view.street !== 'river' && cap === 1 && eq > req && rng() < profile.bluff * aggr * 0.5) return sizeRaise(view, L, 0.75);
     if (eq < 0.22 && cap === 1 && view.street !== 'river' && rng() < profile.bluff * 0.07 * (0.5 + late)) return sizeRaise(view, L, 0.8);
   }
-  if (toCall >= stack) return eq > req + margin ? { type: 'call' } : { type: 'fold' };
+  if (toCall >= stack) return eq > req + 0.01 + icm ? { type: 'call' } : { type: 'fold' };
   return eq > req + margin ? { type: 'call' } : { type: 'fold' };
 }

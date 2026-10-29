@@ -12,7 +12,7 @@ export default function rankScreen(app, props = {}) {
   const sc = h('div', { class: 'pk-scroll' });
   el.append(sc);
   let scope = props.scope || 'season';
-  const opts = [{ id: 'season', label: t('rank.season') }, ...['local', 'regional', 'intl', 'world'].filter((k) => c.unlocked.includes(k)).map((k) => ({ id: k, label: app.tx(app.CIRCUIT_BY_ID[k].name).split(' ')[0] }))];
+  const opts = [{ id: 'season', label: t('rank.season') }, ...['local', 'regional', 'intl', 'world'].filter((k) => c.unlocked.includes(k)).map((k) => ({ id: k, label: t('cir.' + k) }))];
   const body = h('div', { class: 'pk-rank-body' });
   const paint = () => {
     clear(body);

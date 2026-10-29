@@ -14,28 +14,23 @@
 import { avatarEl } from './avatars.js';
 import { faceEl, backEl, flipEl, parse, cardLabel } from './cards.js';
 
-// angle table (degrees clockwise from the hero, who sits at 0 = bottom centre)
-const ARC = {
-  2: [180],
-  3: [125, 235],
-  4: [100, 180, 260],
-  5: [80, 140, 220, 280],
-  6: [62, 112, 180, 248, 298],
-  7: [55, 100, 150, 210, 260, 305],
-  8: [50, 90, 130, 180, 230, 270, 310],
-  9: [50, 87, 124, 161, 199, 236, 273, 310],
-  10: [46, 78, 110, 142, 180, 218, 250, 282, 314],
+// seat slots (x%, y%) clockwise from the hero's left; the bands used by the board (y 38-54%) stay free
+const SLOTS = {
+  1: [[50, 10]],
+  2: [[30, 11], [70, 11]],
+  3: [[14, 31], [50, 9], [86, 31]],
+  4: [[14, 62], [32, 10], [68, 10], [86, 62]],
+  5: [[14, 64], [14, 32], [50, 9], [86, 32], [86, 64]],
+  6: [[14, 64], [14, 33], [37, 8], [63, 8], [86, 33], [86, 64]],
+  7: [[14, 65], [14, 35], [24, 8], [50, 8], [76, 8], [86, 35], [86, 65]],
+  8: [[14, 66], [14, 37], [18, 8], [39, 8], [61, 8], [82, 8], [86, 37], [86, 66]],
 };
 
 export function seatPos(slot, n) {
   // slot 0 = hero
   if (slot === 0) return { x: 50, y: 95 };
-  const arc = ARC[Math.min(10, Math.max(2, n))];
-  const a = (arc[slot - 1] * Math.PI) / 180;
-  let x = 50 - 44 * Math.sin(a);
-  let y = 47 + 40 * Math.cos(a);
-  x = Math.max(14, Math.min(86, x));
-  y = Math.max(8, Math.min(86, y));
+  const arr = SLOTS[Math.max(1, Math.min(8, n - 1))];
+  const [x, y] = arr[Math.min(slot - 1, arr.length - 1)];
   return { x, y };
 }
 
@@ -266,7 +261,7 @@ export function createTable(host, { t, lang, reduce = () => false }) {
       lab.dataset.k = txt + cls;
       lab.textContent = txt;
       lab.className = 'pk-act ' + cls + (txt ? ' on' : '');
-      if (txt && !reduce()) lab.animate([{ transform: 'translate(-50%,6px) scale(.8)', opacity: 0 }, { transform: 'translate(-50%,0) scale(1)', opacity: 1 }], { duration: 220, easing: 'ease-out' });
+      if (txt && !reduce()) lab.animate([{ opacity: 0, scale: '0.8' }, { opacity: 1, scale: '1' }], { duration: 220, easing: 'ease-out' });
     }
     // tags: dealer / blinds / handName
     const tags = seat.querySelector('.pk-tags');

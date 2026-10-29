@@ -82,6 +82,10 @@ export async function mount(root, ctx) {
   let hintTimer = 0;
 
   const alive = (id) => !disposed && id === runId;
+  const vars = (el, o) => {
+    for (const k of Object.keys(o)) el.style.setProperty(k, o[k]);
+    return el;
+  };
 
   // ---------- helpers ----------
   const flash = (text, tone = '') => {
@@ -221,8 +225,8 @@ export async function mount(root, ctx) {
   function sizes() {
     const W = root.clientWidth || 360;
     const Hh = root.clientHeight || 640;
-    const hand = Math.max(50, Math.min(Math.floor((W - 18) / 5.5), 84, Math.floor(Hh / 8)));
-    return { hand, trick: Math.round(hand * 0.8), stack: Math.round(hand * 0.5), W, H: Hh };
+    const hand = Math.max(50, Math.min(Math.floor((W - 18) / 5.5), 96, Math.floor(Hh / 7.4)));
+    return { hand, trick: Math.min(hand, Math.floor((W - 130) / 3.7)), stack: Math.round(hand * 0.5), W, H: Hh };
   }
 
   function buildTable() {
@@ -230,7 +234,7 @@ export async function mount(root, ctx) {
     const sz = sizes();
     const seatEl = (seat) => {
       const chip = playerChip({ name: seatName(seat), avatar: AVATARS[seat], color: TEAM_COLOR[R.teamOf(seat)], size: seat === 2 ? 'md' : 'sm', layout: 'col', sub: seat === 0 ? '' : seat === 2 ? t('partner') : t('rival') });
-      const stack = h('div', { class: 'g-sueca-stack', style: { '--cw': sz.stack + 'px' }, 'aria-hidden': 'true' });
+      const stack = vars(h('div', { class: 'g-sueca-stack', 'aria-hidden': 'true' }), { '--cw': sz.stack + 'px' });
       const tcard = h('div', { class: 'g-sueca-tcard', title: t('trunfo') });
       const el = h('div', { class: `g-sueca-seat s${seat}`, dataset: { seat } }, chip, seat === 0 ? null : stack, tcard);
       return { el, chip, stack, tcard };
@@ -238,11 +242,12 @@ export async function mount(root, ctx) {
     const seats = [0, 1, 2, 3].map(seatEl);
     const slots = [0, 1, 2, 3].map((i) => h('div', { class: `g-sueca-slot p${i}`, dataset: { seat: i } }));
     const pile = (team) => {
-      const stack = h('div', { class: 'g-sueca-pstack', style: { '--cw': Math.round(sz.stack * 0.9) + 'px' } });
+      const stack = vars(h('div', { class: 'g-sueca-pstack' }), { '--cw': Math.round(sz.stack * 0.9) + 'px' });
       const cnt = h('b', { class: 'g-sueca-pcnt' }, '0');
       const lab = h('span', { class: 'g-sueca-plab' }, t(team === 0 ? 'us' : 'them'));
       const pts_ = h('span', { class: 'g-sueca-ppts' });
-      return { el: h('div', { class: `g-sueca-pile t${team}`, style: { '--tc': TEAM_COLOR[team] } }, stack, h('div', { class: 'g-sueca-pinfo' }, lab, h('span', { class: 'g-sueca-pn' }, cnt, ' ', t('tricks').toLowerCase()), pts_)), stack, cnt, pts: pts_ };
+      const el = vars(h('div', { class: `g-sueca-pile t${team}` }, stack, h('div', { class: 'g-sueca-pinfo' }, lab, h('span', { class: 'g-sueca-pn' }, cnt, ' ', t('tricks').toLowerCase()), pts_)), { '--tc': TEAM_COLOR[team] });
+      return { el, stack, cnt, pts: pts_ };
     };
     const piles = [pile(0), pile(1)];
     const tool = (ico, label, onclick) => h('button', { type: 'button', class: 'g-sueca-tool', 'aria-label': label, title: label, onclick, html: ICONS[ico] });
@@ -259,13 +264,13 @@ export async function mount(root, ctx) {
     };
     const flashEl = h('div', { class: 'g-sueca-flash', role: 'status', 'aria-live': 'polite' });
     const status = h('div', { class: 'g-sueca-status', role: 'status', 'aria-live': 'polite' });
-    const handBox = h('div', { class: 'g-sueca-hand', style: { '--hcw': sz.hand + 'px' } });
+    const handBox = vars(h('div', { class: 'g-sueca-hand' }), { '--hcw': sz.hand + 'px' });
     const felt = h('div', { class: 'g-sueca-table' },
       h('div', { class: 'g-sueca-felt' }),
       h('div', { class: 'g-sueca-tools l' }, lastBtn, hintBtn),
       h('div', { class: 'g-sueca-tools r' }, soundBtn, rulesBtn, optBtn),
       seats.map((s) => s.el),
-      h('div', { class: 'g-sueca-trick', style: { '--cw': sz.trick + 'px' } }, slots),
+      vars(h('div', { class: 'g-sueca-trick' }, slots), { '--cw': sz.trick + 'px' }),
       piles[0].el, piles[1].el, flashEl);
     const game = h('div', { class: 'g-sueca-game' }, h('div', { class: 'g-sueca-hud' }, hud.us, hud.trump, hud.them), felt, status, handBox);
     root.append(game);
@@ -353,7 +358,7 @@ export async function mount(root, ctx) {
     const teamBlock = (el, team) => {
       clear(el);
       el.style.setProperty('--tc', TEAM_COLOR[team]);
-      el.append(h('b', { class: 'g-sueca-tname' }, t(team === 0 ? 'us' : 'them')), pips(team), h('span', { class: 'g-sueca-tsub' }, `${t('tricks')} ${teamTricks(team)}`, settings.showPoints ? ` · ${S.points[team]} ${t('points').toLowerCase()}` : ''));
+      el.append(h('b', { class: 'g-sueca-tname' }, t(team === 0 ? 'us' : 'them')), pips(team) || '', h('span', { class: 'g-sueca-tsub' }, `${t('tricks')} ${teamTricks(team)}`, settings.showPoints ? ` · ${S.points[team]} ${t('points').toLowerCase()}` : ''));
     };
     teamBlock(hud.us, 0);
     teamBlock(hud.them, 1);
@@ -466,8 +471,8 @@ export async function mount(root, ctx) {
       return;
     }
     const sz = sizes();
-    const grid = h('div', { class: 'g-sueca-lt', style: { '--cw': Math.round(sz.hand * 0.82) + 'px' } },
-      last.plays.map((x) => h('div', { class: `g-sueca-ltc p${x.p}${x.p === last.winner ? ' win' : ''}` }, cardEl(toCard(x.c), { size: Math.round(sz.hand * 0.82), highlight: x.p === last.winner }), h('small', null, seatName(x.p)))));
+    const grid = vars(h('div', { class: 'g-sueca-lt' },
+      last.plays.map((x) => h('div', { class: `g-sueca-ltc p${x.p}${x.p === last.winner ? ' win' : ''}` }, cardEl(toCard(x.c), { size: Math.round(Math.min(sz.hand * 0.9, (sz.W - 100) / 4.4)), highlight: x.p === last.winner }), h('small', null, seatName(x.p))))), { '--cw': Math.round(Math.min(sz.hand * 0.9, (sz.W - 100) / 4.4)) + 'px' });
     modal({
       root,
       title: t('lastTrick'),
@@ -598,7 +603,7 @@ export async function mount(root, ctx) {
   const kindLabel = (k) => t({ normal: 'kindNormal', capote: 'kindCapote', bandeira: 'kindBandeira', draw: 'kindDraw' }[k]);
 
   function pipsRow(team, n, target) {
-    const row = h('span', { class: 'g-sueca-pips big', style: { '--tc': TEAM_COLOR[team] } });
+    const row = vars(h('span', { class: 'g-sueca-pips big' }), { '--tc': TEAM_COLOR[team] });
     for (let i = 0; i < target; i++) row.append(h('i', { class: i < n ? 'on' : '' }));
     return row;
   }

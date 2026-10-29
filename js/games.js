@@ -15,6 +15,8 @@ import lightsEntry from '../games/lights/entry.js';
 import stackEntry from '../games/stack/entry.js';
 import mazeEntry from '../games/maze/entry.js';
 import trucoEntry from '../games/truco/entry.js';
+import colorsEntry from '../games/colors/entry.js';
+import blackjackEntry from '../games/blackjack/entry.js';
 
 export const GAMES = [
   {
@@ -491,7 +493,7 @@ export const GAMES = [
 ];
 
 // Games that ship their own entry.js
-GAMES.push(minesEntry, lightsEntry, stackEntry, mazeEntry, trucoEntry);
+GAMES.push(minesEntry, lightsEntry, stackEntry, mazeEntry, trucoEntry, colorsEntry, blackjackEntry);
 
 export const CATEGORIES = [
   { id: 'all', label: { pt: 'Todos', en: 'All', es: 'Todos' } },

@@ -276,8 +276,8 @@ export async function mount(root, ctx) {
     const W = root.clientWidth || 360;
     const Hh = root.clientHeight || 700;
     const handCw = Math.max(46, Math.min(72, Math.floor(W / 6.5))) - (Hh < 700 ? 3 : 0);
-    const meldCw = W >= 600 ? 38 : 30;
-    const oppCw = W >= 600 ? 30 : 24;
+    const meldCw = Math.max(32, Math.min(44, Math.floor(W / 10)));
+    const oppCw = Math.max(26, Math.min(34, Math.floor(W / 13)));
 
     const screen = h('div', { class: 'g-buraco-table' });
     // HUD
@@ -461,9 +461,10 @@ export async function mount(root, ctx) {
       class: `g-buraco-meld ${kind ? 'is-can is-' + kind : ''}${opts.mine ? ' is-mine' : ''}`,
       'data-meld': m.id,
       'data-team': team,
-      style: { width: `${cw + step * (m.cards.length - 1) + 4}px`, '--cw': cw + 'px' },
+      style: { width: `${cw + step * (m.cards.length - 1) + 4}px` },
       'aria-label': meldLabel(m, kind),
     });
+    el.style.setProperty('--cw', cw + 'px');
     m.cards.forEach((c, i) => {
       const ce = cardEl(toCard(c.id), { size: cw, lang });
       ce.removeAttribute('role');
@@ -485,7 +486,7 @@ export async function mount(root, ctx) {
     return `${SUIT_SYM[m.suit]} ${txt}${kind ? ' · ' + t('can_' + kind) : ''}`;
   }
 
-  let renderedMelds = { 0: '', 1: '' };
+  let renderedMelds = { 0: '\u0000', 1: '\u0000' };
   function renderMelds(team, area, cw, mine, freshIds) {
     const s = match.state;
     const sig = s.melds[team].map((m) => m.id + ':' + m.cards.map((c) => c.id + (c.w ? 'w' : '')).join('.')).join('|');
@@ -517,7 +518,7 @@ export async function mount(root, ctx) {
   function render(first = false, freshMelds = null) {
     const s = match.state;
     const n = match.n;
-    renderedMelds = first ? { 0: '', 1: '' } : renderedMelds;
+    renderedMelds = first ? { 0: '\u0000', 1: '\u0000' } : renderedMelds;
     G.scoreUs.textContent = String(match.scores[0]);
     G.scoreThem.textContent = String(match.scores[1]);
     G.roundEl.textContent = t('roundN', { n: match.round });
@@ -1072,7 +1073,7 @@ export async function mount(root, ctx) {
     persist();
     G.handOrder = [];
     G.hand.setCards([], { animate: false });
-    renderedMelds = { 0: '', 1: '' };
+    renderedMelds = { 0: '\u0000', 1: '\u0000' };
     G.sel = [];
     G.log = [];
     G.lastLine.textContent = '';
