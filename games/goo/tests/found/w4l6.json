@@ -1,0 +1,1 @@
+{"sol":[{"type":"balloon","x":200,"y":600},{"type":"balloon","x":260,"y":640},{"type":"goo","x":340,"y":480},{"type":"heavy","x":260,"y":500},{"type":"goo","x":500,"y":560},{"type":"goo","x":460,"y":500},{"type":"goo","x":480,"y":540},{"type":"heavy","x":640,"y":480},{"type":"goo","x":700,"y":480}],"stock":{"goo":9,"heavy":3,"balloon":2},"stars":[9,11]}

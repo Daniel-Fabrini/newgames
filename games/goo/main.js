@@ -804,12 +804,16 @@ export async function mount(root, ctx) {
   window.addEventListener('resize', onResize);
 
   // ------------------------------------------------------------------ events from the simulation
+  let lastSndT = -1;
   function handleEvents() {
     const evs = sim.events;
     if (!evs.length) return;
+    const quiet = time - lastSndT < 0.07; // never stack dozens of sounds in one frame
+    let sounded = false;
     for (const ev of evs) {
       if (ev.k === 'snap') {
-        sSnap();
+        if (!quiet && !sounded) sSnap();
+        sounded = true;
         particles.burst(ev.x, ev.y, 12, { color: ['#fff', '#ffd54a', '#ff8a4a'], speed: 260, size: 2.6, life: 0.55, g: 300, shape: 'star' });
         shake = reduced ? 0 : 0.6;
         if (time - lastSnapMsg > 2.5) {
@@ -818,7 +822,8 @@ export async function mount(root, ctx) {
         }
       } else if (ev.k === 'die') {
         if (ev.why !== 'remove') {
-          sDie();
+          if (!quiet && !sounded) sDie();
+          sounded = true;
           const col = ev.why === 'spikes' ? '#ff5a4a' : '#ffc86a';
           particles.burst(ev.x, Math.min(ev.y, sim.killY - 20), 16, { color: [TYPES[ev.type]?.color || '#fff', col, '#fff'], speed: 250, size: 3.4, life: 0.8, g: 700, up: 220, shape: 'dot' });
           shake = reduced ? 0 : 0.35;
@@ -830,6 +835,7 @@ export async function mount(root, ctx) {
       } else if (ev.k === 'win') onWin();
       else if (ev.k === 'lose') onLose();
     }
+    if (sounded) lastSndT = time;
     evs.length = 0;
   }
 
@@ -849,7 +855,7 @@ export async function mount(root, ctx) {
     if (newBest) prog.best[lv.id] = sim.used;
     prog.wins = (prog.wins || 0) + 1;
     saveProg();
-    ctx.addXP?.(10 + st * 6 + (prev === 0 ? 10 : 0));
+    ctx.addXP?.(prev === 0 ? 20 + st * 6 : st > prev ? 10 : 4);
     clearTimeout(endTimer);
     endTimer = setTimeout(() => alive && phase === 'won' && showWin(st, newBest), 1700);
   }

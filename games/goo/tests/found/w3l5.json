@@ -1,1 +1,1 @@
-{"sol":[{"type":"stake","x":580,"y":360},{"type":"goo","x":600,"y":360}],"stock":{"goo":5,"stake":3},"stars":[2,4]}
+{"sol":[{"type":"goo","x":120,"y":580},{"type":"goo","x":200,"y":660},{"type":"goo","x":220,"y":600},{"type":"goo","x":280,"y":560},{"type":"stake","x":680,"y":620},{"type":"goo","x":420,"y":520},{"type":"goo","x":440,"y":400},{"type":"goo","x":560,"y":360}],"stock":{"goo":11,"stake":3},"stars":[8,10]}

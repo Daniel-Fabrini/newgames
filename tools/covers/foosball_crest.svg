@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <clipPath id="sh"><path id="shp" d="M60 118 H340 V300 C340 392 280 446 200 482 C120 446 60 392 60 300 Z"/></clipPath>
+  </defs>
+  <!-- stars arc -->
+  <g stroke="#fff" stroke-width="3" stroke-linejoin="round">
+    <polygon id="s" fill="#f7c600" points="0,-17 5,-5.5 17,-5.5 7.5,2 11,14 0,7 -11,14 -7.5,2 -17,-5.5 -5,-5.5" transform="translate(88,72) rotate(-34)"/>
+    <polygon fill="#f7c600" points="0,-17 5,-5.5 17,-5.5 7.5,2 11,14 0,7 -11,14 -7.5,2 -17,-5.5 -5,-5.5" transform="translate(312,72) rotate(34)"/>
+    <polygon fill="#d8202a" points="0,-17 5,-5.5 17,-5.5 7.5,2 11,14 0,7 -11,14 -7.5,2 -17,-5.5 -5,-5.5" transform="translate(136,46) rotate(-17)"/>
+    <polygon fill="#d8202a" points="0,-17 5,-5.5 17,-5.5 7.5,2 11,14 0,7 -11,14 -7.5,2 -17,-5.5 -5,-5.5" transform="translate(200,34)"/>
+    <polygon fill="#d8202a" points="0,-17 5,-5.5 17,-5.5 7.5,2 11,14 0,7 -11,14 -7.5,2 -17,-5.5 -5,-5.5" transform="translate(264,46) rotate(17)"/>
+  </g>
+  <!-- shield: white outline, then inside -->
+  <path d="M52 110 H348 V302 C348 400 286 454 200 492 C114 454 52 400 52 302 Z" fill="#fff"/>
+  <g clip-path="url(#sh)">
+    <rect x="40" y="100" width="330" height="420" fill="#111"/>
+    <!-- red left panel -->
+    <polygon points="60,172 168,172 168,340 200,482 60,482" fill="#d8202a"/>
+    <!-- white centre stripe -->
+    <polygon points="168,172 232,172 232,340 200,482 168,340" fill="#fff"/>
+    <!-- black right panel -->
+    <polygon points="232,172 340,172 340,482 200,482 232,340" fill="#111"/>
+    <rect x="60" y="118" width="280" height="54" fill="#111"/>
+  </g>
+  <path d="M60 118 H340 V300 C340 392 280 446 200 482 C120 446 60 392 60 300 Z" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
+  <line x1="60" y1="172" x2="340" y2="172" stroke="#fff" stroke-width="4"/>
+  <text x="200" y="161" text-anchor="middle" font-family="Montserrat, 'Arial Black', 'DejaVu Sans', sans-serif" font-weight="900" font-size="46" letter-spacing="4" fill="#fff">SPFC</text>
+</svg>
