@@ -19,12 +19,13 @@ import rivais from './rivais.js';
 import cultura from './cultura.js';
 import outras from './outras.js';
 import extra1 from './extra1.js';
+import ref from './ref.js';
 import { validateBank, CATEGORIES, CAT_IDS } from './schema.js';
 
 export { CATEGORIES, CAT_IDS };
 export { validateQuestion, validateBank, bankStats, normText } from './schema.js';
 
-export const FILES = { fund, hist, paul, bras, lib, mundial, copas, idolos, tecnicos, morumbi, jogos, recordes, elencos, rivais, cultura, outras, extra1 };
+export const FILES = { fund, hist, paul, bras, lib, mundial, copas, idolos, tecnicos, morumbi, jogos, recordes, elencos, rivais, cultura, outras, extra1, ref };
 export const NAMES = Object.keys(FILES);
 
 export function rawEntries() {
