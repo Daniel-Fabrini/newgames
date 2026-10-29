@@ -21,10 +21,15 @@ export default [
       {
         "n": "Wikipedia (en) — 1992 Copa Libertadores",
         "u": "https://en.wikipedia.org/wiki/1992_Copa_Libertadores"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 1992",
+        "u": "https://www.rsssf.org/sacups/copa92.html"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-002",
@@ -38,7 +43,7 @@ export default [
     "c": 2,
     "cat": "jogos",
     "d": 2,
-    "exp": "No Gigante de Arroyito, Berizzo converteu um pênalti aos 39 minutos do primeiro tempo e deu a vitória aos argentinos.",
+    "exp": "No Gigante de Arroyito, Berizzo converteu um pênalti no primeiro tempo e deu a vitória aos argentinos.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1992",
@@ -47,10 +52,15 @@ export default [
       {
         "n": "Wikipedia (en) — 1992 Copa Libertadores",
         "u": "https://en.wikipedia.org/wiki/1992_Copa_Libertadores"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 1992",
+        "u": "https://www.rsssf.org/sacups/copa92.html"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-003",
@@ -73,10 +83,15 @@ export default [
       {
         "n": "Wikipedia (en) — 1992 Copa Libertadores",
         "u": "https://en.wikipedia.org/wiki/1992_Copa_Libertadores"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 1992",
+        "u": "https://www.rsssf.org/sacups/copa92.html"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-004",
@@ -95,10 +110,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1992",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 1992",
+        "u": "https://www.rsssf.org/sacups/copa92.html"
+      },
+      {
+        "n": "Infobae — El 'Ñuls' de Bielsa perdió la Libertadores frente a San Pablo (16/06/2013)",
+        "u": "https://www.infobae.com/2013/06/16/715784-el-nuls-bielsa-perdio-la-libertadores-frente-san-pablo-pero-dejo-un-sello/"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-005",
@@ -117,10 +141,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1992",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+      },
+      {
+        "n": "Infobae — El 'Ñuls' de Bielsa perdió la Libertadores frente a San Pablo (16/06/2013)",
+        "u": "https://www.infobae.com/2013/06/16/715784-el-nuls-bielsa-perdio-la-libertadores-frente-san-pablo-pero-dejo-un-sello/"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-006",
@@ -139,10 +168,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1992",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+      },
+      {
+        "n": "Infobae — El 'Ñuls' de Bielsa perdió la Libertadores frente a San Pablo (16/06/2013)",
+        "u": "https://www.infobae.com/2013/06/16/715784-el-nuls-bielsa-perdio-la-libertadores-frente-san-pablo-pero-dejo-un-sello/"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-007",
@@ -161,10 +195,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1992",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1992"
+      },
+      {
+        "n": "Lance! — Com Calleri, São Paulo vira time com mais artilheiros na Libertadores",
+        "u": "https://www.lance.com.br/sao-paulo/com-calleri-vira-time-com-mais-artilheiros-libertadores.html"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-008",
@@ -178,15 +217,20 @@ export default [
     "c": 2,
     "cat": "jogos",
     "d": 1,
-    "exp": "Em 19 de maio de 1993, o São Paulo goleou por 5 a 1, com gols de López (contra), Vítor, Gilmar, Raí e Müller.",
+    "exp": "Em 19 de maio de 1993, no Morumbi, o São Paulo goleou por 5 a 1, com gols de Gilmar, Raí e Müller, um gol contra de López e mais um gol atribuído a Vítor pela Wikipédia e a Dinho pela RSSSF.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1993",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1993"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 1993",
+        "u": "https://www.rsssf.org/sacups/copa93.html"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-009",
@@ -205,10 +249,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1993",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1993"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 1993",
+        "u": "https://www.rsssf.org/sacups/copa93.html"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-010",
@@ -227,10 +276,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1993",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1993"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 1993",
+        "u": "https://www.rsssf.org/sacups/copa93.html"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-011",
@@ -249,10 +303,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1993",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1993"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 1993",
+        "u": "https://www.rsssf.org/sacups/copa93.html"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-012",
@@ -266,15 +325,20 @@ export default [
     "c": 3,
     "cat": "jogos",
     "d": 2,
-    "exp": "Raí marcou 4 gols na campanha; Müller fez 2 e Cafu, Palhinha, Dinho, Vítor e Gilmar fizeram 1 cada.",
+    "exp": "Raí marcou 4 gols na campanha do bicampeonato: dois contra o Newell's, um contra o Cerro Porteño e um na final contra a Universidad Católica.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1993",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1993"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 1993",
+        "u": "https://www.rsssf.org/sacups/copa93.html"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-013",
@@ -293,10 +357,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1994",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1994"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 1994",
+        "u": "https://www.rsssf.org/sacups/copa94.html"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-014",
@@ -310,15 +379,20 @@ export default [
     "c": 1,
     "cat": "jogos",
     "d": 3,
-    "exp": "Müller marcou aos 33 minutos do jogo de volta, em 31 de agosto de 1994, mas o Vélez levou o título nos pênaltis.",
+    "exp": "Müller marcou no jogo de volta, no Morumbi, e igualou o 1 a 0 do Vélez na ida, mas os argentinos levaram o título nos pênaltis.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1994",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1994"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 1994",
+        "u": "https://www.rsssf.org/sacups/copa94.html"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-015",
@@ -337,10 +411,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 1994",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_1994"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 1994",
+        "u": "https://www.rsssf.org/sacups/copa94.html"
+      },
+      {
+        "n": "Wikipedia (en) — 1994 Copa Libertadores finals",
+        "u": "https://en.wikipedia.org/wiki/1994_Copa_Libertadores_finals"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-016",
@@ -363,10 +446,15 @@ export default [
       {
         "n": "Wikipedia (en) — 2005 Copa Libertadores",
         "u": "https://en.wikipedia.org/wiki/2005_Copa_Libertadores"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 2005",
+        "u": "https://www.rsssf.org/sacups/copa05.html"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-017",
@@ -380,15 +468,20 @@ export default [
     "c": 1,
     "cat": "jogos",
     "d": 3,
-    "exp": "Amoroso marcou aos 16 minutos do primeiro tempo; Fabão, Luizão e Tardelli completaram a goleada.",
+    "exp": "Amoroso abriu o placar no primeiro tempo; Fabão, Luizão e Tardelli completaram a goleada no Morumbi, em 14 de julho de 2005.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 2005",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2005"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 2005",
+        "u": "https://www.rsssf.org/sacups/copa05.html"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-018",
@@ -407,10 +500,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 2005",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2005"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 2005",
+        "u": "https://www.rsssf.org/sacups/copa05.html"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-019",
@@ -429,10 +527,15 @@ export default [
       {
         "n": "Wikipedia (en) — 2005 Copa Libertadores",
         "u": "https://en.wikipedia.org/wiki/2005_Copa_Libertadores"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 2005",
+        "u": "https://www.rsssf.org/sacups/copa05.html"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-020",
@@ -451,10 +554,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Libertadores da América de 2006",
         "u": "https://pt.wikipedia.org/wiki/Copa_Libertadores_da_Am%C3%A9rica_de_2006"
+      },
+      {
+        "n": "RSSSF — Copa Libertadores 2006",
+        "u": "https://www.rsssf.org/sacups/copa06.html"
       }
     ],
     "when": "2006",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-021",
@@ -468,15 +576,20 @@ export default [
     "c": 2,
     "cat": "jogos",
     "d": 1,
-    "exp": "Em 13 de dezembro de 1992, em Tóquio, o São Paulo venceu o Barcelona de Johan Cruyff por 2 a 1.",
+    "exp": "Em dezembro de 1992, no Estádio Nacional de Tóquio, o São Paulo venceu o Barcelona de Johan Cruyff por 2 a 1.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Intercontinental de 1992",
         "u": "https://pt.wikipedia.org/wiki/Copa_Intercontinental_de_1992"
+      },
+      {
+        "n": "RSSSF — Intercontinental Club Cup 1992",
+        "u": "https://www.rsssf.org/tablest/toyota92.html"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-022",
@@ -495,14 +608,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Intercontinental de 1992",
         "u": "https://pt.wikipedia.org/wiki/Copa_Intercontinental_de_1992"
+      },
+      {
+        "n": "RSSSF — Intercontinental Club Cup 1992",
+        "u": "https://www.rsssf.org/tablest/toyota92.html"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-023",
-    "q": "Quem marcou o gol do Barcelona na final do Mundial de 1992, aos 12 minutos?",
+    "q": "Quem marcou o gol do Barcelona, que abriu o placar, na final do Mundial de 1992 contra o São Paulo?",
     "a": [
       "Stoichkov",
       "Romário",
@@ -512,15 +630,20 @@ export default [
     "c": 0,
     "cat": "jogos",
     "d": 4,
-    "exp": "O búlgaro Hristo Stoichkov abriu o placar para o Barcelona, mas o São Paulo virou.",
+    "exp": "O búlgaro Hristo Stoichkov abriu o placar no primeiro tempo, mas Raí marcou duas vezes e o São Paulo virou para 2 a 1.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Intercontinental de 1992",
         "u": "https://pt.wikipedia.org/wiki/Copa_Intercontinental_de_1992"
+      },
+      {
+        "n": "RSSSF — Intercontinental Club Cup 1992",
+        "u": "https://www.rsssf.org/tablest/toyota92.html"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-024",
@@ -539,10 +662,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Intercontinental de 1992",
         "u": "https://pt.wikipedia.org/wiki/Copa_Intercontinental_de_1992"
+      },
+      {
+        "n": "Wikipedia (en) — 1992 Intercontinental Cup",
+        "u": "https://en.wikipedia.org/wiki/1992_Intercontinental_Cup"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-025",
@@ -561,10 +689,15 @@ export default [
       {
         "n": "Goal — São Paulo x Milan 1993: escalações, gols e tudo sobre o jogo",
         "u": "https://www.goal.com/br/not%C3%ADcias/sao-paulo-x-milan-1993-escalacoes-gols-e-tudo-sobre-o-jogo-do-penta-mundial/f88ipzce3axb1v7bj5xt8407g"
+      },
+      {
+        "n": "RSSSF — Intercontinental Club Cup 1993",
+        "u": "https://www.rsssf.org/tablest/toyota93.html"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-026",
@@ -583,10 +716,15 @@ export default [
       {
         "n": "Goal — São Paulo x Milan 1993: escalações, gols e tudo sobre o jogo",
         "u": "https://www.goal.com/br/not%C3%ADcias/sao-paulo-x-milan-1993-escalacoes-gols-e-tudo-sobre-o-jogo-do-penta-mundial/f88ipzce3axb1v7bj5xt8407g"
+      },
+      {
+        "n": "RSSSF — Intercontinental Club Cup 1993",
+        "u": "https://www.rsssf.org/tablest/toyota93.html"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-027",
@@ -605,10 +743,15 @@ export default [
       {
         "n": "Goal — São Paulo x Milan 1993: escalações, gols e tudo sobre o jogo",
         "u": "https://www.goal.com/br/not%C3%ADcias/sao-paulo-x-milan-1993-escalacoes-gols-e-tudo-sobre-o-jogo-do-penta-mundial/f88ipzce3axb1v7bj5xt8407g"
+      },
+      {
+        "n": "RSSSF — Intercontinental Club Cup 1993",
+        "u": "https://www.rsssf.org/tablest/toyota93.html"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-028",
@@ -627,10 +770,15 @@ export default [
       {
         "n": "Goal — São Paulo x Milan 1993: escalações, gols e tudo sobre o jogo",
         "u": "https://www.goal.com/br/not%C3%ADcias/sao-paulo-x-milan-1993-escalacoes-gols-e-tudo-sobre-o-jogo-do-penta-mundial/f88ipzce3axb1v7bj5xt8407g"
+      },
+      {
+        "n": "RSSSF — Intercontinental Club Cup 1993",
+        "u": "https://www.rsssf.org/tablest/toyota93.html"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-029",
@@ -649,10 +797,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa do Mundo de Clubes da FIFA de 2005",
         "u": "https://pt.wikipedia.org/wiki/Copa_do_Mundo_de_Clubes_da_FIFA_de_2005"
+      },
+      {
+        "n": "RSSSF — FIFA Club World Championship 2005",
+        "u": "https://www.rsssf.org/tablesf/fifa-wcc05.html"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-030",
@@ -671,10 +824,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa do Mundo de Clubes da FIFA de 2005",
         "u": "https://pt.wikipedia.org/wiki/Copa_do_Mundo_de_Clubes_da_FIFA_de_2005"
+      },
+      {
+        "n": "RSSSF — FIFA Club World Championship 2005",
+        "u": "https://www.rsssf.org/tablesf/fifa-wcc05.html"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-031",
@@ -693,10 +851,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa do Mundo de Clubes da FIFA de 2005",
         "u": "https://pt.wikipedia.org/wiki/Copa_do_Mundo_de_Clubes_da_FIFA_de_2005"
+      },
+      {
+        "n": "RSSSF — FIFA Club World Championship 2005",
+        "u": "https://www.rsssf.org/tablesf/fifa-wcc05.html"
       }
     ],
     "when": "2005",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-032",
@@ -719,14 +882,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 1977",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1977"
+      },
+      {
+        "n": "RSSSF — Brazil 1977 Championship",
+        "u": "https://www.rsssf.org/tablesb/braz77.html"
       }
     ],
     "when": "1977",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-033",
-    "q": "Qual goleiro foi decisivo na disputa de pênaltis que deu ao São Paulo o título brasileiro de 1977?",
+    "q": "Quem era o goleiro do São Paulo na final do Brasileiro de 1977, decidida nos pênaltis no Mineirão em março de 1978?",
     "a": [
       "Poy",
       "Waldir Peres",
@@ -736,19 +904,25 @@ export default [
     "c": 1,
     "cat": "jogos",
     "d": 3,
-    "exp": "Waldir Peres foi a figura da disputa de pênaltis no Mineirão, em março de 1978.",
+    "exp": "Waldir Peres defendia o gol tricolor no 0 a 0 com o Atlético-MG. Segundo a Itatiaia, ele não precisou defender cobranças: Cerezo, Márcio e Joãozinho Paulista chutaram para fora, e o São Paulo venceu por 3 a 2.",
     "src": [
       {
-        "n": "Placar — São Paulo frustrou Atlético-MG em BH, em seu primeiro título nacional",
+        "n": "Itatiaia — São Paulo e Atlético fizeram decisão carregada de marcas em 1977",
+        "u": "https://www.itatiaia.com.br/esportes/futebol/futebol-nacional/sao-paulo-e-atletico-fizeram-decisao-carregada-de-marcas-em-1977/"
+      },
+      {
+        "n": "Placar — São Paulo frustrou Atlético-MG em BH em seu primeiro título nacional",
         "u": "https://placar.com.br/coluna/tbt-placar/sao-paulo-frustrou-atletico-mg-em-bh-em-seu-primeiro-titulo-nacional"
       },
       {
-        "n": "Lance! — Dúvidas na escalação de Galo e São Paulo resgatam final do BR-1977",
-        "u": "https://lance.com.br/todos-esportes/duvidas-escalacao-galo-sao-paulo-resgatam-final-1977.html"
+        "n": "RSSSF — Brazil 1977 Championship",
+        "u": "https://www.rsssf.org/tablesb/braz77.html"
       }
     ],
     "when": "1977",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "jogos-034",
@@ -767,10 +941,15 @@ export default [
       {
         "n": "Lance! — Dúvidas na escalação de Galo e São Paulo resgatam final do BR-1977",
         "u": "https://lance.com.br/todos-esportes/duvidas-escalacao-galo-sao-paulo-resgatam-final-1977.html"
+      },
+      {
+        "n": "Itatiaia — São Paulo e Atlético fizeram decisão carregada de marcas em 1977",
+        "u": "https://www.itatiaia.com.br/esportes/futebol/futebol-nacional/sao-paulo-e-atletico-fizeram-decisao-carregada-de-marcas-em-1977/"
       }
     ],
     "when": "1977",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-035",
@@ -789,10 +968,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 1986",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1986"
+      },
+      {
+        "n": "Trivela — O título brasileiro de 1986 do São Paulo no Brinco de Ouro",
+        "u": "https://trivela.com.br/brasil/sao-paulo-brinco-de-ouro-brasileirao-1986/"
+      },
+      {
+        "n": "RSSSF — Brazil 1986 Championship",
+        "u": "https://www.rsssf.org/tablesb/braz86.html"
       }
     ],
     "when": "1986",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-036",
@@ -806,15 +994,20 @@ export default [
     "c": 1,
     "cat": "jogos",
     "d": 1,
-    "exp": "Após o 3 a 3 na prorrogação no Brinco de Ouro, o São Paulo converteu as cobranças e ganhou por 4 a 3.",
+    "exp": "Após o 3 a 3 na prorrogação no Brinco de Ouro, Careca perdeu sua cobrança, mas Darío Pereyra, Rômulo, Fonseca e Wagner Basílio converteram e o São Paulo venceu por 4 a 3.",
     "src": [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 1986",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1986"
+      },
+      {
+        "n": "Trivela — O título brasileiro de 1986 do São Paulo no Brinco de Ouro",
+        "u": "https://trivela.com.br/brasil/sao-paulo-brinco-de-ouro-brasileirao-1986/"
       }
     ],
     "when": "1986",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-037",
@@ -833,10 +1026,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 1986",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1986"
+      },
+      {
+        "n": "RSSSF — Brazil 1986 Championship",
+        "u": "https://www.rsssf.org/tablesb/braz86.html"
       }
     ],
     "when": "1986",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-038",
@@ -855,10 +1053,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 1991",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+      },
+      {
+        "n": "RSSSF — Brazil 1991 Championship",
+        "u": "https://www.rsssf.org/tablesb/braz91.html"
+      },
+      {
+        "n": "Gazeta Esportiva — Há 34 anos, gol histórico de Mário Tilico deixava São Paulo perto de título",
+        "u": "https://www.gazetaesportiva.com/times/sao-paulo/ha-34-anos-sao-paulo-vencia-bragantino-e-saia-em-vantagem-por-titulo-brasileiro/"
       }
     ],
     "when": "1991",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-039",
@@ -872,15 +1079,24 @@ export default [
     "c": 0,
     "cat": "jogos",
     "d": 3,
-    "exp": "Mário Tilico marcou aos 49 minutos do segundo tempo em 5 de junho de 1991.",
+    "exp": "Mário Tilico marcou no segundo tempo do jogo de ida, em 5 de junho de 1991, no Morumbi; o 0 a 0 da volta garantiu o título.",
     "src": [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 1991",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+      },
+      {
+        "n": "RSSSF — Brazil 1991 Championship",
+        "u": "https://www.rsssf.org/tablesb/braz91.html"
+      },
+      {
+        "n": "Gazeta Esportiva — Há 34 anos, gol histórico de Mário Tilico deixava São Paulo perto de título",
+        "u": "https://www.gazetaesportiva.com/times/sao-paulo/ha-34-anos-sao-paulo-vencia-bragantino-e-saia-em-vantagem-por-titulo-brasileiro/"
       }
     ],
     "when": "1991",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-040",
@@ -899,10 +1115,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 1991",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_1991"
+      },
+      {
+        "n": "Trivela — Imortais do Futebol: o Bragantino vice-campeão brasileiro de 1991",
+        "u": "https://trivela.com.br/imortais-do-futebol/imortais-do-futebol-o-bragantino-campeao-paulista-de-1990-e-vice-campeao-brasileiro-de-1991/"
       }
     ],
     "when": "1991",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-041",
@@ -921,10 +1142,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 2006",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2006"
+      },
+      {
+        "n": "RSSSF — Brazil 2006 Championship",
+        "u": "https://www.rsssf.org/tablesb/braz06.html"
       }
     ],
     "when": "2006",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-042",
@@ -943,10 +1169,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 2007",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2007"
+      },
+      {
+        "n": "RSSSF — Brazil 2007 Championship",
+        "u": "https://www.rsssf.org/tablesb/braz07.html"
       }
     ],
     "when": "2007",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-043",
@@ -965,10 +1196,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Brasileiro de Futebol de 2008",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2008"
+      },
+      {
+        "n": "RSSSF — Brazil 2008 Championship",
+        "u": "https://www.rsssf.org/tablesb/braz08.html"
       }
     ],
     "when": "2008",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-044",
@@ -989,12 +1225,17 @@ export default [
         "u": "https://en.wikipedia.org/wiki/2023_Copa_do_Brasil"
       },
       {
-        "n": "Wikipédia (pt) — Copa do Brasil de Futebol de 2023",
-        "u": "https://pt.wikipedia.org/wiki/Copa_do_Brasil_de_Futebol_de_2023"
+        "n": "Correio Braziliense — Copa do Brasil: relembre a campanha vitoriosa do São Paulo (24/09/2023)",
+        "u": "https://www.correiobraziliense.com.br/esportes/2023/09/amp/5127781-copa-do-brasil-relembre-a-campanha-vitoriosa-do-sao-paulo.html"
+      },
+      {
+        "n": "Trivela — São Paulo amarra o Flamengo e é campeão da Copa do Brasil pela primeira vez (24/09/2023)",
+        "u": "https://trivela.com.br/brasil/copa-do-brasil/a-espera-acabou-sao-paulo-amarra-o-flamengo-e-e-campeao-da-copa-do-brasil-pela-primeira-vez-na-historia/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-045",
@@ -1013,10 +1254,15 @@ export default [
       {
         "n": "Wikipedia (en) — 2023 Copa do Brasil",
         "u": "https://en.wikipedia.org/wiki/2023_Copa_do_Brasil"
+      },
+      {
+        "n": "Trivela — São Paulo amarra o Flamengo e é campeão da Copa do Brasil pela primeira vez (24/09/2023)",
+        "u": "https://trivela.com.br/brasil/copa-do-brasil/a-espera-acabou-sao-paulo-amarra-o-flamengo-e-e-campeao-da-copa-do-brasil-pela-primeira-vez-na-historia/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-046",
@@ -1035,10 +1281,15 @@ export default [
       {
         "n": "Wikipedia (en) — 2023 Copa do Brasil",
         "u": "https://en.wikipedia.org/wiki/2023_Copa_do_Brasil"
+      },
+      {
+        "n": "Trivela — São Paulo amarra o Flamengo e é campeão da Copa do Brasil pela primeira vez (24/09/2023)",
+        "u": "https://trivela.com.br/brasil/copa-do-brasil/a-espera-acabou-sao-paulo-amarra-o-flamengo-e-e-campeao-da-copa-do-brasil-pela-primeira-vez-na-historia/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-047",
@@ -1052,15 +1303,21 @@ export default [
     "c": 2,
     "cat": "jogos",
     "d": 1,
-    "exp": "O São Paulo venceu o Palmeiras por 1 a 0 fora e 2 a 1 em casa (3 a 1 no agregado).",
+    "exp": "O São Paulo venceu o Palmeiras por 1 a 0 em casa, com gol de Rafinha, e por 2 a 1 no Allianz Parque (3 a 1 no agregado).",
     "src": [
       {
         "n": "Wikipedia (en) — 2023 Copa do Brasil",
         "u": "https://en.wikipedia.org/wiki/2023_Copa_do_Brasil"
+      },
+      {
+        "n": "Correio Braziliense — Copa do Brasil: relembre a campanha vitoriosa do São Paulo (24/09/2023)",
+        "u": "https://www.correiobraziliense.com.br/esportes/2023/09/amp/5127781-copa-do-brasil-relembre-a-campanha-vitoriosa-do-sao-paulo.html"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "jogos-048",
@@ -1079,10 +1336,15 @@ export default [
       {
         "n": "Wikipedia (en) — 2023 Copa do Brasil",
         "u": "https://en.wikipedia.org/wiki/2023_Copa_do_Brasil"
+      },
+      {
+        "n": "Correio Braziliense — Copa do Brasil: relembre a campanha vitoriosa do São Paulo (24/09/2023)",
+        "u": "https://www.correiobraziliense.com.br/esportes/2023/09/amp/5127781-copa-do-brasil-relembre-a-campanha-vitoriosa-do-sao-paulo.html"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-049",
@@ -1101,10 +1363,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
         "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+      },
+      {
+        "n": "RSSSF — Copa Sudamericana 2012",
+        "u": "https://www.rsssf.org/sacups/sudamcup2012.html"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-050",
@@ -1123,10 +1390,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
         "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+      },
+      {
+        "n": "RSSSF — Copa Sudamericana 2012",
+        "u": "https://www.rsssf.org/sacups/sudamcup2012.html"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-051",
@@ -1145,10 +1417,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
         "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+      },
+      {
+        "n": "RSSSF — Copa Sudamericana 2012",
+        "u": "https://www.rsssf.org/sacups/sudamcup2012.html"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-052",
@@ -1167,10 +1444,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
         "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+      },
+      {
+        "n": "Wikipedia (en) — 2012 Copa Sudamericana finals",
+        "u": "https://en.wikipedia.org/wiki/2012_Copa_Sudamericana_finals"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-053",
@@ -1189,10 +1471,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de Futebol de 2021",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2021"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 2021",
+        "u": "https://rsssfbrasil.com/tablessz/sp2021.htm"
       }
     ],
     "when": "2021",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-054",
@@ -1211,10 +1498,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de Futebol de 2021",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2021"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 2021",
+        "u": "https://rsssfbrasil.com/tablessz/sp2021.htm"
       }
     ],
     "when": "2021",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-055",
@@ -1233,10 +1525,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de Futebol de 2000",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2000"
+      },
+      {
+        "n": "RSSSF — São Paulo State Championship 2000",
+        "u": "https://www.rsssf.org/tabless/spl00.html"
       }
     ],
     "when": "2000",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-056",
@@ -1250,15 +1547,20 @@ export default [
     "c": 2,
     "cat": "jogos",
     "d": 4,
-    "exp": "Rogério Ceni marcou aos 38 minutos do primeiro tempo; Marcelinho Paraíba fez o outro gol.",
+    "exp": "Rogério Ceni marcou no primeiro tempo e Marcelinho Paraíba fez o outro gol no 2 a 2 com o Santos, em 18 de junho de 2000.",
     "src": [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de Futebol de 2000",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_2000"
+      },
+      {
+        "n": "RSSSF — São Paulo State Championship 2000",
+        "u": "https://www.rsssf.org/tabless/spl00.html"
       }
     ],
     "when": "2000",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-057",
@@ -1277,10 +1579,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de Futebol de 1998",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1998"
+      },
+      {
+        "n": "RSSSF — São Paulo State Championship 1998",
+        "u": "https://www.rsssf.org/tabless/spl98.html"
       }
     ],
     "when": "1998",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-058",
@@ -1294,15 +1601,20 @@ export default [
     "c": 0,
     "cat": "jogos",
     "d": 3,
-    "exp": "O São Paulo fez 6 a 3 no agregado, com Raí marcando três vezes no primeiro jogo.",
+    "exp": "O São Paulo venceu o Palmeiras por 4 a 2 e por 2 a 1 em dezembro de 1992 e fez 6 a 3 no agregado.",
     "src": [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de Futebol de 1992",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1992"
+      },
+      {
+        "n": "RSSSF — São Paulo State Championship 1992",
+        "u": "https://www.rsssf.org/tabless/spl92.html"
       }
     ],
     "when": "1992",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-059",
@@ -1316,15 +1628,20 @@ export default [
     "c": 1,
     "cat": "jogos",
     "d": 4,
-    "exp": "O São Paulo venceu o São José por 1 a 0 (gol contra de André Luís) e empatou por 0 a 0, conquistando o 16º título estadual.",
+    "exp": "O São Paulo venceu o São José por 1 a 0 e empatou por 0 a 0, conquistando o 16º título estadual.",
     "src": [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de Futebol de 1989",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1989"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1989",
+        "u": "https://rsssfbrasil.com/tablessz/sp1989.htm"
       }
     ],
     "when": "1989",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-060",
@@ -1343,10 +1660,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de Futebol de 1987",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1987"
+      },
+      {
+        "n": "Wikipedia (en) — 1987 São Paulo FC season",
+        "u": "https://en.wikipedia.org/wiki/1987_S%C3%A3o_Paulo_FC_season"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1987",
+        "u": "https://rsssfbrasil.com/tablessz/sp1987.htm"
       }
     ],
     "when": "1987",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-061",
@@ -1365,10 +1691,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de Futebol de 1985",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1985"
+      },
+      {
+        "n": "RSSSF — São Paulo State Championship 1985",
+        "u": "https://www.rsssf.org/tabless/spl85.html"
       }
     ],
     "when": "1985",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-062",
@@ -1387,10 +1718,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de Futebol de 1985",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1985"
+      },
+      {
+        "n": "Wikipedia (en) — 1985 São Paulo FC season",
+        "u": "https://en.wikipedia.org/wiki/1985_S%C3%A3o_Paulo_FC_season"
       }
     ],
     "when": "1985",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-063",
@@ -1409,10 +1745,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Campeonato Paulista de Futebol de 1975",
         "u": "https://pt.wikipedia.org/wiki/Campeonato_Paulista_de_Futebol_de_1975"
+      },
+      {
+        "n": "RSSSF Brasil — Campeonato Paulista 1975",
+        "u": "https://rsssfbrasil.com/tablessz/sp1975.htm"
       }
     ],
     "when": "1975",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-064",
@@ -1431,10 +1772,15 @@ export default [
       {
         "n": "RSSSF — Supercopa Libertadores 1993",
         "u": "https://rsssf.org/sacups/supcopa93.html"
+      },
+      {
+        "n": "Wikipedia (en) — 1993 Supercopa Libertadores finals",
+        "u": "https://en.wikipedia.org/wiki/1993_Supercopa_Libertadores_finals"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-065",
@@ -1453,10 +1799,15 @@ export default [
       {
         "n": "RSSSF — Supercopa Libertadores 1993",
         "u": "https://rsssf.org/sacups/supcopa93.html"
+      },
+      {
+        "n": "Wikipedia (en) — 1993 Supercopa Libertadores finals",
+        "u": "https://en.wikipedia.org/wiki/1993_Supercopa_Libertadores_finals"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-066",
@@ -1479,10 +1830,15 @@ export default [
       {
         "n": "Lance! — Campeões da Recopa Sul-Americana",
         "u": "https://www.lance.com.br/lancepedia/campeoes-da-recopa-sul-americana.html"
+      },
+      {
+        "n": "Wikipedia (en) — 1994 Recopa Sudamericana",
+        "u": "https://en.wikipedia.org/wiki/1994_Recopa_Sudamericana"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "jogos-067",
@@ -1501,9 +1857,14 @@ export default [
       {
         "n": "RSSSF — Recopa Sudamericana 1993",
         "u": "https://rsssf.org/sacups/recopa93.html"
+      },
+      {
+        "n": "Wikipedia (en) — 1994 Recopa Sudamericana",
+        "u": "https://en.wikipedia.org/wiki/1994_Recopa_Sudamericana"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   }
 ];

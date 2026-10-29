@@ -9,6 +9,7 @@ import { createSession, currentView, answer, next, stop, timeUp, cur, canUse, us
 import { recordMatch, recordDaily, pushRecent, xpFor, ACHIEVEMENTS } from './stats.js';
 import { confirmBox, fmtScore, fmtDur, modes, stats, lifelineRows } from './screens.js';
 
+const put = (el, ...c) => el.append(...c.flat(Infinity).filter((x) => x !== null && x !== undefined && x !== false));
 const L = 'ABCD';
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 let matchId = 0;
@@ -124,7 +125,7 @@ function questionScreen(app, st, save, alive) {
         const stopBtn = M.ladder ? h('button', { class: 'tc-btn dark stop', onclick: () => askStop() }, t('stop')) : st.mode === 'time' || st.mode === 'daily' || st.mode === 'quick' || st.mode === 'themes' ? h('button', { class: 'tc-btn dark stop', onclick: () => askQuit() }, t('quit')) : null;
         const actions = h('div', { class: 'tc-actions' }, stopBtn, confirmBtn);
         const expBox = h('div', { class: 'tc-explain hidden' });
-        el.append(hud, qbar, chip, panel, answers, h('div', { class: 'tc-bottom' }, prize, stakes, actions), expBox);
+        put(el, hud, qbar, chip, panel, answers, h('div', { class: 'tc-bottom' }, prize, stakes, actions), expBox);
 
         // --- timers ---
         let tickId = null;
@@ -223,9 +224,9 @@ function questionScreen(app, st, save, alive) {
             app.ctx.sfx.vibrate([60, 40, 90]);
           }
           if (st.mode === 'time') {
-            if (out.timePenalty) el.append(h('div', { class: 'tc-float bad' }, `-${out.timePenalty}s`));
-            if (out.timeBonus) el.append(h('div', { class: 'tc-float good' }, `+${out.timeBonus}s`));
-            if (out.gained) el.append(h('div', { class: 'tc-float gold' }, `+${out.gained}`));
+            if (out.timePenalty) put(el, h('div', { class: 'tc-float bad' }, `-${out.timePenalty}s`));
+            if (out.timeBonus) put(el, h('div', { class: 'tc-float good' }, `+${out.timeBonus}s`));
+            if (out.gained) put(el, h('div', { class: 'tc-float gold' }, `+${out.gained}`));
           }
           if (out.gained && st.mode !== 'time') prize.textContent = `${t('points')} ${st.points}  (+${out.gained})`;
           if (M.ladder) {
@@ -437,7 +438,7 @@ function ladderView(app, st, from, to, { quick = false } = {}) {
           done = true;
           resolve();
         };
-        el.append(
+        put(el, 
           h('div', { class: 'tc-lhead' }, h('div', { class: 'tc-crest sm', html: crest({ stars: true }) }), h('div', { class: 'tc-lt' }, h('b', null, 'TRICOLOR'), h('span', null, t('title2')))),
           rows,
           h('p', { class: 'tc-lfoot' }, t('ladderFoot')),
@@ -479,7 +480,7 @@ function ladderResult(app, st, out) {
         const box = h('div', { class: 'tc-explain flat' });
         showExplain(v, box, t);
         const lastWin = right && out.won;
-        el.append(
+        put(el, 
           h('div', { class: 'tc-crest md', html: crest({ stars: true }) }),
           h('h2', { class: 'tc-big' }, right ? t('right') : t('wrong')),
           right
@@ -529,7 +530,7 @@ function congrats(app, st, sum, res) {
   app.show(
     (el) => {
       el.classList.add('tc-congrats');
-      el.append(
+      put(el, 
         h('div', { class: 'tc-cup', html: trophy() }),
         h('h2', { class: 'tc-big gold' }, t('congrats')),
         h('p', { class: 'tc-reach' }, t('reached'), h('b', null, t('oneMillion'))),
@@ -567,7 +568,7 @@ function resultsView(app, st, sum, res) {
       const head =
         st.outcome === 'won' ? t('res.won') : st.outcome === 'stopped' ? t('res.stopped') : st.outcome === 'lost' ? t('res.lost') : st.outcome === 'timeup' || st.outcome === 'exhausted' ? t('res.timeup') : st.outcome === 'quit' ? t('res.quit') : t('res.finished');
       const newRec = res.newRecords?.length;
-      el.append(
+      put(el, 
         h('div', { class: 'tc-crest md', html: crest({ stars: true }) }),
         h('h2', { class: 'tc-big sm' }, head),
         h('div', { class: 'tc-hex' }, h('small', null, M.ladder ? t('prizeWon') : t('score')), h('b', null, fmtScore(app, st.mode, sum.score))),
@@ -599,7 +600,7 @@ function reviewView(app, st, sum, back) {
   app.show(
     (el) => {
       el.classList.add('tc-rules');
-      el.append(
+      put(el, 
         h('div', { class: 'tc-top' }, h('button', { class: 'tc-round', 'aria-label': t('back'), onclick: back, html: ico('back') }), h('div', { class: 'tc-top-title' }, t('review')), h('span', { class: 'tc-round ghost' })),
         h('div', { class: 'tc-scroll' }, sum.review.map((r, i) => {
           const v = r.view;

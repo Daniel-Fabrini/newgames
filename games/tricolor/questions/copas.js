@@ -21,10 +21,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/São_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "Trivela — São Paulo amarra o Flamengo e é campeão da Copa do Brasil (24/09/2023)",
+        "u": "https://trivela.com.br/brasil/copa-do-brasil/a-espera-acabou-sao-paulo-amarra-o-flamengo-e-e-campeao-da-copa-do-brasil-pela-primeira-vez-na-historia/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-002",
@@ -43,10 +48,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa do Brasil de 2023",
         "u": "https://pt.wikipedia.org/wiki/Copa_do_Brasil_de_Futebol_de_2023"
+      },
+      {
+        "n": "Trivela — São Paulo amarra o Flamengo e é campeão da Copa do Brasil (24/09/2023)",
+        "u": "https://trivela.com.br/brasil/copa-do-brasil/a-espera-acabou-sao-paulo-amarra-o-flamengo-e-e-campeao-da-copa-do-brasil-pela-primeira-vez-na-historia/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-003",
@@ -69,10 +79,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/São_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "RSSSF — Copa Sudamericana 2012",
+        "u": "https://rsssf.org/sacups/sudamcup2012.html"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-004",
@@ -91,10 +106,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa do Brasil de 2023",
         "u": "https://pt.wikipedia.org/wiki/Copa_do_Brasil_de_Futebol_de_2023"
+      },
+      {
+        "n": "Trivela — São Paulo amarra o Flamengo e é campeão da Copa do Brasil (24/09/2023)",
+        "u": "https://trivela.com.br/brasil/copa-do-brasil/a-espera-acabou-sao-paulo-amarra-o-flamengo-e-e-campeao-da-copa-do-brasil-pela-primeira-vez-na-historia/"
+      },
+      {
+        "n": "Gazeta Esportiva — São Paulo empata com o Flamengo e fatura título inédito da Copa do Brasil",
+        "u": "https://www.gazetaesportiva.com/campeonatos/copa-do-brasil/sao-paulo-empata-com-o-flamengo-e-fatura-titulo-inedito-da-copa-do-brasil/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-005",
@@ -108,19 +132,24 @@ export default [
     "c": 1,
     "cat": "copas",
     "d": 1,
-    "exp": "Jonathan Calleri marcou aos 45 minutos do primeiro tempo (acréscimos) no Maracanã, em 17 de setembro de 2023.",
+    "exp": "Jonathan Calleri marcou nos acréscimos do primeiro tempo no Maracanã, em 17 de setembro de 2023, e o São Paulo venceu por 1 a 0.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa do Brasil de 2023",
         "u": "https://pt.wikipedia.org/wiki/Copa_do_Brasil_de_Futebol_de_2023"
       },
       {
-        "n": "Wikipédia (pt) — Jonathan Calleri",
-        "u": "https://pt.wikipedia.org/wiki/Jonathan_Calleri"
+        "n": "Trivela — São Paulo amarra o Flamengo e é campeão da Copa do Brasil (24/09/2023)",
+        "u": "https://trivela.com.br/brasil/copa-do-brasil/a-espera-acabou-sao-paulo-amarra-o-flamengo-e-e-campeao-da-copa-do-brasil-pela-primeira-vez-na-historia/"
+      },
+      {
+        "n": "Soccerway — São Paulo vence Flamengo (1-0) no Maracanã na final",
+        "u": "https://pt.soccerway.com/noticias/futebol-taca-do-brasil-sao-paulo-vence-flamengo-1-0-no-maracana-e-esta-em-vantagem-na-final-da-taca-do-brasil/CpOc8AEa"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-006",
@@ -139,10 +168,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa do Brasil de 2023",
         "u": "https://pt.wikipedia.org/wiki/Copa_do_Brasil_de_Futebol_de_2023"
+      },
+      {
+        "n": "Trivela — São Paulo amarra o Flamengo e é campeão da Copa do Brasil (24/09/2023)",
+        "u": "https://trivela.com.br/brasil/copa-do-brasil/a-espera-acabou-sao-paulo-amarra-o-flamengo-e-e-campeao-da-copa-do-brasil-pela-primeira-vez-na-historia/"
+      },
+      {
+        "n": "Gazeta Esportiva — São Paulo empata com o Flamengo e fatura título inédito da Copa do Brasil",
+        "u": "https://www.gazetaesportiva.com/campeonatos/copa-do-brasil/sao-paulo-empata-com-o-flamengo-e-fatura-titulo-inedito-da-copa-do-brasil/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-007",
@@ -156,15 +194,25 @@ export default [
     "c": 0,
     "cat": "copas",
     "d": 3,
-    "exp": "Nestor marcou aos 45 minutos do segundo tempo (acréscimos); Bruno Henrique havia marcado para o Flamengo.",
+    "exp": "Rodrigo Nestor empatou aos 49 minutos do primeiro tempo, com um chute de fora da área, depois de Bruno Henrique abrir o placar para o Flamengo.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa do Brasil de 2023",
         "u": "https://pt.wikipedia.org/wiki/Copa_do_Brasil_de_Futebol_de_2023"
+      },
+      {
+        "n": "Trivela — São Paulo amarra o Flamengo e é campeão da Copa do Brasil (24/09/2023)",
+        "u": "https://trivela.com.br/brasil/copa-do-brasil/a-espera-acabou-sao-paulo-amarra-o-flamengo-e-e-campeao-da-copa-do-brasil-pela-primeira-vez-na-historia/"
+      },
+      {
+        "n": "Gazeta Esportiva — São Paulo empata com o Flamengo e fatura título inédito da Copa do Brasil",
+        "u": "https://www.gazetaesportiva.com/campeonatos/copa-do-brasil/sao-paulo-empata-com-o-flamengo-e-fatura-titulo-inedito-da-copa-do-brasil/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "copas-008",
@@ -178,15 +226,20 @@ export default [
     "c": 2,
     "cat": "copas",
     "d": 2,
-    "exp": "Bruno Henrique abriu o placar para o Flamengo, e Nestor empatou para o São Paulo nos acréscimos.",
+    "exp": "Bruno Henrique abriu o placar aos 43 minutos do primeiro tempo e Nestor empatou nos acréscimos da mesma etapa. (Uma ficha técnica da Gazeta Esportiva credita o gol a Pedro, mas as reportagens atribuem-no a Bruno Henrique.)",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa do Brasil de 2023",
         "u": "https://pt.wikipedia.org/wiki/Copa_do_Brasil_de_Futebol_de_2023"
+      },
+      {
+        "n": "Trivela — São Paulo amarra o Flamengo e é campeão da Copa do Brasil (24/09/2023)",
+        "u": "https://trivela.com.br/brasil/copa-do-brasil/a-espera-acabou-sao-paulo-amarra-o-flamengo-e-e-campeao-da-copa-do-brasil-pela-primeira-vez-na-historia/"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-009",
@@ -205,10 +258,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa do Brasil de 2023",
         "u": "https://pt.wikipedia.org/wiki/Copa_do_Brasil_de_Futebol_de_2023"
+      },
+      {
+        "n": "Correio Braziliense — Copa do Brasil: relembre a campanha vitoriosa do São Paulo",
+        "u": "https://www.correiobraziliense.com.br/esportes/2023/09/amp/5127781-copa-do-brasil-relembre-a-campanha-vitoriosa-do-sao-paulo.html"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-010",
@@ -222,15 +280,21 @@ export default [
     "c": 0,
     "cat": "copas",
     "d": 3,
-    "exp": "Após um agregado de 3 a 3 contra o Sport (0 a 2 e 3 a 1), o São Paulo avançou por 5 a 3 nos pênaltis.",
+    "exp": "O São Paulo venceu o Sport por 2 a 0 na Ilha do Retiro e perdeu por 3 a 1 no Morumbi; no agregado de 3 a 3, avançou ao vencer nos pênaltis por 5 a 3.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa do Brasil de 2023",
         "u": "https://pt.wikipedia.org/wiki/Copa_do_Brasil_de_Futebol_de_2023"
+      },
+      {
+        "n": "Correio Braziliense — Copa do Brasil: relembre a campanha vitoriosa do São Paulo",
+        "u": "https://www.correiobraziliense.com.br/esportes/2023/09/amp/5127781-copa-do-brasil-relembre-a-campanha-vitoriosa-do-sao-paulo.html"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "copas-011",
@@ -249,10 +313,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa do Brasil de 2023",
         "u": "https://pt.wikipedia.org/wiki/Copa_do_Brasil_de_Futebol_de_2023"
+      },
+      {
+        "n": "Correio Braziliense — Copa do Brasil: relembre a campanha vitoriosa do São Paulo",
+        "u": "https://www.correiobraziliense.com.br/esportes/2023/09/amp/5127781-copa-do-brasil-relembre-a-campanha-vitoriosa-do-sao-paulo.html"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-012",
@@ -271,10 +340,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa do Brasil de 2023",
         "u": "https://pt.wikipedia.org/wiki/Copa_do_Brasil_de_Futebol_de_2023"
+      },
+      {
+        "n": "Correio Braziliense — Copa do Brasil: relembre a campanha vitoriosa do São Paulo",
+        "u": "https://www.correiobraziliense.com.br/esportes/2023/09/amp/5127781-copa-do-brasil-relembre-a-campanha-vitoriosa-do-sao-paulo.html"
       }
     ],
     "when": "2023",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-013",
@@ -297,10 +371,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Supercopa do Brasil",
         "u": "https://pt.wikipedia.org/wiki/Supercopa_do_Brasil"
+      },
+      {
+        "n": "Gazeta Esportiva — São Paulo bate Palmeiras nos pênaltis e conquista título inédito da Supercopa",
+        "u": "https://www.gazetaesportiva.com/?p=3462884"
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-014",
@@ -319,10 +398,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Supercopa do Brasil de 2024",
         "u": "https://pt.wikipedia.org/wiki/Supercopa_do_Brasil_de_2024"
+      },
+      {
+        "n": "Gazeta Esportiva — São Paulo bate Palmeiras nos pênaltis e conquista título inédito da Supercopa",
+        "u": "https://www.gazetaesportiva.com/?p=3462884"
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-015",
@@ -341,10 +425,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Supercopa do Brasil de 2024",
         "u": "https://pt.wikipedia.org/wiki/Supercopa_do_Brasil_de_2024"
+      },
+      {
+        "n": "Gazeta Esportiva — São Paulo bate Palmeiras nos pênaltis e conquista título inédito da Supercopa",
+        "u": "https://www.gazetaesportiva.com/?p=3462884"
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-016",
@@ -363,10 +452,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Supercopa do Brasil de 2024",
         "u": "https://pt.wikipedia.org/wiki/Supercopa_do_Brasil_de_2024"
+      },
+      {
+        "n": "Gazeta Esportiva — São Paulo bate Palmeiras nos pênaltis e conquista título inédito da Supercopa",
+        "u": "https://www.gazetaesportiva.com/?p=3462884"
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-017",
@@ -389,10 +483,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Supercopa do Brasil",
         "u": "https://pt.wikipedia.org/wiki/Supercopa_do_Brasil"
+      },
+      {
+        "n": "Gazeta Esportiva — São Paulo bate Palmeiras nos pênaltis e conquista título inédito da Supercopa",
+        "u": "https://www.gazetaesportiva.com/?p=3462884"
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-018",
@@ -411,10 +510,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Supercopa do Brasil",
         "u": "https://pt.wikipedia.org/wiki/Supercopa_do_Brasil"
+      },
+      {
+        "n": "Gazeta Esportiva — São Paulo bate Palmeiras nos pênaltis e conquista título inédito da Supercopa",
+        "u": "https://www.gazetaesportiva.com/?p=3462884"
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-019",
@@ -435,16 +539,21 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Supercopa_do_Brasil"
       },
       {
-        "n": "Wikipédia (pt) — Supercopa do Brasil de 2024",
-        "u": "https://pt.wikipedia.org/wiki/Supercopa_do_Brasil_de_2024"
+        "n": "Gazeta Esportiva — São Paulo bate Palmeiras nos pênaltis e conquista título inédito da Supercopa",
+        "u": "https://www.gazetaesportiva.com/?p=3462884"
+      },
+      {
+        "n": "Trivela — São Paulo amarra o Flamengo e é campeão da Copa do Brasil (24/09/2023)",
+        "u": "https://trivela.com.br/brasil/copa-do-brasil/a-espera-acabou-sao-paulo-amarra-o-flamengo-e-e-campeao-da-copa-do-brasil-pela-primeira-vez-na-historia/"
       }
     ],
     "when": "2024",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-020",
-    "q": "Qual clube o São Paulo superou na Recopa Sul-Americana de 1993?",
+    "q": "Qual clube o São Paulo superou na Recopa Sul-Americana disputada em 1993?",
     "a": [
       "Botafogo",
       "Cruzeiro",
@@ -454,7 +563,7 @@ export default [
     "c": 1,
     "cat": "copas",
     "d": 2,
-    "exp": "O São Paulo, campeão da Libertadores de 1992, venceu o Cruzeiro, campeão da Supercopa, nos pênaltis.",
+    "exp": "O São Paulo, campeão da Libertadores de 1992, venceu o Cruzeiro, campeão da Supercopa, nos pênaltis. A RSSSF registra essa edição como \"Recopa 1992\", disputada em 1993.",
     "src": [
       {
         "n": "Wikipédia (pt) — Recopa Sul-Americana de 1993",
@@ -463,14 +572,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Recopa Sul-Americana",
         "u": "https://pt.wikipedia.org/wiki/Recopa_Sul-Americana"
+      },
+      {
+        "n": "RSSSF — Recopa 1992 (disputada em 1993)",
+        "u": "https://rsssf.org/sacups/recopa92.html"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-021",
-    "q": "Como o São Paulo venceu o Cruzeiro na Recopa Sul-Americana de 1993?",
+    "q": "Como o São Paulo venceu o Cruzeiro na Recopa Sul-Americana disputada em 1993?",
     "a": [
       "Por 1 a 0 e 0 a 0",
       "Nos pênaltis, após dois 0 a 0",
@@ -480,19 +594,24 @@ export default [
     "c": 1,
     "cat": "copas",
     "d": 2,
-    "exp": "Os dois jogos (Morumbi e Mineirão) terminaram sem gols, e o São Paulo ganhou nos pênaltis por 4 a 2.",
+    "exp": "Os dois jogos (em São Paulo e em Belo Horizonte, em setembro de 1993) terminaram sem gols, e o São Paulo ganhou nos pênaltis por 4 a 2.",
     "src": [
       {
         "n": "Wikipédia (pt) — Recopa Sul-Americana de 1993",
         "u": "https://pt.wikipedia.org/wiki/Recopa_Sul-Americana_de_1993"
+      },
+      {
+        "n": "RSSSF — Recopa 1992 (disputada em 1993)",
+        "u": "https://rsssf.org/sacups/recopa92.html"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-022",
-    "q": "Em qual país foi disputada a Recopa de 1994, na qual o São Paulo bateu o Botafogo por 3 a 1?",
+    "q": "Em qual país foi disputada a Recopa de 1994 (jogo único), na qual o São Paulo bateu o Botafogo por 3 a 1?",
     "a": [
       "Brasil",
       "Argentina",
@@ -502,15 +621,20 @@ export default [
     "c": 3,
     "cat": "copas",
     "d": 2,
-    "exp": "A partida única foi disputada em Kobe, no Japão, em 3 de abril de 1994.",
+    "exp": "A partida única foi disputada em Kobe, no Japão, em 3 de abril de 1994 (a RSSSF a registra como \"Recopa 1993\").",
     "src": [
       {
         "n": "Wikipédia (pt) — Recopa Sul-Americana de 1994",
         "u": "https://pt.wikipedia.org/wiki/Recopa_Sul-Americana_de_1994"
+      },
+      {
+        "n": "RSSSF — Recopa 1993 (disputada em Kobe, 1994)",
+        "u": "https://rsssf.org/sacups/recopa93.html"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-023",
@@ -529,10 +653,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Recopa Sul-Americana de 1994",
         "u": "https://pt.wikipedia.org/wiki/Recopa_Sul-Americana_de_1994"
+      },
+      {
+        "n": "RSSSF — Recopa 1993 (disputada em Kobe, 1994)",
+        "u": "https://rsssf.org/sacups/recopa93.html"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-024",
@@ -546,19 +675,24 @@ export default [
     "c": 2,
     "cat": "copas",
     "d": 3,
-    "exp": "O São Paulo foi campeão em 1993 e 1994 e vice em 2006 e 2013, segundo o artigo sobre a competição.",
+    "exp": "O São Paulo venceu as Recopas disputadas em 1993 (Cruzeiro) e 1994 (Botafogo) e foi vice nas disputadas em 2006 (Boca Juniors) e 2013 (Corinthians).",
     "src": [
       {
         "n": "Wikipédia (pt) — Recopa Sul-Americana",
         "u": "https://pt.wikipedia.org/wiki/Recopa_Sul-Americana"
+      },
+      {
+        "n": "RSSSF — Recopa Sudamericana (lista de finais)",
+        "u": "https://rsssf.org/sacups/recopa.html"
       }
     ],
     "when": "1993–2013",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-025",
-    "q": "Que clube derrotou o São Paulo, campeão da Libertadores de 2005, na Recopa Sul-Americana de 2006?",
+    "q": "Que clube derrotou o São Paulo, campeão da Libertadores de 2005, na Recopa Sul-Americana disputada em 2006?",
     "a": [
       "River Plate",
       "Santos",
@@ -568,15 +702,20 @@ export default [
     "c": 2,
     "cat": "copas",
     "d": 3,
-    "exp": "O Boca Juniors, campeão da Sul-Americana de 2005, ficou com a Recopa de 2006.",
+    "exp": "O Boca Juniors, campeão da Sul-Americana de 2005, venceu por 2 a 1 em Buenos Aires e empatou por 2 a 2 no Morumbi, em setembro de 2006.",
     "src": [
       {
         "n": "Wikipédia (pt) — Recopa Sul-Americana",
         "u": "https://pt.wikipedia.org/wiki/Recopa_Sul-Americana"
+      },
+      {
+        "n": "RSSSF — Recopa 2005 (disputada em 2006)",
+        "u": "https://rsssf.org/sacups/recopa05.html"
       }
     ],
     "when": "2006",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-026",
@@ -590,15 +729,20 @@ export default [
     "c": 0,
     "cat": "copas",
     "d": 2,
-    "exp": "O Corinthians, campeão da Libertadores de 2012, venceu o São Paulo, campeão da Sul-Americana de 2012.",
+    "exp": "O Corinthians, campeão da Libertadores de 2012, venceu o São Paulo, campeão da Sul-Americana de 2012, por 2 a 1 e 2 a 0, em julho de 2013.",
     "src": [
       {
         "n": "Wikipédia (pt) — Recopa Sul-Americana",
         "u": "https://pt.wikipedia.org/wiki/Recopa_Sul-Americana"
+      },
+      {
+        "n": "RSSSF — Recopa 2012 (disputada em 2013)",
+        "u": "https://rsssf.org/sacups/recopa2012.html"
       }
     ],
     "when": "2013",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-027",
@@ -621,10 +765,15 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/São_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "RSSSF — Supercopa 1993",
+        "u": "https://rsssf.org/sacups/supcopa93.html"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-028",
@@ -643,10 +792,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Supercopa Libertadores de 1993",
         "u": "https://pt.wikipedia.org/wiki/Supercopa_Libertadores_de_1993"
+      },
+      {
+        "n": "RSSSF — Supercopa 1993",
+        "u": "https://rsssf.org/sacups/supcopa93.html"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-029",
@@ -665,10 +819,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Supercopa Libertadores de 1993",
         "u": "https://pt.wikipedia.org/wiki/Supercopa_Libertadores_de_1993"
+      },
+      {
+        "n": "RSSSF — Supercopa 1993 (detalhes completos)",
+        "u": "https://rsssf.org/sacups/supcopa93full.html"
+      },
+      {
+        "n": "Trivela — as finais Supercopa 1993 e Copa dos Campeões 2001 (São Paulo x Flamengo)",
+        "u": "https://trivela.com.br/brasil/copa-do-brasil/em-dia-de-sao-paulo-x-flamengo-decisivo-as-lembrancas-de-duas-finais-eletrizantes-a-supercopa-de-1993-e-a-copa-dos-campeoes-de-2001/"
       }
     ],
     "when": "1993",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-030",
@@ -682,7 +845,7 @@ export default [
     "c": 3,
     "cat": "copas",
     "d": 2,
-    "exp": "O São Paulo foi campeão da Copa Conmebol de 1994, batendo o Peñarol por 7 a 4 no agregado.",
+    "exp": "O São Paulo foi campeão da Copa Conmebol de 1994, batendo o Peñarol por 6 a 4 no agregado (6 a 1 e 0 a 3).",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Conmebol de 1994",
@@ -691,14 +854,20 @@ export default [
       {
         "n": "Wikipédia (pt) — São Paulo Futebol Clube",
         "u": "https://pt.wikipedia.org/wiki/São_Paulo_Futebol_Clube"
+      },
+      {
+        "n": "RSSSF — Copa Conmebol (campeões e finais)",
+        "u": "https://rsssf.org/sacups/conmebol.html"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "copas-031",
-    "q": "Qual foi o placar da vitória do São Paulo no jogo de ida da final da Copa Conmebol de 1994, no Morumbi?",
+    "q": "Qual foi o placar da vitória do São Paulo no jogo de ida da final da Copa Conmebol de 1994, em casa?",
     "a": [
       "6 x 1",
       "4 x 0",
@@ -708,15 +877,25 @@ export default [
     "c": 0,
     "cat": "copas",
     "d": 4,
-    "exp": "Mesmo com derrota por 3 a 0 em Montevidéu, o 6 a 1 no Morumbi deu o título por 7 a 4 no agregado.",
+    "exp": "Mesmo com a derrota por 3 a 0 em Montevidéu, o 6 a 1 no jogo de ida deu ao São Paulo o título por 6 a 4 no agregado.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Conmebol de 1994",
         "u": "https://pt.wikipedia.org/wiki/Copa_Conmebol_de_1994"
+      },
+      {
+        "n": "RSSSF — Copa Conmebol (campeões e finais)",
+        "u": "https://rsssf.org/sacups/conmebol.html"
+      },
+      {
+        "n": "RSSSF — Copa Conmebol 1994",
+        "u": "https://rsssf.org/sacups/conmebol94.html"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "copas-032",
@@ -730,15 +909,25 @@ export default [
     "c": 2,
     "cat": "copas",
     "d": 4,
-    "exp": "Depois de vencer por 4 a 3 no Pacaembu e perder no Morumbi, o São Paulo avançou nos pênaltis (5 a 4).",
+    "exp": "O São Paulo venceu o primeiro jogo por 4 a 3 e perdeu o segundo por 3 a 2; com o agregado empatado em 6 a 6, avançou nos pênaltis por 5 a 4.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Conmebol de 1994",
         "u": "https://pt.wikipedia.org/wiki/Copa_Conmebol_de_1994"
+      },
+      {
+        "n": "RSSSF — Copa Conmebol 1994",
+        "u": "https://rsssf.org/sacups/conmebol94.html"
+      },
+      {
+        "n": "Trivela — Expressinho do São Paulo conquistou a Copa Conmebol de 1994",
+        "u": "https://trivela.com.br/america-do-sul/com-ceni-e-muricy-ramalho-expressinho-do-sao-paulo-foi-ate-o-fim-e-conquistou-a-copa-conmebol-de-1994/"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "copas-033",
@@ -761,10 +950,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Rogério Ceni",
         "u": "https://pt.wikipedia.org/wiki/Rogério_Ceni"
+      },
+      {
+        "n": "Trivela — Expressinho do São Paulo conquistou a Copa Conmebol de 1994",
+        "u": "https://trivela.com.br/america-do-sul/com-ceni-e-muricy-ramalho-expressinho-do-sao-paulo-foi-ate-o-fim-e-conquistou-a-copa-conmebol-de-1994/"
       }
     ],
     "when": "1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-034",
@@ -783,14 +977,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Conmebol de 1994",
         "u": "https://pt.wikipedia.org/wiki/Copa_Conmebol_de_1994"
+      },
+      {
+        "n": "RSSSF — Copa Conmebol (campeões e finais)",
+        "u": "https://rsssf.org/sacups/conmebol.html"
       }
     ],
     "when": "1992–1994",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-035",
-    "q": "Em 1996, em Cuiabá, o São Paulo foi campeão de qual torneio disputado uma única vez?",
+    "q": "Em 1996, em Cuiabá, o São Paulo foi campeão de qual torneio que reuniu os campeões da Copa Conmebol de 1992 a 1995?",
     "a": [
       "Copa Conmebol",
       "Supercopa Libertadores",
@@ -805,10 +1004,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Master da Conmebol",
         "u": "https://pt.wikipedia.org/wiki/Copa_Master_da_Conmebol"
+      },
+      {
+        "n": "RSSSF — Copa Master Conmebol 1996",
+        "u": "https://rsssf.org/sacups/mastconmebol96.html"
       }
     ],
     "when": "1996",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-036",
@@ -827,10 +1031,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Master da Conmebol",
         "u": "https://pt.wikipedia.org/wiki/Copa_Master_da_Conmebol"
+      },
+      {
+        "n": "RSSSF — Copa Master Conmebol 1996",
+        "u": "https://rsssf.org/sacups/mastconmebol96.html"
       }
     ],
     "when": "1996",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-037",
@@ -849,14 +1058,19 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Master da Conmebol",
         "u": "https://pt.wikipedia.org/wiki/Copa_Master_da_Conmebol"
+      },
+      {
+        "n": "RSSSF — Copa Master Conmebol 1996",
+        "u": "https://rsssf.org/sacups/mastconmebol96.html"
       }
     ],
     "when": "1996",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-038",
-    "q": "Quem foi o artilheiro da Copa Master de 1996, com 4 gols?",
+    "q": "Quem foi o artilheiro da Copa Master de 1996, com 5 gols?",
     "a": [
       "Müller",
       "Zetti",
@@ -866,15 +1080,21 @@ export default [
     "c": 3,
     "cat": "copas",
     "d": 4,
-    "exp": "Almir, do São Paulo, foi o artilheiro do torneio, que teve 13 gols em 3 jogos.",
+    "exp": "Almir, do São Paulo, marcou 3 gols na semifinal (7 a 3 no Botafogo) e 2 na final (3 a 0 no Atlético-MG), somando 5 gols segundo a RSSSF.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Master da Conmebol",
         "u": "https://pt.wikipedia.org/wiki/Copa_Master_da_Conmebol"
+      },
+      {
+        "n": "RSSSF — Copa Master Conmebol 1996",
+        "u": "https://rsssf.org/sacups/mastconmebol96.html"
       }
     ],
     "when": "1996",
-    "ok": true
+    "ok": true,
+    "v2": true,
+    "fixed": true
   },
   {
     "id": "copas-039",
@@ -888,15 +1108,20 @@ export default [
     "c": 0,
     "cat": "copas",
     "d": 4,
-    "exp": "Segundo o artigo, o campeão da Copa Master se classificava para a Copa de Ouro Nicolás Leoz do mesmo ano.",
+    "exp": "O São Paulo disputou a Copa de Oro de 1996 (em Manaus) como campeão da Copa Master; perdeu a final para o Flamengo.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Master da Conmebol",
         "u": "https://pt.wikipedia.org/wiki/Copa_Master_da_Conmebol"
+      },
+      {
+        "n": "RSSSF — Copa de Oro 1996",
+        "u": "https://rsssf.org/sacups/oro96.html"
       }
     ],
     "when": "1996",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-040",
@@ -915,10 +1140,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
         "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+      },
+      {
+        "n": "RSSSF — Copa Sudamericana 2012",
+        "u": "https://rsssf.org/sacups/sudamcup2012.html"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-041",
@@ -932,15 +1162,20 @@ export default [
     "c": 2,
     "cat": "copas",
     "d": 2,
-    "exp": "O jogo de ida, em 5 de dezembro de 2012, terminou 0 a 0.",
+    "exp": "O jogo de ida, em 5 de dezembro de 2012, terminou 0 a 0 no estádio La Bombonera, em Buenos Aires.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
         "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+      },
+      {
+        "n": "RSSSF — Copa Sudamericana 2012",
+        "u": "https://rsssf.org/sacups/sudamcup2012.html"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-042",
@@ -963,10 +1198,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Lucas Moura",
         "u": "https://pt.wikipedia.org/wiki/Lucas_Moura"
+      },
+      {
+        "n": "Goal — Lucas Moura no São Paulo: jogos, gols e títulos",
+        "u": "https://www.goal.com/br/listas/lucas-moura-no-sao-paulo-jogos-gols-e-titulos/blt8b96d57f53270884"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-043",
@@ -985,10 +1225,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
         "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+      },
+      {
+        "n": "RSSSF — Copa Sudamericana 2012",
+        "u": "https://rsssf.org/sacups/sudamcup2012.html"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-044",
@@ -1007,10 +1252,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
         "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+      },
+      {
+        "n": "RSSSF — Copa Sudamericana 2012",
+        "u": "https://rsssf.org/sacups/sudamcup2012.html"
       }
     ],
     "when": "2012",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-045",
@@ -1033,10 +1283,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Sul-Americana de 2012",
         "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2012"
+      },
+      {
+        "n": "Terra — Ficha técnica: Kashima Antlers 3 x 2 São Paulo (Copa Suruga 2013)",
+        "u": "https://www.terra.com.br/esportes/futebol/ficha-tecnica-kashima-antlers-3-x-2-sao-paulo,3a2123d7f2050410VgnCLD2000000dc6eb0aRCRD.html"
       }
     ],
     "when": "2013",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-046",
@@ -1050,15 +1305,20 @@ export default [
     "c": 3,
     "cat": "copas",
     "d": 4,
-    "exp": "Ganso (58 min) e Aloísio (75 min) marcaram; o Kashima venceu por 3 a 2.",
+    "exp": "Ganso (12 min do 2º tempo) e Aloísio (29 min do 2º tempo) marcaram; Osako fez os três gols do Kashima.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Suruga Bank de 2013",
         "u": "https://pt.wikipedia.org/wiki/Copa_Suruga_Bank_de_2013"
+      },
+      {
+        "n": "Terra — Ficha técnica: Kashima Antlers 3 x 2 São Paulo (Copa Suruga 2013)",
+        "u": "https://www.terra.com.br/esportes/futebol/ficha-tecnica-kashima-antlers-3-x-2-sao-paulo,3a2123d7f2050410VgnCLD2000000dc6eb0aRCRD.html"
       }
     ],
     "when": "2013",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-047",
@@ -1077,10 +1337,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Copa Sul-Americana de 2022",
         "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2022"
+      },
+      {
+        "n": "RSSSF — Copa Sudamericana 2022",
+        "u": "https://rsssf.org/sacups/sudamcup2022.html"
       }
     ],
     "when": "2022",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-048",
@@ -1094,15 +1359,20 @@ export default [
     "c": 2,
     "cat": "copas",
     "d": 2,
-    "exp": "O Atlético Nacional avançou à final; o campeão foi o River Plate.",
+    "exp": "O Atlético Nacional venceu por 1 a 0 em Medellín e perdeu por 1 a 0 em São Paulo, avançando nos pênaltis (4 a 1); o campeão foi o River Plate.",
     "src": [
       {
         "n": "Wikipédia (pt) — Copa Sul-Americana de 2014",
         "u": "https://pt.wikipedia.org/wiki/Copa_Sul-Americana_de_2014"
+      },
+      {
+        "n": "RSSSF — Copa Sudamericana 2014",
+        "u": "https://rsssf.org/sacups/sudamcup2014.html"
       }
     ],
     "when": "2014",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-049",
@@ -1123,12 +1393,17 @@ export default [
         "u": "https://pt.wikipedia.org/wiki/Torneio_Rio-São_Paulo"
       },
       {
-        "n": "Wikipédia (pt) — Luís Fabiano",
-        "u": "https://pt.wikipedia.org/wiki/Luís_Fabiano"
+        "n": "RSSSF — Torneio Rio-São Paulo: lista de campeões",
+        "u": "https://rsssf.org/tablesr/riosplchamp.html"
+      },
+      {
+        "n": "RSSSF — Torneio Rio-São Paulo 2001",
+        "u": "https://rsssf.org/tablesr/riospl01.html"
       }
     ],
     "when": "2001",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-050",
@@ -1147,10 +1422,15 @@ export default [
       {
         "n": "Wikipédia (pt) — Torneio Rio-São Paulo",
         "u": "https://pt.wikipedia.org/wiki/Torneio_Rio-São_Paulo"
+      },
+      {
+        "n": "RSSSF — Torneio Rio-São Paulo 2002",
+        "u": "https://rsssf.org/tablesr/riospl02.html"
       }
     ],
     "when": "2002",
-    "ok": true
+    "ok": true,
+    "v2": true
   },
   {
     "id": "copas-051",
@@ -1169,9 +1449,14 @@ export default [
       {
         "n": "Wikipédia (pt) — Torneio Rio-São Paulo",
         "u": "https://pt.wikipedia.org/wiki/Torneio_Rio-São_Paulo"
+      },
+      {
+        "n": "Trivela — as finais Supercopa 1993 e Copa dos Campeões 2001 (São Paulo x Flamengo)",
+        "u": "https://trivela.com.br/brasil/copa-do-brasil/em-dia-de-sao-paulo-x-flamengo-decisivo-as-lembrancas-de-duas-finais-eletrizantes-a-supercopa-de-1993-e-a-copa-dos-campeoes-de-2001/"
       }
     ],
     "when": "2001",
-    "ok": true
+    "ok": true,
+    "v2": true
   }
 ];

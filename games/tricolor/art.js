@@ -254,7 +254,7 @@ const P = {
   grad: '<path d="m2 9 10-5 10 5-10 5z" fill="currentColor"/><path d="M6 11.5V16c3 2.5 9 2.5 12 0v-4.5M22 9v6"/>',
   bars: '<path d="M5 20V10M12 20V4M19 20v-7" stroke-width="3.2" stroke-linecap="butt"/>',
   cup: '<path d="M7 4h10v5a5 5 0 0 1-10 0z" fill="currentColor"/><path d="M7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3M12 14v4M8 21h8"/>',
-  shield: '<path d="M4 5h16v7c0 4-4 7-8 9-4-2-8-5-8-9z" fill="currentColor" opacity=".9"/><path d="M4 5h16" /><path d="M9 9h6" stroke="#000" opacity=".6"/>',
+  shield: '<path d="M4 4h16v9c0 4-4 6-8 8-4-2-8-4-8-8z" fill="currentColor"/><rect x="6.4" y="6.6" width="11.2" height="3.4" fill="#000" opacity=".8"/>',
   shirt: '<path d="m8 3-5 3 2 5 3-1v11h8V10l3 1 2-5-5-3c-1 2-5 2-8 0z" fill="currentColor"/>',
   coach: '<circle cx="12" cy="7" r="4" fill="currentColor"/><path d="M4 21c0-5 3-8 8-8s8 3 8 8z" fill="currentColor"/>',
   stadium: '<path d="M2 9c0-2 4-4 10-4s10 2 10 4v6c0 2-4 4-10 4S2 17 2 15z"/><ellipse cx="12" cy="12" rx="6" ry="2.6"/><path d="M12 9.4v5.2"/>',

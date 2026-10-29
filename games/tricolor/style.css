@@ -396,3 +396,4 @@
 .tc-avatar.card img { object-fit: contain; }
 .tc-idol { padding: 4px 4px 6px; }
 .tc-idol .tc-avatar { aspect-ratio: 283 / 312; }
+.tc-q.explaining .tc-qchip { margin-top: 8px; }

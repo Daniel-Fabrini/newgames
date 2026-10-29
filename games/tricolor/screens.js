@@ -7,6 +7,7 @@ import { ACHIEVEMENTS, completedThemes, themeDone, hitRate, avgSeconds, liveStre
 import { dayKey } from './session.js';
 import { CAT_IDS } from './questions/schema.js';
 
+const put = (el, ...c) => el.append(...c.flat(Infinity).filter((x) => x !== null && x !== undefined && x !== false));
 const MODE_ICON = { main: 'trophy', quick: 'bolt', themes: 'list', time: 'clock', daily: 'calendar', expert: 'grad' };
 const fmtDur = (ms) => {
   const s = Math.round(ms / 1000);
@@ -41,7 +42,7 @@ export function home(app) {
     (el, sc) => {
       const resumeSt = app.getResume();
       el.classList.add('tc-home');
-      el.append(
+      put(el, 
         h('div', { class: 'tc-hero' },
           h('div', { class: 'tc-crest', html: crest({ stars: true }) }),
           h('h1', { class: 'tc-title' }, h('span', { class: 'tc-t1' }, 'TRICOLOR'), h('span', { class: 'tc-t2' }, t('title2'))),
@@ -98,7 +99,7 @@ export function modes(app) {
       el.classList.add('tc-modes');
       const row = (id, primary) =>
         h('button', { class: `tc-mode ${primary ? 'primary' : ''}`, onclick: () => enterMode(app, id), html: `<span class="ic">${ico(MODE_ICON[id])}</span><span class="tx"><b>${t(`mode.${id}`)}</b><small>${t(`mode.${id}.sub`)}</small></span>` });
-      el.append(
+      put(el, 
         h('div', { class: 'tc-mhead' },
           h('button', { class: 'tc-round', 'aria-label': t('back'), onclick: () => home(app), html: ico('back') }),
           h('div', { class: 'tc-crest sm', html: crest({ stars: true }) }),
@@ -171,7 +172,7 @@ export function rules(app, mode, opts = {}) {
         mode === 'quick' ? h('div', { class: 'tc-opt' }, h('b', null, t('timerLabel')), chips) : null,
       );
       const mini = M.ladder ? miniLadder(app) : null;
-      el.append(
+      put(el, 
         backRow(app, t(`mode.${mode}`), () => modes(app)),
         h('div', { class: 'tc-scroll' }, body, mini),
         h('div', { class: 'tc-foot' }, h('button', { class: 'tc-btn red big', onclick: () => app.start(mode, { timer }) }, t('start'))),
@@ -206,7 +207,7 @@ export function themesGrid(app) {
           h('button', { class: `tc-theme ${done ? 'done' : ''}`, disabled: n < 5, onclick: () => app.start('themes', { themeId: th.id }), html: `<span class="ic">${ico(th.icon)}</span><b>${t(`theme.${th.id}`)}</b><small>${t('themeInfo', { n, k: have, m: MASTERY.theme })}</small>${done ? `<i class="ok">${ico('check')}</i>` : ''}` }),
         );
       }
-      el.append(backRow(app, t('themesTitle'), () => modes(app)), h('div', { class: 'tc-scroll' }, grid, h('p', { class: 'tc-note' }, t('themesNote', { m: MASTERY.theme }))));
+      put(el, backRow(app, t('themesTitle'), () => modes(app)), h('div', { class: 'tc-scroll' }, grid, h('p', { class: 'tc-note' }, t('themesNote', { m: MASTERY.theme }))));
     },
     { bgMode: 'stands', scene: 'menu', back: () => (modes(app), true) },
   );
@@ -221,7 +222,7 @@ export function dailyScreen(app) {
     (el) => {
       el.classList.add('tc-rules');
       const streak = liveStreak(app.daily, key);
-      el.append(
+      put(el, 
         backRow(app, t('mode.daily'), () => modes(app)),
         h('div', { class: 'tc-scroll' },
           h('div', { class: 'tc-card' },
@@ -247,7 +248,7 @@ export function howTo(app) {
   app.show(
     (el) => {
       el.classList.add('tc-rules');
-      el.append(
+      put(el, 
         backRow(app, t('howto'), () => home(app)),
         h('div', { class: 'tc-scroll' },
           h('div', { class: 'tc-card' }, h('h3', null, t('rulesTitle')), h('ul', { class: 'tc-ul' }, rulesList(app, 'main').map((x) => h('li', null, x)))),
@@ -296,7 +297,7 @@ export function stats(app) {
       ];
       const recs = Object.keys(MODES).map((m) => [t(`mode.${m}`), P.rec[m] ? fmtScore(app, m, P.rec[m].best) : '—']);
       const cats = CAT_IDS.map((c) => [t(`cat.${c}`), P.catRight[c] || 0]).filter((x) => x[1] > 0);
-      el.append(
+      put(el, 
         backRow(app, t('stats'), () => home(app)),
         h('div', { class: 'tc-scroll' },
           h('div', { class: 'tc-panel' }, rows.map(([k, v]) => h('div', { class: 'tc-row' }, h('span', null, k), h('b', null, v)))),
@@ -320,7 +321,7 @@ export function ranking(app, mode = 'main') {
       const list = P.ranks[mode] || [];
       const tabs = h('div', { class: 'tc-chips wrap' }, Object.keys(MODES).map((m) => h('button', { class: `tc-chip ${m === mode ? 'on' : ''}`, onclick: () => ranking(app, m) }, t(`mode.${m}`))));
       const loc = app.lang === 'pt' ? 'pt-BR' : app.lang === 'es' ? 'es-ES' : 'en-US';
-      el.append(
+      put(el, 
         backRow(app, t('ranking'), () => home(app)),
         h('div', { class: 'tc-scroll' },
           tabs,
@@ -341,7 +342,7 @@ export function achievements(app) {
     (el) => {
       el.classList.add('tc-rules');
       const n = ACHIEVEMENTS.filter((a) => P.ach[a.id]).length;
-      el.append(
+      put(el, 
         backRow(app, t('achievements'), () => home(app)),
         h('div', { class: 'tc-scroll' },
           h('p', { class: 'tc-count' }, t('ach.count', { n, m: ACHIEVEMENTS.length })),
