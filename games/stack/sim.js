@@ -32,6 +32,7 @@ export function createSim(diffId = 'normal', saved = null) {
   world.substeps = 6;
   world.contactHertz = 60;
   world.contactDamping = 10;
+  world.pushMax = 3;
   world.linDamp = 0.05;
   world.angDamp = 0.15;
   world.add(new Body({ pos: [0, -1, 0], half: [40, 1, 40], isStatic: true, friction: 0.9 }));
@@ -105,6 +106,12 @@ export function createSim(diffId = 'normal', saved = null) {
     world, blocks, diff, events, handlers, update, stepOnce, addBlock, slotPos, topLayerInfo,
     get time() { return world.time; },
     get asleep() { return world.asleep; },
+    // quality levels used by the frame-time governor: 0 best ... 2 cheapest
+    setQuality(q) {
+      const L = [[6, 60], [4, 40], [3, 30]][Math.max(0, Math.min(2, q))];
+      world.substeps = L[0];
+      world.contactHertz = L[1];
+    },
     settle(sec = 1.5) { for (let i = 0; i < sec / STEP; i++) stepOnce(); },
     maxSpeed() { let m = 0; for (const b of blocks) m = Math.max(m, Math.hypot(b.body.v[0], b.body.v[1], b.body.v[2]), Math.hypot(b.body.w[0], b.body.w[1], b.body.w[2]) * 0.5); return m; },
     serialize() {

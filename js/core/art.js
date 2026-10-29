@@ -89,7 +89,7 @@ const ART = {
 
 // 3D covers (assets/covers/<id>.webp, rendered by tools/covers). Games without one
 // fall back to the drawn illustrations above.
-const COVERS = new Set(['soccer', 'squad', 'mapquiz', 'flags', 'polyglot', 'busjam', 'waldo', 'findit', 'wordsearch', 'hero', 'million', 'towers', 'naval', 'farm', 'pingpong', 'blocks', 'water', 'snake', 'numbers', 'solitaire', 'checkers', 'domino', 'sudoku', 'g2048', 'crossword', 'mines', 'lights', 'dice']);
+const COVERS = new Set(['soccer', 'squad', 'mapquiz', 'flags', 'polyglot', 'busjam', 'waldo', 'findit', 'wordsearch', 'hero', 'million', 'towers', 'naval', 'farm', 'pingpong', 'blocks', 'water', 'snake', 'numbers', 'solitaire', 'checkers', 'domino', 'sudoku', 'g2048', 'crossword', 'mines', 'lights', 'dice', 'stack', 'maze']);
 export const hasCover = (id) => COVERS.has(id);
 export const coverUrl = (id) => new URL(`../../assets/covers/${id}.webp`, import.meta.url).href;
 

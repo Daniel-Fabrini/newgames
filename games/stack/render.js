@@ -114,11 +114,11 @@ function textures() {
 
 // ---------------------------------------------------------------- renderer
 export function createRenderer(canvas) {
-  const ctx = canvas.getContext('2d', { alpha: false });
+  const ctx = canvas.getContext('2d');
   const tex = textures();
   const shadowCanvas = document.createElement('canvas');
   const sctx = shadowCanvas.getContext('2d');
-  const cam = { yaw: 0.6, pitch: 0.5, zoom: 1, ty: 5.2, dist: 26, shake: 0 };
+  const cam = { yaw: 0.6, pitch: 0.5, zoom: 1, ty: 5.2, dist: 26, shake: 0, vshift: 0 };
   let cw = 300, ch = 500, dpr = 1;
   let focal = 800;
   // per-frame camera basis
@@ -161,7 +161,7 @@ export function createRenderer(canvas) {
     Rv = [rx / rl, ry / rl, rz / rl];
     Uv = [Rv[1] * Fv[2] - Rv[2] * Fv[1], Rv[2] * Fv[0] - Rv[0] * Fv[2], Rv[0] * Fv[1] - Rv[1] * Fv[0]];
     cam.ox = cw / 2 + ox;
-    cam.oy = ch * 0.5 + oy;
+    cam.oy = ch * (0.5 + cam.vshift) + oy;
   }
 
   function proj(p, out) {
@@ -205,81 +205,83 @@ export function createRenderer(canvas) {
   }
 
   function background() {
-    if (!bg) {
-      bg = document.createElement('canvas');
-      bg.width = cw;
-      bg.height = ch;
-      const g = bg.getContext('2d');
-      const lg = g.createLinearGradient(0, 0, 0, ch);
-      lg.addColorStop(0, '#15120b');
-      lg.addColorStop(0.55, '#0c0b08');
-      lg.addColorStop(1, '#050505');
-      g.fillStyle = lg;
-      g.fillRect(0, 0, cw, ch);
-      const rg = g.createRadialGradient(cw / 2, ch * 0.42, 0, cw / 2, ch * 0.42, Math.max(cw, ch) * 0.7);
-      rg.addColorStop(0, 'rgba(247,215,116,0.10)');
-      rg.addColorStop(1, 'rgba(247,215,116,0)');
-      g.fillStyle = rg;
-      g.fillRect(0, 0, cw, ch);
-    }
-    ctx.drawImage(bg, 0, 0);
+    ctx.clearRect(0, 0, cw, ch);
   }
 
-  function drawTable() {
-    const R = 8.2;
+  function ring(R, y = 0) {
     const pts = [];
-    const tmp = [0, 0, 0];
-    for (let i = 0; i < 56; i++) {
-      const a = (i / 56) * TAU;
-      pts.push(proj([Math.cos(a) * R, 0, Math.sin(a) * R], [0, 0, 0]));
+    for (let i = 0; i < 64; i++) {
+      const a = (i / 64) * TAU;
+      pts.push(proj([Math.cos(a) * R, y, Math.sin(a) * R], [0, 0, 0]));
     }
-    const o = proj([0, 0, 0], tmp);
-    const rim = proj([R, 0, 0], [0, 0, 0]);
-    const rad = Math.max(40, Math.hypot(rim[0] - o[0], (rim[1] - o[1]) * 3.2));
-    ctx.save();
+    return pts;
+  }
+  function pathOf(pts) {
     ctx.beginPath();
     pts.forEach((q, i) => (i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])));
     ctx.closePath();
-    // table thickness (side) below
-    const below = pts.map((q) => [q[0], q[1] + 0.5 * focal / Math.max(1, q[2])]);
+  }
+
+  // a faint floor around the platter so fallen blocks do not float in the dark
+  function drawFloor() {
+    const o = proj([0, 0, 0], [0, 0, 0]);
+    const far = ring(22, 0);
+    const edge = proj([22, 0, 0], [0, 0, 0]);
+    const rad = Math.max(120, Math.hypot(edge[0] - o[0], (edge[1] - o[1]) * 2.4));
     ctx.save();
-    ctx.beginPath();
-    below.forEach((q, i) => (i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])));
-    ctx.closePath();
-    ctx.fillStyle = '#0a0907';
+    pathOf(far);
+    const g = ctx.createRadialGradient(o[0], o[1], 0, o[0], o[1], rad);
+    g.addColorStop(0, 'rgba(46,38,24,0.9)');
+    g.addColorStop(0.35, 'rgba(26,22,14,0.75)');
+    g.addColorStop(1, 'rgba(8,7,5,0)');
+    ctx.fillStyle = g;
     ctx.fill();
     ctx.restore();
+  }
+
+  // the wooden platter the tower stands on
+  function drawTable() {
+    const R = 4.7;
+    const top = ring(R, 0);
+    const bot = ring(R, -0.55);
+    const o = proj([0, 0, 0], [0, 0, 0]);
+    // rim (side wall): the lower ring plus the upper ring give a thickness band
+    ctx.save();
     ctx.beginPath();
-    pts.forEach((q, i) => (i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])));
-    ctx.closePath();
-    ctx.translate(o[0], o[1]);
-    ctx.scale(1, 0.31);
-    const g = ctx.createRadialGradient(0, 0, 0, 0, 0, rad);
-    g.addColorStop(0, '#2b2418');
-    g.addColorStop(0.7, '#1a150d');
-    g.addColorStop(1, '#0e0b07');
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.fillStyle = g;
-    // fill with a simple gradient aligned in screen space instead (path is already in screen coords)
+    pathOf(bot);
+    ctx.fillStyle = '#0b0906';
+    ctx.fill();
+    // connect the two rings with quads on the visible half
+    for (let i = 0; i < 64; i++) {
+      const a = top[i], b = top[(i + 1) % 64], c = bot[(i + 1) % 64], d = bot[i];
+      const ang = ((i + 0.5) / 64) * TAU;
+      const nx = Math.cos(ang), nz = Math.sin(ang);
+      if (nx * (C[0]) + nz * (C[2]) <= R * 0.5) continue;
+      ctx.beginPath();
+      ctx.moveTo(a[0], a[1]);
+      ctx.lineTo(b[0], b[1]);
+      ctx.lineTo(c[0], c[1]);
+      ctx.lineTo(d[0], d[1]);
+      ctx.closePath();
+      const lam = 0.35 + 0.65 * Math.max(0, nx * LIGHT[0] + nz * LIGHT[2]);
+      const v = Math.round(30 + lam * 40);
+      ctx.fillStyle = `rgb(${v},${Math.round(v * 0.82)},${Math.round(v * 0.55)})`;
+      ctx.fill();
+    }
+    pathOf(top);
+    const rimPt = top[0];
+    const rad = Math.max(60, Math.hypot(rimPt[0] - o[0], (rimPt[1] - o[1]) * 3));
     const lg = ctx.createRadialGradient(o[0], o[1], 0, o[0], o[1], rad);
-    lg.addColorStop(0, '#2d2619');
-    lg.addColorStop(0.65, '#1b160d');
-    lg.addColorStop(1, '#0d0a06');
+    lg.addColorStop(0, '#2f271a');
+    lg.addColorStop(0.7, '#1d170d');
+    lg.addColorStop(1, '#120e08');
     ctx.fillStyle = lg;
     ctx.fill();
     ctx.lineWidth = Math.max(1.5, 2 * dpr);
-    ctx.strokeStyle = 'rgba(247,215,116,0.55)';
+    ctx.strokeStyle = 'rgba(247,215,116,0.7)';
     ctx.stroke();
-    ctx.restore();
-    // inner thin ring
-    ctx.save();
-    ctx.beginPath();
-    for (let i = 0; i <= 56; i++) {
-      const a = (i / 56) * TAU;
-      const q = proj([Math.cos(a) * 5.2, 0, Math.sin(a) * 5.2], [0, 0, 0]);
-      i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]);
-    }
-    ctx.strokeStyle = 'rgba(247,215,116,0.12)';
+    pathOf(ring(R * 0.72, 0));
+    ctx.strokeStyle = 'rgba(247,215,116,0.14)';
     ctx.lineWidth = Math.max(1, dpr);
     ctx.stroke();
     ctx.restore();
@@ -294,6 +296,7 @@ export function createRenderer(canvas) {
     sctx.setTransform(sw / cw, 0, 0, sh / ch, 0, 0);
     sctx.fillStyle = 'rgba(0,0,0,1)';
     sctx.beginPath();
+    let bx0 = Infinity, by0 = Infinity, bx1 = -Infinity, by1 = -Infinity;
     const lx = -LIGHT[0] / LIGHT[1], lz = -LIGHT[2] / LIGHT[1];
     for (const b of blocks) {
       const ax = b.body.ax, e = b.body.e, p = b.body.p;
@@ -306,14 +309,25 @@ export function createRenderer(canvas) {
         pts.push(proj([x + lx * yy, 0, z + lz * yy], [0, 0, 0]));
       }
       const hull = convexHull(pts);
+      for (const q of hull) {
+        if (q[0] < bx0) bx0 = q[0];
+        if (q[0] > bx1) bx1 = q[0];
+        if (q[1] < by0) by0 = q[1];
+        if (q[1] > by1) by1 = q[1];
+      }
       hull.forEach((q, i) => (i ? sctx.lineTo(q[0], q[1]) : sctx.moveTo(q[0], q[1])));
       sctx.closePath();
     }
     sctx.fill('nonzero');
+    if (!isFinite(bx0)) return;
+    // only blit the part of the small canvas that has shadow in it
+    const x0 = Math.max(0, Math.floor(((bx0 - 8) * sw) / cw)), y0 = Math.max(0, Math.floor(((by0 - 8) * sh) / ch));
+    const x1 = Math.min(sw, Math.ceil(((bx1 + 8) * sw) / cw)), y1 = Math.min(sh, Math.ceil(((by1 + 8) * sh) / ch));
+    if (x1 <= x0 || y1 <= y0) return;
     ctx.save();
     ctx.globalAlpha = 0.42;
     ctx.imageSmoothingEnabled = true;
-    ctx.drawImage(shadowCanvas, 0, 0, sw, sh, 0, 0, cw, ch);
+    ctx.drawImage(shadowCanvas, x0, y0, x1 - x0, y1 - y0, (x0 * cw) / sw, (y0 * ch) / sh, ((x1 - x0) * cw) / sw, ((y1 - y0) * ch) / sh);
     ctx.restore();
   }
 
@@ -361,24 +375,9 @@ export function createRenderer(canvas) {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     // lighting
     const lam = Math.max(0, f.n[0] * LIGHT[0] + f.n[1] * LIGHT[1] + f.n[2] * LIGHT[2]);
-    const dark = 0.62 * (1 - lam) + 0.06;
-    ctx.fillStyle = `rgba(14,8,2,${dark.toFixed(3)})`;
+    const dark = 0.5 * (1 - lam) + 0.03;
+    ctx.fillStyle = lam > 0.55 ? `rgba(255,236,190,${((lam - 0.55) * 0.22).toFixed(3)})` : `rgba(14,8,2,${(dark + (f.def.a !== 1 ? 0.05 : 0)).toFixed(3)})`;
     ctx.fill();
-    if (lam > 0.55) {
-      ctx.fillStyle = `rgba(255,236,190,${((lam - 0.55) * 0.22).toFixed(3)})`;
-      ctx.fill();
-    }
-    // ambient occlusion toward the lower edge of side faces
-    if (f.def.a !== 1) {
-      const lo = q[0][1] > q[3][1] ? [q[0], q[3]] : [q[3], q[0]];
-      // gradient from the upper to lower edge
-      const g = ctx.createLinearGradient((q[0][0] + q[1][0]) / 2, Math.min(q[0][1], q[3][1]), (q[2][0] + q[3][0]) / 2, Math.max(q[0][1], q[3][1]));
-      g.addColorStop(0, 'rgba(0,0,0,0)');
-      g.addColorStop(1, 'rgba(0,0,0,0.18)');
-      ctx.fillStyle = g;
-      ctx.fill();
-      void lo;
-    }
     ctx.restore();
     // thin bevel
     ctx.beginPath();
@@ -424,16 +423,17 @@ export function createRenderer(canvas) {
     setupCamera(topY, shakeX, shakeY);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     background();
+    drawFloor();
     drawTable();
     const blocks = sim.blocks.slice();
     drawShadows(blocks);
-    // painter's order: far to near by distance to the camera
+    // painter's order: lower layers first (the camera looks down on the tower), then far to near
     const order = blocks
       .map((b) => {
         const p = b.body.p;
-        return { b, d: (p[0] - C[0]) ** 2 + (p[1] - C[1]) ** 2 + (p[2] - C[2]) ** 2 };
+        return { b, band: Math.round((p[1] - 0.3) / 0.604), d: (p[0] - C[0]) ** 2 + (p[1] - C[1]) ** 2 + (p[2] - C[2]) ** 2 };
       })
-      .sort((x, y) => y.d - x.d);
+      .sort((x, y) => x.band - y.band || y.d - x.d);
     faces = [];
     const selFaces = [];
     const flashFaces = [];

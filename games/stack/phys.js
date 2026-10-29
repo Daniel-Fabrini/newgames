@@ -67,11 +67,11 @@ export class Body {
     this.updateAxes();
   }
   // world-space inverse inertia times vector
-  invIw(v) {
+  invIw(x, y, z) {
     const a = this.ax, d = this.invI;
-    const s0 = (a[0][0] * v[0] + a[0][1] * v[1] + a[0][2] * v[2]) * d[0];
-    const s1 = (a[1][0] * v[0] + a[1][1] * v[1] + a[1][2] * v[2]) * d[1];
-    const s2 = (a[2][0] * v[0] + a[2][1] * v[1] + a[2][2] * v[2]) * d[2];
+    const s0 = (a[0][0] * x + a[0][1] * y + a[0][2] * z) * d[0];
+    const s1 = (a[1][0] * x + a[1][1] * y + a[1][2] * z) * d[1];
+    const s2 = (a[2][0] * x + a[2][1] * y + a[2][2] * z) * d[2];
     return [a[0][0] * s0 + a[1][0] * s1 + a[2][0] * s2, a[0][1] * s0 + a[1][1] * s1 + a[2][1] * s2, a[0][2] * s0 + a[1][2] * s1 + a[2][2] * s2];
   }
   up() {
@@ -87,159 +87,235 @@ export class Body {
   }
 }
 
-// ---------------------------------------------------------------- narrowphase
+// ---------------------------------------------------------------- narrowphase (allocation free)
 const MARGIN = 0.008; // speculative contact distance
 
-function projR(e, ax, n) {
-  return e[0] * Math.abs(v3.dot(ax[0], n)) + e[1] * Math.abs(v3.dot(ax[1], n)) + e[2] * Math.abs(v3.dot(ax[2], n));
-}
+// scratch manifold written by satBoxBox()
+const MF = { n: new Float64Array(3), cnt: 0, p: new Float64Array(12), depth: new Float64Array(4) };
+const polyA = new Float64Array(3 * 12);
+const polyB = new Float64Array(3 * 12);
+const cand = { p: new Float64Array(3 * 12), d: new Float64Array(12), k: 0 };
 
-function clipPoly(poly, n, d) {
-  // keep points with dot(n,p) <= d
-  const out = [];
-  const m = poly.length;
-  for (let i = 0; i < m; i++) {
-    const a = poly[i], b = poly[(i + 1) % m];
-    const da = v3.dot(n, a) - d, db = v3.dot(n, b) - d;
-    if (da <= 0) out.push(a);
+// clip polygon src (n points) keeping nx*x+ny*y+nz*z <= d; writes to dst, returns the new count
+function clipPlane(src, n, dst, nx, ny, nz, d) {
+  let m = 0;
+  for (let i = 0; i < n; i++) {
+    const j = i + 1 === n ? 0 : i + 1;
+    const ax = src[i * 3], ay = src[i * 3 + 1], az = src[i * 3 + 2];
+    const bx = src[j * 3], by = src[j * 3 + 1], bz = src[j * 3 + 2];
+    const da = nx * ax + ny * ay + nz * az - d, db = nx * bx + ny * by + nz * bz - d;
+    if (da <= 0) {
+      dst[m * 3] = ax; dst[m * 3 + 1] = ay; dst[m * 3 + 2] = az;
+      m++;
+    }
     if ((da < 0 && db > 0) || (da > 0 && db < 0)) {
       const t = da / (da - db);
-      out.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]);
+      dst[m * 3] = ax + (bx - ax) * t; dst[m * 3 + 1] = ay + (by - ay) * t; dst[m * 3 + 2] = az + (bz - az) * t;
+      m++;
     }
+    if (m > 10) break;
   }
-  return out;
+  return m;
 }
 
-// keep at most 4 points: deepest, farthest from it, then the ones that maximise the area
-function reduce4(pts) {
-  if (pts.length <= 4) return pts;
+// keep at most 4 manifold points (deepest, farthest, then the largest triangle areas on both sides)
+function reduceTo4(k) {
+  const P = cand.p, D = cand.d;
   let i0 = 0;
-  for (let i = 1; i < pts.length; i++) if (pts[i].depth > pts[i0].depth) i0 = i;
-  const a = pts[i0];
+  for (let i = 1; i < k; i++) if (D[i] > D[i0]) i0 = i;
   let i1 = -1, bd = -1;
-  for (let i = 0; i < pts.length; i++) if (i !== i0) {
-    const d = (pts[i].p[0] - a.p[0]) ** 2 + (pts[i].p[1] - a.p[1]) ** 2 + (pts[i].p[2] - a.p[2]) ** 2;
+  for (let i = 0; i < k; i++) if (i !== i0) {
+    const dx = P[i * 3] - P[i0 * 3], dy = P[i * 3 + 1] - P[i0 * 3 + 1], dz = P[i * 3 + 2] - P[i0 * 3 + 2];
+    const d = dx * dx + dy * dy + dz * dz;
     if (d > bd) { bd = d; i1 = i; }
   }
-  const b = pts[i1];
-  const ab = v3.sub(b.p, a.p);
+  const abx = P[i1 * 3] - P[i0 * 3], aby = P[i1 * 3 + 1] - P[i0 * 3 + 1], abz = P[i1 * 3 + 2] - P[i0 * 3 + 2];
   let i2 = -1, i3 = -1, best = 0, worst = 0;
-  for (let i = 0; i < pts.length; i++) if (i !== i0 && i !== i1) {
-    const area = v3.dot(v3.cross(ab, v3.sub(pts[i].p, a.p)), [0, 1, 0]) || 0;
-    const full = v3.len(v3.cross(ab, v3.sub(pts[i].p, a.p)));
-    const sgn = Math.sign(area) || 1;
-    if (sgn > 0 && full > best) { best = full; i2 = i; }
-    if (sgn < 0 && full > worst) { worst = full; i3 = i; }
+  for (let i = 0; i < k; i++) if (i !== i0 && i !== i1) {
+    const px = P[i * 3] - P[i0 * 3], py = P[i * 3 + 1] - P[i0 * 3 + 1], pz = P[i * 3 + 2] - P[i0 * 3 + 2];
+    const cx = aby * pz - abz * py, cy = abz * px - abx * pz, cz = abx * py - aby * px;
+    const area = Math.hypot(cx, cy, cz);
+    const side = cy >= 0 ? 1 : -1; // approximate "side" using the vertical component (contacts are mostly horizontal)
+    if (side > 0) { if (area > best) { best = area; i2 = i; } } else if (area > worst) { worst = area; i3 = i; }
   }
-  const out = [a, b];
-  if (i2 >= 0) out.push(pts[i2]);
-  if (i3 >= 0) out.push(pts[i3]);
-  if (out.length < 4) for (let i = 0; i < pts.length && out.length < 4; i++) if (!out.includes(pts[i])) out.push(pts[i]);
-  return out;
+  const pick = [i0, i1];
+  if (i2 >= 0) pick.push(i2);
+  if (i3 >= 0) pick.push(i3);
+  for (let i = 0; i < k && pick.length < 4; i++) if (!pick.includes(i)) pick.push(i);
+  for (let q = 0; q < 4; q++) {
+    const i = pick[q];
+    MF.p[q * 3] = P[i * 3]; MF.p[q * 3 + 1] = P[i * 3 + 1]; MF.p[q * 3 + 2] = P[i * 3 + 2];
+    MF.depth[q] = D[i];
+  }
+  MF.cnt = 4;
 }
 
-// Returns { n (A to B), pts:[{p, depth}] } or null.
-export function boxBox(A, B) {
-  const ta = A.ax, tb = B.ax;
-  const t = [B.p[0] - A.p[0], B.p[1] - A.p[1], B.p[2] - A.p[2]];
+// SAT on the 15 axes. Returns true on contact; the manifold (normal from A to B) is in MF.
+function satBoxBox(A, B) {
+  const a0 = A.ax[0], a1 = A.ax[1], a2 = A.ax[2], b0 = B.ax[0], b1 = B.ax[1], b2 = B.ax[2];
+  const ea0 = A.e[0], ea1 = A.e[1], ea2 = A.e[2], eb0 = B.e[0], eb1 = B.e[1], eb2 = B.e[2];
+  const tx = B.p[0] - A.p[0], ty = B.p[1] - A.p[1], tz = B.p[2] - A.p[2];
+  const R00 = a0[0] * b0[0] + a0[1] * b0[1] + a0[2] * b0[2], R01 = a0[0] * b1[0] + a0[1] * b1[1] + a0[2] * b1[2], R02 = a0[0] * b2[0] + a0[1] * b2[1] + a0[2] * b2[2];
+  const R10 = a1[0] * b0[0] + a1[1] * b0[1] + a1[2] * b0[2], R11 = a1[0] * b1[0] + a1[1] * b1[1] + a1[2] * b1[2], R12 = a1[0] * b2[0] + a1[1] * b2[1] + a1[2] * b2[2];
+  const R20 = a2[0] * b0[0] + a2[1] * b0[1] + a2[2] * b0[2], R21 = a2[0] * b1[0] + a2[1] * b1[1] + a2[2] * b1[2], R22 = a2[0] * b2[0] + a2[1] * b2[1] + a2[2] * b2[2];
+  const t0 = tx * a0[0] + ty * a0[1] + tz * a0[2], t1 = tx * a1[0] + ty * a1[1] + tz * a1[2], t2 = tx * a2[0] + ty * a2[1] + tz * a2[2];
+  const E = 1e-6;
+  const A00 = Math.abs(R00) + E, A01 = Math.abs(R01) + E, A02 = Math.abs(R02) + E;
+  const A10 = Math.abs(R10) + E, A11 = Math.abs(R11) + E, A12 = Math.abs(R12) + E;
+  const A20 = Math.abs(R20) + E, A21 = Math.abs(R21) + E, A22 = Math.abs(R22) + E;
   let faceSep = -Infinity, faceIdx = -1;
-  for (let k = 0; k < 6; k++) {
-    const n = k < 3 ? ta[k] : tb[k - 3];
-    const sep = Math.abs(v3.dot(t, n)) - (projR(A.e, ta, n) + projR(B.e, tb, n));
-    if (sep > MARGIN) return null;
-    if (sep > faceSep) { faceSep = sep; faceIdx = k; }
+  let sep;
+  // faces of A
+  sep = Math.abs(t0) - (ea0 + eb0 * A00 + eb1 * A01 + eb2 * A02);
+  if (sep > MARGIN) return false;
+  if (sep > faceSep) { faceSep = sep; faceIdx = 0; }
+  sep = Math.abs(t1) - (ea1 + eb0 * A10 + eb1 * A11 + eb2 * A12);
+  if (sep > MARGIN) return false;
+  if (sep > faceSep) { faceSep = sep; faceIdx = 1; }
+  sep = Math.abs(t2) - (ea2 + eb0 * A20 + eb1 * A21 + eb2 * A22);
+  if (sep > MARGIN) return false;
+  if (sep > faceSep) { faceSep = sep; faceIdx = 2; }
+  // faces of B
+  sep = Math.abs(t0 * R00 + t1 * R10 + t2 * R20) - (ea0 * A00 + ea1 * A10 + ea2 * A20 + eb0);
+  if (sep > MARGIN) return false;
+  if (sep > faceSep) { faceSep = sep; faceIdx = 3; }
+  sep = Math.abs(t0 * R01 + t1 * R11 + t2 * R21) - (ea0 * A01 + ea1 * A11 + ea2 * A21 + eb1);
+  if (sep > MARGIN) return false;
+  if (sep > faceSep) { faceSep = sep; faceIdx = 4; }
+  sep = Math.abs(t0 * R02 + t1 * R12 + t2 * R22) - (ea0 * A02 + ea1 * A12 + ea2 * A22 + eb2);
+  if (sep > MARGIN) return false;
+  if (sep > faceSep) { faceSep = sep; faceIdx = 5; }
+  // edges: A_i x B_j
+  let edgeSep = -Infinity, ei = -1, ej = -1;
+  const Rm = [R00, R01, R02, R10, R11, R12, R20, R21, R22];
+  const Am = [A00, A01, A02, A10, A11, A12, A20, A21, A22];
+  const tA = [t0, t1, t2];
+  const eA = [ea0, ea1, ea2], eB = [eb0, eb1, eb2];
+  for (let i = 0; i < 3; i++) {
+    const i1 = (i + 1) % 3, i2 = (i + 2) % 3;
+    for (let j = 0; j < 3; j++) {
+      const j1 = (j + 1) % 3, j2 = (j + 2) % 3;
+      const r = Rm[i * 3 + j];
+      const l2 = 1 - r * r;
+      if (l2 < 1e-6) continue;
+      const ra = eA[i1] * Am[i2 * 3 + j] + eA[i2] * Am[i1 * 3 + j];
+      const rb = eB[j1] * Am[i * 3 + j2] + eB[j2] * Am[i * 3 + j1];
+      const dist = Math.abs(tA[i2] * Rm[i1 * 3 + j] - tA[i1] * Rm[i2 * 3 + j]);
+      sep = (dist - (ra + rb)) / Math.sqrt(l2);
+      if (sep > MARGIN) return false;
+      if (sep > edgeSep) { edgeSep = sep; ei = i; ej = j; }
+    }
   }
-  let edgeSep = -Infinity, ei = -1, ej = -1, edgeN = null;
-  for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) {
-    const c = v3.cross(ta[i], tb[j]);
-    const l = v3.len(c);
-    if (l < 1e-4) continue;
-    const n = [c[0] / l, c[1] / l, c[2] / l];
-    const sep = Math.abs(v3.dot(t, n)) - (projR(A.e, ta, n) + projR(B.e, tb, n));
-    if (sep > MARGIN) return null;
-    if (sep > edgeSep) { edgeSep = sep; ei = i; ej = j; edgeN = n; }
-  }
-  if (edgeN && 0.95 * edgeSep > faceSep + 0.01) {
-    // edge / edge
-    const n = edgeN;
-    if (v3.dot(t, n) < 0) { n[0] = -n[0]; n[1] = -n[1]; n[2] = -n[2]; }
-    const PA = A.p.slice(), PB = B.p.slice();
+  if (ei >= 0 && 0.95 * edgeSep > faceSep + 0.01) {
+    // edge / edge: one contact point
+    const da = A.ax[ei], db = B.ax[ej];
+    let nx = da[1] * db[2] - da[2] * db[1], ny = da[2] * db[0] - da[0] * db[2], nz = da[0] * db[1] - da[1] * db[0];
+    const nl = Math.hypot(nx, ny, nz);
+    nx /= nl; ny /= nl; nz /= nl;
+    if (nx * tx + ny * ty + nz * tz < 0) { nx = -nx; ny = -ny; nz = -nz; }
+    let pax = A.p[0], pay = A.p[1], paz = A.p[2], pbx = B.p[0], pby = B.p[1], pbz = B.p[2];
     for (let k = 0; k < 3; k++) {
       if (k !== ei) {
-        const s = v3.dot(n, ta[k]) > 0 ? 1 : -1;
-        for (let c = 0; c < 3; c++) PA[c] += s * A.e[k] * ta[k][c];
+        const ax = A.ax[k];
+        const sg = (nx * ax[0] + ny * ax[1] + nz * ax[2] > 0 ? 1 : -1) * eA[k];
+        pax += sg * ax[0]; pay += sg * ax[1]; paz += sg * ax[2];
       }
       if (k !== ej) {
-        const s = v3.dot(n, tb[k]) > 0 ? -1 : 1;
-        for (let c = 0; c < 3; c++) PB[c] += s * B.e[k] * tb[k][c];
+        const bx = B.ax[k];
+        const sg = (nx * bx[0] + ny * bx[1] + nz * bx[2] > 0 ? -1 : 1) * eB[k];
+        pbx += sg * bx[0]; pby += sg * bx[1]; pbz += sg * bx[2];
       }
     }
-    const da = ta[ei], db = tb[ej];
-    const r = v3.sub(PA, PB);
-    const b = v3.dot(da, db), d = v3.dot(da, r), e = v3.dot(db, r);
-    const den = 1 - b * b;
-    let s = (b * e - d) / den, u = (e - b * d) / den;
-    s = Math.max(-A.e[ei], Math.min(A.e[ei], s));
-    u = Math.max(-B.e[ej], Math.min(B.e[ej], u));
-    const CA = [PA[0] + da[0] * s, PA[1] + da[1] * s, PA[2] + da[2] * s];
-    const CB = [PB[0] + db[0] * u, PB[1] + db[1] * u, PB[2] + db[2] * u];
-    return { n, pts: [{ p: [(CA[0] + CB[0]) / 2, (CA[1] + CB[1]) / 2, (CA[2] + CB[2]) / 2], depth: -edgeSep }] };
+    const rx = pax - pbx, ry = pay - pby, rz = paz - pbz;
+    const bb = da[0] * db[0] + da[1] * db[1] + da[2] * db[2];
+    const d = da[0] * rx + da[1] * ry + da[2] * rz, e = db[0] * rx + db[1] * ry + db[2] * rz;
+    const den = 1 - bb * bb;
+    let s = (bb * e - d) / den, u = (e - bb * d) / den;
+    s = Math.max(-eA[ei], Math.min(eA[ei], s));
+    u = Math.max(-eB[ej], Math.min(eB[ej], u));
+    MF.n[0] = nx; MF.n[1] = ny; MF.n[2] = nz;
+    MF.cnt = 1;
+    MF.p[0] = (pax + da[0] * s + pbx + db[0] * u) * 0.5;
+    MF.p[1] = (pay + da[1] * s + pby + db[1] * u) * 0.5;
+    MF.p[2] = (paz + da[2] * s + pbz + db[2] * u) * 0.5;
+    MF.depth[0] = -edgeSep;
+    return true;
   }
-  // face contact: reference face on R, incident face on I
+  // face contact: clip the incident face against the side planes of the reference face
   const refIsA = faceIdx < 3;
   const R = refIsA ? A : B, I = refIsA ? B : A;
   const k = refIsA ? faceIdx : faceIdx - 3;
-  const rel = refIsA ? t : [-t[0], -t[1], -t[2]]; // from R to I
-  const sgn = v3.dot(R.ax[k], rel) >= 0 ? 1 : -1;
-  const nRef = v3.scale(R.ax[k], sgn);
-  // incident face: the one most anti-parallel to nRef
+  const rx0 = refIsA ? tx : -tx, ry0 = refIsA ? ty : -ty, rz0 = refIsA ? tz : -tz;
+  const rk = R.ax[k];
+  const sg = rk[0] * rx0 + rk[1] * ry0 + rk[2] * rz0 >= 0 ? 1 : -1;
+  const nrx = rk[0] * sg, nry = rk[1] * sg, nrz = rk[2] * sg;
   let ki = 0, bestD = 0;
   for (let m = 0; m < 3; m++) {
-    const dd = v3.dot(I.ax[m], nRef);
+    const ia = I.ax[m];
+    const dd = ia[0] * nrx + ia[1] * nry + ia[2] * nrz;
     if (Math.abs(dd) > Math.abs(bestD)) { bestD = dd; ki = m; }
   }
-  const nInc = v3.scale(I.ax[ki], bestD > 0 ? -1 : 1);
-  const ic = [I.p[0] + nInc[0] * I.e[ki], I.p[1] + nInc[1] * I.e[ki], I.p[2] + nInc[2] * I.e[ki]];
+  const ni = bestD > 0 ? -1 : 1;
+  const iax = I.ax[ki];
+  const icx = I.p[0] + iax[0] * ni * I.e[ki], icy = I.p[1] + iax[1] * ni * I.e[ki], icz = I.p[2] + iax[2] * ni * I.e[ki];
   const k1 = (ki + 1) % 3, k2 = (ki + 2) % 3;
-  const u1 = v3.scale(I.ax[k1], I.e[k1]), u2 = v3.scale(I.ax[k2], I.e[k2]);
-  let poly = [
-    [ic[0] + u1[0] + u2[0], ic[1] + u1[1] + u2[1], ic[2] + u1[2] + u2[2]],
-    [ic[0] - u1[0] + u2[0], ic[1] - u1[1] + u2[1], ic[2] - u1[2] + u2[2]],
-    [ic[0] - u1[0] - u2[0], ic[1] - u1[1] - u2[1], ic[2] - u1[2] - u2[2]],
-    [ic[0] + u1[0] - u2[0], ic[1] + u1[1] - u2[1], ic[2] + u1[2] - u2[2]],
-  ];
+  const u1 = I.ax[k1], u2 = I.ax[k2], e1 = I.e[k1], e2 = I.e[k2];
+  const w = polyA;
+  for (let c = 0; c < 4; c++) {
+    const s1 = c === 0 || c === 3 ? 1 : -1, s2 = c < 2 ? 1 : -1;
+    w[c * 3] = icx + s1 * u1[0] * e1 + s2 * u2[0] * e2;
+    w[c * 3 + 1] = icy + s1 * u1[1] * e1 + s2 * u2[1] * e2;
+    w[c * 3 + 2] = icz + s1 * u1[2] * e1 + s2 * u2[2] * e2;
+  }
+  let src = polyA, dst = polyB, cnt = 4;
   const ka = (k + 1) % 3, kb = (k + 2) % 3;
-  for (const kk of [ka, kb]) {
+  for (let q = 0; q < 2 && cnt; q++) {
+    const kk = q === 0 ? ka : kb;
     const n = R.ax[kk];
-    const off = v3.dot(n, R.p);
-    poly = clipPoly(poly, n, off + R.e[kk]);
-    if (!poly.length) return null;
-    poly = clipPoly(poly, [-n[0], -n[1], -n[2]], -off + R.e[kk]);
-    if (!poly.length) return null;
+    const off = n[0] * R.p[0] + n[1] * R.p[1] + n[2] * R.p[2];
+    cnt = clipPlane(src, cnt, dst, n[0], n[1], n[2], off + R.e[kk]);
+    let tmp = src; src = dst; dst = tmp;
+    if (!cnt) return false;
+    cnt = clipPlane(src, cnt, dst, -n[0], -n[1], -n[2], -off + R.e[kk]);
+    tmp = src; src = dst; dst = tmp;
+    if (!cnt) return false;
   }
-  const planeD = v3.dot(nRef, R.p) + R.e[k];
-  let pts = [];
-  for (const p of poly) {
-    const sep = v3.dot(nRef, p) - planeD; // negative when penetrating
-    if (sep <= MARGIN) pts.push({ p: [p[0] - nRef[0] * sep * 0.5, p[1] - nRef[1] * sep * 0.5, p[2] - nRef[2] * sep * 0.5], depth: -sep });
+  const planeD = nrx * R.p[0] + nry * R.p[1] + nrz * R.p[2] + R.e[k];
+  let kc = 0;
+  for (let i = 0; i < cnt; i++) {
+    const px = src[i * 3], py = src[i * 3 + 1], pz = src[i * 3 + 2];
+    const sp = nrx * px + nry * py + nrz * pz - planeD;
+    if (sp <= MARGIN) {
+      cand.p[kc * 3] = px - nrx * sp * 0.5; cand.p[kc * 3 + 1] = py - nry * sp * 0.5; cand.p[kc * 3 + 2] = pz - nrz * sp * 0.5;
+      cand.d[kc] = -sp;
+      kc++;
+    }
   }
-  if (!pts.length) return null;
-  pts = reduce4(pts);
-  const n = refIsA ? nRef : [-nRef[0], -nRef[1], -nRef[2]];
-  return { n, pts };
+  if (!kc) return false;
+  if (refIsA) { MF.n[0] = nrx; MF.n[1] = nry; MF.n[2] = nrz; } else { MF.n[0] = -nrx; MF.n[1] = -nry; MF.n[2] = -nrz; }
+  if (kc > 4) reduceTo4(kc);
+  else {
+    MF.cnt = kc;
+    for (let i = 0; i < kc; i++) { MF.p[i * 3] = cand.p[i * 3]; MF.p[i * 3 + 1] = cand.p[i * 3 + 1]; MF.p[i * 3 + 2] = cand.p[i * 3 + 2]; MF.depth[i] = cand.d[i]; }
+  }
+  return true;
+}
+
+// Convenience wrapper for tests: { n, pts:[{p, depth}] } or null.
+export function boxBox(A, B) {
+  if (!satBoxBox(A, B)) return null;
+  const pts = [];
+  for (let i = 0; i < MF.cnt; i++) pts.push({ p: [MF.p[i * 3], MF.p[i * 3 + 1], MF.p[i * 3 + 2]], depth: MF.depth[i] });
+  return { n: [MF.n[0], MF.n[1], MF.n[2]], pts };
 }
 
 // ---------------------------------------------------------------- world
 export class World {
-  constructor({ gravity = [0, -30, 0], iterations = 10 } = {}) {
+  constructor({ gravity = [0, -30, 0] } = {}) {
     this.gravity = gravity;
-    this.iterations = iterations;
     this.bodies = [];
-    this.cache = new Map(); // pair key -> previous contacts (warm start)
-    this.contacts = [];
     this.asleep = false;
     this.quiet = 0;
-    this.beta = 0.2;
     this.slop = 0.004;
     this.linDamp = 0.02;
     this.angDamp = 0.08;
@@ -248,34 +324,41 @@ export class World {
     this.sleepEnabled = true;
     this.preStep = null;
     this.substeps = 4;
-    this.contactHertz = 30;
+    this.contactHertz = 40;
     this.contactDamping = 10;
     this.pushMax = 3;
     this._cap = 0;
     this._ccap = 0;
+    this.nc = 0;
+    this.pc = 0; // previous contacts (warm start)
+    this.pairMap = new Map();
+    this.prevPairMap = new Map();
     this.layout(64);
+    this.ensureContacts(512);
+  }
+  get contacts() {
+    return { length: this.nc };
   }
   // velocities of all bodies live in one typed array: body.v / body.w are views into it
   layout(cap) {
-    const old = this.V;
+    const oldBodies = this.bodies.map((b) => [b.v.slice ? Array.from(b.v) : [0, 0, 0], Array.from(b.w)]);
     this.V = new Float64Array(cap * 6);
     this._cap = cap;
     this.DP = new Float64Array(cap * 3);
     this.DR = new Float64Array(cap * 9);
     this.QD = new Float64Array(cap * 4);
     this.bodies.forEach((b, i) => {
-      if (old) this.V.set(old.subarray(0, 0)); // (values are copied per body below)
-      const v = b.v, w = b.w;
-      const vv = [v[0], v[1], v[2]], ww = [w[0], w[1], w[2]];
       b.v = this.V.subarray(i * 6, i * 6 + 3);
       b.w = this.V.subarray(i * 6 + 3, i * 6 + 6);
-      b.v.set(vv);
-      b.w.set(ww);
+      b.v.set(oldBodies[i][0]);
+      b.w.set(oldBodies[i][1]);
     });
   }
   reindex() {
-    if (this.bodies.length > this._cap) return this.layout(this.bodies.length * 2);
-    this.layout(this._cap);
+    this.layout(Math.max(this._cap, this.bodies.length * 2));
+    this.pairMap.clear();
+    this.prevPairMap.clear();
+    this.pc = 0;
   }
   add(b) {
     this.bodies.push(b);
@@ -295,19 +378,33 @@ export class World {
   }
   ensureContacts(n) {
     if (n <= this._ccap) return;
-    this._ccap = Math.max(n, this._ccap * 2, 256);
-    this.D = new Float64Array(this._ccap * 45);
-    this.M = new Float64Array(this._ccap * 3);
-    this.J = new Float64Array(this._ccap * 3);
-    this.S0 = new Float64Array(this._ccap);
-    this.RA = new Float64Array(this._ccap * 3);
-    this.RB = new Float64Array(this._ccap * 3);
-    this.MU = new Float64Array(this._ccap);
-    this.CA = new Int32Array(this._ccap);
-    this.CB = new Int32Array(this._ccap);
-    this.IMA = new Float64Array(this._ccap);
-    this.IMB = new Float64Array(this._ccap);
+    const cap = Math.max(n, this._ccap * 2, 256);
+    const grow = (Ctor, len, old) => {
+      const a = new Ctor(cap * len);
+      if (old) a.set(old.subarray(0, Math.min(old.length, a.length)));
+      return a;
+    };
+    this.D = grow(Float64Array, 45, this.D);
+    this.M = grow(Float64Array, 3, this.M);
+    this.J = grow(Float64Array, 3, this.J);
+    this.S0 = grow(Float64Array, 1, this.S0);
+    this.RA = grow(Float64Array, 3, this.RA);
+    this.RB = grow(Float64Array, 3, this.RB);
+    this.MU = grow(Float64Array, 1, this.MU);
+    this.CA = grow(Int32Array, 1, this.CA);
+    this.CB = grow(Int32Array, 1, this.CB);
+    this.IMA = grow(Float64Array, 1, this.IMA);
+    this.IMB = grow(Float64Array, 1, this.IMB);
+    this.VN0 = grow(Float64Array, 1, this.VN0);
+    // warm-start memory: previous frame's local anchors (on A), impulses and pair
+    this.LA = grow(Float64Array, 3, this.LA);
+    this.PJ = grow(Float64Array, 3, this.PJ);
+    this.PLA = grow(Float64Array, 3, this.PLA);
+    this.PKEY = grow(Float64Array, 1, this.PKEY);
+    this.KEY = grow(Float64Array, 1, this.KEY);
+    this._ccap = cap;
   }
+
   step(dt) {
     if (this.asleep) return;
     this.time += dt;
@@ -316,90 +413,108 @@ export class World {
     const bodies = this.bodies;
     const n = bodies.length;
     for (let i = 0; i < n; i++) bodies[i].idx = i;
-    // broadphase + narrowphase
-    const aabbs = new Array(n);
+    // ---- broadphase + narrowphase -> contact arrays
+    const aabb = this._aabb || (this._aabb = new Float64Array(0));
+    if (aabb.length < n * 6) this._aabb = new Float64Array(n * 12);
+    const AB = this._aabb;
     for (let i = 0; i < n; i++) {
       const b = bodies[i];
-      const ax = b.ax, e = b.e;
+      const ax = b.ax, e = b.e, o = i * 6;
       const rx = e[0] * Math.abs(ax[0][0]) + e[1] * Math.abs(ax[1][0]) + e[2] * Math.abs(ax[2][0]);
       const ry = e[0] * Math.abs(ax[0][1]) + e[1] * Math.abs(ax[1][1]) + e[2] * Math.abs(ax[2][1]);
       const rz = e[0] * Math.abs(ax[0][2]) + e[1] * Math.abs(ax[1][2]) + e[2] * Math.abs(ax[2][2]);
-      aabbs[i] = [b.p[0] - rx, b.p[1] - ry, b.p[2] - rz, b.p[0] + rx, b.p[1] + ry, b.p[2] + rz];
+      AB[o] = b.p[0] - rx - MARGIN; AB[o + 1] = b.p[1] - ry - MARGIN; AB[o + 2] = b.p[2] - rz - MARGIN;
+      AB[o + 3] = b.p[0] + rx + MARGIN; AB[o + 4] = b.p[1] + ry + MARGIN; AB[o + 5] = b.p[2] + rz + MARGIN;
     }
-    const contacts = [];
-    const newCache = new Map();
+    this.ensureContacts(n * 12);
+    // swap warm-start memory
+    const PJ = this.PJ, PLA = this.PLA, PKEY = this.PKEY, pc = this.pc;
+    const oldMap = this.pairMap;
+    this.pairMap = this.prevPairMap;
+    this.pairMap.clear();
+    this.prevPairMap = oldMap;
+    const { D, M, J, MU, CA, CB, IMA, IMB, V, S0, RA, RB, LA, KEY, VN0 } = this;
+    let nc = 0;
     for (let i = 0; i < n; i++) {
       const A = bodies[i];
-      const a = aabbs[i];
+      const o = i * 6;
       for (let j = i + 1; j < n; j++) {
         const B = bodies[j];
         if (A.invM === 0 && B.invM === 0) continue;
-        const c = aabbs[j];
-        if (a[0] > c[3] + MARGIN || c[0] > a[3] + MARGIN || a[1] > c[4] + MARGIN || c[1] > a[4] + MARGIN || a[2] > c[5] + MARGIN || c[2] > a[5] + MARGIN) continue;
-        const m = boxBox(A, B);
-        if (!m) continue;
+        const q = j * 6;
+        if (AB[o] > AB[q + 3] || AB[q] > AB[o + 3] || AB[o + 1] > AB[q + 4] || AB[q + 1] > AB[o + 4] || AB[o + 2] > AB[q + 5] || AB[q + 2] > AB[o + 5]) continue;
+        if (!satBoxBox(A, B)) continue;
+        if (nc + MF.cnt > this._ccap) this.ensureContacts(nc + MF.cnt + 64);
         const key = A.id * 100000 + B.id;
-        const old = this.cache.get(key);
-        const list = [];
+        const pm = oldMap.get(key);
         const mu = Math.sqrt(A.friction * B.friction);
-        for (const pt of m.pts) {
-          const la = A.toLocal(pt.p);
-          const ct = { A, B, n: m.n, p: pt.p, depth: pt.depth, la, mu, jn: 0, j1: 0, j2: 0 };
-          if (old) {
-            let bd = 0.0036; // 0.06^2
-            for (const o of old) {
-              const w = A.toWorld(o.la);
-              const d = (w[0] - pt.p[0]) ** 2 + (w[1] - pt.p[1]) ** 2 + (w[2] - pt.p[2]) ** 2;
-              if (d < bd) { bd = d; ct.jn = o.jn; ct.j1 = o.j1; ct.j2 = o.j2; }
+        this.pairMap.set(key, nc);
+        for (let c = 0; c < MF.cnt; c++) {
+          const px = MF.p[c * 3], py = MF.p[c * 3 + 1], pz = MF.p[c * 3 + 2];
+          // anchor in A's frame (for matching next frame)
+          const dx = px - A.p[0], dy = py - A.p[1], dz = pz - A.p[2];
+          const lx = dx * A.ax[0][0] + dy * A.ax[0][1] + dz * A.ax[0][2];
+          const ly = dx * A.ax[1][0] + dy * A.ax[1][1] + dz * A.ax[1][2];
+          const lz = dx * A.ax[2][0] + dy * A.ax[2][1] + dz * A.ax[2][2];
+          const k3 = nc * 3;
+          LA[k3] = lx; LA[k3 + 1] = ly; LA[k3 + 2] = lz;
+          J[k3] = J[k3 + 1] = J[k3 + 2] = 0;
+          if (pm !== undefined) {
+            let bd = 0.0036;
+            for (let m = pm; m < pc && PKEY[m] === key; m++) {
+              const ex = PLA[m * 3] - lx, ey = PLA[m * 3 + 1] - ly, ez = PLA[m * 3 + 2] - lz;
+              const dd = ex * ex + ey * ey + ez * ez;
+              if (dd < bd) { bd = dd; J[k3] = PJ[m * 3]; J[k3 + 1] = PJ[m * 3 + 1]; J[k3 + 2] = PJ[m * 3 + 2]; }
             }
           }
-          list.push(ct);
-          contacts.push(ct);
+          KEY[nc] = key;
+          // rows: normal, tangent 1, tangent 2
+          const nx = MF.n[0], ny = MF.n[1], nz = MF.n[2];
+          let t1x, t1y, t1z;
+          if (Math.abs(nx) > 0.7) { t1x = -nz; t1y = 0; t1z = nx; } else { t1x = 0; t1y = nz; t1z = -ny; }
+          const tl = Math.hypot(t1x, t1y, t1z);
+          t1x /= tl; t1y /= tl; t1z /= tl;
+          const t2x = ny * t1z - nz * t1y, t2y = nz * t1x - nx * t1z, t2z = nx * t1y - ny * t1x;
+          const rax = px - A.p[0], ray = py - A.p[1], raz = pz - A.p[2];
+          const rbx = px - B.p[0], rby = py - B.p[1], rbz = pz - B.p[2];
+          RA[k3] = rax; RA[k3 + 1] = ray; RA[k3 + 2] = raz;
+          RB[k3] = rbx; RB[k3 + 1] = rby; RB[k3 + 2] = rbz;
+          const base = nc * 45;
+          for (let r = 0; r < 3; r++) {
+            const dX = r === 0 ? nx : r === 1 ? t1x : t2x, dY = r === 0 ? ny : r === 1 ? t1y : t2y, dZ = r === 0 ? nz : r === 1 ? t1z : t2z;
+            const o2 = base + r * 15;
+            const cax = ray * dZ - raz * dY, cay = raz * dX - rax * dZ, caz = rax * dY - ray * dX;
+            const cbx = rby * dZ - rbz * dY, cby = rbz * dX - rbx * dZ, cbz = rbx * dY - rby * dX;
+            D[o2] = dX; D[o2 + 1] = dY; D[o2 + 2] = dZ;
+            D[o2 + 3] = cax; D[o2 + 4] = cay; D[o2 + 5] = caz;
+            D[o2 + 6] = cbx; D[o2 + 7] = cby; D[o2 + 8] = cbz;
+            let kk = A.invM + B.invM;
+            if (A.invM > 0) {
+              const ia = A.invIw(cax, cay, caz);
+              D[o2 + 9] = ia[0]; D[o2 + 10] = ia[1]; D[o2 + 11] = ia[2];
+              kk += ia[0] * cax + ia[1] * cay + ia[2] * caz;
+            } else { D[o2 + 9] = D[o2 + 10] = D[o2 + 11] = 0; }
+            if (B.invM > 0) {
+              const ib = B.invIw(cbx, cby, cbz);
+              D[o2 + 12] = ib[0]; D[o2 + 13] = ib[1]; D[o2 + 14] = ib[2];
+              kk += ib[0] * cbx + ib[1] * cby + ib[2] * cbz;
+            } else { D[o2 + 12] = D[o2 + 13] = D[o2 + 14] = 0; }
+            M[k3 + r] = kk > 0 ? 1 / kk : 0;
+          }
+          CA[nc] = i * 6;
+          CB[nc] = j * 6;
+          IMA[nc] = A.invM;
+          IMB[nc] = B.invM;
+          MU[nc] = mu;
+          S0[nc] = -MF.depth[c];
+          nc++;
         }
-        newCache.set(key, list);
       }
     }
-    this.contacts = contacts;
-    const nc = contacts.length;
-    this.ensureContacts(nc);
-    const { D, M, J, MU, CA, CB, IMA, IMB, V, S0, RA, RB } = this;
-    // ---- contact set-up (once per frame)
-    for (let k = 0; k < nc; k++) {
-      const c = contacts[k];
-      const { A, B, n } = c;
-      const ra = [c.p[0] - A.p[0], c.p[1] - A.p[1], c.p[2] - A.p[2]];
-      const rb = [c.p[0] - B.p[0], c.p[1] - B.p[1], c.p[2] - B.p[2]];
-      const ref = Math.abs(n[0]) > 0.7 ? [0, 1, 0] : [1, 0, 0];
-      let t1 = v3.cross(n, ref);
-      const l = v3.len(t1);
-      t1 = [t1[0] / l, t1[1] / l, t1[2] / l];
-      const t2 = v3.cross(n, t1);
-      const dirs = [n, t1, t2];
-      const base = k * 45;
-      for (let r = 0; r < 3; r++) {
-        const dd = dirs[r];
-        const o = base + r * 15;
-        const rax = v3.cross(ra, dd), rbx = v3.cross(rb, dd);
-        const ia = A.invIw(rax), ib = B.invIw(rbx);
-        D[o] = dd[0]; D[o + 1] = dd[1]; D[o + 2] = dd[2];
-        D[o + 3] = rax[0]; D[o + 4] = rax[1]; D[o + 5] = rax[2];
-        D[o + 6] = rbx[0]; D[o + 7] = rbx[1]; D[o + 8] = rbx[2];
-        D[o + 9] = ia[0]; D[o + 10] = ia[1]; D[o + 11] = ia[2];
-        D[o + 12] = ib[0]; D[o + 13] = ib[1]; D[o + 14] = ib[2];
-        const kk = A.invM + B.invM + v3.dot(ia, rax) + v3.dot(ib, rbx);
-        M[k * 3 + r] = kk > 0 ? 1 / kk : 0;
-      }
-      CA[k] = A.idx;
-      CB[k] = B.idx;
-      IMA[k] = A.invM;
-      IMB[k] = B.invM;
-      MU[k] = c.mu;
-      S0[k] = -c.depth;
-      RA[k * 3] = ra[0]; RA[k * 3 + 1] = ra[1]; RA[k * 3 + 2] = ra[2];
-      RB[k * 3] = rb[0]; RB[k * 3 + 1] = rb[1]; RB[k * 3 + 2] = rb[2];
-      J[k * 3] = c.jn; J[k * 3 + 1] = c.j1; J[k * 3 + 2] = c.j2;
-      c.vn0 = rowVel(D, base, V, A.idx * 6, B.idx * 6);
-    }
+    this.nc = nc;
+    // approach speed before solving (impact events)
+    for (let k = 0; k < nc; k++) VN0[k] = rowVel(D, k * 45, V, CA[k], CB[k]);
+
     // ---- sub-stepped soft-constraint solver
     const sub = this.substeps;
     const h = dt / sub, invH = 1 / h;
@@ -408,105 +523,136 @@ export class World {
     const omega = 2 * Math.PI * hertz;
     const a1 = 2 * zeta + h * omega, a2 = h * omega * a1, a3 = 1 / (1 + a2);
     const biasRate = omega / a1, massScale = a2 * a3, impulseScale = a3;
-    const pushMax = this.pushMax;
+    const pushMax = this.pushMax, slop = this.slop;
     const DP = this.DP, DR = this.DR, QD = this.QD;
     DP.fill(0, 0, n * 3);
-    for (let i = 0; i < n; i++) { QD[i * 4] = 0; QD[i * 4 + 1] = 0; QD[i * 4 + 2] = 0; QD[i * 4 + 3] = 1; const o = i * 9; DR.fill(0, o, o + 9); DR[o] = DR[o + 4] = DR[o + 8] = 1; }
-    const solveAll = (useBias) => {
+    for (let i = 0; i < n; i++) {
+      QD[i * 4] = 0; QD[i * 4 + 1] = 0; QD[i * 4 + 2] = 0; QD[i * 4 + 3] = 1;
+      const o = i * 9;
+      DR[o] = 1; DR[o + 1] = 0; DR[o + 2] = 0; DR[o + 3] = 0; DR[o + 4] = 1; DR[o + 5] = 0; DR[o + 6] = 0; DR[o + 7] = 0; DR[o + 8] = 1;
+    }
+    const solveAll = (useBias, warm) => {
       for (let ii = 0; ii < nc; ii++) {
         const k = useBias ? ii : nc - 1 - ii;
-        const ia = CA[k], ib = CB[k];
-        const a = ia * 6, b = ib * 6, imA = IMA[k], imB = IMB[k], base = k * 45, k3 = k * 3;
-        // friction rows first (limited by the normal impulse of the previous pass)
-        const maxF = MU[k] * J[k3];
-        let l = -M[k3 + 1] * rowVel(D, base + 15, V, a, b);
-        let nj = J[k3 + 1] + l;
-        nj = nj > maxF ? maxF : nj < -maxF ? -maxF : nj;
-        l = nj - J[k3 + 1];
-        J[k3 + 1] = nj;
-        if (l !== 0) rowApply(D, base + 15, l, V, a, b, imA, imB);
-        l = -M[k3 + 2] * rowVel(D, base + 30, V, a, b);
-        nj = J[k3 + 2] + l;
-        nj = nj > maxF ? maxF : nj < -maxF ? -maxF : nj;
-        l = nj - J[k3 + 2];
-        J[k3 + 2] = nj;
-        if (l !== 0) rowApply(D, base + 30, l, V, a, b, imA, imB);
-        // normal row: current separation from the accumulated body displacement
-        const nx = D[base], ny = D[base + 1], nz = D[base + 2];
-        const pa = ia * 3, pb = ib * 3, ra9 = ia * 9, rb9 = ib * 9, k3r = k * 3;
-        const rax = RA[k3r], ray = RA[k3r + 1], raz = RA[k3r + 2], rbx = RB[k3r], rby = RB[k3r + 1], rbz = RB[k3r + 2];
-        const dx = DP[pb] - DP[pa] + (DR[rb9] * rbx + DR[rb9 + 1] * rby + DR[rb9 + 2] * rbz - rbx) - (DR[ra9] * rax + DR[ra9 + 1] * ray + DR[ra9 + 2] * raz - rax);
-        const dy = DP[pb + 1] - DP[pa + 1] + (DR[rb9 + 3] * rbx + DR[rb9 + 4] * rby + DR[rb9 + 5] * rbz - rby) - (DR[ra9 + 3] * rax + DR[ra9 + 4] * ray + DR[ra9 + 5] * raz - ray);
-        const dz = DP[pb + 2] - DP[pa + 2] + (DR[rb9 + 6] * rbx + DR[rb9 + 7] * rby + DR[rb9 + 8] * rbz - rbz) - (DR[ra9 + 6] * rax + DR[ra9 + 7] * ray + DR[ra9 + 8] * raz - raz);
-        const sep = S0[k] + nx * dx + ny * dy + nz * dz;
-        let bias = 0, ms = 1, is = 0;
-        if (sep > 0) bias = sep * invH;
-        else if (useBias) {
-          bias = Math.max(biasRate * (sep + this.slop), -pushMax);
-          if (bias > 0) bias = 0;
-          ms = massScale;
-          is = impulseScale;
+        const a = CA[k], b = CB[k], imA = IMA[k], imB = IMB[k], base = k * 45, k3 = k * 3;
+        // local copies of the two velocities
+        let avx = V[a], avy = V[a + 1], avz = V[a + 2], awx = V[a + 3], awy = V[a + 4], awz = V[a + 5];
+        let bvx = V[b], bvy = V[b + 1], bvz = V[b + 2], bwx = V[b + 3], bwy = V[b + 4], bwz = V[b + 5];
+        if (warm) {
+          // warm start: apply the accumulated impulses
+          for (let r = 0; r < 3; r++) {
+            const l = J[k3 + r];
+            if (l === 0) continue;
+            const o = base + r * 15;
+            const ka = l * imA, kb = l * imB;
+            avx -= D[o] * ka; avy -= D[o + 1] * ka; avz -= D[o + 2] * ka;
+            awx -= D[o + 9] * l; awy -= D[o + 10] * l; awz -= D[o + 11] * l;
+            bvx += D[o] * kb; bvy += D[o + 1] * kb; bvz += D[o + 2] * kb;
+            bwx += D[o + 12] * l; bwy += D[o + 13] * l; bwz += D[o + 14] * l;
+          }
+        } else {
+          // friction rows first (limited by the normal impulse of the previous pass)
+          const maxF = MU[k] * J[k3];
+          for (let r = 1; r < 3; r++) {
+            const o = base + r * 15;
+            const vr = D[o] * (bvx - avx) + D[o + 1] * (bvy - avy) + D[o + 2] * (bvz - avz) + bwx * D[o + 6] + bwy * D[o + 7] + bwz * D[o + 8] - awx * D[o + 3] - awy * D[o + 4] - awz * D[o + 5];
+            let nj = J[k3 + r] - M[k3 + r] * vr;
+            nj = nj > maxF ? maxF : nj < -maxF ? -maxF : nj;
+            const l = nj - J[k3 + r];
+            J[k3 + r] = nj;
+            const ka = l * imA, kb = l * imB;
+            avx -= D[o] * ka; avy -= D[o + 1] * ka; avz -= D[o + 2] * ka;
+            awx -= D[o + 9] * l; awy -= D[o + 10] * l; awz -= D[o + 11] * l;
+            bvx += D[o] * kb; bvy += D[o + 1] * kb; bvz += D[o + 2] * kb;
+            bwx += D[o + 12] * l; bwy += D[o + 13] * l; bwz += D[o + 14] * l;
+          }
+          // normal row: current separation from the accumulated body displacement
+          const ia = a / 6, ib = b / 6;
+          const nx = D[base], ny = D[base + 1], nz = D[base + 2];
+          const pa = ia * 3, pb = ib * 3, ra9 = ia * 9, rb9 = ib * 9;
+          const rax = RA[k3], ray = RA[k3 + 1], raz = RA[k3 + 2], rbx = RB[k3], rby = RB[k3 + 1], rbz = RB[k3 + 2];
+          const dx = DP[pb] - DP[pa] + (DR[rb9] * rbx + DR[rb9 + 1] * rby + DR[rb9 + 2] * rbz - rbx) - (DR[ra9] * rax + DR[ra9 + 1] * ray + DR[ra9 + 2] * raz - rax);
+          const dy = DP[pb + 1] - DP[pa + 1] + (DR[rb9 + 3] * rbx + DR[rb9 + 4] * rby + DR[rb9 + 5] * rbz - rby) - (DR[ra9 + 3] * rax + DR[ra9 + 4] * ray + DR[ra9 + 5] * raz - ray);
+          const dz = DP[pb + 2] - DP[pa + 2] + (DR[rb9 + 6] * rbx + DR[rb9 + 7] * rby + DR[rb9 + 8] * rbz - rbz) - (DR[ra9 + 6] * rax + DR[ra9 + 7] * ray + DR[ra9 + 8] * raz - raz);
+          const sep = S0[k] + nx * dx + ny * dy + nz * dz;
+          let bias = 0, ms = 1, is = 0;
+          if (sep > 0) bias = sep * invH;
+          else if (useBias) {
+            bias = Math.max(biasRate * (sep + slop), -pushMax);
+            if (bias > 0) bias = 0;
+            ms = massScale;
+            is = impulseScale;
+          }
+          const vn = nx * (bvx - avx) + ny * (bvy - avy) + nz * (bvz - avz) + bwx * D[base + 6] + bwy * D[base + 7] + bwz * D[base + 8] - awx * D[base + 3] - awy * D[base + 4] - awz * D[base + 5];
+          let nj = J[k3] - M[k3] * ms * (vn + bias) - is * J[k3];
+          if (nj < 0) nj = 0;
+          const l = nj - J[k3];
+          J[k3] = nj;
+          const ka = l * imA, kb = l * imB;
+          avx -= nx * ka; avy -= ny * ka; avz -= nz * ka;
+          awx -= D[base + 9] * l; awy -= D[base + 10] * l; awz -= D[base + 11] * l;
+          bvx += nx * kb; bvy += ny * kb; bvz += nz * kb;
+          bwx += D[base + 12] * l; bwy += D[base + 13] * l; bwz += D[base + 14] * l;
         }
-        l = -M[k3] * ms * (rowVel(D, base, V, a, b) + bias) - is * J[k3];
-        nj = J[k3] + l;
-        if (nj < 0) nj = 0;
-        l = nj - J[k3];
-        J[k3] = nj;
-        if (l !== 0) rowApply(D, base, l, V, a, b, imA, imB);
+        if (imA !== 0) { V[a] = avx; V[a + 1] = avy; V[a + 2] = avz; V[a + 3] = awx; V[a + 4] = awy; V[a + 5] = awz; }
+        if (imB !== 0) { V[b] = bvx; V[b + 1] = bvy; V[b + 2] = bvz; V[b + 3] = bwx; V[b + 4] = bwy; V[b + 5] = bwz; }
       }
     };
     const ld = 1 / (1 + this.linDamp * h);
+    const gx = g[0] * h, gy = g[1] * h, gz = g[2] * h;
     for (let sIdx = 0; sIdx < sub; sIdx++) {
-      // integrate velocities
       for (let i = 0; i < n; i++) {
         const bd = bodies[i];
         if (bd.invM === 0) continue;
         const o = i * 6;
-        V[o] += (g[0] + bd.f[0] * bd.invM) * h;
-        V[o + 1] += (g[1] + bd.f[1] * bd.invM) * h;
-        V[o + 2] += (g[2] + bd.f[2] * bd.invM) * h;
+        const im = bd.invM * h;
+        V[o] = (V[o] + gx + bd.f[0] * im) * ld;
+        V[o + 1] = (V[o + 1] + gy + bd.f[1] * im) * ld;
+        V[o + 2] = (V[o + 2] + gz + bd.f[2] * im) * ld;
         const ad = 1 / (1 + (this.angDamp + bd.angDamp) * h);
-        V[o] *= ld; V[o + 1] *= ld; V[o + 2] *= ld;
         V[o + 3] *= ad; V[o + 4] *= ad; V[o + 5] *= ad;
       }
-      // warm start
-      for (let k = 0; k < nc; k++) {
-        const a = CA[k] * 6, b = CB[k] * 6, base = k * 45, k3 = k * 3, imA = IMA[k], imB = IMB[k];
-        if (J[k3] !== 0) rowApply(D, base, J[k3], V, a, b, imA, imB);
-        if (J[k3 + 1] !== 0) rowApply(D, base + 15, J[k3 + 1], V, a, b, imA, imB);
-        if (J[k3 + 2] !== 0) rowApply(D, base + 30, J[k3 + 2], V, a, b, imA, imB);
-      }
-      solveAll(true);
-      // integrate positions (as displacements from the start of the frame)
+      solveAll(true, true);
+      solveAll(true, false);
       for (let i = 0; i < n; i++) {
         const bd = bodies[i];
         if (bd.invM === 0) continue;
         const o = i * 6;
-        const wx = V[o + 3], wy = V[o + 4], wz = V[o + 5];
-        const wl = Math.hypot(wx, wy, wz);
-        if (wl > 30) { const sc = 30 / wl; V[o + 3] *= sc; V[o + 4] *= sc; V[o + 5] *= sc; }
+        const ux = V[o + 3], uy = V[o + 4], uz = V[o + 5];
+        const wl2 = ux * ux + uy * uy + uz * uz;
+        if (wl2 > 900) { const sc = 30 / Math.sqrt(wl2); V[o + 3] *= sc; V[o + 4] *= sc; V[o + 5] *= sc; }
         DP[i * 3] += V[o] * h; DP[i * 3 + 1] += V[o + 1] * h; DP[i * 3 + 2] += V[o + 2] * h;
         const q = i * 4;
         const x = QD[q], y = QD[q + 1], z = QD[q + 2], w = QD[q + 3];
-        const hw = 0.5 * h, ux = V[o + 3], uy = V[o + 4], uz = V[o + 5];
-        let nx = x + hw * (ux * w + uy * z - uz * y), ny = y + hw * (uy * w + uz * x - ux * z), nz = z + hw * (uz * w + ux * y - uy * x), nw = w + hw * (-ux * x - uy * y - uz * z);
-        const ln = 1 / Math.hypot(nx, ny, nz, nw);
-        nx *= ln; ny *= ln; nz *= ln; nw *= ln;
-        QD[q] = nx; QD[q + 1] = ny; QD[q + 2] = nz; QD[q + 3] = nw;
+        const hw = 0.5 * h, vx = V[o + 3], vy = V[o + 4], vz = V[o + 5];
+        let qx = x + hw * (vx * w + vy * z - vz * y), qy = y + hw * (vy * w + vz * x - vx * z), qz = z + hw * (vz * w + vx * y - vy * x), qw = w + hw * (-vx * x - vy * y - vz * z);
+        const ln = 1 / Math.sqrt(qx * qx + qy * qy + qz * qz + qw * qw);
+        qx *= ln; qy *= ln; qz *= ln; qw *= ln;
+        QD[q] = qx; QD[q + 1] = qy; QD[q + 2] = qz; QD[q + 3] = qw;
         const r = i * 9;
-        const xx = nx * nx, yy = ny * ny, zz = nz * nz, xy = nx * ny, xz = nx * nz, yz = ny * nz, wx2 = nw * nx, wy2 = nw * ny, wz2 = nw * nz;
-        DR[r] = 1 - 2 * (yy + zz); DR[r + 1] = 2 * (xy - wz2); DR[r + 2] = 2 * (xz + wy2);
-        DR[r + 3] = 2 * (xy + wz2); DR[r + 4] = 1 - 2 * (xx + zz); DR[r + 5] = 2 * (yz - wx2);
-        DR[r + 6] = 2 * (xz - wy2); DR[r + 7] = 2 * (yz + wx2); DR[r + 8] = 1 - 2 * (xx + yy);
+        const xx = qx * qx, yy = qy * qy, zz = qz * qz, xy = qx * qy, xz = qx * qz, yz = qy * qz, wx = qw * qx, wy = qw * qy, wz = qw * qz;
+        DR[r] = 1 - 2 * (yy + zz); DR[r + 1] = 2 * (xy - wz); DR[r + 2] = 2 * (xz + wy);
+        DR[r + 3] = 2 * (xy + wz); DR[r + 4] = 1 - 2 * (xx + zz); DR[r + 5] = 2 * (yz - wx);
+        DR[r + 6] = 2 * (xz - wy); DR[r + 7] = 2 * (yz + wx); DR[r + 8] = 1 - 2 * (xx + yy);
       }
-      solveAll(false);
+      solveAll(false, false);
     }
+    // ---- remember impulses for warm starting, impact events
     for (let k = 0; k < nc; k++) {
-      const c = contacts[k];
-      c.jn = J[k * 3]; c.j1 = J[k * 3 + 1]; c.j2 = J[k * 3 + 2];
+      PJ[k * 3] = J[k * 3]; PJ[k * 3 + 1] = J[k * 3 + 1]; PJ[k * 3 + 2] = J[k * 3 + 2];
+      PLA[k * 3] = LA[k * 3]; PLA[k * 3 + 1] = LA[k * 3 + 1]; PLA[k * 3 + 2] = LA[k * 3 + 2];
+      PKEY[k] = KEY[k];
     }
-    if (this.onImpact) for (const c of contacts) if (c.vn0 < -1.5 && c.jn > 0) this.onImpact(-c.vn0, c.A, c.B);
-    // write back the displacements
+    this.pc = nc;
+    if (this.onImpact) {
+      for (let k = 0; k < nc; k++) {
+        if (VN0[k] < -1.5 && J[k * 3] > 0) {
+          const A = bodies[CA[k] / 6], B = bodies[CB[k] / 6];
+          this.onImpact(-VN0[k], A, B);
+        }
+      }
+    }
+    // ---- write back the displacements
     for (let i = 0; i < n; i++) {
       const b = bodies[i];
       if (b.kinematic || b.invM === 0) continue;
@@ -514,11 +660,10 @@ export class World {
       b.p[0] += DP[i * 3]; b.p[1] += DP[i * 3 + 1]; b.p[2] += DP[i * 3 + 2];
       const q = i * 4;
       const x = QD[q], y = QD[q + 1], z = QD[q + 2], w = QD[q + 3];
-      const [bx, by, bz, bw] = b.q;
+      const bx = b.q[0], by = b.q[1], bz = b.q[2], bw = b.q[3];
       b.setQuat([w * bx + x * bw + y * bz - z * by, w * by - x * bz + y * bw + z * bx, w * bz + x * by - y * bx + z * bw, w * bw - x * bx - y * by - z * bz]);
     }
-    this.cache = newCache;
-    // global sleeping
+    // ---- global sleeping
     if (this.sleepEnabled) {
       let moving = false;
       for (const b of bodies) {
@@ -536,17 +681,4 @@ export class World {
 
 function rowVel(D, o, V, a, b) {
   return D[o] * (V[b] - V[a]) + D[o + 1] * (V[b + 1] - V[a + 1]) + D[o + 2] * (V[b + 2] - V[a + 2]) + V[b + 3] * D[o + 6] + V[b + 4] * D[o + 7] + V[b + 5] * D[o + 8] - V[a + 3] * D[o + 3] - V[a + 4] * D[o + 4] - V[a + 5] * D[o + 5];
-}
-
-function rowApply(D, o, l, V, a, b, imA, imB) {
-  if (imA !== 0) {
-    const k = l * imA;
-    V[a] -= D[o] * k; V[a + 1] -= D[o + 1] * k; V[a + 2] -= D[o + 2] * k;
-    V[a + 3] -= D[o + 9] * l; V[a + 4] -= D[o + 10] * l; V[a + 5] -= D[o + 11] * l;
-  }
-  if (imB !== 0) {
-    const k = l * imB;
-    V[b] += D[o] * k; V[b + 1] += D[o + 1] * k; V[b + 2] += D[o + 2] * k;
-    V[b + 3] += D[o + 12] * l; V[b + 4] += D[o + 13] * l; V[b + 5] += D[o + 14] * l;
-  }
 }
