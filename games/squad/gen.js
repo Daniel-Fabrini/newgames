@@ -1,12 +1,23 @@
-// Procedural level generation. Campaign levels are fully generated from the
-// level number (seeded); survival mode streams segments forever with rising
-// difficulty. Everything is sized from an "expected squad" estimate E and a
-// nominal per-soldier DPS so numbers stay meaningful at any level.
+// Procedural canyon-level generation (pure, seeded). Units are metres along the
+// road (z grows forward) and across it (x in [-ROAD, ROAD]).
+//
+// A level is a chain of ~42 m segments. Each segment starts a horde wave and
+// lays out pickups: a column of blue +N crates in the right lane, plus one
+// feature (weapon pedestal, golden statue or power-up ring). Campaign levels end
+// with a boss; survival streams segments forever with rising difficulty.
+//
+// Balance: the generator tracks the squad the player is *expected* to have at
+// each point (soldiers, weapon tier, multipliers, heroes) and sizes HP numbers
+// from that expected DPS, so numbers stay meaningful at any level.
 
 import { rng } from '../../js/core/ui.js';
-import { ZTYPES, bossFor, isMegaLevel } from './data.js';
+import { ZTYPES, STATUES, STATUE_ORDER, WEAPONS, MAX_TIER, weaponDps, bossFor, isMegaLevel } from './data.js';
 
-const sat = (x, k) => 1 - Math.exp(-x / k);
+export const ROAD = 5; // half width of the road (m)
+export const LANE_X = 3.95; // crate lane centre (right side)
+export const SEG = 42; // segment length (m)
+
+const sat = (x, k) => 1 - Math.exp(-Math.max(0, x) / k);
 export const niceV = (v) => {
   v = Math.max(1, v);
   if (v < 30) return Math.round(v);
@@ -14,34 +25,32 @@ export const niceV = (v) => {
   if (v < 2000) return Math.round(v / 10) * 10;
   return Math.round(v / 100) * 100;
 };
-const ROADX = 136;
 
 export class Gen {
-  // o: { mode: 'campaign'|'endless', level, seed, pNom, E0 }
+  // o: { mode: 'campaign'|'endless', level, seed, nom: { startN, dmg, rate } }
   constructor(o) {
     this.mode = o.mode;
-    this.level = o.level || 1;
+    this.level = Math.max(1, o.level || 1);
     this.r = rng((o.seed >>> 0) || 1);
-    this.pNom = o.pNom;
-    this.E0 = o.E0;
-    this.E = o.E0;
-    this.z = 650;
+    this.nom = o.nom;
+    // expected squad state at the current generation point
+    this.En = o.nom.startN;
+    this.Et = 0;
+    this.Em = 1;
+    this.Eh = 0; // hero DPS in "soldier DPS" units
+    this.z = 16;
     this.seg = 0;
-    this.threats = 0;
-    this.crateKind = Math.floor(this.r() * 3);
+    this.statues = 0;
+    this.statueKind = Math.floor(this.r() * 3);
     if (this.mode === 'campaign') {
-      const x = this.level - 1;
-      this.x0 = x;
-      this.length = Math.round(4600 + 2800 * sat(x, 14) + 10 * Math.min(x, 300));
-      this.Eend = this.E0 * (5 + 3 * sat(x, 25)) + 10 + 1.5 * Math.min(x, 400);
-      this.spacing = 1 - 0.2 * sat(x, 25);
-      this.ease = 0.7 + 0.3 * Math.min(1, x / 6);
+      const L = this.level;
+      this.segs = 4 + Math.min(3, Math.floor(L / 6));
+      this.length = this.z + this.segs * SEG + 10; // boss trigger
     } else {
+      this.segs = Infinity;
       this.length = Infinity;
-      this.nextBoss = 4600;
-      this.ease = 1;
-      this.bossCount = 0;
     }
+    this.done = false;
   }
 
   rand(a, b) {
@@ -51,199 +60,93 @@ export class Gen {
     return arr[Math.floor(this.r() * arr.length)];
   }
 
-  // Difficulty index and "virtual level" at a given distance.
-  xAt(z) {
-    return this.mode === 'campaign' ? this.x0 : 1.5 + z / 430;
+  // virtual level (difficulty) at the generation point
+  vLevel() {
+    return this.mode === 'campaign' ? this.level : 1 + Math.floor(this.z / 70);
   }
-  vLevel(z) {
-    return this.mode === 'campaign' ? this.level : Math.floor(2 + z / 520);
+  soldierDps() {
+    return weaponDps(this.Et) * this.Em * this.nom.dmg * this.nom.rate;
   }
-  Etarget(z) {
-    if (this.mode === 'campaign') return this.E0 + (this.Eend - this.E0) * Math.min(1, z / this.length);
-    return this.E0 * (1.3 + z / 4000) + 4 + z / 450;
+  edps() {
+    return (this.En + this.Eh) * this.soldierDps();
   }
-  Tk(x) {
-    if (this.mode === 'campaign') return (1.4 + 1.6 * sat(x, 18) + 0.006 * x) * this.ease;
-    return 1.2 + 0.06 * x;
-  }
-  lossAfterThreat(x) {
-    this.E = Math.max(this.E0 * 0.6, this.E * (1 - (0.06 + 0.1 * sat(x, 20))));
+  // how hard hordes push relative to the expected DPS (< 1: player keeps up)
+  pressure(i, n) {
+    const L = this.vLevel();
+    const base = L === 1 ? 0.45 : 0.55 + 0.55 * sat(L - 1, 14) + 0.002 * Math.min(L, 200);
+    return base * (0.9 + 0.2 * (n > 1 ? i / (n - 1) : 0)) * (this.mode === 'endless' ? 0.95 : 1);
   }
 
-  // Fill the world with segments until `toZ`.
+  // Generate content until `toZ`. `w` is the World (spawning API) — survival adapts to it.
   fill(w, toZ) {
-    if (this.mode === 'campaign') {
-      if (this.done) return;
-      this.campaignLayout(w);
-      this.done = true;
-      return;
-    }
-    while (this.z < toZ) {
-      // survival adapts to the real squad so it can never snowball forever
-      this.E = Math.max(this.E0 * 0.6, 0.4 * this.E + 0.6 * w.sq.n);
-      this.pNom = w.lo.dmg * w.lo.rate * w.buff.dmg * w.buff.rate;
-      if (this.z >= this.nextBoss) {
-        const vL = this.vLevel(this.z);
-        this.placeBoss(w, this.z + 200, vL, this.xAt(this.z), true);
-        this.z += 1100;
-        this.nextBoss = this.z + 4200 + Math.min(2000, this.bossCount * 300);
-        this.bossCount++;
+    while (!this.done && this.z < toZ) {
+      if (this.mode === 'endless' && w) {
+        // never let survival snowball: blend expectation with the real squad
+        this.En = Math.max(this.nom.startN * 0.8, 0.5 * this.En + 0.5 * w.sq.n);
+        this.Et = Math.max(0, Math.min(this.Et, w.sq.tier + 1));
+      }
+      if (this.seg >= this.segs) {
+        this.boss(w, this.z, true);
+        this.done = true;
+        break;
+      }
+      if (this.mode === 'endless' && this.seg > 0 && this.seg % 5 === 4) {
+        this.boss(w, this.z, false);
+        this.z += SEG;
+        this.seg++;
         continue;
       }
-      const x = this.xAt(this.z);
-      if (this.seg % 2 === 0) {
-        this.gate(w, this.z, x, 3);
-        this.z += this.rand(430, 520) * Math.max(0.75, 1 - x * 0.006);
-      } else {
-        this.threat(w, this.z, x, this.pickThreat(x, this.vLevel(this.z)));
-        this.z += this.rand(560, 660) * Math.max(0.72, 1 - x * 0.006);
-      }
+      this.segment(w, this.z, this.seg);
+      this.z += SEG;
       this.seg++;
     }
   }
 
-  campaignLayout(w) {
-    const L = this.level;
-    const x = this.x0;
-    // positions
-    const segs = [];
-    let z = 650;
-    let i = 0;
-    while (z < this.length - 380) {
-      const kind = i % 2 === 0 ? 'gate' : 'threat';
-      segs.push({ z, kind });
-      z += (kind === 'gate' ? this.rand(430, 520) : this.rand(570, 670)) * this.spacing;
-      i++;
-    }
-    if (segs[segs.length - 1].kind === 'threat' && segs.length > 3) {
-      /* keep: a threat right before the boss is fine */
-    }
-    // Threat plan
-    const threatSegs = segs.filter((s) => s.kind === 'threat');
-    let plan;
-    if (L === 1) plan = ['horde', 'crate', 'horde', 'crate', 'horde'];
-    else plan = threatSegs.map(() => this.pickThreat(x, L));
-    const fresh = Object.keys(ZTYPES).find((k) => ZTYPES[k].from === L && L > 1);
-    if (fresh && plan.length > 1) plan[1] = fresh === 'brute' || fresh === 'giant' ? fresh : 'fresh:' + fresh;
-    let ti = 0;
-    let gatesLeft = segs.filter((s) => s.kind === 'gate').length;
-    for (const s of segs) {
-      if (s.kind === 'gate') {
-        this.gate(w, s.z, x, gatesLeft);
-        gatesLeft--;
-      } else {
-        this.threat(w, s.z, x, plan[ti++] || 'horde');
-      }
-    }
-    this.placeBoss(w, this.length, L, x, false);
-  }
-
-  pickThreat(x, vL) {
-    const opts = [['horde', 4], ['crate', 2]];
-    if (vL >= 3) opts.push(['barrels', 1.5]);
-    if (vL >= 2) opts.push(['brute', 1.5]);
-    if (vL >= 4) opts.push(['runners', 1.2]);
-    if (vL >= 26) opts.push(['giant', 1]);
-    let tot = 0;
-    for (const o of opts) tot += o[1];
-    let k = this.r() * tot;
-    for (const o of opts) {
-      k -= o[1];
-      if (k <= 0) return o[0];
-    }
-    return 'horde';
-  }
-
-  // ------------------------------------------------------------ gates
-  goodOp(E, need, avoid) {
-    const r = this.r();
-    if (avoid !== 'x3' && need >= 2.5 && E < 400 && r < 0.4) return { op: 'x', v: 3 };
-    if (avoid !== 'x2' && need >= 1.65 && E < 900 && r < 0.6) return { op: 'x', v: 2 };
-    return { op: '+', v: niceV(Math.max(3, E * (need - 1) * this.rand(0.85, 1.25))) };
-  }
-  badOp(E) {
-    if (E >= 8 && this.r() < 0.3) return { op: '/', v: 2 };
-    return { op: '+', v: -niceV(Math.max(2, E * this.rand(0.25, 0.55))) };
-  }
-  static apply(n, g) {
-    if (!g) return n;
-    if (g.op === 'x') return n * g.v;
-    if (g.op === '/') return Math.floor(n / g.v);
-    return n + g.v;
-  }
-
-  stragglers(w, z, x) {
-    const E = this.E;
-    const n = 2 + Math.floor(this.r() * 3) + Math.min(4, Math.floor(x / 8));
-    const types = this.hordeTypes(this.vLevel(z));
-    for (let i = 0; i < n; i++) {
-      const k = this.pickType(types);
-      w.addZombie(k, this.rand(-ROADX, ROADX), z + this.rand(0, 160), E * this.pNom * 0.1 * ZTYPES[k].hpW, Math.max(0.5, E * 0.03 * ZTYPES[k].powW));
-    }
-  }
-
-  gate(w, z, x, gatesLeft) {
-    this.stragglers(w, z + 230, x);
-    const E = this.E;
-    const h = Math.max(1, Math.min(3, gatesLeft));
-    const tgt = this.Etarget(z + 1100 * h);
-    const need = Math.min(3.2, Math.max(this.mode === 'endless' ? 1.08 : 1.18, Math.pow(Math.max(1, tgt) / E, 1 / h)));
-    const roll = this.r();
-    let A;
-    let B;
-    let gain;
-    const vL = this.vLevel(z);
-    const first = !this.gatesMade;
-    this.gatesMade = (this.gatesMade || 0) + 1;
-    if (first) {
-      A = this.goodOp(E, need);
-      B = this.goodOp(E, Math.max(1.2, need * this.rand(0.7, 0.9)), A.op === 'x' ? 'x' + A.v : null);
-      if (B.op === A.op && B.v === A.v) B = { op: '+', v: niceV(Math.max(2, E * (need - 1) * 0.6)) };
-      gain = Math.max(Gen.apply(E, A), Gen.apply(E, B));
-    } else if (vL >= 2 && roll < 0.2) {
-      // Shootable gate: starts negative and grows +1 per `step` damage.
-      const start = -niceV(Math.max(3, E * this.rand(0.2, 0.4)));
-      A = { op: '+', v: start, shoot: true, step: this.pNom * (2.4 + 0.8 * sat(x, 20)) };
-      B = this.r() < 0.5 ? this.badOp(E) : { op: '+', v: niceV(Math.max(2, E * this.rand(0.2, 0.35))) };
-      gain = E * 1.5;
-    } else if (vL >= 3 && roll < 0.36) {
-      // Guarded gate: a barricade protects the better door.
-      A = this.goodOp(E, need);
-      B = this.r() < 0.5 ? this.badOp(E) : { op: '+', v: niceV(Math.max(2, E * (need - 1) * 0.4)) };
-      gain = Gen.apply(E, A);
-      const side = this.r() < 0.5 ? 0 : 1;
-      if (side === 1) [A, B] = [B, A];
-      w.addObj('wall', side === 0 ? -75 : 75, z - 190, {
-        w: 66,
-        hp: E * this.pNom * (0.8 + 0.5 * sat(x, 20)),
-        power: E * 0.28,
-      });
-      w.addGate(z, A, B);
-      this.E = Math.max(E, gain * 0.95);
-      return;
-    } else if (roll < 0.7) {
-      // Two good doors: think before you choose (+15 or ×2?).
-      A = this.goodOp(E, need);
-      B = this.goodOp(E, Math.max(1.2, need * this.rand(0.75, 0.95)), A.op === 'x' ? 'x' + A.v : null);
-      if (B.op === A.op && B.v === A.v) B = { op: '+', v: niceV(Math.max(2, E * (need - 1) * 0.6)) };
-      gain = Math.max(Gen.apply(E, A), Gen.apply(E, B));
+  segment(w, z, i) {
+    const L = this.vLevel();
+    const nSeg = this.mode === 'campaign' ? this.segs : 6;
+    const ii = this.mode === 'campaign' ? i : i % 5;
+    // the horde wave starts as the squad enters the segment (before its pickups)
+    this.wave(w, z, ii, nSeg);
+    // features first: they raise the expectation for the wave of the next segment
+    // 1) reinforcements column in the right lane
+    const cnt = Math.min(18, 5 + Math.floor(this.r() * 5) + Math.floor(L / 4));
+    const v = 1 + Math.floor(L / 12) + (this.r() < 0.15 && L > 3 ? 1 : 0);
+    const cz = z + this.rand(5, 12);
+    for (let k = 0; k < cnt; k++) w.addCrate(LANE_X, cz + k * 1.55, v);
+    this.En += cnt * v * 0.6;
+    // 2) one feature
+    const order = L === 1 ? ['ring', 'weapon', 'statue', 'ring'] : ['weapon', 'statue', 'ring', 'weapon', 'ring', 'statue'];
+    let feat = order[i % order.length];
+    if (feat === 'weapon' && this.Et >= MAX_TIER + 2) feat = 'ring';
+    if (feat === 'statue' && this.mode === 'campaign' && this.statues >= 2) feat = 'ring';
+    const fz = z + this.rand(14, 24);
+    const side = this.r() < 0.7 ? -1 : 1;
+    if (feat === 'weapon') {
+      const x = side < 0 ? -3.3 : 2.2;
+      const hp = niceV(this.edps() * (2.4 + 1.2 * sat(L, 20)));
+      w.addPickup(x, fz, this.Et + 1, hp);
+      this.Et += 1;
+    } else if (feat === 'statue') {
+      const kind = STATUE_ORDER[(this.statueKind + this.statues) % 3];
+      const hp = niceV(this.edps() * (4 + 2.5 * sat(L, 20)));
+      w.addStatue(-3.45, fz + 4, kind, hp);
+      this.statues++;
+      this.Eh += STATUES[kind].dpsK * 0.85;
     } else {
-      A = this.goodOp(E, need);
-      B = this.badOp(E);
-      gain = Gen.apply(E, A);
+      const rate = this.r() < 0.3 && L > 2;
+      const p = rate ? this.pick([20, 25, 30]) : this.pick([20, 30, 30, 40, 50]);
+      const x = this.rand(-2.2, 1.6);
+      w.addRing(x, fz, rate ? 'rate' : 'dmg', p);
+      this.Em *= 1 + (p / 100) * 0.8;
     }
-    if (this.r() < 0.5) [A, B] = [B, A];
-    w.addGate(z, A, B);
-    this.E = Math.max(E, gain * 0.95);
   }
 
-  // ------------------------------------------------------------ threats
-  hordeTypes(vL) {
-    const t = [['walker', 1]];
-    if (vL >= 4) t.push(['runner', 0.35]);
-    if (vL >= 8) t.push(['armored', 0.3]);
-    if (vL >= 13) t.push(['bloater', 0.12]);
-    if (vL >= 18) t.push(['crawler', 0.3]);
+  hordeTypes(L) {
+    const t = [['grunt', 1]];
+    if (L >= 3) t.push(['shield', 0.3]);
+    if (L >= 5) t.push(['runner', 0.25]);
+    if (L >= 9) t.push(['elite', 0.18]);
     return t;
   }
   pickType(types) {
@@ -254,106 +157,57 @@ export class Gen {
       k -= o[1];
       if (k <= 0) return o[0];
     }
-    return 'walker';
+    return types[0][0];
   }
 
-  horde(w, z, x, { tk = 1, pow = 1, n = null, cx = null, types = null, spreadZ = 1 } = {}) {
-    const E = this.E;
-    const vL = this.vLevel(z);
-    const count = n || Math.round(Math.min(16 + Math.min(8, x / 10), 4 + 9 * sat(x, 15) + 3 * this.r()));
-    const list = [];
-    const ty = types || this.hordeTypes(vL);
-    for (let i = 0; i < count; i++) list.push(this.pickType(ty));
-    let hw = 0;
-    let pw = 0;
-    for (const k of list) {
-      hw += ZTYPES[k].hpW;
-      pw += ZTYPES[k].powW;
+  wave(w, z, i, n) {
+    const L = this.vLevel();
+    let types = this.hordeTypes(L);
+    const fresh = Object.keys(ZTYPES).find((k) => ZTYPES[k].from === L && !ZTYPES[k].big && L > 1);
+    if (fresh && i === 1 && this.mode === 'campaign') types = [[fresh, 3], ['grunt', 1]];
+    let wsum = 0;
+    let psum = 0;
+    for (const [k, p] of types) {
+      wsum += ZTYPES[k].hpW * p;
+      psum += p;
     }
-    const totalHP = E * this.pNom * this.Tk(x) * tk;
-    const totalPow = E * (0.45 + 0.25 * sat(x, 20)) * pow;
-    const c = cx === null ? this.pick([-70, 0, 70]) + this.rand(-15, 15) : cx;
-    const rad = 34 + count * 4;
-    for (let i = 0; i < count; i++) {
-      const k = list[i];
-      const a = this.r() * Math.PI * 2;
-      const rr = Math.sqrt(this.r()) * rad;
-      const zx = Math.max(-ROADX, Math.min(ROADX, c + Math.cos(a) * rr * 1.3));
-      const zz = z + Math.sin(a) * rr * 1.2 * spreadZ;
-      w.addZombie(k, zx, zz, (totalHP * ZTYPES[k].hpW) / hw, (totalPow * ZTYPES[k].powW) / pw);
-    }
-    return c;
+    const avgW = wsum / psum;
+    // grunts die in exactly `k` expected bullets; the arrival rate (enemies / s) follows
+    // the bullets the expected squad puts out, so a grown squad faces hundreds
+    const W = WEAPONS[Math.min(this.Et, MAX_TIER)];
+    const vis = Math.min(6, W.rate * this.nom.rate);
+    const perShot = (this.soldierDps() / vis) * Math.max(1, this.En / 60);
+    const bps = Math.min(60, this.En) * vis;
+    const k = L < 4 ? 1 : L < 12 ? 2 : 3;
+    const hu = perShot * k * 0.97;
+    const rate = Math.max(2.5, Math.min(46, (bps * this.pressure(i, n)) / (k * avgW)));
+    const dur = 6 + 3 * sat(L - 1, 10) + 0.8 * i;
+    const count = Math.round(rate * dur);
+    const cx = this.rand(-1.6, 0.4);
+    const Rexp = 0.3 + 0.32 * Math.sqrt(Math.min(60, this.En));
+    const width = Math.max(1.5, Math.min(3.8, 2.1 * Rexp + this.rand(0, 0.5)));
+    const extra = [];
+    if (L >= 2 && i >= 1 && (i % 2 === 1 || L >= 8)) extra.push('brute');
+    if (L >= 16 && i >= 2 && i % 3 === 2) extra.push('giant');
+    w.addWave({ z, count, rate, cx, width, types, hu, extra });
   }
 
-  threat(w, z, x, kind) {
-    const E = this.E;
-    const P = this.pNom;
-    if (kind.startsWith('fresh:')) {
-      // Introduce a new enemy type: a horde made mostly of it.
-      const k = kind.slice(6);
-      this.horde(w, z, x, { types: [[k, 3], ['walker', 1]], n: 8 });
-    } else if (kind === 'horde') {
-      this.horde(w, z, x, this.level === 1 && this.mode === 'campaign' ? { tk: 0.6, n: 5 + this.threats * 2 } : {});
-    } else if (kind === 'brute' || kind === 'giant') {
-      const giant = kind === 'giant';
-      const cnt = !giant && x >= 12 && this.r() < 0.35 ? 2 : 1;
-      for (let i = 0; i < cnt; i++) {
-        const bx = cnt === 1 ? this.rand(-50, 50) : i === 0 ? -70 : 70;
-        const hp = (E * P * (giant ? 2.6 + sat(x, 30) : 1.5 + 1.1 * sat(x, 20))) / cnt;
-        w.addZombie(kind, bx, z + this.rand(-20, 20), hp, (E * (giant ? 0.55 : 0.32)) / cnt);
-      }
-      this.horde(w, z - 160, x, { tk: 0.35, n: 3 + Math.floor(this.r() * 3), pow: 0.4 });
-    } else if (kind === 'runners') {
-      const types = [['runner', 1]];
-      if (this.vLevel(z) >= 18) types.push(['crawler', 0.6]);
-      this.horde(w, z + 200, x, { tk: 0.65, pow: 0.8, n: Math.round(5 + 6 * sat(x, 20)), types, spreadZ: 1.6 });
-    } else if (kind === 'barrels') {
-      const c = this.horde(w, z, x, { tk: 0.85 });
-      const nb = 2 + (this.r() < 0.5 ? 1 : 0);
-      for (let i = 0; i < nb; i++) {
-        w.addObj('barrel', Math.max(-ROADX, Math.min(ROADX, c + this.rand(-55, 55))), z - 70 + i * 60 + this.rand(-15, 15), {
-          w: 11,
-          hp: E * P * 0.12,
-          power: E * 0.12,
-          boom: E * P * 1.0,
-        });
-      }
-    } else if (kind === 'crate') {
-      const side = this.r() < 0.5 ? -75 : 75;
-      const reward = ['rate', 'dmg', 'troops'][this.crateKind++ % 3];
-      w.addObj('crate', side, z, {
-        w: 22,
-        hp: E * P * (this.level === 1 && this.mode === 'campaign' ? 0.6 : 0.9 + 0.5 * sat(x, 20)),
-        power: 0,
-        reward,
-        amount: reward === 'troops' ? niceV(Math.max(3, E * 0.3)) : reward === 'rate' ? 0.25 : 0.3,
-      });
-      this.horde(w, z - 230, x, { tk: 0.45, pow: 0.6, cx: side, n: 3 + Math.floor(this.r() * 3) });
-    }
-    this.threats++;
-    this.lossAfterThreat(x);
-  }
-
-  placeBoss(w, stopZ, vL, x, endless) {
-    const spec = bossFor(vL);
-    const mega = !endless && isMegaLevel(vL);
-    const E = this.E;
-    const Tb = (endless ? 5 + 0.07 * x : 6.5 + 3 * sat(x, 25) + 0.012 * x) * spec.hpMul * (mega ? 1.35 : 1) * this.ease;
-    w.addBoss(stopZ, {
-      id: spec.id,
-      mega,
-      hp: E * this.pNom * Tb,
-      power: Math.max(1, E * 0.11 * spec.stomp),
+  boss(w, z, final) {
+    const L = this.vLevel();
+    const spec = bossFor(L);
+    const mega = final && this.mode === 'campaign' && isMegaLevel(L);
+    const Tb = (7 + 4.5 * sat(L - 1, 20) + 0.015 * Math.min(L, 300)) * spec.hpMul * (mega ? 1.5 : 1) * (this.mode === 'endless' ? 0.8 : 1);
+    const hp = niceV(this.edps() * Tb);
+    // a short escort wave before the boss
+    const rate = Math.max(3, Math.min(30, Math.min(60, this.En) * 1.2));
+    const hu = (this.edps() * 0.5) / rate;
+    w.addWave({ z, count: Math.round(rate * 5), rate, cx: -0.6, width: 3.2, types: this.hordeTypes(L), hu, extra: [], boss: {
+      id: spec.id, spr: spec.spr, final, mega, hp,
+      scale: spec.scale * (mega ? 1.2 : 1),
       spd: spec.spd,
-      r: spec.r * (mega ? 1.2 : 1) * 1.3,
-      scale: mega ? 1.2 : 1,
-      coin: Math.round((15 + 2 * vL) * (mega ? 2 : 1)),
-      minion: spec.minion && {
-        ...spec.minion,
-        hp: E * this.pNom * 0.12,
-        power: Math.max(0.5, E * 0.03),
-      },
-    });
-    this.lossAfterThreat(x);
+      pow: Math.max(2, Math.round(this.En * 0.08 * spec.stomp)),
+      coin: Math.round((15 + 2 * L) * (mega ? 2 : 1)),
+      minion: spec.minion && { ...spec.minion, hp: hu * ZTYPES[spec.minion.type].hpW },
+    } });
   }
 }

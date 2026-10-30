@@ -1623,3 +1623,59 @@
     font-size: 13.5px;
   }
 }
+
+/* ---------------------------------------------------------------- canyon battle additions */
+.g-squad-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #0a0a0c;
+}
+.g-squad-bosshp {
+  position: relative;
+}
+.g-squad-bosshp > em {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-style: normal;
+  font-weight: 1000;
+  font-size: 10px;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.8);
+}
+.g-squad-buff.wpn {
+  color: #cfe6ff;
+  border-color: rgba(127, 184, 255, 0.75);
+  background: rgba(10, 22, 48, 0.88);
+}
+.g-squad-banner {
+  position: absolute;
+  left: 50%;
+  top: 27%;
+  z-index: 4;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  border-radius: 14px;
+  width: max-content;
+  text-align: center;
+  line-height: 1.2;
+  font-weight: 1000;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  max-width: 88%;
+  color: #241600;
+  background: linear-gradient(180deg, #f7d774, #c9971c);
+  box-shadow: 0 0 24px rgba(247, 215, 116, 0.55), 0 8px 18px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  animation: g-squad-banner 1.7s ease both;
+}
+@keyframes g-squad-banner {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+  12% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+  22% { transform: translate(-50%, -50%) scale(1); }
+  80% { opacity: 1; transform: translate(-50%, -60%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -80%) scale(0.95); }
+}

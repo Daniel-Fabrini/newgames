@@ -172,36 +172,28 @@ export function nominalStats(level) {
 }
 
 // ---------------------------------------------------------------- themes
+// Every region is a canyon road; the theme tints the pre-rendered rock walls
+// (`rock` is a CSS filter applied once at load), the road and the haze.
 export const THEMES = [
   {
-    id: 'city',
-    ground: '#5b6a4a', ground2: '#536142', walk: '#8d919b', walk2: '#7a7e88', road: '#4a4e5a', road2: '#30333d',
-    line: '#f1e7c4', curbA: '#e7e7ea', curbB: '#d64545', fog: '#e2c3a0', glow: '#ffd59a', dark: 0, ambient: 'dust',
-    props: ['building', 'lamp', 'car', 'tree', 'cone', 'building', 'tree'],
+    id: 'canyon', ground: '#c9a273', ground2: '#a77f52', dark: 0,
+    rock: 'none', road: [204, 192, 174], haze: '#f3dcb8', sky: '#f6e3c4', edge: '#7a5a3a',
   },
   {
-    id: 'desert',
-    ground: '#dcb877', ground2: '#d0aa69', walk: '#c2a67c', walk2: '#ad916a', road: '#73685a', road2: '#564d42',
-    line: '#fff1c9', curbA: '#f2e2c0', curbB: '#c46a2b', fog: '#f7dcaa', glow: '#fff0b8', dark: 0, ambient: 'sand',
-    props: ['cactus', 'rock', 'wreck', 'cactus', 'drums', 'skull', 'sign'],
+    id: 'redrock', ground: '#c47a52', ground2: '#9a5134', dark: 0,
+    rock: 'hue-rotate(-14deg) saturate(1.45) brightness(0.92)', road: [214, 176, 150], haze: '#f0b98f', sky: '#f7cfa6', edge: '#6e3420',
   },
   {
-    id: 'snow',
-    ground: '#e9eff7', ground2: '#dce5f0', walk: '#c9d3df', walk2: '#b8c3d1', road: '#5a6472', road2: '#3f4753',
-    line: '#ffffff', curbA: '#f4f8ff', curbB: '#3d7be0', fog: '#e6eef8', glow: '#ffffff', dark: 0, ambient: 'snow',
-    props: ['pine', 'pine', 'snowrock', 'car', 'lamp', 'pine', 'fence'],
+    id: 'frost', ground: '#dfe7f1', ground2: '#b9c6d6', dark: 0,
+    rock: 'saturate(0.15) brightness(1.18) contrast(0.95)', road: [222, 228, 236], haze: '#eef4fb', sky: '#f4f8fd', edge: '#7b8796',
   },
   {
-    id: 'night',
-    ground: '#22332b', ground2: '#1d2d26', walk: '#3d4352', walk2: '#343947', road: '#2d303b', road2: '#1c1e26',
-    line: '#d9cf8f', curbA: '#a3a9bd', curbB: '#8a2a3e', fog: '#141a33', glow: '#7c8cff', dark: 0.6, ambient: 'embers',
-    props: ['building', 'lamp', 'car', 'tree', 'lamp', 'building', 'cone'],
+    id: 'dusk', ground: '#5d4a63', ground2: '#3b2e44', dark: 0.45,
+    rock: 'hue-rotate(-40deg) saturate(0.8) brightness(0.62)', road: [150, 138, 150], haze: '#9a6f86', sky: '#c88a7a', edge: '#2a1f30',
   },
   {
-    id: 'toxic',
-    ground: '#4b5b2d', ground2: '#435228', walk: '#5f6652', walk2: '#515846', road: '#363e35', road2: '#242a23',
-    line: '#d8ff5a', curbA: '#e6e04a', curbB: '#2b2b2b', fog: '#a5cf5f', glow: '#d0ff66', dark: 0.15, ambient: 'spores',
-    props: ['drums', 'deadtree', 'pipe', 'hazard', 'drums', 'deadtree', 'pipe'],
+    id: 'toxic', ground: '#7d8a4a', ground2: '#56602f', dark: 0.1,
+    rock: 'hue-rotate(38deg) saturate(0.9) brightness(0.9)', road: [190, 192, 160], haze: '#cfe39a', sky: '#dfeeb0', edge: '#3e4520',
   },
 ];
 export const LEVELS_PER_REGION = 10;
@@ -224,30 +216,56 @@ export function roman(n) {
   }
   return s;
 }
-export const ENDLESS_ZONE = 3000; // world units per survival zone (300 m)
+export const ENDLESS_ZONE = 100; // metres per survival zone
+
+// ---------------------------------------------------------------- weapons
+// Squad weapon tiers. Tier 0 is the starting rifle; pickups on pedestals give
+// tiers 1..5 (sprite w0..w4). Beyond the last tier each pickup adds +30% damage.
+export const WEAPONS = [
+  { id: 'rifle', dmg: 1, rate: 3.2, tracer: '#ffe9a8', w: 1 },
+  { id: 'smg', dmg: 1, rate: 5, tracer: '#fff1b0', w: 1 },
+  { id: 'ar', dmg: 1.6, rate: 5.5, tracer: '#ffd36b', w: 1.2 },
+  { id: 'lmg', dmg: 2.3, rate: 6.5, tracer: '#ffb84a', w: 1.4 },
+  { id: 'minigun', dmg: 2.4, rate: 11, tracer: '#ffcf5a', w: 1.3 },
+  { id: 'plasma', dmg: 6, rate: 7, tracer: '#6ff6ff', w: 1.8 },
+];
+export const MAX_TIER = WEAPONS.length - 1;
+export function weaponDps(tier) {
+  const w = WEAPONS[Math.min(tier, MAX_TIER)];
+  return w.dmg * w.rate * Math.pow(1.3, Math.max(0, tier - MAX_TIER));
+}
+
+// ---------------------------------------------------------------- statue heroes (in-level allies)
+// dpsK: damage per second as a multiple of one soldier's DPS; hp: hits absorbed.
+export const STATUES = {
+  gunner: { dpsK: 9, rate: 5, hp: 8, splash: 0 },
+  heavy: { dpsK: 15, rate: 14, hp: 14, splash: 0 },
+  rocket: { dpsK: 12, rate: 0.9, hp: 6, splash: 2.6 },
+};
+export const STATUE_ORDER = ['gunner', 'heavy', 'rocket'];
 
 // ---------------------------------------------------------------- enemies
+// World units are metres. hpW: HP weight (× level HP unit), pow: soldiers killed on contact.
 export const ZTYPES = {
-  walker: { from: 1, hpW: 1, powW: 1, spd: 42, lat: 38, r: 9, w: 18, h: 28, coin: 1 },
-  brute: { from: 2, hpW: 7, powW: 5, spd: 30, lat: 26, r: 17, w: 36, h: 46, coin: 4, bar: true },
-  runner: { from: 4, hpW: 0.6, powW: 0.8, spd: 120, lat: 70, r: 8, w: 17, h: 27, coin: 1 },
-  armored: { from: 8, hpW: 2.6, powW: 1.4, spd: 34, lat: 30, r: 10, w: 20, h: 29, coin: 2 },
-  bloater: { from: 13, hpW: 2.2, powW: 3, spd: 30, lat: 28, r: 13, w: 28, h: 30, coin: 2, explodes: true },
-  crawler: { from: 18, hpW: 0.7, powW: 1, spd: 95, lat: 60, r: 9, w: 24, h: 15, coin: 1 },
-  giant: { from: 26, hpW: 20, powW: 12, spd: 24, lat: 20, r: 26, w: 60, h: 76, coin: 10, bar: true },
+  grunt: { from: 1, hpW: 1, pow: 1, spd: 2.5, r: 0.34, coin: 1, spr: 'red', scale: 1 },
+  brute: { from: 2, hpW: 22, pow: 5, spd: 1.5, r: 0.8, coin: 8, spr: 'bru', scale: 1, bar: true, big: true },
+  shield: { from: 3, hpW: 3, pow: 1, spd: 2.1, r: 0.38, coin: 2, spr: 'shd', scale: 1 },
+  runner: { from: 5, hpW: 0.7, pow: 1, spd: 4.6, r: 0.3, coin: 1, spr: 'org', scale: 0.88 },
+  elite: { from: 9, hpW: 6, pow: 2, spd: 2.2, r: 0.4, coin: 3, spr: 'blk', scale: 1.08 },
+  giant: { from: 16, hpW: 60, pow: 9, spd: 1.25, r: 1.0, coin: 16, spr: 'bru', scale: 1.35, bar: true, big: true },
 };
-export const ZORDER = ['walker', 'brute', 'runner', 'armored', 'bloater', 'crawler', 'giant'];
+export const ZORDER = ['grunt', 'brute', 'shield', 'runner', 'elite', 'giant'];
 export function newEnemyAt(level) {
   return ZORDER.find((k) => ZTYPES[k].from === level && level > 1) || null;
 }
 
-// ---------------------------------------------------------------- bosses
+// ---------------------------------------------------------------- bosses (end of every level)
 export const BOSSES = [
-  { id: 'hulk', from: 1, w: 104, h: 128, r: 42, hpMul: 1, spd: 85, stomp: 1, minion: null },
-  { id: 'iron', from: 6, w: 112, h: 132, r: 44, hpMul: 1.2, spd: 72, stomp: 1.1, minion: null },
-  { id: 'abom', from: 11, w: 124, h: 118, r: 46, hpMul: 0.95, spd: 70, stomp: 1, minion: { type: 'walker', every: 3.2, count: 4 } },
-  { id: 'queen', from: 21, w: 100, h: 142, r: 40, hpMul: 0.9, spd: 92, stomp: 0.9, minion: { type: 'runner', every: 2.6, count: 3 } },
-  { id: 'colossus', from: 31, w: 140, h: 170, r: 54, hpMul: 1.35, spd: 60, stomp: 1.4, minion: { type: 'crawler', every: 4, count: 4 } },
+  { id: 'juggernaut', from: 1, hpMul: 1, scale: 1.65, spr: 'bru', spd: 1.2, stomp: 1, minion: null },
+  { id: 'warlord', from: 6, hpMul: 1.1, scale: 1.75, spr: 'blkbru', spd: 1.1, stomp: 1.1, minion: { type: 'runner', every: 3, count: 4 } },
+  { id: 'titan', from: 11, hpMul: 1.2, scale: 1.9, spr: 'bru', spd: 1.0, stomp: 1.3, minion: { type: 'shield', every: 3.5, count: 3 } },
+  { id: 'inferno', from: 21, hpMul: 1.0, scale: 1.75, spr: 'orgbru', spd: 1.3, stomp: 1, minion: { type: 'grunt', every: 2.2, count: 6 } },
+  { id: 'colossus', from: 31, hpMul: 1.4, scale: 2.2, spr: 'blkbru', spd: 0.9, stomp: 1.5, minion: { type: 'elite', every: 4, count: 3 } },
 ];
 export const BOSSMAP = Object.fromEntries(BOSSES.map((b) => [b.id, b]));
 export function bossFor(level) {

@@ -53,9 +53,9 @@ export const GAMES = [
     name: { pt: 'Comando de Guerra', en: 'War Command', es: 'Comando de Guerra' },
     sub: { pt: 'Estratégia e Batalha', en: 'Strategy & Battle', es: 'Estrategia y Batalla' },
     about: {
-      pt: 'Construa sua base, recrute heróis e lidere sua tropa contra hordas de zumbis. Escolha os portões certos e multiplique o exército.',
-      en: 'Build your base, recruit heroes and lead your squad against zombie hordes. Pick the right gates and multiply your army.',
-      es: 'Construye tu base, recluta héroes y lidera tu tropa contra hordas de zombis. Elige las puertas correctas y multiplica tu ejército.',
+      pt: 'Lidere seu esquadrão por cânions contra hordas inimigas: recrute com caixas +1, desbloqueie armas e desperte heróis dourados.',
+      en: 'Lead your squad through canyons against enemy hordes: recruit with +1 crates, unlock weapons and awaken golden heroes.',
+      es: 'Lidera tu escuadrón por cañones contra hordas enemigas: recluta con cajas +1, desbloquea armas y despierta héroes dorados.',
     },
     modes: [
       { id: 'campaign', icon: 'flag', label: { pt: 'Campanha', en: 'Campaign', es: 'Campaña' } },

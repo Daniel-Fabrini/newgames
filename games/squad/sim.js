@@ -1,68 +1,75 @@
-// Runner simulation (no DOM): squad, bullets, zombies, gates, objects, boss,
-// hero abilities. The renderer and the UI read its state and consume
-// `events` every frame.
+// Canyon-runner battle simulation (pure: no DOM, deterministic for a seed).
+//
+// The squad walks up a canyon road (z forward, x across, metres) and auto-fires
+// straight ahead; the player only steers x. Hordes of red soldiers stream down
+// from the far end. Along the road: blue +N crates (walk into them), weapon
+// pedestals and golden statues (shoot their number down to 0), power-up rings
+// (walk through). The renderer and UI read the state and consume `events`.
 
-import { ZTYPES, heroStats } from './data.js';
-import { Gen } from './gen.js';
+import { ZTYPES, WEAPONS, MAX_TIER, STATUES, heroStats } from './data.js';
+import { Gen, ROAD } from './gen.js';
+import { rng } from '../../js/core/ui.js';
 
-export const ROAD = 150; // half width of the road (world units)
-export const VIEW = 1550; // how far ahead things wake up / bullets fly
-export const MAXD = 60; // max soldiers drawn
-const BSPD = 1900;
+export { ROAD };
+export const VIEW = 56; // how far ahead (m) things are visible / spawn
+export const RANGE = 38; // bullet range (m)
+export const MAXD = 60; // max soldiers simulated individually (rest folded into damage)
+const BSPD = 46; // bullet speed m/s
+const WALK = 3.1; // squad speed when the way is clear
+const VIS_RATE = 6; // max visual shots per soldier per second
+const SPACING = 0.52; // formation spacing
 const GOLDEN = 2.39996323;
-const rnd = (a, b) => a + (b - a) * Math.random();
-
-export function gateGood(g) {
-  return g && (g.op === 'x' || (g.op === '+' && g.v >= 0));
-}
-export function gateLabel(g) {
-  if (g.op === 'x') return '×' + g.v;
-  if (g.op === '/') return '÷' + g.v;
-  return (g.v >= 0 ? '+' : '−') + Math.abs(g.v);
-}
+// spatial grid for bullet hits (small enemies only)
+const GX0 = -ROAD - 1;
+const GCW = 0.5;
+const GCOLS = Math.ceil((2 * ROAD + 2) / GCW);
+const GROWS = 72; // 1 m rows from sq.z - 6
+const NOP = -1;
 
 export class World {
-  // o: { mode, level, seed, lo:{startN,dmg,rate,hp,rank}, hero:{id,lvl,tower}|null, pNom, E0, killCoin }
+  // o: { mode, level, seed, lo:{startN,dmg,rate,hp,rank}, nom:{startN,dmg,rate}, hero:{id,lvl,tower}|null, killCoin }
   constructor(o) {
-    this.mode = o.mode;
+    this.mode = o.mode === 'endless' ? 'endless' : 'campaign';
     this.level = o.level || 1;
     this.lo = o.lo;
     this.killCoin = o.killCoin || 1;
+    this.rand = rng(((o.seed >>> 0) ^ 0x9e3779b9) >>> 0);
     this.t = 0;
     this.state = 'ready';
     this.endT = 0;
-    this.speed = 260;
     const n = Math.max(1, Math.round(o.lo.startN));
-    this.sq = { x: 0, z: 0, tx: 0, n, peak: n, acc: 0 };
-    this.c = 7;
-    this.R = 12;
+    this.sq = { x: 0, tx: 0, z: 0, n, peak: n, acc: 0, R: 0.5, tier: 0, dmgMul: 1, rateMul: 1, speed: 0, heroes: [] };
     this.sol = [];
+    this.enemies = [];
     this.bullets = [];
     this.bpool = [];
-    this.zombies = [];
-    this.gates = [];
-    this.objs = [];
-    this.bossQ = [];
-    this.boss = null;
-    this.bossStop = Infinity;
-    this.events = [];
-    this.kills = 0;
-    this.coins = 0;
-    this.crates = 0;
-    this.gatesGood = 0;
-    this.abilityUses = 0;
-    this.bossKills = 0;
-    this.buff = { dmg: 1, rate: 1 };
-    this.shieldT = 0;
+    this.crates = [];
+    this.pickups = [];
+    this.statues = [];
+    this.rings = [];
+    this.waves = [];
+    this.booms = [];
     this.strikes = [];
     this.missiles = [];
-    this.booms = [];
-    this.seen = new Set();
+    this.events = [];
+    this.boss = null;
+    this.kills = 0;
+    this.coins = 0;
+    this.cratesGot = 0;
+    this.unlocks = 0;
+    this.heroesJoined = 0;
+    this.abilityUses = 0;
+    this.bossKills = 0;
+    this.shieldT = 0;
     this.hitBudget = 0;
+    this.seen = new Set();
     this.hero = o.hero ? { ...o.hero, st: heroStats(o.hero.id, o.hero.lvl, o.hero.tower || 1), cd: 0 } : null;
-    this.gen = new Gen({ mode: o.mode, level: this.level, seed: o.seed, pNom: o.pNom, E0: o.E0 });
-    this.length = this.gen.length;
-    this.gen.fill(this, VIEW + 2500);
+    // grid
+    this.gHead = new Int32Array(GCOLS * GROWS);
+    this.gNext = new Int32Array(1024);
+    this.gen = new Gen({ mode: this.mode, level: this.level, seed: o.seed, nom: o.nom || { startN: n, dmg: o.lo.dmg, rate: o.lo.rate } });
+    this.length = this.mode === 'campaign' ? 16 + this.gen.segs * 42 : Infinity;
+    this.gen.fill(this, VIEW + 90);
     this.syncSoldiers();
     for (const s of this.sol) {
       s.ox = s.tx;
@@ -71,23 +78,31 @@ export class World {
   }
 
   // ------------------------------------------------------------ spawning API (used by Gen)
-  addZombie(type, x, z, hp, power) {
+  addCrate(x, z, v) {
+    this.crates.push({ x, z, v, alive: true });
+  }
+  addPickup(x, z, tier, hp) {
+    this.pickups.push({ x, z, tier, hp, max: hp, alive: true, flash: 0, w: 0.8 });
+  }
+  addStatue(x, z, kind, hp) {
+    this.statues.push({ x, z, kind, hp, max: hp, alive: true, flash: 0, w: 1.4, wake: -1 });
+  }
+  addRing(x, z, kind, p) {
+    this.rings.push({ x, z, kind, p, alive: true, t: 0 });
+  }
+  addWave(spec) {
+    this.waves.push({ ...spec, started: false, spawned: 0, acc: 0, bossDone: !spec.boss });
+  }
+
+  spawnEnemy(type, x, z, hp, opt = {}) {
     const T = ZTYPES[type];
-    this.zombies.push({
-      type, x, z, hp, max: hp, power, r: T.r, w: T.w, h: T.h,
-      spd: T.spd * rnd(0.88, 1.12), lat: T.lat, coin: T.coin,
-      active: false, alive: true, flash: 0, ph: Math.random() * 10, off: rnd(-22, 22), v: Math.floor(Math.random() * 4),
-    });
-  }
-  addGate(z, A, B) {
-    const mk = (g, x0, x1) => (g ? { ...g, x0, x1, prog: 0, pulse: 0 } : null);
-    this.gates.push({ z, h: [mk(A, -ROAD, 0), mk(B, 0, ROAD)], done: false, t: 0, pick: -1 });
-  }
-  addObj(kind, x, z, o) {
-    this.objs.push({ kind, x, z, w: o.w, hp: o.hp, max: o.hp, power: o.power || 0, boom: o.boom || 0, reward: o.reward, amount: o.amount, alive: true, flash: 0 });
-  }
-  addBoss(stopZ, spec) {
-    this.bossQ.push({ stopZ, spec });
+    const e = {
+      type, x, z, hp, max: hp, r: T.r * (opt.scale || 1), pow: opt.pow || T.pow, spd: (opt.spd || T.spd) * (0.9 + 0.2 * this.rand()),
+      coin: opt.coin || T.coin, big: !!(T.big || opt.boss), boss: !!opt.boss, spr: opt.spr || T.spr, scale: (opt.scale || 1) * T.scale,
+      off: opt.off || 0, cx: opt.cx === undefined ? x : opt.cx, alive: true, flash: 0, ph: this.rand() * 10, stompT: 0.6, atk: 0, contact: 0,
+    };
+    this.enemies.push(e);
+    return e;
   }
 
   // ------------------------------------------------------------ helpers
@@ -95,7 +110,7 @@ export class World {
     this.events.push(e);
   }
   get live() {
-    return this.state === 'run' || this.state === 'boss';
+    return this.state === 'run';
   }
   start() {
     if (this.state === 'ready') {
@@ -103,17 +118,35 @@ export class World {
       this.emit({ t: 'start' });
     }
   }
+  weapon() {
+    return WEAPONS[Math.min(this.sq.tier, MAX_TIER)];
+  }
+  // damage multiplier from tiers beyond the last weapon
+  tierBonus() {
+    return Math.pow(1.3, Math.max(0, this.sq.tier - MAX_TIER));
+  }
+  soldierDps() {
+    const w = this.weapon();
+    return w.dmg * w.rate * this.tierBonus() * this.sq.dmgMul * this.sq.rateMul * this.lo.dmg * this.lo.rate;
+  }
   dps() {
-    return this.sq.n * this.lo.dmg * this.buff.dmg * this.lo.rate * this.buff.rate;
+    let d = this.sq.n * this.soldierDps();
+    for (const h of this.sq.heroes) d += STATUES[h.kind].dpsK * this.soldierDps();
+    return d;
   }
   steer(x) {
-    const lim = ROAD - Math.min(this.R * 0.7, 60);
+    const lim = ROAD - 0.25 - Math.min(this.sq.R * 0.8, 1.6);
     this.sq.tx = Math.max(-lim, Math.min(lim, x));
+  }
+  see(what) {
+    if (this.seen.has(what)) return;
+    this.seen.add(what);
+    this.emit({ t: 'see', what });
   }
 
   syncSoldiers(hx, hz) {
     const D = Math.min(this.sq.n, MAXD);
-    while (this.sol.length < D) this.sol.push({ ox: rnd(-3, 3), oz: rnd(-3, 3), tx: 0, tz: 0, born: this.t, fire: Math.random() * 0.4, fl: 0 });
+    while (this.sol.length < D) this.sol.push({ ox: (this.rand() - 0.5) * 0.4, oz: -0.6, tx: 0, tz: 0, fire: this.rand() * 0.3, fl: 0, ph: this.rand() });
     while (this.sol.length > D) {
       let k = this.sol.length - 1;
       if (hx !== undefined) {
@@ -131,14 +164,20 @@ export class World {
       this.emit({ t: 'sdie', x: this.sq.x + s.ox, z: this.sq.z + s.oz });
       this.sol.splice(k, 1);
     }
-    const n = this.sq.n;
-    this.c = 7 + 1.6 * Math.log10(Math.max(1, n / MAXD));
-    this.R = this.c * Math.sqrt(Math.max(1, D)) + 7;
+    const c = SPACING * (1 + 0.25 * Math.log10(Math.max(1, this.sq.n / MAXD)));
     for (let i = 0; i < this.sol.length; i++) {
-      const rad = this.c * Math.sqrt(i + 0.5);
+      const rad = c * Math.sqrt(i + 0.5) * 0.62;
       const a = i * GOLDEN;
       this.sol[i].tx = Math.cos(a) * rad;
-      this.sol[i].tz = Math.sin(a) * rad * 0.85;
+      this.sol[i].tz = Math.sin(a) * rad * 0.8;
+    }
+    this.sq.R = 0.3 + c * 0.62 * Math.sqrt(Math.max(1, D));
+    // heroes stand on the flanks
+    let l = 0;
+    let r = 0;
+    for (const h of this.sq.heroes) {
+      if (h.side < 0) h.tx = -(this.sq.R + 0.55 + 0.9 * l++);
+      else h.tx = this.sq.R + 0.55 + 0.9 * r++;
     }
   }
 
@@ -147,7 +186,6 @@ export class World {
     this.sq.n = Math.max(0, Math.min(99999, Math.round(n)));
     if (this.sq.n > this.sq.peak) this.sq.peak = this.sq.n;
     this.syncSoldiers(hx, hz);
-    if (this.sq.n <= 0 && this.live) this.lose();
     return this.sq.n - before;
   }
 
@@ -158,113 +196,103 @@ export class World {
       return 0;
     }
     this.sq.acc += power / this.lo.hp;
-    const lost = Math.floor(this.sq.acc + 1e-9);
-    if (lost > 0) {
-      this.sq.acc -= lost;
-      const real = Math.min(lost, this.sq.n);
-      this.emit({ t: 'lost', n: real, x, z });
-      this.setCount(this.sq.n - lost, x, z);
-      return real;
+    let lost = Math.floor(this.sq.acc + 1e-9);
+    if (lost <= 0) {
+      this.emit({ t: 'graze', x, z });
+      return 0;
     }
-    this.emit({ t: 'graze', x, z });
-    return 0;
+    this.sq.acc -= lost;
+    const fromSquad = Math.min(lost, this.sq.n);
+    if (fromSquad > 0) {
+      this.emit({ t: 'lost', n: fromSquad, x, z });
+      this.setCount(this.sq.n - fromSquad, x, z);
+      lost -= fromSquad;
+    }
+    // heroes soak the rest once the squad is gone
+    while (lost > 0 && this.sq.heroes.length) {
+      const h = this.sq.heroes[0];
+      const d = Math.min(lost, h.hp);
+      h.hp -= d;
+      lost -= d;
+      if (h.hp <= 0) {
+        this.sq.heroes.shift();
+        this.emit({ t: 'heroDie', kind: h.kind, x: this.sq.x + h.ox, z: this.sq.z });
+        this.syncSoldiers();
+      }
+    }
+    if (this.sq.n <= 0 && !this.sq.heroes.length) this.lose();
+    return fromSquad;
   }
 
   lose() {
+    if (this.state !== 'run') return;
     this.state = 'lost';
     this.endT = this.t;
     this.emit({ t: 'lose' });
   }
+  win() {
+    if (this.state !== 'run') return;
+    this.state = 'won';
+    this.endT = this.t;
+    this.emit({ t: 'win' });
+    for (const e of this.enemies) if (e.alive) this.killEnemy(e, false);
+  }
 
-  killZombie(e, credit = true) {
+  killEnemy(e, credit = true) {
     if (!e.alive) return;
     e.alive = false;
     if (credit) {
       this.kills++;
       this.coins += e.coin * this.killCoin;
     }
-    this.emit({ t: credit ? 'kill' : 'bite', x: e.x, z: e.z, type: e.type, big: !!ZTYPES[e.type].bar });
-    if (e.type === 'bloater') this.booms.push({ x: e.x, z: e.z, r: 95, dmg: e.max * 2.5, kind: 'bloat', bossMul: 0.2 });
-  }
-
-  damageZombie(e, dmg) {
-    e.hp -= dmg;
-    e.flash = 0.07;
-    if (e.hp <= 0) this.killZombie(e);
-  }
-
-  breakObj(o, reward) {
-    if (!o.alive) return;
-    o.alive = false;
-    if (o.kind === 'barrel') {
-      this.booms.push({ x: o.x, z: o.z, r: 115, dmg: o.boom, kind: 'barrel', bossMul: 0.3 });
-    } else if (o.kind === 'crate') {
-      if (reward && this.live) {
-        this.crates++;
-        if (o.reward === 'rate') this.buff.rate *= 1 + o.amount;
-        else if (o.reward === 'dmg') this.buff.dmg *= 1 + o.amount;
-        else this.setCount(this.sq.n + o.amount);
-        this.emit({ t: 'crate', x: o.x, z: o.z, kind: o.reward, amount: o.amount });
-      } else this.emit({ t: 'crateMiss', x: o.x, z: o.z });
-    } else {
-      this.emit({ t: 'wallBreak', x: o.x, z: o.z, w: o.w });
+    this.emit({ t: 'kill', x: e.x, z: e.z, spr: e.spr, scale: e.scale, big: e.big, credit });
+    if (e.boss) {
+      this.bossKills++;
+      this.coins += e.coin;
+      this.emit({ t: 'bossDie', x: e.x, z: e.z, coin: e.coin });
+      if (this.boss === e) this.boss = null;
+      if (e.final && this.mode === 'campaign') this.win();
     }
   }
 
-  damageObj(o, dmg) {
-    o.hp -= dmg;
-    o.flash = 0.07;
-    if (o.hp <= 0) this.breakObj(o, true);
+  damageEnemy(e, dmg) {
+    e.hp -= dmg;
+    e.flash = 0.06;
+    if (e.hp <= 0) this.killEnemy(e);
   }
 
-  damageBoss(dmg) {
-    const b = this.boss;
-    if (!b || !b.alive) return;
-    b.hp -= dmg;
-    b.flash = 0.06;
-    if (b.hp <= 0) {
-      b.hp = 0;
-      b.alive = false;
-      b.deadT = this.t;
-      this.bossKills++;
-      this.coins += b.spec.coin;
-      this.emit({ t: 'bossDie', x: b.x, z: b.z, coin: b.spec.coin });
-      if (this.mode === 'campaign') {
-        this.state = 'won';
-        this.endT = this.t;
-        this.emit({ t: 'win' });
-        // remaining zombies flee/die
-        for (const e of this.zombies) if (e.alive && e.active) this.killZombie(e, false);
-      } else {
-        this.state = 'run';
-        this.bossStop = Infinity;
-      }
+  hitItem(it, dmg, kind) {
+    it.hp -= dmg;
+    it.flash = 0.08;
+    if (it.hp > 0) return;
+    it.hp = 0;
+    it.alive = false;
+    if (kind === 'pickup') {
+      const before = this.sq.tier;
+      this.sq.tier = Math.max(this.sq.tier + 1, it.tier);
+      this.unlocks++;
+      this.emit({ t: 'weapon', tier: this.sq.tier, from: before, x: it.x, z: it.z });
+    } else {
+      this.unlocks++;
+      this.heroesJoined++;
+      const st = STATUES[it.kind];
+      const h = { kind: it.kind, hp: Math.max(1, Math.round(st.hp * this.lo.hp)), fire: 0.2, ox: it.x - this.sq.x, oz: it.z - this.sq.z, tx: 0, side: it.x < this.sq.x ? -1 : 1, fl: 0, ph: 0, born: this.t };
+      this.sq.heroes.push(h);
+      this.syncSoldiers();
+      this.emit({ t: 'heroJoin', kind: it.kind, x: it.x, z: it.z });
     }
   }
 
   explode(bm) {
     this.emit({ t: 'boom', x: bm.x, z: bm.z, r: bm.r, kind: bm.kind });
-    const r = bm.r;
-    for (const e of this.zombies) {
+    for (const e of this.enemies) {
       if (!e.alive) continue;
       const d = Math.hypot(e.x - bm.x, e.z - bm.z);
-      if (d < r + e.r) {
-        e.active = true;
-        this.damageZombie(e, bm.dmg * (1 - 0.5 * Math.min(1, d / r)));
-      }
+      if (d < bm.r + e.r) this.damageEnemy(e, bm.dmg * (e.boss ? bm.bossMul : 1) * (1 - 0.4 * Math.min(1, d / bm.r)));
     }
-    for (const o of this.objs) {
-      if (!o.alive) continue;
-      if (Math.abs(o.x - bm.x) < r + o.w && Math.abs(o.z - bm.z) < r) {
-        if (o.kind === 'barrel') this.breakObj(o, true);
-        else this.damageObj(o, bm.dmg * 0.6);
-      }
-    }
-    const b = this.boss;
-    if (b && b.alive && Math.hypot(b.x - bm.x, b.z - bm.z) < r + b.r) this.damageBoss(bm.dmg * bm.bossMul);
   }
 
-  // ------------------------------------------------------------ hero
+  // ------------------------------------------------------------ meta hero ability
   useAbility() {
     const h = this.hero;
     if (!h || h.cd > 0 || !this.live) return false;
@@ -274,43 +302,28 @@ export class World {
     const sq = this.sq;
     if (h.id === 'tank') {
       this.shieldT = h.st.dur;
-      this.booms.push({ x: sq.x, z: sq.z + 30, r: h.st.radius, dmg: dps * h.st.k, kind: 'shock', bossMul: 0.3 });
+      this.booms.push({ x: sq.x, z: sq.z + 2, r: h.st.radius / 30, dmg: dps * h.st.k, kind: 'shock', bossMul: 0.3 });
     } else if (h.id === 'jet') {
-      const lane = sq.x;
-      for (let i = 0; i < 7; i++) this.strikes.push({ t: this.t + 0.5 + i * 0.11, x: lane + rnd(-18, 18), dz: 240 + i * 175, dmg: dps * h.st.k, r: h.st.radius });
+      for (let i = 0; i < 8; i++) this.strikes.push({ t: this.t + 0.45 + i * 0.1, x: sq.x + (this.rand() - 0.5) * 1.2, dz: 8 + i * 4.2, dmg: dps * h.st.k, r: h.st.radius / 30 });
     } else {
-      // densest group (or the boss)
+      // densest group in view
       let best = null;
       let bestScore = 0;
-      for (const e of this.zombies) {
-        if (!e.alive || e.z - sq.z > VIEW - 150 || e.z < sq.z + 40) continue;
-        let score = 0;
-        for (const f of this.zombies) if (f.alive && Math.abs(f.x - e.x) < 150 && Math.abs(f.z - e.z) < 150) score += 1 + f.hp / (dps + 1);
+      for (const e of this.enemies) {
+        if (!e.alive || e.z - sq.z > VIEW - 6 || e.z < sq.z + 2) continue;
+        let score = e.boss ? 4 : 0;
+        for (const f of this.enemies) if (f.alive && Math.abs(f.x - e.x) < 3 && Math.abs(f.z - e.z) < 3) score += 1;
         if (score > bestScore) {
           bestScore = score;
           best = e;
         }
       }
-      let tx = sq.x;
-      let tz = sq.z + 700;
-      let target = null;
-      if (this.boss && this.boss.alive && this.boss.z - sq.z < VIEW && bestScore < 6) {
-        target = this.boss;
-      } else if (best) target = best;
-      if (target) {
-        tx = target.x;
-        tz = target.z;
-      }
-      this.missiles.push({ x0: sq.x, z0: sq.z + 10, tx, tz, target, t0: this.t, dur: 0.8, dmg: dps * h.st.k, r: h.st.radius, x: sq.x, z: sq.z, y: 20 });
+      const tx = best ? best.x : sq.x;
+      const tz = best ? best.z : sq.z + 25;
+      this.missiles.push({ x0: sq.x, z0: sq.z + 0.5, tx, tz, target: best, t0: this.t, dur: 0.8, dmg: dps * h.st.k, r: h.st.radius / 30, x: sq.x, z: sq.z, y: 1 });
     }
     this.emit({ t: 'ability', id: h.id, x: sq.x });
     return true;
-  }
-
-  see(what) {
-    if (this.seen.has(what)) return;
-    this.seen.add(what);
-    this.emit({ t: 'see', what });
   }
 
   // ------------------------------------------------------------ update
@@ -318,169 +331,274 @@ export class World {
     this.t += dt;
     const sq = this.sq;
     const live = this.live;
-    this.hitBudget = 14;
+    this.hitBudget = 10;
+    this.gen.fill(this, sq.z + VIEW + 90);
 
-    if (this.mode === 'endless') {
-      this.speed = 260 + Math.min(120, sq.z / 220);
-      this.gen.fill(this, sq.z + VIEW + 2500);
+    // movement: walk while the way is clear, creep when enemies are close
+    let near = Infinity;
+    for (const e of this.enemies) {
+      if (!e.alive) continue;
+      const dz = e.z - sq.z;
+      if (dz > -1 && dz < near && Math.abs(e.x - sq.x) < 3.5 + e.r) near = dz;
     }
-
-    // boss queue → spawn the boss entity when it comes into view
-    if (!this.boss && this.bossQ.length && this.bossQ[0].stopZ + 820 - sq.z < VIEW + 200) {
-      const q = this.bossQ.shift();
-      const s = q.spec;
-      this.boss = { spec: s, x: 0, z: q.stopZ + 820, hp: s.hp, max: s.hp, r: s.r, alive: true, active: false, flash: 0, ph: 0, stompT: 1, minT: 2, deadT: 0, atk: 0 };
-      this.bossStop = q.stopZ;
-    }
-
+    const want = !live ? 0 : near < 9 ? 0 : near < 22 ? 0.9 : WALK;
+    sq.speed += (want - sq.speed) * Math.min(1, dt * 3);
     if (live) {
-      if (this.state === 'run') {
-        let step = this.speed * dt;
-        if (sq.z + step >= this.bossStop) {
-          step = Math.max(0, this.bossStop - sq.z);
-          this.state = 'boss';
-          if (this.boss) this.boss.active = true;
-          this.emit({ t: 'bossStart', id: this.boss && this.boss.spec.id });
-        }
-        sq.z += step;
-      }
-      sq.x += (sq.tx - sq.x) * Math.min(1, dt * 14);
+      sq.z += sq.speed * dt;
+      sq.x += (sq.tx - sq.x) * Math.min(1, dt * 10);
     }
 
-    // formation
-    const k = Math.min(1, dt * 9);
+    // formation easing
+    const k = Math.min(1, dt * 8);
     for (const s of this.sol) {
       s.ox += (s.tx - s.ox) * k;
       s.oz += (s.tz - s.oz) * k;
       if (s.fl > 0) s.fl -= dt;
+      s.ph += dt * (0.9 + sq.speed * 0.45);
+    }
+    for (const h of sq.heroes) {
+      const kk = Math.min(1, dt * 3);
+      h.ox += (h.tx - h.ox) * kk;
+      h.oz += (-0.25 - h.oz) * kk;
+      if (h.fl > 0) h.fl -= dt;
+      h.ph += dt * (0.8 + sq.speed * 0.35);
     }
 
-    // firing
-    if (live) {
-      const rate = this.lo.rate * this.buff.rate;
-      const rs = Math.min(5, rate);
-      const D = this.sol.length;
-      const dmg = (this.lo.dmg * this.buff.dmg * (rate / rs) * sq.n) / Math.max(1, D);
-      const iv = 1 / rs;
-      let shots = 0;
-      for (const s of this.sol) {
-        s.fire -= dt;
-        if (s.fire <= 0) {
-          s.fire += iv * rnd(0.85, 1.15);
-          if (s.fire < 0) s.fire = iv * 0.5;
-          s.fl = 0.05;
-          const b = this.bpool.pop() || {};
-          b.x = sq.x + s.ox + 3;
-          b.z = sq.z + s.oz + 8;
-          b.vx = rnd(-18, 18);
-          b.dmg = dmg;
-          this.bullets.push(b);
-          shots++;
-        }
-      }
-      if (shots) this.emit({ t: 'shoot', n: shots });
-    }
-
+    this.updateWaves(dt, live);
+    if (live) this.fire(dt);
+    this.buildGrid();
     this.updateBullets(dt);
-    this.updateZombies(dt, live);
-    if (live) this.updateGates();
-    this.updateObjs(dt, live);
-    this.updateBoss(dt, live);
-    this.updateHero(dt, live);
-
-    // explosions (chains resolve over frames)
+    this.updateEnemies(dt, live);
+    if (live) this.updateItems(dt);
+    this.updateAbility(dt, live);
     if (this.booms.length) {
       const list = this.booms;
       this.booms = [];
       for (const bm of list) this.explode(bm);
     }
-
     // cleanup
-    if (this.zombies.length > 20) {
+    if (this.enemies.length) {
       let j = 0;
-      for (const e of this.zombies) if (e.alive && e.z > sq.z - 160) this.zombies[j++] = e;
-      this.zombies.length = j;
+      for (const e of this.enemies) if (e.alive && e.z > sq.z - 4) this.enemies[j++] = e;
+      this.enemies.length = j;
     }
-    if (this.objs.length) this.objs = this.objs.filter((o) => o.alive && o.z > sq.z - 220);
-    if (this.gates.length && this.gates[0].z < sq.z - 500) this.gates.shift();
+    const minZ = sq.z - 6;
+    if (this.crates.length && (this.crates[0].z < minZ || !this.crates[0].alive)) this.crates = this.crates.filter((c) => c.alive && c.z > minZ);
+    if (this.pickups.length) this.pickups = this.pickups.filter((p) => p.alive && p.z > minZ);
+    if (this.statues.length) this.statues = this.statues.filter((p) => p.alive && p.z > minZ);
+    if (this.rings.length) this.rings = this.rings.filter((p) => p.alive && p.z > minZ);
+    if (this.waves.length && this.waves[0].started && this.waves[0].spawned >= this.waves[0].count && this.waves[0].bossDone) this.waves.shift();
   }
 
+  updateWaves(dt, live) {
+    const sq = this.sq;
+    for (const w of this.waves) {
+      if (!w.started) {
+        if (sq.z + 4 >= w.z && live) {
+          w.started = true;
+          // marching column: rows of `rowN` soldiers, `gap` metres apart
+          w.rowN = Math.max(2, Math.round(w.width / 0.62));
+          w.gap = Math.max(0.55, Math.min(2.2, (ZTYPES.grunt.spd * w.rowN) / w.rate));
+          // the head of the column is already in sight when the wave starts
+          for (let z = sq.z + 26; z < sq.z + VIEW + 2 && w.spawned < w.count; z += w.gap) this.spawnRow(w, z);
+          this.emit({ t: 'wave', boss: !!w.boss, n: w.count });
+        } else continue;
+      }
+      if (!live) continue;
+      if (w.spawned < w.count) {
+        w.acc += (w.rate / w.rowN) * dt;
+        while (w.acc >= 1 && w.spawned < w.count) {
+          w.acc -= 1;
+          this.spawnRow(w, sq.z + VIEW + 2);
+        }
+        if (w.spawned >= w.count) {
+          for (const ex of w.extra) {
+            const T = ZTYPES[ex];
+            this.spawnEnemy(ex, w.cx + (this.rand() - 0.5), sq.z + VIEW + 3, w.hu * T.hpW, { cx: w.cx });
+            this.see(ex);
+          }
+        }
+      }
+      if (w.boss && !w.bossDone && w.spawned >= w.count * 0.6) {
+        w.bossDone = true;
+        const b = w.boss;
+        const e = this.spawnEnemy('brute', w.cx, sq.z + VIEW + 4, b.hp, { boss: true, scale: b.scale, spd: b.spd, pow: b.pow, coin: b.coin, spr: b.spr, cx: w.cx });
+        e.final = b.final;
+        e.id = b.id;
+        e.mega = b.mega;
+        e.minion = b.minion;
+        e.minT = 2.5;
+        this.boss = e;
+        this.emit({ t: 'bossStart', id: b.id });
+        this.see('boss');
+      }
+    }
+  }
+
+  spawnRow(w, z) {
+    const types = w.types;
+    let tot = 0;
+    for (const o of types) tot += o[1];
+    const n = Math.min(w.rowN, w.count - w.spawned);
+    for (let j = 0; j < n; j++) {
+      let r = this.rand() * tot;
+      let type = types[0][0];
+      for (const o of types) {
+        r -= o[1];
+        if (r <= 0) {
+          type = o[0];
+          break;
+        }
+      }
+      // staggered rows with loose jitter so the column reads as a crowd, not a block
+      const stag = w.rowI & 1 ? 0.5 : 0;
+      const off = (j + stag - (w.rowN - 1) / 2) * (w.width / w.rowN) + (this.rand() - 0.5) * 0.45;
+      const x = Math.max(-ROAD + 0.4, Math.min(ROAD - 0.4, w.cx + off));
+      this.spawnEnemy(type, x, z + (this.rand() - 0.5) * w.gap * 0.9, w.hu * ZTYPES[type].hpW, { off, cx: w.cx });
+    }
+    w.spawned += n;
+    w.rowI = (w.rowI || 0) + 1;
+  }
+
+  fire(dt) {
+    const sq = this.sq;
+    const w = this.weapon();
+    const rate = w.rate * sq.rateMul * this.lo.rate;
+    const vr = Math.min(VIS_RATE, rate);
+    const D = this.sol.length;
+    const perShot = w.dmg * this.tierBonus() * sq.dmgMul * this.lo.dmg * (rate / vr) * (sq.n / Math.max(1, D));
+    const iv = 1 / vr;
+    let shots = 0;
+    for (const s of this.sol) {
+      s.fire -= dt;
+      if (s.fire <= 0) {
+        s.fire += iv * (0.85 + 0.3 * this.rand());
+        if (s.fire < 0) s.fire = iv * 0.5;
+        s.fl = 0.05;
+        this.shot(sq.x + s.ox + 0.1, sq.z + s.oz + 0.5, perShot, 0);
+        shots++;
+      }
+    }
+    const sd = this.soldierDps();
+    for (const h of sq.heroes) {
+      const st = STATUES[h.kind];
+      h.fire -= dt;
+      if (h.fire <= 0) {
+        h.fire += 1 / st.rate;
+        h.fl = 0.07;
+        this.shot(sq.x + h.ox + 0.15, sq.z + h.oz + 0.8, (st.dpsK * sd) / st.rate, h.kind === 'rocket' ? 2 : 1);
+        shots++;
+      }
+    }
+    if (shots) this.emit({ t: 'shoot', n: shots, tier: sq.tier });
+  }
+
+  shot(x, z, dmg, kind) {
+    const b = this.bpool.pop() || {};
+    b.x = x;
+    b.z = z;
+    b.z0 = z;
+    b.vx = (this.rand() - 0.5) * 0.25;
+    b.dmg = dmg;
+    b.kind = kind;
+    b.max = this.sq.z + RANGE;
+    this.bullets.push(b);
+  }
+
+  buildGrid() {
+    const head = this.gHead;
+    head.fill(NOP);
+    const es = this.enemies;
+    if (this.gNext.length < es.length) this.gNext = new Int32Array(es.length * 2);
+    const next = this.gNext;
+    const z0 = this.sq.z - 6;
+    for (let i = 0; i < es.length; i++) {
+      const e = es[i];
+      if (!e.alive || e.big) continue;
+      const c = Math.floor((e.x - GX0) / GCW);
+      const r = Math.floor(e.z - z0);
+      if (c < 0 || c >= GCOLS || r < 0 || r >= GROWS) continue;
+      const k = r * GCOLS + c;
+      next[i] = head[k];
+      head[k] = i;
+    }
+  }
+
+  // first live thing hit by a bullet moving from z0 to z1 along x
   updateBullets(dt) {
     const sq = this.sq;
-    const maxZ = sq.z + VIEW;
-    const zs = this.zombies;
-    const objs = this.objs;
-    const boss = this.boss && this.boss.alive ? this.boss : null;
-    const gates = this.gates;
+    const es = this.enemies;
+    const head = this.gHead;
+    const next = this.gNext;
+    const gz0 = sq.z - 6;
     const list = this.bullets;
+    const items = this.pickups.length || this.statues.length;
     let j = 0;
     for (let i = 0; i < list.length; i++) {
       const b = list[i];
       const z0 = b.z;
       b.z += BSPD * dt;
       b.x += b.vx * dt;
+      const z1 = b.z;
       let hit = null;
-      let hitKind = 0;
       let hz = Infinity;
-      for (let q = 0; q < zs.length; q++) {
-        const e = zs[q];
-        if (!e.alive || e.z > maxZ) continue;
-        const r = e.r;
-        if (e.z - r > b.z || e.z + r < z0 || Math.abs(e.x - b.x) > r) continue;
-        if (e.z < hz) {
-          hz = e.z;
-          hit = e;
-          hitKind = 1;
+      let hk = 0;
+      // small enemies via grid
+      const c = Math.floor((b.x - GX0) / GCW);
+      const r0 = Math.max(0, Math.floor(z0 - gz0) - 1);
+      const r1 = Math.min(GROWS - 1, Math.floor(z1 - gz0) + 1);
+      for (let r = r0; r <= r1 && !hit; r++) {
+        for (let cc = c - 1; cc <= c + 1; cc++) {
+          if (cc < 0 || cc >= GCOLS) continue;
+          for (let q = head[r * GCOLS + cc]; q !== NOP; q = next[q]) {
+            const e = es[q];
+            if (!e.alive) continue;
+            if (e.z - e.r > z1 || e.z + e.r < z0 || Math.abs(e.x - b.x) > e.r) continue;
+            if (e.z < hz) {
+              hz = e.z;
+              hit = e;
+              hk = 1;
+            }
+          }
         }
       }
-      for (let q = 0; q < objs.length; q++) {
-        const o = objs[q];
-        if (!o.alive || o.z > maxZ) continue;
-        if (o.z - 14 > b.z || o.z + 14 < z0 || Math.abs(o.x - b.x) > o.w) continue;
-        if (o.z < hz) {
-          hz = o.z;
-          hit = o;
-          hitKind = 2;
-        }
+      // big enemies (bosses, brutes)
+      for (let q = 0; q < es.length; q++) {
+        const e = es[q];
+        if (!e.big || !e.alive || e.z >= hz) continue;
+        if (e.z - e.r > z1 || e.z + e.r * 0.5 < z0 || Math.abs(e.x - b.x) > e.r * 0.9) continue;
+        hz = e.z;
+        hit = e;
+        hk = 1;
       }
-      if (boss && boss.z < maxZ) {
-        const r = boss.r;
-        if (!(boss.z - r * 0.6 > b.z || boss.z + r * 0.6 < z0 || Math.abs(boss.x - b.x) > r * 0.9) && boss.z < hz) {
-          hz = boss.z;
-          hit = boss;
-          hitKind = 3;
+      if (items) {
+        for (const p of this.pickups) {
+          if (!p.alive || p.z >= hz || p.z > z1 || p.z < z0 - 0.5 || Math.abs(p.x - b.x) > p.w) continue;
+          hz = p.z;
+          hit = p;
+          hk = 2;
         }
-      }
-      for (let q = 0; q < gates.length; q++) {
-        const g = gates[q];
-        if (g.done || g.z > maxZ || !(z0 < g.z && b.z >= g.z) || g.z > hz) continue;
-        const half = b.x < 0 ? g.h[0] : g.h[1];
-        if (half && half.shoot) {
-          hit = half;
-          hitKind = 4;
-          hz = g.z;
+        for (const p of this.statues) {
+          if (!p.alive || p.z >= hz || p.z > z1 || p.z < z0 - 0.5 || Math.abs(p.x - b.x) > p.w) continue;
+          hz = p.z;
+          hit = p;
+          hk = 3;
         }
       }
       if (hit) {
-        if (hitKind === 1) this.damageZombie(hit, b.dmg);
-        else if (hitKind === 2) this.damageObj(hit, b.dmg);
-        else if (hitKind === 3) this.damageBoss(b.dmg);
-        else {
-          hit.prog += b.dmg;
-          hit.pulse = 0.12;
-          while (hit.prog >= hit.step) {
-            hit.prog -= hit.step;
-            hit.v += 1;
-          }
-        }
-        if (this.hitBudget > 0 && hitKind !== 4) {
-          this.hitBudget--;
-          this.emit({ t: 'hit', x: b.x, z: hz, k: hitKind, y: hitKind === 3 ? hit.r * 1.4 : hitKind === 1 ? hit.h * 0.6 : 12 });
+        if (b.kind === 2) {
+          this.booms.push({ x: b.x, z: hz, r: STATUES.rocket.splash, dmg: b.dmg, kind: 'rocket', bossMul: 1 });
+          if (hk !== 1) this.hitItem(hit, b.dmg, hk === 2 ? 'pickup' : 'statue');
+        } else if (hk === 1) this.damageEnemy(hit, b.dmg);
+        else this.hitItem(hit, b.dmg, hk === 2 ? 'pickup' : 'statue');
+        if (hk !== 1 || hit.big || this.hitBudget > 0) {
+          if (hk === 1 && !hit.big) this.hitBudget--;
+          this.emit({ t: 'hit', o: hit, x: b.x, z: hz, k: hk, big: hk !== 1 || hit.big, dmg: b.dmg, y: hk === 1 ? hit.r * 2.4 * (hit.big ? 1.2 : 1) : hk === 2 ? 1.0 : 1.9 });
         }
         this.bpool.push(b);
         continue;
       }
-      if (b.z > maxZ) {
+      if (b.z > b.max) {
         this.bpool.push(b);
         continue;
       }
@@ -489,139 +607,104 @@ export class World {
     list.length = j;
   }
 
-  updateZombies(dt, live) {
+  updateEnemies(dt, live) {
     const sq = this.sq;
-    const wake = VIEW - 120;
-    for (const e of this.zombies) {
+    const R = sq.R;
+    for (const e of this.enemies) {
       if (!e.alive) continue;
-      e.ph += dt;
+      e.ph += dt * (e.spd * 0.9);
       if (e.flash > 0) e.flash -= dt;
-      if (!e.active) {
-        if (e.z - sq.z < wake && this.state !== 'ready') {
-          e.active = true;
-          if (ZTYPES[e.type].bar) this.see(e.type);
+      if (e.atk > 0) e.atk -= dt;
+      if (this.state === 'won') continue;
+      const dz = e.z - sq.z;
+      // marching column: drift toward the squad lane as they get close
+      const follow = dz < 34 ? 1 : 0.35;
+      // the column funnels onto the squad as it charges (edges converge into the fire)
+      const squeeze = dz < 30 ? Math.max(0.2, (dz - 3) / 27) : 1;
+      const want = e.cx + (sq.x - e.cx) * follow + e.off * squeeze;
+      const m = (e.big ? 0.8 : 1.3) * dt;
+      e.x += Math.max(-m, Math.min(m, want - e.x));
+      if (e.x > ROAD - 0.35) e.x = ROAD - 0.35;
+      else if (e.x < -ROAD + 0.35) e.x = -ROAD + 0.35;
+      const reach = R * 0.75 + e.r;
+      const inLane = Math.abs(e.x - sq.x) < R + e.r * 0.8;
+      if (e.big) {
+        if (dz > reach || !inLane || !live) e.z -= e.spd * dt;
+        else if (live) {
+          e.contact += dt;
+          e.stompT -= dt;
+          if (e.stompT <= 0) {
+            e.stompT = 1.1;
+            e.atk = 0.35;
+            this.emit({ t: 'stomp', x: e.x, z: e.z - e.r, boss: e.boss });
+            this.hurt(Math.max(e.pow * (1 + e.contact / 12), this.lo.hp * 1.01), e.x, e.z - e.r);
+          }
+        }
+        if (e.boss && e.minion && live && dz < VIEW - 4) {
+          e.minT -= dt;
+          if (e.minT <= 0) {
+            e.minT = e.minion.every;
+            for (let i = 0; i < e.minion.count; i++) {
+              const off = (this.rand() - 0.5) * 3;
+              this.spawnEnemy(e.minion.type, Math.max(-ROAD + 0.4, Math.min(ROAD - 0.4, e.x + off)), e.z - e.r - 0.5 - this.rand(), e.minion.hp, { off, cx: e.x });
+            }
+            this.emit({ t: 'summon', x: e.x, z: e.z });
+          }
         }
         continue;
       }
-      if (this.state === 'won') continue;
       e.z -= e.spd * dt;
-      const want = sq.x + e.off;
-      const dx = want - e.x;
-      const m = e.lat * dt;
-      e.x += Math.max(-m, Math.min(m, dx));
-      if (e.x > ROAD - 8) e.x = ROAD - 8;
-      else if (e.x < -ROAD + 8) e.x = -ROAD + 8;
       if (!live) continue;
-      const ddx = e.x - sq.x;
-      const ddz = e.z - sq.z;
-      const rr = this.R + e.r;
-      if (ddx * ddx + ddz * ddz < rr * rr) {
+      if (dz < reach && dz > -R && inLane) {
         if (this.shieldT > 0) {
-          this.killZombie(e, true);
+          this.killEnemy(e, true);
           this.emit({ t: 'shieldHit', x: e.x, z: e.z });
         } else {
-          this.killZombie(e, false);
-          this.hurt(e.power, e.x, e.z);
-          if (e.type === 'bloater') this.emit({ t: 'boom', x: e.x, z: e.z, r: 60, kind: 'bloat' });
+          this.killEnemy(e, false);
+          this.hurt(e.pow, e.x, e.z);
         }
       }
     }
   }
 
-  updateGates() {
+  updateItems(dt) {
     const sq = this.sq;
-    for (const g of this.gates) {
-      if (g.done) continue;
-      if (g.z - sq.z < 1250) {
-        if (g.h.some((h) => h && h.shoot)) this.see('shootGate');
-        else this.see('gate');
+    const R = sq.R;
+    for (const c of this.crates) {
+      if (!c.alive) continue;
+      const dz = c.z - sq.z;
+      if (dz > 30) break; // crates are ordered by z
+      if (dz < 20) this.see('crate');
+      if (Math.abs(dz) < R * 0.7 + 0.45 && Math.abs(c.x - sq.x) < R + 0.55) {
+        c.alive = false;
+        this.cratesGot++;
+        const d = this.setCount(sq.n + c.v);
+        this.emit({ t: 'crate', x: c.x, z: c.z, v: c.v, d });
       }
-      for (const h of g.h) if (h && h.pulse > 0) h.pulse -= 1 / 60;
-      if (sq.z >= g.z) {
-        g.done = true;
-        g.t = this.t;
-        const side = sq.x < 0 ? 0 : 1;
-        g.pick = side;
-        const h = g.h[side];
-        if (!h) continue;
-        const good = gateGood(h);
-        const before = sq.n;
-        const after = Gen.apply(before, h);
-        if (good) this.gatesGood++;
-        this.emit({ t: 'gate', good, label: gateLabel(h), x: sq.x, z: sq.z, delta: after - before });
-        this.setCount(after);
+    }
+    for (const p of this.pickups) {
+      if (p.flash > 0) p.flash -= dt;
+      if (p.alive && p.z - sq.z < 30) this.see('pickup');
+    }
+    for (const p of this.statues) {
+      if (p.flash > 0) p.flash -= dt;
+      if (p.alive && p.z - sq.z < 32) this.see('statue');
+    }
+    for (const g of this.rings) {
+      g.t += dt;
+      if (!g.alive) continue;
+      const dz = g.z - sq.z;
+      if (dz < 26) this.see('ring');
+      if (Math.abs(dz) < 0.6 && Math.abs(g.x - sq.x) < 1.25 + R * 0.4) {
+        g.alive = false;
+        if (g.kind === 'rate') sq.rateMul *= 1 + g.p / 100;
+        else sq.dmgMul *= 1 + g.p / 100;
+        this.emit({ t: 'ring', kind: g.kind, p: g.p, x: g.x, z: g.z });
       }
     }
   }
 
-  updateObjs(dt, live) {
-    const sq = this.sq;
-    for (const o of this.objs) {
-      if (!o.alive) continue;
-      if (o.flash > 0) o.flash -= dt;
-      if (o.z - sq.z < 1200) this.see(o.kind);
-      if (!live) continue;
-      if (Math.abs(o.z - sq.z) < this.R * 0.5 + 12 && Math.abs(o.x - sq.x) < o.w + this.R * 0.75) {
-        if (o.kind === 'crate') this.breakObj(o, false);
-        else {
-          if (this.shieldT <= 0) this.hurt(o.power, o.x, o.z);
-          else this.emit({ t: 'shieldHit', x: o.x, z: o.z });
-          this.breakObj(o, false);
-        }
-      }
-    }
-  }
-
-  updateBoss(dt, live) {
-    const b = this.boss;
-    if (!b) return;
-    b.ph += dt;
-    if (b.flash > 0) b.flash -= dt;
-    if (b.atk > 0) b.atk -= dt;
-    if (!b.alive) {
-      if (this.t - b.deadT > 2.5) this.boss = null;
-      return;
-    }
-    const sq = this.sq;
-    if (b.z - sq.z < 1300) this.see('boss');
-    if (!b.active || !live) return;
-    const contact = this.R + b.r * 0.8;
-    const dz = b.z - sq.z;
-    if (dz > contact + 0.5) {
-      b.z -= Math.min(dz - contact, b.spec.spd * dt);
-      b.walking = true;
-    } else b.walking = false;
-    const dx = sq.x - b.x;
-    b.x += Math.max(-40 * dt, Math.min(40 * dt, dx));
-    // minions
-    const mn = b.spec.minion;
-    if (mn) {
-      b.minT -= dt;
-      if (b.minT <= 0) {
-        b.minT = mn.every;
-        for (let i = 0; i < mn.count; i++) {
-          this.addZombie(mn.type, Math.max(-ROAD + 10, Math.min(ROAD - 10, b.x + rnd(-110, 110))), b.z - b.r - rnd(10, 60), mn.hp, mn.power);
-          const e = this.zombies[this.zombies.length - 1];
-          e.active = true;
-        }
-        this.emit({ t: 'summon', x: b.x, z: b.z });
-      }
-    }
-    // stomp attack when touching the squad
-    if (!b.walking) {
-      b.contactT = (b.contactT || 0) + dt;
-      b.stompT -= dt;
-      if (b.stompT <= 0) {
-        b.stompT = 1.25;
-        b.atk = 0.35;
-        this.emit({ t: 'stomp', x: b.x, z: b.z - b.r });
-        // always at least one soldier; enrages the longer the fight lasts
-        this.hurt(Math.max(b.spec.power * (1 + b.contactT / 10), this.lo.hp * 1.01), b.x, b.z - b.r);
-      }
-    }
-  }
-
-  updateHero(dt, live) {
+  updateAbility(dt, live) {
     const h = this.hero;
     const sq = this.sq;
     if (h && live && h.cd > 0) h.cd = Math.max(0, h.cd - dt);
@@ -629,7 +712,7 @@ export class World {
     if (this.strikes.length) {
       const rest = [];
       for (const s of this.strikes) {
-        if (this.t >= s.t) this.booms.push({ x: s.x, z: sq.z + s.dz, r: s.r, dmg: s.dmg, kind: 'bomb', bossMul: 0.12 });
+        if (this.t >= s.t) this.booms.push({ x: s.x, z: sq.z + s.dz, r: s.r, dmg: s.dmg, kind: 'bomb', bossMul: 0.15 });
         else rest.push(s);
       }
       this.strikes = rest;
@@ -637,17 +720,14 @@ export class World {
     if (this.missiles.length) {
       const rest = [];
       for (const m of this.missiles) {
-        if (m.target && m.target.alive !== false) {
+        if (m.target && m.target.alive) {
           m.tx = m.target.x;
           m.tz = m.target.z;
         }
         const u = Math.min(1, (this.t - m.t0) / m.dur);
-        m.px = m.x;
-        m.pz = m.z;
-        m.py = m.y;
         m.x = m.x0 + (m.tx - m.x0) * u;
         m.z = m.z0 + (m.tz - m.z0) * u;
-        m.y = 20 + Math.sin(Math.PI * u) * 260;
+        m.y = 1 + Math.sin(Math.PI * u) * 9;
         if (u >= 1) this.booms.push({ x: m.tx, z: m.tz, r: m.r, dmg: m.dmg, kind: 'missile', bossMul: 0.35 });
         else rest.push(m);
       }

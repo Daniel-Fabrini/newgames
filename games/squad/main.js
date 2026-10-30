@@ -1,11 +1,12 @@
-// Survivor Squad — base building + lane runner-shooter.
+// War Command (Comando de Guerra) — base building + canyon squad-vs-horde battles.
 // Main screen: isometric base (Build / Army / Missions / Map tabs).
-// Core gameplay: the runner (sim.js + render.js).
+// Core gameplay: the canyon battle (gen.js + sim.js + render.js, Blender atlases in assets/).
 
 import STRINGS from './strings.js';
 import * as D from './data.js';
 import { World } from './sim.js';
 import { Renderer } from './render.js';
+import { loadAssets } from './assets.js';
 import { Sprites, drawSpr } from './sprites.js';
 import { BaseView, buildingThumb } from './base.js';
 import { icon, rankBadge } from './icons.js';
@@ -19,6 +20,7 @@ export async function mount(root, ctx) {
   const num = (n) => Math.floor(n).toLocaleString(locale);
   await ctx.loadCSS(new URL('./style.css', import.meta.url));
 
+  loadAssets().catch(() => {}); // warm the sprite atlases while the base loads
   let save = D.migrateSave(ctx.store.get('save', null));
   const persist = () => ctx.store.set('save', save);
   persist();
@@ -636,16 +638,21 @@ export async function mount(root, ctx) {
   // ----------------------------------------------------------- missions
   function levelPreview(level, w, hh) {
     const cv = h('canvas', { class: 'g-squad-preview' });
-    try {
-      const nom = D.nominalStats(level);
-      const world = new World({ mode: 'campaign', level, seed: level * 7919 + 13, lo: { ...D.playerStats(save) }, hero: null, pNom: nom.dmg * nom.rate, E0: nom.startN });
-      const r = new Renderer(cv, { mode: 'campaign', level, themeIndex: D.themeIndex(level), rank: D.rankOf(save.train), t, preview: true, sprites: sharedSprites });
-      r.resize(w, hh, dpr());
-      for (let i = 0; i < 3; i++) world.update(0.016);
-      r.frame(world, 0.016);
-    } catch (e) {
-      console.error(e);
-    }
+    loadAssets()
+      .then((A) => {
+        if (!alive) return;
+        const n = D.nominalStats(level);
+        const lo0 = D.playerStats(save);
+        const nom = { startN: n.startN, dmg: n.dmg, rate: n.rate / 2.6 };
+        const world = new World({ mode: 'campaign', level, seed: level * 7919 + 13, lo: { ...lo0, rate: lo0.rate / 2.6 }, nom, hero: null });
+        const r = new Renderer(cv, { assets: A, themeIndex: D.themeIndex(level), t, preview: true });
+        r.resize(w, hh, dpr());
+        world.start();
+        for (let i = 0; i < 200; i++) world.update(1 / 30);
+        world.events.length = 0;
+        r.frame(world, 0.016);
+      })
+      .catch((e) => console.error(e));
     return cv;
   }
   function renderMissions(body) {
@@ -744,12 +751,13 @@ export async function mount(root, ctx) {
 
   // ----------------------------------------------------------- map
   const mapSprites = sharedSprites;
+  // map decoration per canyon theme: [procedural prop theme, kinds]
   const regionProps = {
-    city: ['tree', 'building', 'car', 'lamp'],
-    desert: ['cactus', 'rock', 'wreck', 'skull'],
-    snow: ['pine', 'snowrock', 'pine', 'fence'],
-    night: ['building_n', 'tree', 'car', 'lamp'],
-    toxic: ['deadtree', 'drums', 'pipe', 'hazard'],
+    canyon: ['desert', ['cactus', 'rock', 'wreck', 'skull']],
+    redrock: ['desert', ['rock', 'cactus', 'rock', 'skull']],
+    frost: ['snow', ['pine', 'snowrock', 'pine', 'fence']],
+    dusk: ['night', ['tree', 'car', 'lamp', 'tree']],
+    toxic: ['toxic', ['deadtree', 'drums', 'pipe', 'hazard']],
   };
   function paintRegion(cv, r, nodes) {
     const th = D.THEMES[r % D.THEMES.length];
@@ -783,7 +791,7 @@ export async function mount(root, ctx) {
     // path through nodes
     g.lineCap = 'round';
     g.lineJoin = 'round';
-    for (const [lw, col] of [[22, 'rgba(0,0,0,.18)'], [16, th.id === 'snow' ? '#c9d3df' : '#b8925a'], [3, 'rgba(255,255,255,.35)']]) {
+    for (const [lw, col] of [[22, 'rgba(0,0,0,.18)'], [16, th.id === 'frost' ? '#c9d3df' : '#d8bf94'], [3, 'rgba(255,255,255,.35)']]) {
       g.strokeStyle = col;
       g.lineWidth = lw;
       if (lw === 3) g.setLineDash([6, 8]);
@@ -793,7 +801,7 @@ export async function mount(root, ctx) {
       g.setLineDash([]);
     }
     // props
-    const kinds = regionProps[th.id];
+    const [propTheme, kinds] = regionProps[th.id] || regionProps.canyon;
     const items = [];
     for (let i = 0; i < 26; i++) {
       const x = rr() * W;
@@ -803,7 +811,7 @@ export async function mount(root, ctx) {
     }
     items.sort((a, b) => a.y - b.y);
     for (const it of items) {
-      const sp = mapSprites.prop(it.kind, th.id, 0);
+      const sp = mapSprites.prop(it.kind, propTheme, 0);
       if (sp) drawSpr(g, sp, it.x, it.y, it.kind.startsWith('building') ? 0.32 : 0.55);
     }
     if (th.dark > 0.3) {
@@ -982,41 +990,62 @@ export async function mount(root, ctx) {
 
   // =========================================================== RUN
   const HERO_TIP = { tank: 'ab_tank', jet: 'ab_jet', missile: 'ab_missile' };
-  function spriteThumb(draw, size = 72) {
+  // small canvas thumbnail of an atlas frame (start card intros)
+  function atlasThumb(img, frame, size = 64) {
     const cv = h('canvas', { class: 'g-squad-sprthumb' });
     const k = dpr();
     cv.width = cv.height = Math.round(size * k);
     cv.style.width = cv.style.height = size + 'px';
-    const g = cv.getContext('2d');
-    g.setTransform(k, 0, 0, k, 0, 0);
-    draw(g, size);
+    loadAssets()
+      .then((A) => {
+        const fr = A.F[img][frame];
+        const g = cv.getContext('2d');
+        const s = (size * k * 0.9) / Math.max(fr[2], fr[3]);
+        g.drawImage(A.img[img], fr[0], fr[1], fr[2], fr[3], (size * k - fr[2] * s) / 2, size * k - fr[3] * s - 2 * k, fr[2] * s, fr[3] * s);
+      })
+      .catch(() => {});
     return cv;
   }
+  const enemyThumb = { grunt: 'red_0', shield: 'shd_0', runner: 'red_0', elite: 'shd_0', brute: 'bru_0', giant: 'bru_0' };
 
-  function startRun(mode, level) {
+  async function startRun(mode, level) {
     teardownBase();
     teardownRun();
     screen = 'run';
     clear(app);
-    const lo = D.playerStats(save);
+    const loading = h('div', { class: 'g-squad-loading' }, h('div', { class: 'spinner' }));
+    app.append(loading);
+    let A;
+    try {
+      A = await loadAssets();
+    } catch (e) {
+      console.error(e);
+      if (!alive) return;
+      loading.remove();
+      ctx.ui.toast(t('loadError'));
+      showBase();
+      return;
+    }
+    if (!alive || screen !== 'run') return;
+    loading.remove();
+    const lo0 = D.playerStats(save);
+    const lo = { ...lo0, rate: lo0.rate / 2.6 };
     const heroId = save.hero;
     const hero = { id: heroId, lvl: save.heroes[heroId].lvl, tower: save.bld.tower };
-    let pNom;
-    let E0;
+    let nom;
     let seed;
     if (mode === 'campaign') {
-      const nom = D.nominalStats(level);
-      pNom = nom.dmg * nom.rate;
-      E0 = nom.startN;
+      const n = D.nominalStats(level);
+      nom = { startN: n.startN, dmg: n.dmg, rate: n.rate / 2.6 };
       seed = level * 7919 + 13;
     } else {
-      pNom = lo.dmg * lo.rate;
-      E0 = lo.startN;
+      nom = { startN: lo.startN, dmg: lo.dmg, rate: lo.rate };
       seed = (Date.now() % 1000000007) | 0;
     }
-    const world = new World({ mode, level: mode === 'campaign' ? level : 1, seed, lo, hero, pNom, E0, killCoin: D.killCoin(mode === 'campaign' ? level : save.level) });
+    const world = new World({ mode, level: mode === 'campaign' ? level : 1, seed, lo, nom, hero, killCoin: D.killCoin(mode === 'campaign' ? level : save.level) });
     const cv = h('canvas', { class: 'g-squad-runcv' });
-    const renderer = new Renderer(cv, { mode, level, themeIndex: mode === 'campaign' ? D.themeIndex(level) : 0, rank: lo.rank, t, sprites: sharedSprites });
+    const themeIdx = mode === 'campaign' ? D.themeIndex(level) : Math.floor(Date.now() / 86400000) % D.THEMES.length;
+    const renderer = new Renderer(cv, { assets: A, themeIndex: themeIdx, t });
 
     // HUD
     const pauseBtn = h('button', { class: 'g-squad-round', 'aria-label': t('pause'), onclick: () => pauseRun() }, icon('pause'));
@@ -1027,7 +1056,8 @@ export async function mount(root, ctx) {
     const coinPill = h('div', { class: 'g-squad-hudpill coin' }, icon('gold'), coinVal);
     const bossName = h('span');
     const bossI = h('i');
-    const bossBar = h('div', { class: 'g-squad-bossbar' }, h('div', { class: 'g-squad-bossname' }, icon('skull'), bossName), h('div', { class: 'g-squad-bosshp' }, bossI));
+    const bossHp = h('em');
+    const bossBar = h('div', { class: 'g-squad-bossbar' }, h('div', { class: 'g-squad-bossname' }, icon('skull'), bossName), h('div', { class: 'g-squad-bosshp' }, bossI, bossHp));
     const buffs = h('div', { class: 'g-squad-buffs' });
     const hint = h('div', { class: 'g-squad-hint' });
     const abBtn = h(
@@ -1040,56 +1070,36 @@ export async function mount(root, ctx) {
       icon(heroId, 'hero'),
       h('span', { class: 'g-squad-ab-lbl' }, t('ready')),
     );
-    const top = h('div', { class: 'g-squad-hudtop' }, pauseBtn, lvlPill, mode === 'campaign' ? prog : h('div', { class: 'g-squad-distbox' }), coinPill);
-    const distBox = mode === 'endless' ? top.children[2] : null;
+    const distBox = mode === 'endless' ? h('div', { class: 'g-squad-distbox' }) : null;
+    const top = h('div', { class: 'g-squad-hudtop' }, pauseBtn, lvlPill, mode === 'campaign' ? prog : distBox, coinPill);
     if (mode === 'campaign') lvlPill.append(h('b', null, t('levelUpper', { n: level })));
     else lvlPill.append(icon('infinity'), h('b', null, t('survival')));
 
     // start overlay
-    const th = mode === 'campaign' ? D.themeFor(level) : D.THEMES[0];
-    const startCard = h('div', { class: 'g-squad-startcard' }, h('small', null, mode === 'campaign' ? `${t('region', { n: D.regionOf(level) + 1 })} · ${t('th_' + th.id)}` : t('best', { d: num(save.bestDist) })), h('b', null, mode === 'campaign' ? t('levelUpper', { n: level }) : t('survival')));
-    const sprites = renderer.spr;
+    const th = D.THEMES[themeIdx];
+    const startCard = h(
+      'div',
+      { class: 'g-squad-startcard' },
+      h('small', null, mode === 'campaign' ? `${t('region', { n: D.regionOf(level) + 1 })} · ${t('th_' + th.id)}` : t('best', { d: num(save.bestDist) })),
+      h('b', null, mode === 'campaign' ? t('levelUpper', { n: level }) : t('survival')),
+    );
     if (mode === 'campaign') {
       const fresh = D.newEnemyAt(level);
       const bossDef = D.bossFor(level);
       if (fresh) {
-        startCard.append(
-          h(
-            'div',
-            { class: 'g-squad-intro' },
-            spriteThumb((g, s) => {
-              const sp = sprites.zombie(fresh, 0, 1, false);
-              drawSpr(g, sp, s / 2, s - 6, (s - 12) / Math.max(sp.h, sp.w));
-            }, 64),
-            h('div', null, h('small', null, t('newEnemy')), h('b', null, t('z_' + fresh)), h('span', null, t('zd_' + fresh))),
-          ),
-        );
+        startCard.append(h('div', { class: 'g-squad-intro' }, atlasThumb('units', enemyThumb[fresh] || 'red_0'), h('div', null, h('small', null, t('newEnemy')), h('b', null, t('z_' + fresh)), h('span', null, t('zd_' + fresh)))));
       } else if (bossDef.from === level && level > 1) {
-        startCard.append(
-          h(
-            'div',
-            { class: 'g-squad-intro' },
-            spriteThumb((g, s) => {
-              const sp = sprites.boss(bossDef.id, 0, false);
-              drawSpr(g, sp, s / 2, s - 4, (s - 8) / Math.max(sp.h, sp.w));
-            }, 64),
-            h('div', null, h('small', null, t('newBoss')), h('b', null, t('boss_' + bossDef.id))),
-          ),
-        );
+        startCard.append(h('div', { class: 'g-squad-intro' }, atlasThumb('units', 'bru_0'), h('div', null, h('small', null, t('newBoss')), h('b', null, t('boss_' + bossDef.id)))));
       }
     }
-    const startOv = h(
-      'div',
-      { class: 'g-squad-start' },
-      startCard,
-      h('div', { class: 'g-squad-hand' }, h('i'), h('span', null, t('tapToStart'))),
-    );
-    const el = h('div', { class: 'g-squad-run' }, cv, h('div', { class: 'g-squad-vign' }), top, bossBar, buffs, hint, abBtn, startOv);
+    const startOv = h('div', { class: 'g-squad-start' }, startCard, h('div', { class: 'g-squad-hand' }, h('i'), h('span', null, t('tapToStart'))));
+    const el = h('div', { class: 'g-squad-run' }, cv, top, bossBar, buffs, hint, abBtn, startOv);
     app.append(el);
 
     run = {
-      mode, level, world, renderer, cv, el, startOv, hint, abBtn, bossBar, bossI, bossName, buffs, coinVal, progI, distBox,
+      mode, level, world, renderer, cv, el, startOv, hint, abBtn, bossBar, bossI, bossHp, bossName, buffs, coinVal, progI, distBox,
       paused: false, ended: false, resultShown: false, sfxT: {}, lastCoins: -1, lastBuff: '', hintQ: [], hintT: 0, drag: null, keys: {}, abilityHinted: false,
+      crateChain: 0, crateT: 0, crowdT: 0,
       q: { ema: 1 / 60, n: 0, dpr: dpr() },
     };
     resizeRun();
@@ -1139,7 +1149,7 @@ export async function mount(root, ctx) {
   function onRunMove(e) {
     if (!run || !run.drag || run.drag.id !== e.pointerId || run.paused) return;
     const dx = e.clientX - run.drag.x0;
-    run.world.steer(run.drag.tx0 + (dx / run.renderer.s0) * 1.3);
+    run.world.steer(run.drag.tx0 + (dx / run.renderer.s0) * 1.15);
   }
   function onRunUp(e) {
     if (run && run.drag && run.drag.id === e.pointerId) run.drag = null;
@@ -1219,12 +1229,56 @@ export async function mount(root, ctx) {
   };
   document.addEventListener('visibilitychange', onVis);
 
+  // ----------------------------------------------------------- synthesized sound
   function rl(key, ms) {
     const n = performance.now();
     if (n - (run.sfxT[key] || 0) < ms) return false;
     run.sfxT[key] = n;
     return true;
   }
+  const SND = {
+    gun(tier, n) {
+      // short noise burst; heavier weapons sound lower and fuller
+      const f = [2600, 2300, 1900, 1500, 1300, 900][Math.min(5, tier)];
+      const v = Math.min(0.22, 0.09 + 0.015 * Math.sqrt(n));
+      sfx.noise({ dur: 0.045, vol: v, freq: f, q: 0.7 });
+      if (tier >= 3) sfx.noise({ dur: 0.06, vol: v * 0.7, freq: 380, q: 0.9, delay: 0.005 });
+      if (tier >= 5) sfx.tone({ freq: 1400, to: 500, dur: 0.06, type: 'sawtooth', vol: 0.03 });
+    },
+    hit() {
+      sfx.tone({ freq: 1800, to: 1200, dur: 0.03, type: 'square', vol: 0.03 });
+    },
+    kill() {
+      sfx.noise({ dur: 0.07, vol: 0.06, freq: 700, q: 1.2 });
+    },
+    crate(chain) {
+      const f = 520 * Math.pow(2, Math.min(12, chain) / 12);
+      sfx.tone({ freq: f, to: f * 1.5, dur: 0.08, type: 'triangle', vol: 0.12 });
+    },
+    fanfare(big) {
+      const notes = big ? [523, 659, 784, 1047, 1319] : [523, 659, 784, 1047];
+      notes.forEach((f, i) => sfx.tone({ freq: f, dur: 0.16, type: 'triangle', vol: 0.18, delay: i * 0.085 }));
+      notes.forEach((f, i) => sfx.tone({ freq: f / 2, dur: 0.16, type: 'square', vol: 0.05, delay: i * 0.085 }));
+      if (big) sfx.tone({ freq: 1047, to: 1568, dur: 0.5, type: 'sine', vol: 0.12, delay: 0.42 });
+    },
+    ring() {
+      sfx.play('whoosh');
+      sfx.tone({ freq: 700, to: 1700, dur: 0.35, type: 'sine', vol: 0.12 });
+      sfx.tone({ freq: 1050, to: 2400, dur: 0.3, type: 'triangle', vol: 0.06, delay: 0.06 });
+    },
+    crowd(n) {
+      // marching rumble of the horde
+      const v = Math.min(0.18, 0.05 + n * 0.0007);
+      sfx.noise({ dur: 0.5, vol: v, freq: 160, q: 0.6 });
+      sfx.noise({ dur: 0.08, vol: v * 0.8, freq: 260, q: 1.5, delay: 0.25 });
+    },
+    boss() {
+      sfx.tone({ freq: 110, to: 55, dur: 0.8, type: 'sawtooth', vol: 0.28 });
+      sfx.tone({ freq: 165, to: 70, dur: 0.7, type: 'square', vol: 0.1, delay: 0.1 });
+      sfx.noise({ dur: 0.8, vol: 0.12, freq: 120, q: 0.7 });
+    },
+  };
+
   function handleEvents(events) {
     const w = run.world;
     for (const e of events) {
@@ -1233,10 +1287,14 @@ export async function mount(root, ctx) {
           hideStart();
           break;
         case 'shoot':
-          if (rl('shoot', 150)) sfx.play('shoot');
+          if (rl('shoot', 85)) SND.gun(e.tier, e.n);
+          break;
+        case 'hit':
+          if (e.big && rl('hitb', 90)) SND.hit();
           break;
         case 'kill':
-          if (rl('hit', 70)) sfx.play('hit');
+          if (rl('kill', 70)) SND.kill();
+          if (e.big && rl('boomk', 150)) sfx.play('explosion');
           break;
         case 'boom':
           if (rl('boom', 110)) {
@@ -1244,32 +1302,46 @@ export async function mount(root, ctx) {
             sfx.vibrate(25);
           }
           break;
-        case 'gate':
-          if (e.good) {
-            sfx.play('success');
-            sfx.vibrate(20);
-          } else {
-            sfx.play('error');
-            sfx.vibrate([30, 30, 30]);
-          }
-          break;
         case 'crate':
-          sfx.play('levelup');
-          sfx.vibrate(30);
+          if (performance.now() - run.crateT > 900) run.crateChain = 0;
+          run.crateT = performance.now();
+          SND.crate(run.crateChain++);
+          sfx.vibrate(8);
+          break;
+        case 'weapon':
+          SND.fanfare(false);
+          sfx.vibrate([20, 30, 40]);
+          showToastBig(t('wpn_' + Math.min(5, e.tier)) + (e.tier > D.MAX_TIER ? ` +${e.tier - D.MAX_TIER}` : ''));
+          break;
+        case 'heroJoin':
+          SND.fanfare(true);
+          sfx.vibrate([30, 40, 60]);
+          showToastBig(t('heroJoined', { name: t('sh_' + e.kind) }));
+          break;
+        case 'ring':
+          SND.ring();
+          sfx.vibrate(15);
+          break;
+        case 'wave':
+          if (e.boss) break;
+          SND.crowd(40);
           break;
         case 'lost':
           if (rl('lost', 120)) {
             sfx.vibrate(12);
-            if (rl('lostS', 200)) sfx.tone({ freq: 200, to: 90, dur: 0.12, type: 'sawtooth', vol: 0.12 });
+            if (rl('lostS', 200)) sfx.tone({ freq: 220, to: 90, dur: 0.12, type: 'sawtooth', vol: 0.1 });
           }
+          break;
+        case 'heroDie':
+          sfx.play('explosion');
+          sfx.vibrate(60);
           break;
         case 'stomp':
           sfx.play('kick');
-          sfx.vibrate(60);
+          sfx.vibrate(50);
           break;
         case 'bossStart':
-          sfx.tone({ freq: 110, to: 55, dur: 0.7, type: 'sawtooth', vol: 0.3 });
-          sfx.tone({ freq: 160, to: 70, dur: 0.6, type: 'square', vol: 0.12, delay: 0.1 });
+          SND.boss();
           break;
         case 'bossDie':
           sfx.play('explosion');
@@ -1291,7 +1363,7 @@ export async function mount(root, ctx) {
           sfx.vibrate([80, 50, 120]);
           break;
         case 'see': {
-          const map = { gate: 'gate', shootGate: 'shootGate', crate: 'crate', barrel: 'barrel', wall: 'wall', brute: 'brute', giant: 'brute', boss: 'boss' };
+          const map = { crate: 'crate', pickup: 'pickup', statue: 'statue', ring: 'ring', brute: 'brute', giant: 'brute', boss: 'boss' };
           if (map[e.what]) showHint(map[e.what]);
           break;
         }
@@ -1299,7 +1371,16 @@ export async function mount(root, ctx) {
           break;
       }
     }
-    if (!run.abilityHinted && w.hero && w.t > 6 && w.live && w.hero.cd <= 0) {
+    // horde rumble while many enemies are on screen
+    if (w.live) {
+      run.crowdT -= 1 / 60;
+      if (run.crowdT <= 0) {
+        run.crowdT = 0.95;
+        const n = w.enemies.length;
+        if (n > 25) SND.crowd(n);
+      }
+    }
+    if (!run.abilityHinted && w.hero && w.t > 20 && w.live && w.hero.cd <= 0 && w.enemies.length > 30) {
       run.abilityHinted = true;
       if (!save.seen.h_ability) {
         showHint('ability');
@@ -1308,11 +1389,18 @@ export async function mount(root, ctx) {
     }
   }
 
+  function showToastBig(text) {
+    if (!run) return;
+    const el = h('div', { class: 'g-squad-banner' }, text);
+    run.el.append(el);
+    later(() => el.remove(), 1700);
+  }
+
   function updateHud(dt) {
     const w = run.world;
     if (run.mode === 'campaign') run.progI.style.width = `${Math.min(100, (100 * w.sq.z) / w.length)}%`;
     else if (run.distBox) {
-      const d = Math.floor(w.sq.z / 10);
+      const d = Math.floor(w.sq.z);
       if (d !== run.lastDist) {
         run.lastDist = d;
         run.distBox.textContent = `${num(d)} m`;
@@ -1324,12 +1412,13 @@ export async function mount(root, ctx) {
       run.coinVal.textContent = D.fmt(w.coins);
     }
     const b = w.boss;
-    const showBoss = b && b.alive && (w.state === 'boss' || b.z - w.sq.z < 1300);
+    const showBoss = b && b.alive && b.z - w.sq.z < 52;
     run.bossBar.classList.toggle('on', !!showBoss);
     run.el.classList.toggle('bossing', !!showBoss);
     if (showBoss) {
       run.bossI.style.width = `${(100 * b.hp) / b.max}%`;
-      const nm = b.spec.mega ? t('megaBoss') : t('boss_' + b.spec.id);
+      run.bossHp.textContent = D.fmt(Math.ceil(b.hp));
+      const nm = b.mega ? t('megaBoss') : t('boss_' + b.id);
       if (run.bossName.textContent !== nm) run.bossName.textContent = nm;
     }
     const hero = w.hero;
@@ -1339,27 +1428,27 @@ export async function mount(root, ctx) {
       run.abBtn.classList.toggle('ready', p === 0 && w.live);
       run.abBtn.classList.toggle('shield', w.shieldT > 0);
     }
-    const bk = `${w.buff.rate.toFixed(2)}|${w.buff.dmg.toFixed(2)}`;
+    const bk = `${w.sq.tier}|${w.sq.dmgMul.toFixed(2)}|${w.sq.rateMul.toFixed(2)}`;
     if (bk !== run.lastBuff) {
       run.lastBuff = bk;
       clear(run.buffs);
-      if (w.buff.rate > 1.001) run.buffs.append(h('span', { class: 'g-squad-buff pop-in' }, icon('bolt'), `+${Math.round((w.buff.rate - 1) * 100)}%`));
-      if (w.buff.dmg > 1.001) run.buffs.append(h('span', { class: 'g-squad-buff pop-in' }, icon('target'), `+${Math.round((w.buff.dmg - 1) * 100)}%`));
+      const tier = w.sq.tier;
+      run.buffs.append(h('span', { class: 'g-squad-buff wpn pop-in' }, icon('target'), t('wpn_' + Math.min(5, tier)) + (tier > D.MAX_TIER ? ` +${tier - D.MAX_TIER}` : '')));
+      if (w.sq.dmgMul > 1.001) run.buffs.append(h('span', { class: 'g-squad-buff pop-in' }, icon('bolt'), t('ringDmg', { p: Math.round((w.sq.dmgMul - 1) * 100) })));
+      if (w.sq.rateMul > 1.001) run.buffs.append(h('span', { class: 'g-squad-buff pop-in' }, icon('bolt'), t('ringRate', { p: Math.round((w.sq.rateMul - 1) * 100) })));
     }
-    // hints
     if (run.hintT > 0) {
       run.hintT -= dt;
       if (run.hintT <= 0) run.hint.classList.remove('on');
     } else if (run.hintQ.length) {
       run.hint.textContent = run.hintQ.shift();
       run.hint.classList.add('on');
-      run.hintT = 3;
+      run.hintT = 3.2;
     }
   }
 
   function frameRun(dt) {
     const w = run.world;
-    // adaptive resolution: keep the frame rate smooth on slower devices
     const q = run.q;
     if (!run.paused && dt > 0) {
       q.ema = q.ema * 0.95 + dt * 0.05;
@@ -1371,7 +1460,7 @@ export async function mount(root, ctx) {
       }
     }
     if (!run.paused) {
-      if (run.keys.l || run.keys.r) w.steer(w.sq.tx + (run.keys.r ? 1 : -1) * 460 * dt);
+      if (run.keys.l || run.keys.r) w.steer(w.sq.tx + (run.keys.r ? 1 : -1) * 9 * dt);
       const steps = Math.max(1, Math.min(3, Math.ceil(dt / (1 / 60) - 0.01)));
       for (let i = 0; i < steps; i++) w.update(dt / steps);
     }
@@ -1380,7 +1469,7 @@ export async function mount(root, ctx) {
     w.events.length = 0;
     run.renderer.frame(w, run.paused ? 0 : dt);
     updateHud(dt);
-    if (!run.ended && (w.state === 'won' || w.state === 'lost') && w.t - w.endT > 1.8) finishRun();
+    if (!run.ended && (w.state === 'won' || w.state === 'lost') && w.t - w.endT > 1.6) finishRun();
   }
 
   function finishRun() {
@@ -1396,20 +1485,20 @@ export async function mount(root, ctx) {
     let gems = 0;
     let xp = 0;
     let record = false;
-    const dist = Math.floor(w.sq.z / 10);
+    const dist = Math.floor(w.sq.z);
     save.stats.runs++;
     save.stats.kills += w.kills;
-    save.stats.gates += w.gatesGood;
+    save.stats.gates += w.cratesGot;
     save.stats.bosses += w.bossKills;
     mission('kills', w.kills);
-    mission('gates', w.gatesGood);
+    mission('gates', w.cratesGot);
     mission('ability', w.abilityUses);
     mission('bosses', w.bossKills);
-    mission('crates', w.crates);
+    mission('crates', w.unlocks);
     if (r.mode === 'campaign') {
       if (won) {
-        const ratio = w.sq.n / Math.max(1, w.sq.peak);
-        stars = ratio >= 0.5 ? 3 : ratio >= 0.25 ? 2 : 1;
+        const ratio = (w.sq.n + 3 * w.sq.heroes.length) / Math.max(1, w.sq.peak);
+        stars = ratio >= 0.6 ? 3 : ratio >= 0.3 ? 2 : 1;
         const rw = D.levelReward(L);
         gold = Math.round(rw.gold * D.STAR_MUL[stars]) + w.coins;
         mat = Math.round(rw.mat * D.STAR_MUL[stars]);
@@ -1426,15 +1515,15 @@ export async function mount(root, ctx) {
         xp = 6;
       }
     } else {
-      gold = w.coins + Math.round(dist * 0.4);
-      mat = Math.round(dist * 0.15);
+      gold = w.coins + Math.round(dist * 3);
+      mat = Math.round(dist * 1.2);
       if (dist > save.bestDist) {
         record = save.bestDist > 0 || dist >= 100;
         if (save.bestDist > 0 && dist >= 200) gems += 5;
         save.bestDist = dist;
       }
       mission('dist', dist, true);
-      xp = 8 + Math.min(22, Math.floor(dist / 100));
+      xp = 8 + Math.min(22, Math.floor(dist / 40));
     }
     save.gold += gold;
     save.mat += mat;
@@ -1463,6 +1552,7 @@ export async function mount(root, ctx) {
     if (camp) rows.append(h('div', null, h('span', null, t('survivors')), h('b', null, `${num(w.sq.n)} / ${num(w.sq.peak)}`)));
     else rows.append(h('div', null, h('span', null, t('distLbl')), h('b', null, `${num(res.dist)} m`)));
     rows.append(h('div', null, h('span', null, t('killsLbl')), h('b', null, num(w.kills))));
+    if (w.heroesJoined) rows.append(h('div', null, h('span', null, t('heroesLbl')), h('b', null, num(w.heroesJoined))));
     const rewards = h('div', { class: 'g-squad-rewards' });
     const counters = [];
     for (const k of ['gold', 'mat', 'gems']) {
@@ -1493,7 +1583,6 @@ export async function mount(root, ctx) {
     const ov = h('div', { class: 'g-squad-result' }, card);
     r.el.append(ov);
     if (res.record) later(() => ctx.ui.confetti(70), 500);
-    // count-up
     const steps = 24;
     for (let i = 1; i <= steps; i++) {
       later(() => {
