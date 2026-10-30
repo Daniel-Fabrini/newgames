@@ -378,3 +378,42 @@ test('artwork inserts: valid positions inside the table, known groups, art files
     for (const f of ['base', 'ramp', 'sprites']) assert.ok(fs.existsSync(path.join(dir, `${f}_${id}.webp`)), `${f}_${id}.webp`);
   }
 });
+
+test('flippers: left/right symmetry (pivot, angles, mirrored impulse) and sprite pose matches the collider', async () => {
+  const { flipperSpritePose, spritePoint } = await import('../render.js');
+  const { XC } = await import('../tables.js');
+  for (const id of TABLE_IDS) {
+    const s = new Sim(makeTable(id));
+    const L = s.flippers.find((f) => f.side === 'L' && f.btn === 'L' && f.py > 650);
+    const Rf = s.flippers.find((f) => f.side === 'R');
+    assert.ok(Math.abs(L.px + Rf.px - 2 * XC) < 1e-9 && L.py === Rf.py, 'pivots mirrored');
+    assert.equal(L.rest, Rf.rest);
+    assert.equal(L.up, Rf.up);
+    assert.equal(L.len, Rf.len);
+    for (const on of [false, true]) {
+      s.setFlipper('L', on);
+      s.setFlipper('R', on);
+      for (let i = 0; i < 30; i++) s.update(1 / 60);
+      for (const f of s.flippers) {
+        const pose = flipperSpritePose(f);
+        const tip = spritePoint(f, pose, f.len, 0);
+        assert.ok(Math.hypot(tip.x - f.tx, tip.y - f.ty) < 1e-6, `${id} ${f.side} sprite tip on collider tip (on=${on})`);
+      }
+      assert.ok(Math.abs(L.tx + Rf.tx - 2 * XC) < 1e-6 && Math.abs(L.ty - Rf.ty) < 1e-6, 'tips mirrored');
+    }
+  }
+  // mirrored shot: same speed, opposite horizontal direction
+  const shot = (side) => {
+    const s = new Sim(makeTable('neon'));
+    for (let i = 0; i < 30; i++) s.update(1 / 60);
+    const f = s.flippers.find((q) => q.side === side && q.py > 650);
+    const b = s.addBall(f.px + (side === 'L' ? 36 : -36), f.py - 2);
+    for (let i = 0; i < 6; i++) s.update(1 / 60);
+    s.setFlipper(side, true);
+    let best = { vx: 0, vy: 0 };
+    for (let i = 0; i < 20; i++) { s.update(1 / 60); if (b.vy < best.vy) best = { vx: b.vx, vy: b.vy }; }
+    return best;
+  };
+  const l = shot('L'), r = shot('R');
+  assert.ok(Math.abs(l.vy - r.vy) < 1e-6 && Math.abs(l.vx + r.vx) < 1e-6, `mirrored impulse ${l.vx},${l.vy} vs ${r.vx},${r.vy}`);
+});

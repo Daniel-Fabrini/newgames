@@ -826,7 +826,8 @@ export function createRenderer(canvas, tb, opts = {}) {
       ctx.fill();
       ctx.restore();
       const sc = f.len / 60;
-      sprite('flip', f.px, f.py, f.ang, f.side !== 'L', 1);
+      const pose = flipperSpritePose(f);
+      sprite('flip', f.px, f.py, pose.rot, pose.mirror, 1);
       void sc;
       if (f.on && sim.flippersOn && sim.live) {
         ctx.globalCompositeOperation = 'lighter';
@@ -884,6 +885,26 @@ export function createRenderer(canvas, tb, opts = {}) {
     ctx.fillRect(0, 0, W, H);
     ctx.globalCompositeOperation = 'source-over';
     drawFx(game, dt, tsec);
+    if (globalThis.__pinballDebug) {
+      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = '#00ff66';
+      ctx.beginPath();
+      for (const s of sim.segs) {
+        ctx.moveTo(s.x1, s.y1);
+        ctx.lineTo(s.x2, s.y2);
+      }
+      ctx.stroke();
+      ctx.strokeStyle = '#00e5ff';
+      for (const f of sim.flippers) {
+        hull(ctx, f.px, f.py, f.r0, f.tx, f.ty, f.r1);
+        ctx.stroke();
+      }
+      for (const b of tb.bumpers) {
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, TAU);
+        ctx.stroke();
+      }
+    }
     ctx.restore();
   }
 
@@ -957,6 +978,19 @@ export function createRenderer(canvas, tb, opts = {}) {
   }
 
   return { resize, draw, spark, popup, toTable, get k() { return k; }, get ox() { return ox; }, get oy() { return oy; } };
+}
+
+// Flipper sprite pose. The sprite points along +x from its pivot. ctx applies rotate() and then scale(-1,1)
+// to the sprite's local points, so a mirrored (right) flipper must be rotated by -ang to end at the collider tip
+// (px - len*cos(ang), py + len*sin(ang)).
+export function flipperSpritePose(f) {
+  return f.side === 'L' ? { rot: f.ang, mirror: false } : { rot: -f.ang, mirror: true };
+}
+// where the sprite's local point (u, v) lands on the table for a pose (same order as the canvas transform)
+export function spritePoint(f, pose, u, v) {
+  const x = pose.mirror ? -u : u;
+  const c = Math.cos(pose.rot), s = Math.sin(pose.rot);
+  return { x: f.px + x * c - v * s, y: f.py + x * s + v * c };
 }
 
 // ---------------------------------------------------------------------- dot matrix display

@@ -256,40 +256,16 @@
 .g-pinball-plunger.down {
   filter: brightness(1.1);
 }
-.g-pinball-plunger.hide,
-.g-pinball-nudge.hide {
+.g-pinball-plunger.hide {
   opacity: 0;
   pointer-events: none;
 }
 .g-pinball-nudge {
-  position: absolute;
-  left: 4px;
-  bottom: 70px;
-  min-width: 0;
-  width: 52px;
-  height: 52px;
-  padding: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(243, 194, 74, 0.55);
-  background: linear-gradient(180deg, rgba(40, 36, 26, 0.9), rgba(12, 10, 7, 0.9));
-  color: #f7d774;
-  font: 900 12px var(--font, system-ui);
-  letter-spacing: 1px;
-  cursor: pointer;
-  touch-action: none;
-}
-.g-pinball-nudge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
   font-size: 20px;
+  font-weight: 900;
 }
-.g-pinball-nudge small {
-  font-size: 8px;
-  letter-spacing: 0.4px;
-  margin-top: 2px;
+.g-pinball-nudge:disabled {
+  opacity: 0.45;
 }
 .g-pinball-nudge.warn {
   border-color: #ff4a3d;

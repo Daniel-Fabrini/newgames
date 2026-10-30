@@ -52,15 +52,15 @@ export async function mount(root, ctx) {
   const multPill = h('div', { class: 'g-pinball-pill g-pinball-mult' });
   const pauseBtn = h('button', { class: 'g-pinball-ibtn', type: 'button', 'aria-label': t('pause'), onclick: () => pauseGame() });
   pauseBtn.innerHTML = ICON.pause;
-  const hud = h('div', { class: 'g-pinball-hud' }, h('div', { class: 'g-pinball-scorebox' }, h('small', {}, t('scoreLabel')), scoreEl), ballPill, multPill, pauseBtn);
+  const nudgeBtn = h('button', { class: 'g-pinball-ibtn g-pinball-nudge', type: 'button', 'aria-label': t('nudgeAria'), title: t('nudge') }, '⇅');
+  const hud = h('div', { class: 'g-pinball-hud' }, h('div', { class: 'g-pinball-scorebox' }, h('small', {}, t('scoreLabel')), scoreEl), ballPill, multPill, nudgeBtn, pauseBtn);
   const dmdCanvas = h('canvas', { class: 'g-pinball-dmd', role: 'status', 'aria-label': 'display' });
   const dmdWrap = h('div', { class: 'g-pinball-dmdwrap' }, dmdCanvas);
   const canvas = h('canvas', { class: 'g-pinball-canvas', role: 'img', 'aria-label': t('tableLabel') });
   const plungerBtn = h('button', { class: 'g-pinball-plunger', type: 'button', 'aria-label': t('plungerAria') }, h('b', {}, t('plunger')), h('i'));
-  const nudgeBtn = h('button', { class: 'g-pinball-nudge', type: 'button', 'aria-label': t('nudgeAria'), title: t('nudge') }, '⇅');
   const hintL = h('div', { class: 'g-pinball-fbtn left', 'aria-hidden': 'true', title: t('leftFlipper') }, h('i'));
   const hintR = h('div', { class: 'g-pinball-fbtn right', 'aria-hidden': 'true', title: t('rightFlipper') }, h('i'));
-  const stage = h('div', { class: 'g-pinball-stage', role: 'group', 'aria-label': t('leftFlipper') + ' / ' + t('rightFlipper') }, canvas, hintL, hintR, plungerBtn, nudgeBtn);
+  const stage = h('div', { class: 'g-pinball-stage', role: 'group', 'aria-label': t('leftFlipper') + ' / ' + t('rightFlipper') }, canvas, hintL, hintR, plungerBtn);
   const fwCanvas = h('canvas', { class: 'g-pinball-fw', 'aria-hidden': 'true' });
   const menu = h('div', { class: 'g-pinball-menu', hidden: true });
   const overlay = h('div', { class: 'g-pinball-overlay', hidden: true });
@@ -763,7 +763,7 @@ export async function mount(root, ctx) {
     const showPl = ui === 'play' && game.phase === 'ready';
     plungerBtn.classList.toggle('hide', !showPl);
     if (showPl) plungerBtn.style.setProperty('--p', String(game.charge));
-    nudgeBtn.classList.toggle('hide', !(game.phase === 'play'));
+    nudgeBtn.disabled = game.phase !== 'play';
     nudgeBtn.classList.toggle('warn', game.tiltMeter >= 2);
     const [m1, m2, col] = dmdContent();
     dmd.show(m1, m2, col);
